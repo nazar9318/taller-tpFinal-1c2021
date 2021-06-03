@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/ak47.png</file>
+        <file>resources/glock.png</file>
+        <file>resources/awp.png</file>
+        <file>resources/canion.png</file>
+        <file>resources/cofre.png</file>
+        <file>resources/m3.png</file>
+        <file>resources/cruz.png</file>
+    </qresource>
+    <qresource prefix="/img"/>
+</RCC>

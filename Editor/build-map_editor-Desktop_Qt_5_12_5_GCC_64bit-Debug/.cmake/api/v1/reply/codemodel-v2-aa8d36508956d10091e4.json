@@ -1,0 +1,68 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "map_editor",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "map_editor::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-map_editor-Debug-5ca9763be28a465ddbf5.json",
+					"name" : "map_editor",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "map_editor_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-map_editor_autogen-Debug-8fdf7df257f5c80bb561.json",
+					"name" : "map_editor_autogen",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/federico/Git/taller-tpFinal-1c2021/Editor/build-map_editor-Desktop_Qt_5_12_5_GCC_64bit-Debug",
+		"source" : "/home/federico/Git/taller-tpFinal-1c2021/Editor/map_editor"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 2
+	}
+}

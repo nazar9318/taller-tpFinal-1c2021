@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include "yaml-cpp/yaml.h"
 #include <fstream>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -10,6 +9,42 @@ QMainWindow(parent), ui(new Ui::MainWindow) {
     this->ui->map->setScene(scene);
     this->loadImages();
     this->connectItems();
+}
+
+void MainWindow::save_extra_attributes(QGraphicsItem* item, YAML::Node node) {
+    if (item->data(0).toString().toStdString().compare("ak47_m") == 0) {
+        node["rate"] = 3;
+        node["automatic"] = true;
+        node["frequency"] = 0.4;
+        node["damage"] = 10;
+        node["accuracy"] = 100;
+        node["distance_penalty"] = 5;
+        node["price"] = 10;
+    } else if (item->data(0).toString().toStdString().compare("glock_m") == 0) {
+        node["rate"] = 1;
+        node["automatic"] = false;
+        node["frequency"] = 0;
+        node["damage"] = 15;
+        node["accuracy"] = 50;
+        node["distance_penalty"] = 5;
+        node["price"] = 50;
+    } else if (item->data(0).toString().toStdString().compare("m3_m") == 0) {
+        node["rate"] = 1;
+        node["automatic"] = false;
+        node["frequency"] = 0;
+        node["damage"] = 25;
+        node["accuracy"] = 30;
+        node["distance_penalty"] = 20;
+        node["price"] = 100;
+    } else if (item->data(0).toString().toStdString().compare("awp_m") == 0) {
+        node["rate"] = 1;
+        node["automatic"] = false;
+        node["frequency"] = 0;
+        node["damage"] = 50;
+        node["accuracy"] = 100;
+        node["distance_penalty"] = 0;
+        node["price"] = 500;
+    }
 }
 
 void MainWindow::on_save_clicked() {
@@ -24,10 +59,7 @@ void MainWindow::on_save_clicked() {
         coordinates.push_back(item->pos().y());
         node["item"] = item->data(0).toString().toStdString();
         node["position"] = coordinates;
-        if (item->data(0).toString().toStdString().compare("Oficial") == 0) {
-            node["life points"] = 5;
-            node["bullets"] = 15;
-        }
+        save_extra_attributes(item, node);
         emitter << node;
     }
     QString fileName = QFileDialog::getSaveFileName(this,

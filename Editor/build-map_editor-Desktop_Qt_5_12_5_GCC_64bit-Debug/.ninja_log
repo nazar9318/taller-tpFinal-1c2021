@@ -42,3 +42,9 @@
 5	100	1622774722839155419	map_editor_autogen/EWIEGA46WW/qrc_resources.cpp	ded9cae4d73f43f0
 100	1831	1622774724599186090	CMakeFiles/map_editor.dir/map_editor_autogen/EWIEGA46WW/qrc_resources.cpp.o	34d236f6cc7c0f91
 1831	2270	1622774725035193680	map_editor	3a76b058d38e2557
+1	2146	0	CMakeFiles/map_editor_autogen	ab527b5388cec6a0
+1	2146	0	map_editor_autogen/mocs_compilation.cpp	ab527b5388cec6a0
+2146	5268	1622813585394215500	CMakeFiles/map_editor.dir/map_editor_autogen/mocs_compilation.cpp.o	c812ee885f225db4
+2147	5287	1622813585402215633	CMakeFiles/map_editor.dir/main.cpp.o	b63fdff9ea81be8d
+2147	5739	1622813585870223429	CMakeFiles/map_editor.dir/mainwindow.cpp.o	3006e349968ef5de
+5739	7932	1622813588058259879	map_editor	3a76b058d38e2557

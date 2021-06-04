@@ -9,6 +9,7 @@
 #include <QFileDialog>
 #include <QDir>
 #include <QGraphicsPixmapItem>
+#include "yaml-cpp/yaml.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,6 +26,7 @@ class MainWindow : public QMainWindow {
             Ui::MainWindow *ui;
             QGraphicsScene *scene;
             QString dragged;
+            void save_extra_attributes(QGraphicsItem* item, YAML::Node node);
 
     private slots:
         void on_save_clicked();

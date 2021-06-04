@@ -30,9 +30,8 @@ void MainWindow::on_save_clicked() {
         }
         emitter << node;
     }
-
     QString fileName = QFileDialog::getSaveFileName(this,
-        tr("Save Address Book"), "",
+        tr("Save Address Book"), "../configs/",
         tr("Address Book (*.yml);;All Files (*)"));
     std::ofstream out(fileName.toStdString());
     out << emitter.c_str();
@@ -40,7 +39,6 @@ void MainWindow::on_save_clicked() {
 
 void MainWindow::on_load_clicked() {
     QString file_name = QFileDialog::getOpenFileName(this, "Open a file", "../configs/");
-    QMessageBox::information(this, "..", file_name);
     std::vector<YAML::Node> nodes = YAML::LoadAllFromFile(file_name.toStdString());
     for (size_t i = 0; i < nodes.size(); i++) {
         QGraphicsPixmapItem *item;
@@ -61,44 +59,23 @@ void MainWindow::on_clean_clicked() {
 }
 
 void MainWindow::connectItems() {
-    connect(this->ui->ak47, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->awp, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->glock, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->m3, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->cofre, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->cruz, SIGNAL(pressed()), this, SLOT(selectItem()));
-    /*connect(this->ui->Guardia, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->Llave, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->KitMedico, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->ManchaAgua, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->ManchaSangre, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->Mesa, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->Oficial, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->Pared, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->PuertaConLlave, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->PuertaSinLlave, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->SS, SIGNAL(pressed()), this, SLOT(selectItem()));*/
+    connect(this->ui->ak47_m, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->awp_m, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->glock_m, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->m3_m, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->default_aztec, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->aztec, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->default_dust, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->dust, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->default_inferno, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->box_black, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->box_brown, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->box_metal, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->box_wood, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->box_wood_metal, SIGNAL(pressed()), this, SLOT(selectItem()));
 }
 
-void MainWindow::loadImages() {
-/*    this->ui->ametralladora->setIcon(QPixmap(":/Ametralladora.png"));
-    this->ui->barril->setIcon(QPixmap(":/Barril.png"));
-    this->ui->balas->setIcon(QPixmap(":/Balas.png"));
-    this->ui->canion->setIcon(QPixmap(":/CanionCadena.png"));
-    this->ui->cofre->setIcon(QPixmap(":/Cofre.png"));
-    this->ui->corona->setIcon(QPixmap(":/Corona.png"));
-    this->ui->cruz->setIcon(QPixmap(":/Cruz.png"));
-    this->ui->Guardia->setIcon(QPixmap(":/Guardia.png"));
-    this->ui->Llave->setIcon(QPixmap(":/Llave.png"));
-    this->ui->ManchaAgua->setIcon(QPixmap(":/ManchaAgua.png"));
-    this->ui->ManchaSangre->setIcon(QPixmap(":/ManchaSangre.png"));
-    this->ui->Mesa->setIcon(QPixmap(":/Mesa.png"));
-    this->ui->KitMedico->setIcon(QPixmap(":/KitMedico.png"));
-    this->ui->Pared->setIcon(QPixmap(":/Pared.png"));
-    this->ui->PuertaSinLlave->setIcon(QPixmap(":/PuertaSinLlave.png"));
-    this->ui->PuertaConLlave->setIcon(QPixmap(":/PuertaConLlave.png"));
-    this->ui->SS->setIcon(QPixmap(":/SS.png"));*/
-}
+void MainWindow::loadImages() {}
 
 void MainWindow::selectItem() {
     QPushButton* button = (QPushButton*) sender();

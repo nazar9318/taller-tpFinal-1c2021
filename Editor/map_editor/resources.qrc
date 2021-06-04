@@ -1,12 +1,20 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources/ak47.png</file>
-        <file>resources/glock.png</file>
-        <file>resources/awp.png</file>
-        <file>resources/canion.png</file>
-        <file>resources/cofre.png</file>
-        <file>resources/m3.png</file>
-        <file>resources/cruz.png</file>
+        <file>resources/aztec.png</file>
+        <file>resources/default_aztec.png</file>
+        <file>resources/default_dust.png</file>
+        <file>resources/default_inferno.png</file>
+        <file>resources/dust.png</file>
+        <file>resources/inferno.png</file>
+        <file>resources/ak47_m.png</file>
+        <file>resources/awp_m.png</file>
+        <file>resources/glock_m.png</file>
+        <file>resources/m3_m.png</file>
+        <file>resources/box_black.png</file>
+        <file>resources/box_wood.png</file>
+        <file>resources/box_wood_metal.png</file>
+        <file>resources/box_metal.png</file>
+        <file>resources/box_brown.png</file>
     </qresource>
     <qresource prefix="/img"/>
 </RCC>

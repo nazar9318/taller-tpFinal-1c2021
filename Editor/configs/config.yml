@@ -1,173 +1,77 @@
 node: 0
-item: awp
+item: dust
 position:
-  - 297
-  - 261
+  - 568
+  - 872
 ---
 node: 1
-item: awp
+item: dust
 position:
-  - 544
-  - 214
+  - 504
+  - 872
 ---
 node: 2
-item: awp
+item: dust
 position:
-  - 402
-  - 187
+  - 376
+  - 259
 ---
 node: 3
-item: m3
+item: awp_m
 position:
-  - 429
-  - 229
+  - 613
+  - 572
 ---
 node: 4
-item: ak47
+item: m3_m
 position:
-  - 351
-  - 245
+  - 598
+  - 306
 ---
 node: 5
-item: glock
+item: ak47_m
 position:
-  - 468
-  - 192
+  - 426
+  - 564
 ---
 node: 6
-item: cruz
+item: glock_m
 position:
-  - 430
-  - 280
+  - 494
+  - 326
 ---
 node: 7
-item: cruz
+item: box_metal
 position:
-  - 369
-  - 278
+  - 635
+  - 408
 ---
 node: 8
-item: cruz
+item: box_wood_metal
 position:
-  - 443
-  - 317
+  - 504
+  - 432
 ---
 node: 9
-item: cofre
+item: box_wood
 position:
-  - 460
-  - 279
+  - 563
+  - 481
 ---
 node: 10
-item: canion
+item: box_black
 position:
-  - 388
-  - 332
+  - 576
+  - 349
 ---
 node: 11
-item: barril
+item: box_brown
 position:
-  - 356
-  - 183
+  - 451
+  - 380
 ---
 node: 12
-item: balas
+item: default_dust
 position:
-  - 449
-  - 228
----
-node: 13
-item: ametralladora
-position:
-  - 315
-  - 237
----
-node: 14
-item: cruz
-position:
-  - 369
-  - 278
----
-node: 15
-item: cruz
-position:
-  - 443
-  - 317
----
-node: 16
-item: cofre
-position:
-  - 460
-  - 279
----
-node: 17
-item: canion
-position:
-  - 473
-  - 257
----
-node: 18
-item: barril
-position:
-  - 356
-  - 183
----
-node: 19
-item: balas
-position:
-  - 449
-  - 228
----
-node: 20
-item: ametralladora
-position:
-  - 315
-  - 237
----
-node: 21
-item: ametralladora
-position:
-  - 315
-  - 237
----
-node: 22
-item: balas
-position:
-  - 449
-  - 228
----
-node: 23
-item: barril
-position:
-  - 475
-  - 124
----
-node: 24
-item: canion
-position:
-  - 473
-  - 257
----
-node: 25
-item: cofre
-position:
-  - 460
-  - 279
----
-node: 26
-item: cruz
-position:
-  - 443
-  - 317
----
-node: 27
-item: cruz
-position:
-  - 369
-  - 278
----
-node: 28
-item: balas
-position:
-  - 214
-  - 137
+  - 376
+  - 259

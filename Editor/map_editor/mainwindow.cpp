@@ -11,7 +11,7 @@ QMainWindow(parent), ui(new Ui::MainWindow) {
     this->connectItems();
 }
 
-void MainWindow::save_extra_attributes(QGraphicsItem* item, YAML::Node node) {
+/*void MainWindow::save_extra_attributes(QGraphicsItem* item, YAML::Node node) {
     if (item->data(0).toString().toStdString().compare("ak47_m") == 0) {
         node["rate"] = 3;
         node["automatic"] = true;
@@ -45,7 +45,7 @@ void MainWindow::save_extra_attributes(QGraphicsItem* item, YAML::Node node) {
         node["distance_penalty"] = 0;
         node["price"] = 500;
     }
-}
+}*/
 
 void MainWindow::on_save_clicked() {
     YAML::Emitter emitter;
@@ -59,7 +59,7 @@ void MainWindow::on_save_clicked() {
         coordinates.push_back(item->pos().y());
         node["item"] = item->data(0).toString().toStdString();
         node["position"] = coordinates;
-        save_extra_attributes(item, node);
+        //save_extra_attributes(item, node);
         emitter << node;
     }
     QString fileName = QFileDialog::getSaveFileName(this,
@@ -100,6 +100,7 @@ void MainWindow::connectItems() {
     connect(this->ui->default_dust, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->dust, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->default_inferno, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->inferno, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->box_black, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->box_brown, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->box_metal, SIGNAL(pressed()), this, SLOT(selectItem()));
@@ -119,7 +120,8 @@ void MainWindow::mouseReleaseEvent(QMouseEvent*) {
     QGraphicsPixmapItem *item = new QGraphicsPixmapItem
         (QPixmap(":/resources/" + this->dragged + ".png"));
     item->setFlag(QGraphicsItem::ItemIsMovable, true);
-    item->setPos(cursor().pos().x(), cursor().pos().y());
+    QPoint pos = mapFromGlobal(QCursor::pos());
+    item->setPos(pos.x(), pos.y());
     item->setData(0, this->dragged);
     this->scene->addItem(item);
 }

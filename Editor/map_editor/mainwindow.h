@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QDir>
+#include <QPoint>
 #include <QGraphicsPixmapItem>
 #include "yaml-cpp/yaml.h"
 

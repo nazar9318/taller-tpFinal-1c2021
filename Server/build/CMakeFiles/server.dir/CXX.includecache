@@ -1,0 +1,128 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Server/src/main.cpp
+../../libs/box2d/include/box2d/b2_world.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_world.h
+iostream
+-
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_block_allocator.h
+b2_api.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+b2_settings.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_settings.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_broad_phase.h
+b2_api.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+b2_settings.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_settings.h
+b2_collision.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_collision.h
+b2_dynamic_tree.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_dynamic_tree.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_collision.h
+limits.h
+-
+b2_api.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+b2_math.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_math.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_common.h
+b2_settings.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_settings.h
+stddef.h
+-
+assert.h
+-
+float.h
+-
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_contact_manager.h
+b2_api.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+b2_broad_phase.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_broad_phase.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_dynamic_tree.h
+b2_api.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+b2_collision.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_collision.h
+b2_growable_stack.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_growable_stack.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_growable_stack.h
+string.h
+-
+b2_settings.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_settings.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_math.h
+math.h
+-
+b2_api.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+b2_settings.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_settings.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_settings.h
+b2_types.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_types.h
+b2_api.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+b2_user_settings.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_user_settings.h
+stdarg.h
+-
+stdint.h
+-
+b2_common.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_common.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_stack_allocator.h
+b2_api.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+b2_settings.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_settings.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_time_step.h
+b2_api.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+b2_math.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_math.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_types.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_world.h
+b2_api.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+b2_block_allocator.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_block_allocator.h
+b2_contact_manager.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_contact_manager.h
+b2_math.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_math.h
+b2_stack_allocator.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_stack_allocator.h
+b2_time_step.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_time_step.h
+b2_world_callbacks.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_world_callbacks.h
+
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_world_callbacks.h
+b2_api.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_api.h
+b2_settings.h
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d/b2_settings.h
+

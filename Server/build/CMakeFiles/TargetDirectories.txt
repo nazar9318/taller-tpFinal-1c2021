@@ -1,0 +1,3 @@
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Server/build/CMakeFiles/rebuild_cache.dir
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Server/build/CMakeFiles/server.dir
+/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Server/build/CMakeFiles/edit_cache.dir

@@ -3,6 +3,7 @@
 
 #include <typeinfo>
 #include <exception>
+#include "Exception.h"
 
 #define BUF_SIZE 256
 

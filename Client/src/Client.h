@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include "BlockingQueue.h"
 
 class Client {
 	public:

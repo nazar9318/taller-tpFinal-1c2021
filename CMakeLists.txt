@@ -16,6 +16,17 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline ")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 
+
+# Including Box2D
+# add_subdirectory("")
+# include_directories(${PROJECT_SOURCE_DIR}/Common)
+
+# add_subdirectory("Common")
+# include_directories("libs/box2d/src")
+
+
+
+
 add_subdirectory("Common")
 include_directories(${PROJECT_SOURCE_DIR}/Common)
 

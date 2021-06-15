@@ -1,7 +1,7 @@
 # taller-tpFinal-1c2021
 
 
-**Compilar y ejecutar
+**Compilar y ejecutar**
 
 
 Para compilar el Servidor y el Cliente ejecutar las siguientes lineas:

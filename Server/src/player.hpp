@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+class Weapon;
+
 #include "weapon.hpp"
 #include <vector>
 #include <iostream>
@@ -9,9 +11,9 @@ enum Team {TERRORIST, COUNTER_ENEMY};
 
 class Player {
     private:
-        Team team;
         uint16_t life_points;
         uint16_t money;
+        Team team;
         std::vector<Weapon*> weapons;
         Weapon* current_weapon;
         void buy(Weapon& new_weapon);

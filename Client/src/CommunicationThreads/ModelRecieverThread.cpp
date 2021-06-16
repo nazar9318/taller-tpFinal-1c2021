@@ -1,5 +1,5 @@
 #include "ModelRecieverThread.h"
-
+#include <queue>
 ModelRecieverThread::ModelRecieverThread(Socket& skt,
 					ProtectedQueue<ModelEvent>& queue):
 					socket_recv(skt), events(queue), 
@@ -15,7 +15,7 @@ void ModelRecieverThread::run() {
 		while (allowed_to_run) {
 			ModelEvent event;
 			protocol.recv_event(socket_recv, event);
-			//events.push(event);
+			events.push(event);
 		}
 	} catch(const std::exception& e) {
 		syslog(LOG_ERR, "[%s:%i]: Error: %s", __FILE__, __LINE__, e.what());

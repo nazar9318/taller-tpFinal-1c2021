@@ -8,8 +8,8 @@ Lobby::Lobby(ProtectedQueue<ModelEvent>& model,
 }
 		
 // returns true if player is logged in. 
-bool Lobby::launch() {
-
+bool Lobby::launch(Socket& socket) {
+	// CONEXION SINCRONICA: SEND-RECV
 	// LOGICA DE BIENVENIDA
 	// QAPPLICATION
 	// SERIA: 1) blocking_pop DE MODEL_EVENTS que devuelve los LOS MAPAS QUE

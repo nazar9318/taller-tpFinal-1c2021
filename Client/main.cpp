@@ -12,7 +12,6 @@ int main(int argc, char *argv[]) {
 		syslog(LOG_CRIT, "[%s:%i]: Se enviaron %d argumentos"
 						 " y se esperaban %d.", __FILE__, __LINE__,
 						  argc, ARGC_EXPECTED);
-		return ERROR;
 	}
 	std::string host(argv[1]);
 	std::string port(argv[2]);

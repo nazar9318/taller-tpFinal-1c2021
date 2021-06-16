@@ -4,7 +4,7 @@
 
 ClientEvent::ClientEvent() {}
 
-ClientEvent::ClientEvent(ClientEvent &&other): msg(std::move(other.msg)), type_msg(std::move(other.type_msg)) {}
+//ClientEvent::ClientEvent(ClientEvent &&other): msg(std::move(other.msg)), type_msg(std::move(other.type_msg)) {}
 
 
 char ClientEvent::type() {

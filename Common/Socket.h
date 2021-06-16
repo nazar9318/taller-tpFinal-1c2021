@@ -18,6 +18,7 @@ class Socket {
 		int socket_fd;
 
 	public:
+		Socket(const std::string& host, const std::string& service);
 		Socket();
 		Socket(Socket &&other);
 

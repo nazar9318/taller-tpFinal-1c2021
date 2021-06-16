@@ -3,9 +3,25 @@
 
 #include <string>
 #include <iostream>
-#include "BlockingQueue.h"
+#include <syslog.h>
+
+#include "ClientEvent.h"
+#include "ModelEvent.h"
+#include "ProtectedQueue.h"
+#include "EventSenderThread.h"
+#include "ModelRecieverThread.h"
+#include "GameMap.h"
+#include "Lobby.h"
+#include "Game.h"
 
 class Client {
+	Socket socket; 
+	ProtectedQueue<ModelEvent> model_events;
+	ProtectedQueue<ClientEvent> client_events;
+	ModelRecieverThread reciever;
+	EventSenderThread sender;
+	
+
 	public:
 		Client(const std::string& host, const std::string& port);
 		

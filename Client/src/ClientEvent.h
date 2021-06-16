@@ -11,7 +11,10 @@ class ClientEvent {
 	char type_msg;
 	public:
 		ClientEvent();
-		ClientEvent(ClientEvent &&other);
+		//ClientEvent(ClientEvent &&other);
+		ModelEvent(ModelEvent&&) = default;
+    	ModelEvent& operator = (ModelEvent&&) = default;
+
 		char type();
 		std::string to_string();
 

@@ -21,7 +21,6 @@ class Client {
 	ModelRecieverThread reciever;
 	EventSenderThread sender;
 	
-
 	public:
 		Client(const std::string& host, const std::string& port);
 		

@@ -8,6 +8,7 @@
 #include "ProtectedQueue.h"
 #include "ProtectedQueue.h"
 #include "GameMap.h"
+#include "Socket.h"
 
 class Lobby {
 	ProtectedQueue<ModelEvent>& model_events;
@@ -19,7 +20,7 @@ class Lobby {
 		 ProtectedQueue<ClientEvent>& client_events, GameMap& map);
 		
 		// returns true if player is logged in. 
-		bool launch();
+		bool launch(Socket& socket);
 
 		~Lobby();
 

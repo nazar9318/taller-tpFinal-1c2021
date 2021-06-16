@@ -16,8 +16,6 @@ void EventSenderThread::stop_running() {
 void EventSenderThread::run() {
 	try {
 		while (allowed_to_run) {
-			/*ClientEvent event;
-			events.blocking_pop(event);*/
 			ClientEvent& event = events.blocking_pop();
 			protocol.send_msg(socket_send, event.type(), event.to_string());
 		}

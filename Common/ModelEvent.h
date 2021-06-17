@@ -4,10 +4,11 @@
 #include <string>
 
 class ModelEvent {
-	
+	char type;
 	public:
 		ModelEvent();
-
+		ModelEvent(ModelEvent&&) = default;
+    	ModelEvent& operator = (ModelEvent&&) = default;
 		~ModelEvent();
 
 	private:

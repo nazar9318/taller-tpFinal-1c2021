@@ -8,8 +8,8 @@ Client::Client(const std::string& host, const std::string& port):
 		
 void Client::execute() {
 	GameMap map;
-	Lobby lobby(model_events, client_events, map);
-	bool game_started = lobby.launch(socket);
+	Initiator initiator(model_events, client_events, map);
+	bool game_started = initiator.launch(socket);
 	if (game_started) {
 		reciever.start();
 		sender.start();

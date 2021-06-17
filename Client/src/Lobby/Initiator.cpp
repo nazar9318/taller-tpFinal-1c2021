@@ -1,14 +1,14 @@
-#include "Lobby.h"
+#include "Initiator.h"
 
 
 
-Lobby::Lobby(ProtectedQueue<ModelEvent>& model,
+Initiator::Initiator(ProtectedQueue<ModelEvent>& model,
 		 ProtectedQueue<ClientEvent>& client, GameMap& game_map):
 		  model_events(model), client_events(client), map(game_map) {
 }
 		
 // returns true if player is logged in. 
-bool Lobby::launch(Socket& socket) {
+bool Initiator::launch(Socket& socket) {
 	// CONEXION SINCRONICA: SEND-RECV
 	// LOGICA DE BIENVENIDA
 	// QAPPLICATION
@@ -21,4 +21,4 @@ bool Lobby::launch(Socket& socket) {
 	return true;
 }
 
-Lobby::~Lobby() {}
+Initiator::~Initiator() {}

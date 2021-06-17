@@ -20,13 +20,13 @@ void Listener::run() {
 	try {
 		while (keep_running) {
 			Socket client = accepter.accept();
-			//orchestrator.add_client(std::move(client));
+			home.add_client(std::move(client));
 		}
 	} catch(ExceptionSocketClosed& e) {
 		syslog(LOG_INFO, "[%s:%i]: Socket Closed", __FILE__, __LINE__);
 	} catch(std::exception& e) {
-		syslog(LOG_INFO, "[Listener.cpp] Se corto el run de Listener: %s.",
-						e.what());
+		syslog(LOG_INFO, "[%s:%i] Se corto el run de Listener: %s.",
+						 __FILE__, __LINE__, e.what());
 	} catch(...) {
 		syslog(LOG_CRIT, "[%s:%i]: Unknown error", __FILE__, __LINE__);
 	}

@@ -29,8 +29,14 @@ include_directories(${PROJECT_SOURCE_DIR}/Server/src)
 add_subdirectory("Client/src")
 include_directories(${PROJECT_SOURCE_DIR}/Client/src)
 
-add_subdirectory("Tests/src")
-include_directories(${PROJECT_SOURCE_DIR}/Tests/src)
+
+
+# COMENTO TESTS PORQUE NO EXISTE LA CARPETA. 
+
+
+
+# add_subdirectory("Tests/src")
+# include_directories(${PROJECT_SOURCE_DIR}/Tests/src)
 
 add_executable(server "Server/main.cpp")
 target_link_libraries(server server_classes common_classes)
@@ -38,5 +44,5 @@ target_link_libraries(server server_classes common_classes)
 add_executable(client "Client/main.cpp")
 target_link_libraries(client client_classes common_classes)
 
-add_executable(tests "Tests/main.cpp")
-target_link_libraries(tests tests_classes common_classes client_classes server_classes)
+# add_executable(tests "Tests/main.cpp")
+# target_link_libraries(tests tests_classes common_classes client_classes server_classes)

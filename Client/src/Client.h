@@ -11,7 +11,7 @@
 #include "EventSenderThread.h"
 #include "ModelRecieverThread.h"
 #include "GameMap.h"
-#include "Lobby.h"
+#include "Initiator.h"
 #include "Game.h"
 
 class Client {
@@ -30,14 +30,6 @@ class Client {
 		~Client();
 
 	private:
-		// POST: Initializes the game. 
-		//       Returns true if the player made a 
-		//       successfull login. 
-		bool execute_lobby();
-		
-		// POST: Executes the Counter Strike game. 
-		void execute_game();
-
 		Client(const Client &other) = delete;
 		Client& operator=(const Client &other) = delete;
 };

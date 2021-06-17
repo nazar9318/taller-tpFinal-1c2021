@@ -22,8 +22,6 @@ class ExceptionClosedQueue: public Exception {
 #include <condition_variable>
 #include <utility>
 
-//#include "ExceptionClosedQueue.h"
-
 template <class T> class ProtectedQueue {
 		std::queue<T, std::deque<T>> queue;
 		std::mutex m;
@@ -37,17 +35,6 @@ template <class T> class ProtectedQueue {
 		//       Si no hay datos, el metodo es bloqueante
 		//       y espera a un push. Si la cola esta vacia 
 		//       y cerrada, lanza ExceptionClosedQueue.
-		/*void blocking_pop(T& data) {
-			std::unique_lock<std::mutex> lock(m);
-			while (queue.empty()) {
-				if (closed)
-					throw ExceptionClosedQueue("La cola esta cerrada");
-				condition_variable.wait(lock);
-			}
-			data = std::move(queue.front());
-			queue.pop();
-		}*/
-
 		T& blocking_pop() {
 			std::unique_lock<std::mutex> lock(m);
 			while (queue.empty()) {
@@ -59,13 +46,6 @@ template <class T> class ProtectedQueue {
 			queue.pop();
 			return data;
 		}
-
-
-
-
-
-
-
 
 		// POST: Retorna el primer dato de la cola. 
 		// Si la cola esta vacia lanza una Exception.
@@ -87,11 +67,12 @@ template <class T> class ProtectedQueue {
 		void push(T& data) {
 			std::unique_lock<std::mutex> lock(m);
 			if (!closed) {
-				queue.push(data);
+				queue.push(std::move(data));
 				condition_variable.notify_all();
 			}
 		}
 		
+
 		bool empty() {
 			std::unique_lock<std::mutex> lock(m);
 			return queue.empty();

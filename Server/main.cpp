@@ -1,15 +1,32 @@
-/*
-
-Por ahora solo vemos ejemplos de box 2d para ir aprendiendo.
-
-*/
-#include "Server.h"
 #include <iostream>
+#include <string>
+#include <exception>
+#include <syslog.h>
 
+#include "Server.h"
 
-int main() {
+#define ERROR 1
+#define ARGC_EXPECTED 2
 
-	std::cout << "Hola" <<std::endl;
+int main(int argc, char *argv[]) {
+	if (argc != ARGC_EXPECTED) {
+		syslog(LOG_CRIT, "[%s:%i]: Se enviaron %d argumentos"
+				 " y se esperaban %d.", __FILE__, __LINE__,
+				   argc, ARGC_EXPECTED);
+		return ERROR;
+	}
+
+	std::string port(argv[1]);
+	
+	try {
+		Server server(port);
+		server.excecute();
+	} catch(std::exception& e) {
+		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what());
+	} catch(...) {
+		syslog(LOG_CRIT, "[%s:%i]: Unknown error", __FILE__, __LINE__);
+	}
+	return 0;
 
 	return 0;
 }

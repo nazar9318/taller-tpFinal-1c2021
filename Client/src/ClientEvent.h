@@ -12,8 +12,8 @@ class ClientEvent {
 	public:
 		ClientEvent();
 		//ClientEvent(ClientEvent &&other);
-		ModelEvent(ModelEvent&&) = default;
-    	ModelEvent& operator = (ModelEvent&&) = default;
+		ClientEvent(ClientEvent&&) = default;
+    	ClientEvent& operator = (ClientEvent&&) = default;
 
 		char type();
 		std::string to_string();

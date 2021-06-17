@@ -3,15 +3,12 @@
 
 #include <iostream>
 #include <string>
-//#include "Socket.h"
-//#include "Listener.h"
-//#include "../common_src/Exception.h"
-
-
+#include "Socket.h"
+#include "Listener.h"
 
 class Server {
-	//Listener listener;
-	
+	Listener listener;
+
 	public:
 		explicit Server(const std::string& port);
 

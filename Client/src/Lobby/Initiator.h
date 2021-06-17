@@ -1,5 +1,5 @@
-#ifndef _LOBBY_H
-#define _LOBBY_H
+#ifndef _INITIATOR_H
+#define _INITIATOR_H
 
 #include <string>
 #include <iostream>
@@ -10,23 +10,23 @@
 #include "GameMap.h"
 #include "Socket.h"
 
-class Lobby {
+class Initiator {
 	ProtectedQueue<ModelEvent>& model_events;
 	ProtectedQueue<ClientEvent>& client_events;
 	GameMap& map;
 
 	public:
-		Lobby(ProtectedQueue<ModelEvent>& model_events,
+		Initiator(ProtectedQueue<ModelEvent>& model_events,
 		 ProtectedQueue<ClientEvent>& client_events, GameMap& map);
 		
 		// returns true if player is logged in. 
 		bool launch(Socket& socket);
 
-		~Lobby();
+		~Initiator();
 
 	private:
-		Lobby(const Lobby &other) = delete;
-		Lobby& operator=(const Lobby &other) = delete;
+		Initiator(const Initiator &other) = delete;
+		Initiator& operator=(const Initiator &other) = delete;
 };
 
 

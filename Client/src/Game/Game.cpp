@@ -5,14 +5,14 @@
 
 Game::Game(ProtectedQueue<ModelEvent>& model,
 		 ProtectedQueue<ClientEvent>& client, GameMap& game_map):
-		  model_events(model), client_events(client), map(game_map), 
+		  model_events(model), client_events(client), map(game_map),
 		  is_running(true) {
 }
 void Game::execute() {
 	FrameLimiter frame_limiter;
 	// GAME LOOP
 	while (is_running) {
-		handle_events();
+		handle_events(); //
 		process_events();
 		update();
 		render();

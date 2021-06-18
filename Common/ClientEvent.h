@@ -2,22 +2,33 @@
 #define _CLIENT_EVENT_H
 
 #include <string>
+#include <vector>
 #include <syslog.h>
 
 #include "TypesOfEvents.h"
 
 class ClientEvent {
-	std::string msg;
-	TypeOfEvent type_msg;
-	int client_id;
+
+	private:
+		std::vector<char> msg;
+		size_t size;
+		int client_id;
+
 	public:
-		ClientEvent(TypeOfEvent t);
-		ClientEvent() {}
+		ClientEvent(std::vector<char> msg, size_t size);
+		ClientEvent();
+
 		ClientEvent(ClientEvent&&) = default;
-    	ClientEvent& operator = (ClientEvent&&) = default;
-    	void add_client_id(int id);
+
+		ClientEvent& operator = (ClientEvent&&) = default;
+
+		void add_client_id(int id);
+
 		char get_type();
-		std::string to_string();
+
+		int get_id();
+
+		std::vector<char> to_string();
 
 		~ClientEvent();
 

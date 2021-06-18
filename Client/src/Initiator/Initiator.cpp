@@ -7,8 +7,8 @@ Initiator::Initiator(GameMap& game_map):
 }
 
 
-		
-// returns true if player is logged in. 
+
+// returns true if player is logged in.
 bool Initiator::launch(Socket& socket) {
 	// CONEXION SINCRONICA: SEND-RECV
 	// LOGICA DE BIENVENIDA
@@ -32,9 +32,9 @@ bool Initiator::launch(Socket& socket) {
 
 
 	enum TypeOfLine {
-		Create, 
-		Join,  
-		List, 
+		Create,
+		Join,
+		List,
 		Undefined
 	};
 #define NAME_POS_JOIN 7
@@ -57,7 +57,7 @@ bool Initiator::launch(Socket& socket) {
 			Parser() {}
 
 			// POST: Dependiendo de la estructura de la linea, retorna
-			//       el enum correspondiente.  
+			//       el enum correspondiente.
 			TypeOfLine type_of_line(const std::string& line) const {
 		if ((line.length() > SIZE_CREATE + 2) &&
 			 (line.substr(0, SIZE_CREATE) == CREATE))
@@ -70,8 +70,8 @@ bool Initiator::launch(Socket& socket) {
 	}
 
 			// POST: Si la linea contiene alguna de las frases correspondidas
-			//       a la finalizacion de la partida, retorna true. Caso 
-			//       contrario, retorna false. 
+			//       a la finalizacion de la partida, retorna true. Caso
+			//       contrario, retorna false.
 			~Parser() {}
 		private:
 			Parser(const Parser &other) = delete;
@@ -93,7 +93,7 @@ bool Initiator::launch(Socket& socket) {
 					protocol.get_list(socket, line);
 					std::cout << line;
 					break;
-				}	
+				}
 			case Create:
 				{
 
@@ -105,7 +105,10 @@ bool Initiator::launch(Socket& socket) {
 					// termino harcodeo
 					std::cout << "Press key any" << std::endl;
 					std::getline(std::cin, line);
-					ClientEvent event(START_GAME);
+
+					StartGameEvent evento;
+					ClientEvent event = evento.get_event();
+
 					protocol.send_event(socket, event);
 					not_started = false;
 					break;
@@ -133,11 +136,11 @@ bool Initiator::launch(Socket& socket) {
 			} catch(ExceptionInvalidCommand& e) {
 				std::cout << "El comando enviado es invalido. "
 							 "Es posible que haya enviado un nombre incorrecto."
-						  << std::endl;	 
-				not_started = true;		  
+						  << std::endl;
+				not_started = true;
 			}
 		}
-		
+
 	}
 
 

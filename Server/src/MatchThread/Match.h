@@ -18,6 +18,9 @@
 #include "GameWorldFactory.h"
 #include "GameWorld.h"
 
+#include "ClientEventHandler.h"
+#include "EventHandlerFactory.h"
+
 
 class Match: public Thread {
 		std::mutex m;
@@ -36,7 +39,7 @@ class Match: public Thread {
 		bool is_finished();
 
 		virtual void run() override;
-		void stop_running();		
+		void stop_running();
 		~Match();
 
 	private:

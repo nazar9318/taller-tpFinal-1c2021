@@ -8,13 +8,15 @@
 #include "GameWorldTypes.h"
 #include "Protocol.h"
 
+#include "StartGameEvent.h"
+
 class Initiator {
 	GameMap& map;
 
 	public:
 		Initiator(GameMap& map);
-		
-		// returns true if player is logged in. 
+
+		// returns true if player is logged in.
 		bool launch(Socket& socket);
 
 		~Initiator();

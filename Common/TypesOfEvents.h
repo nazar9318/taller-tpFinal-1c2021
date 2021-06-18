@@ -3,7 +3,8 @@
 
 
 enum TypeOfEvent: char {
-	START_GAME
+	START_GAME,
+	MOVE
 };
 
 

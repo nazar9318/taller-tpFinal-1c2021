@@ -20,5 +20,4 @@ class ModelEvent {
 		ModelEvent& operator=(const ModelEvent &other) = delete;
 };
 
-
 #endif

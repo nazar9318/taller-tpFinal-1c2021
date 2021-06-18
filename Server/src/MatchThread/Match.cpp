@@ -1,9 +1,6 @@
 #include "Match.h"
 
-
-
-
-Match::Match(Socket& socket, GameWorldType type): match_started(false), 
+Match::Match(Socket& socket, GameWorldType type): match_started(false),
 				finished(false), last_id(0), game_world(GameWorldFactory::create(type)) {
 	if (!game_world)
 		throw Exception("No se pudo alocar memoria");
@@ -19,7 +16,7 @@ void Match::join_player_if_not_full(Socket& skt) {
 	std::lock_guard<std::mutex> l(m);
 	if (match_started)
 		throw ExceptionMatchStarted("El juego ya comenzo");
-	game_world->add_player_if_not_full(last_id);	
+	game_world->add_player_if_not_full(last_id);
 	Player* player = new Player(skt, last_id, to_process_events);
 	if (!player) {
 		game_world->delete_player(last_id);
@@ -51,7 +48,9 @@ void Match::run() {
 	game_world->start();
 	while (!finished) {
 		ClientEvent event = to_process_events.pop();
-
+		std::unique_ptr<ClientEventHandler> handler = EventHandlerFactory::create(event);
+		// ClientEventHandler* handler = EventHandlerFactory::create(event);
+		handler->handle();
 	}
 
 
@@ -65,7 +64,7 @@ void Match::stop_running() {
 		players.erase(it->first);
 	}
 	finished = true;
-}	
+}
 
 Match::~Match() {
 	stop_running();

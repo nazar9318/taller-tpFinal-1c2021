@@ -21,3 +21,10 @@ Para ejecutarlos desde la carpeta build, las siguientes:
 
 ./client host port
 ~~~
+
+
+**Instalar yaml**
+
+~~~{.bash}
+sudo apt-get install libyaml-cpp-dev
+~~~

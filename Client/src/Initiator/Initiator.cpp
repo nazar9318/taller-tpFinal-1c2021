@@ -13,8 +13,23 @@ bool Initiator::launch(Socket& socket) {
 	// CONEXION SINCRONICA: SEND-RECV
 	// LOGICA DE BIENVENIDA
 	// QAPPLICATION
+	// ETAPA INICIAL DE ELECCION DE COLORES PARA LOS BANDOS
+
+
+
+
+
+
 
  	// EJEMPLO PARA PROBAR
+
+
+
+
+
+
+	std::cout << "No me la Counter Strike" << std::endl;
+
 
 	enum TypeOfLine {
 		Create, 

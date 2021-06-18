@@ -43,6 +43,3 @@ target_link_libraries(server server_classes common_classes)
 
 add_executable(client "Client/main.cpp")
 target_link_libraries(client client_classes common_classes SDL2 SDL2_image)
-
-# add_executable(tests "Tests/main.cpp")
-# target_link_libraries(tests tests_classes common_classes client_classes server_classes)

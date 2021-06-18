@@ -4,18 +4,19 @@
 #include <string>
 #include <syslog.h>
 
-
+#include "TypesOfEvents.h"
 
 class ClientEvent {
 	std::string msg;
-	char type_msg;
+	TypeOfEvent type_msg;
+	int client_id;
 	public:
-		ClientEvent();
-		//ClientEvent(ClientEvent &&other);
+		ClientEvent(TypeOfEvent t);
+		ClientEvent() {}
 		ClientEvent(ClientEvent&&) = default;
     	ClientEvent& operator = (ClientEvent&&) = default;
-
-		char type();
+    	void add_client_id(int id);
+		char get_type();
 		std::string to_string();
 
 		~ClientEvent();

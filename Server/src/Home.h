@@ -19,13 +19,12 @@ class Home {
 		// PRE: El socket esta correctamente inicializado. 
 		void add_client(Socket skt_client);
 
-		// POST: Libera los recursos de los hilos que ya finalizaron su
-		//       ejecucion
-		void clear_clients();
-
 		~Home();
 
 	private:
+		// POST: Libera los recursos de los hilos que ya finalizaron su
+		//       ejecucion
+		void clear_clients();
 		Home(const Home &other) = delete;
 		Home& operator=(const Home &other) = delete;
 };

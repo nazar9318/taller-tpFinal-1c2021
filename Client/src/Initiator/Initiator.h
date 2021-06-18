@@ -3,21 +3,16 @@
 
 #include <string>
 #include <iostream>
-#include "ClientEvent.h"
-#include "ModelEvent.h"
-#include "ProtectedQueue.h"
-#include "ProtectedQueue.h"
 #include "GameMap.h"
 #include "Socket.h"
+#include "GameWorldTypes.h"
+#include "Protocol.h"
 
 class Initiator {
-	ProtectedQueue<ModelEvent>& model_events;
-	ProtectedQueue<ClientEvent>& client_events;
 	GameMap& map;
 
 	public:
-		Initiator(ProtectedQueue<ModelEvent>& model_events,
-		 ProtectedQueue<ClientEvent>& client_events, GameMap& map);
+		Initiator(GameMap& map);
 		
 		// returns true if player is logged in. 
 		bool launch(Socket& socket);

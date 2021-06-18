@@ -25,7 +25,7 @@ class Matches {
 
 		// PRE: Existe ninguna partida con el nombre name. 
 		// POST: Se une un jugador a la partida name.  
-		void join_if_not_full(Socket& skt, const std::string& name);
+		void join_if_exists(Socket& skt, const std::string& name);
 
 		// POST: Retorna los nombres de las partidas.  
 		std::string get_names();

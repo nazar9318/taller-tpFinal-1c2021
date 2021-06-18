@@ -4,9 +4,10 @@
 #include <string>
 #include "Socket.h"
 #include "ModelEvent.h"
+#include "ClientEvent.h"
 #include "Exception.h"
 #include "ExceptionInvalidCommand.h"
-
+#include <memory>
 #define LIST_CODE 0x6C
 #define CREATE_CODE 0x6e
 #define PLAY_CODE 0x70
@@ -61,6 +62,11 @@ class Protocol {
 
 
 		void recv_event(Socket& socket, ModelEvent& event);
+		void recv_event(Socket& socket, ClientEvent& event);
+		
+		void send_event(Socket& socket, std::shared_ptr<ModelEvent> event);
+		void send_event(Socket& socket, ClientEvent& event);
+
 
 
 		// POST: Recibe un mensaje cualquiera compuesto por dos bytes

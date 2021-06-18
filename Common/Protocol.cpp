@@ -37,8 +37,10 @@ void Protocol::recv_message(Socket& socket, char type, std::string& msg) const {
 
 
 void Protocol::recv_event(Socket& socket, ModelEvent& event) {}
-
-
+void Protocol::recv_event(Socket& socket, ClientEvent& event) {}
+		
+void Protocol::send_event(Socket& socket, std::shared_ptr<ModelEvent> event) {}
+void Protocol::send_event(Socket& socket, ClientEvent& event) {}
 
 
 

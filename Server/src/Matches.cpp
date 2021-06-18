@@ -25,7 +25,7 @@ void Matches::create(Socket& skt, const std::string& name, GameWorldType type) {
 
 // PRE: Existe ninguna partida con el nombre name. 
 // POST: Se une un jugador a la partida name.  
-void Matches::join_if_not_full(Socket& skt, const std::string& name) {
+void Matches::join_if_exists(Socket& skt, const std::string& name) {
 	std::lock_guard<std::mutex> l(m);
 	if (matches.find(name) == matches.end())
 		throw ExceptionInvalidCommand("La partida no existe");
@@ -37,11 +37,10 @@ void Matches::join_if_not_full(Socket& skt, const std::string& name) {
 // POST: Retorna los nombres de las partidas.  
 std::string Matches::get_names() {
 	std::lock_guard<std::mutex> l(m);
-	std::string list  = "Partidas:\n";
+	std::string list;
 	for (auto it = matches.begin(); it != matches.end(); ++it) {
-		list += " - ";
 		list += it->first;
-		list += '\n';
+		list += ";";
 	}
 	return list;
 }

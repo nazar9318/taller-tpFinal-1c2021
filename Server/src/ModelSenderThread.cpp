@@ -1,22 +1,22 @@
-#include "EventSenderThread.h"
+#include "ModelSenderThread.h"
 
 
 
-EventSenderThread::EventSenderThread(Socket& skt,
-					ProtectedQueue<ClientEvent>& queue):
+ModelSenderThread::ModelSenderThread(Socket& skt,
+					ProtectedQueue<std::shared_ptr<ModelEvent>>& queue):
 					socket_send(skt), events(queue), 
 					allowed_to_run(true) {}
 
-void EventSenderThread::stop_running() {
+void ModelSenderThread::stop_running() {
 	socket_send.shutdown(SHUT_WR);
-	events.close();
 	allowed_to_run = false;
+
 }
 
-void EventSenderThread::run() {
+void ModelSenderThread::run() {
 	try {
 		while (allowed_to_run) {
-			ClientEvent event = events.blocking_pop();
+			std::shared_ptr<ModelEvent> event = events.blocking_pop();
 			protocol.send_event(socket_send, event);
 		}
 	} catch(const std::exception& e) {
@@ -26,6 +26,6 @@ void EventSenderThread::run() {
 	}
 }
 
-EventSenderThread::~EventSenderThread() {
+ModelSenderThread::~ModelSenderThread() {
 	this->join();
 }

@@ -18,4 +18,6 @@ void GameWorld::delete_player(int id) {
 	// delete player
 	number_players--;
 }
+
+ void GameWorld::start() {}
 GameWorld::~GameWorld() {}

@@ -15,6 +15,7 @@ class GameWorld {
 		GameWorld();
 		virtual void add_player_if_not_full(int id);
 		virtual void delete_player(int id);
+		virtual void start();
 		~GameWorld();
 	
 	private:

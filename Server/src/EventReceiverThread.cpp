@@ -1,21 +1,22 @@
-#include "ModelRecieverThread.h"
+#include "EventReceiverThread.h"
 #include <queue>
-ModelRecieverThread::ModelRecieverThread(Socket& skt,
-					ProtectedQueue<ModelEvent>& queue):
-					socket_recv(skt), events(queue), 
+
+EventReceiverThread::EventReceiverThread(Socket& skt,
+					int id, ProtectedQueue<ClientEvent>& queue):
+					client_id(id), socket_recv(skt), events(queue), 
 					allowed_to_run(true) {}
 
-void ModelRecieverThread::stop_running() {
+void EventReceiverThread::stop_running() {
 	socket_recv.shutdown(SHUT_RD);
 	allowed_to_run = false;
 }
 
-
-void ModelRecieverThread::run() {
+void EventReceiverThread::run() {
 	try {
 		while (allowed_to_run) {
-			ModelEvent event;
+			ClientEvent event;
 			protocol.recv_event(socket_recv, event);
+			event.add_client_id(client_id);
 			events.push(event);
 		}
 	} catch(const std::exception& e) {
@@ -25,6 +26,6 @@ void ModelRecieverThread::run() {
 	}
 }
 
-ModelRecieverThread::~ModelRecieverThread() {
+EventReceiverThread::~EventReceiverThread() {
 	this->join();
 }

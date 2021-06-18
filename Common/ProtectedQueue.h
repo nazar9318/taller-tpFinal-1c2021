@@ -35,26 +35,26 @@ template <class T> class ProtectedQueue {
 		//       Si no hay datos, el metodo es bloqueante
 		//       y espera a un push. Si la cola esta vacia 
 		//       y cerrada, lanza ExceptionClosedQueue.
-		T& blocking_pop() {
+		T blocking_pop() {
 			std::unique_lock<std::mutex> lock(m);
 			while (queue.empty()) {
 				if (closed)
 					throw ExceptionClosedQueue("La cola esta cerrada");
 				condition_variable.wait(lock);
 			}
-			T& data = queue.front();
+			T data = std::move(queue.front());
 			queue.pop();
 			return data;
 		}
 
 		// POST: Retorna el primer dato de la cola. 
 		// Si la cola esta vacia lanza una Exception.
-		T& pop() {
+		T pop() {
 			std::unique_lock<std::mutex> lock(m);
 			if (queue.empty()) {
 				throw Exception("Queue is empty");
 			}
-			T data = queue.front();
+			T data = std::move(queue.front());
 			queue.pop();
 			return data;
 		}

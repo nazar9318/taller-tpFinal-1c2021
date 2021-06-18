@@ -9,15 +9,14 @@
 #define ARGC_EXPECTED 2
 
 int main(int argc, char *argv[]) {
+	std::string port("8080");
 	if (argc != ARGC_EXPECTED) {
 		syslog(LOG_CRIT, "[%s:%i]: Se enviaron %d argumentos"
 				 " y se esperaban %d.", __FILE__, __LINE__,
 				   argc, ARGC_EXPECTED);
-		return ERROR;
+	} else {
+		port = argv[1];
 	}
-
-	std::string port(argv[1]);
-	
 	try {
 		Server server(port);
 		server.excecute();

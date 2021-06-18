@@ -50,9 +50,8 @@ void Lobby::handle_lobby() {
 			if (type_msg == CREATE_CODE) {
 				GameWorldType world_type = (GameWorldType)protocol.get_message_type(communication_skt);
 				matches.create(communication_skt, match_name, world_type);
-
 			} else {
-				matches.join_if_not_full(communication_skt, match_name);
+				matches.join_if_exists(communication_skt, match_name);
 			}
 			not_started = false;	
 		} catch(ExceptionInvalidCommand &e) {

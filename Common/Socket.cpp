@@ -27,7 +27,8 @@ Socket::Socket(Socket&& other) {
 	other.socket_fd = NOT_INITIALIZED;
 }
 
-Socket::Socket(const std::string& host, const std::string& service) {
+Socket::Socket(const std::string& host, const std::string& service): 
+		socket_fd(NOT_INITIALIZED) {
 	connect_to(host, service);
 }
 

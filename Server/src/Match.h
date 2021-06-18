@@ -5,9 +5,9 @@
 #include <mutex>
 #include <map>
 #include <atomic>
+#include <memory>
 
 #include "Player.h"
-
 #include "Socket.h"
 #include "Thread.h"
 #include "ProtectedQueue.h"
@@ -18,13 +18,14 @@
 #include "GameWorldFactory.h"
 #include "GameWorld.h"
 
+
 class Match: public Thread {
 		std::mutex m;
 		std::atomic<bool> match_started;
 		std::atomic<bool> finished;
 		char last_id;
 		std::map<char, Player*> players; //char id_player
-		ProtectedQueue<ModelEvent> to_process_events;
+		ProtectedQueue<ClientEvent> to_process_events;
 		std::unique_ptr<GameWorld> game_world;
 
 	public:

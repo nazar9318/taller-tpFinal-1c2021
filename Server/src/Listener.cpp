@@ -7,7 +7,6 @@
 Listener::Listener(const std::string& port) {
 	syslog(LOG_INFO, "Creando Listener con"
 				" parametro %s", port.c_str());
-
 	accepter.bind_listen(port);
 	keep_running = true;
 }
@@ -15,7 +14,7 @@ Listener::Listener(const std::string& port) {
 
 // POST: Escucha y acepta clientes que intentan 
 //       conectarse al servidor. Estos son enviados al 
-//       orchestrator para que los maneje. 
+//       home para que los maneje. 
 void Listener::run() {
 	try {
 		while (keep_running) {

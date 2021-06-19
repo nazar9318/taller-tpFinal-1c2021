@@ -3,7 +3,7 @@
 
 
 enum TypeOfEvent: char {
-	START_GAME,
+	START_GAME = 'a', //Los hago comenzar en a -> se puede cambiar
 	MOVE
 };
 

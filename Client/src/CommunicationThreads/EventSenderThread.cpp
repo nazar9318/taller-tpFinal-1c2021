@@ -2,9 +2,8 @@
 
 
 
-EventSenderThread::EventSenderThread(Socket& skt,
-					ProtectedQueue<ClientEvent>& queue):
-					socket_send(skt), events(queue), 
+EventSenderThread::EventSenderThread(Socket& skt, ProtectedQueue<Event>& queue):
+					socket_send(skt), events(queue),
 					allowed_to_run(true) {}
 
 void EventSenderThread::stop_running() {
@@ -16,8 +15,8 @@ void EventSenderThread::stop_running() {
 void EventSenderThread::run() {
 	try {
 		while (allowed_to_run) {
-			ClientEvent event = events.blocking_pop();
-			protocol.send_event(socket_send, event);
+			Event event = events.blocking_pop();
+			protocol.send_event(socket_send, event.get_msg());
 		}
 	} catch(const std::exception& e) {
 		syslog(LOG_ERR, "[%s:%i]: Error: %s", __FILE__, __LINE__, e.what());

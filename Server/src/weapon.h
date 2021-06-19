@@ -26,7 +26,7 @@ class Weapon {
 
         virtual void shoot(Character &character, uint16_t distance) = 0;
 
-        ~Weapon();
+        virtual ~Weapon() = 0;
 };
 
 #endif

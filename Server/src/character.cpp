@@ -1,7 +1,7 @@
 #include "character.h"
 #include <algorithm>
 
-Character::Character(Team team) : life_points(CF::character_life_points), 
+Character::Character(Team team) : life_points(CF::character_life_points),
 money(CF::character_money), team(team) {
     this->weapons.push_back(new WeaponWhite());
     this->weapons.push_back(new WeaponPistol());

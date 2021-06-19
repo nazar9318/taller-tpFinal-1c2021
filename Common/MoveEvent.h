@@ -4,7 +4,7 @@
 #include <string>
 #include <syslog.h>
 
-#include "ClientEvent.h"
+#include "Event.h"
 #include "TypesOfEvents.h"
 
 class MoveEvent{
@@ -15,7 +15,7 @@ class MoveEvent{
 	public:
 		MoveEvent(/*Direction& direction*/);
 
-    ClientEvent get_event();
+    Event get_event();
 
 		~MoveEvent();
 

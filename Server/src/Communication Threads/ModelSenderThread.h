@@ -5,7 +5,8 @@
 #include <atomic>
 #include <syslog.h>
 
-#include "ModelEvent.h"
+#include "Event.h"
+// #include "ModelEvent.h"
 #include "ProtectedQueue.h"
 #include "Thread.h"
 #include "Socket.h"
@@ -15,12 +16,12 @@
 class ModelSenderThread: public Thread {
 		Socket& socket_send;
 		Protocol protocol;
-		ProtectedQueue<std::shared_ptr<ModelEvent>>& events;
+		ProtectedQueue<std::shared_ptr<Event>>& events;
 		std::atomic<bool> allowed_to_run;
 
 	public:
 		ModelSenderThread(Socket& skt,
-		 ProtectedQueue<std::shared_ptr<ModelEvent>>& events);
+		 ProtectedQueue<std::shared_ptr<Event>>& events);
 		void stop_running();
 		virtual void run() override;
 

@@ -5,21 +5,21 @@
 
 #include "Socket.h"
 #include "ProtectedQueue.h"
-#include "ModelEvent.h"
 #include "EventReceiverThread.h"
 #include "ModelSenderThread.h"
+#include "Event.h"
 
 class Player {
 	Socket socket;
 	int id;
 	EventReceiverThread receiver;
-	ProtectedQueue<std::shared_ptr<ModelEvent>> model_events;
+	ProtectedQueue<std::shared_ptr<Event>> model_events;
 	ModelSenderThread sender;
 
 	public:
-		Player(Socket& socket, int player_id, ProtectedQueue<ClientEvent>& client_events);
+		Player(Socket& socket, int player_id, ProtectedQueue<Event>& client_events);
 		~Player();
-		void push(std::shared_ptr<ModelEvent> model_event);
+		void push(std::shared_ptr<Event> model_event);
 		void stop_running();
 
 	private:

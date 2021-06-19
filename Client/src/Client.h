@@ -5,8 +5,7 @@
 #include <iostream>
 #include <syslog.h>
 
-#include "ClientEvent.h"
-#include "ModelEvent.h"
+#include "Event.h"
 #include "ProtectedQueue.h"
 #include "EventSenderThread.h"
 #include "ModelRecieverThread.h"
@@ -15,16 +14,16 @@
 #include "Game.h"
 
 class Client {
-	Socket socket; 
-	ProtectedQueue<ModelEvent> model_events;
-	ProtectedQueue<ClientEvent> client_events;
+	Socket socket;
+	ProtectedQueue<Event> model_events;
+	ProtectedQueue<Event> client_events;
 	ModelRecieverThread reciever;
 	EventSenderThread sender;
-	
+
 	public:
 		Client(const std::string& host, const std::string& port);
-		
-		// POST: Executes the Counter Strike game.  
+
+		// POST: Executes the Counter Strike game.
 		void execute();
 
 		~Client();
@@ -36,4 +35,3 @@ class Client {
 
 
 #endif
-

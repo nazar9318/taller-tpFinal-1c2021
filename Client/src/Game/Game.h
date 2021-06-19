@@ -3,22 +3,21 @@
 
 #include <string>
 #include <iostream>
-#include "ClientEvent.h"
-#include "ModelEvent.h"
+#include "Event.h"
 #include "ProtectedQueue.h"
 #include "GameMap.h"
 #include "FrameLimiter.h"
 
 class Game {
-	ProtectedQueue<ModelEvent>& model_events;
-	ProtectedQueue<ClientEvent>& client_events;
+	ProtectedQueue<Event>& model_events;
+	ProtectedQueue<Event>& client_events;
 	GameMap& map;
 	bool is_running;
 
 	public:
-		Game(ProtectedQueue<ModelEvent>& model_events,
-		 ProtectedQueue<ClientEvent>& client_events, GameMap& map);
-		
+		Game(ProtectedQueue<Event>& model_events,
+		ProtectedQueue<Event>& client_events, GameMap& map);
+
 		void execute();
 		~Game();
 

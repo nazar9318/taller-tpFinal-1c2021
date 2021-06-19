@@ -2,14 +2,14 @@
 #define _GAME_MAP_H
 
 #include <string>
-#include "ModelEvent.h"
+#include "Event.h"
 
 
 class GameMap {
 
 	public:
 		GameMap();
-		void create(ModelEvent& starter_event);
+		void create(Event& starter_event);
 		~GameMap();
 
 	private:

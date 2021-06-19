@@ -16,11 +16,11 @@
 class ModelRecieverThread: public Thread {
 	Socket& socket_recv;
 	Protocol protocol;
-	ProtectedQueue<ModelEvent>& events;
+	ProtectedQueue<Event>& events;
 	std::atomic<bool> allowed_to_run;
 
 	public:
-		ModelRecieverThread(Socket& skt, ProtectedQueue<ModelEvent>& events);
+		ModelRecieverThread(Socket& skt, ProtectedQueue<Event>& events);
 		void stop_running();
 		virtual void run() override;
 

@@ -6,8 +6,8 @@ MoveEvent::MoveEvent(/*Direction& direction*/){
   // msg.push_back(direction.get_y());
 }
 
-ClientEvent MoveEvent::get_event(){
-  return ClientEvent(msg, msg.size());
+Event MoveEvent::get_event(){
+  return Event(msg, msg.size());
 }
 
 MoveEvent::~MoveEvent(){}

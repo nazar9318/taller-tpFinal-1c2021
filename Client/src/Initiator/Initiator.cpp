@@ -16,67 +16,9 @@ bool Initiator::launch(Socket& socket) {
 	// ETAPA INICIAL DE ELECCION DE COLORES PARA LOS BANDOS
 
 
-
-
-
-
-
- 	// EJEMPLO PARA PROBAR
-
-
-
-
-
-
 	std::cout << "No me la Counter Strike" << std::endl;
 
 
-	enum TypeOfLine {
-		Create,
-		Join,
-		List,
-		Undefined
-	};
-#define NAME_POS_JOIN 7
-#define NAME_POS_CREATE 6
-#define COLUMN_POS 6
-#define ROW_POS 8
-	#define CREATE "crear"
-#define SIZE_CREATE 5
-#define LIST "listar"
-#define JOIN "unirse"
-#define SIZE_JOIN 6
-#define PLAY "jugar"
-#define SIZE_PLAY 5
-#define PLAY_LEN 9
-#define BEGIN 0
-#define ASCII_ONE 49
-#define ASCII_THREE 51
-	class Parser {
-		public:
-			Parser() {}
-
-			// POST: Dependiendo de la estructura de la linea, retorna
-			//       el enum correspondiente.
-			TypeOfLine type_of_line(const std::string& line) const {
-		if ((line.length() > SIZE_CREATE + 2) &&
-			 (line.substr(0, SIZE_CREATE) == CREATE))
-			return TypeOfLine::Create;
-		if (line == LIST)
-			return TypeOfLine::List;
-		if ((line.length() > SIZE_JOIN + 2) && (line.substr(0, SIZE_JOIN) == JOIN))
-			return TypeOfLine::Join;
-		return TypeOfLine::Undefined;
-	}
-
-			// POST: Si la linea contiene alguna de las frases correspondidas
-			//       a la finalizacion de la partida, retorna true. Caso
-			//       contrario, retorna false.
-			~Parser() {}
-		private:
-			Parser(const Parser &other) = delete;
-			Parser& operator=(const Parser &other) = delete;
-	};
 	Parser parser;
 	Protocol protocol;
 	bool not_started = true;
@@ -99,6 +41,7 @@ bool Initiator::launch(Socket& socket) {
 
 					name = line.substr(NAME_POS_CREATE);
 					protocol.send_create(socket, name);
+					std::cout << "Envio crear" << '\n';
 					//harcodeo tipo
 					GameWorldType w_type = GameWorldType::DEFAULT;
 					socket.send_message((char*)&w_type, 1);
@@ -107,9 +50,11 @@ bool Initiator::launch(Socket& socket) {
 					std::getline(std::cin, line);
 
 					StartGameEvent evento;
-					ClientEvent event = evento.get_event();
+					Event event = evento.get_event();
 
-					protocol.send_event(socket, event);
+					protocol.send_event(socket, event.get_msg());
+
+					std::cout << "Envio startgame event" << '\n';
 					not_started = false;
 					break;
 				}
@@ -128,8 +73,7 @@ bool Initiator::launch(Socket& socket) {
 		}
 		if (!not_started) {
 			try {
-				ModelEvent starter_event;
-				protocol.recv_event(socket, starter_event);
+				Event starter_event = protocol.recv_event(socket);
 				if (starter_event.get_type() != START_GAME)
 					throw Exception("No se pudo arrancar la partida");
 				map.create(starter_event);

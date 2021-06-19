@@ -31,28 +31,31 @@ bool Match::is_finished() {
 }
 
 void Match::run() {
-	ClientEvent event = to_process_events.blocking_pop();
-	if (event.get_type() != START_GAME) {
+
+	Event event = to_process_events.blocking_pop();
+	if (event.get_type() != TypeOfEvent::START_GAME) {
 		finished = true;
+		syslog(LOG_INFO, "LLega un evento diferente al esperado, startgame");
 		return;
 	}
 	{
 		std::lock_guard<std::mutex> l(m);
 		match_started = true;
 	}
-	std::shared_ptr<ModelEvent> starter_event(new ModelEvent(START_GAME));
+
+	std::shared_ptr<Event> starter_event(new Event());
 	for (auto it = players.begin(); it != players.end(); ++it) {
 		it->second->push(starter_event);
 	}
 
+
 	game_world->start();
 	while (!finished) {
-		ClientEvent event = to_process_events.pop();
+		Event event = to_process_events.pop();
 		std::unique_ptr<ClientEventHandler> handler = EventHandlerFactory::create(event);
-		// ClientEventHandler* handler = EventHandlerFactory::create(event);
 		handler->handle();
 	}
-
+		//Enviar a todos los clientes los eventos
 
 }
 

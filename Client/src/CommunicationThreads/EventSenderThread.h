@@ -5,7 +5,7 @@
 #include <atomic>
 #include <syslog.h>
 
-#include "ClientEvent.h"
+#include "Event.h"
 #include "ProtectedQueue.h"
 #include "Thread.h"
 #include "Socket.h"
@@ -15,11 +15,11 @@
 class EventSenderThread: public Thread {
 		Socket& socket_send;
 		Protocol protocol;
-		ProtectedQueue<ClientEvent>& events;
+		ProtectedQueue<Event>& events;
 		std::atomic<bool> allowed_to_run;
 
 	public:
-		EventSenderThread(Socket& skt, ProtectedQueue<ClientEvent>& events);
+		EventSenderThread(Socket& skt, ProtectedQueue<Event>& events);
 		void stop_running();
 		virtual void run() override;
 

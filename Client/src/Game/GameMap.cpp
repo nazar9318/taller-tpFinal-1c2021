@@ -4,6 +4,6 @@
 
 GameMap::GameMap() {}
 
-void GameMap::create(ModelEvent& starter_event) {}
+void GameMap::create(Event& starter_event) {}
 
 GameMap::~GameMap() {}

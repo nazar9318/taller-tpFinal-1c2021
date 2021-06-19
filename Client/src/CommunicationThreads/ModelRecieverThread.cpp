@@ -1,8 +1,7 @@
 #include "ModelRecieverThread.h"
 #include <queue>
-ModelRecieverThread::ModelRecieverThread(Socket& skt,
-					ProtectedQueue<ModelEvent>& queue):
-					socket_recv(skt), events(queue), 
+ModelRecieverThread::ModelRecieverThread(Socket& skt, ProtectedQueue<Event>& queue):
+					socket_recv(skt), events(queue),
 					allowed_to_run(true) {}
 
 void ModelRecieverThread::stop_running() {
@@ -14,8 +13,7 @@ void ModelRecieverThread::stop_running() {
 void ModelRecieverThread::run() {
 	try {
 		while (allowed_to_run) {
-			ModelEvent event;
-			protocol.recv_event(socket_recv, event);
+			Event event = protocol.recv_event(socket_recv);
 			events.push(event);
 		}
 	} catch(const std::exception& e) {

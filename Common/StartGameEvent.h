@@ -4,7 +4,8 @@
 #include <string>
 #include <syslog.h>
 
-#include "ClientEvent.h"
+#include "Event.h"
+// #include "ClientEvent.h"
 #include "TypesOfEvents.h"
 
 class StartGameEvent{
@@ -13,9 +14,9 @@ class StartGameEvent{
     std::vector<char> msg;
 
 	public:
-		StartGameEvent(/*Direction& direction*/);
+		StartGameEvent();
 
-    ClientEvent get_event();
+    Event get_event();
 
 		~StartGameEvent();
 

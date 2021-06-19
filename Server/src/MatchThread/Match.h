@@ -11,12 +11,12 @@
 #include "Socket.h"
 #include "Thread.h"
 #include "ProtectedQueue.h"
-#include "ModelEvent.h"
 #include "Exception.h"
 #include "ExceptionMatchStarted.h"
 #include "GameWorldTypes.h"
 #include "GameWorldFactory.h"
 #include "GameWorld.h"
+#include "Event.h"
 
 #include "ClientEventHandler.h"
 #include "EventHandlerFactory.h"
@@ -28,7 +28,7 @@ class Match: public Thread {
 		std::atomic<bool> finished;
 		char last_id;
 		std::map<char, Player*> players; //char id_player
-		ProtectedQueue<ClientEvent> to_process_events;
+		ProtectedQueue<Event> to_process_events;
 		std::unique_ptr<GameWorld> game_world;
 
 	public:

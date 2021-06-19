@@ -1,13 +1,12 @@
 #include "StartGameEvent.h"
+#include <stdio.h>
 
 StartGameEvent::StartGameEvent(){
-  msg.push_back((char)TypeOfEvent::START_GAME); //Agrego el tipo de evento
-  // msg.push_back(direction.get_x());
-  // msg.push_back(direction.get_y());
+  msg.push_back(TypeOfEvent::START_GAME); //Agrego el tipo de evento
 }
 
-ClientEvent StartGameEvent::get_event(){
-  return ClientEvent(msg, msg.size());
+Event StartGameEvent::get_event(){
+  return Event(msg, msg.size());
 }
 
 StartGameEvent::~StartGameEvent(){}

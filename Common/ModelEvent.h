@@ -2,17 +2,24 @@
 #define _MODEL_EVENT_H
 
 #include <string>
+#include <vector>
 #include "TypesOfEvents.h"
 
 class ModelEvent {
-	TypeOfEvent type;
-	std::string info;
+	std::vector<char> msg;
+	size_t size;
 	public:
-		ModelEvent(TypeOfEvent t);
-		ModelEvent() {}
-		TypeOfEvent get_type();
+
+		ModelEvent(std::vector<char> msg, size_t size);
+		ModelEvent();
+
+		char get_type();
+
+		std::vector<char> get_msg();
+
 		ModelEvent(ModelEvent&&) = default;
-    	ModelEvent& operator = (ModelEvent&&) = default;
+    ModelEvent& operator= (ModelEvent&&) = default;
+
 		~ModelEvent();
 
 	private:

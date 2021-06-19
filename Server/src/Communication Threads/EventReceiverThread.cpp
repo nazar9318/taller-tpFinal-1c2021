@@ -2,8 +2,8 @@
 #include <queue>
 
 EventReceiverThread::EventReceiverThread(Socket& skt,
-					int id, ProtectedQueue<ClientEvent>& queue):
-					client_id(id), socket_recv(skt), events(queue), 
+					int id, ProtectedQueue<Event>& queue):
+					client_id(id), socket_recv(skt), events(queue),
 					allowed_to_run(true) {}
 
 void EventReceiverThread::stop_running() {
@@ -11,11 +11,11 @@ void EventReceiverThread::stop_running() {
 	allowed_to_run = false;
 }
 
+
 void EventReceiverThread::run() {
 	try {
 		while (allowed_to_run) {
-			ClientEvent event;
-			protocol.recv_event(socket_recv, event);
+			Event event = protocol.recv_event(socket_recv);
 			event.add_client_id(client_id);
 			events.push(event);
 		}

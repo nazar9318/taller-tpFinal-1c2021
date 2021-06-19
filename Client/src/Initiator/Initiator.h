@@ -7,6 +7,7 @@
 #include "Socket.h"
 #include "GameWorldTypes.h"
 #include "Protocol.h"
+#include "Parser.h"
 
 #include "StartGameEvent.h"
 

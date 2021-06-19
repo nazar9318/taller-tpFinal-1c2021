@@ -1,4 +1,63 @@
 ---
 
-number_bullets: 15
-ak47_range: 17
+character_life_points: 100
+character_money: 100
+
+bomb_clock_count: 15
+
+glock_bullets: 10
+ak47_bullets: 20
+m3_bullets: 12
+awp_bullets: 7
+
+glock_range: 15
+ak47_range: 20
+m3_range: 4
+awp_range: 50
+
+glock_accuracy: 0.8
+ak47_accuracy: 0.8
+m3_accuracy: 0.7
+awp_accuracy: 0.9
+
+knife_damage_min: 5
+glock_damage_min: 7
+ak47_damage_min: 10
+m3_damage_min: 15
+awp_damage_min: 30
+
+knife_damage_max: 8
+glock_damage_max: 10
+ak47_damage_max: 15
+m3_damage_max: 20
+awp_damage_max: 50
+
+glock_shoot_rate: 1
+ak47_shoot_rate: 3
+m3_shoot_rate: 1
+awp_shoot_rate: 1
+
+glock_shoot_freq: 0
+ak47_shoot_freq: 400
+m3_shoot_freq: 0
+awp_shoot_freq: 0
+
+glock_distance_penalty: 2
+ak47_distance_penalty: 1
+m3_distance_penalty: 3
+awp_distance_penalty: 0
+
+glock_ammo: 8
+ak47_ammo: 30
+m3_ammo: 12
+awp_ammo: 7
+
+glock_price: 15
+ak47_price: 30
+m3_price: 50
+awp_price: 100
+
+glock_max_distance: 18
+ak47_max_distance: 10
+m3_max_distance: 3
+awp_max_distance: 120

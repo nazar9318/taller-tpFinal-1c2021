@@ -1,9 +1,53 @@
 #include "Configuration.h"
 
+YAML::Node CF::yaml_file = YAML::LoadFile("/home/federico/Git/pruebas/Configuration/Configuration.yaml");
 
-YAML::Node CF::yaml_file = YAML::LoadFile("Configuration.yaml");
-
-int CF::number_bullets = CF::yaml_file["number_bullets"].as<int>();
-
-double CF::ak47_range = CF::yaml_file["ak47_range"].as<double>(); 
-
+double CF::character_life_points = CF::yaml_file["character_life_points"].as<double>();
+double CF::character_money = CF::yaml_file["character_money"].as<double>();
+int CF::bomb_clock_count = CF::yaml_file["bomb_clock_count"].as<int>();
+int CF::glock_bullets = CF::yaml_file["glock_bullets"].as<int>();
+int CF::ak47_bullets = CF::yaml_file["ak47_bullets"].as<int>();
+int CF::m3_bullets = CF::yaml_file["m3_bullets"].as<int>();
+int CF::awp_bullets = CF::yaml_file["awp_bullets"].as<int>();
+int CF::glock_range = CF::yaml_file["glock_range"].as<int>();
+int CF::ak47_range = CF::yaml_file["ak47_range"].as<int>();
+int CF::m3_range = CF::yaml_file["m3_range"].as<int>();
+int CF::awp_range = CF::yaml_file["awp_range"].as<int>();
+double CF::glock_accuracy = CF::yaml_file["glock_accuracy"].as<double>();
+double CF::ak47_accuracy = CF::yaml_file["ak47_accuracy"].as<double>();
+double CF::m3_accuracy = CF::yaml_file["m3_accuracy"].as<double>();
+double CF::awp_accuracy = CF::yaml_file["awp_accuracy"].as<double>();
+double CF::knife_damage_min = CF::yaml_file["knife_damage_min"].as<double>();
+double CF::glock_damage_min = CF::yaml_file["glock_damage_min"].as<double>();
+double CF::ak47_damage_min = CF::yaml_file["ak47_damage_min"].as<double>();
+double CF::m3_damage_min = CF::yaml_file["m3_damage_min"].as<double>();
+double CF::awp_damage_min = CF::yaml_file["awp_damage_min"].as<double>();
+double CF::knife_damage_max = CF::yaml_file["knife_damage_max"].as<double>();
+double CF::glock_damage_max = CF::yaml_file["glock_damage_max"].as<double>();
+double CF::ak47_damage_max = CF::yaml_file["ak47_damage_max"].as<double>();
+double CF::m3_damage_max = CF::yaml_file["m3_damage_max"].as<double>();
+double CF::awp_damage_max = CF::yaml_file["awp_damage_max"].as<double>();
+int CF::glock_shoot_rate = CF::yaml_file["glock_shoot_rate"].as<int>();
+int CF::ak47_shoot_rate = CF::yaml_file["ak47_shoot_rate"].as<int>();
+int CF::m3_shoot_rate = CF::yaml_file["m3_shoot_rate"].as<int>();
+int CF::awp_shoot_rate = CF::yaml_file["awp_shoot_rate"].as<int>();
+int CF::glock_shoot_freq = CF::yaml_file["glock_shoot_freq"].as<int>();
+int CF::ak47_shoot_freq = CF::yaml_file["ak47_shoot_freq"].as<int>();
+int CF::m3_shoot_freq = CF::yaml_file["m3_shoot_freq"].as<int>();
+int CF::awp_shoot_freq = CF::yaml_file["awp_shoot_freq"].as<int>();
+double CF::glock_distance_penalty = CF::yaml_file["glock_distance_penalty"].as<double>();
+double CF::ak47_distance_penalty = CF::yaml_file["ak47_distance_penalty"].as<double>();
+double CF::m3_distance_penalty = CF::yaml_file["m3_distance_penalty"].as<double>();
+double CF::awp_distance_penalty = CF::yaml_file["awp_distance_penalty"].as<double>();
+double CF::glock_price = CF::yaml_file["glock_price"].as<double>();
+double CF::ak47_price = CF::yaml_file["ak47_price"].as<double>();
+double CF::m3_price = CF::yaml_file["m3_price"].as<double>();
+double CF::awp_price = CF::yaml_file["awp_price"].as<double>();
+int CF::glock_ammo = CF::yaml_file["glock_ammo"].as<int>();
+int CF::ak47_ammo = CF::yaml_file["ak47_ammo"].as<int>();
+int CF::m3_ammo = CF::yaml_file["m3_ammo"].as<int>();
+int CF::awp_ammo = CF::yaml_file["awp_ammo"].as<int>();
+double CF::glock_max_distance = CF::yaml_file["glock_max_distance"].as<double>();
+double CF::ak47_max_distance = CF::yaml_file["ak47_max_distance"].as<double>();
+double CF::m3_max_distance = CF::yaml_file["m3_max_distance"].as<double>();
+double CF::awp_max_distance = CF::yaml_file["awp_max_distance"].as<double>();

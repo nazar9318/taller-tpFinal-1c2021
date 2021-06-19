@@ -2,28 +2,33 @@
 #define CHARACTER_H
 
 #include "weapon.h"
+#include "weapon_bomb.h"
 #include "weapon_white.h"
-#include "weapon_manual.h"
+#include "weapon_pistol.h"
+#include "weapon_shotgun.h"
 #include "weapon_automatic.h"
 #include "team.h"
+#include "Configuration/Configuration.h"
 #include <vector>
 #include <iostream>
 
 class Weapon;
 class WeaponWhite;
-class WeaponManual;
+class WeaponShotgun;
+class WeaponPistol;
+class WeaponSniper;
 class WeaponAutomatic;
 
 class Character {
     private:
         double life_points;
-        uint16_t money;
+        double money;
         Team team;
         std::vector<Weapon*> weapons;
         Weapon* current_weapon;
 
     public:
-        Character(double life_points, uint16_t money, Team team);
+        Character(Team team);
 
         void takeDamage(double points);
 
@@ -33,7 +38,13 @@ class Character {
         
         void grab(Weapon *new_weapon);
 
-        void remove(Weapon *weapon);
+        void grab(Bomb *bomb);
+
+        void place(Bomb *bomb);
+
+        void deactivate(Bomb *bomb);
+
+        void removeSecondary();
 
         void take(uint16_t money);
 

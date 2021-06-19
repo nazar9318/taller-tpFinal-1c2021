@@ -4,11 +4,9 @@
 #include "weapon.h"
 #include <iostream>
 
-//class Character;
-
 class WeaponWhite : public Weapon {
     public:
-        WeaponWhite(uint16_t price, uint16_t damage);
+        WeaponWhite();
 
         void shoot(Character &character, uint16_t distance);
 

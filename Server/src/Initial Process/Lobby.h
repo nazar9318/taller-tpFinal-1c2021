@@ -9,7 +9,6 @@
 #include "Matches.h"
 #include "ExceptionInvalidCommand.h"
 #include "ExceptionMatchFull.h"
-#include "GameWorldTypes.h"
 #include "TypesOfEvents.h"
 #include "GetMapsHandler.h"
 #include "GetMatchesHandler.h"

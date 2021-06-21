@@ -6,21 +6,21 @@
 #include "GameWorld.h"
 #include "TypesOfEvents.h"
 #include "MoveHandler.h"
-#include "StartAttakingHandler.h"
-//#include "GrabWeaponHandler.h"
-//#include "DropWeaponHandler.h"
-//#include "ExchangeWeaponHandler.h"
-//#include "BuyArmourHandler.h"
-//#include "QuitGameHandler.h"
+#include "StartAttackingHandler.h"
+#include "GrabWeaponHandler.h"
+#include "DropWeaponHandler.h"
+#include "ExchangeWeaponHandler.h"
+#include "BuyArmourHandler.h"
+#include "QuitGameHandler.h"
 
 class ClientEventHandler{
 		MoveHandler mover;
-		//StartAttakingHandler attacker; 
-		//GrabWeaponHandler graber; 
-		//DropWeaponHandler droper; 
-		//ExchangeWeaponHandler exchanger; 
-		//BuyArmourHandler buyier;
-		//QuitGameHandler quiter; 
+		StartAttackingHandler attacker; 
+		GrabWeaponHandler graber; 
+		DropWeaponHandler droper; 
+		ExchangeWeaponHandler exchanger; 
+		BuyArmourHandler buyier;
+		QuitGameHandler quiter; 
 		GameWorld& world;
 		
 	public:

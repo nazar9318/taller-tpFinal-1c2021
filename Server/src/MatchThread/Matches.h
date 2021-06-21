@@ -9,7 +9,6 @@
 #include "ExceptionInvalidCommand.h"
 #include "Exception.h"
 #include "GameWorld.h"
-#include "GameWorldTypes.h"
 
 class Matches {
 		std::map<std::string, Match*> matches;

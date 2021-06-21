@@ -26,8 +26,29 @@ void Game::execute() {
 }
 
 
-void Game::handle_events() {}
-void Game::process_events() {}
+void Game::handle_events() {
+	//poll de sdl hasta que no haya mas eventos. 
+	// ir agregando a la cola. 
+
+
+
+}
+
+void Game::process_events() {
+	bool queue_not_empty = true;
+	int max_iterations = 15;//harcodeo, va en arch de config.
+	int i = 0;
+	while (queue_not_empty && max_iterations > i) {
+		try {
+			Event event = model_events.pop();
+			handler.handle(event);
+			i++;
+		} catch(ExceptionEmptyQueue& e) {
+			queue_not_empty = false;
+		}
+	}
+}
+
 void Game::update() {
 	is_running = false;
 }

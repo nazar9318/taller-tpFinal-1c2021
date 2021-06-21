@@ -14,7 +14,6 @@
 #include "ProtectedQueue.h"
 #include "Exception.h"
 #include "ExceptionMatchStarted.h"
-#include "GameWorldTypes.h"
 #include "GameWorld.h"
 #include "Event.h"
 #include "StartGameHandler.h"

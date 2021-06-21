@@ -7,11 +7,13 @@
 #include "ProtectedQueue.h"
 #include "GameMap.h"
 #include "FrameLimiter.h"
+#include "ModelEventHandler.h"
 
 class Game {
 	ProtectedQueue<Event>& model_events;
 	ProtectedQueue<Event>& client_events;
 	GameMap& map;
+	ModelEventHandler handler;
 	bool is_running;
 
 	public:

@@ -5,7 +5,6 @@ ClientEventHandler::
 }
 
 void ClientEventHandler::handle(Event& event) {
-	/*
 	switch(event.get_type()) {
 		case ClientTypeEvent::MOVE:
 			{
@@ -47,7 +46,6 @@ void ClientEventHandler::handle(Event& event) {
 				throw Exception("No one matches");
 			}
 	}
-	*/
 } 
 
 

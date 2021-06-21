@@ -6,6 +6,7 @@ enum TypeOfLine {
 	Create,
 	Join,
 	List,
+	Configuration,
 	Undefined
 };
 

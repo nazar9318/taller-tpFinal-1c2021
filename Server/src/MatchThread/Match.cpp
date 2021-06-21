@@ -68,7 +68,7 @@ void Match::handle_events() {
 	bool queue_not_empty = true;
 	int max_iterations = CF::max_iterations_pop_events;
 	int i = 0;
-	while (queue_not_empty && max_iterations < i) {
+	while (queue_not_empty && max_iterations > i) {
 		try {
 			Event event = to_process_events.pop();
 			handler.handle(event);
@@ -77,7 +77,6 @@ void Match::handle_events() {
 			queue_not_empty = false;
 		}
 	}
-
 }
 
 void Match::push_event(std::shared_ptr<Event>& event) {

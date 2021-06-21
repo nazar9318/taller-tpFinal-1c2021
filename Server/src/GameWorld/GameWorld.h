@@ -2,7 +2,6 @@
 #define _GAME_WORLD_H
 
 #include <mutex>
-#include "GameWorldTypes.h"
 #include "ExceptionMatchFull.h"
 #include <vector>
 

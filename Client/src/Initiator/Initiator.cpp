@@ -7,9 +7,82 @@ Initiator::Initiator(GameMap& game_map):
 }
 
 
+bool Initiator::launch(Socket& socket) {
+	std::cout << "No me la Counter Strike" << std::endl;
+	Protocol protocol;
+	Parser parser;
+	bool not_started = true;
+	std::string name;
+	while (not_started) {
+		std::string line;
+		std::getline(std::cin, line);
+		TypeOfLine type = parser.type_of_line(line);
+		switch (type) {
+			case Configuration:
+				{
+					std::cout << "Aca deberiamos poder elegir"
+								 "los colores de los chaboncitos";
+					break;
+				}
+			case Create:
+				{
+					name = line.substr(NAME_POS_CREATE);
+					protocol.send_create(socket, name);
+					std::cout << "Envio crear" << '\n';
+					//harcodeo tipo
+					char w_map[] = "map1";
+					socket.send_message(w_map, 5);
+					// termino harcodeo
+					std::cout << "Press key any" << std::endl;
+					std::getline(std::cin, line);
+
+					StartGameEvent evento;
+					Event event = evento.get_event();
+
+					protocol.send_event(socket, event.get_msg());
+
+					std::cout << "Envio startgame event" << '\n';
+					not_started = false;
+					break;
+				}
+			case Join:
+				{
+
+					name = line.substr(NAME_POS_JOIN);
+					protocol.send_join(socket, name);
+					not_started = false;
+					break;
+				}
+			default:
+				{
+					std::cout << "Se ingreso un texto indefinido." << std::endl;
+				}
+		}
+		if (!not_started) {
+			try {
+				Event starter_event = protocol.recv_event(socket);
+				if (starter_event.get_type() != START_GAME)
+					throw Exception("No se pudo arrancar la partida");
+				map.create(starter_event);
+			} catch(ExceptionInvalidCommand& e) {
+				std::cout << "El comando enviado es invalido. "
+							 "Es posible que haya enviado un nombre incorrecto."
+						  << std::endl;
+				not_started = true;
+			}
+		}
+
+	}
+
+
+	return true;
+
+
+
+}
 
 // returns true if player is logged in.
-bool Initiator::launch(Socket& socket) {
+//bool Initiator::launch(Socket& socket) {
 	
 	// CONEXION SINCRONICA: SEND-RECV
 	// LOGICA DE BIENVENIDA
@@ -29,8 +102,7 @@ bool Initiator::launch(Socket& socket) {
 	|
 	|
 */
-
-	std::cout << "No me la Counter Strike" << std::endl;
+/*
 
 
 	Parser parser;
@@ -104,5 +176,5 @@ bool Initiator::launch(Socket& socket) {
 
 	return true;
 }
-
+*/
 Initiator::~Initiator() {}

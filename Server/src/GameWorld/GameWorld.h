@@ -2,13 +2,17 @@
 #define _GAME_WORLD_H
 
 #include <mutex>
+#include "GroundMap.h"
 #include "ExceptionMatchFull.h"
 #include <vector>
+#include "../../libs/box2d/include/box2d/box2d.h"
+#include "../../libs/box2d/include/box2d/b2_math.h"
 
 class GameWorld {
 		std::mutex m; 
 		int number_players_allowed;
 		int number_players;
+		b2World* world;
 
 	public:
 		GameWorld(const std::string& map_type);

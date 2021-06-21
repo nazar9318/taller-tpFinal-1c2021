@@ -3,7 +3,10 @@
 
 
 GameWorld::GameWorld(const std::string& map_type): number_players_allowed(10), number_players(0) {
-	//crear clase para logica de cargado de mapas. 
+	b2Vec2 gravity(0, 0);
+	world = new b2World(gravity);
+	//GroundMap ground(map_type);
+	//ground.fill_blocks(world);
 }
 
 
@@ -42,4 +45,6 @@ std::vector<char> GameWorld::get_players_info() {
 
 
 
-GameWorld::~GameWorld() {}
+GameWorld::~GameWorld() {
+	delete world;
+}

@@ -8,7 +8,7 @@
 #include "weapon_shotgun.h"
 #include "weapon_automatic.h"
 #include "team.h"
-#include "Configuration/Configuration.h"
+#include "Configuration.h"
 #include <vector>
 #include <iostream>
 

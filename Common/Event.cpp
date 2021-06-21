@@ -1,7 +1,7 @@
 #include "Event.h"
 
-Event::Event(std::vector<char> msg, size_t size):msg(msg), size(size){}
-Event::Event(){}
+Event::Event(std::vector<char> msg, size_t size): msg(msg), size(size) {}
+Event::Event() {}
 
 char Event::get_type() {
 	return msg[0];
@@ -18,6 +18,11 @@ int Event::get_id(){
 void Event::add_client_id(int id) {
 	client_id = id;
 }
+
+size_t Event::get_size() {
+	return size;
+}
+
 
 
 Event::~Event() {}

@@ -10,6 +10,12 @@
 #include "ExceptionInvalidCommand.h"
 #include "ExceptionMatchFull.h"
 #include "GameWorldTypes.h"
+#include "TypesOfEvents.h"
+#include "GetMapsHandler.h"
+#include "GetMatchesHandler.h"
+#include "CreateMatchHandler.h"
+#include "JoinMatchHandler.h"
+#include "ErrorEvent.h"
 
 
 class Lobby: public Thread {

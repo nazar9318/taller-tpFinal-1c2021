@@ -10,11 +10,11 @@ Matches::Matches() {
 // PRE: No hay ninguna partida con el nombre name. 
 // POST: Crea una partida y la agrega a la estructura
 //       de partidas. 
-void Matches::create(Socket& skt, const std::string& name, GameWorldType type) {
+void Matches::create(Socket& skt, const std::string& name, const std::string map_type) {
 	std::lock_guard<std::mutex> l(m);
 	if (matches.find(name) != matches.end())
 		throw ExceptionInvalidCommand("La partida ya existe");
-	Match* match = new Match(skt, type);
+	Match* match = new Match(skt, map_type);
 	if (!match) {
 		throw Exception("Error al alocar memoria para create de match");
 	}
@@ -35,7 +35,7 @@ void Matches::join_if_exists(Socket& skt, const std::string& name) {
 }
 
 // POST: Retorna los nombres de las partidas.  
-std::string Matches::get_names() {
+std::string Matches::get_matches_info() {
 	std::lock_guard<std::mutex> l(m);
 	std::string list;
 	for (auto it = matches.begin(); it != matches.end(); ++it) {

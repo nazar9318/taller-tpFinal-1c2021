@@ -9,7 +9,7 @@
 
 class Event {
 
-	private:
+	protected:
 		std::vector<char> msg;
 		size_t size;
 		int client_id;
@@ -25,7 +25,7 @@ class Event {
 		void add_client_id(int id);
 
 		char get_type();
-
+		size_t get_size();
 		int get_id();
 
 		std::vector<char> get_msg();

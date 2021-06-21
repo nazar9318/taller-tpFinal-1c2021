@@ -5,16 +5,17 @@
 #include <string>
 #include "Socket.h"
 #include "Listener.h"
+#include "Configuration.h"
 
 class Server {
 	Listener listener;
 
 	public:
-		explicit Server(const std::string& port);
+		explicit Server();
 
 		// POST: Lee de stdin hasta recibir una 'q' indicando
 		//       que debe finalizar.
-		void excecute();
+		void execute();
 
 		~Server();
 

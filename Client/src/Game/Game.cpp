@@ -9,13 +9,16 @@ Game::Game(ProtectedQueue<Event>& model,
 		  is_running(true) {
 }
 
+
+
+
 void Game::execute() {
 	FrameLimiter frame_limiter;
 	// GAME LOOP
 	while (is_running) {
 		handle_events(); //
 		process_events();
-		update();
+
 		render();
 		frame_limiter.sleep();
 	}

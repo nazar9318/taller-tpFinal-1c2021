@@ -18,7 +18,6 @@ class Home {
 
 		// PRE: El socket esta correctamente inicializado. 
 		void add_client(Socket skt_client);
-
 		~Home();
 
 	private:

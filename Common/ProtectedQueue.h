@@ -15,6 +15,14 @@ class ExceptionClosedQueue: public Exception {
 		virtual ~ExceptionClosedQueue() noexcept {}
 };
 
+class ExceptionEmptyQueue: public Exception {
+  	public:
+    	ExceptionEmptyQueue(): Exception("La cola esta vacia") {}
+		explicit ExceptionEmptyQueue(const char* description)
+    	:Exception("%s ", description) { }
+		virtual ~ExceptionEmptyQueue() noexcept {}
+};
+
 
 
 #include <queue>
@@ -52,7 +60,7 @@ template <class T> class ProtectedQueue {
 		T pop() {
 			std::unique_lock<std::mutex> lock(m);
 			if (queue.empty()) {
-				throw Exception("Queue is empty");
+				throw ExceptionEmptyQueue("Queue is empty");
 			}
 			T data = std::move(queue.front());
 			queue.pop();

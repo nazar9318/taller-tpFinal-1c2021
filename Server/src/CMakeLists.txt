@@ -14,7 +14,8 @@ ENDMACRO()
 
 
 FILE(GLOB myFiles *.cpp 
-				  */*.cpp)
+				  */*.cpp
+                  */*/*.cpp)
 
 
 HEADER_DIRECTORIES(header_dir_list)

@@ -40,4 +40,5 @@ Home::~Home() {
     	(*it)->join();
     	delete *it;
   	}
+  	syslog(LOG_INFO, "Se elimina Home");
 }

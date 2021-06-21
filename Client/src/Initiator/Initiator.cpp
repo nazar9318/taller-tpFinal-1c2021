@@ -10,11 +10,25 @@ Initiator::Initiator(GameMap& game_map):
 
 // returns true if player is logged in.
 bool Initiator::launch(Socket& socket) {
+	
 	// CONEXION SINCRONICA: SEND-RECV
 	// LOGICA DE BIENVENIDA
 	// QAPPLICATION
 	// ETAPA INICIAL DE ELECCION DE COLORES PARA LOS BANDOS
+	// botonCrear, botonUnirse
 
+
+
+/*
+
+	|
+	|    crear ->    |   MAPA1, MAPA2, MAPA3, | COMENZAR PARTIDA |
+	|    UNISE ->    |   PARTIDAS PARA UNIRSE |  ESPERANDO A COMIENZO |
+	|    
+	|
+	|
+	|
+*/
 
 	std::cout << "No me la Counter Strike" << std::endl;
 

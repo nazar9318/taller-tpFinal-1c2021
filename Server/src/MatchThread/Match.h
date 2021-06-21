@@ -7,6 +7,7 @@
 #include <atomic>
 #include <memory>
 
+#include "Configuration.h"
 #include "Player.h"
 #include "Socket.h"
 #include "Thread.h"
@@ -14,12 +15,12 @@
 #include "Exception.h"
 #include "ExceptionMatchStarted.h"
 #include "GameWorldTypes.h"
-#include "GameWorldFactory.h"
 #include "GameWorld.h"
 #include "Event.h"
+#include "StartGameHandler.h"
+#include "SendPlayersInfoEvent.h"
 
 #include "ClientEventHandler.h"
-#include "EventHandlerFactory.h"
 
 
 class Match: public Thread {
@@ -29,10 +30,11 @@ class Match: public Thread {
 		char last_id;
 		std::map<char, Player*> players; //char id_player
 		ProtectedQueue<Event> to_process_events;
-		std::unique_ptr<GameWorld> game_world;
+		GameWorld game_world;
+		ClientEventHandler handler;
 
 	public:
-		Match(Socket& socket, GameWorldType type);
+		Match(Socket& socket, const std::string& map_type);
 
 		void join_player_if_not_full(Socket& skt);
 
@@ -43,6 +45,13 @@ class Match: public Thread {
 		~Match();
 
 	private:
+		void start_game();
+		void game_loop();
+		void push_event(std::shared_ptr<Event>& event);
+		void handle_events();
+
+
+
 		Match(const Match &other) = delete;
 		Match& operator=(const Match &other) = delete;
 };

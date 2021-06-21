@@ -1,10 +1,8 @@
 #include "Match.h"
 
-Match::Match(Socket& socket, GameWorldType type): match_started(false),
-				finished(false), last_id(0), game_world(GameWorldFactory::create(type)) {
-	if (!game_world)
-		throw Exception("No se pudo alocar memoria");
-	game_world->add_player_if_not_full(last_id);
+Match::Match(Socket& socket, const std::string& map_type): match_started(false),
+				finished(false), last_id(0), game_world(map_type), handler(game_world) {
+	game_world.add_player_if_not_full(last_id);
 	Player* player = new Player(socket, last_id, to_process_events);
 	if (!player)
 		throw Exception("No se pudo alocar memoria");
@@ -16,10 +14,10 @@ void Match::join_player_if_not_full(Socket& skt) {
 	std::lock_guard<std::mutex> l(m);
 	if (match_started)
 		throw ExceptionMatchStarted("El juego ya comenzo");
-	game_world->add_player_if_not_full(last_id);
+	game_world.add_player_if_not_full(last_id);
 	Player* player = new Player(skt, last_id, to_process_events);
 	if (!player) {
-		game_world->delete_player(last_id);
+		game_world.delete_player(last_id);
 		throw Exception("No se pudo alocar memoria");
 	}
 	players[last_id] = player;
@@ -31,32 +29,61 @@ bool Match::is_finished() {
 }
 
 void Match::run() {
+	try {
+		start_game();
+		game_loop();
+	} catch (std::exception& e) {
+		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what());
+	}
+	
+}
 
+
+
+
+
+
+void Match::start_game() {
 	Event event = to_process_events.blocking_pop();
-	if (event.get_type() != TypeOfEvent::START_GAME) {
-		finished = true;
-		syslog(LOG_INFO, "LLega un evento diferente al esperado, startgame");
-		return;
-	}
-	{
-		std::lock_guard<std::mutex> l(m);
-		match_started = true;
-	}
-
-	std::shared_ptr<Event> starter_event(new Event());
-	for (auto it = players.begin(); it != players.end(); ++it) {
-		it->second->push(starter_event);
-	}
+	// bloqueamos para no aceptar mas jugadores. 
+	std::lock_guard<std::mutex> l(m);
+	match_started = true;
+	StartGameHandler game_starter;
+	game_starter.handle(event, players, game_world);
+}
 
 
-	game_world->start();
+
+void Match::game_loop() {
 	while (!finished) {
-		Event event = to_process_events.pop();
-		std::unique_ptr<ClientEventHandler> handler = EventHandlerFactory::create(event);
-		handler->handle();
+		handle_events();
+		game_world.simulate_step();
+		std::shared_ptr<Event> players_info(
+				new SendPlayersInfoEvent(game_world.get_players_info()));
+		push_event(players_info);
 	}
-		//Enviar a todos los clientes los eventos
+}
 
+void Match::handle_events() {
+	bool queue_not_empty = true;
+	int max_iterations = CF::max_iterations_pop_events;
+	int i = 0;
+	while (queue_not_empty && max_iterations < i) {
+		try {
+			Event event = to_process_events.pop();
+			handler.handle(event);
+			i++;
+		} catch(ExceptionEmptyQueue& e) {
+			queue_not_empty = false;
+		}
+	}
+
+}
+
+void Match::push_event(std::shared_ptr<Event>& event) {
+	for (auto it = players.begin(); it != players.end(); ++it) {
+			it->second->push(event);
+	}
 }
 
 void Match::stop_running() {

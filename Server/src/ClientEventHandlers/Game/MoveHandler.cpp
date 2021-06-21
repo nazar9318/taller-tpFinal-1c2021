@@ -1,8 +1,8 @@
 #include "MoveHandler.h"
 
-MoveHandler::MoveHandler(std::vector<char> message, int id):msg(message), id(id){}
+MoveHandler::MoveHandler() {}
 
-void MoveHandler::handle(){
+void MoveHandler::handle(Event& event, GameWorld& world){
   // std::cout << "Aca manejamos el evento: "<< msg[0] << '\n';
 }
 

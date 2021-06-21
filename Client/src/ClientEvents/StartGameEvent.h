@@ -15,8 +15,8 @@ class StartGameEvent{
 
 	public:
 		StartGameEvent();
-
-    Event get_event();
+		Event* get_pointer_event();
+		Event get_event();
 
 		~StartGameEvent();
 

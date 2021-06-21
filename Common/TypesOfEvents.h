@@ -1,11 +1,46 @@
-#ifndef _TYPE_OF_EVENTS_H_
-#define _TYPE_OF_EVENTS_H_
+#ifndef _TYPES_OF_EVENTS_H_
+#define _TYPES_OF_EVENTS_H_
 
 
-enum TypeOfEvent: char {
-	START_GAME = 'a', //Los hago comenzar en a -> se puede cambiar
-	MOVE
+enum ClientTypeEvent: char {
+	MOVE, 
+	START_ATTACKING, 
+	GRAB_WEAPON, 
+	DROP_WEAPON, 
+	EXCHANGE_WEAPON,
+	BUY_ARMOUR, 
+	START_GAME, 
+	QUIT_GAME, 
+	GET_MAPS, 
+	GET_MATCHES, 
+	CREATE, 
+	JOIN 
 };
+
+enum ModelTypeEvent: char {
+	SEND_MAPS, 
+	SEND_MATCHES,
+	SEND_FULL_MAP,
+	PLAYERS_INFO,
+	ERROR
+};
+
+enum ServerError: char {
+	INVALID_COMMAND, 
+	MATCH_FULL, 
+};
+
+// CONSTANTS FOR EVENTS
+
+
+#define START_CREATE_NAME 1
+#define START_JOIN_NAME 1
+
+
+
+
+
+
 
 
 #endif

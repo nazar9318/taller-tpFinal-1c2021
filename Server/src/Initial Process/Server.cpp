@@ -3,13 +3,13 @@
 #include <syslog.h>
 #include <string>
 
-Server::Server(const std::string& port): listener(port) {
-	syslog(LOG_INFO, "Creando Server con parametro %s", port.c_str());
+Server::Server(): listener(CF::port) {
+	syslog(LOG_INFO, "Creando Server con parametro %s", CF::port.c_str());
 }
 
 // POST: Lee de stdin hasta recibir una 'q' indicando
 //       que debe finalizar.
-void Server::excecute() {
+void Server::execute() {
 	listener.start();
 	bool server_active = true;
 	while (server_active) {

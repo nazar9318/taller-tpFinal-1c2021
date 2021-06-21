@@ -34,6 +34,52 @@ void Lobby::run() {
 }
 
 
+
+void Lobby::handle_lobby() {
+	bool not_started = true;
+	std::string match_name;
+	while (not_started) {
+		Event event = protocol.recv_event(communication_skt);
+		switch (event.get_type()) {
+			case ClientTypeEvent::GET_MAPS: 
+			{
+				GetMapsHandler handler(communication_skt);
+				handler.handle(event);
+				break;
+			} 
+			case ClientTypeEvent::GET_MATCHES: 
+			{
+				GetMatchesHandler handler(communication_skt);
+				handler.handle(event, matches);	
+				break;
+			} 
+			case ClientTypeEvent::CREATE: 
+			{
+				CreateMatchHandler handler(communication_skt);
+				not_started = !handler.handle(event, matches);
+				break;	
+			} 
+			case ClientTypeEvent::JOIN: 
+			{
+				JoinMatchHandler handler(communication_skt);
+				not_started = !handler.handle(event, matches);
+				break;	
+			} 
+			default:
+			{
+				ErrorEvent error(ServerError::INVALID_COMMAND);
+				protocol.send_event(communication_skt, error.get_msg());
+			}
+		}	
+	}
+}	
+
+
+
+
+
+
+/*
 void Lobby::handle_lobby() {
 	bool not_started = true;
 	std::string match_name;
@@ -63,5 +109,5 @@ void Lobby::handle_lobby() {
         }
     }
 }
-
+*/
 Lobby::~Lobby() {}

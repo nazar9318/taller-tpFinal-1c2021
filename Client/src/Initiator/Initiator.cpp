@@ -91,13 +91,13 @@ bool Initiator::launch(Socket& socket) {
 	// botonCrear, botonUnirse
 
 
-
 /*
+
 
 	|
 	|    crear ->    |   MAPA1, MAPA2, MAPA3, | COMENZAR PARTIDA |
 	|    UNISE ->    |   PARTIDAS PARA UNIRSE |  ESPERANDO A COMIENZO |
-	|    
+	|    Configuration(no hay comunicacion)
 	|
 	|
 	|

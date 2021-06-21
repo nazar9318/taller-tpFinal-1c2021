@@ -3,7 +3,7 @@
 
 
 enum ClientTypeEvent: char {
-	MOVE, 
+	MOVE,
 	START_ATTACKING, 
 	GRAB_WEAPON, 
 	DROP_WEAPON, 
@@ -20,14 +20,21 @@ enum ClientTypeEvent: char {
 enum ModelTypeEvent: char {
 	SEND_MAPS, 
 	SEND_MATCHES,
-	SEND_FULL_MAP,
+	SEND_FULL_MAP, //Mensaje que se sabe que tenes que arrancar la partida. 
 	PLAYERS_INFO,
+	// id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
+	SEND_ATTACK, 
+	BOMB_STATE, //activada/descativada;tiempo; 
+	ROUND_FINISHED, 
+	GAME_FINISHED, //manda los resultados 
+
 	ERROR
 };
 
 enum ServerError: char {
 	INVALID_COMMAND, 
-	MATCH_FULL, 
+	MATCH_FULL,
+	NOT_ENOUGH_PLAYERS
 };
 
 // CONSTANTS FOR EVENTS

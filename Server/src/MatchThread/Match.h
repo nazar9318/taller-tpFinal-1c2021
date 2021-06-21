@@ -14,8 +14,11 @@
 #include "ProtectedQueue.h"
 #include "Exception.h"
 #include "ExceptionMatchStarted.h"
+#include "NotEnoughPlayersException.h"
+
 #include "GameWorld.h"
 #include "Event.h"
+#include "ErrorEvent.h"
 #include "StartGameHandler.h"
 #include "SendPlayersInfoEvent.h"
 

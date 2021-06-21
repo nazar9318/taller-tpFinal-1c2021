@@ -13,9 +13,9 @@ bool CreateMatchHandler::handle(Event& event, Matches& matches) {
 	// structure of event_msg: msg[0]: type,
 	//                         msg[1], ..., msg[i] == \0: match_name 
 	//                         msg[i], ..., msg[size-1] == \0: map_type 
-	std::string match_name(&event.get_msg()[START_CREATE_NAME]);
-	std::string map_type(&event.get_msg()[START_CREATE_NAME
-						 + match_name.length() + 1]);
+	std::string match_name(&(event.get_msg()[START_CREATE_NAME]));
+	std::string map_type(&(event.get_msg()[START_CREATE_NAME
+						 + match_name.length() + 1]));
 	syslog(LOG_INFO, "[%s:%i]: Se busca crear match con"
 					 " nombre %s y mapa %s", __FILE__, __LINE__,
 					  match_name.c_str(), map_type.c_str());

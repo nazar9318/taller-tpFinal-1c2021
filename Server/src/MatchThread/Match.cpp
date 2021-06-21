@@ -44,12 +44,23 @@ void Match::run() {
 
 
 void Match::start_game() {
-	Event event = to_process_events.blocking_pop();
-	// bloqueamos para no aceptar mas jugadores. 
-	std::lock_guard<std::mutex> l(m);
-	match_started = true;
-	StartGameHandler game_starter;
-	game_starter.handle(event, players, game_world);
+	while(!match_started) {
+		Event event = to_process_events.blocking_pop();
+		// bloqueamos para no aceptar mas jugadores. 
+		std::lock_guard<std::mutex> l(m);
+		match_started = true;
+		StartGameHandler game_starter;
+		try {
+			game_starter.handle(event, players, game_world);
+		} catch(NotEnoughPlayersException& e) {
+			std::shared_ptr<Event> error(
+					new ErrorEvent(ServerError::NOT_ENOUGH_PLAYERS));
+			push_event(error);
+			syslog(LOG_CRIT, "[%s:%i]: No hay jugadores suficientes"
+						, __FILE__, __LINE__);
+			match_started = false;
+		}
+	}
 }
 
 

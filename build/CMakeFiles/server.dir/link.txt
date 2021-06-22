@@ -1,1 +1,0 @@
-/usr/bin/c++   -Wall -O0 -Werror -pedantic -ggdb -DDEBUG -fno-inline  -pthread  -rdynamic CMakeFiles/server.dir/Server/main.cpp.o  -o server  Server/src/libserver_classes.a Common/libcommon_classes.a -lyaml-cpp libs/box2d/bin/libbox2d.a 

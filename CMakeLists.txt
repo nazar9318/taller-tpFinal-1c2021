@@ -20,49 +20,62 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lSDL2 -lSDL2_image -lSDL2_ttf")
 
 
+# COMMON
 
-
-add_subdirectory("Common")
 include_directories(${PROJECT_SOURCE_DIR}/Common)
 
-add_subdirectory("Server/src")
-include_directories(${PROJECT_SOURCE_DIR}/Server/src)
+include_directories(${PROJECT_SOURCE_DIR}/Common/Communication)
+include_directories(${PROJECT_SOURCE_DIR}/Common/Event)
+include_directories(${PROJECT_SOURCE_DIR}/Common/DataStructures)
+include_directories(${PROJECT_SOURCE_DIR}/Common/Exception)
+include_directories(${PROJECT_SOURCE_DIR}/Common/Thread)
 
-add_subdirectory("Client/src")
+add_subdirectory("Common")
+
+
+# SERVER
+
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/ClientEventHandlers)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/ClientEventHandlers/Game)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/ClientEventHandlers/Lobby)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/CommunicationThreads)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/Configuration)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld/Exceptions)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld/WorldObjects)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld/WorldObjects/Block)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld/WorldObjects/Character)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld/WorldObjects/GroundMap)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld/WorldObjects/Weapon)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/InitialProcess)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/MatchThread)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/ServerEvents)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/ServerEvents/Game)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/ServerEvents/Lobby)
+
+add_subdirectory("Server/src")
+
+# CLIENT
+
 include_directories(${PROJECT_SOURCE_DIR}/Client/src)
 
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/ClientEvents)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/CommunicationThreads)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/Game)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/Initiator)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/Render)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/Render/sdl)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/ServerEventHandlers)
+add_subdirectory("Client/src")
 
 
-
-# set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lBox2D")
-# add_subdirectory(./libs/box2d)
-# include_directories(./libs/box2d)
-# file(GLOB_RECURSE BOX2D_SRCS ./libs/box2d/src *.cpp)
-
-# add_library(box2D STATIC ${BOX2D_SRCS})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# COMENTO TESTS PORQUE NO EXISTE LA CARPETA.
-find_package(Qt5Widgets)
-
-
-# add_subdirectory("Tests/src")
-# include_directories(${PROJECT_SOURCE_DIR}/Tests/src)
+add_subdirectory(Editor/map_editor)
 
 add_executable(server "Server/main.cpp")
 target_link_libraries(server server_classes common_classes yaml-cpp box2d)
 
 add_executable(client "Client/main.cpp")
-target_link_libraries(client client_classes common_classes SDL2 SDL2_image yaml-cpp Qt5::Widgets)
+target_link_libraries(client client_classes common_classes SDL2 SDL2_image yaml-cpp)
+
+
+#target_link_libraries(login PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

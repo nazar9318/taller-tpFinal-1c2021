@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -O0 -Werror -pedantic -ggdb -DDEBUG -fno-inline  -pthread -lBox2D  -rdynamic CMakeFiles/client.dir/Client/main.cpp.o  -o client Client/src/libclient_classes.a Common/libcommon_classes.a -lSDL2 -lSDL2_image -lyaml-cpp 

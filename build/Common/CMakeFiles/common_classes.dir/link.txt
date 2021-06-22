@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcommon_classes.a  CMakeFiles/common_classes.dir/Event.cpp.o CMakeFiles/common_classes.dir/Exception.cpp.o CMakeFiles/common_classes.dir/Protocol.cpp.o CMakeFiles/common_classes.dir/Socket.cpp.o CMakeFiles/common_classes.dir/Thread.cpp.o
+/usr/bin/ranlib libcommon_classes.a

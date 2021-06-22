@@ -6,7 +6,7 @@ Position::Position(char column, char row, bool terrorist,
 			 		bool bomb, bool is_block_zone):
 	x(column), y(row), terrorist_zone(terrorist), 
 	counter_terrorist_zone(counter_terrorist),
-	bomb_zone(bomb), block(is_block_zone) {
+	bomb_zone(bomb), block(is_block_zone), occupied(false) {
 } 
 
 
@@ -28,5 +28,14 @@ bool Position::is_bomb_zone() {
 bool Position::is_block() {
 	return block;
 }
+
+bool Position::is_occupied() {
+	return occupied;
+}
+
+void Position::occupy() {
+	occupied = true;
+}
+
 
 Position::~Position() {}

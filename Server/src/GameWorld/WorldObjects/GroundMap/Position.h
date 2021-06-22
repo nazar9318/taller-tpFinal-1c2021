@@ -10,7 +10,8 @@ class Position {
 		bool terrorist_zone;
 		bool counter_terrorist_zone;
 		bool bomb_zone; 
-		bool block; 
+		bool block;
+		bool occupied;
 	public:
 		Position(char x, char y, bool terrorist,
 			 		bool counter_terrorist,
@@ -21,6 +22,8 @@ class Position {
 		bool is_counter_terrorist_zone();
 		bool is_bomb_zone(); 
 		bool is_block(); 
+		bool is_occupied(); 
+		void occupy();
 		~Position();
 };
 

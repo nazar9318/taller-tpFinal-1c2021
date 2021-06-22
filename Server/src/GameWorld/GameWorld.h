@@ -5,15 +5,22 @@
 #include "GroundMap.h"
 #include "ExceptionMatchFull.h"
 #include <vector>
+#include <map>
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
+#include "team.h"
+#include "character.h"
+
 
 class GameWorld {
 		std::mutex m; 
 		int number_players_allowed;
 		int number_players;
+		GroundMap ground;
+		Team actual_team;
 		b2World* world;
-
+		// (id, character)
+		std::map<int, Character> characters; 
 	public:
 		GameWorld(const std::string& map_type);
 		void add_player_if_not_full(int id);

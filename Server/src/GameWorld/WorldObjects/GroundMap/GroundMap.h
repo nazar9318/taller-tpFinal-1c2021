@@ -6,12 +6,13 @@
 #include <string>
 #include "Block.h"
 #include "Position.h"
+#include "team.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
 
 
 class GroundMap {
-		std::list<Position> positions;
+		std::vector<Position> positions;
 		char x_size;
 		char y_size;
 	public:
@@ -19,10 +20,12 @@ class GroundMap {
 		void fill_blocks(b2World* world);
 
 		void get_limits(char& lenght, char& width);
-		std::list<Position> get_blocks();
-		std::list<Position> get_terrorist_zone();
-		std::list<Position> get_counter_terrorist_zone();
-		std::list<Position> get_bomb_zone();
+		std::vector<Position*> get_blocks();
+		std::vector<Position*> get_terrorist_zone();
+		std::vector<Position*> get_counter_terrorist_zone();
+		std::vector<Position*> get_bomb_zone();
+		std::vector<Position*> get_zone(Team team);
+
 		~GroundMap();
 	
 	private:

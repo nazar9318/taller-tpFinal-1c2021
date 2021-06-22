@@ -3,4 +3,6 @@
 
 enum Team {TERRORIST, COUNTER_ENEMY};
 
+Team get_opposite(Team team);
+
 #endif

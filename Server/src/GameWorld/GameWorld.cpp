@@ -2,10 +2,11 @@
 
 
 
-GameWorld::GameWorld(const std::string& map_type): number_players_allowed(10), number_players(0) {
+GameWorld::GameWorld(const std::string& map_type):
+			 number_players_allowed(10), number_players(0),
+			 ground(map_type), actual_team(Team::COUNTER_ENEMY) {
 	b2Vec2 gravity(0, 0);
 	world = new b2World(gravity);
-	GroundMap ground(map_type);
 	ground.fill_blocks(world);
 }
 
@@ -14,8 +15,10 @@ void GameWorld::add_player_if_not_full(int id) {
 	std::lock_guard<std::mutex> l(m);
 	if (number_players_allowed == number_players) 
 		throw ExceptionMatchFull("La partida esta completa"); 
+	Character character(actual_team, world, ground.get_zone(actual_team));
+	characters.insert({id, character});
+	actual_team = get_opposite(actual_team);
 	number_players++;
-	// add_player(id);
 }
 
 void GameWorld::delete_player(int id) {

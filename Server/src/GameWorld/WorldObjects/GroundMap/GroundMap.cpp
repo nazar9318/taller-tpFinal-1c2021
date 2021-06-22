@@ -93,40 +93,46 @@ void GroundMap::set_limits(b2World* world) {
 
 // Quedaria mas elegante con punteros a funciones.
 
-std::list<Position> GroundMap::get_blocks() {
-	std::list<Position> blocks;
+std::vector<Position*> GroundMap::get_blocks() {
+	std::vector<Position*> blocks;
 	for (auto it = positions.begin(); it != positions.end(); ++it) {
 		if (it->is_block())
-			blocks.push_back(*it);
+			blocks.push_back(&(*it));
 	}
 	return blocks;
 }
 
-std::list<Position> GroundMap::get_terrorist_zone() {
-	std::list<Position> terrorist_zone;
+std::vector<Position*> GroundMap::get_terrorist_zone() {
+	std::vector<Position*> terrorist_zone;
 	for (auto it = positions.begin(); it != positions.end(); ++it) {
-		if (it->is_terrorist_zone())
-			terrorist_zone.push_back(*it);
+		if (it->is_terrorist_zone() && !it->is_occupied())
+			terrorist_zone.push_back(&(*it));
 	}
 	return terrorist_zone;
 }
 
-std::list<Position> GroundMap::get_counter_terrorist_zone() {
-	std::list<Position> counter_terrorists;
+std::vector<Position*> GroundMap::get_counter_terrorist_zone() {
+	std::vector<Position*> counter_terrorists;
 	for (auto it = positions.begin(); it != positions.end(); ++it) {
-		if (it->is_counter_terrorist_zone())
-			counter_terrorists.push_back(*it);
+		if (it->is_counter_terrorist_zone() && !it->is_occupied())
+			counter_terrorists.push_back(&(*it));
 	}
 	return counter_terrorists;
 }
 
-std::list<Position> GroundMap::get_bomb_zone() {
-	std::list<Position> bomb_zone;
+std::vector<Position*> GroundMap::get_bomb_zone() {
+	std::vector<Position*> bomb_zone;
 	for (auto it = positions.begin(); it != positions.end(); ++it) {
 		if (it->is_bomb_zone())
-			bomb_zone.push_back(*it);
+			bomb_zone.push_back(&(*it));
 	}
 	return bomb_zone;
+}
+
+std::vector<Position*> GroundMap::get_zone(Team team) {
+	if (team == Team::TERRORIST)
+		return get_terrorist_zone();
+	return get_counter_terrorist_zone();
 }
 
 GroundMap::~GroundMap() {}

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Server/main.cpp" "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/CMakeFiles/server.dir/Server/main.cpp.o"
+  "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Server/main.cpp" "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/CMakeFiles/server.dir/Server/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -34,9 +34,9 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/Server/src/CMakeFiles/server_classes.dir/DependInfo.cmake"
-  "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/Common/CMakeFiles/common_classes.dir/DependInfo.cmake"
-  "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/src/CMakeFiles/box2d.dir/DependInfo.cmake"
+  "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/Server/src/CMakeFiles/server_classes.dir/DependInfo.cmake"
+  "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/Common/CMakeFiles/common_classes.dir/DependInfo.cmake"
+  "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/src/CMakeFiles/box2d.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

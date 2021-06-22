@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "../bin/testbed"
+  "../bin/testbed.pdb"
   "CMakeFiles/testbed.dir/draw.cpp.o"
   "CMakeFiles/testbed.dir/imgui_impl_glfw.cpp.o"
   "CMakeFiles/testbed.dir/imgui_impl_opengl3.cpp.o"
@@ -63,8 +65,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/testbed.dir/tests/web.cpp.o"
   "CMakeFiles/testbed.dir/tests/wheel_joint.cpp.o"
   "CMakeFiles/testbed.dir/tests/wrecking_ball.cpp.o"
-  "../bin/testbed.pdb"
-  "../bin/testbed"
 )
 
 # Per-language clean rules from dependency scanning.

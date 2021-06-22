@@ -12,8 +12,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/client_classes.dir/Render/FrameLimiter.cpp.o"
   "CMakeFiles/client_classes.dir/Render/Renderer.cpp.o"
   "CMakeFiles/client_classes.dir/ServerEventHandlers/ModelEventHandler.cpp.o"
-  "libclient_classes.pdb"
   "libclient_classes.a"
+  "libclient_classes.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -1,4 +1,4 @@
-# Install script for directory: /home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/extern/imgui
+# Install script for directory: /home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/libs/box2d/extern/imgui
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

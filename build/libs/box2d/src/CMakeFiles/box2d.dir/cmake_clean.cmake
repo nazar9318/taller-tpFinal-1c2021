@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "../bin/libbox2d.a"
+  "../bin/libbox2d.pdb"
   "CMakeFiles/box2d.dir/collision/b2_broad_phase.cpp.o"
   "CMakeFiles/box2d.dir/collision/b2_chain_shape.cpp.o"
   "CMakeFiles/box2d.dir/collision/b2_circle_shape.cpp.o"
@@ -44,8 +46,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/box2d.dir/dynamics/b2_world.cpp.o"
   "CMakeFiles/box2d.dir/dynamics/b2_world_callbacks.cpp.o"
   "CMakeFiles/box2d.dir/rope/b2_rope.cpp.o"
-  "../bin/libbox2d.pdb"
-  "../bin/libbox2d.a"
 )
 
 # Per-language clean rules from dependency scanning.

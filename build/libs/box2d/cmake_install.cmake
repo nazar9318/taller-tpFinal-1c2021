@@ -1,4 +1,4 @@
-# Install script for directory: /home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d
+# Install script for directory: /home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/libs/box2d
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,18 +38,18 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/include/box2d")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/libs/box2d/include/box2d")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/src/cmake_install.cmake")
-  include("/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/unit-test/cmake_install.cmake")
-  include("/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/extern/glad/cmake_install.cmake")
-  include("/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/extern/glfw/cmake_install.cmake")
-  include("/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/extern/imgui/cmake_install.cmake")
-  include("/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/extern/sajson/cmake_install.cmake")
-  include("/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/testbed/cmake_install.cmake")
+  include("/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/src/cmake_install.cmake")
+  include("/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/unit-test/cmake_install.cmake")
+  include("/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/extern/glad/cmake_install.cmake")
+  include("/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/extern/glfw/cmake_install.cmake")
+  include("/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/extern/imgui/cmake_install.cmake")
+  include("/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/extern/sajson/cmake_install.cmake")
+  include("/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/testbed/cmake_install.cmake")
 
 endif()
 

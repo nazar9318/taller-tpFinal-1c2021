@@ -808,7 +808,7 @@ b2_weld_joint.h
 b2_wheel_joint.h
 ../libs/box2d/include/box2d/b2_wheel_joint.h
 
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Server/main.cpp
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Server/main.cpp
 iostream
 -
 string
@@ -818,7 +818,7 @@ exception
 syslog.h
 -
 Server.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Server/Server.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Server/Server.h
 Configuration.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Server/Configuration.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Server/Configuration.h
 

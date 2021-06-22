@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/extern/imgui/imgui.cpp" "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/extern/imgui/CMakeFiles/imgui.dir/imgui.cpp.o"
-  "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/extern/imgui/imgui_demo.cpp" "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/extern/imgui/CMakeFiles/imgui.dir/imgui_demo.cpp.o"
-  "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/extern/imgui/imgui_draw.cpp" "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/extern/imgui/CMakeFiles/imgui.dir/imgui_draw.cpp.o"
-  "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/extern/imgui/imgui_widgets.cpp" "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/extern/imgui/CMakeFiles/imgui.dir/imgui_widgets.cpp.o"
+  "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/libs/box2d/extern/imgui/imgui.cpp" "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/extern/imgui/CMakeFiles/imgui.dir/imgui.cpp.o"
+  "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/libs/box2d/extern/imgui/imgui_demo.cpp" "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/extern/imgui/CMakeFiles/imgui.dir/imgui_demo.cpp.o"
+  "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/libs/box2d/extern/imgui/imgui_draw.cpp" "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/extern/imgui/CMakeFiles/imgui.dir/imgui_draw.cpp.o"
+  "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/libs/box2d/extern/imgui/imgui_widgets.cpp" "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/extern/imgui/CMakeFiles/imgui.dir/imgui_widgets.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

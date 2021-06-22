@@ -1,4 +1,4 @@
-# Install script for directory: /home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021
+# Install script for directory: /home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,10 +39,10 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/cmake_install.cmake")
-  include("/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/Common/cmake_install.cmake")
-  include("/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/Server/src/cmake_install.cmake")
-  include("/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/Client/src/cmake_install.cmake")
+  include("/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/cmake_install.cmake")
+  include("/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/Common/cmake_install.cmake")
+  include("/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/Server/src/cmake_install.cmake")
+  include("/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/Client/src/cmake_install.cmake")
 
 endif()
 
@@ -54,5 +54,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

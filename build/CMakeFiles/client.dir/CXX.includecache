@@ -226,7 +226,7 @@ utility
 
 ../Common/TypesOfEvents.h
 
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/main.cpp
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/main.cpp
 string
 -
 exception
@@ -234,5 +234,5 @@ exception
 syslog.h
 -
 Client.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/Client.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/Client.h
 

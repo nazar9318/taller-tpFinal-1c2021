@@ -6,111 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Event.cpp
-Event.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Event.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Event.h
-string
--
-vector
--
-syslog.h
--
-TypesOfEvents.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/TypesOfEvents.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Exception.cpp
-Exception.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Exception.h
-string.h
--
-errno.h
--
-cstdarg
--
-cstdio
--
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Exception.h
-exception
--
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/ExceptionInvalidCommand.h
-exception
--
-Exception.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Exception.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/ExceptionSocketClosed.h
-typeinfo
--
-exception
--
-Exception.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Exception.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Protocol.cpp
-Protocol.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Protocol.h
-vector
--
-syslog.h
--
-string
--
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Protocol.h
-string
--
-Socket.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Socket.h
-Event.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Event.h
-Exception.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Exception.h
-ExceptionInvalidCommand.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/ExceptionInvalidCommand.h
-memory
--
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Socket.cpp
-Socket.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Socket.h
-stdlib.h
--
-string.h
--
-syslog.h
--
-string
--
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Socket.h
-string
--
-sys/types.h
--
-sys/socket.h
--
-netdb.h
--
-unistd.h
--
-Exception.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Exception.h
-ExceptionSocketClosed.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/ExceptionSocketClosed.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Thread.cpp
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Common/Thread.cpp
 Thread.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Thread.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Common/Thread.h
 
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/Thread.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Common/Thread.h
 thread
 -
 utility
 -
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Common/TypesOfEvents.h
 

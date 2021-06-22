@@ -204,11 +204,11 @@ utility
 
 ../Common/TypesOfEvents.h
 
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Client.cpp
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/Client.cpp
 Client.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Client.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/Client.h
 
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Client.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/Client.h
 string
 -
 iostream
@@ -216,67 +216,25 @@ iostream
 syslog.h
 -
 Event.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Event.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/Event.h
 ProtectedQueue.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ProtectedQueue.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/ProtectedQueue.h
 EventSenderThread.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/EventSenderThread.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/EventSenderThread.h
 ModelRecieverThread.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ModelRecieverThread.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/ModelRecieverThread.h
 GameMap.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/GameMap.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/GameMap.h
 Initiator.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/Initiator.h
 Game.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/Game.h
 
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/ModelEvent.cpp
-ModelEvent.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/ModelEvent.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/ModelEvent.h
-string
--
-vector
--
-TypesOfEvents.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/TypesOfEvents.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/MoveEvent.cpp
-MoveEvent.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/MoveEvent.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/MoveEvent.h
-string
--
-syslog.h
--
-Event.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/Event.h
-TypesOfEvents.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/TypesOfEvents.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/StartGameEvent.cpp
-StartGameEvent.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/StartGameEvent.h
-stdio.h
--
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/StartGameEvent.h
-string
--
-syslog.h
--
-Event.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/Event.h
-TypesOfEvents.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ClientEvents/TypesOfEvents.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/EventSenderThread.cpp
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/EventSenderThread.cpp
 EventSenderThread.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/EventSenderThread.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/EventSenderThread.h
 
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/EventSenderThread.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/EventSenderThread.h
 string
 -
 atomic
@@ -284,25 +242,25 @@ atomic
 syslog.h
 -
 Event.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Event.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Event.h
 ProtectedQueue.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ProtectedQueue.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ProtectedQueue.h
 Thread.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Thread.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Thread.h
 Socket.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Socket.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Socket.h
 Exception.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Exception.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Exception.h
 Protocol.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Protocol.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Protocol.h
 
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ModelRecieverThread.cpp
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ModelRecieverThread.cpp
 ModelRecieverThread.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ModelRecieverThread.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ModelRecieverThread.h
 queue
 -
 
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ModelRecieverThread.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ModelRecieverThread.h
 string
 -
 atomic
@@ -310,109 +268,17 @@ atomic
 syslog.h
 -
 ModelEvent.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ModelEvent.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ModelEvent.h
 Thread.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Thread.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Thread.h
 Socket.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Socket.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Socket.h
 Exception.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Exception.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Exception.h
 Protocol.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Protocol.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/Protocol.h
 ProtectedQueue.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ProtectedQueue.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ProtectedQueue.h
 ModelEvent.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ModelEvent.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/Game.cpp
-Game.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/Game.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/Game.h
-string
--
-iostream
--
-Event.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/Event.h
-ProtectedQueue.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/ProtectedQueue.h
-GameMap.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/GameMap.h
-FrameLimiter.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/FrameLimiter.h
-ModelEventHandler.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/ModelEventHandler.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/GameMap.cpp
-GameMap.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/GameMap.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/GameMap.h
-string
--
-Event.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Game/Event.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/Initiator.cpp
-Initiator.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/Initiator.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/Initiator.h
-string
--
-iostream
--
-GameMap.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/GameMap.h
-Socket.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/Socket.h
-Protocol.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/Protocol.h
-Parser.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/Parser.h
-StartGameEvent.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/StartGameEvent.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/Parser.cpp
-Parser.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/Parser.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/Parser.h
-string
--
-TypeOfLine.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/TypeOfLine.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Initiator/TypeOfLine.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Render/FrameLimiter.cpp
-FrameLimiter.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Render/FrameLimiter.h
-SDL2/SDL.h
--
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Render/FrameLimiter.h
-cstddef
--
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Render/Renderer.cpp
-Renderer.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Render/Renderer.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/Render/Renderer.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ServerEventHandlers/ModelEventHandler.cpp
-ModelEventHandler.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ServerEventHandlers/ModelEventHandler.h
-
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ServerEventHandlers/ModelEventHandler.h
-vector
--
-TypesOfEvents.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ServerEventHandlers/TypesOfEvents.h
-Event.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ServerEventHandlers/Event.h
-Exception.h
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/Client/src/ServerEventHandlers/Exception.h
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/Client/src/CommunicationThreads/ModelEvent.h
 

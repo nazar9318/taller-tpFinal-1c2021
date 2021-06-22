@@ -15,7 +15,7 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O0 -Werror -pedantic")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline ")
 # threads
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lBox2D")
+#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lBox2D")
 
 
 
@@ -52,8 +52,8 @@ include_directories(${PROJECT_SOURCE_DIR}/Client/src)
 
 
 
-# COMENTO TESTS PORQUE NO EXISTE LA CARPETA. 
-
+# COMENTO TESTS PORQUE NO EXISTE LA CARPETA.
+find_package(Qt5Widgets)
 
 
 # add_subdirectory("Tests/src")
@@ -63,4 +63,4 @@ add_executable(server "Server/main.cpp")
 target_link_libraries(server server_classes common_classes yaml-cpp box2d)
 
 add_executable(client "Client/main.cpp")
-target_link_libraries(client client_classes common_classes SDL2 SDL2_image yaml-cpp)
+target_link_libraries(client client_classes common_classes SDL2 SDL2_image yaml-cpp Qt5::Widgets)

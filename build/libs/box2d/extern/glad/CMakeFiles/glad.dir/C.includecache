@@ -20,7 +20,7 @@ winapifamily.h
 KHR/khrplatform.h
 -
 
-/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/extern/glad/src/gl.c
+/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/libs/box2d/extern/glad/src/gl.c
 stdio.h
 -
 stdlib.h

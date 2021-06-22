@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/libs/box2d/extern/glad/src/gl.c" "/home/matecapo67/Documents/Facultad/2021 1er cuatri/Taller de Programacion/taller-tpFinal-1c2021/build/libs/box2d/extern/glad/CMakeFiles/glad.dir/src/gl.c.o"
+  "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/libs/box2d/extern/glad/src/gl.c" "/home/santiago/Escritorio/Fiuba/Taller I/taller-tpFinal-1c2021/build/libs/box2d/extern/glad/CMakeFiles/glad.dir/src/gl.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

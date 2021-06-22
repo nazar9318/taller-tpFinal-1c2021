@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/sajson.dir/sajson.cpp.o"
-  "../../bin/libsajson.pdb"
   "../../bin/libsajson.a"
+  "../../bin/libsajson.pdb"
+  "CMakeFiles/sajson.dir/sajson.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -71,6 +71,7 @@ add_subdirectory("Server/src")
 include_directories(${PROJECT_SOURCE_DIR}/Client/src)
 
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/ClientEvents)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/ClientEvents/Lobby)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/CommunicationThreads)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/Game)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/Initiator)

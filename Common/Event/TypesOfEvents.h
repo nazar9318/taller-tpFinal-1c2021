@@ -37,6 +37,17 @@ enum ServerError: char {
 	NOT_ENOUGH_PLAYERS
 };
 
+
+enum Direction: char {
+	RIGHT, 
+	LEFT, 
+	UP, 
+	DOWN, 
+	STOP_MOVING
+};
+
+
+
 // CONSTANTS FOR EVENTS
 
 

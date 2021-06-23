@@ -2,7 +2,7 @@
 #include <syslog.h>
 
 
-YAML::Node CF::yaml_file = YAML::LoadFile("Configuration.yaml");
+YAML::Node CF::yaml_file = YAML::LoadFile("../Server/src/Configuration/Configuration.yaml");
 
 std::string CF::host = yaml_file["host"].as<std::string>();
 std::string CF::port = yaml_file["port"].as<std::string>();

@@ -6,7 +6,16 @@ Initiator::Initiator(GameMap& game_map):
 		  				map(game_map) {
 }
 
+bool Initiator::launch(Socket& socket, int argc, char** argv) {
+	QApplication a(argc, argv);
+	MainWindow w;
+	w.show();
+	a.exec();
+	return true;
+}
 
+
+/*
 bool Initiator::launch(Socket& socket) {
 	std::cout << "No me la Counter Strike" << std::endl;
 	Protocol protocol;
@@ -80,7 +89,7 @@ bool Initiator::launch(Socket& socket) {
 
 
 }
-
+*/
 // returns true if player is logged in.
 //bool Initiator::launch(Socket& socket) {
 	

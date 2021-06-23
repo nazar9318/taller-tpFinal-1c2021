@@ -20,6 +20,17 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lSDL2 -lSDL2_image -lSDL2_ttf")
 
 
+
+# QT
+#set(CMAKE_AUTOMOC ON)
+#set(CMAKE_AUTORCC ON)
+#set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+#find_package(Qt5 REQUIRED COMPONENTS Widgets)
+
+
+
+
 # COMMON
 
 include_directories(${PROJECT_SOURCE_DIR}/Common)
@@ -78,4 +89,11 @@ add_executable(client "Client/main.cpp")
 target_link_libraries(client client_classes common_classes SDL2 SDL2_image yaml-cpp)
 
 
-#target_link_libraries(login PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+
+
+include_directories(${PROJECT_SOURCE_DIR}/login/login/src)
+add_subdirectory(login/login/src)
+
+add_executable(login_exe "login/login/main.cpp")
+target_link_libraries(login_exe login_files)

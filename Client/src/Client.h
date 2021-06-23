@@ -24,7 +24,7 @@ class Client {
 		Client(const std::string& host, const std::string& port);
 
 		// POST: Executes the Counter Strike game.
-		void execute();
+		void execute(int argc, char** argv);
 
 		~Client();
 

@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 	}
 	try {
 		Client client(host, port);
-		client.execute();
+		client.execute(argc, argv);
 	} catch(std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what());
 	} catch(...) {

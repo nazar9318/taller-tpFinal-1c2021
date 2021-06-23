@@ -15,3 +15,6 @@ message (STATUS "Cargué ${myFiles}")
 add_library(client_classes
   ${myFiles}
 )
+
+
+target_link_libraries(client_classes PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

@@ -14,6 +14,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void on_NuevaPartida_clicked();
+
+	void on_UnirsePartida_clicked();
 
 private:
     Ui::MainWindow *ui;

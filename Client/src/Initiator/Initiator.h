@@ -7,6 +7,8 @@
 #include "Socket.h"
 #include "Protocol.h"
 #include "Parser.h"
+#include <QApplication>
+#include "mainwindow.h"
 
 #include "StartGameEvent.h"
 
@@ -17,7 +19,7 @@ class Initiator {
 		Initiator(GameMap& map);
 
 		// returns true if player is logged in.
-		bool launch(Socket& socket);
+		bool launch(Socket& socket, int argc, char** argv);
 
 		~Initiator();
 

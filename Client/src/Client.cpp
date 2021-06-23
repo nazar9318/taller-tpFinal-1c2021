@@ -6,10 +6,10 @@ Client::Client(const std::string& host, const std::string& port):
 
 		
 		
-void Client::execute() {
+void Client::execute(int argc, char** argv) {
 	GameMap map;
 	Initiator initiator(map);
-	bool game_started = initiator.launch(socket);
+	bool game_started = initiator.launch(socket, argc, argv);
 	if (game_started) {
 		reciever.start();
 		sender.start();

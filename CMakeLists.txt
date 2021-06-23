@@ -72,6 +72,8 @@ include_directories(${PROJECT_SOURCE_DIR}/Client/src)
 
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/ClientEvents)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/ClientEvents/Lobby)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/ClientEvents/Game)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/ClientEvents/Game/Move)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/CommunicationThreads)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/GameView)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/GameView/sdl)

@@ -7,16 +7,9 @@
 #include "Event.h"
 #include "TypesOfEvents.h"
 
-class MoveEvent{
-
-	private:
-    std::vector<char> msg;
-
+class MoveEvent: public Event{
 	public:
-		MoveEvent(/*Direction& direction*/);
-
-    Event get_event();
-
+		MoveEvent(Direction direction);
 		~MoveEvent();
 
 	private:

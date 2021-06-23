@@ -13,23 +13,24 @@ Game::Game(ProtectedQueue<Event>& model,
 
 
 void Game::execute() {
-	FrameLimiter frame_limiter;
 	// GAME LOOP
 	while (is_running) {
-		handle_events(); //
+		handle_events();
 		process_events();
 
 		render();
-		frame_limiter.sleep();
 	}
 
 }
 
 
 void Game::handle_events() {
-	//poll de sdl hasta que no haya mas eventos. 
-	// ir agregando a la cola. 
-
+		//poll de sdl hasta que no haya mas eventos.
+		// ir agregando a la cola.
+		// case KEY_UP:
+			// case K:
+				// std::unique_ptr<Event> event(new MoveEvent());
+				// client_events.push(event);
 
 
 }

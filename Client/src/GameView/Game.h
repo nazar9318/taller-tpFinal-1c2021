@@ -6,7 +6,6 @@
 #include "Event.h"
 #include "ProtectedQueue.h"
 #include "GameMap.h"
-#include "FrameLimiter.h"
 #include "ModelEventHandler.h"
 
 class Game {

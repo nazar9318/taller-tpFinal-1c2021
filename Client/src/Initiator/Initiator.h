@@ -8,7 +8,6 @@
 #include "Protocol.h"
 #include "Parser.h"
 #include <QApplication>
-#include "mainwindow.h"
 
 #include "StartGameEvent.h"
 

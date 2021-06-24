@@ -4,8 +4,8 @@
 
 
 Game::Game(ProtectedQueue<Event>& model,
-		 ProtectedQueue<Event>& client, GameMap& game_map):
-		  model_events(model), client_events(client), map(game_map),
+		 ProtectedQueue<Event>& client):
+		  model_events(model), client_events(client),
 		  is_running(true) {
 }
 

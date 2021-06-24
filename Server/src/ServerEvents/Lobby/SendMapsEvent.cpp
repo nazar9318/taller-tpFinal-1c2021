@@ -6,7 +6,7 @@ SendMapsEvent::SendMapsEvent(std::list<std::string> maps) {
 		for (auto it_str = it->begin(); it_str != it->end(); ++it_str) {
 			this->msg.push_back(*it_str);
 		}
-		this->msg.push_back(';');
+		this->msg.push_back('\0');
 	}	
 }
 

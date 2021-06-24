@@ -10,7 +10,7 @@ add_subdirectory("./libs/box2d")
 include_directories(${PROJECT_SOURCE_DIR}/libs/box2d)
 
 # Flags
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O0 -Werror -pedantic")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O0 -Werror -pedantic -Wno-reorder")
 # debugging flags
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline ")
 # threads
@@ -78,6 +78,8 @@ include_directories(${PROJECT_SOURCE_DIR}/Client/src/CommunicationThreads)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/GameView)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/GameView/sdl)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/Initiator)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/Initiator/ui)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/Initiator/window)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/ServerEventHandlers)
 add_subdirectory("Client/src")
 
@@ -94,8 +96,8 @@ target_link_libraries(client client_classes common_classes SDL2 SDL2_image yaml-
 
 
 
-include_directories(${PROJECT_SOURCE_DIR}/login/login/src)
-add_subdirectory(login/login/src)
+#include_directories(${PROJECT_SOURCE_DIR}/login/login/src)
+#add_subdirectory(login/login/src)
 
-add_executable(login_exe "login/login/main.cpp")
-target_link_libraries(login_exe login_files)
+#add_executable(login_exe "login/login/main.cpp")
+#target_link_libraries(login_exe login_files)

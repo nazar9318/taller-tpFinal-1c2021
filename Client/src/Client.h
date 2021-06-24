@@ -9,7 +9,6 @@
 #include "ProtectedQueue.h"
 #include "EventSenderThread.h"
 #include "ModelRecieverThread.h"
-#include "GameMap.h"
 #include "Initiator.h"
 #include "Game.h"
 

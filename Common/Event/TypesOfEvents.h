@@ -14,20 +14,24 @@ enum ClientTypeEvent: char {
 	GET_MAPS, 
 	GET_MATCHES, 
 	CREATE, 
-	JOIN 
+	JOIN, 
+	USER_NAME
 };
 
 enum ModelTypeEvent: char {
 	SEND_MAPS, 
 	SEND_MATCHES,
-	SEND_FULL_MAP, //Mensaje que se sabe que tenes que arrancar la partida. 
+	SEND_FULL_MAP,
+	GAME_STARTED, 
 	PLAYERS_INFO,
+	JOIN_SUCCESSFULL,
+	CREATE_SUCCESSFULL,
 	// id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
 	SEND_ATTACK, 
 	BOMB_STATE, //activada/descativada;tiempo; 
 	ROUND_FINISHED, 
 	GAME_FINISHED, //manda los resultados 
-
+	PLAYER_JOINED,
 	ERROR
 };
 

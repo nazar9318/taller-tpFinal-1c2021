@@ -11,13 +11,13 @@
 class Game {
 	ProtectedQueue<Event>& model_events;
 	ProtectedQueue<Event>& client_events;
-	GameMap& map;
+	GameMap map;
 	ModelEventHandler handler;
 	bool is_running;
 
 	public:
 		Game(ProtectedQueue<Event>& model_events,
-		ProtectedQueue<Event>& client_events, GameMap& map);
+		ProtectedQueue<Event>& client_events);
 
 		void execute();
 		~Game();

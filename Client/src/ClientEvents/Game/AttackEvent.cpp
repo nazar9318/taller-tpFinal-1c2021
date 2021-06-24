@@ -11,4 +11,4 @@ AttackEvent::AttackEvent(int angle) {
 }
 
 
-AttackEvent::~AttackEvent();
+AttackEvent::~AttackEvent() {}

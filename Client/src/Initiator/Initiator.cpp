@@ -2,16 +2,19 @@
 
 
 
-Initiator::Initiator(GameMap& game_map):
-		  				map(game_map) {
+Initiator::Initiator(ModelRecieverThread& rcv, EventSenderThread& snd,
+		 ProtectedQueue<Event>& m_events, ProtectedQueue<Event>& c_events):
+		 receiver(rcv), sender(snd), 
+		 model_events(m_events), client_events(c_events) {
 }
 
-bool Initiator::launch(Socket& socket, int argc, char** argv) {
-	// QApplication a(argc, argv);
-	// MainWindow w;
-	// w.show();
-	// a.exec();
-	return true;
+void Initiator::launch(Socket& socket, int argc,
+			 char** argv, bool &game_started) {
+	QApplication a(argc, argv);
+	MainWindow w(socket, game_started, receiver,
+				 sender, model_events, client_events);
+	w.show();
+	a.exec();
 }
 
 

@@ -3,22 +3,31 @@
 
 #include <string>
 #include <iostream>
-#include "GameMap.h"
 #include "Socket.h"
 #include "Protocol.h"
 #include "Parser.h"
+#include "ProtectedQueue.h"
+#include "ModelRecieverThread.h"
+#include "EventSenderThread.h"
+
 #include <QApplication>
+#include "mainwindow.h"
+
 
 #include "StartGameEvent.h"
 
 class Initiator {
-	GameMap& map;
+	ModelRecieverThread& receiver;
+	EventSenderThread& sender;
+	ProtectedQueue<Event>& model_events;
+	ProtectedQueue<Event>& client_events;
 
 	public:
-		Initiator(GameMap& map);
+		Initiator(ModelRecieverThread& receiver, EventSenderThread& sender,
+		 ProtectedQueue<Event>& model_events, ProtectedQueue<Event>& client_events);
 
 		// returns true if player is logged in.
-		bool launch(Socket& socket, int argc, char** argv);
+		void launch(Socket& socket, int argc, char** argv, bool &game_started);
 
 		~Initiator();
 

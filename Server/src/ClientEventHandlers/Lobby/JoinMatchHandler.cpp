@@ -5,7 +5,7 @@ JoinMatchHandler::JoinMatchHandler(Socket& skt): communication_skt(skt) {
 }
 
 // returns true if create has success.
-bool JoinMatchHandler::handle(Event& event, Matches& matches) {
+bool JoinMatchHandler::handle(Event& event, Matches& matches, std::string user_name) {
 	if (event.get_type() != ClientTypeEvent::JOIN) {
 		throw Exception("[%s:%i]: Se esperaba un"
 				 "tipo Join", __FILE__, __LINE__);
@@ -17,7 +17,7 @@ bool JoinMatchHandler::handle(Event& event, Matches& matches) {
 					 " nombre %s", __FILE__, __LINE__,
 					  match_name.c_str());
 	try {
-		matches.join_if_exists(communication_skt, match_name);
+		matches.join_if_exists(communication_skt, match_name, user_name);
 		return true;
 	} catch(ExceptionInvalidCommand &e) {
 		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what()); 

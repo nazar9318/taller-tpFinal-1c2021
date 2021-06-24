@@ -9,13 +9,8 @@ Client::Client(const std::string& host, const std::string& port):
 void Client::execute(int argc, char** argv) {
 	Initiator initiator(reciever, sender, model_events, client_events);
 	bool game_started;
-	initiator.launch(socket, argc, argv, game_started);
+	initiator.launch(socket, argc, argv, game_started, players);
 	if (game_started) {
-/*
-		// esto se hace en el initiator.
-		reciever.start();
-		sender.start();
-*/
 		Game game(model_events, client_events);
 		game.execute();
 		reciever.stop_running();

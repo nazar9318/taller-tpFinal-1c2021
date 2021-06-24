@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <map>
 #include "Socket.h"
 #include "Protocol.h"
 #include "Parser.h"
@@ -27,8 +28,8 @@ class Initiator {
 		 ProtectedQueue<Event>& model_events, ProtectedQueue<Event>& client_events);
 
 		// returns true if player is logged in.
-		void launch(Socket& socket, int argc, char** argv, bool &game_started);
-
+		void launch(Socket& socket, int argc, char** argv, bool &game_started, 
+						std::map<char, PlayerInformation>& players);		
 		~Initiator();
 
 	private:

@@ -7,7 +7,6 @@
 #include "ErrorEvent.h"
 #include "Matches.h"
 
-
 class CreateMatchHandler {
 		Protocol protocol;
 		Socket& communication_skt;
@@ -15,7 +14,7 @@ class CreateMatchHandler {
 	public:
 		CreateMatchHandler(Socket& skt);
 		// returns true if create has success.
-		bool handle(Event& event, Matches& matches);
+		bool handle(Event& event, Matches& matches, std::string user_name);
 		~CreateMatchHandler();
 	private:
 		CreateMatchHandler(const CreateMatchHandler &other) = delete;

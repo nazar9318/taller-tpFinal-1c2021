@@ -1,26 +1,31 @@
 #include "Match.h"
 
-Match::Match(Socket& socket, const std::string& map_type): match_started(false),
-				finished(false), last_id(0), game_world(map_type), handler(game_world) {
+Match::Match(Socket& socket, const std::string& map_type,
+			std::string player_name): match_started(false),
+			finished(false), last_id(0), 
+			game_world(map_type), handler(game_world) {
 	game_world.add_player_if_not_full(last_id);
-	Player* player = new Player(socket, last_id, to_process_events);
+	Player* player = new Player(socket, last_id, player_name, to_process_events);
 	if (!player)
 		throw Exception("No se pudo alocar memoria");
 	players[last_id] = player;
 	last_id++;
 }
 
-void Match::join_player_if_not_full(Socket& skt) {
+void Match::join_player_if_not_full(Socket& skt, std::string player_name) {
 	std::lock_guard<std::mutex> l(m);
 	if (match_started)
 		throw ExceptionMatchStarted("El juego ya comenzo");
 	game_world.add_player_if_not_full(last_id);
-	Player* player = new Player(skt, last_id, to_process_events);
+	Player* player = new Player(skt, last_id, player_name, to_process_events);
 	if (!player) {
 		game_world.delete_player(last_id);
 		throw Exception("No se pudo alocar memoria");
 	}
 	players[last_id] = player;
+	std::shared_ptr<Event> players_info(
+			new SendPlayersIdsEvent(players));
+	push_event(players_info);
 	last_id++;
 }
 
@@ -105,6 +110,7 @@ void Match::stop_running() {
 	}
 	finished = true;
 }
+
 
 Match::~Match() {
 	stop_running();

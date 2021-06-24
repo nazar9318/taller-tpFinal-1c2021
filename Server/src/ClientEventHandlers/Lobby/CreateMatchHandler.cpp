@@ -5,7 +5,8 @@ CreateMatchHandler::CreateMatchHandler(Socket& skt): communication_skt(skt) {
 }
 
 // returns true if create has success.
-bool CreateMatchHandler::handle(Event& event, Matches& matches) {
+bool CreateMatchHandler::handle(Event& event,
+				 Matches& matches, std::string user_name) {
 	if (event.get_type() != ClientTypeEvent::CREATE) {
 		throw Exception("[%s:%i]: Se esperaba un"
 				 "tipo Create", __FILE__, __LINE__);
@@ -20,14 +21,14 @@ bool CreateMatchHandler::handle(Event& event, Matches& matches) {
 					 " nombre %s y mapa %s", __FILE__, __LINE__,
 					  match_name.c_str(), map_type.c_str());
 	try {
-		matches.create(communication_skt, match_name, map_type);
+		matches.create(communication_skt, match_name, map_type, user_name);
 		return true;
 	} catch(ExceptionInvalidCommand &e) {
 		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what()); 
 		ErrorEvent error(ServerError::INVALID_COMMAND);
 		protocol.send_event(communication_skt, error.get_msg());
-		return false;
 	}
+	return false;
 }
 
 

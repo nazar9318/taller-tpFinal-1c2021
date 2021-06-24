@@ -21,6 +21,7 @@
 #include "ErrorEvent.h"
 #include "StartGameHandler.h"
 #include "SendPlayersInfoEvent.h"
+#include "SendPlayersIdsEvent.h"
 
 #include "ClientEventHandler.h"
 
@@ -36,9 +37,11 @@ class Match: public Thread {
 		ClientEventHandler handler;
 
 	public:
-		Match(Socket& socket, const std::string& map_type);
+		Match(Socket& socket, const std::string& map_type,
+			 std::string player_name);
 
-		void join_player_if_not_full(Socket& skt);
+		void join_player_if_not_full(Socket& skt,
+						 std::string player_name);
 
 		bool is_finished();
 

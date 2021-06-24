@@ -24,14 +24,13 @@ enum ModelTypeEvent: char {
 	SEND_FULL_MAP,
 	GAME_STARTED, 
 	PLAYERS_INFO,
-	JOIN_SUCCESSFULL,
-	CREATE_SUCCESSFULL,
+	SUCCESSFUL_ENTRY,
 	// id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
 	SEND_ATTACK, 
 	BOMB_STATE, //activada/descativada;tiempo; 
 	ROUND_FINISHED, 
 	GAME_FINISHED, //manda los resultados 
-	PLAYER_JOINED,
+	PLAYERS_ID_LIST,
 	ERROR
 };
 

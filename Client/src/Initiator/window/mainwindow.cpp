@@ -7,17 +7,19 @@
 #include <string>
 
 #define TITLE "Counter Strike"
-
+#define PRINCIPAL_PAGE 0
+#define MIN_NAME_LENGTH 4
 
 
 MainWindow::MainWindow(Socket& skt, bool &started,
 		 ModelRecieverThread& rcv, EventSenderThread& snd,
 		 ProtectedQueue<Event>& m_events, 
-		 ProtectedQueue<Event>& c_events, 
+		 ProtectedQueue<Event>& c_events,
+		 std::map<char, PlayerInformation>& users,
 		 QWidget *parent)
  		: socket(skt), game_started(started), receiver(rcv),
  		 sender(snd), model_events(m_events), 
- 		 client_events(c_events), QMainWindow(parent), 
+ 		 client_events(c_events), players(users), QMainWindow(parent), 
  		 ui(new Ui::MainWindow) {
    	ui->setupUi(this); 
 	this->setStyleSheet("background-color: white;");
@@ -30,14 +32,14 @@ MainWindow::MainWindow(Socket& skt, bool &started,
 // POST: Boton de la primera pantalla mostrada. 
 //       Se pide un nombre de usuario. 
 void MainWindow::on_buttonBox_accepted() {
-	std::string user_name = ui->textEdit->toPlainText().toStdString();
-	if (user_name.length() < 3) {
+	user_name = ui->textEdit->toPlainText().toStdString();
+	if (user_name.length() < MIN_NAME_LENGTH) {
 		show_error("El nombre es demasiado corto");
 		return;
 	}
 	SendUserNameEvent user_event(user_name);
 	protocol.send_event(socket, user_event.get_msg());
-	ui->stackedWidget->setCurrentIndex(0);
+	ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
 }
 
 
@@ -50,6 +52,14 @@ void MainWindow::show_error(const QString& message) {
 	msgBox.setStandardButtons(QMessageBox::Ok);
 	msgBox.exec();
 }
+
+void MainWindow::show_error(const QString& message,
+					 const Event& event) {
+	// SI NOS MANDAN UN EVENTO DE TIPO ERROR
+	// IMPRIMIMOS EL ERROR. 
+	show_error(message);
+}
+
 
 
 /******************************************************/
@@ -64,12 +74,17 @@ void MainWindow::on_createButton_clicked() {
 	protocol.send_event(socket, recv_maps.get_msg());
 	Event maps_received = protocol.recv_event(socket);
 	if (maps_received.get_type() != ModelTypeEvent::SEND_MAPS) {
-		show_error("error al intentar recibir los mapas actuales");
+		show_error("error al intentar recibir los mapas actuales", maps_received);
 		return;
 	}
+	show_maps(maps_received);
+	ui->stackedWidget->setCurrentIndex(1);
+}
+
+
+void MainWindow::show_maps(Event& maps_received) {
 	std::vector<char> msg = maps_received.get_msg();
 	unsigned i = 1;
-	// IMPRIMO LOS MAPAS
 	while (i < maps_received.get_size()) {
 		std::string map_name(&msg[i]);
 		QPushButton* listed_map = new QPushButton();
@@ -79,28 +94,34 @@ void MainWindow::on_createButton_clicked() {
 		connect(listed_map, SIGNAL(pressed()), this, SLOT(createMatch(map_name)));
 		i += map_name.length() + 1;
 	}
-	ui->stackedWidget->setCurrentIndex(1);
 }
+
 
 // POST: Al apretar el boton de crear el match con el nombre, 
 //       se crea una partida con ese mapa.      
 void MainWindow::createMatch(std::string map_name) {
 	QString qname = QInputDialog::getText(this, "entrada", "Ingrese un nombre");
     std::string match_name = qname.toStdString();
-    if (match_name.length() < 3) {
+    if (match_name.length() < MIN_NAME_LENGTH) {
 		show_error("El nombre es demasiado corto");
 		return;
 	}
     CreateMatchEvent create(match_name, map_name);
     protocol.send_event(socket, create.get_msg());
-    Event is_successfull = protocol.recv_event(socket);
-	if (is_successfull.get_type() == ModelTypeEvent::CREATE_SUCCESSFULL) {
-		syslog(LOG_INFO, "[%s:%i]: Se unio a la partida %s"
+    Event is_successful = protocol.recv_event(socket);
+	if (is_successful.get_type() == ModelTypeEvent::SUCCESSFUL_ENTRY) {
+		syslog(LOG_INFO, "[%s:%i]: Se creo la partida %s"
 			, __FILE__, __LINE__, match_name.c_str());
+		// seria la posicion 2 en el protocolo. 
+		char id = is_successful.get_msg()[2];
+		PlayerInformation this_player(user_name, true);
+		//players.emplace(std::make_pair(id, this_player));
+		players[id] = std::move(this_player);
+		//players.insert({id, std::move(this_player)});
 	    ui->stackedWidget->setCurrentIndex(3);
 	    receiver.start();
 	} else {
-		show_error("error al intentar unirse a la partida."
+		show_error("error al intentar crear la partida."
 					"falta aclarar cual es el error");
 	}
 }
@@ -114,12 +135,11 @@ void MainWindow::on_pushButton_clicked() {
 	while (not_started) {
 		Event model_event = model_events.blocking_pop();
 		switch (model_event.get_type()) {
-			case ModelTypeEvent::PLAYER_JOINED:
+			case ModelTypeEvent::PLAYERS_ID_LIST:
 			{
-				// podriamos que el PLAYER_JOINED haga que se agregue a 
-				// map con id, nombre. 
-				std::string player_name(&(model_event.get_msg()[1]));
-				ui->players_create->addItem(QString::fromStdString(player_name));
+				update_players_list(model_event);
+				//std::string player_name(&(model_event.get_msg()[1]));
+				//ui->players_create->addItem(QString::fromStdString(player_name));
 				break;
 			}
 			case ModelTypeEvent::GAME_STARTED: 
@@ -145,11 +165,12 @@ void MainWindow::on_pushButton_2_clicked() {
     while(players_waiting) {
     	try {
     		Event model_event = model_events.pop();
-			if (model_event.get_type() == ModelTypeEvent::PLAYER_JOINED) {
+			if (model_event.get_type() == ModelTypeEvent::PLAYERS_ID_LIST) {
+					update_players_list(model_event);
 					// podriamos que el PLAYER_JOINED haga que se agregue a 
 					// map con id, nombre. 
-					std::string player_name(&(model_event.get_msg()[1]));
-					ui->players_create->addItem(QString::fromStdString(player_name));
+					//std::string player_name(&(model_event.get_msg()[1]));
+					//ui->players_create->addItem(QString::fromStdString(player_name));
 			} else {
 				syslog(LOG_CRIT, "[%s:%i]: Se recibe un tipo inesperado."
 				, __FILE__, __LINE__);
@@ -187,7 +208,7 @@ void MainWindow::on_joinButton_clicked() {
 		listed_match->setText("Partida: " + str);
 		ui->matchsList->addWidget(listed_match);
 		connect(listed_match, SIGNAL(pressed()), this, SLOT(joinMatch(match_name)));
-		i+= match_name.length() + 1;
+		i += match_name.length() + 1;
 	}
 }
 
@@ -195,7 +216,8 @@ void MainWindow::on_reload_games_clicked() {
 	//ui->matchsList->clean();
 	// Modularizar en una funcion para estoo. 
 	
-	// NO PUEDO HACER ESTA FUNCIOON.
+	// NO PUEDO HACER ESTA FUNCIOON DE
+	// CLEAN DE LOS BOTONES DE LOS MATCHES.
 	ReceiveMatchesEvent recv_matches;
 	protocol.send_event(socket, recv_matches.get_msg());
 	Event matches_received = protocol.recv_event(socket);
@@ -222,24 +244,28 @@ void MainWindow::on_reload_games_clicked() {
 void MainWindow::joinMatch(std::string match_name) {
 	JoinMatchEvent joiner_event(match_name);
 	protocol.send_event(socket, joiner_event.get_msg());
-	Event is_successfull = protocol.recv_event(socket);
-	if (is_successfull.get_type() != ModelTypeEvent::JOIN_SUCCESSFULL) {
+	Event is_successful = protocol.recv_event(socket);
+	if (is_successful.get_type() != ModelTypeEvent::SUCCESSFUL_ENTRY) {
 		show_error("error al intentar unirse a la partida."
 					"falta aclarar cual es el error");
 	}
 	syslog(LOG_INFO, "[%s:%i]: Se unio a la partida %s"
 			, __FILE__, __LINE__, match_name.c_str());
-
+	char id = is_successful.get_msg()[2];
+	PlayerInformation this_player(user_name, true);
+	//players.emplace(std::make_pair(id, this_player));
+	players[id] = std::move(this_player);
 	ui->stackedWidget->setCurrentIndex(3);
-	load_players(is_successfull);
+
 	bool not_started = true;
 	while (not_started) {
 		Event event = protocol.recv_event(socket);
 		switch (event.get_type()) {
-			case ModelTypeEvent::PLAYER_JOINED:
+			case ModelTypeEvent::PLAYERS_ID_LIST:
 			{
-				std::string player_name(&(event.get_msg()[1]));
-				ui->players_join->addItem(QString::fromStdString(player_name));
+				update_players_list(event);
+				//std::string player_name(&(event.get_msg()[1]));
+				//ui->players_join->addItem(QString::fromStdString(player_name));
 				break;
 			}
 			case ModelTypeEvent::GAME_STARTED: 
@@ -259,18 +285,32 @@ void MainWindow::joinMatch(std::string match_name) {
 
 }
 
-
-void MainWindow::load_players(Event& join_successfull) {
-	// join_successfull tiene la lista de los jugadores
-	// desde la posicion 1. 
-	std::vector<char> msg = join_successfull.get_msg();
+void MainWindow::update_players_list(Event& players_list) {
+	ui->players_join->clear();
+	ui->players_create->clear();
+	std::vector<char> msg = players_list.get_msg();
 	unsigned i = 1;
-	while (i < join_successfull.get_size()) {
+	// se que el mensaje es del tipo id_1Nombre_1id_2Nombre_2...
+    std::map<char, PlayerInformation> new_players;
+	while (i < players_list.get_size()) {
+		char player_id = msg[i];
+		i++;
 		std::string player_name(&msg[i]);
+		if (players.find(player_id) != players.end()) {
+			//new_players.emplace(std::make_pair(player_id,
+			//		 std::move(players[player_id])));
+
+			new_players[player_id] = std::move(players[player_id]);
+		} else {
+			PlayerInformation player(player_name);
+			new_players[player_id] = std::move(player);
+			//new_players.emplace(std::make_pair(player_id, player));
+		}
 		ui->players_join->addItem(QString::fromStdString(player_name));
+		ui->players_create->addItem(QString::fromStdString(player_name));
 		i += player_name.length() + 1;
 	}
-
+	players.swap(new_players);
 }
 
 

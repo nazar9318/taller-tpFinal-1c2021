@@ -9,13 +9,16 @@ Initiator::Initiator(ModelRecieverThread& rcv, EventSenderThread& snd,
 }
 
 void Initiator::launch(Socket& socket, int argc,
-			 char** argv, bool &game_started) {
+			 char** argv, bool &game_started, 
+			 std::map<char, PlayerInformation>& players) {
 	QApplication a(argc, argv);
 	MainWindow w(socket, game_started, receiver,
-				 sender, model_events, client_events);
+				 sender, model_events, client_events, players);
 	w.show();
 	a.exec();
 }
+
+Initiator::~Initiator() {}
 
 
 /*
@@ -189,4 +192,3 @@ bool Initiator::launch(Socket& socket) {
 	return true;
 }
 */
-Initiator::~Initiator() {}

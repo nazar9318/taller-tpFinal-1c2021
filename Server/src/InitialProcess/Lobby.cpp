@@ -38,6 +38,7 @@ void Lobby::run() {
 void Lobby::handle_lobby() {
 	bool not_started = true;
 	std::string match_name;
+	std::string user_name = get_user_name();
 	while (not_started) {
 		Event event = protocol.recv_event(communication_skt);
 		switch (event.get_type()) {
@@ -56,13 +57,13 @@ void Lobby::handle_lobby() {
 			case ClientTypeEvent::CREATE: 
 			{
 				CreateMatchHandler handler(communication_skt);
-				not_started = !handler.handle(event, matches);
+				not_started = !handler.handle(event, matches, user_name);
 				break;	
 			} 
 			case ClientTypeEvent::JOIN: 
 			{
 				JoinMatchHandler handler(communication_skt);
-				not_started = !handler.handle(event, matches);
+				not_started = !handler.handle(event, matches, user_name);
 				break;	
 			} 
 			default:
@@ -74,40 +75,16 @@ void Lobby::handle_lobby() {
 	}
 }	
 
-
-
-
-
-
-/*
-void Lobby::handle_lobby() {
-	bool not_started = true;
-	std::string match_name;
-	while (not_started) {
-		try {
-			char type_msg = protocol.get_message_type(communication_skt);
-			if (type_msg == LIST_CODE) {
-				protocol.send_message(communication_skt, matches.get_names());
-				continue;
-			}
-			if ((type_msg != CREATE_CODE) && (type_msg != JOIN_CODE)) 
-				throw ExceptionInvalidCommand("Se recibió un comando inválido");
-			protocol.recv_message(communication_skt, match_name);
-			if (type_msg == CREATE_CODE) {
-				GameWorldType world_type = (GameWorldType)protocol.get_message_type(communication_skt);
-				matches.create(communication_skt, match_name, world_type);
-			} else {
-				matches.join_if_exists(communication_skt, match_name);
-			}
-			not_started = false;	
-		} catch(ExceptionInvalidCommand &e) {
-			syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what()); 
-			protocol.send_invalid_command_error(communication_skt);
-        } catch(ExceptionMatchFull &e) {
-			syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what()); 
-			protocol.send_invalid_command_error(communication_skt);
-        }
-    }
+std::string Lobby::get_user_name() {
+	Event event = protocol.recv_event(communication_skt);
+	if (event.get_type() != ClientTypeEvent::USER_NAME)
+		throw Exception("El primer mensaje de un cliente"
+						" debe ser su nombre de usuario");
+	std::string user_name(&(event.get_msg()[1]));
+	syslog(LOG_INFO, "[%s:%i]: Cliente con nombre de"
+					 " usurio %s entra al lobby."
+					 , __FILE__, __LINE__, user_name.c_str());
+	return std::move(user_name);
 }
-*/
+
 Lobby::~Lobby() {}

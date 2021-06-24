@@ -32,6 +32,7 @@ class Lobby: public Thread {
 
 	private:
 		void handle_lobby();
+		std::string get_user_name();
 		Lobby(const Lobby &other) = delete;
 		Lobby& operator=(const Lobby &other) = delete;
 };

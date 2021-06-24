@@ -10,11 +10,12 @@ Matches::Matches() {
 // PRE: No hay ninguna partida con el nombre name. 
 // POST: Crea una partida y la agrega a la estructura
 //       de partidas. 
-void Matches::create(Socket& skt, const std::string& name, const std::string map_type) {
+void Matches::create(Socket& skt, const std::string& name,
+					 const std::string map_type, std::string player_name) {
 	std::lock_guard<std::mutex> l(m);
 	if (matches.find(name) != matches.end())
 		throw ExceptionInvalidCommand("La partida ya existe");
-	Match* match = new Match(skt, map_type);
+	Match* match = new Match(skt, map_type, player_name);
 	if (!match) {
 		throw Exception("Error al alocar memoria para create de match");
 	}
@@ -25,12 +26,13 @@ void Matches::create(Socket& skt, const std::string& name, const std::string map
 
 // PRE: Existe ninguna partida con el nombre name. 
 // POST: Se une un jugador a la partida name.  
-void Matches::join_if_exists(Socket& skt, const std::string& name) {
+void Matches::join_if_exists(Socket& skt,
+		 const std::string& name, std::string player_name) {
 	std::lock_guard<std::mutex> l(m);
 	if (matches.find(name) == matches.end())
 		throw ExceptionInvalidCommand("La partida no existe");
 	Match* match = matches.at(name);
-	match->join_player_if_not_full(skt);
+	match->join_player_if_not_full(skt, player_name);
 	clear_matches();
 }
 

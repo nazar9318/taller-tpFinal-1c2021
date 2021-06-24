@@ -16,7 +16,7 @@ class JoinMatchHandler {
 	public:
 		JoinMatchHandler(Socket& skt);
 		// returns true if join has success.
-		bool handle(Event& event, Matches& matches);
+		bool handle(Event& event, Matches& matches, std::string user_name);
 		~JoinMatchHandler();
 	private:
 		JoinMatchHandler(const JoinMatchHandler &other) = delete;

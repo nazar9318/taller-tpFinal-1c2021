@@ -34,7 +34,6 @@ void Lobby::run() {
 }
 
 
-
 void Lobby::handle_lobby() {
 	bool not_started = true;
 	std::string match_name;

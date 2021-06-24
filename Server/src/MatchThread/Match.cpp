@@ -23,8 +23,7 @@ void Match::join_player_if_not_full(Socket& skt, std::string player_name) {
 		throw Exception("No se pudo alocar memoria");
 	}
 	players[last_id] = player;
-	std::shared_ptr<Event> players_info(
-			new SendPlayersIdsEvent(players));
+	std::shared_ptr<Event> players_info(new SendPlayersIdsEvent(players));
 	push_event(players_info);
 	last_id++;
 }
@@ -71,12 +70,23 @@ void Match::start_game() {
 
 
 void Match::game_loop() {
+	//auto  t_current = std::chrono::high_resolution_clock::now();
+	//auto t_after_step = std::chrono::high_resolution_clock::now(); 
+	//auto t_delta = std::chrono::high_resolution_clock::now();
+
+	//double step_time = 1/30; // en segundos
+
+	
 	while (!finished) {
+		//t_current = std::chrono::high_resolution_clock::now();
 		handle_events();
-		game_world.simulate_step();
+		finished = game_world.simulate_step();
 		std::shared_ptr<Event> players_info(
 				new SendPlayersInfoEvent(game_world.get_players_info()));
 		push_event(players_info);
+	//	t_after_step = std::chrono::high_resolution_clock::now();
+		//t_delta = t_after_step - t_current;
+		//std::this_thread::sleep_for(std::chrono::seconds(step_time - t_after_step + t_current));
 	}
 }
 

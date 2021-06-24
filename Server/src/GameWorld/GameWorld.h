@@ -26,7 +26,9 @@ class GameWorld {
 		void add_player_if_not_full(int id);
 		void delete_player(int id);
 		void start();
-		void simulate_step();
+		
+		// false if the game is finished. 
+		bool simulate_step();
 		std::vector<char> get_players_info();
 		std::vector<char> get_all_info();
 		~GameWorld();

@@ -77,6 +77,8 @@ private:
     void on_pushButton_2_clicked();
     void update_players_list(Event& players_list);
     void show_maps(Event& maps_received);
+    void clean_matches();
+
 
 };
 

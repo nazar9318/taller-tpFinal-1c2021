@@ -37,7 +37,9 @@ std::vector<char> GameWorld::get_all_info() {
 	return info;
 }
 
-void GameWorld::simulate_step() {}
+bool GameWorld::simulate_step() {
+	return true;
+}
 std::vector<char> GameWorld::get_players_info() {
 	std::vector<char> info; 
 	std::string s = "Players Infooo!";

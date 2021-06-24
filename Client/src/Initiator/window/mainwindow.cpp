@@ -212,12 +212,18 @@ void MainWindow::on_joinButton_clicked() {
 	}
 }
 
+void MainWindow::clean_matches() {
+	while (ui->matchsList->count()) {
+		QWidget* widget = ui->matchsList->itemAt(0)->widget();
+		if (widget) {
+			ui->matchsList->removeWidget(widget);
+			delete widget;
+		}
+	}
+}
+
 void MainWindow::on_reload_games_clicked() {
-	//ui->matchsList->clean();
-	// Modularizar en una funcion para estoo. 
-	
-	// NO PUEDO HACER ESTA FUNCIOON DE
-	// CLEAN DE LOS BOTONES DE LOS MATCHES.
+	clean_matches();
 	ReceiveMatchesEvent recv_matches;
 	protocol.send_event(socket, recv_matches.get_msg());
 	Event matches_received = protocol.recv_event(socket);

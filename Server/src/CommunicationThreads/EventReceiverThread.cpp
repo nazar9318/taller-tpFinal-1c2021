@@ -1,5 +1,6 @@
 #include "EventReceiverThread.h"
 #include <queue>
+#include "ExceptionSocketClosed.h"
 
 EventReceiverThread::EventReceiverThread(Socket& skt,
 					int id, ProtectedQueue<Event>& queue):
@@ -22,6 +23,10 @@ void EventReceiverThread::run() {
 			event.add_client_id(client_id);
 			events.push(event);
 		}
+	} catch(const ExceptionSocketClosed& e) {
+		syslog(LOG_INFO, "[%s:%i]: Se cierra el socket del"
+				" jugador con id %d. Msg:%s", __FILE__,
+						 __LINE__, client_id, e.what());
 	} catch(const std::exception& e) {
 		syslog(LOG_ERR, "[%s:%i]: Error: %s", __FILE__, __LINE__, e.what());
 	} catch (...) {

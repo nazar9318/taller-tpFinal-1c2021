@@ -3,12 +3,13 @@
 
 #include "TypesOfEvents.h"
 #include "Event.h"
+#include <list>
 #include <string>
 
 
 class SendMatchesEvent: public Event {
 	public:
-		SendMatchesEvent(std::string matches_info);
+		SendMatchesEvent(std::list<std::string> matches_info);
 		~SendMatchesEvent();
 	private:
 		SendMatchesEvent(const SendMatchesEvent &other) = delete;

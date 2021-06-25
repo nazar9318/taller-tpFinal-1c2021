@@ -109,7 +109,8 @@ void Match::handle_events() {
 
 void Match::push_event(std::shared_ptr<Event>& event) {
 	for (auto it = players.begin(); it != players.end(); ++it) {
-			it->second->push(event);
+			std::shared_ptr<Event> to_push = event;
+			it->second->push(to_push);
 	}
 }
 

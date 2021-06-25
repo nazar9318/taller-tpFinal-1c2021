@@ -29,7 +29,7 @@ class Matches {
 							 std::string player_name);
 
 		// POST: Retorna los nombres de las partidas.  
-		std::string get_matches_info();
+		std::list<std::string> get_matches_info();
 		
 		~Matches();
 	

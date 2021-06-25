@@ -7,7 +7,12 @@
 #include <string>
 
 #define TITLE "Counter Strike"
+#define USER_NAME_PAGE 5
 #define PRINCIPAL_PAGE 0
+#define MAPS_FOR_CREATE_PAGE 1
+#define MATCHES_FOR_JOIN_PAGE 2
+#define JOIN_MATCH_WAITING 3
+#define CREATE_MATCH_WAITING 4
 #define MIN_NAME_LENGTH 4
 
 
@@ -23,7 +28,7 @@ MainWindow::MainWindow(Socket& skt, bool &started,
  		 ui(new Ui::MainWindow) {
    	ui->setupUi(this); 
 	this->setStyleSheet("background-color: white;");
-	ui->stackedWidget->setCurrentIndex(5);
+	ui->stackedWidget->setCurrentIndex(USER_NAME_PAGE);
 	setWindowTitle(TITLE);
 }
 
@@ -65,6 +70,8 @@ void MainWindow::show_error(const QString& message,
 /******************SECUENCIA DE CREATE*****************/
 /******************************************************/
 
+
+
 // POST: Cuando se aprieta el boton de crear, 
 //       se piden los mapas al servidor y se 
 //       abre una nueva pagina con los mismos. 
@@ -77,7 +84,7 @@ void MainWindow::on_createButton_clicked() {
 		return;
 	}
 	show_maps(maps_received);
-	ui->stackedWidget->setCurrentIndex(1);
+	ui->stackedWidget->setCurrentIndex(MAPS_FOR_CREATE_PAGE);
 }
 
 
@@ -120,7 +127,7 @@ void MainWindow::createMatch(const QString& map_name) {
 		//players.emplace(std::make_pair(id, this_player));
 		players[id] = std::move(this_player);
 		//players.insert({id, std::move(this_player)});
-	    ui->stackedWidget->setCurrentIndex(4);
+	    ui->stackedWidget->setCurrentIndex(CREATE_MATCH_WAITING);
 	    receiver.start();
 	} else {
 		show_error("error al intentar crear la partida."
@@ -176,6 +183,7 @@ void MainWindow::on_pushButton_2_clicked() {
 		} catch (ExceptionEmptyQueue& e) {
 			syslog(LOG_INFO, "[%s:%i]: No hay jugadores para recargar."
 				, __FILE__, __LINE__);
+			players_waiting = false;
 		}	
     }
 }
@@ -185,6 +193,8 @@ void MainWindow::on_pushButton_2_clicked() {
 /******************************************************/
 /******************SECUENCIA DE JOIN*******************/
 /******************************************************/
+
+
 
 // POST: Cuando se aprieta en join, se reciben las partidas
 // actuales y se las agrega a la lista de partidas. 
@@ -197,7 +207,7 @@ void MainWindow::on_joinButton_clicked() {
 		return;
 	}
 	show_matches(matches_received);
-	ui->stackedWidget->setCurrentIndex(2);
+	ui->stackedWidget->setCurrentIndex(MATCHES_FOR_JOIN_PAGE);
 }
 
 
@@ -207,6 +217,8 @@ void MainWindow::show_matches(Event& matches_received) {
 	QStringList matches;
 	while (i < matches_received.get_size()) {
 		std::string match_name(&msg[i]);
+		syslog(LOG_INFO, "[%s:%i]: Se lee de show matches el match %s"
+			, __FILE__, __LINE__, match_name.c_str());
 		QString str = QString::fromUtf8(match_name.c_str());
 		matches << str;
 		i += match_name.length() + 1;
@@ -251,13 +263,12 @@ void MainWindow::joinMatch(const QString &text) {
 					"falta aclarar cual es el error");
 		return;
 	}
-	syslog(LOG_INFO, "[%s:%i]: Se unio a la partida %s"
-			, __FILE__, __LINE__, match_name.c_str());
 	char id = is_successful.get_msg()[2];
 	PlayerInformation this_player(user_name, true);
-	//players.emplace(std::make_pair(id, this_player));
 	players[id] = std::move(this_player);
-	ui->stackedWidget->setCurrentIndex(3);
+	ui->stackedWidget->setCurrentIndex(JOIN_MATCH_WAITING);
+	syslog(LOG_INFO, "[%s:%i]: Se unio a la partida %s"
+			, __FILE__, __LINE__, match_name.c_str());
 
 	bool not_started = true;
 	while (not_started) {
@@ -298,10 +309,9 @@ void MainWindow::update_players_list(Event& players_list) {
 		char player_id = msg[i];
 		i++;
 		std::string player_name(&msg[i]);
+		syslog(LOG_INFO, "[%s:%i]: Por cargar jugador con id %d y nombre %s"
+					, __FILE__, __LINE__, player_id, player_name.c_str());
 		if (players.find(player_id) != players.end()) {
-			//new_players.emplace(std::make_pair(player_id,
-			//		 std::move(players[player_id])));
-
 			new_players[player_id] = std::move(players[player_id]);
 		} else {
 			PlayerInformation player(player_name);

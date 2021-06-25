@@ -27,11 +27,13 @@
 #include "SendUserNameEvent.h"
 #include "StartGameEvent.h"
 #include "MapsWidget.h"
+#include "MatchesWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 class MapsWidget;
+class MatchesWidget;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -55,17 +57,15 @@ public:
 
     void createMatch(const QString& map_name);
     ~MainWindow();
+    void joinMatch(const QString &text);
 
 private slots:
     void on_createButton_clicked();
 
     void on_joinButton_clicked();
 
-    void joinMatch(std::string match_name);
 	void on_buttonBox_accepted();
 	void on_reload_games_clicked();
-
-
 
 private:
     Ui::MainWindow* ui;
@@ -79,6 +79,8 @@ private:
     void update_players_list(Event& players_list);
     void show_maps(Event& maps_received);
     void clean_matches();
+    void show_matches(Event& matches_received);
+
 
 
 };

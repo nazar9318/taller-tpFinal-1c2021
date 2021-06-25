@@ -16,7 +16,8 @@ void Matches::create(Socket& skt, const std::string& name,
 	if (matches.find(name) != matches.end())
 		throw ExceptionInvalidCommand("La partida ya existe");
 	syslog(LOG_INFO, "[%s:%i]: Por crear hilo match con mapa %s"
-					 , __FILE__, __LINE__, map_type.c_str());
+					 "y nombre %s", __FILE__, __LINE__,
+					  map_type.c_str(), player_name.c_str());
 
 	Match* match = new Match(skt, map_type, player_name);
 	if (!match) {
@@ -32,8 +33,11 @@ void Matches::create(Socket& skt, const std::string& name,
 void Matches::join_if_exists(Socket& skt,
 		 const std::string& name, std::string player_name) {
 	std::lock_guard<std::mutex> l(m);
-	if (matches.find(name) == matches.end())
+	if (matches.find(name) == matches.end()) {
+		syslog(LOG_CRIT, "[%s:%i]: No existe la partida %s"
+					, __FILE__, __LINE__, name.c_str());
 		throw ExceptionInvalidCommand("La partida no existe");
+	}
 	Match* match = matches.at(name);
 	match->join_player_if_not_full(skt, player_name);
 	clear_matches();
@@ -45,7 +49,7 @@ std::string Matches::get_matches_info() {
 	std::string list;
 	for (auto it = matches.begin(); it != matches.end(); ++it) {
 		list += it->first;
-		list += ";";
+		list += "\0";
 	}
 	return list;
 }

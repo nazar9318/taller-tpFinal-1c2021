@@ -1,5 +1,5 @@
 #include "SendPlayersIdsEvent.h"
-
+#include <syslog.h>
 
 // map of (name, id_player) 
 // POST: El mensaje se construye como:
@@ -16,6 +16,8 @@ SendPlayersIdsEvent(const std::map<char, Player*>& current_players) {
 		std::copy(name.begin(), name.end(), std::back_inserter(this->msg));
 		this->msg.push_back('\0');
 	}
+	syslog(LOG_INFO, "[%s:%i]: Se construye evento de enviar"
+					 " jugadores.", __FILE__, __LINE__);
 }
 
 SendPlayersIdsEvent::~SendPlayersIdsEvent() {

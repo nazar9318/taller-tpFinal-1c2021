@@ -101,7 +101,8 @@ void MainWindow::show_maps(Event& maps_received) {
 // POST: Al apretar el boton de crear el match con el nombre, 
 //       se crea una partida con ese mapa.      
 void MainWindow::createMatch(const QString& map_name) {
-	QString qname = QInputDialog::getText(this, "entrada", "Ingrese un nombre");
+	QString qname = QInputDialog::getText(this, "entrada", "Ingrese un"
+										" nombre para la partida");
     std::string match_name = qname.toStdString();
     if (match_name.length() < MIN_NAME_LENGTH) {
 		show_error("El nombre es demasiado corto");
@@ -119,7 +120,7 @@ void MainWindow::createMatch(const QString& map_name) {
 		//players.emplace(std::make_pair(id, this_player));
 		players[id] = std::move(this_player);
 		//players.insert({id, std::move(this_player)});
-	    ui->stackedWidget->setCurrentIndex(3);
+	    ui->stackedWidget->setCurrentIndex(4);
 	    receiver.start();
 	} else {
 		show_error("error al intentar crear la partida."
@@ -168,10 +169,6 @@ void MainWindow::on_pushButton_2_clicked() {
     		Event model_event = model_events.pop();
 			if (model_event.get_type() == ModelTypeEvent::PLAYERS_ID_LIST) {
 					update_players_list(model_event);
-					// podriamos que el PLAYER_JOINED haga que se agregue a 
-					// map con id, nombre. 
-					//std::string player_name(&(model_event.get_msg()[1]));
-					//ui->players_create->addItem(QString::fromStdString(player_name));
 			} else {
 				syslog(LOG_CRIT, "[%s:%i]: Se recibe un tipo inesperado."
 				, __FILE__, __LINE__);
@@ -192,7 +189,6 @@ void MainWindow::on_pushButton_2_clicked() {
 // POST: Cuando se aprieta en join, se reciben las partidas
 // actuales y se las agrega a la lista de partidas. 
 void MainWindow::on_joinButton_clicked() {
-	ui->stackedWidget->setCurrentIndex(2);
 	ReceiveMatchesEvent recv_matches;
 	protocol.send_event(socket, recv_matches.get_msg());
 	Event matches_received = protocol.recv_event(socket);
@@ -200,18 +196,25 @@ void MainWindow::on_joinButton_clicked() {
 		show_error("error al intentar recibir las partidas actuales");
 		return;
 	}
+	show_matches(matches_received);
+	ui->stackedWidget->setCurrentIndex(2);
+}
+
+
+void MainWindow::show_matches(Event& matches_received) {
 	std::vector<char> msg = matches_received.get_msg();
 	unsigned i = 1;
+	QStringList matches;
 	while (i < matches_received.get_size()) {
 		std::string match_name(&msg[i]);
-		QPushButton* listed_match = new QPushButton();
 		QString str = QString::fromUtf8(match_name.c_str());
-		listed_match->setText("Partida: " + str);
-		ui->matchsList->addWidget(listed_match);
-		connect(listed_match, SIGNAL(pressed()), this, SLOT(joinMatch(match_name)));
+		matches << str;
 		i += match_name.length() + 1;
 	}
-}
+	MatchesWidget* matches_buttons = new MatchesWidget(matches, this);
+	ui->matchsList->addWidget(matches_buttons);
+}	
+
 
 void MainWindow::clean_matches() {
 	while (ui->matchsList->count()) {
@@ -232,29 +235,21 @@ void MainWindow::on_reload_games_clicked() {
 		show_error("error al intentar recibir las partidas actuales");
 		return;
 	}
-	std::vector<char> msg = matches_received.get_msg();
-	unsigned i = 1;
-	while (i < matches_received.get_size()) {
-		std::string match_name(&msg[i]);
-		QPushButton* listed_match = new QPushButton();
-		QString str = QString::fromUtf8(match_name.c_str());
-		listed_match->setText("Partida: " + str);
-		ui->matchsList->addWidget(listed_match);
-		connect(listed_match, SIGNAL(pressed()), this, SLOT(joinMatch(match_name)));
-		i+= match_name.length() + 1;
-	}
+	show_matches(matches_received);
 }
 
 
 // POST: Al apretar el boton de la partida en particular
 //       se une a la partida. 
-void MainWindow::joinMatch(std::string match_name) {
+void MainWindow::joinMatch(const QString &text) {
+	std::string match_name = text.toStdString();
 	JoinMatchEvent joiner_event(match_name);
 	protocol.send_event(socket, joiner_event.get_msg());
 	Event is_successful = protocol.recv_event(socket);
 	if (is_successful.get_type() != ModelTypeEvent::SUCCESSFUL_ENTRY) {
 		show_error("error al intentar unirse a la partida."
 					"falta aclarar cual es el error");
+		return;
 	}
 	syslog(LOG_INFO, "[%s:%i]: Se unio a la partida %s"
 			, __FILE__, __LINE__, match_name.c_str());
@@ -288,11 +283,11 @@ void MainWindow::joinMatch(std::string match_name) {
 				, __FILE__, __LINE__);
 		}
 	}
-
-
 }
 
 void MainWindow::update_players_list(Event& players_list) {
+	syslog(LOG_INFO, "[%s:%i]: Por cargar lista de jugadores"
+		, __FILE__, __LINE__);
 	ui->players_join->clear();
 	ui->players_create->clear();
 	std::vector<char> msg = players_list.get_msg();

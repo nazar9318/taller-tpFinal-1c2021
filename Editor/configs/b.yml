@@ -1,0 +1,23 @@
+node: 0
+item: base_dust
+position:
+  - 125
+  - 186
+---
+node: 1
+item: base_aztec
+position:
+  - 61
+  - 186
+---
+node: 2
+item: base_inferno
+position:
+  - 61
+  - 250
+---
+node: 3
+item: base_dust
+position:
+  - 125
+  - 250

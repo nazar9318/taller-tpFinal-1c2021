@@ -1,0 +1,65 @@
+node: 0
+item: base_inferno
+position:
+  - 125
+  - 58
+---
+node: 1
+item: base_aztec
+position:
+  - 61
+  - 58
+---
+node: 2
+item: base_dust
+position:
+  - 125
+  - 186
+---
+node: 3
+item: base_aztec
+position:
+  - 61
+  - 186
+---
+node: 4
+item: base_inferno
+position:
+  - 61
+  - 250
+---
+node: 5
+item: base_dust
+position:
+  - 125
+  - 250
+---
+node: 6
+item: base_inferno
+position:
+  - 61
+  - 122
+---
+node: 7
+item: base_inferno
+position:
+  - 125
+  - 122
+---
+node: 8
+item: base_aztec
+position:
+  - 61
+  - 314
+---
+node: 9
+item: base_aztec
+position:
+  - 125
+  - 314
+---
+node: 10
+item: awp_weapon
+position:
+  - 60
+  - 378

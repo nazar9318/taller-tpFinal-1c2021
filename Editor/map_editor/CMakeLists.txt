@@ -3,11 +3,9 @@ cmake_minimum_required(VERSION 3.5)
 project(map_editor LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -18,17 +16,18 @@ find_package(yaml-cpp REQUIRED)
 if(ANDROID)
   add_library(map_editor SHARED
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
+    editor_window.cpp
+    editor_window.h
+    editor_window.ui
+    editor_cell_type.h
     resources.qrc
   )
 else()
   add_executable(map_editor
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
+    editor_window.cpp
+    editor_window.h
+    editor_window.ui
     resources.qrc
   )
 endif()

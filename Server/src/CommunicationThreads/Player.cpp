@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include <syslog.h>
 
 
 Player::Player(Socket& skt, int player_id, std::string player_name,
@@ -9,6 +9,9 @@ Player::Player(Socket& skt, int player_id, std::string player_name,
 			model_events(), sender(socket, model_events)  {
 	EntrySuccessfulEvent event(id);
 	Protocol protocol;
+	syslog(LOG_INFO, "[%s:%i]: Por enviar mensaje de entry successful",
+					 __FILE__, __LINE__);
+
 	protocol.send_event(socket, event.get_msg());
 	sender.start();
 	receiver.start();

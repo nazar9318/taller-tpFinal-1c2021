@@ -10,6 +10,8 @@ Match::Match(Socket& socket, const std::string& map_type,
 		throw Exception("No se pudo alocar memoria");
 	players[last_id] = player;
 	last_id++;
+	syslog(LOG_INFO, "[%s:%i]: Se crea el match con mapa %s"
+					 , __FILE__, __LINE__, map_type.c_str());
 }
 
 void Match::join_player_if_not_full(Socket& skt, std::string player_name) {

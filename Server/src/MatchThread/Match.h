@@ -7,6 +7,7 @@
 #include <atomic>
 #include <memory>
 #include <chrono>
+#include <syslog.h>
 
 
 #include "Configuration.h"

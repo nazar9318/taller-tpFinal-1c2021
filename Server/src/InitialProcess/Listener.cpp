@@ -33,10 +33,15 @@ void Listener::run() {
 
 // POST: Fuerza la finalizacion del run al cortar la conexion. 
 void Listener::stop_conection() {
+	syslog(LOG_CRIT, "[%s:%i]: Por cerrar la conexion"
+					, __FILE__, __LINE__);
 	accepter.shutdown();
 	keep_running = false;
 }
 
 Listener::~Listener() {
 	this->join();
+	syslog(LOG_CRIT, "[%s:%i]: Se hizo join"
+					 " de hilo listener"
+					 , __FILE__, __LINE__);
 }

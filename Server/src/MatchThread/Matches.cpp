@@ -65,6 +65,10 @@ Matches::~Matches() {
 	for (auto it = matches.begin(); it != matches.end(); ++it) {
 		it->second->stop_running();
 		it->second->join();
+		syslog(LOG_INFO, "[%s:%i]: Dejo de correr la partida"
+					 , __FILE__, __LINE__);
 		delete it->second;
 	}
+	syslog(LOG_INFO, "[%s:%i]: Se destruye matches"
+					 , __FILE__, __LINE__);
 }

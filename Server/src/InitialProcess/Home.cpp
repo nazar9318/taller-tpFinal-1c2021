@@ -36,9 +36,9 @@ void Home::clear_clients() {
 
 Home::~Home() {
 	for (auto it = clients_in_lobby.begin(); it != clients_in_lobby.end(); ++it) {
-    	(*it)->stop_running();
-    	(*it)->join();
-    	delete *it;
+		(*it)->stop_running();
+		(*it)->join();
+		delete *it;
   	}
-  	syslog(LOG_INFO, "Se elimina Home");
+	syslog(LOG_INFO, "Se elimina Home");
 }

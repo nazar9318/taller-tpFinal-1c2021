@@ -37,6 +37,11 @@ class Character {
         Character(Team team, b2World* world,
              std::vector<Position*> available_positions);
         
+        Character(Character&&) = default;
+
+        Character& operator = (Character&&) = default;
+
+
         void add_body(char x, char y, b2World* world);
 
 
@@ -66,6 +71,10 @@ class Character {
         void attack(Character &enemy, Team my_team, uint16_t distance);
 
         ~Character();
+    private:
+        Character(const Character &other) = delete;
+        Character& operator=(const Character &other) = delete;
+
 };
 
 #endif

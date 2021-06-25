@@ -1,5 +1,5 @@
 #include "GameWorld.h"
-
+#include <syslog.h>
 
 
 GameWorld::GameWorld(const std::string& map_type):
@@ -15,10 +15,14 @@ void GameWorld::add_player_if_not_full(int id) {
 	std::lock_guard<std::mutex> l(m);
 	if (number_players_allowed == number_players) 
 		throw ExceptionMatchFull("La partida esta completa"); 
+	syslog(LOG_INFO, "[%s:%i]: Por agregar el jugador con id %d"
+					 " al GameWorld", __FILE__, __LINE__, id);
 	Character character(actual_team, world, ground.get_zone(actual_team));
-	characters.insert({id, character});
+	characters.insert({id, std::move(character)});
 	actual_team = get_opposite(actual_team);
 	number_players++;
+	syslog(LOG_INFO, "[%s:%i]: Se agrego al jugador con id %d"
+					 " al GameWorld", __FILE__, __LINE__, id);
 }
 
 void GameWorld::delete_player(int id) {

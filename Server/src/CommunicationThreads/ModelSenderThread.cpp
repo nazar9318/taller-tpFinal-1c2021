@@ -1,16 +1,19 @@
 #include "ModelSenderThread.h"
-
+#include <syslog.h>
 
 
 ModelSenderThread::ModelSenderThread(Socket& skt,
 					ProtectedQueue<std::shared_ptr<Event>>& queue):
 					socket_send(skt), events(queue),
-					allowed_to_run(true) {}
+					allowed_to_run(true) {
+	syslog(LOG_INFO, "[%s:%i]: Se crea un sender"
+					, __FILE__, __LINE__);
+}
 
 void ModelSenderThread::stop_running() {
 	socket_send.shutdown(SHUT_WR);
 	allowed_to_run = false;
-
+	events.close();
 }
 
 void ModelSenderThread::run() {
@@ -28,4 +31,6 @@ void ModelSenderThread::run() {
 
 ModelSenderThread::~ModelSenderThread() {
 	this->join();
+	syslog(LOG_INFO, "[%s:%i]: Se hizo join de sender"
+						, __FILE__, __LINE__);
 }

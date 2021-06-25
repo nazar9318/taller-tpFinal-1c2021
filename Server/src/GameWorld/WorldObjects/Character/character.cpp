@@ -1,6 +1,7 @@
 #include "character.h"
 #include <algorithm>
 #include <random>
+#include <syslog.h>
 
 float Character::body_radius = 0.5;
 
@@ -15,6 +16,9 @@ Character::Character(Team team, b2World* world,
 		throw Exception("No hay suficientes posiciones"
 					" para ubicar a los jugadores");
 	}
+	syslog(LOG_INFO, "[%s:%i]: Por agregar un character al world"
+					 , __FILE__, __LINE__);
+
 	std::random_device rd;  
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distrib(0,

@@ -58,8 +58,6 @@ class Match: public Thread {
 		void push_event(std::shared_ptr<Event>& event);
 		void handle_events();
 
-
-
 		Match(const Match &other) = delete;
 		Match& operator=(const Match &other) = delete;
 };

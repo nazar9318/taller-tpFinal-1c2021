@@ -114,16 +114,23 @@ void Match::push_event(std::shared_ptr<Event>& event) {
 }
 
 void Match::stop_running() {
+	syslog(LOG_INFO, "[%s:%i]: Por cerrar"
+					 " los hilos de los jugadores "
+				 	  , __FILE__, __LINE__);
 	std::lock_guard<std::mutex> l(m);
 	for (auto it = players.begin(); it != players.end(); ++it) {
 		it->second->stop_running();
 		delete it->second;
-		players.erase(it->first);
 	}
+	syslog(LOG_INFO, "[%s:%i]: Se cerraron"
+					 " los hilos de los jugadores "
+				 	  , __FILE__, __LINE__);
 	finished = true;
+	to_process_events.close();
 }
 
 
 Match::~Match() {
-	stop_running();
+	syslog(LOG_INFO, "[%s:%i]: Se elimino el match "
+				 	  , __FILE__, __LINE__);
 }

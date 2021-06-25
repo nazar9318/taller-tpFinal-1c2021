@@ -5,7 +5,7 @@
 Player::Player(Socket& skt, int player_id, std::string player_name,
 			ProtectedQueue<Event>& client_events):
 			socket(std::move(skt)), id(player_id),
-			name(player_name),receiver(socket, id, client_events),
+			name(player_name), receiver(socket, id, client_events),
 			model_events(), sender(socket, model_events)  {
 	EntrySuccessfulEvent event(id);
 	Protocol protocol;
@@ -27,8 +27,13 @@ std::string Player::get_name() const{
 
 
 void Player::stop_running() {
+	syslog(LOG_INFO, "[%s:%i]: Por eliminar a sender y receiver",
+				 __FILE__, __LINE__);
 	sender.stop_running();
 	receiver.stop_running();
 }
 
-Player::~Player() {}
+Player::~Player() {
+	syslog(LOG_INFO, "[%s:%i]: Se elimina el player",
+				__FILE__, __LINE__);
+}

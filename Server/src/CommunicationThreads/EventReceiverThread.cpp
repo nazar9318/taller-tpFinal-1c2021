@@ -4,7 +4,10 @@
 EventReceiverThread::EventReceiverThread(Socket& skt,
 					int id, ProtectedQueue<Event>& queue):
 					client_id(id), socket_recv(skt), events(queue),
-					allowed_to_run(true) {}
+					allowed_to_run(true) {
+	syslog(LOG_INFO, "[%s:%i]: Se crea un receiver"
+			" con id %d", __FILE__, __LINE__, id);
+}
 
 void EventReceiverThread::stop_running() {
 	socket_recv.shutdown(SHUT_RD);
@@ -28,4 +31,7 @@ void EventReceiverThread::run() {
 
 EventReceiverThread::~EventReceiverThread() {
 	this->join();
+	syslog(LOG_ERR, "[%s:%i]: Se hizo join de receiver"
+					, __FILE__, __LINE__);
+
 }

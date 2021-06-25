@@ -7,10 +7,6 @@
 
 #define BASE_X 65
 #define BASE_Y 65
-#define WEAPON_X 65
-#define WEAPON_Y 30
-#define BOX_X 30
-#define BOX_Y 30
 
 MainWindow::MainWindow(QWidget *parent) :
 QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -143,6 +139,11 @@ void MainWindow::connectItems() {
     connect(this->ui->box_metal, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->box_wood, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->box_wood_metal, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->bomb_area_a, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->bomb_area_b, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->bomb_area_c, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->terrorist_spawn, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->counter_spawn, SIGNAL(pressed()), this, SLOT(selectItem()));
 }
 
 void MainWindow::selectItem() {

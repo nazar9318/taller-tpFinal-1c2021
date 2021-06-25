@@ -1,38 +1,56 @@
+width: 3
+height: 2
+---
 node: 0
-item: glock_m
+item: base_aztec
 position:
-  - 357
-  - 226
-rate: 1
-automatic: false
-frequency: 0
-damage: 15
-accuracy: 50
-distance_penalty: 5
-price: 50
+  - 2
+  - 0
 ---
 node: 1
-item: ak47_m
+item: base_inferno
 position:
-  - 457
-  - 199
-rate: 3
-automatic: true
-frequency: 0.4
-damage: 10
-accuracy: 100
-distance_penalty: 5
-price: 10
+  - 1
+  - 1
 ---
 node: 2
-item: awp_m
+item: base_inferno
 position:
-  - 393
-  - 284
-rate: 1
-automatic: false
-frequency: 0
-damage: 50
-accuracy: 100
-distance_penalty: 0
-price: 500
+  - 0
+  - 1
+---
+node: 3
+item: base_aztec
+position:
+  - 1
+  - 0
+---
+node: 4
+item: base_aztec
+position:
+  - 0
+  - 0
+---
+node: 0
+item: box_black
+position:
+  - 1
+  - 1
+---
+node: 1
+item: box_brown
+position:
+  - 0
+  - 0
+---
+node: 2
+item: box_brown
+position:
+  - 0
+  - 1
+---
+node: 3
+item: glock_weapon
+position:
+  - 1
+  - 0

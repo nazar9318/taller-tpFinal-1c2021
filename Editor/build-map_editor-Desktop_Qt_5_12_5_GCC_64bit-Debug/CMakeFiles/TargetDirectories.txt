@@ -1,0 +1,4 @@
+/home/federico/Git/taller-tpFinal-1c2021/Editor/build-map_editor-Desktop_Qt_5_12_5_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
+/home/federico/Git/taller-tpFinal-1c2021/Editor/build-map_editor-Desktop_Qt_5_12_5_GCC_64bit-Debug/CMakeFiles/edit_cache.dir
+/home/federico/Git/taller-tpFinal-1c2021/Editor/build-map_editor-Desktop_Qt_5_12_5_GCC_64bit-Debug/CMakeFiles/map_editor.dir
+/home/federico/Git/taller-tpFinal-1c2021/Editor/build-map_editor-Desktop_Qt_5_12_5_GCC_64bit-Debug/CMakeFiles/map_editor_autogen.dir

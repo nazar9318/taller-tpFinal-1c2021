@@ -3,7 +3,9 @@
 #include <fstream>
 #include <QLayoutItem>
 #include <QLabel>
+#include <QMouseEvent>
 #include <math.h>
+#include <cstdlib>
 
 #define BASE_X 65
 #define BASE_Y 65
@@ -26,7 +28,8 @@ void MainWindow::saveObjects(YAML::Emitter &emitter) {
     int i = 0;
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
-        if ((name.find("weapon") != std::string::npos) || (name.find("box") != std::string::npos)) {
+        if ((name.find("weapon") != std::string::npos) || (name.find("box") != std::string::npos) ||
+            (name.find("bomb") != std::string::npos) || (name.find("spawn") != std::string::npos)) {
             YAML::Node node;
             node["node"] = i;
             i++;
@@ -152,11 +155,11 @@ void MainWindow::selectItem() {
     button->show();
 }
 
-void MainWindow::mouseReleaseEvent(QMouseEvent*) {
+void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
     QGraphicsPixmapItem *item = new QGraphicsPixmapItem
         (QPixmap(":/resources/" + this->dragged + ".png"));
     item->setFlag(QGraphicsItem::ItemIsMovable, true);
-    item->setPos(1, 1);
+    item->setPos(this->ui->map->mapToScene(event->pos()).x()-30, this->ui->map->mapToScene(event->pos()).y()-50);
     item->setData(0, this->dragged);
     this->scene->addItem(item);
 }

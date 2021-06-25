@@ -28,4 +28,20 @@ const int MapParser::getPosY() {
     return this->pos_y;
 }
 
+const WEAPON_TYPE MapParser::getWeaponType() {
+    if (this->type.find("m3") != std::string::npos) {
+        return SHOTGUN;
+    }
+    if (this->type.find("awp") != std::string::npos) {
+        return SNIPER;
+    }
+    if (this->type.find("glock") != std::string::npos) {
+        return PISTOL;
+    }
+    if (this->type.find("ak") != std::string::npos) {
+        return AUTOMATIC;
+    }
+    return NONE;
+}
+
 MapParser::~MapParser() {

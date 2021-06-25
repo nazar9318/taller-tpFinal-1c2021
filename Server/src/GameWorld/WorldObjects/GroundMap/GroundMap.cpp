@@ -7,15 +7,16 @@ GroundMap::GroundMap(const std::string& map_type) {
 	// hago lo siguiente para pruebas:
 	std::string file_name;
 	MapParser parser(file_name);
-	positions.push_back(Position(parser.getPosX(), parser.getPosY(), true, false, false, false));
+	positions.push_back(Position(parser.getPosX(), parser.getPosY(), true,
+						false, false, false, parser.getWeaponType()));
 
-	positions.push_back(Position(0, 0, true, false, false, false));
-	positions.push_back(Position(0, 1, true, false, false, false));
-	positions.push_back(Position(0, 2, true, false, false, false));
-	positions.push_back(Position(0, 3, false, false, false, true));
-	positions.push_back(Position(1, 0, false, false, false, true));
-	positions.push_back(Position(1, 1, false, true, false, false));
-	positions.push_back(Position(1, 2, false, true, true, false));
+	positions.push_back(Position(0, 0, true, false, false, false, NONE));
+	positions.push_back(Position(0, 1, true, false, false, false, NONE));
+	positions.push_back(Position(0, 2, true, false, false, false, NONE));
+	positions.push_back(Position(0, 3, false, false, false, true, NONE));
+	positions.push_back(Position(1, 0, false, false, false, true, NONE));
+	positions.push_back(Position(1, 1, false, true, false, false, NONE));
+	positions.push_back(Position(1, 2, false, true,  true, false, NONE));
 	x_size = 2;
 	y_size = 3;
 }

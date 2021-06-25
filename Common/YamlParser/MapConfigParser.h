@@ -5,6 +5,7 @@
 #include <iostream>
 #include "yaml-cpp/yaml.h"
 #include "Position.h"
+#include "WeaponType.h"
 
 class MapParser {
     private:
@@ -24,6 +25,8 @@ class MapParser {
         const int getPosX();
         
         const int getPosY();
+
+        const WEAPON_TYPE getWeaponType();
 
         ~MapParser();
 };

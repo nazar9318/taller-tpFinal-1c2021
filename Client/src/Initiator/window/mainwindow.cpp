@@ -25,7 +25,6 @@ MainWindow::MainWindow(Socket& skt, bool &started,
 	this->setStyleSheet("background-color: white;");
 	ui->stackedWidget->setCurrentIndex(5);
 	setWindowTitle(TITLE);
-
 }
 
 
@@ -82,31 +81,33 @@ void MainWindow::on_createButton_clicked() {
 }
 
 
+
+
 void MainWindow::show_maps(Event& maps_received) {
 	std::vector<char> msg = maps_received.get_msg();
 	unsigned i = 1;
+	QStringList maps;
 	while (i < maps_received.get_size()) {
 		std::string map_name(&msg[i]);
-		QPushButton* listed_map = new QPushButton();
 		QString str = QString::fromUtf8(map_name.c_str());
-		listed_map->setText("Mapa: " + str);
-		ui->mapList->addWidget(listed_map);
-		connect(listed_map, SIGNAL(pressed()), this, SLOT(createMatch(map_name)));
+		maps << str;
 		i += map_name.length() + 1;
 	}
+	MapsWidget* maps_buttons = new MapsWidget(maps, this);
+	ui->mapList->addWidget(maps_buttons);
 }
 
 
 // POST: Al apretar el boton de crear el match con el nombre, 
 //       se crea una partida con ese mapa.      
-void MainWindow::createMatch(std::string map_name) {
+void MainWindow::createMatch(const QString& map_name) {
 	QString qname = QInputDialog::getText(this, "entrada", "Ingrese un nombre");
     std::string match_name = qname.toStdString();
     if (match_name.length() < MIN_NAME_LENGTH) {
 		show_error("El nombre es demasiado corto");
 		return;
 	}
-    CreateMatchEvent create(match_name, map_name);
+    CreateMatchEvent create(match_name, map_name.toStdString());
     protocol.send_event(socket, create.get_msg());
     Event is_successful = protocol.recv_event(socket);
 	if (is_successful.get_type() == ModelTypeEvent::SUCCESSFUL_ENTRY) {

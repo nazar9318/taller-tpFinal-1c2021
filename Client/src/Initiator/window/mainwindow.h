@@ -12,6 +12,7 @@
 #include <QTextEdit>
 #include <QMessageBox>
 #include <map>
+#include <QSignalMapper>
 
 #include "PlayerInformation.h"
 #include "CreateMatchEvent.h"
@@ -25,12 +26,12 @@
 #include "EventSenderThread.h"
 #include "SendUserNameEvent.h"
 #include "StartGameEvent.h"
-
+#include "MapsWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
-
+class MapsWidget;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -52,6 +53,7 @@ public:
             std::map<char, PlayerInformation>& players, 
             QWidget *parent = nullptr);
 
+    void createMatch(const QString& map_name);
     ~MainWindow();
 
 private slots:
@@ -72,7 +74,6 @@ private:
     void wait_until_start();
     void show_error(const QString& message);
     void show_error(const QString& message, const Event& event);
-    void createMatch(std::string map_name);
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void update_players_list(Event& players_list);

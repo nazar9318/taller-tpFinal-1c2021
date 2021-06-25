@@ -9,7 +9,7 @@ Lobby::Lobby(Socket& skt, Matches& matches_counter):
 							communication_skt(std::move(skt)),
 							matches(matches_counter), finished(false) {
 }
-		
+
 
 bool Lobby::is_finished() {
 	return finished;
@@ -41,38 +41,38 @@ void Lobby::handle_lobby() {
 	while (not_started) {
 		Event event = protocol.recv_event(communication_skt);
 		switch (event.get_type()) {
-			case ClientTypeEvent::GET_MAPS: 
+			case ClientTypeEvent::GET_MAPS:
 			{
 				GetMapsHandler handler(communication_skt);
 				handler.handle(event);
 				break;
-			} 
-			case ClientTypeEvent::GET_MATCHES: 
+			}
+			case ClientTypeEvent::GET_MATCHES:
 			{
 				GetMatchesHandler handler(communication_skt);
-				handler.handle(event, matches);	
+				handler.handle(event, matches);
 				break;
-			} 
-			case ClientTypeEvent::CREATE: 
+			}
+			case ClientTypeEvent::CREATE:
 			{
 				CreateMatchHandler handler(communication_skt);
 				not_started = !handler.handle(event, matches, user_name);
-				break;	
-			} 
-			case ClientTypeEvent::JOIN: 
+				break;
+			}
+			case ClientTypeEvent::JOIN:
 			{
 				JoinMatchHandler handler(communication_skt);
 				not_started = !handler.handle(event, matches, user_name);
-				break;	
-			} 
+				break;
+			}
 			default:
 			{
 				ErrorEvent error(ServerError::INVALID_COMMAND);
 				protocol.send_event(communication_skt, error.get_msg());
 			}
-		}	
+		}
 	}
-}	
+}
 
 std::string Lobby::get_user_name() {
 	Event event = protocol.recv_event(communication_skt);
@@ -83,7 +83,7 @@ std::string Lobby::get_user_name() {
 	syslog(LOG_INFO, "[%s:%i]: Cliente con nombre de"
 					 " usurio %s entra al lobby."
 					 , __FILE__, __LINE__, user_name.c_str());
-	return std::move(user_name);
+	return user_name;
 }
 
 Lobby::~Lobby() {}

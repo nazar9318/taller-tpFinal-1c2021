@@ -42,7 +42,7 @@ private:
     bool& game_started;
     ModelRecieverThread& receiver;
     EventSenderThread& sender;
-    ProtectedQueue<Event>& client_events;
+    ProtectedQueue<std::unique_ptr<Event>>& client_events;
     ProtectedQueue<Event>& model_events;
     std::map<char, PlayerInformation>& players;
     std::string user_name;
@@ -50,9 +50,9 @@ public:
     MainWindow(Socket& socket, bool& game_started,
             ModelRecieverThread& receiver,
             EventSenderThread& sender,
-            ProtectedQueue<Event>& model_events, 
-            ProtectedQueue<Event>& client_events,
-            std::map<char, PlayerInformation>& players, 
+            ProtectedQueue<Event>& model_events,
+            ProtectedQueue<std::unique_ptr<Event>>& client_events,
+            std::map<char, PlayerInformation>& players,
             QWidget *parent = nullptr);
 
     void createMatch(const QString& map_name);

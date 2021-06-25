@@ -3,13 +3,13 @@
 
 
 Initiator::Initiator(ModelRecieverThread& rcv, EventSenderThread& snd,
-		 ProtectedQueue<Event>& m_events, ProtectedQueue<Event>& c_events):
-		 receiver(rcv), sender(snd), 
+		 ProtectedQueue<Event>& m_events, ProtectedQueue<std::unique_ptr<Event>>& c_events):
+		 receiver(rcv), sender(snd),
 		 model_events(m_events), client_events(c_events) {
 }
 
 void Initiator::launch(Socket& socket, int argc,
-			 char** argv, bool &game_started, 
+			 char** argv, bool &game_started,
 			 std::map<char, PlayerInformation>& players) {
 	QApplication a(argc, argv);
 	MainWindow w(socket, game_started, receiver,

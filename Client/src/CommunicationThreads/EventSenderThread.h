@@ -15,11 +15,11 @@
 class EventSenderThread: public Thread {
 		Socket& socket_send;
 		Protocol protocol;
-		ProtectedQueue<Event>& events;
+		ProtectedQueue<std::unique_ptr<Event>>& events;
 		std::atomic<bool> allowed_to_run;
 
 	public:
-		EventSenderThread(Socket& skt, ProtectedQueue<Event>& events);
+		EventSenderThread(Socket& skt, ProtectedQueue<std::unique_ptr<Event>>& events);
 		void stop_running();
 		virtual void run() override;
 

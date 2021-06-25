@@ -18,7 +18,7 @@
 class Client {
 	Socket socket;
 	ProtectedQueue<Event> model_events;
-	ProtectedQueue<Event> client_events;
+	ProtectedQueue<std::unique_ptr<Event>> client_events;
 	ModelRecieverThread reciever;
 	EventSenderThread sender;
 	std::map<char, PlayerInformation> players;

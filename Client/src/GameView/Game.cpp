@@ -4,7 +4,7 @@
 
 
 Game::Game(ProtectedQueue<Event>& model,
-		 ProtectedQueue<Event>& client):
+		 ProtectedQueue<std::unique_ptr<Event>>& client):
 		  model_events(model), client_events(client),
 		  is_running(true) {
 }
@@ -15,7 +15,7 @@ Game::Game(ProtectedQueue<Event>& model,
 void Game::execute() {
 	// GAME LOOP
 	while (is_running) {
-		handle_events();
+		is_running = handle_events();
 		process_events();
 
 		render();
@@ -24,15 +24,95 @@ void Game::execute() {
 }
 
 
-void Game::handle_events() {
-		//poll de sdl hasta que no haya mas eventos.
-		// ir agregando a la cola.
-		// case KEY_UP:
-			// case K:
-				// std::unique_ptr<Event> event(new MoveEvent());
-				// client_events.push(event);
+bool Game::handle_events() {
 
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+		switch (event.type) {
+			case SDL_QUIT:
+			return false;
+			break;
+			case SDL_KEYDOWN:
+			handle_key_press(event);
+			break;
+			case SDL_KEYUP:
+			handle_key_release(event);
+			break;
+			case SDL_MOUSEBUTTONDOWN:
+			handle_click(event);
+			break;
+			case SDL_MOUSEBUTTONUP:
+			handle_unclick(event);
+			break;
+			case SDL_MOUSEMOTION:
+			handle_mouse_motion();
+			break;
+			default:
+			break;
+		}
+	}
+	return true;
+	//poll de sdl hasta que no haya mas eventos.
+	// ir agregando a la cola.
+	// case KEY_UP:
+	// case K:
+	// std::unique_ptr<Event> event(new MoveEvent());
+	// client_events.push(event);
+}
 
+void Game::handle_key_press(SDL_Event& event){
+	switch (event.key.keysym.sym) {
+		case SDLK_w:
+			//
+			break;
+		case SDLK_a:
+			break;
+		case SDLK_d:
+			break;
+		case SDLK_s:
+			break;
+		case SDLK_SPACE:
+			break;
+	}
+}
+
+void Game::handle_key_release(SDL_Event& event) {
+	switch (event.key.keysym.sym) {
+		case SDLK_w:
+		break;
+		case SDLK_a:
+		break;
+		case SDLK_d:
+		break;
+		case SDLK_s:
+		break;
+		case SDLK_SPACE:
+		break;
+	}
+}
+
+void Game::handle_click(SDL_Event& event) {
+	switch (event.button.button) {
+		case SDL_BUTTON_RIGHT:
+			break;
+		case SDL_BUTTON_LEFT:
+			// std::unique_ptr<Event> event(new MoveEvent());
+			// client_events.push(event);
+			break;
+	}
+}
+
+void Game::handle_unclick(SDL_Event& event) {
+	switch (event.button.button) {
+		case SDL_BUTTON_RIGHT:
+		break;
+		case SDL_BUTTON_LEFT:
+		break;
+	}
+}
+
+void Game::handle_mouse_motion() {
+	/* code */
 }
 
 void Game::process_events() {

@@ -2,7 +2,7 @@
 
 
 
-EventSenderThread::EventSenderThread(Socket& skt, ProtectedQueue<Event>& queue):
+EventSenderThread::EventSenderThread(Socket& skt, ProtectedQueue<std::unique_ptr<Event>>& queue):
 					socket_send(skt), events(queue),
 					allowed_to_run(true) {}
 
@@ -15,8 +15,8 @@ void EventSenderThread::stop_running() {
 void EventSenderThread::run() {
 	try {
 		while (allowed_to_run) {
-			Event event = events.blocking_pop();
-			protocol.send_event(socket_send, event.get_msg());
+			std::unique_ptr<Event> event = events.blocking_pop();
+			protocol.send_event(socket_send, event->get_msg());
 		}
 	} catch(const std::exception& e) {
 		syslog(LOG_ERR, "[%s:%i]: Error: %s", __FILE__, __LINE__, e.what());

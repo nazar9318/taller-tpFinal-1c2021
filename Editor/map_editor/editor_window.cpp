@@ -145,8 +145,8 @@ void MainWindow::connectItems() {
     connect(this->ui->bomb_area_a, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->bomb_area_b, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->bomb_area_c, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->terrorist_spawn, SIGNAL(pressed()), this, SLOT(selectItem()));
-    connect(this->ui->counter_spawn, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->T_spawn, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->C_spawn, SIGNAL(pressed()), this, SLOT(selectItem()));
 }
 
 void MainWindow::selectItem() {
@@ -162,6 +162,12 @@ bool MainWindow::isFloor() {
     return (is_base || is_bomb_zone || is_box);
 }
 
+QGraphicsPixmapItem* MainWindow::createSpawn() {
+    QPixmap pix(":/resources/" + this->dragged + ".png");
+    QPixmap pixmap = pix.scaled(QSize(32, 32));
+    return new QGraphicsPixmapItem(pixmap);
+}
+
 QGraphicsPixmapItem* MainWindow::createFloor() {
     QPixmap pix(":/resources/" + this->dragged + ".png");
     QPixmap pixmap = pix.scaled(QSize(64, 64));
@@ -174,6 +180,9 @@ QGraphicsPixmapItem* MainWindow::createPlaceable() {
 }
 
 QGraphicsPixmapItem* MainWindow::createNewItem() {
+    if (this->dragged.toStdString().find("spawn") != std::string::npos) {
+        return createSpawn();
+    }
     return isFloor() ? createFloor() : createPlaceable();
 }
 

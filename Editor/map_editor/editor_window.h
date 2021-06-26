@@ -38,6 +38,7 @@ class MainWindow : public QMainWindow {
             QGraphicsPixmapItem* createFloor();
             QGraphicsPixmapItem* createPlaceable();
             QGraphicsPixmapItem* createNewItem();
+            QGraphicsPixmapItem* createSpawn();
 
     private slots:
         void on_save_clicked();

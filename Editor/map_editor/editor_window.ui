@@ -256,7 +256,7 @@
        <string>Bomb Area C</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="terrorist_spawn">
+     <widget class="QPushButton" name="T_spawn">
       <property name="geometry">
        <rect>
         <x>-2</x>
@@ -269,7 +269,7 @@
        <string>Terrorist Spawn</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="counter_spawn">
+     <widget class="QPushButton" name="C_spawn">
       <property name="geometry">
        <rect>
         <x>0</x>

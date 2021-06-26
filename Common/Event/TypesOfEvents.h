@@ -61,6 +61,24 @@ enum Direction: char {
 	STOP_MOVING
 };
 
+enum BlockName: char {
+	AZTEC,
+	INFIERNO,
+	DUST,
+	BOMB_AREA_A,
+	BOMB_AREA_B,
+	BOMB_AREA_C,
+	BOX_BLACK,
+	BOX_BROWN,
+	BOX_METAL,
+	BOX_WOOD_METAL,
+	BOX_WOOD,
+	GLOCK,
+	M3,
+	AWP,
+	AK47
+};
+
 
 
 // CONSTANTS FOR EVENTS

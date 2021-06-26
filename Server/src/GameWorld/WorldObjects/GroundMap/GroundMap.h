@@ -7,15 +7,16 @@
 #include "Block.h"
 #include "Position.h"
 #include "team.h"
-//#include "MapConfigParser.h"
+//#include "../YamlParser/MapConfigParser.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
 
 
 class GroundMap {
 		std::vector<Position> positions;
-		char x_size;
-		char y_size;
+		int x_size;
+		int y_size;
+
 	public:
 		GroundMap(const std::string& map_type);
 		void fill_blocks(b2World* world);

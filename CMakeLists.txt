@@ -63,6 +63,7 @@ include_directories(${PROJECT_SOURCE_DIR}/Server/src/MatchThread)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/ServerEvents)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/ServerEvents/Game)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/ServerEvents/Lobby)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/YamlParser)
 
 add_subdirectory("Server/src")
 

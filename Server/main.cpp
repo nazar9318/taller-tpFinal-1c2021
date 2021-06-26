@@ -4,6 +4,7 @@
 #include <syslog.h>
 #include "Server.h"
 #include "Configuration.h"
+#include "yaml-cpp/yaml.h"
 
 #define ERROR 1
 #define ARGC_EXPECTED 2

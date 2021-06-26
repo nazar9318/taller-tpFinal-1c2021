@@ -1,4 +1,4 @@
-/*#include "MapConfigParser.h"
+#include "MapConfigParser.h"
 
 MapParser::MapParser(const std::string &file_name) :
 nodes(YAML::LoadAllFromFile(file_name)), it(1) {
@@ -44,5 +44,4 @@ const WEAPON_TYPE MapParser::getWeaponType() {
     return NONE;
 }
 
-MapParser::~MapParser() {
-*/
+MapParser::~MapParser() {}

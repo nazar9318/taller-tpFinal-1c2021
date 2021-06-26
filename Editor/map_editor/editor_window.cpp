@@ -155,11 +155,34 @@ void MainWindow::selectItem() {
     button->show();
 }
 
+bool MainWindow::isFloor() {
+    bool is_base = (this->dragged.toStdString().find("base") != std::string::npos);
+    bool is_bomb_zone = (this->dragged.toStdString().find("bomb") != std::string::npos);
+    bool is_box = (this->dragged.toStdString().find("box") != std::string::npos);
+    return (is_base || is_bomb_zone || is_box);
+}
+
+QGraphicsPixmapItem* MainWindow::createFloor() {
+    QPixmap pix(":/resources/" + this->dragged + ".png");
+    QPixmap pixmap = pix.scaled(QSize(64, 64));
+    return new QGraphicsPixmapItem(pixmap);
+}
+
+QGraphicsPixmapItem* MainWindow::createPlaceable() {
+    QPixmap pix(":/resources/" + this->dragged + ".png");
+    return new QGraphicsPixmapItem(pix);
+}
+
+QGraphicsPixmapItem* MainWindow::createNewItem() {
+    return isFloor() ? createFloor() : createPlaceable();
+}
+
 void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
-    QGraphicsPixmapItem *item = new QGraphicsPixmapItem
-        (QPixmap(":/resources/" + this->dragged + ".png"));
+    QGraphicsPixmapItem *item = this->createNewItem();
     item->setFlag(QGraphicsItem::ItemIsMovable, true);
-    item->setPos(this->ui->map->mapToScene(event->pos()).x()-30, this->ui->map->mapToScene(event->pos()).y()-50);
+    int x = this->ui->map->mapToScene(event->pos()).x()-30;
+    int y = this->ui->map->mapToScene(event->pos()).y()-50;
+    item->setPos(x, y);
     item->setData(0, this->dragged);
     this->scene->addItem(item);
 }

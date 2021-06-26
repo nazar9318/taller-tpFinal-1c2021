@@ -34,6 +34,10 @@ class MainWindow : public QMainWindow {
             void saveObjects(YAML::Emitter &emitter);
             size_t width();
             size_t height();
+            bool isFloor();
+            QGraphicsPixmapItem* createFloor();
+            QGraphicsPixmapItem* createPlaceable();
+            QGraphicsPixmapItem* createNewItem();
 
     private slots:
         void on_save_clicked();

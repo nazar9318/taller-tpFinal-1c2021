@@ -7,7 +7,7 @@
 #include "Block.h"
 #include "Position.h"
 #include "team.h"
-#include "MapConfigParser.h"
+#include "MapParser.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
 
@@ -19,8 +19,7 @@ class GroundMap {
 	public:
 		GroundMap(const std::string& map_type);
 		void fill_blocks(b2World* world);
-
-		void get_limits(char& lenght, char& width);
+		void get_limits(int& lenght, int& width);
 		std::vector<Position*> get_blocks();
 		std::vector<Position*> get_terrorist_zone();
 		std::vector<Position*> get_counter_terrorist_zone();

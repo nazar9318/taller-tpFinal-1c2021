@@ -15,17 +15,12 @@ class Configuration {
 		Configuration();
 		~Configuration();
 		static void load_configuration(const std::string& file_path);
-		static std::list<std::string> get_maps() {
-			std::list<std::string> lista_prueba;
-			lista_prueba.push_back("mapa1");
-			lista_prueba.push_back("mapa2");
-			lista_prueba.push_back("mapa3");
-			return lista_prueba;
-		}
 		static YAML::Node yaml_file;
 		static std::string host;
 		static std::string port;
 		static int max_iterations_pop_events;
+
+		static int size_position;
 
 		static double character_life_points;
 		static double character_money;

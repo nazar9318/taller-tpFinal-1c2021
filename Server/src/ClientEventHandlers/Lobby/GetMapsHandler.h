@@ -5,6 +5,7 @@
 #include "Event.h"
 #include "Protocol.h"
 #include "SendMapsEvent.h"
+#include "MapParser.h"
 
 
 class GetMapsHandler {

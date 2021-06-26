@@ -9,7 +9,7 @@ std::string CF::port = yaml_file["port"].as<std::string>();
 int CF::max_iterations_pop_events = 
 				CF::yaml_file["max_iterations_pop_events"].as<int>();
 
-
+int CF::size_position = CF::yaml_file["size_position"].as<int>();
 double CF::character_life_points = CF::yaml_file["character_life_points"].as<double>();
 double CF::character_money = CF::yaml_file["character_money"].as<double>();
 int CF::bomb_clock_count = CF::yaml_file["bomb_clock_count"].as<int>();
@@ -72,6 +72,7 @@ void Configuration::load_configuration(const std::string& file_path) {
 	syslog(LOG_INFO, "[%s:%i]: Se cargo el port: %s"
 			, __FILE__, __LINE__, port.c_str());
 	max_iterations_pop_events = yaml_file["max_iterations_pop_events"].as<int>();
+	size_position = yaml_file["size_position"].as<int>();
 
 
 	character_life_points = yaml_file["character_life_points"].as<double>();

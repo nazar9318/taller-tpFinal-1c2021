@@ -2,6 +2,9 @@
 
 host: 'localhost'
 port: '8080'
+
+size_position: 64
+
 max_iterations_pop_events: 15
 character_life_points: 100
 character_money: 100

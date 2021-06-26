@@ -1,4 +1,4 @@
 #include "Block.h"
 
 
-int Block::length = 1;
+int Block::length = 64;

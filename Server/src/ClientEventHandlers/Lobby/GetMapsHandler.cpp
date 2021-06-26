@@ -10,7 +10,9 @@ void GetMapsHandler::handle(Event& event) {
 				 "tipo GetMaps", __FILE__, __LINE__);
 	}
 	// clientGetMapsEvent doesn't contain any msg. 
-	SendMapsEvent srv_event(CF::get_maps());
+	
+	MapParser parser;
+	SendMapsEvent srv_event(parser.get_maps());
 	protocol.send_event(communication_skt, srv_event.get_msg());
 }
 

@@ -21,15 +21,6 @@ enum ClientTypeEvent: char {
 	USER_NAME
 };
 
-enum WeaponType: char {
-	BOMB,
-	KNIFE,
-	GLOCK,
-	AK47,
-	M3,
-	AWP
-};
-
 enum ModelTypeEvent: char {
 	SEND_MAPS,//Loby
 	SEND_MATCHES,//Loby
@@ -61,7 +52,7 @@ enum Direction: char {
 	STOP_MOVING
 };
 
-enum BlockName: char {
+enum PositionType: char {
 	AZTEC,
 	INFIERNO,
 	DUST,
@@ -73,8 +64,15 @@ enum BlockName: char {
 	BOX_METAL,
 	BOX_WOOD_METAL,
 	BOX_WOOD,
+	TERRORIST_SPAWN,
+	COUNTER_SPAWN,
+	BOMB,
+	KNIFE,
+	GLOCK,
+	AK47,
+	M3,
+	AWP
 };
-
 
 
 // CONSTANTS FOR EVENTS

@@ -137,8 +137,6 @@ void MainWindow::createMatch(const QString& map_name) {
 }
 
 void MainWindow::update_players() {
-	syslog(LOG_INFO, "[%s:%i]: Haciendo update de players."
-			, __FILE__, __LINE__);
 	bool players_waiting = true;
     while(players_waiting) {
     	try {
@@ -165,8 +163,6 @@ void MainWindow::update_players() {
 					}
 			}
 		} catch (ExceptionEmptyQueue& e) {
-			syslog(LOG_INFO, "[%s:%i]: No hay jugadores para recargar."
-				, __FILE__, __LINE__);
 			players_waiting = false;
 		}	
     }
@@ -199,8 +195,6 @@ void MainWindow::on_joinButton_clicked() {
 
 
 void MainWindow::update_matches() {
-	syslog(LOG_INFO, "[%s:%i]: Haciendo update de matches."
-					, __FILE__, __LINE__);
 	ReceiveMatchesEvent recv_matches;
 	protocol.send_event(socket, recv_matches.get_msg());
 	Event matches_received = protocol.recv_event(socket);

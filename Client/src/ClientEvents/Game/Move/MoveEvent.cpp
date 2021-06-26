@@ -1,8 +1,8 @@
 #include "MoveEvent.h"
 
-MoveEvent::MoveEvent(Direction direction){
-	this->msg.push_back((char)ClientTypeEvent::MOVE); 
-	this->msg.push_back((char)direction);
+MoveEvent::MoveEvent(char direction){
+	this->msg.push_back(ClientTypeEvent::MOVE);
+	this->msg.push_back(direction);
 }
 
 MoveEvent::~MoveEvent(){}

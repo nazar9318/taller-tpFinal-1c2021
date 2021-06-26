@@ -9,7 +9,7 @@
 
 class MoveEvent: public Event{
 	public:
-		MoveEvent(Direction direction);
+		MoveEvent(char direction);
 		~MoveEvent();
 
 	private:

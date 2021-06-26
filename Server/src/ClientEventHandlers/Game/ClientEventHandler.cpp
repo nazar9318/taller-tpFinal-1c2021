@@ -15,7 +15,7 @@ void ClientEventHandler::handle(Event& event) {
 			{
 				attacker.handle(event, world);
 				break;
-			} 
+			}
 		case ClientTypeEvent::GRAB_WEAPON:
 			{
 				graber.handle(event, world);
@@ -26,12 +26,12 @@ void ClientEventHandler::handle(Event& event) {
 				droper.handle(event, world);
 				break;
 			}
-		case ClientTypeEvent::EXCHANGE_WEAPON:
+		case ClientTypeEvent::CHANGE_WEAPON:
 			{
 				exchanger.handle(event, world);
 				break;
 			}
-		case ClientTypeEvent::BUY_ARMOUR:
+		case ClientTypeEvent::BUY_WEAPON:
 			{
 				buyier.handle(event, world);
 				break;
@@ -40,13 +40,13 @@ void ClientEventHandler::handle(Event& event) {
 			{
 				quiter.handle(event, world);
 				break;
-			}	
+			}
 		default:
 			{
 				throw Exception("No one matches");
 			}
 	}
-} 
+}
 
 
 ClientEventHandler::~ClientEventHandler() {}

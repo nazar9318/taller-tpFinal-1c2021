@@ -13,9 +13,9 @@ void Client::execute(int argc, char** argv) {
 	if (game_started) {
 		Game game(model_events, client_events);
 		game.execute();
-		reciever.stop_running();
-		sender.stop_running();
 	}
+	reciever.stop_running();
+	sender.stop_running();
 }
 
 

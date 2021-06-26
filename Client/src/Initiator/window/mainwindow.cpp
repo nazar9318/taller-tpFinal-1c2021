@@ -30,6 +30,10 @@ MainWindow::MainWindow(Socket& skt, bool &started,
 	this->setStyleSheet("background-color: white;");
 	ui->stackedWidget->setCurrentIndex(USER_NAME_PAGE);
 	setWindowTitle(TITLE);
+	players_joined_timer = new QTimer(this);
+    connect(players_joined_timer, SIGNAL(timeout()), this, SLOT(update_players()));
+	matches_timer = new QTimer(this);
+    connect(matches_timer, SIGNAL(timeout()), this, SLOT(update_matches()));
 }
 
 
@@ -88,8 +92,6 @@ void MainWindow::on_createButton_clicked() {
 }
 
 
-
-
 void MainWindow::show_maps(Event& maps_received) {
 	std::vector<char> msg = maps_received.get_msg();
 	unsigned i = 1;
@@ -121,26 +123,65 @@ void MainWindow::createMatch(const QString& map_name) {
 	if (is_successful.get_type() == ModelTypeEvent::SUCCESSFUL_ENTRY) {
 		syslog(LOG_INFO, "[%s:%i]: Se creo la partida %s"
 			, __FILE__, __LINE__, match_name.c_str());
-		// seria la posicion 2 en el protocolo.
-		char id = is_successful.get_msg()[2];
+		// seria la posicion 2 en el protocolo. 
+		char id = is_successful.get_msg()[1];
 		PlayerInformation this_player(user_name, true);
-		//players.emplace(std::make_pair(id, this_player));
 		players[id] = std::move(this_player);
-		//players.insert({id, std::move(this_player)});
 	    ui->stackedWidget->setCurrentIndex(CREATE_MATCH_WAITING);
 	    receiver.start();
+	    players_joined_timer->start(1000);
 	} else {
 		show_error("error al intentar crear la partida."
 					"falta aclarar cual es el error");
 	}
 }
 
+void MainWindow::update_players() {
+	syslog(LOG_INFO, "[%s:%i]: Haciendo update de players."
+			, __FILE__, __LINE__);
+	bool players_waiting = true;
+    while(players_waiting) {
+    	try {
+    		Event model_event = model_events.pop();
+			switch (model_event.get_type()) {
+				case ModelTypeEvent::PLAYERS_ID_LIST:
+					{
+						update_players_list(model_event);
+						break;
+					}
+				case ModelTypeEvent::GAME_STARTED:
+					{
+						players_waiting = false;
+						sender.start();
+						players_joined_timer->stop();
+						game_started = true;
+						this->close();
+						break;
+					}
+				default:
+					{
+						syslog(LOG_CRIT, "[%s:%i]: Se recibe un tipo inesperado."
+						, __FILE__, __LINE__);	
+					}
+			}
+		} catch (ExceptionEmptyQueue& e) {
+			syslog(LOG_INFO, "[%s:%i]: No hay jugadores para recargar."
+				, __FILE__, __LINE__);
+			players_waiting = false;
+		}	
+    }
+}
+
+
+
 // POST: Al apretar el boton de iniciar la partida, se
 //       cierra qt para comenzar sdl.
 void MainWindow::on_pushButton_clicked() {
 	StartGameEvent starter;
 	protocol.send_event(socket, starter.get_msg());
-	bool not_started = true;
+
+	/*
+	bool not_started = true; 
 	while (not_started) {
 		Event model_event = model_events.blocking_pop();
 		switch (model_event.get_type()) {
@@ -163,12 +204,16 @@ void MainWindow::on_pushButton_clicked() {
 				, __FILE__, __LINE__);
 		}
 	}
+	*/
 }
 
 
 
-// POST: Se hace un reload de los jugadores en la
-//       lista.
+
+// POST: Se hace un reload de los jugadores en la 
+//       lista. 
+/*
+>>>>>>> Stashed changes
 void MainWindow::on_pushButton_2_clicked() {
     bool players_waiting = true;
     while(players_waiting) {
@@ -188,7 +233,7 @@ void MainWindow::on_pushButton_2_clicked() {
     }
 }
 
-
+*/
 
 /******************************************************/
 /******************SECUENCIA DE JOIN*******************/
@@ -199,6 +244,7 @@ void MainWindow::on_pushButton_2_clicked() {
 // POST: Cuando se aprieta en join, se reciben las partidas
 // actuales y se las agrega a la lista de partidas.
 void MainWindow::on_joinButton_clicked() {
+	/*
 	ReceiveMatchesEvent recv_matches;
 	protocol.send_event(socket, recv_matches.get_msg());
 	Event matches_received = protocol.recv_event(socket);
@@ -207,8 +253,26 @@ void MainWindow::on_joinButton_clicked() {
 		return;
 	}
 	show_matches(matches_received);
+	*/
+	matches_timer->start(1000);
 	ui->stackedWidget->setCurrentIndex(MATCHES_FOR_JOIN_PAGE);
 }
+
+
+void MainWindow::update_matches() {
+	syslog(LOG_INFO, "[%s:%i]: Haciendo update de matches."
+					, __FILE__, __LINE__);
+	ReceiveMatchesEvent recv_matches;
+	protocol.send_event(socket, recv_matches.get_msg());
+	Event matches_received = protocol.recv_event(socket);
+	if (matches_received.get_type() != ModelTypeEvent::SEND_MATCHES) {
+		show_error("error al intentar recibir las partidas actuales");
+		return;
+	}
+	clean_matches();
+	show_matches(matches_received);
+}
+
 
 
 void MainWindow::show_matches(Event& matches_received) {
@@ -237,7 +301,7 @@ void MainWindow::clean_matches() {
 		}
 	}
 }
-
+/*
 void MainWindow::on_reload_games_clicked() {
 	clean_matches();
 	ReceiveMatchesEvent recv_matches;
@@ -249,7 +313,7 @@ void MainWindow::on_reload_games_clicked() {
 	}
 	show_matches(matches_received);
 }
-
+*/
 
 // POST: Al apretar el boton de la partida en particular
 //       se une a la partida.
@@ -266,13 +330,12 @@ void MainWindow::joinMatch(const QString &text) {
 	char id = is_successful.get_msg()[1];
 	PlayerInformation this_player(user_name, true);
 	players[id] = std::move(this_player);
+	matches_timer->stop();
 	ui->stackedWidget->setCurrentIndex(JOIN_MATCH_WAITING);
 	syslog(LOG_INFO, "[%s:%i]: Se unio a la partida %s"
 			, __FILE__, __LINE__, match_name.c_str());
 
 	// bool not_started = true;
-	Event event = protocol.recv_event(socket);
-	update_players_list(event);
 
 	// while (not_started) {
 	// 	Event event = protocol.recv_event(socket);
@@ -297,6 +360,31 @@ void MainWindow::joinMatch(const QString &text) {
 	// 			, __FILE__, __LINE__);
 	// 	}
 	// }
+	receiver.start();
+	players_joined_timer->start();
+/*
+	bool not_started = true;
+	while (not_started) {
+		Event event = protocol.recv_event(socket);
+		switch (event.get_type()) {
+			case ModelTypeEvent::PLAYERS_ID_LIST:
+			{
+				update_players_list(event);
+				break;
+			}
+			case ModelTypeEvent::GAME_STARTED: 
+			{
+				receiver.start();
+				sender.start();
+				not_started = false;
+				this->close();
+				break;
+			}
+			default:
+				syslog(LOG_CRIT, "[%s:%i]: Se recibio un mensaje inesperado"
+				, __FILE__, __LINE__);
+		}
+	}*/
 }
 
 void MainWindow::update_players_list(Event& players_list) {

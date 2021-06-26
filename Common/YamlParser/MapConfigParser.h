@@ -1,6 +1,6 @@
 #ifndef MAP_PARSER_H
 #define MAP_PARSER_H
-
+/*
 #include <string>
 #include <iostream>
 #include "yaml-cpp/yaml.h"
@@ -31,4 +31,5 @@ class MapParser {
         ~MapParser();
 };
 
+*/
 #endif

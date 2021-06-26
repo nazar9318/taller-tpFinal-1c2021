@@ -7,7 +7,7 @@
 #include "Block.h"
 #include "Position.h"
 #include "team.h"
-#include "MapConfigParser.h"
+//#include "MapConfigParser.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
 

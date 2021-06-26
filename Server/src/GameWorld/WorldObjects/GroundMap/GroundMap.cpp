@@ -5,10 +5,10 @@ GroundMap::GroundMap(const std::string& map_type) {
 	//debo cargar el mapa con las posiciones
 	// leer de un .yaml y cargar el mapa aca. 
 	// hago lo siguiente para pruebas:
-	std::string file_name;
-	MapParser parser(file_name);
-	positions.push_back(Position(parser.getPosX(), parser.getPosY(), true,
-						false, false, false, parser.getWeaponType()));
+	//std::string file_name;
+	//MapParser parser(file_name);
+	//positions.push_back(Position(parser.getPosX(), parser.getPosY(), true,
+	//					false, false, false, parser.getWeaponType()));
 
 	positions.push_back(Position(0, 0, true, false, false, false, NONE));
 	positions.push_back(Position(0, 1, true, false, false, false, NONE));

@@ -13,6 +13,7 @@
 #include <QMessageBox>
 #include <map>
 #include <QSignalMapper>
+#include <QTimer>
 
 #include "PlayerInformation.h"
 #include "CreateMatchEvent.h"
@@ -46,6 +47,8 @@ private:
     ProtectedQueue<Event>& model_events;
     std::map<char, PlayerInformation>& players;
     std::string user_name;
+    QTimer* matches_timer;
+    QTimer* players_joined_timer;
 public:
     MainWindow(Socket& socket, bool& game_started,
             ModelRecieverThread& receiver,
@@ -65,7 +68,9 @@ private slots:
     void on_joinButton_clicked();
 
 	void on_buttonBox_accepted();
-	void on_reload_games_clicked();
+	//void on_reload_games_clicked();
+    void update_players();
+    void update_matches();
 
 private:
     Ui::MainWindow* ui;
@@ -75,12 +80,11 @@ private:
     void show_error(const QString& message);
     void show_error(const QString& message, const Event& event);
     void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
+    //void on_pushButton_2_clicked();
     void update_players_list(Event& players_list);
     void show_maps(Event& maps_received);
     void clean_matches();
     void show_matches(Event& matches_received);
-
 
 
 };

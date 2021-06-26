@@ -180,60 +180,9 @@ void MainWindow::on_pushButton_clicked() {
 	StartGameEvent starter;
 	protocol.send_event(socket, starter.get_msg());
 
-	/*
-	bool not_started = true; 
-	while (not_started) {
-		Event model_event = model_events.blocking_pop();
-		switch (model_event.get_type()) {
-			case ModelTypeEvent::PLAYERS_ID_LIST:
-			{
-				update_players_list(model_event);
-				//std::string player_name(&(model_event.get_msg()[1]));
-				//ui->players_create->addItem(QString::fromStdString(player_name));
-				break;
-			}
-			case ModelTypeEvent::GAME_STARTED:
-			{
-				not_started = false;
-				sender.start();
-				this->close();
-				break;
-			}
-			default:
-				syslog(LOG_CRIT, "[%s:%i]: Se recibio un mensaje inesperado"
-				, __FILE__, __LINE__);
-		}
-	}
-	*/
 }
 
 
-
-
-// POST: Se hace un reload de los jugadores en la 
-//       lista. 
-/*
->>>>>>> Stashed changes
-void MainWindow::on_pushButton_2_clicked() {
-    bool players_waiting = true;
-    while(players_waiting) {
-    	try {
-    		Event model_event = model_events.pop();
-			if (model_event.get_type() == ModelTypeEvent::PLAYERS_ID_LIST) {
-					update_players_list(model_event);
-			} else {
-				syslog(LOG_CRIT, "[%s:%i]: Se recibe un tipo inesperado."
-				, __FILE__, __LINE__);
-			}
-		} catch (ExceptionEmptyQueue& e) {
-			syslog(LOG_INFO, "[%s:%i]: No hay jugadores para recargar."
-				, __FILE__, __LINE__);
-			players_waiting = false;
-		}
-    }
-}
-
-*/
 
 /******************************************************/
 /******************SECUENCIA DE JOIN*******************/
@@ -244,16 +193,6 @@ void MainWindow::on_pushButton_2_clicked() {
 // POST: Cuando se aprieta en join, se reciben las partidas
 // actuales y se las agrega a la lista de partidas.
 void MainWindow::on_joinButton_clicked() {
-	/*
-	ReceiveMatchesEvent recv_matches;
-	protocol.send_event(socket, recv_matches.get_msg());
-	Event matches_received = protocol.recv_event(socket);
-	if (matches_received.get_type() != ModelTypeEvent::SEND_MATCHES) {
-		show_error("error al intentar recibir las partidas actuales");
-		return;
-	}
-	show_matches(matches_received);
-	*/
 	matches_timer->start(1000);
 	ui->stackedWidget->setCurrentIndex(MATCHES_FOR_JOIN_PAGE);
 }
@@ -301,19 +240,6 @@ void MainWindow::clean_matches() {
 		}
 	}
 }
-/*
-void MainWindow::on_reload_games_clicked() {
-	clean_matches();
-	ReceiveMatchesEvent recv_matches;
-	protocol.send_event(socket, recv_matches.get_msg());
-	Event matches_received = protocol.recv_event(socket);
-	if (matches_received.get_type() != ModelTypeEvent::SEND_MATCHES) {
-		show_error("error al intentar recibir las partidas actuales");
-		return;
-	}
-	show_matches(matches_received);
-}
-*/
 
 // POST: Al apretar el boton de la partida en particular
 //       se une a la partida.
@@ -335,56 +261,8 @@ void MainWindow::joinMatch(const QString &text) {
 	syslog(LOG_INFO, "[%s:%i]: Se unio a la partida %s"
 			, __FILE__, __LINE__, match_name.c_str());
 
-	// bool not_started = true;
-
-	// while (not_started) {
-	// 	Event event = protocol.recv_event(socket);
-	// 	switch (event.get_type()) {
-	// 		case ModelTypeEvent::PLAYERS_ID_LIST:
-	// 		{
-	// 			update_players_list(event);
-	// 			//std::string player_name(&(event.get_msg()[1]));
-	// 			//ui->players_join->addItem(QString::fromStdString(player_name));
-	// 			break;
-	// 		}
-	// 		case ModelTypeEvent::GAME_STARTED:
-	// 		{
-	// 			receiver.start();
-	// 			sender.start();
-	// 			not_started = false;
-	// 			this->close();
-	// 			break;
-	// 		}
-	// 		default:
-	// 			syslog(LOG_CRIT, "[%s:%i]: Se recibio un mensaje inesperado"
-	// 			, __FILE__, __LINE__);
-	// 	}
-	// }
 	receiver.start();
 	players_joined_timer->start();
-/*
-	bool not_started = true;
-	while (not_started) {
-		Event event = protocol.recv_event(socket);
-		switch (event.get_type()) {
-			case ModelTypeEvent::PLAYERS_ID_LIST:
-			{
-				update_players_list(event);
-				break;
-			}
-			case ModelTypeEvent::GAME_STARTED: 
-			{
-				receiver.start();
-				sender.start();
-				not_started = false;
-				this->close();
-				break;
-			}
-			default:
-				syslog(LOG_CRIT, "[%s:%i]: Se recibio un mensaje inesperado"
-				, __FILE__, __LINE__);
-		}
-	}*/
 }
 
 void MainWindow::update_players_list(Event& players_list) {

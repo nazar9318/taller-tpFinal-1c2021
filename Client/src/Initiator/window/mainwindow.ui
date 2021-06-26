@@ -36,11 +36,14 @@
      <widget class="QPushButton" name="createButton">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>30</y>
-        <width>89</width>
-        <height>25</height>
+        <x>120</x>
+        <y>190</y>
+        <width>201</width>
+        <height>111</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 255);</string>
       </property>
       <property name="text">
        <string>Crear</string>
@@ -49,11 +52,14 @@
      <widget class="QPushButton" name="joinButton">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>30</y>
-        <width>89</width>
-        <height>25</height>
+        <x>430</x>
+        <y>190</y>
+        <width>201</width>
+        <height>111</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 0);</string>
       </property>
       <property name="text">
        <string>Unirse</string>
@@ -84,19 +90,6 @@
        </rect>
       </property>
       <layout class="QVBoxLayout" name="matchsList"/>
-     </widget>
-     <widget class="QPushButton" name="reload_games">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>80</y>
-        <width>141</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Recargar partidas</string>
-      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="waitingCreator">
@@ -146,19 +139,6 @@
         <width>351</width>
         <height>341</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>410</y>
-        <width>351</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Recargar jugadores</string>
       </property>
      </widget>
     </widget>

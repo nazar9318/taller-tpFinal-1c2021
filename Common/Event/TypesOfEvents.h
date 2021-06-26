@@ -73,10 +73,6 @@ enum BlockName: char {
 	BOX_METAL,
 	BOX_WOOD_METAL,
 	BOX_WOOD,
-	GLOCK,
-	M3,
-	AWP,
-	AK47
 };
 
 

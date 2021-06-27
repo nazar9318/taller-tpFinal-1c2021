@@ -92,7 +92,7 @@ add_executable(server "Server/main.cpp")
 target_link_libraries(server server_classes common_classes yaml-cpp box2d)
 
 add_executable(client "Client/main.cpp")
-target_link_libraries(client client_classes common_classes SDL2 SDL2_image yaml-cpp)
+target_link_libraries(client client_classes common_classes SDL2 SDL2_image SDL2_ttf yaml-cpp)
 
 
 

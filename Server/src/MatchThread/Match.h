@@ -23,7 +23,6 @@
 #include "Event.h"
 #include "ErrorEvent.h"
 #include "StartGameHandler.h"
-#include "SendPlayersInfoEvent.h"
 #include "SendPlayersIdsEvent.h"
 #include "StepInformation.h"
 #include "SendStepInfoEvent.h"

@@ -8,6 +8,10 @@
 #include "GameMap.h"
 #include "ModelEventHandler.h"
 
+
+#include "Window.h"
+#include "Renderer.h"
+
 #include <SDL2/SDL.h>
 
 class Game {
@@ -16,6 +20,9 @@ class Game {
 	GameMap map;
 	ModelEventHandler handler;
 	bool is_running;
+
+	Window window;
+	Renderer renderer;
 
 	public:
 		Game(ProtectedQueue<Event>& model_events,

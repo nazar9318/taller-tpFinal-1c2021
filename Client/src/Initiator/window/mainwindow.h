@@ -67,9 +67,10 @@ private slots:
 
     void on_joinButton_clicked();
 
-	void on_buttonBox_accepted();
+    void on_buttonBox_accepted();
     void update_players();
     void update_matches();
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow* ui;
@@ -78,7 +79,6 @@ private:
     void wait_until_start();
     void show_error(const QString& message);
     void show_error(const QString& message, const Event& event);
-    void on_pushButton_clicked();
     void update_players_list(Event& players_list);
     void show_maps(Event& maps_received);
     void clean_matches();

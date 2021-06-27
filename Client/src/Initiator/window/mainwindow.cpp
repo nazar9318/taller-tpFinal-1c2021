@@ -123,7 +123,7 @@ void MainWindow::createMatch(const QString& map_name) {
 	if (is_successful.get_type() == ModelTypeEvent::SUCCESSFUL_ENTRY) {
 		syslog(LOG_INFO, "[%s:%i]: Se creo la partida %s"
 			, __FILE__, __LINE__, match_name.c_str());
-		// seria la posicion 2 en el protocolo. 
+		// seria la posicion 2 en el protocolo.
 		char id = is_successful.get_msg()[1];
 		PlayerInformation this_player(user_name, true);
 		players[id] = std::move(this_player);
@@ -149,6 +149,7 @@ void MainWindow::update_players() {
 					}
 				case ModelTypeEvent::GAME_STARTED:
 					{
+						syslog(LOG_CRIT, "[%s:%i]: Se inicia la partida.", __FILE__, __LINE__);
 						players_waiting = false;
 						sender.start();
 						players_joined_timer->stop();
@@ -159,12 +160,12 @@ void MainWindow::update_players() {
 				default:
 					{
 						syslog(LOG_CRIT, "[%s:%i]: Se recibe un tipo inesperado."
-						, __FILE__, __LINE__);	
+						, __FILE__, __LINE__);
 					}
 			}
 		} catch (ExceptionEmptyQueue& e) {
 			players_waiting = false;
-		}	
+		}
     }
 }
 
@@ -174,6 +175,7 @@ void MainWindow::update_players() {
 //       cierra qt para comenzar sdl.
 void MainWindow::on_pushButton_clicked() {
 	StartGameEvent starter;
+	syslog(LOG_CRIT, "[%s:%i]: Creador inicia la partida, por enviar evento.", __FILE__, __LINE__);
 	protocol.send_event(socket, starter.get_msg());
 
 }

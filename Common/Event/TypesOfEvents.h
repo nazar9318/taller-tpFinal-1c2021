@@ -28,11 +28,7 @@ enum ModelTypeEvent: char {
 	PLAYERS_ID_LIST,//Loby
 	SEND_FULL_MAP,//EventType, width,height,
 	GAME_STARTED,
-	PLAYERS_INFO,
-	// id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
-	SEND_ATTACK,
-	BOMB_STATE, //activada/descativada;tiempo;
-	ROUND_FINISHED,
+	STEP_INFO,// id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
 	GAME_FINISHED, //manda los resultados
 	ERROR
 };

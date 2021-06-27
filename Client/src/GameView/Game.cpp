@@ -6,7 +6,7 @@
 Game::Game(ProtectedQueue<Event>& model,
 		 ProtectedQueue<std::unique_ptr<Event>>& client):
 		  model_events(model), client_events(client),
-		  is_running(true) {
+		  is_running(true), window("Counter 2d", 800, 600, false), renderer(window){
 }
 
 
@@ -52,12 +52,6 @@ bool Game::handle_events() {
 		}
 	}
 	return true;
-	//poll de sdl hasta que no haya mas eventos.
-	// ir agregando a la cola.
-	// case KEY_UP:
-	// case K:
-	// std::unique_ptr<Event> event(new MoveEvent());
-	// client_events.push(event);
 }
 
 void Game::handle_key_press(SDL_Event& event){

@@ -15,7 +15,7 @@ void Matches::create(Socket& skt, const std::string& name,
 	std::lock_guard<std::mutex> l(m);
 	if (matches.find(name) != matches.end())
 		throw ExceptionInvalidCommand("La partida ya existe");
-	syslog(LOG_INFO, "[%s:%i]: Por crear hilo match con mapa %s"
+	syslog(LOG_INFO, "[%s:%i]: Por crear hilo match con mapa %s "
 					 "y nombre de match %s", __FILE__, __LINE__,
 					  map_type.c_str(), name.c_str());
 

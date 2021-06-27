@@ -8,11 +8,14 @@ MapParser::MapParser() {
 
 void MapParser::build_positions(const std::string &type,
 	std::vector<Position> &list, int &x, int &y) {
-	
+		syslog(LOG_INFO, "[%s:%i]: Por cargar la info del mapa %s"
+				, __FILE__, __LINE__, type.c_str());
 	nodes = YAML::LoadAllFromFile(MAPS_PATH + type + ".yml");
 	x = nodes[0]["width"].as<int>() * CF::size_position;
 	y = nodes[0]["height"].as<int>() * CF::size_position;
-	
+	syslog(LOG_INFO, "[%s:%i]: Mapa con largo %d y ancho %d"
+		, __FILE__, __LINE__, y, x);
+
 	for (auto it = nodes.begin() + 1; it != nodes.end(); ++it) {
 		const YAML::Node& obj = *it;
 		char type = get_type(obj["item"].as<std::string>());

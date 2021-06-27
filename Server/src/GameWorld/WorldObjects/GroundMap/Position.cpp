@@ -8,7 +8,6 @@ int Position::get_type() const {
 	return type_position;
 }
 
-
 int Position::get_x() const {
 	return x;
 }

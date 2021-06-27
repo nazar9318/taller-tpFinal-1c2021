@@ -11,6 +11,7 @@
 #include "team.h"
 #include "character.h"
 #include "Position.h"
+#include "StepInformation.h"
 
 
 class GameWorld {
@@ -20,6 +21,7 @@ class GameWorld {
 		GroundMap ground;
 		Team actual_team;
 		b2World* world;
+		StepInformation step_info;
 		// (id, character)
 		std::map<int, Character> characters; 
 	public:
@@ -30,7 +32,9 @@ class GameWorld {
 		
 		// false if the game is finished. 
 		bool simulate_step();
+		const StepInformation& get_step_info();
 		std::vector<char> get_players_info();
+
 		std::vector<Position*> get_ground_info();
 		void get_limits(int& x_size, int&y_size);
 		~GameWorld();

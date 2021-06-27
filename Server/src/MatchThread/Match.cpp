@@ -67,23 +67,23 @@ void Match::start_game() {
 
 
 void Match::game_loop() {
-	//auto  t_current = std::chrono::high_resolution_clock::now();
-	//auto t_after_step = std::chrono::high_resolution_clock::now(); 
-	//auto t_delta = std::chrono::high_resolution_clock::now();
+	using namespace std::chrono;
+	auto begin = steady_clock::now();
+	auto end = steady_clock::now(); 
+	double t_delta;
 
-	//double step_time = 1/30; // en segundos
+	double step_time = 1 / 30; // en segundos
 
-	
 	while (!finished) {
-		//t_current = std::chrono::high_resolution_clock::now();
+		begin = steady_clock::now();
 		handle_events();
 		finished = game_world.simulate_step();
 		std::shared_ptr<Event> players_info(
-				new SendPlayersInfoEvent(game_world.get_players_info()));
+				new SendStepInfoEvent(game_world.get_step_info()));
 		push_event(players_info);
-	//	t_after_step = std::chrono::high_resolution_clock::now();
-		//t_delta = t_after_step - t_current;
-		//std::this_thread::sleep_for(std::chrono::seconds(step_time - t_after_step + t_current));
+		end = steady_clock::now();
+		t_delta = duration<double>(end - begin).count();
+		std::this_thread::sleep_for(duration<double>(step_time - t_delta));
 	}
 }
 

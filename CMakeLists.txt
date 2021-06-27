@@ -58,6 +58,7 @@ include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld/WorldObjects/Bloc
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld/WorldObjects/Character)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld/WorldObjects/GroundMap)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld/WorldObjects/Weapon)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/GameWorld/StepInformation)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/InitialProcess)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/MatchThread)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/ServerEvents)

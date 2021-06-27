@@ -25,6 +25,8 @@
 #include "StartGameHandler.h"
 #include "SendPlayersInfoEvent.h"
 #include "SendPlayersIdsEvent.h"
+#include "StepInformation.h"
+#include "SendStepInfoEvent.h"
 
 #include "ClientEventHandler.h"
 

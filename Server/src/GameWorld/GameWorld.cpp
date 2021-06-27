@@ -54,7 +54,9 @@ std::vector<char> GameWorld::get_players_info() {
 }
 
 
-
+const StepInformation& GameWorld::get_step_info() { 
+	return step_info;
+}
 
 GameWorld::~GameWorld() {
 	delete world;

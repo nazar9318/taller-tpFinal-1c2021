@@ -25,6 +25,7 @@ class GroundMap {
 		std::vector<Position*> get_counter_terrorist_zone();
 		std::vector<Position*> get_bomb_zone();
 		std::vector<Position*> get_zone(Team team);
+		std::vector<Position*> get_drawable_positions();
 
 		~GroundMap();
 	

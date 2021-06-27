@@ -1,11 +1,11 @@
-#ifndef MAP_PARSER_H
-#define MAP_PARSER_H
+#ifndef _MAP_PARSER_H
+#define _MAP_PARSER_H
 
 #include <string>
+#include <list>
 #include <iostream>
 #include <vector>
 #include <dirent.h>
-
 
 #include "yaml-cpp/yaml.h"
 #include "Position.h"
@@ -23,8 +23,6 @@ class MapParser {
         ~MapParser();
     private:
         char get_type(const std::string& type);
-
-
 };
 
 #endif

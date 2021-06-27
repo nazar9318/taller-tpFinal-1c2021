@@ -31,15 +31,17 @@ void GameWorld::delete_player(int id) {
 	number_players--;
 }
 
-void GameWorld::start() {}
-
-// FALTA IMPLEMENTAR
-std::vector<char> GameWorld::get_all_info() {
-	std::vector<char> info; 
-	std::string s = "Aca deberia ir toda la info del mapa!";
-	std::copy(s.begin(), s.end(), std::back_inserter(info));
-	return info;
+void GameWorld::start() {
 }
+
+std::vector<Position*> GameWorld::get_ground_info() {
+	return ground.get_drawable_positions();
+}
+
+void GameWorld::get_limits(int& x, int& y) {
+	ground.get_limits(x,y);
+}
+
 
 bool GameWorld::simulate_step() {
 	return true;

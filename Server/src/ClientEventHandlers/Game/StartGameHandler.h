@@ -6,11 +6,14 @@
 #include "SendFullMapEvent.h"
 #include "Player.h"
 #include "GameWorld.h"
+#include "GameStartedEvent.h"
+#include "Position.h"
 
 class StartGameHandler{
 	public:
 		StartGameHandler();
-		void handle(Event& event, std::map<char, Player*>& players, GameWorld& game_world);
+		void handle(Event& event, std::map<char, Player*>& players,
+							 GameWorld& game_world);
 		~StartGameHandler();
 };
 

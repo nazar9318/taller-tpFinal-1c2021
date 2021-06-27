@@ -2,24 +2,8 @@
 #include <string>
 
 GroundMap::GroundMap(const std::string& map_type) {
-	//debo cargar el mapa con las posiciones
-	// leer de un .yaml y cargar el mapa aca.
-	// hago lo siguiente para pruebas:
-	//std::string file_name;
 	MapParser parser;
 	parser.build_positions(map_type, positions, x_size, y_size);
-	//positions.push_back(Position(parser.getPosX(), parser.getPosY(), true,
-	//					false, false, false, parser.getWeaponType()));
-/*
-	positions.push_back(Position(0, 0, true, false, false, false, NONE));
-	positions.push_back(Position(0, 1, true, false, false, false, NONE));
-	positions.push_back(Position(0, 2, true, false, false, false, NONE));
-	positions.push_back(Position(0, 3, false, false, false, true, NONE));
-	positions.push_back(Position(1, 0, false, false, false, true, NONE));
-	positions.push_back(Position(1, 1, false, true, false, false, NONE));
-	positions.push_back(Position(1, 2, false, true,  true, false, NONE));
-	x_size = 2;
-	y_size = 3;*/
 }
 
 void GroundMap::get_limits(int& lenght, int& width) {
@@ -47,8 +31,6 @@ void GroundMap::fill_blocks(b2World* world) {
 		}
 	}
 }
-
-
 
 
 // agrega los limites en el mundo de box2d.
@@ -138,6 +120,15 @@ std::vector<Position*> GroundMap::get_zone(Team team) {
 	if (team == Team::TERRORIST)
 		return get_terrorist_zone();
 	return get_counter_terrorist_zone();
+}
+
+std::vector<Position*> GroundMap::get_drawable_positions() {
+	std::vector<Position*> drawable_zone;
+	for (auto it = positions.begin(); it != positions.end(); ++it) {
+		if (it->is_bomb_zone() || it->is_block() || it->is_weapon())
+			drawable_zone.push_back(&(*it));
+	}
+	return drawable_zone;
 }
 
 GroundMap::~GroundMap() {}

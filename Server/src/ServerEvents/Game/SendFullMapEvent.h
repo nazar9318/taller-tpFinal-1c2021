@@ -5,11 +5,13 @@
 #include "Event.h"
 #include <vector>
 #include <string>
+#include "Position.h"
 
 
 class SendFullMapEvent: public Event {
 	public:
-		SendFullMapEvent(std::vector<char> map_info);
+		SendFullMapEvent(std::vector<Position*> map_info,
+			 int x_lenght, int y_lenght);
 		~SendFullMapEvent();
 	private:
 		SendFullMapEvent(const SendFullMapEvent &other) = delete;

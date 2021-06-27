@@ -3,8 +3,6 @@
 
 #define MAPS_PATH "../Editor/configs"
 
-
-
 MapParser::MapParser() {
 }
 
@@ -12,8 +10,8 @@ void MapParser::build_positions(const std::string &type,
 	std::vector<Position> &list, int &x, int &y) {
 	
 	nodes = YAML::LoadAllFromFile(MAPS_PATH + type + ".yml");
-	x = nodes[0]["width"].as<int>();
-	y = nodes[0]["height"].as<int>();
+	x = nodes[0]["width"].as<int>() * CF::size_position;
+	y = nodes[0]["height"].as<int>() * CF::size_position;
 	
 	for (auto it = nodes.begin() + 1; it != nodes.end(); ++it) {
 		const YAML::Node& obj = *it;
@@ -23,7 +21,6 @@ void MapParser::build_positions(const std::string &type,
 		list.push_back(Position(x, y, type));
 	}
 }
-
 
 std::list<std::string> MapParser::get_maps() {
 	std::list<std::string> maps_names;
@@ -87,6 +84,5 @@ char MapParser::get_type(const std::string& type) {
 			 		 __FILE__, __LINE__);
 	
 }
-
 
 MapParser::~MapParser() {}

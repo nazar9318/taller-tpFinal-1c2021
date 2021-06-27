@@ -41,12 +41,7 @@ void Match::run() {
 	} catch (std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what());
 	}
-	
 }
-
-
-
-
 
 
 void Match::start_game() {

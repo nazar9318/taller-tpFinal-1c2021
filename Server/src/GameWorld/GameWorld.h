@@ -10,6 +10,7 @@
 #include "../../libs/box2d/include/box2d/b2_math.h"
 #include "team.h"
 #include "character.h"
+#include "Position.h"
 
 
 class GameWorld {
@@ -30,7 +31,8 @@ class GameWorld {
 		// false if the game is finished. 
 		bool simulate_step();
 		std::vector<char> get_players_info();
-		std::vector<char> get_all_info();
+		std::vector<Position*> get_ground_info();
+		void get_limits(int& x_size, int&y_size);
 		~GameWorld();
 	
 	private:

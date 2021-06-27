@@ -1,15 +1,15 @@
 #include "MapParser.h"
 #include <syslog.h>
 
-#define MAPS_PATH "../Editor/configs"
+#define MAPS_PATH "../Editor/configs/"
 
 MapParser::MapParser() {
 }
 
 void MapParser::build_positions(const std::string &type,
 	std::vector<Position> &list, int &x, int &y) {
-		syslog(LOG_INFO, "[%s:%i]: Por cargar la info del mapa %s"
-				, __FILE__, __LINE__, type.c_str());
+		syslog(LOG_INFO, "[%s:%i]: Por cargar la info del mapa %s desde el path %s"
+				, __FILE__, __LINE__, type.c_str(), (MAPS_PATH + type + ".yml").c_str());
 	nodes = YAML::LoadAllFromFile(MAPS_PATH + type + ".yml");
 	x = nodes[0]["width"].as<int>() * CF::size_position;
 	y = nodes[0]["height"].as<int>() * CF::size_position;
@@ -85,7 +85,7 @@ char MapParser::get_type(const std::string& type) {
 	throw Exception("[%s:%i]: No existe"
 	 			"un tipo para esta posicion",
 			 		 __FILE__, __LINE__);
-	
+
 }
 
 MapParser::~MapParser() {}

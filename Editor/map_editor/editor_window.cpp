@@ -109,9 +109,25 @@ void MainWindow::on_load_clicked() {
         QGraphicsPixmapItem *item;
         const std::string &new_item_name = nodes[i]["item"].as<std::string>();
         QString q_new_item_name = QString::fromStdString(new_item_name);
-        item = new QGraphicsPixmapItem(QPixmap(":/resources/" + q_new_item_name + ".png"));
+        if (q_new_item_name.toStdString().find("spawn") != std::string::npos) {
+            QPixmap pix(":/resources/" + q_new_item_name + ".png");
+            QPixmap pixmap = pix.scaled(QSize(32, 32));
+            item = new QGraphicsPixmapItem(pixmap);
+        } else if (q_new_item_name.toStdString().find("box") != std::string::npos) {
+            QPixmap pix(":/resources/" + q_new_item_name + ".png");
+            QPixmap pixmap = pix.scaled(QSize(64, 64));
+            item = new QGraphicsPixmapItem(pixmap);
+        } else if (q_new_item_name.toStdString().find("bomb") != std::string::npos) {
+            QPixmap pix(":/resources/" + q_new_item_name + ".png");
+            QPixmap pixmap = pix.scaled(QSize(64, 64));
+            item = new QGraphicsPixmapItem(pixmap);
+        } else {
+            item = new QGraphicsPixmapItem(QPixmap(":/resources/" + q_new_item_name + ".png"));
+        }
         item->setFlag(QGraphicsItem::ItemIsMovable, true);
-        item->setPos((nodes[i]["position"][0].as<float>())*65+1, (nodes[i]["position"][1].as<float>())*65+1);
+        int x = (nodes[i]["position"][0].as<float>())*BASE_X+1;
+        int y = (nodes[i]["position"][1].as<float>())*BASE_Y+1;
+        item->setPos(x, y);
         item->setData(0, q_new_item_name);
         this->scene->addItem(item);
     }

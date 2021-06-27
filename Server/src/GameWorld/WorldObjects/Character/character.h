@@ -10,6 +10,7 @@
 #include "weapon_automatic.h"
 #include "team.h"
 #include "Configuration.h"
+#include "TypesOfEvents.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
 #include <vector>
@@ -31,6 +32,7 @@ class Character {
         std::vector<Weapon*> weapons;
         Weapon* current_weapon;
         b2Body* character_body;
+        Direction move_state;
 
     public:
         static float body_radius;
@@ -44,6 +46,9 @@ class Character {
 
         void add_body(char x, char y, b2World* world);
 
+        void set_move_state(Direction dir);
+
+        void apply_impulses();
 
         void takeDamage(double points);
 

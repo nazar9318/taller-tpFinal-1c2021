@@ -44,6 +44,16 @@ void GameWorld::get_limits(int& x, int& y) {
 
 
 bool GameWorld::simulate_step() {
+	float time_step = 1/30;
+	int velocity_iterations = 8;
+	int position_iterations = 3;
+	
+	for (auto it = characters.begin(); it != characters.end(); ++it) {
+		it->second.apply_impulses();
+	}
+	
+	world->Step(time_step, velocity_iterations, position_iterations);
+
 	return true;
 }
 std::vector<char> GameWorld::get_players_info() {

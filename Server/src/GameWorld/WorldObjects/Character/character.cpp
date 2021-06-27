@@ -26,6 +26,7 @@ Character::Character(Team team, b2World* world,
 	Position* position = available_positions[distrib(gen)];
 	position->occupy();
 	add_body(position->get_x(), position->get_y(), world);
+	move_state = Direction::STOP_MOVING;
 }
 
 void Character::add_body(char x, char y, b2World* world) {
@@ -44,6 +45,42 @@ void Character::add_body(char x, char y, b2World* world) {
 }
 
 
+void Character::set_move_state(Direction dir) {
+	move_state = dir;
+}
+
+void Character::apply_impulses() {
+	// Citamos iforce2d para esta funcion. 
+	if (life_points > 0) {
+		b2Vec2 vel = character_body->GetLinearVelocity();
+		b2Vec2 desired_vel(0.0, 0.0);
+		switch (move_state) {
+			case Direction::LEFT:
+				desired_vel.x = -120.0f;
+				desired_vel.y = 0.0;
+				break;
+			case Direction::RIGHT:
+				desired_vel.x = 120.0f;
+				desired_vel.y = 0.0;
+				break;
+			case Direction::UP:
+				desired_vel.x = 0.0;
+				desired_vel.y = 120.0f;
+				break;
+			case Direction::DOWN: 
+				desired_vel.x = 0.0;
+				desired_vel.y = 120.0f;
+				break;
+			case Direction::STOP_MOVING:
+				desired_vel.x = 0.0;
+				desired_vel.y = 0.0;
+		}
+		b2Vec2 vel_change = desired_vel - vel;
+		b2Vec2 impulse = character_body->GetMass() * vel_change;
+		character_body->ApplyLinearImpulse
+					(impulse, character_body->GetWorldCenter(), true);
+	}
+}
 
 
 

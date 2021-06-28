@@ -1,7 +1,4 @@
-#include "weapon_automatic.h"
-#include "character.h"
-#include <random>
-#include <chrono>
+#include "WeaponAutomatic.h"
 
 WeaponAutomatic::WeaponAutomatic() :
 Weapon(CF::ak47_price, CF::ak47_damage_min, CF::ak47_damage_max),

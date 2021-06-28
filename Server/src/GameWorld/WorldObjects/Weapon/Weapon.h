@@ -4,7 +4,7 @@
 #include <iostream>
 #include <list>
 #include <map>
-#include "team.h"
+#include "Team.h"
 #include "Block.h"
 #include "StepInformation.h"
 #include "../../libs/box2d/include/box2d/box2d.h"

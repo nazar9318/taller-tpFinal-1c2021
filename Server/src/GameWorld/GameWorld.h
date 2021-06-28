@@ -2,18 +2,19 @@
 #define _GAME_WORLD_H
 
 #include <mutex>
-#include "GroundMap.h"
-#include "ExceptionMatchFull.h"
 #include <vector>
 #include <list>
 #include <map>
+
+#include "GroundMap.h"
+#include "ErrorEvent.h"
+#include "ExceptionInvalidCommand.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
-#include "team.h"
-#include "character.h"
+#include "Team.h"
+#include "Character.h"
 #include "Position.h"
 #include "StepInformation.h"
-
 
 class GameWorld {
 		std::mutex m;

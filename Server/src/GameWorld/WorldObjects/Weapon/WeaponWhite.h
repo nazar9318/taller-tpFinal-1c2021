@@ -1,7 +1,8 @@
 #ifndef WEAPON_WHITE_H
 #define WEAPON_WHITE_H
 
-#include "weapon.h"
+#include "Character.h"
+#include "Weapon.h"
 #include <iostream>
 
 class WeaponWhite : public Weapon {

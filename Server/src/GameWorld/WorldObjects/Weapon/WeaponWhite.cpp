@@ -1,5 +1,4 @@
-#include "weapon_white.h"
-#include "character.h"
+#include "WeaponWhite.h"
 
 WeaponWhite::WeaponWhite() :
 Weapon(0, CF::knife_damage_min, CF::knife_damage_max) {}

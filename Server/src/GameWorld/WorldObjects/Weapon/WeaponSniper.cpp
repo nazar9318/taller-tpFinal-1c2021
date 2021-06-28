@@ -1,7 +1,5 @@
-#include "weapon_sniper.h"
-#include "character.h"
-#include <chrono>
-#include <iostream>
+#include "WeaponSniper.h"
+
 
 WeaponSniper::WeaponSniper() :
 Weapon(CF::awp_price, CF::awp_damage_min, CF::awp_damage_max),

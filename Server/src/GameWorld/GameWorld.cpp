@@ -15,7 +15,8 @@ GameWorld::GameWorld(const std::string& map_type):
 void GameWorld::add_player_if_not_full(char id) {
 	std::lock_guard<std::mutex> l(m);
 	if (number_players_allowed == number_players) 
-		throw ExceptionMatchFull("La partida esta completa"); 
+		throw ExceptionInvalidCommand("La partida esta completa",
+								 ServerError::MATCH_FULL); 
 	syslog(LOG_INFO, "[%s:%i]: Por agregar el jugador con id %d"
 					 " al GameWorld", __FILE__, __LINE__, id);
 	Character character(actual_team, world, ground.get_zone(actual_team));

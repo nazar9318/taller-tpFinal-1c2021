@@ -1,4 +1,4 @@
-#include "weapon.h"
+#include "Weapon.h"
 
 Weapon::Weapon(uint16_t price, uint16_t damage_min, uint16_t damage_max) :
 price(price), damage_min(damage_min), damage_max(damage_max)

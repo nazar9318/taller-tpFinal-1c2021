@@ -1,9 +1,9 @@
-#include "character.h"
+#include "Character.h"
 #include <algorithm>
 #include <random>
 #include <syslog.h>
 
-float Character::body_radius = 0.5;
+float Character::body_radius = 16;
 
 Character::Character(Team team, b2World* world,
 		 std::vector<Position*> available_positions)
@@ -13,8 +13,8 @@ Character::Character(Team team, b2World* world,
 	this->weapons.push_back(new WeaponPistol());
 	this->current_weapon = this->weapons[0];
 	if (available_positions.size() == 0) {
-		throw Exception("No hay suficientes posiciones"
-					" para ubicar a los jugadores");
+		throw ExceptionInvalidCommand("No hay suficientes posiciones"
+				" para ubicar a los jugadores", ServerError::MATCH_FULL);
 	}
 	syslog(LOG_INFO, "[%s:%i]: Por agregar un character al world"
 					 , __FILE__, __LINE__);

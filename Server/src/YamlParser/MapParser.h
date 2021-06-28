@@ -9,6 +9,7 @@
 
 #include "yaml-cpp/yaml.h"
 #include "Position.h"
+#include "Exception.h"
 #include "Configuration.h"
 
 class MapParser {

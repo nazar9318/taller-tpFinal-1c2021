@@ -5,7 +5,7 @@
 #include <string>
 
 
-// cito: Los metodos implementados en esta clase se basan
+// citamos: Los metodos implementados en esta clase se basan
 // en los archivos de ejemplo entregados por la catedra y los 
 // ejemplos de la documentacion oficial de C y C++. Obviamente con 
 // las pertinentes agregaciones y modificaciones para lograr

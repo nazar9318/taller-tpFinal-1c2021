@@ -1,7 +1,11 @@
 #ifndef WEAPON_AUTOMATIC_H
 #define WEAPON_AUTOMATIC_H
 
-#include "weapon.h"
+#include "Weapon.h"
+#include "Character.h"
+#include <random>
+#include <chrono>
+
 #include <iostream>
 #include <random>
 #include <unistd.h>

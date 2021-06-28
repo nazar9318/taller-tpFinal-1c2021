@@ -1,7 +1,10 @@
 #ifndef WEAPON_SHOTGUN_H
 #define WEAPON_SHOTGUN_H
 
-#include "weapon.h"
+#include "Character.h"
+#include <chrono>
+#include <iostream>
+#include "Weapon.h"
 #include <iostream>
 #include <random>
 

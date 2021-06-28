@@ -1,4 +1,4 @@
-#include "team.h"
+#include "Team.h"
 
 Team get_opposite(Team team) {
 	if (team == Team::TERRORIST)

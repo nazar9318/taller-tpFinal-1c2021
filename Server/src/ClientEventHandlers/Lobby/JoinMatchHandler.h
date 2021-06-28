@@ -6,7 +6,6 @@
 #include "Protocol.h"
 #include "ErrorEvent.h"
 #include "Matches.h"
-#include "ExceptionMatchFull.h"
 
 class JoinMatchHandler {
 		Protocol protocol;

@@ -1,13 +1,11 @@
-#include "weapon_pistol.h"
-#include "character.h"
-#include <chrono>
+#include "WeaponShotgun.h"
 
-WeaponPistol::WeaponPistol() :
-Weapon(CF::glock_price, CF::glock_damage_min, CF::glock_damage_max),
-accuracy(CF::glock_accuracy), distance_penalty(CF::glock_distance_penalty),
-ammo(CF::glock_ammo), max_distance(CF::glock_max_distance) {}
+WeaponShotgun::WeaponShotgun() :
+Weapon(CF::m3_price, CF::m3_damage_min, CF::m3_damage_max),
+accuracy(CF::m3_accuracy), distance_penalty(CF::m3_distance_penalty),
+ammo(CF::m3_ammo), max_distance(CF::m3_max_distance) {}
 
-void WeaponPistol::shoot(Character &character, uint16_t distance) {
+void WeaponShotgun::shoot(Character &character, uint16_t distance) {
     if (distance <= this->max_distance && this->ammo > 0) {
         std::mt19937_64 rng;
         uint64_t seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
@@ -24,6 +22,6 @@ void WeaponPistol::shoot(Character &character, uint16_t distance) {
     }
 }
 
-bool WeaponPistol::empty() { return (this->ammo == 0); }
+bool WeaponShotgun::empty() { return (this->ammo == 0); }
 
-WeaponPistol::~WeaponPistol() {}
+WeaponShotgun::~WeaponShotgun() {}

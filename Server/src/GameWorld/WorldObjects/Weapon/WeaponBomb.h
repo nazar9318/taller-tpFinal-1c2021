@@ -1,7 +1,8 @@
 #ifndef BOMB_H
 #define BOMB_H
 
-#include "weapon.h"
+#include "Weapon.h"
+#include "Configuration.h"
 #include <iostream>
 
 class Character;

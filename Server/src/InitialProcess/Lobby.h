@@ -8,7 +8,6 @@
 #include "Protocol.h"
 #include "Matches.h"
 #include "ExceptionInvalidCommand.h"
-#include "ExceptionMatchFull.h"
 #include "TypesOfEvents.h"
 #include "GetMapsHandler.h"
 #include "GetMatchesHandler.h"

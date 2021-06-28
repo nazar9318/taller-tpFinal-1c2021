@@ -8,9 +8,11 @@
 class Block {
 	b2Body* block_body;
 	public:
+		static int length; 
+		
 		Block(int x, int y, b2World* world);
 		~Block();
-		static int length; 
+		
 		Block(Block&&) = default;
         Block& operator = (Block&&) = default;
 	private:

@@ -1,8 +1,8 @@
 #include "Home.h"
 
 
-Home::Home() {}
-
+Home::Home() {
+}
 
 
 // PRE: El socket esta correctamente inicializado. 
@@ -11,7 +11,8 @@ Home::Home() {}
 void Home::add_client(Socket skt_client) {
 	Lobby* client_lobby = new Lobby(skt_client, matches);
 	if (!client_lobby) 
-		throw Exception("[%s:%i]: No se pudo hacer new de client_lobby", __FILE__, __LINE__);
+		throw Exception("[%s:%i]: No se pudo hacer new de client_lobby",
+		 				__FILE__, __LINE__);
 	syslog(LOG_INFO, "Por hacer el run del client.");
 	client_lobby->start();
 	clients_in_lobby.insert(client_lobby);

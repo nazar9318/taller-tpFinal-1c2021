@@ -1,6 +1,4 @@
 #include "EventReceiverThread.h"
-#include <queue>
-#include "ExceptionSocketClosed.h"
 
 EventReceiverThread::EventReceiverThread(Socket& skt,
 					int id, ProtectedQueue<Event>& queue):
@@ -10,12 +8,16 @@ EventReceiverThread::EventReceiverThread(Socket& skt,
 			" con id %d", __FILE__, __LINE__, id);
 }
 
+// POST: Fuerza la finalizacion de la ejecucion de run()
 void EventReceiverThread::stop_running() {
 	socket_recv.shutdown(SHUT_RD);
 	allowed_to_run = false;
 }
 
 
+// Descripcion: Recibe eventos a traves del procolo y los 
+//              encola en la cola de enventos enviados por
+//              el cliente. 
 void EventReceiverThread::run() {
 	try {
 		while (allowed_to_run) {
@@ -38,5 +40,4 @@ EventReceiverThread::~EventReceiverThread() {
 	this->join();
 	syslog(LOG_ERR, "[%s:%i]: Se hizo join de receiver"
 					, __FILE__, __LINE__);
-
 }

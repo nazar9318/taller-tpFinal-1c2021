@@ -13,8 +13,15 @@ class CreateMatchHandler {
 
 	public:
 		CreateMatchHandler(Socket& skt);
-		// returns true if create has success.
-		bool handle(Event& event, Matches& matches, std::string user_name);
+
+		// Descripcion: Crea una partida con las caracteristicas 
+		//              indicadas en event. 
+		// PRE: Event es del tipo CREATE.
+		// POST: retorna true si se creo una partida
+		//       de forma satisfactoria. 
+		bool handle(Event& event, Matches& matches,
+						 const std::string& user_name);
+
 		~CreateMatchHandler();
 	private:
 		CreateMatchHandler(const CreateMatchHandler &other) = delete;

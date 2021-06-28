@@ -34,9 +34,13 @@ enum ModelTypeEvent: char {
 };
 
 enum ServerError: char {
-	INVALID_COMMAND,
+	INVALID_COMMAND, //hay eliminar este.
 	MATCH_FULL,
-	NOT_ENOUGH_PLAYERS
+	NOT_ENOUGH_PLAYERS, 
+	MATCH_ALREADY_STARTED,
+	INVALID_TYPE_EVENT, 
+	MATCH_NOT_FOUND, 
+	MATCH_ALREADY_EXISTS
 };
 
 

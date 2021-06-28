@@ -2,8 +2,6 @@
 #define _SERVER_H
 
 #include <iostream>
-#include <string>
-#include "Socket.h"
 #include "Listener.h"
 #include "Configuration.h"
 
@@ -11,7 +9,7 @@ class Server {
 	Listener listener;
 
 	public:
-		explicit Server();
+		Server();
 
 		// POST: Lee de stdin hasta recibir una 'q' indicando
 		//       que debe finalizar.

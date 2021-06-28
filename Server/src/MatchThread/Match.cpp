@@ -1,23 +1,31 @@
 #include "Match.h"
 
+// POST: Crea una partida con el tipo de mapa correspondiente
+//       y agrega al jugador a la misma.
 Match::Match(Socket& socket, const std::string& map_type,
-			std::string player_name): match_started(false),
+			const std::string& player_name): match_started(false),
 			finished(false), last_id(0), 
 			game_world(map_type), handler(game_world) {
 	game_world.add_player_if_not_full(last_id);
 	Player* player = new Player(socket, last_id, player_name, to_process_events);
 	if (!player)
-		throw Exception("No se pudo alocar memoria");
+		throw Exception("No se pudo alocar memoria para el jugador");
 	players[last_id] = player;
 	last_id++;
 	syslog(LOG_INFO, "[%s:%i]: Se crea el match con mapa %s"
 					 , __FILE__, __LINE__, map_type.c_str());
 }
 
-void Match::join_player_if_not_full(Socket& skt, std::string player_name) {
+
+// PRE: La partida no comenzo y tiene lugar para un jugador mas.
+// POST: Une a la partida al jugador. 
+void Match::join_player_if_not_full(Socket& skt, 
+						const std::string& player_name) {
 	std::lock_guard<std::mutex> l(m);
-	if (match_started)
-		throw ExceptionMatchStarted("El juego ya comenzo");
+	if (match_started) {
+		throw ExceptionInvalidCommand("El juego ya comenzo",
+		 	ServerError::MATCH_ALREADY_STARTED);
+	}
 	game_world.add_player_if_not_full(last_id);
 	Player* player = new Player(skt, last_id, player_name, to_process_events);
 	if (!player) {
@@ -34,10 +42,15 @@ bool Match::is_finished() {
 	return finished;
 }
 
+
+// Descripcion: Comienza la partida una vez que se lee el mensaje 
+//              correspondiente mediante el protocolo. Implementa 
+//              el game-loop.
 void Match::run() {
 	try {
 		start_game();
 		game_loop();
+		stop_running();
 	} catch (std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what());
 	}
@@ -53,9 +66,8 @@ void Match::start_game() {
 		StartGameHandler game_starter;
 		try {
 			game_starter.handle(event, players, game_world);
-		} catch(NotEnoughPlayersException& e) {
-			std::shared_ptr<Event> error(
-					new ErrorEvent(ServerError::NOT_ENOUGH_PLAYERS));
+		} catch(ExceptionInvalidCommand& e) {
+			std::shared_ptr<Event> error(new ErrorEvent(e.get_type()));
 			push_event(error);
 			syslog(LOG_CRIT, "[%s:%i]: No hay jugadores suficientes"
 						, __FILE__, __LINE__);
@@ -71,7 +83,6 @@ void Match::game_loop() {
 	auto begin = steady_clock::now();
 	auto end = steady_clock::now(); 
 	double t_delta;
-
 	double step_time = 1 / 30; // en segundos
 
 	while (!finished) {
@@ -87,6 +98,8 @@ void Match::game_loop() {
 	}
 }
 
+// POST: Desencola los eventos recibidos por los clientes y los
+//       maneja. 
 void Match::handle_events() {
 	bool queue_not_empty = true;
 	int max_iterations = CF::max_iterations_pop_events;
@@ -102,13 +115,16 @@ void Match::handle_events() {
 	}
 }
 
+// POST: Envia el evento a todos los jugadores de la partida.
 void Match::push_event(std::shared_ptr<Event>& event) {
+	std::lock_guard<std::mutex> l(m);
 	for (auto it = players.begin(); it != players.end(); ++it) {
 			std::shared_ptr<Event> to_push = event;
 			it->second->push(to_push);
 	}
 }
 
+// POST: Fuerza la finalizacion de la partida.
 void Match::stop_running() {
 	syslog(LOG_INFO, "[%s:%i]: Por cerrar"
 					 " los hilos de los jugadores "
@@ -117,6 +133,7 @@ void Match::stop_running() {
 	for (auto it = players.begin(); it != players.end(); ++it) {
 		it->second->stop_running();
 		delete it->second;
+		players.erase(it->first);
 	}
 	syslog(LOG_INFO, "[%s:%i]: Se cerraron"
 					 " los hilos de los jugadores "

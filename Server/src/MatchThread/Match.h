@@ -9,15 +9,14 @@
 #include <chrono>
 #include <syslog.h>
 
-
 #include "Configuration.h"
 #include "Player.h"
 #include "Socket.h"
 #include "Thread.h"
 #include "ProtectedQueue.h"
 #include "Exception.h"
-#include "ExceptionMatchStarted.h"
-#include "NotEnoughPlayersException.h"
+#include "ExceptionInvalidCommand.h"
+#include "TypesOfEvents.h"
 
 #include "GameWorld.h"
 #include "Event.h"
@@ -41,22 +40,38 @@ class Match: public Thread {
 		ClientEventHandler handler;
 
 	public:
+		// POST: Crea una partida con el tipo de mapa correspondiente
+		//       y agrega al jugador a la misma. 
 		Match(Socket& socket, const std::string& map_type,
-			 std::string player_name);
+			 const std::string& player_name);
 
+		// PRE: La partida no comenzo y tiene lugar para un jugador mas.
+		// POST: Une a la partida al jugador. 
 		void join_player_if_not_full(Socket& skt,
-						 std::string player_name);
+					const std::string& player_name);
 
 		bool is_finished();
 
+		// Descripcion: Comienza la partida una vez que se lee el mensaje 
+		//              correspondiente mediante el protocolo. Implementa 
+		//              el game-loop.  
 		virtual void run() override;
+
+		// POST: Fuerza la finalizacion de la partida.  
 		void stop_running();
+
 		~Match();
 
 	private:
+
 		void start_game();
 		void game_loop();
+
+		// POST: Envia el evento a todos los jugadores de la partida.
 		void push_event(std::shared_ptr<Event>& event);
+		
+		// POST: Desencola los eventos recibidos por los clientes y los
+		//       maneja. 
 		void handle_events();
 
 		Match(const Match &other) = delete;

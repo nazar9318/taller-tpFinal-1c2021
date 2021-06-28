@@ -15,13 +15,16 @@ bool Lobby::is_finished() {
 	return finished;
 }
 
-
+// POST: Finaliza la conexion cliente-servidor. 
 void Lobby::stop_running() {
 	communication_skt.shutdown();
 	finished = true;
 }
 
-
+// POST: Inicia la comunicacion entre el cliente
+//       y el servidor. Termina cuando ocurre un 
+//       error o el cliente tiene asignada una 
+//       partida.  
 void Lobby::run() {
 	try {
 		handle_lobby();
@@ -33,7 +36,7 @@ void Lobby::run() {
 	finished = true;
 }
 
-
+// Descripcion: implementa la logica del metodo run. 
 void Lobby::handle_lobby() {
 	bool not_started = true;
 	std::string match_name;
@@ -67,13 +70,15 @@ void Lobby::handle_lobby() {
 			}
 			default:
 			{
-				ErrorEvent error(ServerError::INVALID_COMMAND);
+				ErrorEvent error(ServerError::INVALID_TYPE_EVENT);
 				protocol.send_event(communication_skt, error.get_msg());
 			}
 		}
 	}
 }
 
+// Descripcion: manda un mensaje al cliente esperando
+//              por un nombre de usuario y lo devuelve.
 std::string Lobby::get_user_name() {
 	Event event = protocol.recv_event(communication_skt);
 	if (event.get_type() != ClientTypeEvent::USER_NAME)
@@ -86,4 +91,5 @@ std::string Lobby::get_user_name() {
 	return user_name;
 }
 
-Lobby::~Lobby() {}
+Lobby::~Lobby() {
+}

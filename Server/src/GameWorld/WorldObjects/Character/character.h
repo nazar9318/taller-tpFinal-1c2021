@@ -27,36 +27,35 @@ class WeaponSniper;
 class WeaponAutomatic;
 
 class Character {
-    private:
-        double life_points;
-        double money;
-        Team team;
-        std::vector<Weapon*> weapons;
-        Weapon* current_weapon;
-        b2Body* character_body;
-        Direction move_state;
+	private:
+		double life_points;
+		double money;
+		Team team;
+		std::vector<Weapon*> weapons;
+		Weapon* current_weapon;
+		b2Body* character_body;
+		Direction move_state;
 
-    public:
-        static float body_radius;
-        Character(Team team, b2World* world,
-             std::vector<Position*> available_positions);
-        
-        Character(Character&&) = default;
+	public:
+		static float body_radius;
+		Character(Team team, b2World* world,
+			 std::vector<Position*> available_positions);
+		
+		Character(Character&&) = default;
 
-        Character& operator = (Character&&) = default;
+		Character& operator = (Character&&) = default;
 
+		void add_body(char x, char y, b2World* world);
 
-        void add_body(char x, char y, b2World* world);
+		void set_move_state(Direction dir);
 
-        void set_move_state(Direction dir);
-
-        void apply_impulses();
+		void apply_impulses();
 
 
 /*
 disparo pistola ---. 
 arma.attack(team.opposite(), pos.x, pos.y,
-     angulo, world, characters, stepinfo)
+	 angulo, world, characters, stepinfo)
 encuentra jugador/es
 jugador{id}.recieveattack(calculoquehace)
 
@@ -70,36 +69,36 @@ area escopeta
 
 
 
-        void takeDamage(double points);
+		void takeDamage(double points);
 
-        void changeCurrentWeapon(uint16_t pos);
+		void changeCurrentWeapon(uint16_t pos);
 
-        void buy(Weapon *new_weapon);
-        
-        void grab(Weapon *new_weapon);
+		void buy(Weapon *new_weapon);
+		
+		void grab(Weapon *new_weapon);
 
-        void grab(Bomb *bomb);
+		void grab(Bomb *bomb);
 
-        void place(Bomb *bomb);
+		void place(Bomb *bomb);
 
-        void deactivate(Bomb *bomb);
+		void deactivate(Bomb *bomb);
 
-        void removeSecondary();
+		void removeSecondary();
 
-        void take(uint16_t money);
+		void take(uint16_t money);
 
-        double getLifePoints();
+		double getLifePoints();
 
-        Team getTeam();
+		Team getTeam();
 
-        /*acá habría que incluir la distancia entre jugadores*/
-        //void attack(Character &enemy, Team my_team, uint16_t distance);
-        void attack(std::list<Block>& blocks,
-             std::map<char, Character>& characters, StepInformation& step_info);
-        ~Character();
-    private:
-        Character(const Character &other) = delete;
-        Character& operator=(const Character &other) = delete;
+		/*acá habría que incluir la distancia entre jugadores*/
+		//void attack(Character &enemy, Team my_team, uint16_t distance);
+		void attack(std::list<Block>& blocks,
+			 std::map<char, Character>& characters, StepInformation& step_info);
+		~Character();
+	private:
+		Character(const Character &other) = delete;
+		Character& operator=(const Character &other) = delete;
 
 };
 

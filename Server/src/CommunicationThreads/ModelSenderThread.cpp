@@ -1,6 +1,4 @@
 #include "ModelSenderThread.h"
-#include <syslog.h>
-
 
 ModelSenderThread::ModelSenderThread(Socket& skt,
 					ProtectedQueue<std::shared_ptr<Event>>& queue):
@@ -10,12 +8,15 @@ ModelSenderThread::ModelSenderThread(Socket& skt,
 					, __FILE__, __LINE__);
 }
 
+// POST: Fuerza la finalizacion de la ejecucion de run().
 void ModelSenderThread::stop_running() {
 	socket_send.shutdown(SHUT_WR);
 	allowed_to_run = false;
 	events.close();
 }
 
+// Descripcion: Desencola de la cola bloqueante y envia el 
+//              evento correspondiente a traves del protocolo. 
 void ModelSenderThread::run() {
 	try {
 		while (allowed_to_run) {

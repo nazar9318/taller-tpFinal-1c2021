@@ -6,7 +6,6 @@
 #include <syslog.h>
 
 #include "Event.h"
-// #include "ModelEvent.h"
 #include "ProtectedQueue.h"
 #include "Thread.h"
 #include "Socket.h"
@@ -21,8 +20,13 @@ class ModelSenderThread: public Thread {
 
 	public:
 		ModelSenderThread(Socket& skt,
-		 ProtectedQueue<std::shared_ptr<Event>>& events);
+		 	ProtectedQueue<std::shared_ptr<Event>>& events);
+		
+		// POST: Fuerza la finalizacion de la ejecucion de run()
 		void stop_running();
+
+		// Descripcion: Desencola de la cola bloqueante y envia el 
+		//              evento correspondiente a traves del protocolo. 
 		virtual void run() override;
 
 		~ModelSenderThread();

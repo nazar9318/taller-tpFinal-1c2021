@@ -8,15 +8,21 @@
 #include "Matches.h"
 #include "ExceptionMatchFull.h"
 
-
 class JoinMatchHandler {
 		Protocol protocol;
 		Socket& communication_skt;
 
 	public:
 		JoinMatchHandler(Socket& skt);
-		// returns true if join has success.
-		bool handle(Event& event, Matches& matches, std::string user_name);
+		
+		// Descripcion: Se une a  una partida con las  
+		//              caracteristicas indicadas en event. 
+		// PRE: Event es del tipo JOIN.
+		// POST: retorna true si se unio a una partida
+		//       de forma satisfactoria. 
+		bool handle(Event& event, Matches& matches, 
+					const std::string& user_name);
+		
 		~JoinMatchHandler();
 	private:
 		JoinMatchHandler(const JoinMatchHandler &other) = delete;

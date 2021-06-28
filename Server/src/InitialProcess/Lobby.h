@@ -26,13 +26,25 @@ class Lobby: public Thread {
 	public:
 		Lobby(Socket& skt, Matches& matches);
 		bool is_finished();
+
+		// POST: Finaliza la conexion cliente-servidor. 
 		void stop_running();
+
+		// POST: Inicia la comunicacion entre el cliente
+		//       y el servidor. Termina cuando ocurre un 
+		//       error o el cliente tiene asignada una 
+		//       partida.  
 		virtual void run() override;
 		~Lobby();
 
 	private:
+		// Descripcion: implementa la logica del metodo run. 
 		void handle_lobby();
+
+		// Descripcion: manda un mensaje al cliente esperando
+		//              por un nombre de usuario y lo devuelve.
 		std::string get_user_name();
+
 		Lobby(const Lobby &other) = delete;
 		Lobby& operator=(const Lobby &other) = delete;
 };

@@ -1,8 +1,11 @@
 #include "GetMatchesHandler.h"
 
-GetMatchesHandler::GetMatchesHandler(Socket& skt): communication_skt(skt) {
+GetMatchesHandler::GetMatchesHandler(Socket& skt):
+						 communication_skt(skt) {
 }
 
+// PRE: El evento es del tipo GET_MATCHES.
+// POST: Devuelve por el protocolo los matches. 
 void GetMatchesHandler::handle(Event& event, Matches& matches) {
 	if (event.get_type() != ClientTypeEvent::GET_MATCHES) {
 		throw Exception("[%s:%i]: Se esperaba un"

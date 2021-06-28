@@ -1,12 +1,17 @@
 #include "CreateMatchHandler.h"
 #include <syslog.h>
 
-CreateMatchHandler::CreateMatchHandler(Socket& skt): communication_skt(skt) {
+CreateMatchHandler::CreateMatchHandler(Socket& skt):
+							 communication_skt(skt) {
 }
 
-// returns true if create has success.
-bool CreateMatchHandler::handle(Event& event,
-				 Matches& matches, std::string user_name) {
+// Descripcion: Crea una partida con las caracteristicas 
+//              indicadas en event. 
+// PRE: Event es del tipo CREATE.
+// POST: retorna true si se creo una partida
+//       de forma satisfactoria. 
+bool CreateMatchHandler::handle(Event& event, Matches& matches,
+							 const std::string& user_name) {
 	if (event.get_type() != ClientTypeEvent::CREATE) {
 		throw Exception("[%s:%i]: Se esperaba un"
 				 "tipo Create", __FILE__, __LINE__);
@@ -25,11 +30,12 @@ bool CreateMatchHandler::handle(Event& event,
 		return true;
 	} catch(ExceptionInvalidCommand &e) {
 		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what()); 
-		ErrorEvent error(ServerError::INVALID_COMMAND);
+		ErrorEvent error(e.get_type());
 		protocol.send_event(communication_skt, error.get_msg());
 	}
 	return false;
 }
 
 
-CreateMatchHandler::~CreateMatchHandler() {}
+CreateMatchHandler::~CreateMatchHandler() {
+}

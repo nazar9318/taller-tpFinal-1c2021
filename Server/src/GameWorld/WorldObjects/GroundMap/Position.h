@@ -2,7 +2,6 @@
 #define _POSITION_H
 
 #include "ExceptionMatchFull.h"
-#include "WeaponType.h"
 #include "TypesOfEvents.h"
 #include <vector>
 

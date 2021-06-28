@@ -83,6 +83,40 @@ void Character::apply_impulses() {
 }
 
 
+void Character::attack(std::list<Block>& blocks,
+     std::map<char, Character>& characters, StepInformation& step_info) {
+	if (life_points > 0) {
+		current_weapon->attack(get_opposite(team), 
+			character_body, blocks, 
+			characters, step_info);
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+Character::~Character() {
+	for (const auto &weapon : this->weapons) {
+		delete weapon;
+	}
+}
+
+
+
+
+
+
+
 
 
 void Character::take(uint16_t money) {
@@ -173,18 +207,4 @@ void Character::attack(Character &enemy, Team my_team, uint16_t distance) {
 }
 */
 
-void Character::attack(std::list<Block>& blocks,
-     std::map<char, Character>& characters, StepInformation& step_info) {
-	if (life_points > 0) {
-		current_weapon->attack(get_opposite(team), 
-			character_body, blocks, 
-			characters, step_info);
 
-	}
-}
-
-Character::~Character() {
-	for (const auto &weapon : this->weapons) {
-		delete weapon;
-	}
-}

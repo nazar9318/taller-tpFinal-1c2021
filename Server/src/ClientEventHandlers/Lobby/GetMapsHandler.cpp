@@ -1,9 +1,11 @@
 #include "GetMapsHandler.h"
 
-GetMapsHandler::GetMapsHandler(Socket& skt): communication_skt(skt) {
+GetMapsHandler::GetMapsHandler(Socket& skt):
+					 communication_skt(skt) {
 }
 
-
+// PRE: El evento es del tipo GET_MAPS.
+// POST: Devuelve por el protocolo los mapas. 
 void GetMapsHandler::handle(Event& event) {
 	if (event.get_type() != ClientTypeEvent::GET_MAPS) {
 		throw Exception("[%s:%i]: Se esperaba un"
@@ -17,4 +19,5 @@ void GetMapsHandler::handle(Event& event) {
 }
 
 
-GetMapsHandler::~GetMapsHandler() {}
+GetMapsHandler::~GetMapsHandler() {
+}

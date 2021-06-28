@@ -12,6 +12,10 @@
 class StartGameHandler{
 	public:
 		StartGameHandler();
+
+		// PRE: El evento es del tipo START_GAME
+		// POST: Inicia la partida en el mundo y le envia a todos
+		//       los jugadores la informacion del estado del mundo.  
 		void handle(Event& event, std::map<char, Player*>& players,
 							 GameWorld& game_world);
 		~StartGameHandler();

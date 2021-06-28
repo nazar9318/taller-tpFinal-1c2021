@@ -26,8 +26,7 @@ std::list<Block> GroundMap::fill_blocks(b2World* world) {
 
 // agrega los limites en el mundo de box2d.
 void GroundMap::set_limits(b2World* world) {
-	int box_lenght = Block::length;
-	float half_box_length = (float)box_lenght / 2;
+	float half_box_length = (float)CF::size_position / 2;
 	b2Vec2 upper_left_vertex(-half_box_length,-half_box_length + y_size);
 	b2Vec2 upper_right_vertex(-half_box_length + x_size, -half_box_length + y_size);
 	b2Vec2 under_right_vertex(-half_box_length + x_size, -half_box_length);

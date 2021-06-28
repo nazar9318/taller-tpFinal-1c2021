@@ -1,6 +1,7 @@
 #ifndef _CREATE_MATCH_HANDLER_H
 #define _CREATE_MATCH_HANDLER_H
 
+#include <string>
 #include "TypesOfEvents.h"
 #include "Event.h"
 #include "Protocol.h"
@@ -12,7 +13,7 @@ class CreateMatchHandler {
 		Socket& communication_skt;
 
 	public:
-		CreateMatchHandler(Socket& skt);
+		explicit CreateMatchHandler(Socket& skt);
 
 		// Descripcion: Crea una partida con las caracteristicas 
 		//              indicadas en event. 

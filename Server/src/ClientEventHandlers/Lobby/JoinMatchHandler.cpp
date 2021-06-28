@@ -1,5 +1,6 @@
 #include "JoinMatchHandler.h"
 #include <syslog.h>
+#include <string>
 
 JoinMatchHandler::JoinMatchHandler(Socket& skt):
 						 communication_skt(skt) {

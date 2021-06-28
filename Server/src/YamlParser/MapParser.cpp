@@ -1,5 +1,8 @@
 #include "MapParser.h"
 #include <syslog.h>
+#include <string>
+#include <list>
+#include <vector>
 
 #define MAPS_PATH "../Editor/configs/"
 

@@ -1,5 +1,6 @@
 #include "CreateMatchHandler.h"
 #include <syslog.h>
+#include <string>
 
 CreateMatchHandler::CreateMatchHandler(Socket& skt):
 							 communication_skt(skt) {

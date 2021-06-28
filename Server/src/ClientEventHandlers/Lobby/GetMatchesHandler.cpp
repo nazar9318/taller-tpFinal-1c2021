@@ -17,4 +17,5 @@ void GetMatchesHandler::handle(Event& event, Matches& matches) {
 }
 
 
-GetMatchesHandler::~GetMatchesHandler() {}
+GetMatchesHandler::~GetMatchesHandler() {
+}

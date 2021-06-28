@@ -1,4 +1,5 @@
 #include "Match.h"
+#include <string>
 
 // POST: Crea una partida con el tipo de mapa correspondiente
 //       y agrega al jugador a la misma.
@@ -51,7 +52,7 @@ void Match::run() {
 		start_game();
 		game_loop();
 		stop_running();
-	} catch (std::exception& e) {
+	} catch(std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what());
 	}
 }
@@ -83,18 +84,17 @@ void Match::game_loop() {
 	auto begin = steady_clock::now();
 	auto end = steady_clock::now(); 
 	double t_delta;
-	double step_time = 1 / 30; // en segundos
 
 	while (!finished) {
 		begin = steady_clock::now();
 		handle_events();
-		finished = !game_world.simulate_step(step_time);
+		finished = !game_world.simulate_step();
 		std::shared_ptr<Event> players_info(
 				new SendStepInfoEvent(game_world.get_step_info()));
 		push_event(players_info);
 		end = steady_clock::now();
 		t_delta = duration<double>(end - begin).count();
-		std::this_thread::sleep_for(duration<double>(step_time - t_delta));
+		std::this_thread::sleep_for(duration<double>(CF::step_time - t_delta));
 	}
 }
 

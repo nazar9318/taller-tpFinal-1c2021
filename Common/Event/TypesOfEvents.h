@@ -12,29 +12,28 @@ enum ClientTypeEvent: char {
 	DEACTIVATE_BOMB,//Type
 	BUY_WEAPON,//type, weapon
 	BUY_BULLETS,//type, weapon, cantidad
-	START_GAME,
+	START_GAME, // Loby. Manda el cliente creador. 
 	QUIT_GAME,
-	GET_MAPS,
-	GET_MATCHES,
-	CREATE,
-	JOIN,
-	USER_NAME
+	GET_MAPS, // Loby
+	GET_MATCHES, // Loby
+	CREATE, // Loby
+	JOIN, // Loby
+	USER_NAME // Loby
 };
 
 enum ModelTypeEvent: char {
-	SEND_MAPS,//Loby
-	SEND_MATCHES,//Loby
-	SUCCESSFUL_ENTRY,//Loby
-	PLAYERS_ID_LIST,//Loby
-	SEND_FULL_MAP,//EventType, width,height,
-	GAME_STARTED,
-	STEP_INFO,// id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
-	GAME_FINISHED, //manda los resultados
+	SEND_MAPS, // Loby
+	SEND_MATCHES, // Loby
+	SUCCESSFUL_ENTRY, // Loby
+	PLAYERS_ID_LIST, // Loby
+	SEND_FULL_MAP, // EventType, width,height, x,y, type, ...
+	GAME_STARTED, // primer mensaje a todos, luego full map. 
+	STEP_INFO, // id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
+	GAME_FINISHED, //manda los resultados. FALTA USAR. 
 	ERROR
-};
+};	
 
 enum ServerError: char {
-	INVALID_COMMAND, //hay eliminar este.
 	MATCH_FULL,
 	NOT_ENOUGH_PLAYERS, 
 	MATCH_ALREADY_STARTED,

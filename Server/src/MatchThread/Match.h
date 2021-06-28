@@ -63,7 +63,6 @@ class Match: public Thread {
 		~Match();
 
 	private:
-
 		void start_game();
 		void game_loop();
 

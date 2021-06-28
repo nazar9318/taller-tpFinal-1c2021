@@ -12,7 +12,7 @@ class GetMapsHandler {
 		Socket& communication_skt;
 
 	public:
-		GetMapsHandler(Socket& skt);
+		explicit GetMapsHandler(Socket& skt);
 		
 		// PRE: El evento es del tipo GET_MAPS.
 		// POST: Devuelve por el protocolo los mapas. 

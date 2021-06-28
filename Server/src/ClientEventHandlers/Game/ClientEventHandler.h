@@ -11,7 +11,6 @@
 #include "DropWeaponHandler.h"
 #include "ExchangeWeaponHandler.h"
 #include "BuyArmourHandler.h"
-#include "QuitGameHandler.h"
 
 class ClientEventHandler{
 		MoveHandler mover;
@@ -20,7 +19,6 @@ class ClientEventHandler{
 		DropWeaponHandler droper; 
 		ExchangeWeaponHandler exchanger; 
 		BuyArmourHandler buyier;
-		QuitGameHandler quiter; 
 		GameWorld& world;
 		
 	public:

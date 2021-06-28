@@ -3,18 +3,19 @@
 
 
 GameWorld::GameWorld(const std::string& map_type):
-			 number_players_allowed(10), number_players(0),
-			 ground(map_type), actual_team(Team::COUNTER_ENEMY), 
-			 number_tics(0), round_finished(false), number_round(0) {
+			 number_players(0),ground(map_type), 
+			 actual_team(Team::COUNTER_ENEMY), 
+			 number_tics(0), number_round(0) {
 	b2Vec2 gravity(0, 0);
 	world = new b2World(gravity);
 	blocks = ground.fill_blocks(world);
+	fase_type = FaseType::INITIAL_FASE;
 }
 
 
 void GameWorld::add_player_if_not_full(char id) {
 	std::lock_guard<std::mutex> l(m);
-	if (number_players_allowed == number_players) 
+	if (CF::players_allowed == number_players) 
 		throw ExceptionInvalidCommand("La partida esta completa",
 								 ServerError::MATCH_FULL); 
 	syslog(LOG_INFO, "[%s:%i]: Por agregar el jugador con id %d"
@@ -29,12 +30,19 @@ void GameWorld::add_player_if_not_full(char id) {
 
 void GameWorld::delete_player(char id) {
 	std::lock_guard<std::mutex> l(m);
-	// delete player
+	characters.erase(id);
 	number_players--;
 }
 
 void GameWorld::start() {
-	//chequear que haya al menos 2 jugadores. 
+	/* COMENTO PARA PROBAR SDL MAS FACIL. 
+	if (number_players == 1) {
+		throw ExceptionInvalidCommand("Debe haber al menos dos"
+							"jugadores para empezar la partida",
+								ServerError::NOT_ENOUGH_PLAYERS);
+	}
+	*/
+	// asignar la bomba. 
 }
 
 std::vector<Position*> GameWorld::get_ground_info() {
@@ -46,39 +54,72 @@ void GameWorld::get_limits(int& x, int& y) {
 }
 
 
-bool GameWorld::simulate_step(float time_step) {
-	
-	//number_tics++;
+bool GameWorld::simulate_step() {
+	step_info.set_type(fase_type);
+	if (fase_type == FaseType::PLAYING) {
+		simulate_playing_step();
+		return true;
+	} else if (fase_type == FaseType::INITIAL_FASE) {
+		number_tics++;
+		int wait = (int)(CF::time_preparation - number_tics * CF::step_time);
+		step_info.set_waiting_time(wait);
+		if (wait <= 0) {
+			fase_type = FaseType::PLAYING;
+		}
+		return true;
+	} else {
+		number_round++;
+		charge_stats();
+		if (number_round == CF::number_rounds / 2) {
+			change_teams();
+		} else if (number_round == CF::number_rounds) {
+			return false;
+		}
+		prepare_new_round();
+		fase_type = FaseType::PLAYING;
+	} 
+	return true;
+}
 
-	step_info.clear();
+
+
+
+void GameWorld::change_teams() { 
+}
+
+
+void GameWorld::simulate_playing_step() { 
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		it->second.apply_impulses();
 		it->second.attack(blocks, characters, step_info);
 	}
 	
-	int velocity_iterations = 8;
-	int position_iterations = 3;
-	world->Step(time_step, velocity_iterations, position_iterations);
-	// round_finished = 
+	
+	world->Step(CF::step_time, CF::velocity_iterations,
+								 CF::position_iterations);
+	
+	
+	if (round_finished())
+		fase_type = FaseType::END_ROUND;
+
+}
+
+bool GameWorld::round_finished() {
 	// algun bando muerto. 
 	// bomba explota, bomba desactivada
-	for (auto it = characters.begin(); it != characters.end(); ++it) {
-		//it->second.add_information(step_info);
-	}
-	if (round_finished) {
-		number_round++;
-		if (number_round == 10) {
-			return false;
-		}
-	}
-	return true;
+	return false;
 }
-std::vector<char> GameWorld::get_players_info() {
-	std::vector<char> info; 
-	std::string s = "Players Infooo!";
-	std::copy(s.begin(), s.end(), std::back_inserter(info));
-	return info;
+
+void GameWorld::prepare_new_round() {
+
 }
+
+void GameWorld::charge_stats() {
+
+}
+
+
+
 
 
 const StepInformation& GameWorld::get_step_info() { 

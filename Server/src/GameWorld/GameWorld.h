@@ -8,6 +8,7 @@
 
 #include "GroundMap.h"
 #include "ErrorEvent.h"
+#include "Configuration.h"
 #include "ExceptionInvalidCommand.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
@@ -15,21 +16,20 @@
 #include "Character.h"
 #include "Position.h"
 #include "StepInformation.h"
+#include "FaseType.h"
 
 class GameWorld {
 		std::mutex m;
-		int number_players_allowed;
 		int number_players;
 		GroundMap ground;
 		Team actual_team;
 		b2World* world;
 		StepInformation step_info;
 		unsigned int number_tics;
-		bool round_finished;
 		int number_round;
-		// (id, character)
 		std::map<char, Character> characters; 
 		std::list<Block> blocks;
+		FaseType fase_type;
 	public:
 		GameWorld(const std::string& map_type);
 		void add_player_if_not_full(char id);
@@ -37,15 +37,19 @@ class GameWorld {
 		void start();
 		
 		// false if the game is finished. 
-		bool simulate_step(float time_step);
+		bool simulate_step();
 		const StepInformation& get_step_info();
-		std::vector<char> get_players_info();
 
 		std::vector<Position*> get_ground_info();
 		void get_limits(int& x_size, int&y_size);
 		~GameWorld();
 	
 	private:
+		bool round_finished();
+		void change_teams();
+		void simulate_playing_step();
+		void prepare_new_round();
+		void charge_stats();
 		GameWorld(const GameWorld &other) = delete;
 		GameWorld& operator=(const GameWorld &other) = delete;
 };

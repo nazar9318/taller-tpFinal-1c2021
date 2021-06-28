@@ -1,6 +1,7 @@
 #ifndef _JOIN_MATCH_HANDLER_H
 #define _JOIN_MATCH_HANDLER_H
 
+#include <string>
 #include "TypesOfEvents.h"
 #include "Event.h"
 #include "Protocol.h"
@@ -12,7 +13,7 @@ class JoinMatchHandler {
 		Socket& communication_skt;
 
 	public:
-		JoinMatchHandler(Socket& skt);
+		explicit JoinMatchHandler(Socket& skt);
 		
 		// Descripcion: Se une a  una partida con las  
 		//              caracteristicas indicadas en event. 

@@ -1,5 +1,6 @@
 #include "Matches.h"
 
+#include <list>
 #include <syslog.h>
 #include <string>
 

@@ -4,12 +4,22 @@
 
 YAML::Node CF::yaml_file = YAML::LoadFile("../Server/src/Configuration/Configuration.yaml");
 
-std::string CF::host = yaml_file["host"].as<std::string>();
 std::string CF::port = yaml_file["port"].as<std::string>();
 int CF::max_iterations_pop_events = 
 				CF::yaml_file["max_iterations_pop_events"].as<int>();
 
 int CF::size_position = CF::yaml_file["size_position"].as<int>();
+
+int CF::velocity_iterations = CF::yaml_file["velocity_iterations"].as<int>();
+int CF::position_iterations = CF::yaml_file["position_iterations"].as<int>();
+
+
+double CF::step_time = CF::yaml_file["step_time"].as<double>(); 
+double CF::time_preparation = CF::yaml_file["time_preparation"].as<double>();
+int CF::number_rounds = CF::yaml_file["number_rounds"].as<int>();
+int CF::players_allowed = CF::yaml_file["players_allowed"].as<int>();
+int CF::character_radius = CF::yaml_file["character_radius"].as<int>();
+
 double CF::character_life_points = CF::yaml_file["character_life_points"].as<double>();
 double CF::character_money = CF::yaml_file["character_money"].as<double>();
 int CF::bomb_clock_count = CF::yaml_file["bomb_clock_count"].as<int>();
@@ -67,13 +77,19 @@ Configuration::~Configuration() {}
 void Configuration::load_configuration(const std::string& file_path) {
 	yaml_file =	YAML::LoadFile("../../../" + file_path);
 	
-	host = yaml_file["host"].as<std::string>();
 	port = yaml_file["port"].as<std::string>();
 	syslog(LOG_INFO, "[%s:%i]: Se cargo el port: %s"
 			, __FILE__, __LINE__, port.c_str());
 	max_iterations_pop_events = yaml_file["max_iterations_pop_events"].as<int>();
 	size_position = yaml_file["size_position"].as<int>();
+	step_time = yaml_file["step_time"].as<double>(); 
+	time_preparation = yaml_file["time_preparation"].as<double>();
+	number_rounds = yaml_file["number_rounds"].as<int>();
+	players_allowed = yaml_file["players_allowed"].as<int>();
+	character_radius = yaml_file["character_radius"].as<int>();
 
+	velocity_iterations = yaml_file["velocity_iterations"].as<int>();
+	position_iterations = yaml_file["position_iterations"].as<int>();
 
 	character_life_points = yaml_file["character_life_points"].as<double>();
 	character_money = yaml_file["character_money"].as<double>();

@@ -36,11 +36,6 @@ void ClientEventHandler::handle(Event& event) {
 				buyier.handle(event, world);
 				break;
 			}
-		case ClientTypeEvent::QUIT_GAME:
-			{
-				quiter.handle(event, world);
-				break;
-			}
 		default:
 			{
 				throw Exception("No one matches");

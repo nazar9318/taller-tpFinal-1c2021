@@ -33,3 +33,6 @@
 
 build
 CMakeLists.txt.user
+cpplint.py
+execute.sh
+filter_options

@@ -12,7 +12,7 @@ class GetMatchesHandler {
 		Socket& communication_skt;
 
 	public:
-		GetMatchesHandler(Socket& skt);
+		explicit GetMatchesHandler(Socket& skt);
 		
 		// PRE: El evento es del tipo GET_MATCHES.
 		// POST: Devuelve por el protocolo los matches. 

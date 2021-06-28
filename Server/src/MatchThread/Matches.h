@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <mutex>
+#include <list>
 #include "Socket.h"
 #include "Match.h"
 #include "ExceptionInvalidCommand.h"

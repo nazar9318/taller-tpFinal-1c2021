@@ -2,6 +2,13 @@
 #define WEAPON_H
 
 #include <iostream>
+#include <list>
+#include <map>
+#include "team.h"
+#include "Block.h"
+#include "StepInformation.h"
+#include "../../libs/box2d/include/box2d/box2d.h"
+#include "../../libs/box2d/include/box2d/b2_math.h"
 
 class Character;
 
@@ -21,6 +28,10 @@ class Weapon {
         void beNotTaken();
 
         const bool taken();
+
+        virtual void attack(Team team, b2Body* character_body,
+             std::list<Block>& blocks, std::map<char, Character>& characters,
+              StepInformation& step_info);
 
         const uint16_t getPrice();
 

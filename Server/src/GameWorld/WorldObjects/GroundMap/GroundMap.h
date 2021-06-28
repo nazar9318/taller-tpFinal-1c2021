@@ -18,7 +18,7 @@ class GroundMap {
 
 	public:
 		GroundMap(const std::string& map_type);
-		void fill_blocks(b2World* world);
+		std::list<Block> fill_blocks(b2World* world);
 		void get_limits(int& lenght, int& width);
 		std::vector<Position*> get_blocks();
 		std::vector<Position*> get_terrorist_zone();

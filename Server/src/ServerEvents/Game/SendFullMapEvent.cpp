@@ -16,7 +16,7 @@ SendFullMapEvent::SendFullMapEvent(std::vector<Position*> map_info,
 
 	for (auto it = map_info.begin(); it != map_info.end(); ++it) {
 		int x_pos = (*it)->get_x();
-		int y_pos = (*it)->get_y();
+		int y_pos = -1 * (*it)->get_y();
 		char type = (*it)->get_type();
 
 		this->msg.push_back(*((char*)(&x_pos)));

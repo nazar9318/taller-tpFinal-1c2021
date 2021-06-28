@@ -5,6 +5,7 @@
 #include "GroundMap.h"
 #include "ExceptionMatchFull.h"
 #include <vector>
+#include <list>
 #include <map>
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
@@ -15,23 +16,27 @@
 
 
 class GameWorld {
-		std::mutex m; 
+		std::mutex m;
 		int number_players_allowed;
 		int number_players;
 		GroundMap ground;
 		Team actual_team;
 		b2World* world;
 		StepInformation step_info;
+		unsigned int number_tics;
+		bool round_finished;
+		int number_round;
 		// (id, character)
-		std::map<int, Character> characters; 
+		std::map<char, Character> characters; 
+		std::list<Block> blocks;
 	public:
 		GameWorld(const std::string& map_type);
-		void add_player_if_not_full(int id);
-		void delete_player(int id);
+		void add_player_if_not_full(char id);
+		void delete_player(char id);
 		void start();
 		
 		// false if the game is finished. 
-		bool simulate_step();
+		bool simulate_step(float time_step);
 		const StepInformation& get_step_info();
 		std::vector<char> get_players_info();
 

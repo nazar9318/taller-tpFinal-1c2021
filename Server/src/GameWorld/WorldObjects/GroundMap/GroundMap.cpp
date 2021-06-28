@@ -11,25 +11,16 @@ void GroundMap::get_limits(int& lenght, int& width) {
 	width = y_size;
 }
 
-void GroundMap::fill_blocks(b2World* world) {
+std::list<Block> GroundMap::fill_blocks(b2World* world) {
+	std::list<Block> blocks;
 	set_limits(world);
-	int box_lenght = Block::length;
-
 	for (auto it = positions.begin(); it != positions.end(); ++it) {
 		if (it->is_block()){
-		    b2BodyDef block_body_def;
-		    block_body_def.type = b2_staticBody;
-		    block_body_def.position.Set(it->get_x(), it->get_y()); 
-		    b2Body* block_body = world->CreateBody(&block_body_def);
-		    
-		    b2PolygonShape box_shape;
-		    box_shape.SetAsBox((float)box_lenght/2, (float)box_lenght/2);
-		    b2FixtureDef block_fixture_def;
-		    block_fixture_def.shape = &box_shape;
-		    block_fixture_def.density = 1;
-		    block_body->CreateFixture(&block_fixture_def);
+		    Block block(it->get_x(), it->get_y(), world);
+		    blocks.push_back(std::move(block)); 
 		}
 	}
+	return blocks;
 }
 
 

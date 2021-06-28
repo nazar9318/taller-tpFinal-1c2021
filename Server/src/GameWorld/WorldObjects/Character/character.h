@@ -9,7 +9,9 @@
 #include "weapon_shotgun.h"
 #include "weapon_automatic.h"
 #include "team.h"
+#include "StepInformation.h"
 #include "Configuration.h"
+#include "Block.h"
 #include "TypesOfEvents.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
@@ -50,6 +52,24 @@ class Character {
 
         void apply_impulses();
 
+
+/*
+disparo pistola ---. 
+arma.attack(team.opposite(), pos.x, pos.y,
+     angulo, world, characters, stepinfo)
+encuentra jugador/es
+jugador{id}.recieveattack(calculoquehace)
+
+80metros de ancho
+cuchi 45grad 5metros
+pistola normal busca en la recta ---->
+sniper recto
+area escopeta
+
+*/
+
+
+
         void takeDamage(double points);
 
         void changeCurrentWeapon(uint16_t pos);
@@ -73,8 +93,9 @@ class Character {
         Team getTeam();
 
         /*acá habría que incluir la distancia entre jugadores*/
-        void attack(Character &enemy, Team my_team, uint16_t distance);
-
+        //void attack(Character &enemy, Team my_team, uint16_t distance);
+        void attack(std::list<Block>& blocks,
+             std::map<char, Character>& characters, StepInformation& step_info);
         ~Character();
     private:
         Character(const Character &other) = delete;

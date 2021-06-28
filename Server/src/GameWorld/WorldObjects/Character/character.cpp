@@ -163,12 +163,23 @@ void Character::deactivate(Bomb *bomb) {
 		bomb->deactivate();
 	}
 }
-
+/*
 void Character::attack(Character &enemy, Team my_team, uint16_t distance) {
 	if (this->life_points > 0) {
 		if (enemy.getTeam() != this->getTeam()) {
 			this->current_weapon->shoot(enemy, distance);
 		}
+	}
+}
+*/
+
+void Character::attack(std::list<Block>& blocks,
+     std::map<char, Character>& characters, StepInformation& step_info) {
+	if (life_points > 0) {
+		current_weapon->attack(get_opposite(team), 
+			character_body, blocks, 
+			characters, step_info);
+
 	}
 }
 

@@ -77,7 +77,7 @@ void Match::game_loop() {
 	while (!finished) {
 		begin = steady_clock::now();
 		handle_events();
-		finished = game_world.simulate_step();
+		finished = !game_world.simulate_step(step_time);
 		std::shared_ptr<Event> players_info(
 				new SendStepInfoEvent(game_world.get_step_info()));
 		push_event(players_info);

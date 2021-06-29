@@ -95,7 +95,9 @@ void Character::attack(std::list<Block>& blocks,
 
 
 
-
+void Character::start_attacking() {
+	current_weapon->activate();
+}
 
 
 

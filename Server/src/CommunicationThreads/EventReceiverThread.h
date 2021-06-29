@@ -14,14 +14,14 @@
 #include "Event.h"
 
 class EventReceiverThread: public Thread {
-	int client_id;
+	char client_id;
 	Socket& socket_recv;
 	Protocol protocol;
 	ProtectedQueue<Event>& events;
 	std::atomic<bool> allowed_to_run;
 
 	public:
-		EventReceiverThread(Socket& skt, int id,
+		EventReceiverThread(Socket& skt, char id,
 						 ProtectedQueue<Event>& events);
 		
 		// POST: Fuerza la finalizacion de la ejecucion de run()

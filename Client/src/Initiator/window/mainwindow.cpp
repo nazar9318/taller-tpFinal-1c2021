@@ -154,6 +154,7 @@ void MainWindow::update_players() {
 						sender.start();
 						players_joined_timer->stop();
 						game_started = true;
+						//char self_id = model_event.get_msg()[1]; 
 						this->close();
 						break;
 					}

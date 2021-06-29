@@ -3,6 +3,7 @@
 
 #include "GameWorld.h"
 #include "Event.h"
+#include "TypesOfEvents.h"
 
 class MoveHandler {
 	public:

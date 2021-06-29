@@ -3,8 +3,9 @@
 MoveHandler::MoveHandler() {}
 
 void MoveHandler::handle(Event& event, GameWorld& world){
-  // std::cout << "Aca manejamos el evento: "<< msg[0] << '\n';
-	// lo unico que tengo que hacer es setear el Direction de cada jugador. 
+	// msg[1] es la direccion.  
+	world.get_character(event.get_id())
+		.set_move_state((Direction)(event.get_msg()[1]));
 }
 
 MoveHandler::~MoveHandler(){}

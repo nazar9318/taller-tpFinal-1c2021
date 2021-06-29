@@ -52,6 +52,8 @@ class Character {
 
 		void apply_impulses();
 
+		void start_attacking();
+
 
 /*
 disparo pistola ---. 

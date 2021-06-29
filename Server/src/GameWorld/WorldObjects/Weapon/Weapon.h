@@ -14,24 +14,35 @@ class Character;
 
 class Weapon {
     protected:
+        bool activated;
+        
+
+
         uint16_t price;
         uint16_t damage_min;
         uint16_t damage_max;
         bool with_owner;
+
         Weapon() = default;
 
     public:
         Weapon(uint16_t price, uint16_t damage_min, uint16_t damage_max);
+
+        void activate();
+
+        void deactivate();
+
+        virtual void attack(Team team, b2Body* character_body,
+             std::list<Block>& blocks, std::map<char, Character>& characters,
+              StepInformation& step_info);
+
+
 
         void beTaken();
 
         void beNotTaken();
 
         const bool taken();
-
-        virtual void attack(Team team, b2Body* character_body,
-             std::list<Block>& blocks, std::map<char, Character>& characters,
-              StepInformation& step_info);
 
         const uint16_t getPrice();
 

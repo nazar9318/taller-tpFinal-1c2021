@@ -34,6 +34,13 @@ void GameWorld::delete_player(char id) {
 	number_players--;
 }
 
+Character& GameWorld::get_character(char id) {
+	if (characters.find(id) == characters.end())
+		throw Exception("No hay ningun jugador con ese nombre");
+	return characters.at(id);
+}
+
+
 void GameWorld::start() {
 	/* COMENTO PARA PROBAR SDL MAS FACIL. 
 	if (number_players == 1) {

@@ -42,7 +42,10 @@ class GameWorld {
 
 		std::vector<Position*> get_ground_info();
 		void get_limits(int& x_size, int&y_size);
+		
+		Character& get_character(char id);
 		~GameWorld();
+
 	
 	private:
 		bool round_finished();

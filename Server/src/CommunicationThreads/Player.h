@@ -13,7 +13,7 @@
 
 class Player {
 	Socket socket;
-	int id;
+	char id;
 	std::string name;
 	EventReceiverThread receiver;
 	ProtectedQueue<std::shared_ptr<Event>> model_events;
@@ -23,7 +23,7 @@ class Player {
 		// POST: Crea un jugador con el id correspondiente. Lanza dos
 		//       hilos, uno en el que escucha mensajes a traves del 
 		//       protocolo y otro en el que envia mensajes. 
-		Player(Socket& socket, int player_id, const std::string& name,
+		Player(Socket& socket, char player_id, const std::string& name,
 					  ProtectedQueue<Event>& client_events);
 		
 		// POST: Encola el evento en la cola de eventos a enviar por el 

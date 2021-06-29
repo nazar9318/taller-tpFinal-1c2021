@@ -12,7 +12,7 @@ class Event {
 	protected:
 		std::vector<char> msg;
 		size_t size;
-		int client_id;
+		char client_id;
 
 	public:
 		Event(std::vector<char> msg, size_t size);
@@ -22,11 +22,11 @@ class Event {
 
 		Event& operator = (Event&&) = default;
 
-		void add_client_id(int id);
+		void add_client_id(char id);
 
 		char get_type();
 		size_t get_size();
-		int get_id();
+		char get_id();
 
 		std::vector<char> get_msg();
 

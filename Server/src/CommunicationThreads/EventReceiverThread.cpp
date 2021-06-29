@@ -1,7 +1,7 @@
 #include "EventReceiverThread.h"
 
 EventReceiverThread::EventReceiverThread(Socket& skt,
-					int id, ProtectedQueue<Event>& queue):
+					char id, ProtectedQueue<Event>& queue):
 					client_id(id), socket_recv(skt), events(queue),
 					allowed_to_run(true) {
 	syslog(LOG_INFO, "[%s:%i]: Se crea un receiver"

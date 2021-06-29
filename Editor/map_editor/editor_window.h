@@ -27,18 +27,18 @@ class MainWindow : public QMainWindow {
         ~MainWindow();
 
     private:
-            Ui::MainWindow *ui;
-            QGraphicsScene *scene;
-            QString dragged;
-            void saveBases(YAML::Emitter &emitter);
-            void saveObjects(YAML::Emitter &emitter);
-            size_t width();
-            size_t height();
-            bool isFloor();
-            QGraphicsPixmapItem* createFloor();
-            QGraphicsPixmapItem* createPlaceable();
-            QGraphicsPixmapItem* createNewItem();
-            QGraphicsPixmapItem* createSpawn();
+        Ui::MainWindow *ui;
+        QGraphicsScene *scene;
+        QString dragged;
+        void saveBases(YAML::Emitter &emitter);
+        void saveObjects(YAML::Emitter &emitter);
+        size_t width();
+        size_t height();
+        bool isFloor();
+        QGraphicsPixmapItem* createFloor();
+        QGraphicsPixmapItem* createPlaceable();
+        QGraphicsPixmapItem* createNewItem();
+        QGraphicsPixmapItem* createSpawn();
 
     private slots:
         void on_save_clicked();
@@ -52,5 +52,11 @@ class MainWindow : public QMainWindow {
         void selectItem();
 
         void mouseReleaseEvent(QMouseEvent*) override;
+
+        void mousePressEvent(QMouseEvent* event) override;
+
+        void mouseMoveEvent(QMouseEvent* event) override;
+
+        void on_button_clicked();
 };
 #endif // MAINWINDOW_H

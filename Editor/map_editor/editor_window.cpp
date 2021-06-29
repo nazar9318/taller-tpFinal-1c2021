@@ -6,9 +6,11 @@
 #include <QMouseEvent>
 #include <math.h>
 #include <cstdlib>
+#include <QGraphicsRectItem>
 
 #define BASE_X 65
 #define BASE_Y 65
+#define FLOOR_SIZE 64
 
 MainWindow::MainWindow(QWidget *parent) :
 QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -53,7 +55,7 @@ void MainWindow::saveBases(YAML::Emitter &emitter) {
             i++;
             YAML::Node coordinates;
             coordinates.push_back((int)item->pos().x()/BASE_X);
-            coordinates.push_back((int)item->pos().y()/BASE_X);
+            coordinates.push_back((int)item->pos().y()/BASE_Y);
             node["item"] = item->data(0).toString().toStdString();
             node["position"] = coordinates;
             emitter << node;
@@ -115,11 +117,11 @@ void MainWindow::on_load_clicked() {
             item = new QGraphicsPixmapItem(pixmap);
         } else if (q_new_item_name.toStdString().find("box") != std::string::npos) {
             QPixmap pix(":/resources/" + q_new_item_name + ".png");
-            QPixmap pixmap = pix.scaled(QSize(64, 64));
+            QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE));
             item = new QGraphicsPixmapItem(pixmap);
         } else if (q_new_item_name.toStdString().find("bomb") != std::string::npos) {
             QPixmap pix(":/resources/" + q_new_item_name + ".png");
-            QPixmap pixmap = pix.scaled(QSize(64, 64));
+            QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE));
             item = new QGraphicsPixmapItem(pixmap);
         } else {
             item = new QGraphicsPixmapItem(QPixmap(":/resources/" + q_new_item_name + ".png"));
@@ -163,10 +165,27 @@ void MainWindow::connectItems() {
     connect(this->ui->bomb_area_c, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->T_spawn, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->C_spawn, SIGNAL(pressed()), this, SLOT(selectItem()));
+    connect(this->ui->ak47_weapon, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->awp_weapon, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->glock_weapon, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->m3_weapon, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->base_aztec, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->base_dust, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->base_inferno, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->box_black, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->box_brown, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->box_metal, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->box_wood, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->box_wood_metal, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->bomb_area_a, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->bomb_area_b, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->bomb_area_c, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->T_spawn, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
+    connect(this->ui->C_spawn, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
 }
 
 void MainWindow::selectItem() {
-    QPushButton* button = (QPushButton*) sender();
+    QPushButton* button = (QPushButton*)sender();
     this->dragged = button->objectName();
     button->show();
 }
@@ -180,13 +199,13 @@ bool MainWindow::isFloor() {
 
 QGraphicsPixmapItem* MainWindow::createSpawn() {
     QPixmap pix(":/resources/" + this->dragged + ".png");
-    QPixmap pixmap = pix.scaled(QSize(32, 32));
+    QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE/2, FLOOR_SIZE/2));
     return new QGraphicsPixmapItem(pixmap);
 }
 
 QGraphicsPixmapItem* MainWindow::createFloor() {
     QPixmap pix(":/resources/" + this->dragged + ".png");
-    QPixmap pixmap = pix.scaled(QSize(64, 64));
+    QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE));
     return new QGraphicsPixmapItem(pixmap);
 }
 
@@ -202,11 +221,56 @@ QGraphicsPixmapItem* MainWindow::createNewItem() {
     return isFloor() ? createFloor() : createPlaceable();
 }
 
+void MainWindow::mouseMoveEvent(QMouseEvent* event) {
+    qDebug() << "kakakx";
+    QGraphicsRectItem* item1 = new QGraphicsRectItem(0, 0, 65, 65);
+    int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
+    int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
+    int x = x_0*BASE_X;
+    int y = y_0*BASE_Y;
+    item1->setPos(x, y);
+    item1->setData(0, this->dragged);
+    item1->setBrush(QBrush(Qt::red));
+    item1->setData(0, "color");
+    scene->addItem(item1);
+}
+
+void MainWindow::mousePressEvent(QMouseEvent* event) {
+    QGraphicsRectItem* item1 = new QGraphicsRectItem(0, 0, 65, 65);
+    int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
+    int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
+    int x = x_0*BASE_X;
+    int y = y_0*BASE_Y;
+    item1->setPos(x, y);
+    item1->setData(0, this->dragged);
+    item1->setBrush(QBrush(Qt::red));
+    item1->setData(0, "color");
+    scene->addItem(item1);
+}
+
+void MainWindow::on_button_clicked() {
+    for (auto item : this->scene->items()) {
+        std::string name(item->data(0).toString().toStdString());
+        if ((name.find("color") != std::string::npos)) {
+            QGraphicsPixmapItem *new_item = this->createNewItem();
+            new_item->setData(0, this->dragged);
+            new_item->setFlag(QGraphicsItem::ItemIsMovable, true);
+            //new_item->setFlag(QGraphicsItem::ItemIsSelectable, true);
+            new_item->setPos(item->pos().x()+1, item->pos().y()+1);
+            this->scene->addItem(new_item);
+            delete item;
+        }
+    }
+}
+
 void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
     QGraphicsPixmapItem *item = this->createNewItem();
     item->setFlag(QGraphicsItem::ItemIsMovable, true);
-    int x = this->ui->map->mapToScene(event->pos()).x()-30;
-    int y = this->ui->map->mapToScene(event->pos()).y()-50;
+    //item->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
+    int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
+    int x = x_0*BASE_X+1;
+    int y = y_0*BASE_Y+1;
     item->setPos(x, y);
     item->setData(0, this->dragged);
     this->scene->addItem(item);

@@ -6,12 +6,17 @@
 #include "Event.h"
 #include "Exception.h"
 
-class ModelEventHandler{
-		
-	public:
-		ModelEventHandler(); 
+#include "GameMap.h"
 
-		void handle(Event& event); 
+#include "ReciveMapHandler.h"
+
+class ModelEventHandler{
+	private:
+		ReciveMapHandler recive_map;
+	public:
+		ModelEventHandler();
+
+		void handle(Event& event, GameMap& map);
 
 		~ModelEventHandler();
 

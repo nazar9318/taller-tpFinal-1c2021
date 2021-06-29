@@ -6,7 +6,7 @@
 Game::Game(ProtectedQueue<Event>& model,
 		 ProtectedQueue<std::unique_ptr<Event>>& client):
 		  model_events(model), client_events(client),
-		  is_running(true), window("Counter 2d", 800, 600, false), renderer(window){
+		  is_running(true), window("Counter 2d", 800, 600, false), renderer(window), map(renderer){
 }
 
 
@@ -113,10 +113,11 @@ void Game::process_events() {
 	bool queue_not_empty = true;
 	int max_iterations = 15;//harcodeo, va en arch de config.
 	int i = 0;
+
 	while (queue_not_empty && max_iterations > i) {
 		try {
 			Event event = model_events.pop();
-			handler.handle(event);
+			handler.handle(event, map);
 			i++;
 		} catch(ExceptionEmptyQueue& e) {
 			queue_not_empty = false;

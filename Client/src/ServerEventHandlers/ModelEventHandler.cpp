@@ -3,22 +3,18 @@
 
 ModelEventHandler::ModelEventHandler() {}
 
-void ModelEventHandler::handle(Event& event) {
-	/*switch(event.get_type()) {
-		case :
-			{
-				//.handle(event);
-			}
-		case :
-			{
-				//.handle(event);
-			}	
-		default:
-			{
-				throw Exception("No one matches");
-			}
-	}*/
-} 
+void ModelEventHandler::handle(Event& event, GameMap& map) {
+
+  switch (event.get_type()) {
+    case ModelTypeEvent::SEND_FULL_MAP:
+      recive_map.handle(event, map);
+      syslog(LOG_INFO, "[%s:%i]: Manejo el evento recibir mapa", __FILE__, __LINE__);
+      break;
+
+    default:
+      break;
+  }
+}
 
 
 ModelEventHandler::~ModelEventHandler() {}

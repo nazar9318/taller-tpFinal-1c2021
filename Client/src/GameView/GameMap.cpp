@@ -2,8 +2,8 @@
 
 
 
-GameMap::GameMap() {}
+GameMap::GameMap(Renderer& renderer):renderer(renderer), tiles(renderer) {}
 
-void GameMap::create(Event& starter_event) {}
+void GameMap::create() {}
 
 GameMap::~GameMap() {}

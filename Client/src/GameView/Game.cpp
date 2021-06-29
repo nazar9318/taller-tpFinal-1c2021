@@ -29,7 +29,9 @@ void Game::loadMedia(){
 
 void Game::render(){
 
+	renderer.clearScreen();
 	map.renderGround();
+	// renderer.setDrawColor(0xFF,0xFF,0xFF,0xFF);
 	renderer.presentScreen();
 }
 

@@ -2,14 +2,14 @@
 
 
 
-GameMap::GameMap(Renderer& renderer):renderer(renderer), tiles_textures(renderer) {}
+GameMap::GameMap(Renderer& renderer):renderer(renderer), tile_container(TileContainer::getInstance()){}
 
 void GameMap::create() {}
 
 void GameMap::loadMedia(){
   syslog(LOG_INFO, "[%s:%i]: Por cargar las texturas de los Tiles",
                      __FILE__, __LINE__);
-  tiles_textures.loadMedia();
+  tile_container.loadMedia(renderer);
 }
 
 void GameMap::addTile(Tile tile){
@@ -28,7 +28,7 @@ void GameMap::renderGround(){
   SDL_Rect quad = {0};
 
   for (size_t i = 0; i < tiles.size(); i++) {
-    Texture& texture(tiles_textures[tiles[i].getType()]);
+    Texture& texture(tiles[i].getTexture());
     quad = tiles[i].getBox();
     renderer.render(texture.getTexture(), NULL, &quad);
   }

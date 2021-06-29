@@ -1,8 +1,5 @@
 #include "Game.h"
 
-
-
-
 Game::Game(ProtectedQueue<Event>& model,
 		 ProtectedQueue<std::unique_ptr<Event>>& client):
 		  model_events(model), client_events(client),
@@ -11,17 +8,31 @@ Game::Game(ProtectedQueue<Event>& model,
 
 
 
-
 void Game::execute() {
-	// GAME LOOP
-	while (is_running) {
-		is_running = handle_events();
-		process_events();
+	try{
+		loadMedia();
+		while (is_running) {
+			is_running = handle_events();
+			process_events();
 
-		render();
+			render();
+		}
+	} catch(std::exception& e){
+		syslog(LOG_CRIT, "[%s:%i]: Exception: %s", __FILE__, __LINE__,  e.what());
 	}
 
 }
+
+void Game::loadMedia(){
+	map.loadMedia();
+}
+
+void Game::render(){
+
+	map.renderGround();
+	renderer.presentScreen();
+}
+
 
 
 bool Game::handle_events() {
@@ -117,8 +128,8 @@ void Game::process_events() {
 	while (queue_not_empty && max_iterations > i) {
 		try {
 			Event event = model_events.pop();
-			syslog(LOG_INFO, "[%s:%i]: Pop de un evento del server",
-     							 __FILE__, __LINE__);
+			// syslog(LOG_INFO, "[%s:%i]: Pop de un evento del server",
+     	// 						 __FILE__, __LINE__);
 
 			handler.handle(event, map);
 			i++;
@@ -131,7 +142,6 @@ void Game::process_events() {
 void Game::update() {
 	is_running = false;
 }
-void Game::render() {}
 
 
 Game::~Game() {}

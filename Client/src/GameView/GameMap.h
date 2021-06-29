@@ -5,18 +5,33 @@
 #include "Event.h"
 
 #include "TileContainer.h"
+#include "Tile.h"
 
 class GameMap {
 	private:
 		Renderer& renderer;
-		TileContainer tiles;
+
+		TileContainer tiles_textures;
+		std::vector<Tile> tiles;
 
 		int map_width;
 		int map_height;
 
+		// Area a renderizar
+		int x_min = 0, x_max = 0, y_min = 0, y_max = 0;
+
 	public:
 		GameMap(Renderer& renderer);
 		void create();
+		void setSize(int& width, int& height);
+
+		void addTile(Tile tile);
+		void loadMedia();
+
+		/*------------Metodos para render--------------*/
+		void setRenderArea();
+
+		void renderGround();
 		~GameMap();
 
 	private:

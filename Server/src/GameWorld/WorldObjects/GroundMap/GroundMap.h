@@ -2,6 +2,7 @@
 #define _GROUND_MAP_H
 
 #include <vector>
+#include <syslog.h>
 #include <list>
 #include <string>
 #include "Block.h"
@@ -29,7 +30,7 @@ class GroundMap {
 		std::vector<Position*> get_drawable_positions();
 
 		~GroundMap();
-	
+
 	private:
 		void set_limits(b2World* world);
 		GroundMap(const GroundMap &other) = delete;

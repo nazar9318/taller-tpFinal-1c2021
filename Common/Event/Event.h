@@ -29,6 +29,7 @@ class Event {
 		virtual char get_id();
 
 		virtual std::vector<char> get_msg();
+		virtual char* get_data();
 
 		~Event();
 

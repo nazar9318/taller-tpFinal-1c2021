@@ -1,0 +1,38 @@
+width: 3
+height: 3
+---
+node: 0
+item: base_inferno
+position:
+  - 0
+  - 0
+---
+node: 1
+item: base_inferno
+position:
+  - 0
+  - 1
+---
+node: 1
+item: base_inferno
+position:
+  - 1
+  - 0
+---
+node: 0
+item: base_inferno
+position:
+  - 1
+  - 1
+---
+node: 0
+item: C_spawn
+position:
+  - 0
+  - 0
+---
+node: 1
+item: C_spawn
+position:
+  - 0
+  - 1

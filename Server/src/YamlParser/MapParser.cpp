@@ -9,16 +9,16 @@
 MapParser::MapParser() {
 }
 
-// PRE: El type debe ser alguno del MAPS_PATH. 
-// POST: Agrega todas las posiciones del mapa 
-//       de tipo type a la lista de posiciones. 
+// PRE: El type debe ser alguno del MAPS_PATH.
+// POST: Agrega todas las posiciones del mapa
+//       de tipo type a la lista de posiciones.
 //       Carga en x e y, las dimensiones del mapa.
 void MapParser::build_positions(const std::string &type,
 	std::vector<Position> &list, int &x, int &y) {
 	syslog(LOG_INFO, "[%s:%i]: Por cargar la info del mapa"
 					" %s desde el path %s", __FILE__, __LINE__,
 					 type.c_str(), (MAPS_PATH + type + ".yaml").c_str());
-	
+
 	nodes = YAML::LoadAllFromFile(MAPS_PATH + type + ".yaml");
 	x = nodes[0]["width"].as<int>() * CF::size_position;
 	y = nodes[0]["height"].as<int>() * CF::size_position;
@@ -26,6 +26,8 @@ void MapParser::build_positions(const std::string &type,
 		, __FILE__, __LINE__, y, x);
 
 	for (auto it = nodes.begin() + 1; it != nodes.end(); ++it) {
+		syslog(LOG_INFO, "[%s:%i]: Por leer un nodo"
+		, __FILE__, __LINE__);
 		const YAML::Node& obj = *it;
 		char type = get_type(obj["item"].as<std::string>());
 		int x = obj["position"][0].as<int>() * CF::size_position;
@@ -34,7 +36,7 @@ void MapParser::build_positions(const std::string &type,
 	}
 }
 
-// POST: Retorna los nombres de todos los mapas disponibles. 
+// POST: Retorna los nombres de todos los mapas disponibles.
 std::list<std::string> MapParser::get_maps() {
 	std::list<std::string> maps_names;
 	DIR* dir;
@@ -59,7 +61,7 @@ std::list<std::string> MapParser::get_maps() {
 
 char MapParser::get_type(const std::string& type) {
 	if (type == "base_inferno")
-				return PositionType::INFIERNO;
+				return PositionType::INFERNO;
 	if (type == "base_dust")
 				return PositionType::DUST;
 	if (type == "base_aztec")

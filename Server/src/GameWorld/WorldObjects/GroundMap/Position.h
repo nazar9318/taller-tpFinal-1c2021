@@ -12,7 +12,7 @@ class Position {
 
 	public:
 		Position(int x, int y, char type_position);
-		
+
 		int get_x() const;
 		int get_y() const;
 		int get_type() const;
@@ -20,6 +20,7 @@ class Position {
 		bool is_counter_terrorist_zone() const;
 		bool is_bomb_zone() const;
 		bool is_block() const;
+		bool is_ground() const;
 		bool is_weapon() const;
 		bool is_occupied() const;
 		void occupy();

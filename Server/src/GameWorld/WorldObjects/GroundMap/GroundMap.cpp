@@ -17,7 +17,7 @@ std::list<Block> GroundMap::fill_blocks(b2World* world) {
 	for (auto it = positions.begin(); it != positions.end(); ++it) {
 		if (it->is_block()){
 		    Block block(it->get_x(), it->get_y(), world);
-		    blocks.push_back(std::move(block)); 
+		    blocks.push_back(std::move(block));
 		}
 	}
 	return blocks;
@@ -32,36 +32,36 @@ void GroundMap::set_limits(b2World* world) {
 	b2Vec2 under_right_vertex(-half_box_length + x_size, -half_box_length);
 	b2Vec2 under_left_vertex(-half_box_length, -half_box_length);
 
-	
+
 	b2BodyDef body_def;
 	b2FixtureDef fixture_def;
 	body_def.type = b2_staticBody;
 	body_def.position.Set(0, 0); //sistema de referenca en 0, 0
-    
-	b2Body* static_body = world->CreateBody(&body_def);  
-	
+
+	b2Body* static_body = world->CreateBody(&body_def);
+
 	b2EdgeShape edge_shape;
 	edge_shape.SetTwoSided(upper_left_vertex, upper_right_vertex );
 	fixture_def.shape = &edge_shape;
-	static_body->CreateFixture(&fixture_def); 
+	static_body->CreateFixture(&fixture_def);
 
-	b2Body* static_body2 = world->CreateBody(&body_def);  
-	    
+	b2Body* static_body2 = world->CreateBody(&body_def);
+
 	edge_shape.SetTwoSided(upper_left_vertex, under_left_vertex );
 	fixture_def.shape = &edge_shape;
-	static_body2->CreateFixture(&fixture_def); 
+	static_body2->CreateFixture(&fixture_def);
 
-	b2Body* static_body3 = world->CreateBody(&body_def);  
-    
+	b2Body* static_body3 = world->CreateBody(&body_def);
+
 	edge_shape.SetTwoSided(upper_right_vertex, under_right_vertex );
 	fixture_def.shape = &edge_shape;
-	static_body3->CreateFixture(&fixture_def); 
+	static_body3->CreateFixture(&fixture_def);
 
-	b2Body* static_body4 = world->CreateBody(&body_def);  
-    
+	b2Body* static_body4 = world->CreateBody(&body_def);
+
 	edge_shape.SetTwoSided(under_right_vertex, under_left_vertex );
 	fixture_def.shape = &edge_shape;
-	static_body4->CreateFixture(&fixture_def); 
+	static_body4->CreateFixture(&fixture_def);
 }
 
 
@@ -73,8 +73,11 @@ void GroundMap::set_limits(b2World* world) {
 std::vector<Position*> GroundMap::get_blocks() {
 	std::vector<Position*> blocks;
 	for (auto it = positions.begin(); it != positions.end(); ++it) {
-		if (it->is_block())
+		if (it->is_block()){
 			blocks.push_back(&(*it));
+			syslog(LOG_INFO, "[%s:%i]: Cargo un bloque"
+			, __FILE__, __LINE__);
+		}
 	}
 	return blocks;
 }
@@ -115,7 +118,7 @@ std::vector<Position*> GroundMap::get_zone(Team team) {
 std::vector<Position*> GroundMap::get_drawable_positions() {
 	std::vector<Position*> drawable_zone;
 	for (auto it = positions.begin(); it != positions.end(); ++it) {
-		if (it->is_bomb_zone() || it->is_block() || it->is_weapon())
+		if (it->is_bomb_zone() || it->is_ground() || it->is_block() || it->is_weapon())
 			drawable_zone.push_back(&(*it));
 	}
 	return drawable_zone;

@@ -12,7 +12,7 @@ enum ClientTypeEvent: char {
 	DEACTIVATE_BOMB,//Type
 	BUY_WEAPON,//type, weapon
 	BUY_BULLETS,//type, weapon, cantidad
-	START_GAME, // Loby. Manda el cliente creador. 
+	START_GAME, // Loby. Manda el cliente creador.
 	QUIT_GAME,
 	GET_MAPS, // Loby
 	GET_MATCHES, // Loby
@@ -27,18 +27,18 @@ enum ModelTypeEvent: char {
 	SUCCESSFUL_ENTRY, // Loby
 	PLAYERS_ID_LIST, // Loby
 	SEND_FULL_MAP, // EventType, width,height, x,y, type, ...
-	GAME_STARTED, // primer mensaje a todos, luego full map. 
+	GAME_STARTED, // primer mensaje a todos, luego full map.
 	STEP_INFO, // id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
-	GAME_FINISHED, //manda los resultados. FALTA USAR. 
+	GAME_FINISHED, //manda los resultados. FALTA USAR.
 	ERROR
-};	
+};
 
 enum ServerError: char {
 	MATCH_FULL,
-	NOT_ENOUGH_PLAYERS, 
+	NOT_ENOUGH_PLAYERS,
 	MATCH_ALREADY_STARTED,
-	INVALID_TYPE_EVENT, 
-	MATCH_NOT_FOUND, 
+	INVALID_TYPE_EVENT,
+	MATCH_NOT_FOUND,
 	MATCH_ALREADY_EXISTS
 };
 
@@ -53,7 +53,7 @@ enum Direction: char {
 
 enum PositionType: char {
 	AZTEC,
-	INFIERNO,
+	INFERNO,
 	DUST,
 	BOMB_AREA_A,
 	BOMB_AREA_B,

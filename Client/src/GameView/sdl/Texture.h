@@ -38,6 +38,8 @@ class Texture {
 
     ~Texture();
 
+    Texture(Texture&& other) = default;
+    Texture& operator=(Texture&& other) = default;
 
 };
 

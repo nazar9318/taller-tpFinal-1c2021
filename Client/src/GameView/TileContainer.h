@@ -1,7 +1,9 @@
 #ifndef _TILE_CONTAINER_H
 #define _TILE_CONTAINER_H
 
+#include <syslog.h>
 #include <map>
+#include <string>
 #include "Renderer.h"
 #include "Texture.h"
 #include "TypesOfEvents.h"
@@ -19,7 +21,7 @@ class TileContainer {
 		void loadMedia();
 
 		/* Obtiene la textura correspondiente */
-		const Texture& operator[](const char id) const;
+		Texture& operator[](const char id);
 
 		~TileContainer();
 

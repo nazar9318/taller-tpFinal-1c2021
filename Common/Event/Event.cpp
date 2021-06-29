@@ -11,6 +11,10 @@ std::vector<char> Event::get_msg() {
 	return msg;
 }
 
+char* Event::get_data() {
+	return msg.data();
+}
+
 char Event::get_id(){
 	return client_id;
 }

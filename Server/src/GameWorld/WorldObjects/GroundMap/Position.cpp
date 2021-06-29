@@ -2,7 +2,7 @@
 
 Position::Position(int column, int row, char type) :
 	x(column), y(row * (-1)), type_position(type), occupied(false) {
-} 
+}
 
 int Position::get_type() const {
 	return type_position;
@@ -29,7 +29,7 @@ bool Position::is_bomb_zone() const {
 			(type_position == PositionType::BOMB_AREA_B) ||
 			(type_position == PositionType::BOMB_AREA_C));
 }
- 
+
 bool Position::is_block() const {
 	return ((type_position == PositionType::BOX_BLACK) ||
 			(type_position == PositionType::BOX_BROWN) ||
@@ -38,12 +38,18 @@ bool Position::is_block() const {
 			(type_position == PositionType::BOX_WOOD));
 }
 
+bool Position::is_ground() const {
+	return ((type_position == PositionType::DUST) ||
+			(type_position == PositionType::INFERNO) ||
+			(type_position == PositionType::AZTEC));
+}
+
 bool Position::is_weapon() const {
 	return ((type_position == PositionType::BOMB) ||
 			(type_position == PositionType::KNIFE) ||
 			(type_position == PositionType::AK47) ||
 			(type_position == PositionType::M3) ||
-			(type_position == PositionType::AWP));	
+			(type_position == PositionType::AWP));
 }
 
 bool Position::is_occupied() const {

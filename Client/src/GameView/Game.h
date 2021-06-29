@@ -11,6 +11,7 @@
 
 
 #include "Window.h"
+#include "SDLException.h"
 #include "Renderer.h"
 
 #include <SDL2/SDL.h>
@@ -33,6 +34,7 @@ class Game {
 		~Game();
 
 	private:
+		void loadMedia();
 		bool handle_events();
 		void process_events();
 		void update();

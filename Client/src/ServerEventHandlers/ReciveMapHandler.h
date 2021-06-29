@@ -4,6 +4,7 @@
 #include <vector>
 #include "Event.h"
 #include "GameMap.h"
+#include "Tile.h"
 
 class ReciveMapHandler {
 	public:

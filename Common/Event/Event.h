@@ -22,13 +22,13 @@ class Event {
 
 		Event& operator = (Event&&) = default;
 
-		void add_client_id(char id);
+		virtual void add_client_id(char id);
 
-		char get_type();
-		size_t get_size();
-		char get_id();
+		virtual char get_type();
+		virtual size_t get_size();
+		virtual char get_id();
 
-		std::vector<char> get_msg();
+		virtual std::vector<char> get_msg();
 
 		~Event();
 

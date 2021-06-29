@@ -21,6 +21,9 @@ void ModelSenderThread::run() {
 	try {
 		while (allowed_to_run) {
 			std::shared_ptr<Event> event = events.blocking_pop();
+			syslog(LOG_ERR, "[%s:%i]: Envio event: %d"
+					, __FILE__, __LINE__,event->get_type());
+
 			protocol.send_event(socket_send, event->get_msg());
 		}
 	} catch(const std::exception& e) {

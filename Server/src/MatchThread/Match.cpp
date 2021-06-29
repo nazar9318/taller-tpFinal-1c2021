@@ -50,6 +50,8 @@ bool Match::is_finished() {
 void Match::run() {
 	try {
 		start_game();
+		syslog(LOG_INFO, "[%s:%i]: Termina la etapa de start"
+						, __FILE__, __LINE__);		
 		game_loop();
 		stop_running();
 	} catch(std::exception& e) {
@@ -133,8 +135,8 @@ void Match::stop_running() {
 	for (auto it = players.begin(); it != players.end(); ++it) {
 		it->second->stop_running();
 		delete it->second;
-		players.erase(it->first);
 	}
+	players.clear();
 	syslog(LOG_INFO, "[%s:%i]: Se cerraron"
 					 " los hilos de los jugadores "
 				 	  , __FILE__, __LINE__);

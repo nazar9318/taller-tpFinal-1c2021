@@ -14,6 +14,9 @@ void ModelRecieverThread::run() {
 	try {
 		while (allowed_to_run) {
 			Event event = protocol.recv_event(socket_recv);
+			syslog(LOG_ERR, "[%s:%i]: Recibo event: %d"
+						, __FILE__, __LINE__,event.get_type());
+
 			events.push(event);
 		}
 	} catch(const std::exception& e) {

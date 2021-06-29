@@ -2,6 +2,7 @@
 #define _GAME_H
 
 #include <string>
+#include <syslog.h>
 #include <iostream>
 #include "Event.h"
 #include "ProtectedQueue.h"

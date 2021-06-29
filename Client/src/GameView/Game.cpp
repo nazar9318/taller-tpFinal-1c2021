@@ -117,6 +117,9 @@ void Game::process_events() {
 	while (queue_not_empty && max_iterations > i) {
 		try {
 			Event event = model_events.pop();
+			syslog(LOG_INFO, "[%s:%i]: Pop de un evento del server",
+     							 __FILE__, __LINE__);
+
 			handler.handle(event, map);
 			i++;
 		} catch(ExceptionEmptyQueue& e) {

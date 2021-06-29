@@ -13,7 +13,7 @@
 #define FLOOR_SIZE 64
 
 MainWindow::MainWindow(QWidget *parent) :
-QMainWindow(parent), ui(new Ui::MainWindow) {
+QMainWindow(parent), ui(new Ui::MainWindow), delay_cnt(0) {
     this->ui->setupUi(this);
     scene = new QGraphicsScene(this);
     this->ui->map->setScene(scene);
@@ -24,6 +24,7 @@ QMainWindow(parent), ui(new Ui::MainWindow) {
         scene->addLine(0, y, 1000, y, QPen(Qt::black));
     }
     this->connectItems();
+    this->ui->map->setMouseTracking(true);
 }
 
 void MainWindow::saveObjects(YAML::Emitter &emitter) {
@@ -222,27 +223,32 @@ QGraphicsPixmapItem* MainWindow::createNewItem() {
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent* event) {
-    qDebug() << "kakakx";
-    QGraphicsRectItem* item1 = new QGraphicsRectItem(0, 0, 65, 65);
-    int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
-    int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
-    int x = x_0*BASE_X;
-    int y = y_0*BASE_Y;
-    item1->setPos(x, y);
-    item1->setData(0, this->dragged);
-    item1->setBrush(QBrush(Qt::red));
-    item1->setData(0, "color");
-    scene->addItem(item1);
+    if (this->dragged.compare("color") == 0) {
+        delay_cnt++;
+        if (delay_cnt < 50) {
+            return;
+        }
+        delay_cnt = 0;
+        QGraphicsRectItem* item1 = new QGraphicsRectItem(0, 0, BASE_X, BASE_Y);
+        int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
+        int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
+        int x = x_0*BASE_X;
+        int y = y_0*BASE_Y;
+        item1->setPos(x, y);
+        item1->setBrush(QBrush(Qt::red));
+        item1->setData(0, "color");
+        scene->addItem(item1);
+    }
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* event) {
-    QGraphicsRectItem* item1 = new QGraphicsRectItem(0, 0, 65, 65);
+    this->dragged = "color";
+    QGraphicsRectItem* item1 = new QGraphicsRectItem(0, 0, BASE_X, BASE_Y);
     int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
     int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
     int x = x_0*BASE_X;
     int y = y_0*BASE_Y;
     item1->setPos(x, y);
-    item1->setData(0, this->dragged);
     item1->setBrush(QBrush(Qt::red));
     item1->setData(0, "color");
     scene->addItem(item1);
@@ -253,27 +259,31 @@ void MainWindow::on_button_clicked() {
         std::string name(item->data(0).toString().toStdString());
         if ((name.find("color") != std::string::npos)) {
             QGraphicsPixmapItem *new_item = this->createNewItem();
-            new_item->setData(0, this->dragged);
+            QPushButton* button = (QPushButton*)sender();
+            new_item->setData(0, button->objectName());
             new_item->setFlag(QGraphicsItem::ItemIsMovable, true);
             //new_item->setFlag(QGraphicsItem::ItemIsSelectable, true);
             new_item->setPos(item->pos().x()+1, item->pos().y()+1);
             this->scene->addItem(new_item);
+            this->scene->removeItem(item);
             delete item;
         }
     }
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
-    QGraphicsPixmapItem *item = this->createNewItem();
-    item->setFlag(QGraphicsItem::ItemIsMovable, true);
-    //item->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
-    int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
-    int x = x_0*BASE_X+1;
-    int y = y_0*BASE_Y+1;
-    item->setPos(x, y);
-    item->setData(0, this->dragged);
-    this->scene->addItem(item);
+    if (this->dragged.compare("color") != 0) {
+        QGraphicsPixmapItem *item = this->createNewItem();
+        item->setFlag(QGraphicsItem::ItemIsMovable, true);
+        //item->setFlag(QGraphicsItem::ItemIsSelectable, true);
+        int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
+        int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
+        int x = x_0*BASE_X+1;
+        int y = y_0*BASE_Y+1;
+        item->setPos(x, y);
+        item->setData(0, this->dragged);
+        this->scene->addItem(item);
+    }
 }
 
 MainWindow::~MainWindow() { delete ui; }

@@ -35,29 +35,4 @@ class TileContainer {
 		TileContainer& operator=(TileContainer&& other) = delete;
 };
 
-// class TileContainer {
-// 	private:
-// 		Renderer& renderer;
-// 		std::map<char, Texture> container;
-//
-// 	public:
-// 		TileContainer(Renderer& renderer);
-//
-// 		/* Carga las texturas de los tiles */
-// 		void loadMedia();
-//
-// 		/* Obtiene la textura correspondiente */
-// 		Texture& operator[](char id);
-// 		Texture& getTileTexture(char id);
-//
-// 		~TileContainer();
-//
-// 	private:
-// 		TileContainer(const TileContainer &other) = delete;
-// 		TileContainer& operator=(const TileContainer &other) = delete;
-// 		TileContainer(TileContainer&& other) = delete;
-// 		TileContainer& operator=(TileContainer&& other) = delete;
-// };
-
-
 #endif

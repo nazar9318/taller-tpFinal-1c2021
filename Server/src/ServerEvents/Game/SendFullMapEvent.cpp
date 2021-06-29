@@ -3,7 +3,7 @@
 SendFullMapEvent::SendFullMapEvent(std::vector<Position*> map_info,
 			 int x_lenght, int y_lenght) {
 	this->msg.push_back((char)ModelTypeEvent::SEND_FULL_MAP);
-
+/*
 	this->msg.push_back(*((char*)(&x_lenght)));
 	this->msg.push_back(*((char*)(&x_lenght) + 1));
 	this->msg.push_back(*((char*)(&x_lenght) + 2));
@@ -31,6 +31,7 @@ SendFullMapEvent::SendFullMapEvent(std::vector<Position*> map_info,
 
 		this->msg.push_back(type);
 	}
+*/
 }
 
 SendFullMapEvent::~SendFullMapEvent() {}

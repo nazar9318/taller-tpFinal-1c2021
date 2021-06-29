@@ -17,9 +17,9 @@ void MapParser::build_positions(const std::string &type,
 	std::vector<Position> &list, int &x, int &y) {
 	syslog(LOG_INFO, "[%s:%i]: Por cargar la info del mapa"
 					" %s desde el path %s", __FILE__, __LINE__,
-					 type.c_str(), (MAPS_PATH + type + ".yml").c_str());
+					 type.c_str(), (MAPS_PATH + type + ".yaml").c_str());
 	
-	nodes = YAML::LoadAllFromFile(MAPS_PATH + type + ".yml");
+	nodes = YAML::LoadAllFromFile(MAPS_PATH + type + ".yaml");
 	x = nodes[0]["width"].as<int>() * CF::size_position;
 	y = nodes[0]["height"].as<int>() * CF::size_position;
 	syslog(LOG_INFO, "[%s:%i]: Mapa con largo %d y ancho %d"
@@ -45,7 +45,7 @@ std::list<std::string> MapParser::get_maps() {
 	}
 	while ((entry = readdir(dir)) != NULL) {
 		std::string map_name(entry->d_name);
-		size_t pos = map_name.find(".yml");
+		size_t pos = map_name.find(".yaml");
 		if (pos != std::string::npos) {
 			syslog(LOG_INFO, "[%s:%i]: Se leyo el file %s"
 						, __FILE__, __LINE__, map_name.c_str());

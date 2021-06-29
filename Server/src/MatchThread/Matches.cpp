@@ -59,13 +59,16 @@ std::list<std::string> Matches::get_matches_info() {
 
 // POST: Elimina aquellas partidas que finalizaron.
 void Matches::clear_matches() {
+	std::map<std::string, Match*> cleaned;
 	for (auto it = matches.begin(); it != matches.end(); ++it) {
 		if (it->second->is_finished()) {
 			it->second->join();
 			delete it->second;
-			matches.erase(it->first);
+		} else {
+			cleaned.insert(*it);
 		}
 	}
+	matches.swap(cleaned);	
 }
 
 Matches::~Matches() {

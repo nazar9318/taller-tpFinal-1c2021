@@ -38,7 +38,7 @@ class GameWorld {
 		
 		// false if the game is finished. 
 		bool simulate_step();
-		const StepInformation& get_step_info();
+		StepInformation& get_step_info();
 
 		std::vector<Position*> get_ground_info();
 		void get_limits(int& x_size, int&y_size);

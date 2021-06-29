@@ -129,7 +129,7 @@ void GameWorld::charge_stats() {
 
 
 
-const StepInformation& GameWorld::get_step_info() { 
+StepInformation& GameWorld::get_step_info() { 
 	return step_info;
 }
 

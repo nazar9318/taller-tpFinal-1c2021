@@ -4,6 +4,8 @@
 #include "TypesOfEvents.h"
 #include "Event.h"
 #include "StepInformation.h"
+#include "FaseType.h"
+#include "Exception.h"
 #include <vector>
 #include <string>
 #include "Position.h"
@@ -11,7 +13,7 @@
 
 class SendStepInfoEvent: public Event {
 	public:
-		SendStepInfoEvent(const StepInformation& step);
+		SendStepInfoEvent(StepInformation& step);
 		~SendStepInfoEvent();
 	private:
 		SendStepInfoEvent(const SendStepInfoEvent &other) = delete;

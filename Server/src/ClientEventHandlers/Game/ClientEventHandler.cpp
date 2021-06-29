@@ -28,7 +28,7 @@ void ClientEventHandler::handle(Event& event) {
 			}
 		case ClientTypeEvent::CHANGE_WEAPON:
 			{
-				exchanger.handle(event, world);
+				changer.handle(event, world);
 				break;
 			}
 		case ClientTypeEvent::BUY_WEAPON:

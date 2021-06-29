@@ -9,7 +9,7 @@
 #include "StartAttackingHandler.h"
 #include "GrabWeaponHandler.h"
 #include "DropWeaponHandler.h"
-#include "ExchangeWeaponHandler.h"
+#include "ChangeWeaponHandler.h"
 #include "BuyArmourHandler.h"
 
 class ClientEventHandler{
@@ -17,7 +17,7 @@ class ClientEventHandler{
 		StartAttackingHandler attacker; 
 		GrabWeaponHandler graber; 
 		DropWeaponHandler droper; 
-		ExchangeWeaponHandler exchanger; 
+		ChangeWeaponHandler changer; 
 		BuyArmourHandler buyier;
 		GameWorld& world;
 		

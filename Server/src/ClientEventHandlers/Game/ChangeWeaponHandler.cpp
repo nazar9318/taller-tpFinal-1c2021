@@ -3,7 +3,10 @@
 ChangeWeaponHandler::ChangeWeaponHandler() {}
 
 void ChangeWeaponHandler::handle(Event& event, GameWorld& world){
-  // std::cout << "Aca manejamos el evento: "<< msg[0] << '\n';
+	
+	world.get_character(event.get_id())
+	     .change_weapon();
+
 }
 
 ChangeWeaponHandler::~ChangeWeaponHandler(){}

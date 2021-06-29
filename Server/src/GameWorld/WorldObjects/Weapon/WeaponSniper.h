@@ -1,14 +1,12 @@
 #ifndef WEAPON_SNIPER_H
 #define WEAPON_SNIPER_H
 
+#include "Weapon.h"
 #include "Character.h"
 #include <chrono>
 #include <iostream>
-#include "Weapon.h"
 #include <iostream>
 #include <random>
-
-class Character;
 
 class WeaponSniper : public Weapon {
     private:

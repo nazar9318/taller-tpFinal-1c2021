@@ -1,13 +1,18 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+class AttackInformation;
+class Weapon;
+class WeaponBomb;
+class WeaponWhite;
+class WeaponPistol;
+class WeaponShotgun;
+class WeaponAutomatic;
+
+
 #include "Position.h"
 #include "Weapon.h"
-#include "WeaponBomb.h"
-#include "WeaponWhite.h"
-#include "WeaponPistol.h"
-#include "WeaponShotgun.h"
-#include "WeaponAutomatic.h"
+
 #include "Team.h"
 #include "StepInformation.h"
 #include "Configuration.h"
@@ -19,28 +24,26 @@
 #include <vector>
 #include <list>
 #include <iostream>
+#include <memory>
 
-class Weapon;
-class WeaponWhite;
-class WeaponShotgun;
-class WeaponPistol;
-class WeaponSniper;
-class WeaponAutomatic;
 
 class Character {
 	private:
-		double life_points;
-		double money;
+		char life_points;
+		unsigned int money;
 		Team team;
-		std::vector<Weapon*> weapons;
-		Weapon* current_weapon;
+		std::vector<std::unique_ptr<Weapon>> weapons;
+		int current_weapon;
+		int number_weapons;
 		b2Body* character_body;
 		Direction move_state;
+		StepInformation& step_info;
 
 	public:
 		static float body_radius;
 		Character(Team team, b2World* world,
-			 std::vector<Position*> available_positions);
+			 std::vector<Position*> available_positions, 
+			 StepInformation& step_info);
 		
 		Character(Character&&) = default;
 
@@ -54,7 +57,16 @@ class Character {
 
 		void start_attacking();
 
+		void change_weapon();
 
+		void takeDamage(char points);
+		
+		char getLifePoints();
+
+		void attack(std::list<Block>& blocks,
+			 std::map<char, Character>& characters);
+
+		float get_angle();
 /*
 disparo pistola ---. 
 arma.attack(team.opposite(), pos.x, pos.y,
@@ -72,9 +84,7 @@ area escopeta
 
 
 
-		void takeDamage(double points);
-
-		void changeCurrentWeapon(uint16_t pos);
+/*
 
 		void buy(Weapon *new_weapon);
 		
@@ -88,16 +98,13 @@ area escopeta
 
 		void removeSecondary();
 
-		void take(uint16_t money);
+		void take(unsigned int money);
 
-		double getLifePoints();
 
 		Team getTeam();
-
+*/
 		/*acá habría que incluir la distancia entre jugadores*/
 		//void attack(Character &enemy, Team my_team, uint16_t distance);
-		void attack(std::list<Block>& blocks,
-			 std::map<char, Character>& characters, StepInformation& step_info);
 		~Character();
 	private:
 		Character(const Character &other) = delete;

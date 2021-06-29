@@ -20,7 +20,8 @@ void GameWorld::add_player_if_not_full(char id) {
 								 ServerError::MATCH_FULL); 
 	syslog(LOG_INFO, "[%s:%i]: Por agregar el jugador con id %d"
 					 " al GameWorld", __FILE__, __LINE__, id);
-	Character character(actual_team, world, ground.get_zone(actual_team));
+	Character character(actual_team, world,
+					 ground.get_zone(actual_team), step_info);
 	characters.insert({id, std::move(character)});
 	actual_team = get_opposite(actual_team);
 	number_players++;
@@ -98,7 +99,7 @@ void GameWorld::change_teams() {
 void GameWorld::simulate_playing_step() { 
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		it->second.apply_impulses();
-		it->second.attack(blocks, characters, step_info);
+		it->second.attack(blocks, characters);
 	}
 	
 	

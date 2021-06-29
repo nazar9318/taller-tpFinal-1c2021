@@ -7,8 +7,6 @@
 #include <iostream>
 #include <random>
 
-class Character;
-
 class WeaponPistol : public Weapon {
     private:
         float_t accuracy;

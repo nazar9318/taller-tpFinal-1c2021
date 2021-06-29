@@ -2,16 +2,25 @@
 #include <algorithm>
 #include <random>
 #include <syslog.h>
+#include "WeaponBomb.h"
+#include "WeaponWhite.h"
+#include "WeaponPistol.h"
+#include "WeaponShotgun.h"
+#include "WeaponAutomatic.h"
+
 
 float Character::body_radius = 16;
 
 Character::Character(Team team, b2World* world,
-		 std::vector<Position*> available_positions)
+		 std::vector<Position*> available_positions, 
+		 StepInformation& step)
 		: life_points(CF::character_life_points),
-		 money(CF::character_money), team(team) {
-	this->weapons.push_back(new WeaponWhite());
-	this->weapons.push_back(new WeaponPistol());
-	this->current_weapon = this->weapons[0];
+		 money(CF::character_money), team(team), step_info(step) {
+	std::unique_ptr<Weapon> knife(new WeaponWhite());
+	std::unique_ptr<Weapon> pistol(new WeaponPistol());
+	weapons.push_back(std::move(knife));
+	weapons.push_back(std::move(pistol));
+	current_weapon = 0;
 	if (available_positions.size() == 0) {
 		throw ExceptionInvalidCommand("No hay suficientes posiciones"
 				" para ubicar a los jugadores", ServerError::MATCH_FULL);
@@ -84,68 +93,65 @@ void Character::apply_impulses() {
 
 
 void Character::attack(std::list<Block>& blocks,
-     std::map<char, Character>& characters, StepInformation& step_info) {
+     std::map<char, Character>& characters) {
 	if (life_points > 0) {
-		current_weapon->attack(get_opposite(team), 
-			character_body, blocks, 
-			characters, step_info);
-
+		AttackInformation attack_info(this, get_opposite(team));
+		weapons[current_weapon]->
+						attack(std::move(attack_info), blocks, characters);
 	}
 }
 
 
 
 void Character::start_attacking() {
-	current_weapon->activate();
+	weapons[current_weapon]->activate();
 }
 
 
 
+float Character::get_angle() {
+	return character_body->GetAngle();
+}
 
 
 
+void Character::change_weapon() {
+	if (life_points > 0)
+		current_weapon = (current_weapon + 1) % number_weapons;
+}
 
-
-
-Character::~Character() {
-	for (const auto &weapon : this->weapons) {
-		delete weapon;
+void Character::takeDamage(char points) {
+	if (life_points > 0) {
+		if (life_points > points) {
+			life_points -= points;
+		} else {
+			life_points = 0;
+		}
 	}
 }
 
+Character::~Character() {
+}
 
 
 
 
 
 
+/*
 
 
-void Character::take(uint16_t money) {
+void Character::take(unsigned int money) {
 	if (this->life_points > 0) {
 		this->money += money;
 	}
 }
+*/
+/*
 
-void Character::takeDamage(double life_points) {
-	if (this->life_points > 0) {
-		if (this->life_points > life_points) {
-			this->life_points -= life_points;
-		} else {
-			this->life_points = 0;
-		}
-	}
+char Character::getLifePoints() { 
+	return life_points; 
 }
-
-void Character::changeCurrentWeapon(uint16_t pos) {
-	if (this->life_points > 0) {
-		if (pos <= this->weapons.size()) {
-			current_weapon = this->weapons[pos-1];
-		}
-	}
-}
-
-double Character::getLifePoints() { return this->life_points; }
 
 Team Character::getTeam() { return this->team; }
 
@@ -198,7 +204,7 @@ void Character::deactivate(Bomb *bomb) {
 	if (this->team == COUNTER_ENEMY) {
 		bomb->deactivate();
 	}
-}
+}*/
 /*
 void Character::attack(Character &enemy, Team my_team, uint16_t distance) {
 	if (this->life_points > 0) {

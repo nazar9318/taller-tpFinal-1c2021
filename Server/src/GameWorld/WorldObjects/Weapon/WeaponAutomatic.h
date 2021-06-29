@@ -10,8 +10,6 @@
 #include <random>
 #include <unistd.h>
 
-class Character;
-
 class WeaponAutomatic : public Weapon {
     private:
         float_t accuracy;

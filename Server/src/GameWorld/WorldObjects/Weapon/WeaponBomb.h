@@ -1,6 +1,6 @@
 #ifndef BOMB_H
 #define BOMB_H
-
+/*
 #include "Weapon.h"
 #include "Configuration.h"
 #include <iostream>
@@ -27,5 +27,5 @@ class Bomb : public Weapon {
 
         ~Bomb();
 };
-
+*/
 #endif

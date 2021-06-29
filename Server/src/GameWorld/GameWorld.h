@@ -13,10 +13,10 @@
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
 #include "Team.h"
-#include "Character.h"
 #include "Position.h"
 #include "StepInformation.h"
 #include "FaseType.h"
+#include "Character.h"
 
 class GameWorld {
 		std::mutex m;

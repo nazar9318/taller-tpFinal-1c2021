@@ -27,14 +27,10 @@ const uint16_t Weapon::getPrice() { return this->price; }
 void Weapon::shoot(Character &character, uint16_t distance) {}
 
 
-void Weapon::attack(Team team, b2Body* character_body,
-     std::list<Block>& blocks, std::map<char, 
-     Character>& characters, StepInformation& step_info) {
-	float angle = character_body->GetAngle();
+void Weapon::attack(AttackInformation attack_info, std::list<Block>& blocks,
+									 std::map<char, Character>& characters) {
+	float angle = attack_info.get_angle();
 	angle += 0.1;
-
-
-
 }
 
 

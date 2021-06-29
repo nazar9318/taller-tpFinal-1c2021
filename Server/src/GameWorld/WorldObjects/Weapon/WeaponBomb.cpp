@@ -1,5 +1,5 @@
 #include "WeaponBomb.h"
-
+/*
 Bomb::Bomb() : Weapon(0, 0, 0), clock_count(CF::bomb_clock_count) {
     this->with_owner = false;
     this->activated = true;
@@ -25,3 +25,4 @@ void Bomb::deactivate() { this->activated = false; }
 void Bomb::place() { this->placed = true; }
 
 Bomb::~Bomb() {}
+*/

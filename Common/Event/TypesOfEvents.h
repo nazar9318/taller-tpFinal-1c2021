@@ -5,6 +5,7 @@
 enum ClientTypeEvent: char {
 	MOVE, //type/direction
 	START_ATTACKING, //type/angle
+	STOP_ATTACKING, //type
 	GRAB_WEAPON, //type
 	DROP_WEAPON, //type
 	CHANGE_WEAPON,//type

@@ -8,8 +8,11 @@
 #include "ProtectedQueue.h"
 #include "GameMap.h"
 #include "ModelEventHandler.h"
-
-
+#include "MoveEvent.h"
+#include "GrabWeaponEvent.h"
+#include "ChangeWeaponEvent.h"
+#include "AttackEvent.h"
+#include "StopAttackingEvent.h"
 #include "Window.h"
 #include "SDLException.h"
 #include "Renderer.h"

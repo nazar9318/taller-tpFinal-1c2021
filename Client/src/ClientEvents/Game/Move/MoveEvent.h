@@ -7,7 +7,7 @@
 #include "Event.h"
 #include "TypesOfEvents.h"
 
-class MoveEvent: public Event{
+class MoveEvent:public Event{
 	public:
 		MoveEvent(char direction);
 		~MoveEvent();

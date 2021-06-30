@@ -2,6 +2,7 @@
 #define _TILE_H
 
 #include <SDL2/SDL.h>
+#include "TileContainer.h"
 
 #define TILE_WIDTH 64
 #define TILE_HEIGHT 64
@@ -10,12 +11,14 @@ class Tile {
 	private:
 	SDL_Rect box;
 	char type;
+	Texture& texture;
 
 	public:
 		Tile(int x, int y, char type);
 
-		SDL_Rect getBox();
+		SDL_Rect& getBox();
 		char getType();
+		Texture& getTexture();
 
 		~Tile();
 

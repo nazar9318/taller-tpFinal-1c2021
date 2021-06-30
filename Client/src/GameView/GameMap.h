@@ -11,7 +11,7 @@ class GameMap {
 	private:
 		Renderer& renderer;
 
-		TileContainer tiles_textures;
+		TileContainer& tile_container;
 		std::vector<Tile> tiles;
 
 		int map_width;

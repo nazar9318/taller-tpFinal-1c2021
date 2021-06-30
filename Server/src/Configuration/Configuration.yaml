@@ -58,6 +58,7 @@ glock_distance_penalty: 2
 ak47_distance_penalty: 1
 m3_distance_penalty: 3
 awp_distance_penalty: 0
+knife_distance_penalty: 0
 
 glock_ammo: 8
 ak47_ammo: 30
@@ -73,3 +74,4 @@ glock_max_distance: 18
 ak47_max_distance: 10
 m3_max_distance: 3
 awp_max_distance: 120
+knife_max_distance: 10

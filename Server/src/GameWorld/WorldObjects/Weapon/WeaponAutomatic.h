@@ -11,22 +11,26 @@
 #include <unistd.h>
 
 class WeaponAutomatic : public Weapon {
-    private:
-        float_t accuracy;
-        uint16_t shoot_rate;
-        uint16_t shoot_freq;
-        float_t distance_penalty;
-        uint16_t ammo;
-        uint16_t max_distance;
+		float accuracy;
+		unsigned int shoot_rate;
+		unsigned int shoot_freq;
+		unsigned int ammo;
 
-    public:
-        WeaponAutomatic();
+	public:
+		WeaponAutomatic();
+		void attack(AttackInformation& attack_info,
+			 		std::list<Block>& blocks, std::map<char,
+			 					 Character>& characters);
+		char calculate_damage(float distance);
 
-        bool empty();
 
-        void shoot(Character &character, uint16_t distance);
+	   // void shoot(Character &character, uint16_t distance);
 
-        ~WeaponAutomatic();
+		~WeaponAutomatic();
+	
+	private:
+
+		bool empty();
 };
 
 #endif

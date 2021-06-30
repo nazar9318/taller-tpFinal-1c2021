@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <random>
 #include <syslog.h>
-#include "WeaponBomb.h"
+#include "Bomb.h"
 #include "WeaponWhite.h"
 #include "WeaponPistol.h"
 #include "WeaponShotgun.h"
@@ -97,10 +97,18 @@ void Character::attack(std::list<Block>& blocks,
 	if (life_points > 0) {
 		AttackInformation attack_info(this, get_opposite(team));
 		weapons[current_weapon]->
-						attack(std::move(attack_info), blocks, characters);
+						attack(attack_info, blocks, characters);
 	}
 }
 
+
+b2Vec2 Character::get_pos() {
+	return character_body->GetPosition();
+}
+
+b2Fixture* Character::GetFixtureList() {
+	return character_body->GetFixtureList();
+}
 
 
 void Character::start_attacking() {

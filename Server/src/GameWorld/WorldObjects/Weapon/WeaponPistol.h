@@ -8,20 +8,20 @@
 #include <random>
 
 class WeaponPistol : public Weapon {
-    private:
-        float_t accuracy;
-        float_t distance_penalty;
-        uint16_t ammo;
-        uint16_t max_distance;
+	private:
+		float accuracy;
+		unsigned int ammo;
 
-    public:
-        WeaponPistol();
+	public:
+		WeaponPistol();
+		void attack(AttackInformation& attack_info,
+			 		std::list<Block>& blocks, std::map<char,
+			 				 Character>& characters);
 
-        bool empty();
+		~WeaponPistol();
 
-        void shoot(Character &character, uint16_t distance);
-
-        ~WeaponPistol();
+	private:
+		bool empty();
 };
 
 #endif

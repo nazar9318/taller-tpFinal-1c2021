@@ -59,6 +59,12 @@ class Character {
 
 		void change_weapon();
 
+		b2Fixture* GetFixtureList();
+
+		void receive_damage(AttackInformation& attack);
+
+		b2Vec2 get_pos();
+
 		void takeDamage(char points);
 		
 		char getLifePoints();

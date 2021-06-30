@@ -9,20 +9,21 @@
 #include <random>
 
 class WeaponSniper : public Weapon {
-    private:
-        float_t accuracy;
-        float_t distance_penalty;
-        uint16_t ammo;
-        uint16_t max_distance;
+		float accuracy;
+		unsigned int ammo;
+	public:
+		WeaponSniper();
 
-    public:
-        WeaponSniper();
+		void attack(AttackInformation& attack_info,
+	 			std::list<Block>& blocks, std::map<char,
+						 Character>& characters);
 
-        bool empty();
+		//void shoot(Character &character, uint16_t distance);
 
-        void shoot(Character &character, uint16_t distance);
-
-        ~WeaponSniper();
+		~WeaponSniper();
+	
+	private:
+		bool empty();
 };
 
 #endif

@@ -2,10 +2,19 @@
 
 
 WeaponSniper::WeaponSniper() :
-Weapon(CF::awp_price, CF::awp_damage_min, CF::awp_damage_max),
-accuracy(CF::awp_accuracy), distance_penalty(CF::awp_distance_penalty),
-ammo(CF::awp_ammo), max_distance(CF::awp_max_distance) {}
+            Weapon(CF::awp_price, CF::awp_damage_min,
+            CF::awp_damage_max, CF::awp_max_distance, 
+            CF::awp_distance_penalty),
+            accuracy(CF::awp_accuracy),
+            ammo(CF::awp_ammo) {
+}
 
+void WeaponSniper::attack(AttackInformation& attack_info,
+                    std::list<Block>& blocks, std::map<char,
+                                 Character>& characters){}
+
+
+/*
 void WeaponSniper::shoot(Character &character, uint16_t distance) {
     if (distance <= this->max_distance && this->ammo > 0) {
         std::mt19937_64 rng;
@@ -20,7 +29,10 @@ void WeaponSniper::shoot(Character &character, uint16_t distance) {
         }
     }
 }
+*/
 
-bool WeaponSniper::empty() { return (this->ammo == 0); }
+bool WeaponSniper::empty() {
+    return (ammo == 0);
+}
 
 WeaponSniper::~WeaponSniper() {}

@@ -9,6 +9,11 @@ class WeaponWhite : public Weapon {
     public:
         WeaponWhite();
 
+		void attack(AttackInformation& attack_info,
+			 		std::list<Block>& blocks, std::map<char,
+			 					 Character>& characters);
+
+
         void shoot(Character &character, uint16_t distance);
 
         ~WeaponWhite();

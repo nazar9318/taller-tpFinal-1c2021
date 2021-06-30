@@ -1,4 +1,4 @@
-#include "WeaponBomb.h"
+#include "Bomb.h"
 /*
 Bomb::Bomb() : Weapon(0, 0, 0), clock_count(CF::bomb_clock_count) {
     this->with_owner = false;

@@ -13,6 +13,12 @@ Block::Block(int x, int y, b2World* world){
 	block_fixture_def.density = 1;
 	block_body->CreateFixture(&block_fixture_def);
 }
+
+b2Fixture* Block::GetFixtureList() {
+	return block_body->GetFixtureList();
+}
+
+
 Block::~Block(){
 
 }

@@ -10,7 +10,7 @@ class Block {
 	public:		
 		Block(int x, int y, b2World* world);
 		~Block();
-		
+		b2Fixture* GetFixtureList();
 		Block(Block&&) = default;
         Block& operator = (Block&&) = default;
 	private:

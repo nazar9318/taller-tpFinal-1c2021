@@ -1,392 +1,1622 @@
-width: 283796062672454641
+width: 9
 height: 5
 ---
+position:
+  - 4
+  - 0
 node: 0
 item: base_aztec
-position:
-  - 7
-  - 3
 ---
 node: 1
-item: base_aztec
 position:
-  - 7
-  - 2
+  - 3
+  - 0
+item: base_aztec
 ---
 node: 2
 item: base_aztec
 position:
-  - 6
-  - 2
+  - 7
+  - 0
 ---
+item: base_aztec
+position:
+  - 1
+  - 0
 node: 3
+---
 item: base_aztec
+node: 4
+position:
+  - 2
+  - 0
+---
+item: base_aztec
+node: 5
 position:
   - 6
-  - 3
----
-node: 4
-item: base_aztec
-position:
-  - 5
-  - 2
----
-node: 5
-item: base_aztec
-position:
-  - 5
-  - 3
+  - 0
 ---
 node: 6
-item: base_aztec
 position:
   - 4
-  - 3
+  - 1
+item: base_aztec
 ---
 node: 7
-item: base_aztec
 position:
-  - 4
-  - 2
+  - 8
+  - 0
+item: base_aztec
 ---
-node: 8
 item: base_aztec
 position:
-  - 3
-  - 3
+  - 5
+  - 0
+node: 8
 ---
 node: 9
 item: base_aztec
 position:
-  - 3
-  - 2
+  - 6
+  - 1
 ---
 node: 10
 item: base_aztec
 position:
-  - 2
-  - 3
+  - 7
+  - 1
 ---
-node: 11
 item: base_aztec
+node: 11
+position:
+  - 8
+  - 1
+---
 position:
   - 2
-  - 2
----
+  - 1
 node: 12
 item: base_aztec
-position:
-  - 1
-  - 3
 ---
 node: 13
 item: base_aztec
 position:
+  - 5
   - 1
-  - 2
 ---
+position:
+  - 3
+  - 1
 node: 14
 item: base_aztec
-position:
-  - 7
-  - 4
 ---
 node: 15
 item: base_aztec
 position:
-  - 6
-  - 4
+  - 0
+  - 0
 ---
 node: 16
 item: base_aztec
 position:
-  - 5
-  - 4
+  - 1
+  - 1
 ---
 node: 17
 item: base_aztec
 position:
-  - 4
-  - 4
+  - 0
+  - 1
 ---
-node: 18
 item: base_aztec
 position:
-  - 3
-  - 4
+  - 8
+  - 2
+node: 18
 ---
 node: 19
-item: base_inferno
+item: base_aztec
 position:
-  - 2
-  - 4
+  - 8
+  - 3
 ---
 node: 20
 item: base_aztec
 position:
-  - 1
+  - 8
   - 4
 ---
 node: 21
 item: base_aztec
 position:
   - 0
-  - 4
+  - 2
 ---
-node: 22
 item: base_aztec
+node: 22
 position:
   - 0
   - 3
 ---
-node: 23
 item: base_aztec
 position:
   - 0
-  - 2
+  - 4
+node: 23
 ---
 node: 24
-item: base_aztec
 position:
-  - 8
+  - 1
   - 4
+item: base_aztec
 ---
 node: 25
-item: base_aztec
+item: base_inferno
 position:
-  - 8
-  - 3
+  - 2
+  - 4
 ---
 node: 26
-item: base_aztec
 position:
-  - 8
-  - 2
+  - 3
+  - 4
+item: base_aztec
 ---
-node: 27
 item: base_aztec
 position:
-  - 0
-  - 1
+  - 4
+  - 4
+node: 27
 ---
 node: 28
 item: base_aztec
 position:
-  - 1
-  - 1
+  - 5
+  - 4
 ---
-node: 29
 item: base_aztec
 position:
-  - 0
-  - 0
+  - 6
+  - 4
+node: 29
 ---
 node: 30
-item: base_aztec
 position:
-  - 3
-  - 1
+  - 7
+  - 4
+item: base_aztec
 ---
 node: 31
 item: base_aztec
 position:
-  - 5
   - 1
+  - 2
 ---
-node: 32
+position:
+  - 1
+  - 3
 item: base_aztec
+node: 32
+---
+item: base_aztec
+node: 33
 position:
   - 2
-  - 1
----
-node: 33
-item: base_aztec
-position:
-  - 8
-  - 1
+  - 2
 ---
 node: 34
 item: base_aztec
 position:
-  - 7
-  - 1
+  - 2
+  - 3
 ---
 node: 35
-item: base_aztec
 position:
-  - 6
-  - 1
+  - 3
+  - 2
+item: base_aztec
 ---
 node: 36
+position:
+  - 3
+  - 3
+item: base_aztec
+---
+item: base_aztec
+position:
+  - 4
+  - 2
+node: 37
+---
+position:
+  - 4
+  - 3
+item: base_aztec
+node: 38
+---
+node: 39
 item: base_aztec
 position:
   - 5
-  - 0
+  - 3
 ---
-node: 37
+item: base_aztec
+node: 40
+position:
+  - 5
+  - 2
+---
+item: base_aztec
+node: 41
+position:
+  - 6
+  - 3
+---
+position:
+  - 6
+  - 2
+item: base_aztec
+node: 42
+---
+node: 43
+position:
+  - 7
+  - 2
+item: base_aztec
+---
+position:
+  - 7
+  - 3
+node: 44
+item: base_aztec
+---
 item: base_aztec
 position:
-  - 8
+  - 3
+  - 0
+node: 45
+---
+node: 46
+item: base_aztec
+position:
+  - 7
   - 0
 ---
-node: 38
+item: base_aztec
+node: 47
+position:
+  - 1
+  - 0
+---
+item: base_aztec
+position:
+  - 2
+  - 0
+node: 48
+---
+position:
+  - 6
+  - 0
+node: 49
+item: base_aztec
+---
+node: 50
 item: base_aztec
 position:
   - 4
   - 1
 ---
-node: 39
 item: base_aztec
 position:
-  - 6
+  - 8
   - 0
+node: 51
 ---
-node: 40
+node: 52
+position:
+  - 5
+  - 0
+item: base_aztec
+---
+node: 53
+position:
+  - 6
+  - 1
+item: base_aztec
+---
+item: base_aztec
+node: 54
+position:
+  - 7
+  - 1
+---
+node: 55
+item: base_aztec
+position:
+  - 8
+  - 1
+---
+node: 56
 item: base_aztec
 position:
   - 2
-  - 0
+  - 1
 ---
-node: 41
+position:
+  - 5
+  - 1
+item: base_aztec
+node: 57
+---
+node: 58
+position:
+  - 3
+  - 1
+item: base_aztec
+---
+item: base_aztec
+position:
+  - 0
+  - 0
+node: 59
+---
+node: 60
 item: base_aztec
 position:
   - 1
-  - 0
+  - 1
 ---
-node: 42
+node: 61
+item: base_aztec
+position:
+  - 0
+  - 1
+---
+node: 62
+item: base_aztec
+position:
+  - 8
+  - 2
+---
+node: 63
+item: base_aztec
+position:
+  - 8
+  - 3
+---
+node: 64
+item: base_aztec
+position:
+  - 8
+  - 4
+---
+node: 65
+item: base_aztec
+position:
+  - 0
+  - 2
+---
+node: 66
+item: base_aztec
+position:
+  - 0
+  - 3
+---
+node: 67
+item: base_aztec
+position:
+  - 0
+  - 4
+---
+node: 68
+item: base_aztec
+position:
+  - 1
+  - 4
+---
+node: 69
+item: base_inferno
+position:
+  - 2
+  - 4
+---
+node: 70
+item: base_aztec
+position:
+  - 3
+  - 4
+---
+node: 71
+item: base_aztec
+position:
+  - 4
+  - 4
+---
+node: 72
+item: base_aztec
+position:
+  - 5
+  - 4
+---
+node: 73
+item: base_aztec
+position:
+  - 6
+  - 4
+---
+node: 74
 item: base_aztec
 position:
   - 7
-  - 0
+  - 4
 ---
-node: 43
+node: 75
+item: base_aztec
+position:
+  - 1
+  - 2
+---
+node: 76
+item: base_aztec
+position:
+  - 1
+  - 3
+---
+node: 77
+item: base_aztec
+position:
+  - 2
+  - 2
+---
+node: 78
+item: base_aztec
+position:
+  - 2
+  - 3
+---
+node: 79
+item: base_aztec
+position:
+  - 3
+  - 2
+---
+node: 80
+item: base_aztec
+position:
+  - 3
+  - 3
+---
+node: 81
+item: base_aztec
+position:
+  - 4
+  - 2
+---
+node: 82
+item: base_aztec
+position:
+  - 4
+  - 3
+---
+node: 83
+item: base_aztec
+position:
+  - 5
+  - 3
+---
+node: 84
+item: base_aztec
+position:
+  - 5
+  - 2
+---
+node: 85
+item: base_aztec
+position:
+  - 6
+  - 3
+---
+node: 86
+item: base_aztec
+position:
+  - 6
+  - 2
+---
+node: 87
+item: base_aztec
+position:
+  - 7
+  - 2
+---
+node: 88
+item: base_aztec
+position:
+  - 7
+  - 3
+---
+node: 89
 item: base_aztec
 position:
   - 3
   - 0
 ---
-node: 44
+node: 90
+item: base_aztec
+position:
+  - 7
+  - 0
+---
+node: 91
+item: base_aztec
+position:
+  - 1
+  - 0
+---
+node: 92
+item: base_aztec
+position:
+  - 2
+  - 0
+---
+node: 93
+item: base_aztec
+position:
+  - 6
+  - 0
+---
+node: 94
 item: base_aztec
 position:
   - 4
+  - 1
+---
+node: 95
+item: base_aztec
+position:
+  - 8
   - 0
 ---
-node: 0
-item: bomb_area_a
+node: 96
+item: base_aztec
 position:
-  - 4
-  - 2
----
-node: 1
-item: m3_weapon
-position:
-  - 2
-  - 4
----
-node: 2
-item: box_black
-position:
-  - 2
+  - 5
   - 0
 ---
-node: 3
-item: box_black
+node: 97
+item: base_aztec
+position:
+  - 6
+  - 1
+---
+item: base_aztec
+position:
+  - 7
+  - 1
+node: 98
+---
+node: 99
+item: base_aztec
+position:
+  - 8
+  - 1
+---
+node: 100
+item: base_aztec
+position:
+  - 2
+  - 1
+---
+node: 101
+item: base_aztec
+position:
+  - 5
+  - 1
+---
+node: 102
+item: base_aztec
+position:
+  - 3
+  - 1
+---
+node: 103
+item: base_aztec
+position:
+  - 0
+  - 0
+---
+node: 104
+item: base_aztec
+position:
+  - 1
+  - 1
+---
+node: 105
+item: base_aztec
+position:
+  - 0
+  - 1
+---
+node: 106
+item: base_aztec
+position:
+  - 8
+  - 2
+---
+node: 107
+item: base_aztec
+position:
+  - 8
+  - 3
+---
+node: 108
+item: base_aztec
+position:
+  - 8
+  - 4
+---
+node: 109
+item: base_aztec
+position:
+  - 0
+  - 2
+---
+node: 110
+item: base_aztec
+position:
+  - 0
+  - 3
+---
+node: 111
+item: base_aztec
+position:
+  - 0
+  - 4
+---
+node: 112
+item: base_aztec
+position:
+  - 1
+  - 4
+---
+node: 113
+item: base_inferno
+position:
+  - 2
+  - 4
+---
+node: 114
+item: base_aztec
+position:
+  - 3
+  - 4
+---
+node: 115
+item: base_aztec
+position:
+  - 4
+  - 4
+---
+node: 116
+item: base_aztec
+position:
+  - 5
+  - 4
+---
+node: 117
+item: base_aztec
 position:
   - 6
   - 4
 ---
-node: 4
-item: box_wood_metal
+node: 118
+item: base_aztec
+position:
+  - 7
+  - 4
+---
+node: 119
+item: base_aztec
+position:
+  - 1
+  - 2
+---
+node: 120
+item: base_aztec
+position:
+  - 1
+  - 3
+---
+node: 121
+item: base_aztec
 position:
   - 2
   - 2
 ---
+node: 122
+item: base_aztec
+position:
+  - 2
+  - 3
+---
+node: 123
+item: base_aztec
+position:
+  - 3
+  - 2
+---
+node: 124
+item: base_aztec
+position:
+  - 3
+  - 3
+---
+node: 125
+item: base_aztec
+position:
+  - 4
+  - 2
+---
+node: 126
+item: base_aztec
+position:
+  - 4
+  - 3
+---
+node: 127
+item: base_aztec
+position:
+  - 5
+  - 3
+---
+node: 128
+item: base_aztec
+position:
+  - 5
+  - 2
+---
+item: base_aztec
+node: 129
+position:
+  - 6
+  - 3
+---
+node: 130
+item: base_aztec
+position:
+  - 6
+  - 2
+---
+node: 131
+item: base_aztec
+position:
+  - 7
+  - 2
+---
+node: 132
+item: base_aztec
+position:
+  - 7
+  - 3
+---
+node: 133
+item: base_aztec
+position:
+  - 3
+  - 0
+---
+node: 134
+item: base_aztec
+position:
+  - 7
+  - 0
+---
+node: 135
+item: base_aztec
+position:
+  - 1
+  - 0
+---
+node: 136
+item: base_aztec
+position:
+  - 2
+  - 0
+---
+node: 137
+item: base_aztec
+position:
+  - 6
+  - 0
+---
+node: 138
+item: base_aztec
+position:
+  - 4
+  - 1
+---
+node: 139
+item: base_aztec
+position:
+  - 8
+  - 0
+---
+node: 140
+item: base_aztec
+position:
+  - 5
+  - 0
+---
+node: 141
+item: base_aztec
+position:
+  - 6
+  - 1
+---
+node: 142
+item: base_aztec
+position:
+  - 7
+  - 1
+---
+node: 143
+item: base_aztec
+position:
+  - 8
+  - 1
+---
+node: 144
+item: base_aztec
+position:
+  - 2
+  - 1
+---
+node: 145
+item: base_aztec
+position:
+  - 5
+  - 1
+---
+node: 146
+item: base_aztec
+position:
+  - 3
+  - 1
+---
+node: 147
+item: base_aztec
+position:
+  - 0
+  - 0
+---
+node: 148
+item: base_aztec
+position:
+  - 1
+  - 1
+---
+node: 149
+item: base_aztec
+position:
+  - 0
+  - 1
+---
+node: 150
+item: base_aztec
+position:
+  - 8
+  - 2
+---
+node: 151
+item: base_aztec
+position:
+  - 8
+  - 3
+---
+node: 152
+item: base_aztec
+position:
+  - 8
+  - 4
+---
+node: 153
+item: base_aztec
+position:
+  - 0
+  - 2
+---
+node: 154
+item: base_aztec
+position:
+  - 0
+  - 3
+---
+node: 155
+item: base_aztec
+position:
+  - 0
+  - 4
+---
+node: 156
+item: base_aztec
+position:
+  - 1
+  - 4
+---
+node: 157
+item: base_inferno
+position:
+  - 2
+  - 4
+---
+node: 158
+item: base_aztec
+position:
+  - 3
+  - 4
+---
+node: 159
+item: base_aztec
+position:
+  - 4
+  - 4
+---
+node: 160
+item: base_aztec
+position:
+  - 5
+  - 4
+---
+node: 161
+item: base_aztec
+position:
+  - 6
+  - 4
+---
+node: 162
+item: base_aztec
+position:
+  - 7
+  - 4
+---
+node: 163
+item: base_aztec
+position:
+  - 1
+  - 2
+---
+node: 164
+item: base_aztec
+position:
+  - 1
+  - 3
+---
+node: 165
+item: base_aztec
+position:
+  - 2
+  - 2
+---
+node: 166
+item: base_aztec
+position:
+  - 2
+  - 3
+---
+node: 167
+item: base_aztec
+position:
+  - 3
+  - 2
+---
+node: 168
+item: base_aztec
+position:
+  - 3
+  - 3
+---
+node: 169
+item: base_aztec
+position:
+  - 4
+  - 2
+---
+node: 170
+item: base_aztec
+position:
+  - 4
+  - 3
+---
+node: 171
+item: base_aztec
+position:
+  - 5
+  - 3
+---
+node: 172
+item: base_aztec
+position:
+  - 5
+  - 2
+---
+node: 173
+item: base_aztec
+position:
+  - 6
+  - 3
+---
+node: 174
+item: base_aztec
+position:
+  - 6
+  - 2
+---
+node: 175
+item: base_aztec
+position:
+  - 7
+  - 2
+---
+node: 176
+item: base_aztec
+position:
+  - 7
+  - 3
+---
+node: 177
+item: base_inferno
+position:
+  - 4
+  - 1
+---
+node: 178
+item: base_inferno
+position:
+  - 2
+  - 1
+---
+node: 179
+item: base_inferno
+position:
+  - 3
+  - 0
+---
+node: 180
+item: base_inferno
+position:
+  - 3
+  - 1
+---
+node: 181
+item: base_inferno
+position:
+  - 1
+  - 1
+---
+node: 182
+item: base_inferno
+position:
+  - 1
+  - 0
+---
+node: 183
+item: base_inferno
+position:
+  - 0
+  - 0
+---
+node: 184
+item: base_inferno
+position:
+  - 2
+  - 0
+---
+node: 185
+item: base_inferno
+position:
+  - 0
+  - 1
+---
+node: 186
+item: base_inferno
+position:
+  - 3
+  - 2
+---
+node: 187
+item: base_inferno
+position:
+  - 4
+  - 2
+---
+node: 188
+item: base_inferno
+position:
+  - 0
+  - 2
+---
+node: 189
+item: base_inferno
+position:
+  - 2
+  - 2
+---
+node: 190
+item: base_inferno
+position:
+  - 1
+  - 2
+---
+node: 191
+item: base_inferno
+position:
+  - 0
+  - 3
+---
+node: 192
+item: base_inferno
+position:
+  - 2
+  - 3
+---
+node: 193
+item: base_inferno
+position:
+  - 1
+  - 3
+---
+position:
+  - 0
+  - 0
+node: 0
+item: T_spawn
+---
+item: T_spawn
+position:
+  - 0
+  - 1
+node: 1
+---
+node: 2
+item: T_spawn
+position:
+  - 0
+  - 2
+---
+item: T_spawn
+position:
+  - 0
+  - 3
+node: 3
+---
+position:
+  - 0
+  - 4
+node: 4
+item: T_spawn
+---
+position:
+  - 8
+  - 0
 node: 5
+item: C_spawn
+---
+position:
+  - 8
+  - 1
+node: 6
+item: C_spawn
+---
+item: C_spawn
+position:
+  - 8
+  - 2
+node: 7
+---
+position:
+  - 8
+  - 3
+item: C_spawn
+node: 8
+---
+position:
+  - 8
+  - 4
+node: 9
+item: C_spawn
+---
+position:
+  - 3
+  - 0
+node: 10
+item: glock_weapon
+---
+position:
+  - 5
+  - 1
+item: ak47_weapon
+node: 11
+---
+position:
+  - 3
+  - 2
+item: awp_weapon
+node: 12
+---
+item: box_brown
+node: 13
+position:
+  - 5
+  - 0
+---
+node: 14
 item: box_metal
 position:
   - 4
   - 3
 ---
-node: 6
-item: box_brown
+item: box_wood_metal
+node: 15
 position:
-  - 5
+  - 2
+  - 2
+---
+node: 16
+item: box_black
+position:
+  - 6
+  - 4
+---
+position:
+  - 2
+  - 0
+item: box_black
+node: 17
+---
+item: m3_weapon
+node: 18
+position:
+  - 2
+  - 4
+---
+position:
+  - 4
+  - 2
+node: 19
+item: bomb_area_a
+---
+item: T_spawn
+position:
+  - 0
+  - 0
+node: 20
+---
+item: T_spawn
+position:
+  - 0
+  - 1
+node: 21
+---
+node: 22
+item: T_spawn
+position:
+  - 0
+  - 2
+---
+item: T_spawn
+node: 23
+position:
+  - 0
+  - 3
+---
+node: 24
+position:
+  - 0
+  - 4
+item: T_spawn
+---
+item: C_spawn
+position:
+  - 8
+  - 0
+node: 25
+---
+node: 26
+item: C_spawn
+position:
+  - 8
+  - 1
+---
+position:
+  - 8
+  - 2
+node: 27
+item: C_spawn
+---
+item: C_spawn
+position:
+  - 8
+  - 3
+node: 28
+---
+position:
+  - 8
+  - 4
+node: 29
+item: C_spawn
+---
+item: glock_weapon
+node: 30
+position:
+  - 3
   - 0
 ---
-node: 7
+position:
+  - 5
+  - 1
+node: 31
+item: ak47_weapon
+---
 item: awp_weapon
 position:
   - 3
   - 2
+node: 32
 ---
-node: 8
+item: box_brown
+position:
+  - 5
+  - 0
+node: 33
+---
+position:
+  - 4
+  - 3
+item: box_metal
+node: 34
+---
+node: 35
+item: box_wood_metal
+position:
+  - 2
+  - 2
+---
+position:
+  - 6
+  - 4
+node: 36
+item: box_black
+---
+node: 37
+item: box_black
+position:
+  - 2
+  - 0
+---
+position:
+  - 2
+  - 4
+item: m3_weapon
+node: 38
+---
+position:
+  - 4
+  - 2
+node: 39
+item: bomb_area_a
+---
+position:
+  - 0
+  - 0
+node: 40
+item: T_spawn
+---
+position:
+  - 0
+  - 1
+node: 41
+item: T_spawn
+---
+item: T_spawn
+node: 42
+position:
+  - 0
+  - 2
+---
+node: 43
+position:
+  - 0
+  - 3
+item: T_spawn
+---
+position:
+  - 0
+  - 4
+node: 44
+item: T_spawn
+---
+node: 45
+position:
+  - 8
+  - 0
+item: C_spawn
+---
+node: 46
+position:
+  - 8
+  - 1
+item: C_spawn
+---
+position:
+  - 8
+  - 2
+node: 47
+item: C_spawn
+---
+position:
+  - 8
+  - 3
+node: 48
+item: C_spawn
+---
+node: 49
+position:
+  - 8
+  - 4
+item: C_spawn
+---
+position:
+  - 3
+  - 0
+item: glock_weapon
+node: 50
+---
 item: ak47_weapon
+node: 51
 position:
   - 5
   - 1
 ---
-node: 9
+position:
+  - 3
+  - 2
+item: awp_weapon
+node: 52
+---
+position:
+  - 5
+  - 0
+item: box_brown
+node: 53
+---
+node: 54
+position:
+  - 4
+  - 3
+item: box_metal
+---
+position:
+  - 2
+  - 2
+node: 55
+item: box_wood_metal
+---
+position:
+  - 6
+  - 4
+item: box_black
+node: 56
+---
+node: 57
+item: box_black
+position:
+  - 2
+  - 0
+---
+item: m3_weapon
+node: 58
+position:
+  - 2
+  - 4
+---
+position:
+  - 0
+  - 0
+node: 59
+item: T_spawn
+---
+item: T_spawn
+node: 60
+position:
+  - 0
+  - 1
+---
+position:
+  - 0
+  - 2
+item: T_spawn
+node: 61
+---
+position:
+  - 0
+  - 3
+node: 62
+item: T_spawn
+---
+item: T_spawn
+position:
+  - 0
+  - 4
+node: 63
+---
+position:
+  - 8
+  - 0
+item: C_spawn
+node: 64
+---
+position:
+  - 8
+  - 1
+node: 65
+item: C_spawn
+---
+item: C_spawn
+position:
+  - 8
+  - 2
+node: 66
+---
+position:
+  - 8
+  - 3
+item: C_spawn
+node: 67
+---
+position:
+  - 8
+  - 4
+item: C_spawn
+node: 68
+---
 item: glock_weapon
 position:
   - 3
   - 0
+node: 69
 ---
-node: 10
-item: C_spawn
 position:
-  - 8
-  - 4
----
-node: 11
-item: C_spawn
-position:
-  - 8
-  - 3
----
-node: 12
-item: C_spawn
-position:
-  - 8
-  - 2
----
-node: 13
-item: C_spawn
-position:
-  - 8
+  - 5
   - 1
+item: ak47_weapon
+node: 70
 ---
-node: 14
+item: awp_weapon
+position:
+  - 3
+  - 2
+node: 71
+---
+item: T_spawn
+position:
+  - 0
+  - 0
+node: 72
+---
+position:
+  - 1
+  - 0
+item: T_spawn
+node: 73
+---
+node: 74
 item: C_spawn
-position:
-  - 8
-  - 0
----
-node: 15
-item: T_spawn
-position:
-  - 0
-  - 4
----
-node: 16
-item: T_spawn
 position:
   - 0
   - 3
 ---
-node: 17
-item: T_spawn
+item: C_spawn
+node: 75
 position:
-  - 0
+  - 4
   - 2
----
-node: 18
-item: T_spawn
-position:
-  - 0
-  - 1
----
-node: 19
-item: T_spawn
-position:
-  - 0
-  - 0

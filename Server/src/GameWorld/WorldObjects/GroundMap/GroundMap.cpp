@@ -1,5 +1,6 @@
 #include "GroundMap.h"
 #include <string>
+#include <utility>
 
 GroundMap::GroundMap(const std::string& map_type) {
 	MapParser parser;
@@ -63,6 +64,23 @@ void GroundMap::set_limits(b2World* world) {
 	fixture_def.shape = &edge_shape;
 	static_body4->CreateFixture(&fixture_def);
 }
+
+
+std::list<std::unique_ptr<Weapon>> GroundMap::fill_weapons() {
+	std::list<std::unique_ptr<Weapon>> weapons;
+	for (auto it = positions.begin(); it != positions.end(); ++it) {
+		if (it->is_weapon()){
+			std::unique_ptr<Weapon> weapon(
+					WeaponFactory::create(it->get_type()));
+			weapon->set_pos(it->get_x(), it->get_y());
+			weapons.push_back(std::move(weapon));
+		}
+	}
+	return weapons;
+}
+
+
+
 
 
 

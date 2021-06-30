@@ -16,6 +16,8 @@ class AttackInformation;
 
 class Weapon {
 	protected:
+		int pos_x;
+		int pos_y;
 		bool activated;
 		unsigned int price;
 		char damage_min;
@@ -30,6 +32,8 @@ class Weapon {
 
 		void activate();
 
+		void set_pos(int x, int y);
+		void get_pos(int& x, int& y);
 		void deactivate();
 
 		virtual void attack(AttackInformation& attack_info,

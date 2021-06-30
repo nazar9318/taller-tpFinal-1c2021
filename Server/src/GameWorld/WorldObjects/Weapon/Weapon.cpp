@@ -14,6 +14,16 @@ void Weapon::activate() {
 	activated = true;
 }
 
+void Weapon::set_pos(int x, int y) {
+	pos_x = x;
+	pos_y = y;
+}
+void Weapon::get_pos(int& x, int& y) {
+	x = pos_x;
+	y = pos_y;
+}
+
+
 void Weapon::attack(AttackInformation& attack_info,
 	 		std::list<Block>& blocks, std::map<char,
 	 					 Character>& characters) {}

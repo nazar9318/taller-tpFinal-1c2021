@@ -9,6 +9,7 @@ GameWorld::GameWorld(const std::string& map_type):
 	b2Vec2 gravity(0, 0);
 	world = new b2World(gravity);
 	blocks = ground.fill_blocks(world);
+	weapons_in_ground = ground.fill_weapons();
 	fase_type = FaseType::INITIAL_FASE;
 }
 

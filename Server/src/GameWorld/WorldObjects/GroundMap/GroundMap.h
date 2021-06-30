@@ -5,6 +5,11 @@
 #include <syslog.h>
 #include <list>
 #include <string>
+#include <tuple>
+#include <memory>
+#include "WeaponFactory.h"
+
+#include "Weapon.h"
 #include "Block.h"
 #include "Position.h"
 #include "Team.h"
@@ -28,7 +33,7 @@ class GroundMap {
 		std::vector<Position*> get_bomb_zone();
 		std::vector<Position*> get_zone(Team team);
 		std::vector<Position*> get_drawable_positions();
-
+		std::list<std::unique_ptr<Weapon>> fill_weapons();
 		~GroundMap();
 
 	private:

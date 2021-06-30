@@ -5,7 +5,6 @@ Client::Client(const std::string& host, const std::string& port):
 			 reciever(socket, model_events), sender(socket, client_events) {}
 
 		
-		
 void Client::execute(int argc, char** argv) {
 	Initiator initiator(reciever, sender, model_events, client_events);
 	bool game_started;

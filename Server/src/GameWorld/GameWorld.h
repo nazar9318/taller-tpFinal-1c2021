@@ -4,8 +4,10 @@
 #include <mutex>
 #include <vector>
 #include <list>
-#include <map>
+#include <unordered_map>
+#include <memory>
 
+#include "Weapon.h"
 #include "GroundMap.h"
 #include "ErrorEvent.h"
 #include "Configuration.h"
@@ -30,6 +32,7 @@ class GameWorld {
 		std::map<char, Character> characters; 
 		std::list<Block> blocks;
 		FaseType fase_type;
+		std::list<std::unique_ptr<Weapon>> weapons_in_ground;
 	public:
 		GameWorld(const std::string& map_type);
 		void add_player_if_not_full(char id);

@@ -39,6 +39,9 @@ class MainWindow : public QMainWindow {
         QGraphicsPixmapItem* createPlaceable();
         QGraphicsPixmapItem* createNewItem();
         QGraphicsPixmapItem* createSpawn();
+        void addSquare(QMouseEvent* event);
+        bool thereIsFloorIn(std::vector<YAML::Node> &nodes, int &x, int &y);
+        bool hasPos(std::vector<size_t> &vector, size_t pos);
         int delay_cnt;
 
     private slots:

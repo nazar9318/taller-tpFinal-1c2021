@@ -8,9 +8,9 @@
 #include <cstdlib>
 #include <QGraphicsRectItem>
 
-#define BASE_X 65
-#define BASE_Y 65
-#define FLOOR_SIZE 64
+#define BASE_X 33
+#define BASE_Y 33
+#define FLOOR_SIZE 32
 
 MainWindow::MainWindow(QWidget *parent) :
 QMainWindow(parent), ui(new Ui::MainWindow), delay_cnt(0) {
@@ -46,48 +46,71 @@ void MainWindow::saveObjects(YAML::Emitter &emitter) {
     }
 }
 
+bool MainWindow::thereIsFloorIn(std::vector<YAML::Node> &nodes, int &x, int &y) {
+    for (size_t i = 0; i < nodes.size(); i++) {
+        bool is_in_x = nodes[i]["position"][0].as<int>() == x;
+        bool is_in_y = nodes[i]["position"][1].as<int>() == y;
+        return is_in_x && is_in_y;
+    }
+    return false;
+}
+
 void MainWindow::saveBases(YAML::Emitter &emitter) {
     int i = 0;
+    std::vector<YAML::Node> nodes;
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
         if ((name.find("base") != std::string::npos)) {
-            YAML::Node node;
-            node["node"] = i;
-            i++;
-            YAML::Node coordinates;
-            coordinates.push_back((int)item->pos().x()/BASE_X);
-            coordinates.push_back((int)item->pos().y()/BASE_Y);
-            node["item"] = item->data(0).toString().toStdString();
-            node["position"] = coordinates;
-            emitter << node;
+            int x = (int)item->pos().x()/BASE_X;
+            int y = (int)item->pos().y()/BASE_Y;
+            if (!thereIsFloorIn(nodes, x, y)) {
+                YAML::Node node;
+                node["node"] = i;
+                i++;
+                YAML::Node coordinates;
+                coordinates.push_back(x);
+                coordinates.push_back(y);
+                node["item"] = item->data(0).toString().toStdString();
+                node["position"] = coordinates;
+                emitter << node;
+                nodes.push_back(node);
+            }
         }
     }
+}
+
+bool MainWindow::hasPos(std::vector<size_t> &vector, size_t pos) {
+    return std::find(vector.begin(), vector.end(), pos) != vector.end();
 }
 
 size_t MainWindow::height() {
     size_t height = 0;
+    std::vector<size_t> count_heights;
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
         if (name.size() > 0) {
-            if ((size_t) item->pos().y() > height) {
-                height = (size_t)item->pos().y();
+            if (!hasPos(count_heights, (size_t)item->pos().y())) {
+                count_heights.push_back(item->pos().y());
+                height++;
             }
         }
     }
-    return height/BASE_Y+1;
+    return height;
 }
 
 size_t MainWindow::width() {
     size_t width = 0;
+    std::vector<size_t> count_width;
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
         if (name.size() > 0) {
-            if ((size_t) item->pos().x() > width) {
-                width = (size_t)item->pos().x();
+            if (!hasPos(count_width, (size_t)item->pos().x())) {
+                count_width.push_back(item->pos().x());
+                width++;
             }
         }
     }
-    return width/BASE_X+1;
+    return width;
 }
 
 void MainWindow::on_save_clicked() {
@@ -114,7 +137,7 @@ void MainWindow::on_load_clicked() {
         QString q_new_item_name = QString::fromStdString(new_item_name);
         if (q_new_item_name.toStdString().find("spawn") != std::string::npos) {
             QPixmap pix(":/resources/" + q_new_item_name + ".png");
-            QPixmap pixmap = pix.scaled(QSize(32, 32));
+            QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE/2, FLOOR_SIZE/2));
             item = new QGraphicsPixmapItem(pixmap);
         } else if (q_new_item_name.toStdString().find("box") != std::string::npos) {
             QPixmap pix(":/resources/" + q_new_item_name + ".png");
@@ -125,7 +148,9 @@ void MainWindow::on_load_clicked() {
             QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE));
             item = new QGraphicsPixmapItem(pixmap);
         } else {
-            item = new QGraphicsPixmapItem(QPixmap(":/resources/" + q_new_item_name + ".png"));
+            QPixmap pix(":/resources/" + q_new_item_name + ".png");
+            QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE));
+            item = new QGraphicsPixmapItem(pixmap);
         }
         item->setFlag(QGraphicsItem::ItemIsMovable, true);
         int x = (nodes[i]["position"][0].as<float>())*BASE_X+1;
@@ -212,7 +237,8 @@ QGraphicsPixmapItem* MainWindow::createFloor() {
 
 QGraphicsPixmapItem* MainWindow::createPlaceable() {
     QPixmap pix(":/resources/" + this->dragged + ".png");
-    return new QGraphicsPixmapItem(pix);
+    QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE/2));
+    return new QGraphicsPixmapItem(pixmap);
 }
 
 QGraphicsPixmapItem* MainWindow::createNewItem() {
@@ -222,36 +248,30 @@ QGraphicsPixmapItem* MainWindow::createNewItem() {
     return isFloor() ? createFloor() : createPlaceable();
 }
 
-void MainWindow::mouseMoveEvent(QMouseEvent* event) {
-    if (this->dragged.compare("color") == 0) {
-        delay_cnt++;
-        if (delay_cnt < 50) {
-            return;
-        }
-        delay_cnt = 0;
-        QGraphicsRectItem* item1 = new QGraphicsRectItem(0, 0, BASE_X, BASE_Y);
-        int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
-        int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
-        int x = x_0*BASE_X;
-        int y = y_0*BASE_Y;
-        item1->setPos(x, y);
-        item1->setBrush(QBrush(Qt::red));
-        item1->setData(0, "color");
-        scene->addItem(item1);
-    }
-}
-
-void MainWindow::mousePressEvent(QMouseEvent* event) {
-    this->dragged = "color";
-    QGraphicsRectItem* item1 = new QGraphicsRectItem(0, 0, BASE_X, BASE_Y);
+void MainWindow::addSquare(QMouseEvent* event) {
     int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
     int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
     int x = x_0*BASE_X;
     int y = y_0*BASE_Y;
+    QGraphicsRectItem* item1 = new QGraphicsRectItem(0, 0, BASE_X, BASE_Y);
     item1->setPos(x, y);
     item1->setBrush(QBrush(Qt::red));
     item1->setData(0, "color");
     scene->addItem(item1);
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent* event) {
+    delay_cnt++;
+    if (delay_cnt < BASE_X) {
+        return;
+    }
+    delay_cnt = 0;
+    this->addSquare(event);
+}
+
+void MainWindow::mousePressEvent(QMouseEvent* event) {
+    this->dragged = "color";
+    this->addSquare(event);
 }
 
 void MainWindow::on_button_clicked() {
@@ -262,11 +282,13 @@ void MainWindow::on_button_clicked() {
             QPushButton* button = (QPushButton*)sender();
             new_item->setData(0, button->objectName());
             new_item->setFlag(QGraphicsItem::ItemIsMovable, true);
-            //new_item->setFlag(QGraphicsItem::ItemIsSelectable, true);
-            new_item->setPos(item->pos().x()+1, item->pos().y()+1);
-            this->scene->addItem(new_item);
-            this->scene->removeItem(item);
-            delete item;
+            //QGraphicsItem *it = this->ui->map->itemAt(item->pos().x()+1, item->pos().y()+1);
+            //if (it->data(0).toString().toStdString().find("base") == std::string::npos) {
+                new_item->setPos(item->pos().x()+1, item->pos().y()+1);
+                this->scene->addItem(new_item);
+                this->scene->removeItem(item);
+                delete item;
+            //}
         }
     }
 }
@@ -275,7 +297,6 @@ void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
     if (this->dragged.compare("color") != 0) {
         QGraphicsPixmapItem *item = this->createNewItem();
         item->setFlag(QGraphicsItem::ItemIsMovable, true);
-        //item->setFlag(QGraphicsItem::ItemIsSelectable, true);
         int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
         int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
         int x = x_0*BASE_X+1;

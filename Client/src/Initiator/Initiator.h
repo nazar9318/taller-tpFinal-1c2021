@@ -29,7 +29,7 @@ class Initiator {
 
 		// returns true if player is logged in.
 		void launch(Socket& socket, int argc, char** argv, bool &game_started,
-						std::map<char, PlayerInformation>& players);
+						std::map<char, std::string>& players, char& self_id);
 		~Initiator();
 
 	private:

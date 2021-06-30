@@ -31,7 +31,7 @@ void WeaponAutomatic::attack(AttackInformation& attack_info,
 				continue;
 			if (output.fraction < closest_fraction) {
 				closest_fraction = output.fraction;
-			}            
+			}
 		}
 	}
 	std::map<char,Character>::iterator closest_character;
@@ -41,7 +41,8 @@ void WeaponAutomatic::attack(AttackInformation& attack_info,
 			b2RayCastOutput output;
 			if (!f->RayCast(&output, input, 0))
 				continue;
-			if (output.fraction < closest_fraction) {
+			if (output.fraction < closest_fraction && 
+					(it->first != attack_info.get_attacker_id())) {
 				closest_fraction = output.fraction;
 				is_static = false;
 				closest_character = it;
@@ -52,12 +53,13 @@ void WeaponAutomatic::attack(AttackInformation& attack_info,
 	attack_info.set_receptor(TypeReceptor::NO_RECEPTOR);
 	b2Vec2 intersection_point = p1 + closest_fraction * (p2 - p1);
 	float distance = (intersection_point - p1).Length();
-	if (is_static) {
+	if (is_static && (closest_fraction < 1)) {
 		attack_info.set_receptor(TypeReceptor::STATIC);
-	} else {
+	} else if (!is_static) {
 		char damage = calculate_damage(distance);
 		if (damage > 0) {
 			attack_info.set_receptor(TypeReceptor::CHARACTER);
+			attack_info.add_receiver_id(closest_character->first);
 			closest_character->second.receive_damage(attack_info);
 		}
 	}

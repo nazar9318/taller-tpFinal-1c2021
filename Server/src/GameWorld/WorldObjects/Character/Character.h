@@ -65,11 +65,11 @@ class Character {
 
 		b2Vec2 get_pos();
 
-		void takeDamage(char points);
+		void take_damage(char points);
 		
 		char getLifePoints();
 
-		void attack(std::list<Block>& blocks,
+		void attack(char self_id, std::list<Block>& blocks,
 			 std::map<char, Character>& characters);
 
 		float get_angle();

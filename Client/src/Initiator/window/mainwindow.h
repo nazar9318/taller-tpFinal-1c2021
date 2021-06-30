@@ -15,7 +15,6 @@
 #include <QSignalMapper>
 #include <QTimer>
 
-#include "PlayerInformation.h"
 #include "CreateMatchEvent.h"
 #include "JoinMatchEvent.h"
 #include "ReceiveMatchesEvent.h"
@@ -45,7 +44,8 @@ private:
     EventSenderThread& sender;
     ProtectedQueue<std::unique_ptr<Event>>& client_events;
     ProtectedQueue<Event>& model_events;
-    std::map<char, PlayerInformation>& players;
+    std::map<char, std::string>& players;
+    char self_id;
     std::string user_name;
     QTimer* matches_timer;
     QTimer* players_joined_timer;
@@ -55,7 +55,8 @@ public:
             EventSenderThread& sender,
             ProtectedQueue<Event>& model_events,
             ProtectedQueue<std::unique_ptr<Event>>& client_events,
-            std::map<char, PlayerInformation>& players,
+            std::map<char, std::string>& players,
+            char self_id,
             QWidget *parent = nullptr);
 
     void createMatch(const QString& map_name);

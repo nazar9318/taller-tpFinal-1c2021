@@ -10,10 +10,10 @@ Initiator::Initiator(ModelRecieverThread& rcv, EventSenderThread& snd,
 
 void Initiator::launch(Socket& socket, int argc,
 			 char** argv, bool &game_started,
-			 std::map<char, PlayerInformation>& players) {
+			 std::map<char, std::string>& players, char& self_id) {
 	QApplication a(argc, argv);
 	MainWindow w(socket, game_started, receiver,
-				 sender, model_events, client_events, players);
+				 sender, model_events, client_events, players, self_id);
 	w.show();
 	a.exec();
 }

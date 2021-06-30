@@ -20,11 +20,12 @@ MainWindow::MainWindow(Socket& skt, bool &started,
 		 ModelRecieverThread& rcv, EventSenderThread& snd,
 		 ProtectedQueue<Event>& m_events,
 		 ProtectedQueue<std::unique_ptr<Event>>& c_events,
-		 std::map<char, PlayerInformation>& users,
+		 std::map<char, std::string>& users, char id,
 		 QWidget *parent)
  		: socket(skt), game_started(started), receiver(rcv),
  		 sender(snd), model_events(m_events),
- 		 client_events(c_events), players(users), QMainWindow(parent),
+ 		 client_events(c_events), players(users), self_id(id),
+ 		  QMainWindow(parent),
  		 ui(new Ui::MainWindow) {
    	ui->setupUi(this);
 	this->setStyleSheet("background-color: white;");
@@ -124,9 +125,8 @@ void MainWindow::createMatch(const QString& map_name) {
 		syslog(LOG_INFO, "[%s:%i]: Se creo la partida %s"
 			, __FILE__, __LINE__, match_name.c_str());
 		// seria la posicion 2 en el protocolo.
-		char id = is_successful.get_msg()[1];
-		PlayerInformation this_player(user_name, true);
-		players[id] = std::move(this_player);
+		self_id = is_successful.get_msg()[1];
+		players[self_id] = user_name;
 	    ui->stackedWidget->setCurrentIndex(CREATE_MATCH_WAITING);
 	    receiver.start();
 	    players_joined_timer->start(1000);
@@ -250,9 +250,8 @@ void MainWindow::joinMatch(const QString &text) {
 					"falta aclarar cual es el error");
 		return;
 	}
-	char id = is_successful.get_msg()[1];
-	PlayerInformation this_player(user_name, true);
-	players[id] = std::move(this_player);
+	self_id = is_successful.get_msg()[1];
+	players[self_id] = user_name;
 	matches_timer->stop();
 	ui->stackedWidget->setCurrentIndex(JOIN_MATCH_WAITING);
 	syslog(LOG_INFO, "[%s:%i]: Se unio a la partida %s"
@@ -270,7 +269,7 @@ void MainWindow::update_players_list(Event& players_list) {
 	std::vector<char> msg = players_list.get_msg();
 	unsigned i = 1;
 	// se que el mensaje es del tipo id_1Nombre_1id_2Nombre_2...
-    std::map<char, PlayerInformation> new_players;
+    std::map<char, std::string> new_players;
 	while (i < players_list.get_size()) {
 		char player_id = msg[i];
 		i++;
@@ -280,7 +279,7 @@ void MainWindow::update_players_list(Event& players_list) {
 		if (players.find(player_id) != players.end()) {
 			new_players[player_id] = std::move(players[player_id]);
 		} else {
-			PlayerInformation player(player_name);
+			std::string player(player_name);
 			new_players[player_id] = std::move(player);
 			//new_players.emplace(std::make_pair(player_id, player));
 		}

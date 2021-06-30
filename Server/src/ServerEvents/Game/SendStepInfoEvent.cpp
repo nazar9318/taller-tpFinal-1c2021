@@ -2,6 +2,8 @@
 
 SendStepInfoEvent::SendStepInfoEvent(StepInformation& step) {
 	this->msg.push_back((char)ModelTypeEvent::STEP_INFO);
+	
+
 	char type = step.get_type();
 	this->msg.push_back(type);
 	//this->msg.push_back(step.get_number_players());
@@ -12,6 +14,12 @@ SendStepInfoEvent::SendStepInfoEvent(StepInformation& step) {
 		std::vector<char> ground_info = step.get_ground_info();
 		*/
 	} else if (type == FaseType::INITIAL_FASE) {
+		//std::vector<char> players_info = step.get_players_info();
+		// id_player(char), pos_x(int), pos_y(int), life(char), 
+		// std::map<id, player*>
+		//std::vector<char> attacks_info = step.get_buying_things_info();
+
+
 		//std::vector
 	} else if (type == FaseType::END_ROUND) {
 

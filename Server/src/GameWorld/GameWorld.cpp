@@ -90,8 +90,6 @@ bool GameWorld::simulate_step() {
 }
 
 
-
-
 void GameWorld::change_teams() { 
 }
 
@@ -99,7 +97,7 @@ void GameWorld::change_teams() {
 void GameWorld::simulate_playing_step() { 
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		it->second.apply_impulses();
-		it->second.attack(blocks, characters);
+		it->second.attack(it->first, blocks, characters);
 	}
 	
 	

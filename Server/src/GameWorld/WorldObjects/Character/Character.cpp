@@ -92,10 +92,10 @@ void Character::apply_impulses() {
 }
 
 
-void Character::attack(std::list<Block>& blocks,
+void Character::attack(char self_id, std::list<Block>& blocks,
      std::map<char, Character>& characters) {
 	if (life_points > 0) {
-		AttackInformation attack_info(this, get_opposite(team));
+		AttackInformation attack_info(self_id, this, get_opposite(team));
 		weapons[current_weapon]->
 						attack(attack_info, blocks, characters);
 	}
@@ -128,7 +128,7 @@ void Character::change_weapon() {
 		current_weapon = (current_weapon + 1) % number_weapons;
 }
 
-void Character::takeDamage(char points) {
+void Character::take_damage(char points) {
 	if (life_points > 0) {
 		if (life_points > points) {
 			life_points -= points;
@@ -137,6 +137,21 @@ void Character::takeDamage(char points) {
 		}
 	}
 }
+
+
+void Character::receive_damage(AttackInformation& attack) {
+	if ((attack.get_team() == team) && life_points > 0) {
+		take_damage(attack.get_damage());
+		if (life_points == 0) {
+			attack.add_receiver(this, true);
+		} else {
+			attack.add_receiver(this, false);
+		}
+	}
+}
+
+
+
 
 Character::~Character() {
 }

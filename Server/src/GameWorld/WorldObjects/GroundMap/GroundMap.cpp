@@ -118,7 +118,7 @@ std::vector<Position*> GroundMap::get_zone(Team team) {
 std::vector<Position*> GroundMap::get_drawable_positions() {
 	std::vector<Position*> drawable_zone;
 	for (auto it = positions.begin(); it != positions.end(); ++it) {
-		if (it->is_bomb_zone() || it->is_ground() || it->is_block() || it->is_weapon())
+		if (it->is_bomb_zone() || it->is_ground() || it->is_block())
 			drawable_zone.push_back(&(*it));
 	}
 	return drawable_zone;

@@ -5,7 +5,6 @@
 #include <iostream>
 #include <syslog.h>
 #include <map>
-#include "PlayerInformation.h"
 
 
 #include "Event.h"
@@ -21,7 +20,7 @@ class Client {
 	ProtectedQueue<std::unique_ptr<Event>> client_events;
 	ModelRecieverThread reciever;
 	EventSenderThread sender;
-	std::map<char, PlayerInformation> players;
+	std::map<char, std::string> players;
 
 	public:
 		Client(const std::string& host, const std::string& port);

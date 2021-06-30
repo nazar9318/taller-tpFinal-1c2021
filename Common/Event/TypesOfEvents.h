@@ -27,6 +27,7 @@ enum ModelTypeEvent: char {
 	SUCCESSFUL_ENTRY, // Loby
 	PLAYERS_ID_LIST, // Loby
 	SEND_FULL_MAP, // EventType, width,height, x,y, type, ...
+	SEND_WEAPONS,
 	GAME_STARTED, // primer mensaje a todos, luego full map.
 	STEP_INFO, // id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
 	GAME_FINISHED, //manda los resultados. FALTA USAR.

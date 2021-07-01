@@ -1,13 +1,12 @@
 #include "GameMap.h"
 
-
-
-GameMap::GameMap(Renderer& renderer):renderer(renderer), tile_container(TileContainer::getInstance()),
-                                    sprite_container(SpriteContainer::getInstance()){}
+GameMap::GameMap(Renderer& renderer) : renderer(renderer),
+tile_container(TileContainer::getInstance()),
+sprite_container(SpriteContainer::getInstance()) {}
 
 void GameMap::create() {}
 
-void GameMap::loadMedia(){
+void GameMap::loadMedia() {
   syslog(LOG_INFO, "[%s:%i]: Por cargar las texturas de los Tiles",
                      __FILE__, __LINE__);
   tile_container.loadMedia(renderer);
@@ -16,26 +15,26 @@ void GameMap::loadMedia(){
   sprite_container.loadMedia(renderer);
 }
 
-void GameMap::addTile(Tile tile){
+void GameMap::addTile(Tile tile) {
   tiles.push_back(std::move(tile));
 }
 
-void GameMap::addWeapon(WeaponSprite weapon){
+void GameMap::addWeapon(WeaponSprite weapon) {
   weapons.push_back(std::move(weapon));
 }
 
-void GameMap::setSize(int& width, int& height){
+void GameMap::setSize(int& width, int& height) {
   map_width = width;
   map_height = height;
 }
 
 /*-------------------------Metodos para render----------------------------*/
 
-void GameMap::cleanWeapons(){
-  weapons.clear();
+void GameMap::cleanWeapons() { 
+  weapons.clear(); 
 }
 
-void GameMap::renderGround(){
+void GameMap::renderGround() {
 
   SDL_Rect quad = {0};
 
@@ -48,7 +47,7 @@ void GameMap::renderGround(){
   //                    __FILE__, __LINE__);
 }
 
-void GameMap::renderWeapons(){
+void GameMap::renderWeapons() {
 
   SDL_Rect quad = {0};
 
@@ -60,10 +59,6 @@ void GameMap::renderWeapons(){
   // syslog(LOG_INFO, "[%s:%i]: Los Weapons fueron renderizados",
   //                    __FILE__, __LINE__);
 }
-
-
-
-
 
 /*------------------------------------------------------------------------*/
 

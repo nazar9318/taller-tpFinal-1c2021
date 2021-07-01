@@ -1,38 +1,35 @@
 #include "Game.h"
 
 Game::Game(ProtectedQueue<Event>& model,
-		 ProtectedQueue<std::unique_ptr<Event>>& client, std::map<char, std::string>& charactersInfo,
-		 char& player_id):
-		  model_events(model), client_events(client),
-		  is_running(true), player(player_id, charactersInfo.at(player_id)),
-			window("Counter 2d", 800, 600, false), renderer(window), map(renderer){
-
-			for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
-				if(it->first != player_id){
-					ClientCharacter character(it->second);
-					characters.insert({it->first, std::move(character)});
-				}
-			}
+	ProtectedQueue<std::unique_ptr<Event>>& client,
+	std::map<char, std::string>& charactersInfo, char& player_id) :
+model_events(model), client_events(client), is_running(true),
+player(player_id, charactersInfo.at(player_id)),
+window("Counter 2d", 800, 600, false), renderer(window), map(renderer) {
+	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
+		if (it->first != player_id) {
+			ClientCharacter character(it->second);
+			characters.insert({it->first, std::move(character)});
+		}
+	}
 }
 
 void Game::execute() {
-	try{
+	try {
 		loadMedia();
 		while (is_running) {
 			is_running = handle_events();
 			process_events();
-
 			render();
 		}
-	} catch(std::exception& e){
+	} catch (std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: Exception: %s", __FILE__, __LINE__,  e.what());
 	}
-
 }
 
 void Game::loadMedia() { map.loadMedia(); }
 
-void Game::render(){
+void Game::render() {
 	renderer.clearScreen();
 	map.renderGround();
 	map.renderWeapons();
@@ -69,29 +66,29 @@ bool Game::handle_events() {
 	return true;
 }
 
-void Game::handle_key_press(SDL_Event& event){
+void Game::handle_key_press(SDL_Event& event) {
 	switch (event.key.keysym.sym) {
 		case SDLK_w: {
 			std::unique_ptr<Event> move(new MoveEvent(Direction::UP));
 			this->client_events.push(move);
 			break;
 		}
-		case SDLK_a:{
+		case SDLK_a: {
 			std::unique_ptr<Event> move(new MoveEvent(Direction::LEFT));
 			this->client_events.push(move);
 			break;
 		}
-		case SDLK_d:{
+		case SDLK_d: {
 			std::unique_ptr<Event> move(new MoveEvent(Direction::RIGHT));
 			this->client_events.push(move);
 			break;
 		}
-		case SDLK_s:{
+		case SDLK_s: {
 			std::unique_ptr<Event> move(new MoveEvent(Direction::DOWN));
 			this->client_events.push(move);
 			break;
 		}
-		case SDLK_SPACE:{
+		case SDLK_SPACE: {
 			std::unique_ptr<Event> grab(new GrabWeaponEvent());
 			this->client_events.push(grab);
 			break;
@@ -104,31 +101,7 @@ void Game::handle_key_release(SDL_Event& event) {
 		event.key.keysym.sym == SDLK_d || event.key.keysym.sym == SDLK_s ) {
 			std::unique_ptr<Event> move(new MoveEvent(Direction::STOP_MOVING));
 			this->client_events.push(move);
-		}
-	/*switch (event.key.keysym.sym) {
-		case SDLK_w: {
-			std::unique_ptr<Event> move(new MoveEvent(Direction::STOP_MOVING));
-			this->client_events.push(move);
-			break;
-		}
-		case SDLK_a: {
-			std::unique_ptr<Event> move(new MoveEvent(Direction::STOP_MOVING));
-			this->client_events.push(move);
-			break;
-		}
-		case SDLK_d:{
-			std::unique_ptr<Event> move(new MoveEvent(Direction::STOP_MOVING));
-			this->client_events.push(move);
-			break;
-		}
-		case SDLK_s: {
-			std::unique_ptr<Event> move(new MoveEvent(Direction::STOP_MOVING));
-			this->client_events.push(move);
-			break;
-		}
-		case SDLK_SPACE:
-		break;
-	}*/
+	}
 }
 
 void Game::handle_click(SDL_Event& event) {
@@ -138,8 +111,6 @@ void Game::handle_click(SDL_Event& event) {
 			std::unique_ptr<Event> shoot(new AttackEvent());
 			break;
 		}
-			// std::unique_ptr<Event> event(new MoveEvent());
-			// client_events.push(event);
 	}
 }
 
@@ -147,7 +118,7 @@ void Game::handle_unclick(SDL_Event& event) {
 	switch (event.button.button) {
 		case SDL_BUTTON_RIGHT:
 			break;
-		case SDL_BUTTON_LEFT:{
+		case SDL_BUTTON_LEFT: {
 			std::unique_ptr<Event> shoot(new StopAttack());
 			break;
 		}
@@ -162,7 +133,6 @@ void Game::process_events() {
 	bool queue_not_empty = true;
 	int max_iterations = 15;//harcodeo, va en arch de config.
 	int i = 0;
-
 	while (queue_not_empty && max_iterations > i) {
 		try {
 			Event event = model_events.pop();
@@ -177,6 +147,5 @@ void Game::process_events() {
 void Game::update() {
 	is_running = false;
 }
-
 
 Game::~Game() {}

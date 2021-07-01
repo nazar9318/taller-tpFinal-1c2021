@@ -6,7 +6,6 @@
 #include "Texture.h"
 
 class Camera {
-
   private:
     SDL_Rect box = {0};
     Renderer& renderer;

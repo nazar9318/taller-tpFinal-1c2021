@@ -27,5 +27,4 @@ class WeaponSprite {
 		WeaponSprite& operator=(const WeaponSprite &other) = delete;
 };
 
-
 #endif

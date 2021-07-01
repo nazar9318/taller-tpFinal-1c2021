@@ -4,7 +4,6 @@
 #include <string>
 
 class ClientPlayer {
-
 	private:
 		char& id;
 		std::string& name;
@@ -18,6 +17,5 @@ class ClientPlayer {
 		ClientPlayer(const ClientPlayer &other) = delete;
 		ClientPlayer& operator=(const ClientPlayer &other) = delete;
 };
-
 
 #endif

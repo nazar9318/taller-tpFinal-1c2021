@@ -15,7 +15,6 @@ class SpriteContainer {
 		std::map<char, Texture> container;
 
 	public:
-
 		/* Carga las texturas de los sprites */
 		void loadMedia(Renderer& renderer);
 

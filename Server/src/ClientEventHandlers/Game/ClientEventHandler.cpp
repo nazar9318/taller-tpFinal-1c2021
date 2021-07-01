@@ -38,7 +38,9 @@ void ClientEventHandler::handle(Event& event) {
 			}
 		default:
 			{
-				throw Exception("No one matches");
+				throw Exception("[%s:%i]:No hay ningun"
+						" evento con esta caracteristica", 
+						__FILE__, __LINE__);
 			}
 	}
 }

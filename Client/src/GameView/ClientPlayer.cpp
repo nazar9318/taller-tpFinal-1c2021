@@ -10,7 +10,7 @@ ClientPlayer::~ClientPlayer() {
 
 
 void ClientPlayer::set_team(Team team) {
-	texture = &(SpriteContainer::getInstance()[id]);
+	texture = &(SpriteContainer::getInstance()[team]);
 	
 }
 

@@ -11,6 +11,7 @@
 #include "ClientCharacter.h"
 #include "Tile.h"
 #include "WeaponSprite.h"    //VER SI HAGO WEAPON Y CHARACTER COMO UNA UNICA CLASE SPRITE
+#include "Team.h"
 
 class GameMap {
 	private:
@@ -49,6 +50,7 @@ class GameMap {
 		void renderPlayer();
 		void renderGround();
 		void renderWeapons();
+		void add_character_team(char id, Team team);
 		~GameMap();
 
 	private:

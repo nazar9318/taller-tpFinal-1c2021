@@ -6,6 +6,7 @@
 #include <string>
 #include "Position.h"
 #include "FaseType.h"
+#include "Team.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
 
@@ -26,6 +27,10 @@ class StepInformation {
 		int get_waiting_time();
 		void clear();
 		void add_position(char id, int x, int y);
+		int get_wait();
+		std::vector<char> get_players_init();
+
+
 		~StepInformation();
 	private:
 		StepInformation(const StepInformation &other) = delete;

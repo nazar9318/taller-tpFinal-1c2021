@@ -28,5 +28,12 @@ size_t Event::get_size() {
 }
 
 
+void Event::push_back(int a_number) {
+	msg.push_back(*((char*)(&a_number)));
+	msg.push_back(*((char*)(&a_number) + 1));
+	msg.push_back(*((char*)(&a_number) + 2));
+	msg.push_back(*((char*)(&a_number) + 3));
+}
+
 
 Event::~Event() {}

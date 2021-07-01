@@ -4,13 +4,14 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include "SpriteContainer.h"
+#include "Team.h"
 
 class ClientCharacter {
 	private:
 		std::string name;
 		SDL_Rect box;
 		char type;
-		//Texture& texture;
+		Texture* texture;
 
 	public:
 		ClientCharacter(const std::string& name);
@@ -19,7 +20,7 @@ class ClientCharacter {
 		SDL_Rect& getBox();
 		char getType();
 		Texture& getTexture();
-
+		void set_team(Team team);
 		ClientCharacter(ClientCharacter&& other) = default;
 		ClientCharacter& operator=(ClientCharacter&& other) = default;
 

@@ -79,6 +79,8 @@ bool GameWorld::simulate_step() {
 		step_info.set_waiting_time(wait);
 		if (wait <= 0) {
 			fase_type = FaseType::PLAYING;
+			syslog(LOG_INFO, "[%s:%i]: Cambio de fase"
+			 , __FILE__, __LINE__);
 		}
 		return true;
 	} else {

@@ -51,6 +51,8 @@ class Character {
 
 		void set_move_state(Direction dir);
 
+		Team get_team();
+
 		void apply_impulses();
 
 		bool has_enough_to_buy(std::unique_ptr<Weapon>& weapon_buy);

@@ -10,6 +10,21 @@ void StepInformation::clear() {
 	//
 }
 
+int StepInformation::get_wait() {
+	return waiting_time;
+}
+
+std::vector<char> StepInformation::get_players_init() {
+	std::vector<char> v;	
+	for (auto it = characters.begin(); it != characters.end(); ++it) {
+		v.push_back(it->first); // ID
+		Team team = it->second.get_team();
+		v.push_back((char)team);
+	}
+	return v;
+}
+
+
 void StepInformation::set_type(FaseType fase_type) {
 	fase = fase_type;
 }

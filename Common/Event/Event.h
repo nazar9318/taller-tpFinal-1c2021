@@ -28,6 +28,8 @@ class Event {
 		virtual size_t get_size();
 		virtual char get_id();
 
+		void push_back(int a_number);
+
 		virtual std::vector<char> get_msg();
 		virtual char* get_data();
 

@@ -34,7 +34,7 @@ void Game::render() {
 	renderer.clearScreen();
 	map.renderGround();
 	map.renderWeapons();
-//	map.renderPlayer();
+	map.renderPlayer();
 //	map.renderOtherCharacters();
 	// renderer.setDrawColor(0xFF,0xFF,0xFF,0xFF);
 	renderer.presentScreen();

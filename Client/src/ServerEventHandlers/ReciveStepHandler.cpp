@@ -19,7 +19,25 @@ void ReciveStepHandler::handle(Event& event, GameMap& map){
     handle_end_round_fase(event_msg, map);
 }
 
-void ReciveStepHandler::handle_initial_fase(std::vector<char>& event_msg, GameMap& map){}
+void ReciveStepHandler::
+		handle_initial_fase(std::vector<char>& event_msg, GameMap& map) {
+	
+	int wait_time = *((int*)&(event_msg[2]));
+	if (wait_time <= 0) {
+		for (auto it = event_msg.begin() + 6; it != event_msg.end(); it += 2) {
+			char id = *it;
+			Team team = (Team)*(it + 1);
+			map.add_character_team(id, team);
+		}
+	} else {
+		for (auto it = event_msg.begin() + 6; it != event_msg.end(); it += 2) {
+			// leer compras. 
+		}
+	}
+
+
+
+}
 
 void ReciveStepHandler::handle_playing_fase(std::vector<char>& event_msg, GameMap& map){
 

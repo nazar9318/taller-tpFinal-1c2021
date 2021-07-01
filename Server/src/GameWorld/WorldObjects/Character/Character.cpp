@@ -171,7 +171,9 @@ void Character::receive_damage(AttackInformation& attack) {
 	}
 }
 
-
+Team Character::get_team() {
+	return team;
+}
 
 
 Character::~Character() {

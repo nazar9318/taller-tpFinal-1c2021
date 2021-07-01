@@ -61,6 +61,26 @@ void GameMap::renderWeapons() {
   //                    __FILE__, __LINE__);
 }
 
+
+void GameMap::add_character_team(char id, Team team) {
+  if (id == player.get_id()) {
+    player.set_team(team);
+  } else {
+    characters.at(id).set_team(team);
+  }
+}
+
+
+void GameMap::renderPlayer() {
+  SDL_Rect quad = {0};
+  Texture& texture(player.getTexture());
+  quad = player.getBox();
+  renderer.render(texture.getTexture(), NULL, &quad);
+
+}
+
+
+
 /*------------------------------------------------------------------------*/
 
 GameMap::~GameMap() {}

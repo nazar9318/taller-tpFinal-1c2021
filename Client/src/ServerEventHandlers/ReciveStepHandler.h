@@ -5,6 +5,7 @@
 #include "Event.h"
 #include "FaseType.h"
 #include "GameMap.h"
+#include "Team.h"
 
 class ReciveStepHandler {
 	public:

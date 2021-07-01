@@ -4,6 +4,7 @@
 
 enum ClientTypeEvent: char {
 	MOVE, //type/direction
+	ROTATE, //angle
 	START_ATTACKING, //type/angle
 	STOP_ATTACKING, //type
 	GRAB_WEAPON, //type
@@ -75,18 +76,9 @@ enum PositionType: char {
 	AWP
 };
 
-
 // CONSTANTS FOR EVENTS
-
 
 #define START_CREATE_NAME 1
 #define START_JOIN_NAME 1
-
-
-
-
-
-
-
 
 #endif

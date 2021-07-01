@@ -46,11 +46,20 @@ void MainWindow::saveObjects(YAML::Emitter &emitter) {
     }
 }
 
-bool MainWindow::thereIsFloorIn(std::vector<YAML::Node> &nodes, int &x, int &y) {
+/*bool MainWindow::thereIsFloorIn(std::vector<YAML::Node> &nodes, int &x, int &y) {
     for (size_t i = 0; i < nodes.size(); i++) {
         bool is_in_x = nodes[i]["position"][0].as<int>() == x;
         bool is_in_y = nodes[i]["position"][1].as<int>() == y;
         return is_in_x && is_in_y;
+    }
+    return false;
+}*/
+
+bool MainWindow::thereIsFloorIn(int &x, int &y) {
+    for (size_t i = 0; i < this->positions.size(); i++) {
+        bool is_in_x = positions[i].first == x;
+        bool is_in_y = positions[i].second == y;
+        if (is_in_x && is_in_y) { return true; }
     }
     return false;
 }
@@ -63,18 +72,16 @@ void MainWindow::saveBases(YAML::Emitter &emitter) {
         if ((name.find("base") != std::string::npos)) {
             int x = (int)item->pos().x()/BASE_X;
             int y = (int)item->pos().y()/BASE_Y;
-            if (!thereIsFloorIn(nodes, x, y)) {
-                YAML::Node node;
-                node["node"] = i;
-                i++;
-                YAML::Node coordinates;
-                coordinates.push_back(x);
-                coordinates.push_back(y);
-                node["item"] = item->data(0).toString().toStdString();
-                node["position"] = coordinates;
-                emitter << node;
-                nodes.push_back(node);
-            }
+            YAML::Node node;
+            node["node"] = i;
+            i++;
+            YAML::Node coordinates;
+            coordinates.push_back(x);
+            coordinates.push_back(y);
+            node["item"] = item->data(0).toString().toStdString();
+            node["position"] = coordinates;
+            emitter << node;
+            nodes.push_back(node);
         }
     }
 }
@@ -146,6 +153,10 @@ void MainWindow::on_load_clicked() {
         } else if (q_new_item_name.toStdString().find("bomb") != std::string::npos) {
             QPixmap pix(":/resources/" + q_new_item_name + ".png");
             QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE));
+            item = new QGraphicsPixmapItem(pixmap);
+        } else if (q_new_item_name.toStdString().find("weapon") != std::string::npos) {
+            QPixmap pix(":/resources/" + q_new_item_name + ".png");
+            QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE/2));
             item = new QGraphicsPixmapItem(pixmap);
         } else {
             QPixmap pix(":/resources/" + q_new_item_name + ".png");
@@ -261,12 +272,20 @@ void MainWindow::addSquare(QMouseEvent* event) {
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent* event) {
-    delay_cnt++;
-    if (delay_cnt < BASE_X) {
-        return;
+    if (this->dragged.toStdString().compare("color") == 0) {
+        delay_cnt++;
+        if (delay_cnt < BASE_X) {
+            return;
+        }
+        delay_cnt = 0;
+        int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
+        int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
+        int x = x_0*BASE_X+1;
+        int y = y_0*BASE_Y+1;
+        if (!this->thereIsFloorIn(x, y)) {
+            this->addSquare(event);
+        }
     }
-    delay_cnt = 0;
-    this->addSquare(event);
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* event) {
@@ -282,13 +301,15 @@ void MainWindow::on_button_clicked() {
             QPushButton* button = (QPushButton*)sender();
             new_item->setData(0, button->objectName());
             new_item->setFlag(QGraphicsItem::ItemIsMovable, true);
-            //QGraphicsItem *it = this->ui->map->itemAt(item->pos().x()+1, item->pos().y()+1);
-            //if (it->data(0).toString().toStdString().find("base") == std::string::npos) {
-                new_item->setPos(item->pos().x()+1, item->pos().y()+1);
+            int x = item->pos().x()+1;
+            int y = item->pos().y()+1;
+            if (!this->thereIsFloorIn(x, y)) {
+                new_item->setPos(x, y);
+                this->positions.push_back(std::make_pair(x,y));
                 this->scene->addItem(new_item);
-                this->scene->removeItem(item);
-                delete item;
-            //}
+            }
+            this->scene->removeItem(item);
+            delete item;
         }
     }
 }
@@ -302,6 +323,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
         int x = x_0*BASE_X+1;
         int y = y_0*BASE_Y+1;
         item->setPos(x, y);
+        this->positions.push_back(std::make_pair(x,y));
         item->setData(0, this->dragged);
         this->scene->addItem(item);
     }

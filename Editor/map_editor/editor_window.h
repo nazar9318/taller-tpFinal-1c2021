@@ -13,6 +13,7 @@
 #include <QGridLayout>
 #include <QFileDialog>
 #include <QObject>
+#include <vector>
 #include "yaml-cpp/yaml.h"
 
 QT_BEGIN_NAMESPACE
@@ -41,9 +42,11 @@ class MainWindow : public QMainWindow {
         QGraphicsPixmapItem* createSpawn();
         void addSquare(QMouseEvent* event);
         bool thereIsFloorIn(std::vector<YAML::Node> &nodes, int &x, int &y);
+        bool thereIsFloorIn(int &x, int &y);
+        std::vector<std::pair<int,int>> positions;
         bool hasPos(std::vector<size_t> &vector, size_t pos);
         int delay_cnt;
-
+        void mapPositions(int &x, int &y);
     private slots:
         void on_save_clicked();
 

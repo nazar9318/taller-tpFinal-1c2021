@@ -9,7 +9,7 @@
 class AttackEvent: public Event {
 	public:
 		// 0 <= angle < 360 
-		AttackEvent(int angle);
+		AttackEvent();
 		~AttackEvent();
 	private:
 		AttackEvent(const AttackEvent &other) = delete;

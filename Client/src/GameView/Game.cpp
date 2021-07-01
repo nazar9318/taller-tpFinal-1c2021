@@ -126,7 +126,7 @@ void Game::handle_click(SDL_Event& event) {
 	switch (event.button.button) {
 		case SDL_BUTTON_RIGHT: {/*Lo dejamos por si necesitamos este botón*/}
 		case SDL_BUTTON_LEFT:{
-			std::unique_ptr<Event> shoot(new AttackEvent(0/*Falta el ángulo*/));
+			std::unique_ptr<Event> shoot(new AttackEvent());
 			break;
 		}
 			// std::unique_ptr<Event> event(new MoveEvent());

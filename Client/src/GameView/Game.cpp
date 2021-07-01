@@ -13,7 +13,6 @@ Game::Game(ProtectedQueue<Event>& model,
 					characters.insert({it->first, std::move(character)});
 				}
 			}
-
 }
 
 void Game::execute() {

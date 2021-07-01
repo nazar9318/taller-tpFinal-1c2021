@@ -20,6 +20,8 @@ class WeaponShotgun : public Weapon {
 
 
         //void shoot(Character &character, uint16_t distance);
+        char calculate_damage(float distance);
+
         char get_type();
         ~WeaponShotgun();
 

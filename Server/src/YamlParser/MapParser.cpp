@@ -30,8 +30,10 @@ void MapParser::build_positions(const std::string &type,
 		, __FILE__, __LINE__);
 		const YAML::Node& obj = *it;
 		char type = get_type(obj["item"].as<std::string>());
-		int x = obj["position"][0].as<int>() * CF::size_position + CF::size_position/2;
-		int y = obj["position"][1].as<int>() * CF::size_position - CF::size_position/2;
+		int x = obj["position"][0].as<int>() * CF::size_position
+												 + CF::size_position / 2;
+		int y = obj["position"][1].as<int>() * CF::size_position 
+												 - CF::size_position / 2;
 		list.push_back(Position(x, y, type));
 	}
 }

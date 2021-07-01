@@ -15,6 +15,7 @@ class WeaponAutomatic : public Weapon {
 		unsigned int shoot_rate;
 		unsigned int shoot_freq;
 		unsigned int ammo;
+		unsigned int number_tics;
 
 	public:
 		WeaponAutomatic();
@@ -23,6 +24,7 @@ class WeaponAutomatic : public Weapon {
 			 					 Character>& characters);
 		char calculate_damage(float distance);
 
+		void deactivate();
 
 	   // void shoot(Character &character, uint16_t distance);
 		 char get_type();

@@ -20,6 +20,7 @@ class WeaponPistol : public Weapon {
 
 		char get_type();
 		~WeaponPistol();
+		char calculate_damage(float distance);
 
 	private:
 		bool empty();

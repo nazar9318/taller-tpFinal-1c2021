@@ -19,6 +19,7 @@
 #include "StepInformation.h"
 #include "FaseType.h"
 #include "Character.h"
+#include "Bomb.h"
 
 class GameWorld {
 		std::mutex m;
@@ -33,6 +34,7 @@ class GameWorld {
 		std::list<Block> blocks;
 		FaseType fase_type;
 		std::list<std::unique_ptr<Weapon>> weapons_in_ground;
+		//Bomb bomb;
 	public:
 		GameWorld(const std::string& map_type);
 		void add_player_if_not_full(char id);

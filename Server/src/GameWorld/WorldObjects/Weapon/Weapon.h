@@ -37,7 +37,15 @@ class Weapon {
 		void set_pos(int x, int y);
 		void get_pos(int& x, int& y);
 		virtual char get_type();
-		void deactivate();
+		virtual void deactivate();
+
+		// POST: Retorna true si el mas cercano es un player. 
+		bool find_closest_character(AttackInformation& attack_info,
+							std::list<Block>& blocks,
+							std::map<char, Character>& characters,
+							float& angle,
+							std::map<char,Character>::iterator& closest_char,
+							float& distance);
 
 		virtual void attack(AttackInformation& attack_info,
 			 		std::list<Block>& blocks, std::map<char,

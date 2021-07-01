@@ -7,7 +7,7 @@
 
 #include "TileContainer.h"
 #include "SpriteContainer.h"
-#include "Player.h"
+#include "ClientPlayer.h"
 #include "Tile.h"
  #include "WeaponSprite.h"    //VER SI HAGO WEAPON Y CHARACTER COMO UNA UNICA CLASE SPRITE
 
@@ -20,7 +20,6 @@ class GameMap {
 		SpriteContainer& sprite_container;
 
 		/*Entidades*/
-		Player player;
 		std::vector<Tile> tiles;
 		std::vector<WeaponSprite> weapons;
 		// std::vector<Character> weapons;

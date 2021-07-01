@@ -17,6 +17,9 @@
 #include "SDLException.h"
 #include "Renderer.h"
 
+#include "ClientPlayer.h"
+#include "ClientCharacter.h"
+
 #include <SDL2/SDL.h>
 
 class Game {
@@ -26,12 +29,17 @@ class Game {
 	ModelEventHandler handler;
 	bool is_running;
 
+	ClientPlayer player;
+	std::map<char, ClientCharacter> characters;
+
+
 	Window window;
 	Renderer renderer;
 
 	public:
 		Game(ProtectedQueue<Event>& model_events,
-		ProtectedQueue<std::unique_ptr<Event>>& client_events);
+		ProtectedQueue<std::unique_ptr<Event>>& client_events, std::map<char, std::string>& characters,
+		char& player_id);
 
 		void execute();
 		~Game();

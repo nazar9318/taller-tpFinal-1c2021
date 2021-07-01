@@ -1,9 +1,19 @@
 #include "Game.h"
 
 Game::Game(ProtectedQueue<Event>& model,
-		 ProtectedQueue<std::unique_ptr<Event>>& client):
+		 ProtectedQueue<std::unique_ptr<Event>>& client, std::map<char, std::string>& charactersInfo,
+		 char& player_id):
 		  model_events(model), client_events(client),
-		  is_running(true), window("Counter 2d", 800, 600, false), renderer(window), map(renderer){
+		  is_running(true), player(player_id, charactersInfo.at(player_id)),
+			window("Counter 2d", 800, 600, false), renderer(window), map(renderer){
+
+			for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
+				if(it->first != player_id){
+					ClientCharacter character(it->second);
+					characters.insert({it->first, std::move(character)});
+				}
+			}
+
 }
 
 void Game::execute() {
@@ -157,9 +167,6 @@ void Game::process_events() {
 	while (queue_not_empty && max_iterations > i) {
 		try {
 			Event event = model_events.pop();
-			// syslog(LOG_INFO, "[%s:%i]: Pop de un evento del server",
-     	// 						 __FILE__, __LINE__);
-
 			handler.handle(event, map);
 			i++;
 		} catch(ExceptionEmptyQueue& e) {

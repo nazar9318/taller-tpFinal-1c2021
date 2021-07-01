@@ -10,11 +10,13 @@
 
 #include "ReciveMapHandler.h"
 #include "ReciveWeaponHandler.h"
+#include "ReciveStepHandler.h"
 
 class ModelEventHandler{
 	private:
 		ReciveMapHandler recive_map;
 		ReciveWeaponHandler recive_weapons;
+		ReciveStepHandler recive_step;
 	public:
 		ModelEventHandler();
 

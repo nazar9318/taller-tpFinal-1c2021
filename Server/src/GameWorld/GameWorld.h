@@ -48,6 +48,8 @@ class GameWorld {
 		void get_limits(int& x_size, int&y_size);
 
 		Character& get_character(char id);
+
+		void add_weapon(const b2Vec2& pos, Weapon* weapon);
 		~GameWorld();
 
 

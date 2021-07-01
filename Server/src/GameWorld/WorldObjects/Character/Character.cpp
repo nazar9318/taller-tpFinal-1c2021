@@ -93,11 +93,12 @@ void Character::apply_impulses() {
 
 
 void Character::attack(char self_id, std::list<Block>& blocks,
-     std::map<char, Character>& characters) {
+    	std::map<char, Character>& characters) {
 	if (life_points > 0) {
 		AttackInformation attack_info(self_id, this, get_opposite(team));
-		weapons[current_weapon]->
-						attack(attack_info, blocks, characters);
+		weapons[current_weapon]->attack(attack_info, blocks, characters);
+		if (attack_info.attack_is_kill())
+			money++;
 	}
 }
 
@@ -121,6 +122,26 @@ float Character::get_angle() {
 	return character_body->GetAngle();
 }
 
+
+bool Character::has_enough_to_buy(std::unique_ptr<Weapon>& weapon_buy) {
+	return (money >= weapon_buy->get_price());
+}
+
+
+bool Character::has_optative_weapon() {
+	return (number_weapons == 3);
+}
+
+Weapon* Character::drop_optative_weapon() {
+	return weapons[2].release();
+}
+
+
+void Character::buy_weapon(std::unique_ptr<Weapon> weapon) {
+	money -= weapon->get_price();
+	weapons[2] = std::move(weapon);
+	number_weapons++;
+}
 
 
 void Character::change_weapon() {

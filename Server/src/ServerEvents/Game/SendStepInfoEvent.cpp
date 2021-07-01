@@ -8,8 +8,10 @@ SendStepInfoEvent::SendStepInfoEvent(StepInformation& step) {
 	this->msg.push_back(type);
 	//this->msg.push_back(step.get_number_players());
 	if (type == FaseType::PLAYING) {
-		/*
 		std::vector<char> players_info = step.get_players_info();
+		std::copy(players_info.begin(),
+				 players_info.end(), std::back_inserter(this->msg));
+		/*
 		std::vector<char> attacks_info = step.get_attacks_info();
 		std::vector<char> ground_info = step.get_ground_info();
 		*/

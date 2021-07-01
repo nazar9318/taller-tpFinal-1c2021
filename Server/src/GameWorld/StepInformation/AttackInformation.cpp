@@ -10,6 +10,10 @@ float AttackInformation::get_angle() {
 	return attacker->get_angle();
 }
 
+bool AttackInformation::attack_is_kill() {
+	return is_dead;
+}
+
 char AttackInformation::get_attacker_id() {
 	return id_attacker;
 }

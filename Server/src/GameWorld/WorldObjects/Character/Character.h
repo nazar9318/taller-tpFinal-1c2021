@@ -9,7 +9,6 @@ class WeaponPistol;
 class WeaponShotgun;
 class WeaponAutomatic;
 
-
 #include "Position.h"
 #include "Weapon.h"
 
@@ -25,7 +24,6 @@ class WeaponAutomatic;
 #include <list>
 #include <iostream>
 #include <memory>
-
 
 class Character {
 	private:
@@ -54,6 +52,14 @@ class Character {
 		void set_move_state(Direction dir);
 
 		void apply_impulses();
+
+		bool has_enough_to_buy(std::unique_ptr<Weapon>& weapon_buy);
+
+		bool has_optative_weapon();
+
+		Weapon* drop_optative_weapon();
+
+		void buy_weapon(std::unique_ptr<Weapon> weapon);
 
 		void start_attacking();
 

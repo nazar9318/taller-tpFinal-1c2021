@@ -33,6 +33,7 @@ class Weapon {
 
 		void activate();
 
+		unsigned int get_price();
 		void set_pos(int x, int y);
 		void get_pos(int& x, int& y);
 		virtual char get_type();
@@ -42,7 +43,6 @@ class Weapon {
 			 		std::list<Block>& blocks, std::map<char,
 			 					 Character>& characters) = 0;
 
-		unsigned int get_price();
 
 		virtual ~Weapon() = 0;
 };

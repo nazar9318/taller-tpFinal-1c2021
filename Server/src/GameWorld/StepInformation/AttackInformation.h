@@ -45,6 +45,8 @@ class AttackInformation {
 
 		void add_receiver(Character* attacked, bool is_dead);
 
+		bool attack_is_kill();
+
 		b2Vec2 get_init_pos();
 		
 		void set_receptor(TypeReceptor type);

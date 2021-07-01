@@ -14,6 +14,10 @@ void Weapon::activate() {
 	activated = true;
 }
 
+unsigned int Weapon::get_price() {
+	return price;
+}
+
 void Weapon::set_pos(int x, int y) {
 	pos_x = x;
 	pos_y = y;
@@ -36,9 +40,7 @@ void Weapon::deactivate() {
 	activated = false;
 }
 
-unsigned int Weapon::get_price() {
-	return price;
-}
+
 
 Weapon::~Weapon() {
 }

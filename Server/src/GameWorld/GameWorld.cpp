@@ -5,7 +5,8 @@
 GameWorld::GameWorld(const std::string& map_type):
 			 number_players(0),ground(map_type),
 			 actual_team(Team::COUNTER_ENEMY),
-			 number_tics(0), number_round(0) {
+			 number_tics(0), number_round(0), 
+			 characters(), step_info(characters) {
 	b2Vec2 gravity(0, 0);
 	world = new b2World(gravity);
 	blocks = ground.fill_blocks(world);
@@ -130,7 +131,11 @@ void GameWorld::charge_stats() {
 }
 
 
-
+void GameWorld::add_weapon(const b2Vec2& pos, Weapon* weapon) {
+	std::unique_ptr<Weapon> ground_weapon(weapon);
+	weapon->set_pos((int)pos.x, (int)pos.y);
+	weapons_in_ground.push_back(std::move(ground_weapon));
+}
 
 
 StepInformation& GameWorld::get_step_info() {

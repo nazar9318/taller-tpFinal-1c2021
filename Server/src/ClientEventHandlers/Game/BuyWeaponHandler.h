@@ -3,6 +3,7 @@
 
 #include "GameWorld.h"
 #include "Event.h"
+#include "WeaponFactory.h"
 
 class BuyWeaponHandler {
 	public:

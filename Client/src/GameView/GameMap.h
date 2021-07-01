@@ -8,12 +8,15 @@
 #include "TileContainer.h"
 #include "SpriteContainer.h"
 #include "ClientPlayer.h"
+#include "ClientCharacter.h"
 #include "Tile.h"
- #include "WeaponSprite.h"    //VER SI HAGO WEAPON Y CHARACTER COMO UNA UNICA CLASE SPRITE
+#include "WeaponSprite.h"    //VER SI HAGO WEAPON Y CHARACTER COMO UNA UNICA CLASE SPRITE
 
 class GameMap {
 	private:
 		Renderer& renderer;
+		ClientPlayer& player;
+		std::map<char, ClientCharacter> &characters;
 
 		/*Contenedores*/
 		TileContainer& tile_container;
@@ -31,7 +34,7 @@ class GameMap {
 		int x_min = 0, x_max = 0, y_min = 0, y_max = 0;
 
 	public:
-		GameMap(Renderer& renderer);
+		GameMap(Renderer& renderer, ClientPlayer& player, std::map<char, ClientCharacter> &characters);
 		void create();
 		void setSize(int& width, int& height);
 
@@ -42,7 +45,8 @@ class GameMap {
 
 		/*------------Metodos para render--------------*/
 		void setRenderArea();
-
+		void renderOtherCharacters();
+		void renderPlayer();
 		void renderGround();
 		void renderWeapons();
 		~GameMap();

@@ -5,7 +5,8 @@ Game::Game(ProtectedQueue<Event>& model,
 	std::map<char, std::string>& charactersInfo, char& player_id) :
 model_events(model), client_events(client), is_running(true),
 player(player_id, charactersInfo.at(player_id)),
-window("Counter 2d", 800, 600, false), renderer(window), map(renderer) {
+window("Counter 2d", 800, 600, false), renderer(window), map(renderer, player, characters),
+prev_mouse_x(0), prev_mouse_y(0) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
 		if (it->first != player_id) {
 			ClientCharacter character(it->second);
@@ -33,6 +34,8 @@ void Game::render() {
 	renderer.clearScreen();
 	map.renderGround();
 	map.renderWeapons();
+//	map.renderPlayer();
+//	map.renderOtherCharacters();
 	// renderer.setDrawColor(0xFF,0xFF,0xFF,0xFF);
 	renderer.presentScreen();
 }
@@ -109,6 +112,7 @@ void Game::handle_click(SDL_Event& event) {
 		case SDL_BUTTON_RIGHT: {/*Lo dejamos por si necesitamos este botón*/}
 		case SDL_BUTTON_LEFT:{
 			std::unique_ptr<Event> shoot(new AttackEvent());
+			this->client_events.push(shoot);
 			break;
 		}
 	}
@@ -120,6 +124,7 @@ void Game::handle_unclick(SDL_Event& event) {
 			break;
 		case SDL_BUTTON_LEFT: {
 			std::unique_ptr<Event> shoot(new StopAttack());
+			this->client_events.push(shoot);
 			break;
 		}
 	}
@@ -127,6 +132,17 @@ void Game::handle_unclick(SDL_Event& event) {
 
 void Game::handle_mouse_motion() {
 	/* code */
+	int delta_x; int delta_y;
+	int mouse_x, mouse_y;
+	int angle;
+	SDL_GetMouseState(&mouse_x, &mouse_y);
+	delta_x = prev_mouse_x - mouse_x;
+	delta_y = prev_mouse_y - mouse_y;
+	angle = (atan2(delta_y, delta_x) * 180.0000)/ 3.14159265;
+	std::unique_ptr<Event> move(new ChangeAngleEvent(angle));
+	this->client_events.push(move);
+	prev_mouse_x = mouse_x;
+	prev_mouse_y = mouse_y;
 }
 
 void Game::process_events() {
@@ -143,9 +159,7 @@ void Game::process_events() {
 		}
 	}
 }
-
-void Game::update() {
-	is_running = false;
-}
+ 
+void Game::update() { is_running = false; }
 
 Game::~Game() {}

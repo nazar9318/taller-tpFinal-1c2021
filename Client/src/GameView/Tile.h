@@ -9,9 +9,9 @@
 
 class Tile {
 	private:
-	SDL_Rect box;
-	char type;
-	Texture& texture;
+		SDL_Rect box;
+		char type;
+		Texture& texture;
 
 	public:
 		Tile(int x, int y, char type);

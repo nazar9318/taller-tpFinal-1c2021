@@ -1,8 +1,9 @@
 #include "GameMap.h"
 
-GameMap::GameMap(Renderer& renderer) : renderer(renderer),
-tile_container(TileContainer::getInstance()),
-sprite_container(SpriteContainer::getInstance()) {}
+GameMap::GameMap(Renderer& renderer, ClientPlayer& player, std::map<char, ClientCharacter> &characters)
+: renderer(renderer), tile_container(TileContainer::getInstance()),
+sprite_container(SpriteContainer::getInstance()), player(player),
+characters(characters) {}
 
 void GameMap::create() {}
 

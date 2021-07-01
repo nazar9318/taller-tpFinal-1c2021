@@ -16,10 +16,9 @@
 #include "Window.h"
 #include "SDLException.h"
 #include "Renderer.h"
-
 #include "ClientPlayer.h"
 #include "ClientCharacter.h"
-
+#include "ChangeAngleEvent.h"
 #include <SDL2/SDL.h>
 
 class Game {
@@ -33,6 +32,8 @@ class Game {
 		std::map<char, ClientCharacter> characters;
 		Window window;
 		Renderer renderer;
+		int prev_mouse_x;
+		int prev_mouse_y;
 
 	public:
 		Game(ProtectedQueue<Event>& model_events,

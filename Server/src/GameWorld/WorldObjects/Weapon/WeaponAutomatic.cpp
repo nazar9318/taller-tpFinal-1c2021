@@ -2,14 +2,14 @@
 
 WeaponAutomatic::WeaponAutomatic() :
 			Weapon(CF::ak47_price, CF::ak47_damage_min,
-			CF::ak47_damage_max, CF::ak47_max_distance, 
+			CF::ak47_damage_max, CF::ak47_max_distance,
 			CF::ak47_distance_penalty),
 			accuracy(CF::ak47_accuracy),
 			shoot_rate(CF::ak47_shoot_rate),
 			shoot_freq(CF::ak47_shoot_freq),
 			ammo(CF::ak47_ammo) {
 }
- 
+
 
 void WeaponAutomatic::attack(AttackInformation& attack_info,
 			 std::list<Block>& blocks,
@@ -17,7 +17,7 @@ void WeaponAutomatic::attack(AttackInformation& attack_info,
 	float angle = attack_info.get_angle();
 	b2Vec2 p1 = attack_info.get_init_pos();
 	b2Vec2 p2 = p1 + max_distance * b2Vec2(sinf(angle), cosf(angle));
-	
+
 	bool is_static = true;
 	b2RayCastInput input;
 	input.p1 = p1;
@@ -41,15 +41,15 @@ void WeaponAutomatic::attack(AttackInformation& attack_info,
 			b2RayCastOutput output;
 			if (!f->RayCast(&output, input, 0))
 				continue;
-			if (output.fraction < closest_fraction && 
+			if (output.fraction < closest_fraction &&
 					(it->first != attack_info.get_attacker_id())) {
 				closest_fraction = output.fraction;
 				is_static = false;
 				closest_character = it;
-			}            
+			}
 		}
 	}
-	
+
 	attack_info.set_receptor(TypeReceptor::NO_RECEPTOR);
 	b2Vec2 intersection_point = p1 + closest_fraction * (p2 - p1);
 	float distance = (intersection_point - p1).Length();
@@ -80,7 +80,11 @@ char WeaponAutomatic::calculate_damage(float distance) {
 		double damage = fmod((double)std::rand(), damage_range) + damage_min;
 		return (char)(damage - distance * distance_penalty);
 	}
-	return 0;	
+	return 0;
+}
+
+char WeaponAutomatic::get_type(){
+	return PositionType::AK47;
 }
 
 /*
@@ -105,7 +109,7 @@ void WeaponAutomatic::shoot(Character &character, uint16_t distance) {
 */
 
 bool WeaponAutomatic::empty() {
-	return (ammo == 0); 
+	return (ammo == 0);
 }
 
 WeaponAutomatic::~WeaponAutomatic() {

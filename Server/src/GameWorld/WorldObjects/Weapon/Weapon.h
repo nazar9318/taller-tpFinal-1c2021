@@ -13,6 +13,7 @@ class AttackInformation;
 #include "Character.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
+#include "TypesOfEvents.h"
 
 class Weapon {
 	protected:
@@ -34,6 +35,7 @@ class Weapon {
 
 		void set_pos(int x, int y);
 		void get_pos(int& x, int& y);
+		virtual char get_type();
 		void deactivate();
 
 		virtual void attack(AttackInformation& attack_info,

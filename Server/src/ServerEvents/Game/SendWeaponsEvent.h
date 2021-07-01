@@ -5,10 +5,13 @@
 #include "Event.h"
 #include "TypesOfEvents.h"
 #include <vector>
+#include <list>
+#include <memory>
+#include "Weapon.h"
 
 class SendWeaponsEvent: public Event {
 	public:
-		SendWeaponsEvent(std::vector<Position*> weapons_info);
+		SendWeaponsEvent(std::list<std::unique_ptr<Weapon>>&  weapons_info);
 		~SendWeaponsEvent();
 	private:
 		SendWeaponsEvent(const SendWeaponsEvent &other) = delete;

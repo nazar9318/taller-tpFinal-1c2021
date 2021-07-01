@@ -19,9 +19,9 @@ class WeaponSniper : public Weapon {
 						 Character>& characters);
 
 		//void shoot(Character &character, uint16_t distance);
-
+		char get_type();
 		~WeaponSniper();
-	
+
 	private:
 		bool empty();
 };

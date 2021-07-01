@@ -26,6 +26,7 @@ void Game::loadMedia() { map.loadMedia(); }
 void Game::render(){
 	renderer.clearScreen();
 	map.renderGround();
+	map.renderWeapons();
 	// renderer.setDrawColor(0xFF,0xFF,0xFF,0xFF);
 	renderer.presentScreen();
 }

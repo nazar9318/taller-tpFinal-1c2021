@@ -13,7 +13,7 @@ class WeaponWhite : public Weapon {
 			 		std::list<Block>& blocks, std::map<char,
 			 					 Character>& characters);
 
-
+        char get_type();
         void shoot(Character &character, uint16_t distance);
 
         ~WeaponWhite();

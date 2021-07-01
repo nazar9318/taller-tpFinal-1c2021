@@ -18,6 +18,7 @@ class WeaponPistol : public Weapon {
 			 		std::list<Block>& blocks, std::map<char,
 			 				 Character>& characters);
 
+		char get_type();
 		~WeaponPistol();
 
 	private:

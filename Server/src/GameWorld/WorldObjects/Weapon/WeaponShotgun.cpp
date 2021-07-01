@@ -3,7 +3,7 @@
 
 WeaponShotgun::WeaponShotgun() :
             Weapon(CF::m3_price, CF::m3_damage_min,
-            CF::m3_damage_max, CF::m3_max_distance, 
+            CF::m3_damage_max, CF::m3_max_distance,
             CF::m3_distance_penalty),
             accuracy(CF::m3_accuracy),
             ammo(CF::m3_ammo) {
@@ -13,6 +13,9 @@ void WeaponShotgun::attack(AttackInformation& attack_info,
                     std::list<Block>& blocks, std::map<char,
                                  Character>& characters){}
 
+char WeaponShotgun::get_type(){
+	return PositionType::M3;
+}
 /*
 void WeaponShotgun::shoot(Character &character, uint16_t distance) {
     if (distance <= this->max_distance && this->ammo > 0) {

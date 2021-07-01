@@ -23,6 +23,9 @@ void Weapon::get_pos(int& x, int& y) {
 	y = pos_y;
 }
 
+char Weapon::get_type(){
+	return 0;
+}
 
 void Weapon::attack(AttackInformation& attack_info,
 	 		std::list<Block>& blocks, std::map<char,

@@ -20,9 +20,9 @@ class WeaponShotgun : public Weapon {
 
 
         //void shoot(Character &character, uint16_t distance);
-
+        char get_type();
         ~WeaponShotgun();
-    
+
     private:
         bool empty();
 };

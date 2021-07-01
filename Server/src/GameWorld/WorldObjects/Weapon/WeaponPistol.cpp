@@ -3,18 +3,20 @@
 
 WeaponPistol::WeaponPistol() :
             Weapon(CF::glock_price, CF::glock_damage_min,
-            CF::glock_damage_max, CF::glock_max_distance, 
+            CF::glock_damage_max, CF::glock_max_distance,
             CF::glock_distance_penalty),
             accuracy(CF::glock_accuracy),
             ammo(CF::glock_ammo) {
 }
- 
+
 
 void WeaponPistol::attack(AttackInformation& attack_info,
                     std::list<Block>& blocks, std::map<char,
                                  Character>& characters) {}
 
-
+char WeaponPistol::get_type(){
+	return PositionType::GLOCK;
+}
 /*
 void WeaponPistol::shoot(Character &character, uint16_t distance) {
     if (distance <= this->max_distance && this->ammo > 0) {

@@ -25,9 +25,9 @@ class WeaponAutomatic : public Weapon {
 
 
 	   // void shoot(Character &character, uint16_t distance);
-
+		 char get_type();
 		~WeaponAutomatic();
-	
+
 	private:
 
 		bool empty();

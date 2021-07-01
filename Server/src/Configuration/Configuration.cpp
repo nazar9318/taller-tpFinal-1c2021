@@ -13,7 +13,7 @@ int CF::size_position = CF::yaml_file["size_position"].as<int>();
 int CF::velocity_iterations = CF::yaml_file["velocity_iterations"].as<int>();
 int CF::position_iterations = CF::yaml_file["position_iterations"].as<int>();
 
-
+int CF::max_distance_grab = CF::yaml_file["max_distance_grab"].as<int>();
 double CF::step_time = CF::yaml_file["step_time"].as<double>(); 
 double CF::time_preparation = CF::yaml_file["time_preparation"].as<double>();
 int CF::number_rounds = CF::yaml_file["number_rounds"].as<int>();
@@ -90,6 +90,10 @@ void Configuration::load_configuration(const std::string& file_path) {
 	number_rounds = yaml_file["number_rounds"].as<int>();
 	players_allowed = yaml_file["players_allowed"].as<int>();
 	character_radius = yaml_file["character_radius"].as<int>();
+
+
+	max_distance_grab = yaml_file["max_distance_grab"].as<int>();
+
 
 	velocity_iterations = yaml_file["velocity_iterations"].as<int>();
 	position_iterations = yaml_file["position_iterations"].as<int>();

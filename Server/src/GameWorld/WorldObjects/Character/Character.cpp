@@ -179,7 +179,14 @@ Character::~Character() {
 
 
 
+bool Character::is_alive() {
+	return (life_points > 0);
+}
 
+void Character::add_weapon(std::unique_ptr<Weapon> weapon) {
+	weapons[2] = std::move(weapon);
+	number_weapons++;
+}
 
 
 /*

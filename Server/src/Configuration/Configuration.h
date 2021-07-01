@@ -27,6 +27,8 @@ class Configuration {
 		static int velocity_iterations;
 		static int position_iterations;
 
+		static int max_distance_grab;
+
 		static double character_life_points;
 		static double character_money;
 

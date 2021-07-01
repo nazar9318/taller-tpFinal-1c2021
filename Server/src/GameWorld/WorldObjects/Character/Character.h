@@ -79,6 +79,9 @@ class Character {
 			 std::map<char, Character>& characters);
 
 		float get_angle();
+
+		bool is_alive();
+		void add_weapon(std::unique_ptr<Weapon> weapon);
 /*
 disparo pistola ---. 
 arma.attack(team.opposite(), pos.x, pos.y,

@@ -50,6 +50,8 @@ class GameWorld {
 		Character& get_character(char id);
 
 		void add_weapon(const b2Vec2& pos, Weapon* weapon);
+		bool get_closest_weapon(b2Vec2 char_pos, Weapon** weapon);
+
 		~GameWorld();
 
 

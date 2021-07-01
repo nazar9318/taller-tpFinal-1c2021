@@ -131,6 +131,30 @@ void GameWorld::charge_stats() {
 }
 
 
+bool GameWorld::get_closest_weapon(b2Vec2 char_pos, Weapon** weapon) {
+	int closest_distance = CF::max_distance_grab; 
+	bool weapon_close_enough = false;
+	std::list<std::unique_ptr<Weapon>>::iterator closest_weapon;
+	for (auto it = weapons_in_ground.begin(); 
+						it != weapons_in_ground.end(); ++it) {
+		int x_weapon, y_weapon; 
+		(*it)->get_pos(x_weapon, y_weapon);
+		int distance = (int)((char_pos - b2Vec2(x_weapon, y_weapon)).Length());
+		if (distance < closest_distance) {
+			weapon_close_enough = true;
+			closest_weapon = it;
+		}
+	}
+	if (weapon_close_enough) {
+		*weapon = closest_weapon->release();
+		weapons_in_ground.erase(closest_weapon);
+	}
+	return weapon_close_enough;
+}
+
+
+
+
 void GameWorld::add_weapon(const b2Vec2& pos, Weapon* weapon) {
 	std::unique_ptr<Weapon> ground_weapon(weapon);
 	weapon->set_pos((int)pos.x, (int)pos.y);

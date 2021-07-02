@@ -137,6 +137,8 @@ void MainWindow::createMatch(const QString& map_name) {
 }
 
 void MainWindow::update_players() {
+	syslog(LOG_CRIT, "[%s:%i]: Timer de players en funcionamiento."
+		, __FILE__, __LINE__);
 	bool players_waiting = true;
     while(players_waiting) {
     	try {

@@ -16,14 +16,23 @@ class Configuration {
 		~Configuration();
 		static void load_configuration(const std::string& file_path);
 		static YAML::Node yaml_file;
+		
+		/**************************************/
+		/**************COMMON******************/
+		static YAML::Node common_yaml_file;
 		static std::string port;
 		static int max_iterations_pop_events;
 		static double step_time; 
+		static int size_position;
+		static int character_radius;
+		
+		/**************************************/
+		
+
 		static double time_preparation;
 		static int number_rounds;
+
 		static int players_allowed;
-		static int character_radius;
-		static int size_position;
 		static int velocity_iterations;
 		static int position_iterations;
 

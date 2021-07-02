@@ -8,8 +8,6 @@
 #include "WeaponShotgun.h"
 #include "WeaponAutomatic.h"
 
-#define FROM_DEG_TO_RAD 0.01745329252
-
 float Character::body_radius = 16;
 
 Character::Character(Team team, b2World* world,

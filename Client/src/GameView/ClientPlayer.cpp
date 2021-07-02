@@ -11,7 +11,10 @@ ClientPlayer::~ClientPlayer() {
 
 void ClientPlayer::set_team(Team team) {
 	texture = &(SpriteContainer::getInstance()[team]);
-	
+	pos.x = 0;
+	pos.y = 0;
+	pos.w = texture->get_w();
+	pos.h = texture->get_h();
 }
 
 Texture& ClientPlayer::getTexture() {
@@ -19,9 +22,14 @@ Texture& ClientPlayer::getTexture() {
 }
 
 SDL_Rect ClientPlayer::getBox() {
-	SDL_Rect quad = {20, 20, texture->get_w(), texture->get_h()};
-	return quad;
+	return pos;
 }
+
+void ClientPlayer::update_position(int pos_x, int pos_y) {
+	pos.x = pos_x;
+	pos.y = pos_y;
+}
+
 
 char ClientPlayer::get_id() {
 	return id;

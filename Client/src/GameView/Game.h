@@ -20,6 +20,7 @@
 #include "ClientCharacter.h"
 #include "ChangeAngleEvent.h"
 #include <SDL2/SDL.h>
+#include "FaseType.h"
 
 class Game {
 	private:
@@ -34,6 +35,8 @@ class Game {
 		Renderer renderer;
 		int prev_mouse_x;
 		int prev_mouse_y;
+		FaseType fase;
+
 
 	public:
 		Game(ProtectedQueue<Event>& model_events,

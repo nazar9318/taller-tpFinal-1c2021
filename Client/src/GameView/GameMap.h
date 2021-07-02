@@ -43,7 +43,7 @@ class GameMap {
 		void addWeapon(WeaponSprite tile);
 		void cleanWeapons();
 		void loadMedia();
-
+		void update_position(char id, int pos_x, int pos_y);
 		/*------------Metodos para render--------------*/
 		void setRenderArea();
 		void renderOtherCharacters();

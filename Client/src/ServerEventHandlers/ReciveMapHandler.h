@@ -5,6 +5,7 @@
 #include "Event.h"
 #include "GameMap.h"
 #include "Tile.h"
+#include "FaseType.h"
 
 class ReciveMapHandler {
 	public:

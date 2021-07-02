@@ -3,8 +3,8 @@
 
 ModelEventHandler::ModelEventHandler() {}
 
-void ModelEventHandler::handle(Event& event, GameMap& map) {
-
+void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map) {
+  //while()
   switch (event.get_type()) {
     case ModelTypeEvent::SEND_FULL_MAP:
       recive_map.handle(event, map);
@@ -15,7 +15,7 @@ void ModelEventHandler::handle(Event& event, GameMap& map) {
       break;
 
     case ModelTypeEvent::STEP_INFO:
-      recive_step.handle(event, map);
+      recive_step.handle(fase, event, map);
       break;
 
     default:

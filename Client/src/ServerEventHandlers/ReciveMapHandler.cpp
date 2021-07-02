@@ -24,7 +24,6 @@ void ReciveMapHandler::handle(Event& event, GameMap& map){
   syslog(LOG_INFO, "[%s:%i]: Toda la info del mapa fue cargada en los tiles",
                      __FILE__, __LINE__);
 
-
 }
 
 ReciveMapHandler::~ReciveMapHandler(){}

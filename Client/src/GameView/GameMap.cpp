@@ -48,6 +48,8 @@ void GameMap::renderGround() {
   //                    __FILE__, __LINE__);
 }
 
+
+
 void GameMap::renderWeapons() {
 
   SDL_Rect quad = {0};
@@ -60,6 +62,15 @@ void GameMap::renderWeapons() {
   // syslog(LOG_INFO, "[%s:%i]: Los Weapons fueron renderizados",
   //                    __FILE__, __LINE__);
 }
+
+void GameMap::update_position(char id, int pos_x, int pos_y) {
+  if (id == player.get_id()) {
+    player.update_position(pos_x, pos_y);
+  } else {
+    characters.at(id).update_position(pos_x, pos_y);
+  }
+}
+
 
 
 void GameMap::add_character_team(char id, Team team) {

@@ -6,7 +6,7 @@ Game::Game(ProtectedQueue<Event>& model,
 model_events(model), client_events(client), is_running(true),
 player(player_id, charactersInfo.at(player_id)),
 window("Counter 2d", 800, 600, false), renderer(window), map(renderer, player, characters),
-prev_mouse_x(0), prev_mouse_y(0) {
+prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
 		if (it->first != player_id) {
 			ClientCharacter character(it->second);
@@ -33,9 +33,15 @@ void Game::loadMedia() { map.loadMedia(); }
 void Game::render() {
 	renderer.clearScreen();
 	map.renderGround();
-	map.renderWeapons();
-	map.renderPlayer();
-//	map.renderOtherCharacters();
+	if (fase == FaseType::INITIAL_FASE) {
+
+	} else if (fase == FaseType::PLAYING) {
+		map.renderWeapons();
+		map.renderPlayer();
+	} else {
+		// fase final 
+	}
+	//	map.renderOtherCharacters();
 	// renderer.setDrawColor(0xFF,0xFF,0xFF,0xFF);
 	renderer.presentScreen();
 }
@@ -132,7 +138,7 @@ void Game::handle_unclick(SDL_Event& event) {
 
 void Game::handle_mouse_motion() {
 	/* code */
-	int delta_x; int delta_y;
+	/*int delta_x; int delta_y;
 	int mouse_x, mouse_y;
 	int angle;
 	SDL_GetMouseState(&mouse_x, &mouse_y);
@@ -143,7 +149,7 @@ void Game::handle_mouse_motion() {
 	this->client_events.push(move);
 	prev_mouse_x = mouse_x;
 	prev_mouse_y = mouse_y;
-}
+*/}
 
 void Game::process_events() {
 	bool queue_not_empty = true;
@@ -152,7 +158,7 @@ void Game::process_events() {
 	while (queue_not_empty && max_iterations > i) {
 		try {
 			Event event = model_events.pop();
-			handler.handle(event, map);
+			handler.handle(fase, event, map);
 			i++;
 		} catch(ExceptionEmptyQueue& e) {
 			queue_not_empty = false;

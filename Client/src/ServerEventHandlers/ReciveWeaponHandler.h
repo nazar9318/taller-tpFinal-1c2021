@@ -5,6 +5,8 @@
 #include "Event.h"
 #include "GameMap.h"
 #include "WeaponSprite.h"
+#include "FaseType.h"
+
 
 class ReciveWeaponHandler {
 	public:

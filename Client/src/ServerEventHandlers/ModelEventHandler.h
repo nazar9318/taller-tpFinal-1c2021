@@ -7,7 +7,7 @@
 #include "Exception.h"
 
 #include "GameMap.h"
-
+#include "FaseType.h"
 #include "ReciveMapHandler.h"
 #include "ReciveWeaponHandler.h"
 #include "ReciveStepHandler.h"
@@ -20,7 +20,8 @@ class ModelEventHandler{
 	public:
 		ModelEventHandler();
 
-		void handle(Event& event, GameMap& map);
+		// POST: Retorna la fase actual
+		void handle(FaseType& fase, Event& event, GameMap& map);
 
 		~ModelEventHandler();
 

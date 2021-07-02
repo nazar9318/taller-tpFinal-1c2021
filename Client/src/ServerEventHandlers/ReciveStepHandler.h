@@ -6,12 +6,14 @@
 #include "FaseType.h"
 #include "GameMap.h"
 #include "Team.h"
+#include "FaseType.h"
+
 
 class ReciveStepHandler {
 	public:
 		ReciveStepHandler();
 
-		void handle(Event& event, GameMap& map);
+		void handle(FaseType& fase, Event& event, GameMap& map);
 
 		~ReciveStepHandler();
 

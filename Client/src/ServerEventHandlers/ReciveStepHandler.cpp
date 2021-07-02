@@ -21,7 +21,7 @@ void ReciveStepHandler::handle(FaseType& fase, Event& event, GameMap& map){
 
 void ReciveStepHandler::
 		handle_initial_fase(std::vector<char>& event_msg, GameMap& map) {
-	
+
 	int wait_time = *((int*)&(event_msg[2]));
 	if (wait_time <= 0) {
 		for (auto it = event_msg.begin() + 6; it != event_msg.end(); it += 2) {
@@ -31,7 +31,7 @@ void ReciveStepHandler::
 		}
 	} else {
 		for (auto it = event_msg.begin() + 6; it != event_msg.end(); it += 2) {
-			// leer compras. 
+			// leer compras.
 		}
 	}
 
@@ -41,11 +41,12 @@ void ReciveStepHandler::
 
 void ReciveStepHandler::
 handle_playing_fase(std::vector<char>& event_msg, GameMap& map) {
-	for (auto it = event_msg.begin() + 2; it != event_msg.end(); it += 9) {
+	for (auto it = event_msg.begin() + 2; it != event_msg.end(); it += 13) {
 		char id = *it;
 		int pos_x = *((int*)&(*(it + 1)));
 		int pos_y = *((int*)&(*(it + 5)));
-		map.update_position(id, pos_x, pos_y);
+    int angle = *((int*)&(*(it + 9)));
+		map.update_position(id, pos_x, pos_y, angle);
 	}
 }
 

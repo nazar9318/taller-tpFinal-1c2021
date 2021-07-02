@@ -17,7 +17,12 @@ SDL_Rect& ClientCharacter::getBox() {
 	return pos;
 }
 
-void ClientCharacter::update_position(int pos_x, int pos_y) {
+Texture& ClientCharacter::getTexture() {
+	return *texture;
+}
+
+void ClientCharacter::update_position(int pos_x, int pos_y, int angle) {
 	pos.x = pos_x - texture->get_w()/2;
 	pos.y = pos_y - texture->get_h()/2;
+	this->angle = angle;
 }

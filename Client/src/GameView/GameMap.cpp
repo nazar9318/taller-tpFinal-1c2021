@@ -63,11 +63,11 @@ void GameMap::renderWeapons() {
   //                    __FILE__, __LINE__);
 }
 
-void GameMap::update_position(char id, int pos_x, int pos_y) {
+void GameMap::update_position(char id, int pos_x, int pos_y, int angle) {
   if (id == player.get_id()) {
-    player.update_position(pos_x, pos_y);
+    player.update_position(pos_x, pos_y, angle);
   } else {
-    characters.at(id).update_position(pos_x, pos_y);
+    characters.at(id).update_position(pos_x, pos_y, angle);
   }
 }
 
@@ -86,8 +86,20 @@ void GameMap::renderPlayer() {
   SDL_Rect quad = {0};
   Texture& texture(player.getTexture());
   quad = player.getBox();
-  renderer.render(texture.getTexture(), NULL, &quad);
+  double angle = player.getAngle();
+  renderer.render(texture.getTexture(), NULL, &quad, angle);
 
+}
+
+void GameMap::renderCharacters() {
+
+  SDL_Rect quad = {0};
+
+  for(auto it = characters.begin(); it != characters.end(); ++it){
+    Texture& texture(it->second.getTexture());
+    quad = it->second.getBox();
+    renderer.render(texture.getTexture(), NULL, &quad);
+  }
 }
 
 

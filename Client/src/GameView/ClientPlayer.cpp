@@ -25,11 +25,15 @@ SDL_Rect ClientPlayer::getBox() {
 	return pos;
 }
 
-void ClientPlayer::update_position(int pos_x, int pos_y) {
+void ClientPlayer::update_position(int pos_x, int pos_y, int angle) {
 	pos.x = pos_x - texture->get_w()/2;
 	pos.y = pos_y - texture->get_h()/2;
+	this->angle = angle;
 }
 
+double ClientPlayer::getAngle(){
+	return (double)angle;
+}
 
 char ClientPlayer::get_id() {
 	return id;

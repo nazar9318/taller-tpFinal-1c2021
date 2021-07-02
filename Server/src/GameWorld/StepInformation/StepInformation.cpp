@@ -16,7 +16,7 @@ int StepInformation::get_wait() {
 }
 
 std::vector<char> StepInformation::get_players_init() {
-	std::vector<char> v;	
+	std::vector<char> v;
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		v.push_back(it->first); // ID
 		Team team = it->second.get_team();
@@ -52,26 +52,26 @@ std::vector<char> StepInformation::get_players_info() {
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		players_info.push_back(it->first); // ID
 		b2Vec2 pos = it->second.get_pos();
-		
-		int x = (int)pos.x; // POS_X 
+
+		int x = (int)pos.x; // POS_X
 		players_info.push_back(*((char*)(&x)));
 		players_info.push_back(*((char*)(&x) + 1));
 		players_info.push_back(*((char*)(&x) + 2));
-		players_info.push_back(*((char*)(&x) + 3)); 
+		players_info.push_back(*((char*)(&x) + 3));
 
 		int y = (int)pos.y * (-1); // POS_Y
 		players_info.push_back(*((char*)(&y)));
 		players_info.push_back(*((char*)(&y) + 1));
 		players_info.push_back(*((char*)(&y) + 2));
-		players_info.push_back(*((char*)(&y) + 3)); 
-		/*
+		players_info.push_back(*((char*)(&y) + 3));
+
 		int angle = it->second.get_angle();
 		players_info.push_back(*((char*)(&angle)));
 		players_info.push_back(*((char*)(&angle) + 1));
 		players_info.push_back(*((char*)(&angle) + 2));
-		players_info.push_back(*((char*)(&angle) + 3)); 
-		*/
-	}	
+		players_info.push_back(*((char*)(&angle) + 3));
+
+	}
 
 	return players_info;
 }
@@ -80,6 +80,3 @@ std::vector<char> StepInformation::get_players_info() {
 
 StepInformation::~StepInformation() {
 }
-
-
-

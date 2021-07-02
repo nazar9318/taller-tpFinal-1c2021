@@ -12,6 +12,7 @@ class ClientPlayer {
 		std::string& name;
 		Texture* texture;
 		SDL_Rect pos;
+		int angle;
 	public:
 		ClientPlayer(char& id, std::string& name);
 		ClientPlayer();
@@ -20,7 +21,8 @@ class ClientPlayer {
 		void set_team(Team team);
 		Texture& getTexture();
 		SDL_Rect getBox();
-		void update_position(int pos_x, int pos_y);
+		double getAngle();
+		void update_position(int pos_x, int pos_y, int angle);
 
 	private:
 		ClientPlayer(const ClientPlayer &other) = delete;

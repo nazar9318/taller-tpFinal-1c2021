@@ -13,6 +13,7 @@ class ClientCharacter {
 		char type;
 		Texture* texture;
 		SDL_Rect pos;
+		int angle;
 
 	public:
 		ClientCharacter(const std::string& name);
@@ -22,7 +23,7 @@ class ClientCharacter {
 		char getType();
 		Texture& getTexture();
 		void set_team(Team team);
-		void update_position(int pos_x, int pos_y);
+		void update_position(int pos_x, int pos_y, int angle);
 
 		ClientCharacter(ClientCharacter&& other) = default;
 		ClientCharacter& operator=(ClientCharacter&& other) = default;

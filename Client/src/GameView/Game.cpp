@@ -38,10 +38,10 @@ void Game::render() {
 	} else if (fase == FaseType::PLAYING) {
 		map.renderWeapons();
 		map.renderPlayer();
+		map.renderCharacters();
 	} else {
 		// fase final
 	}
-	//	map.renderOtherCharacters();
 	// renderer.setDrawColor(0xFF,0xFF,0xFF,0xFF);
 	renderer.presentScreen();
 }
@@ -138,23 +138,26 @@ void Game::handle_unclick(SDL_Event& event) {
 
 
 #define FROM_RAD_TO_DEG 57.295779513
-
+#include <iostream>
 void Game::handle_mouse_motion() {
-	/* code */
-	/*int delta_x; int delta_y;
+
+	SDL_Rect player_pos = player.getBox();
+
+	int delta_x; int delta_y;
 	int mouse_x, mouse_y;
 	int angle;
 	SDL_GetMouseState(&mouse_x, &mouse_y);
-	delta_x = mouse_x - player_x;
-	delta_y = (-1) * (mouse_y - player_y);
-	angle = (int)((atan2(delta_y, delta_x) * FROM_RAD_TO_DEG);
-	if (delta_x < 0) {
-		angle += 180;
-	}
+	delta_x = mouse_x - (player_pos.x + player_pos.w/2);
+	delta_y = (-1) * (mouse_y - (player_pos.y + player_pos.h/2));
+	angle = (int)((atan2(delta_x, delta_y) * FROM_RAD_TO_DEG));
+	// if (delta_x < 0) {
+	// 	angle += 180;
+	// }
 	angle = angle % 360;
+	std::cout << angle << '\n';
 	std::unique_ptr<Event> move(new ChangeAngleEvent(angle));
 	this->client_events.push(move);
-*/}
+}
 
 void Game::process_events() {
 	bool queue_not_empty = true;

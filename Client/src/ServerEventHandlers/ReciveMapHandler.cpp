@@ -20,10 +20,6 @@ void ReciveMapHandler::handle(Event& event, GameMap& map){
     Tile tile(x, y, type);
     map.addTile(std::move(tile));
   }
-
-  syslog(LOG_INFO, "[%s:%i]: Toda la info del mapa fue cargada en los tiles",
-                     __FILE__, __LINE__);
-
 }
 
 ReciveMapHandler::~ReciveMapHandler(){}

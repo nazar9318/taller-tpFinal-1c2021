@@ -18,7 +18,7 @@ class WeaponSniper : public Weapon {
 	 			std::list<Block>& blocks, std::map<char,
 						 Character>& characters);
 
-		//void shoot(Character &character, uint16_t distance);
+		char calculate_damage();
 		char get_type();
 		~WeaponSniper();
 

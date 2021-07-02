@@ -79,7 +79,7 @@ private:
     void load_players(Event& join_successfull);
     void wait_until_start();
     void show_error(const QString& message);
-    void show_error(const QString& message, const Event& event);
+    void show_error(const QString& message, Event& event);
     void update_players_list(Event& players_list);
     void show_maps(Event& maps_received);
     void clean_matches();

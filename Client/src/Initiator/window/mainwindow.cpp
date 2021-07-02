@@ -62,11 +62,49 @@ void MainWindow::show_error(const QString& message) {
 	msgBox.exec();
 }
 
-void MainWindow::show_error(const QString& message,
-					 const Event& event) {
-	// SI NOS MANDAN UN EVENTO DE TIPO ERROR
-	// IMPRIMIMOS EL ERROR.
-	show_error(message);
+void MainWindow::show_error(const QString& message, Event& event) {
+	QString error_msg(message);
+	if (event.get_type() == ModelTypeEvent::ERROR) {
+		switch (event.get_msg()[1]) {
+			case ServerError::MATCH_FULL:
+			{
+				error_msg.append("La partida ha llegado"
+								" al limite de jugadores");
+				break;
+			}
+			case ServerError::NOT_ENOUGH_PLAYERS:
+			{
+				error_msg.append("La partida ha llegado"
+				" al limite de jugadores");
+				break;
+			}
+			case ServerError::MATCH_ALREADY_STARTED:
+			{
+				error_msg.append("La partida ya ha comenzado.");
+				break;
+			}
+			case ServerError::INVALID_TYPE_EVENT:
+			{
+				error_msg.append("Se envio un mensaje"
+								" inesperado al servidor.");
+				break;
+			}			
+			case ServerError::MATCH_NOT_FOUND:
+			{
+				error_msg.append("No se ha podido"
+								" encontrar la partida.");
+				break;
+			}			
+			case ServerError::MATCH_ALREADY_EXISTS:
+			{
+				error_msg.append("Ya existe una partida con este nombre");
+				break;
+			}
+			default:
+				error_msg.append("Error desconocido.");
+		}
+	}
+	show_error(error_msg);
 }
 
 
@@ -85,7 +123,8 @@ void MainWindow::on_createButton_clicked() {
 	protocol.send_event(socket, recv_maps.get_msg());
 	Event maps_received = protocol.recv_event(socket);
 	if (maps_received.get_type() != ModelTypeEvent::SEND_MAPS) {
-		show_error("error al intentar recibir los mapas actuales", maps_received);
+		show_error("error al intentar recibir"
+						" los mapas actuales", maps_received);
 		return;
 	}
 	show_maps(maps_received);
@@ -131,8 +170,7 @@ void MainWindow::createMatch(const QString& map_name) {
 	    receiver.start();
 	    players_joined_timer->start(1000);
 	} else {
-		show_error("error al intentar crear la partida."
-					"falta aclarar cual es el error");
+		show_error("Error al intentar crear la partida", is_successful);
 	}
 }
 
@@ -206,7 +244,8 @@ void MainWindow::update_matches() {
 	protocol.send_event(socket, recv_matches.get_msg());
 	Event matches_received = protocol.recv_event(socket);
 	if (matches_received.get_type() != ModelTypeEvent::SEND_MATCHES) {
-		show_error("error al intentar recibir las partidas actuales");
+		show_error("error al intentar recibir las partidas "
+						"actuales", matches_received);
 		return;
 	}
 	clean_matches();
@@ -250,8 +289,7 @@ void MainWindow::joinMatch(const QString &text) {
 	protocol.send_event(socket, joiner_event.get_msg());
 	Event is_successful = protocol.recv_event(socket);
 	if (is_successful.get_type() != ModelTypeEvent::SUCCESSFUL_ENTRY) {
-		show_error("error al intentar unirse a la partida."
-					"falta aclarar cual es el error");
+		show_error("error al intentar unirse a la partida.", is_successful);
 		return;
 	}
 	self_id = is_successful.get_msg()[1];

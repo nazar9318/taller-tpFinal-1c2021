@@ -1,4 +1,5 @@
 #include "WeaponWhite.h"
+#include <syslog.h>
 
 WeaponWhite::WeaponWhite() :
 			Weapon(0, CF::knife_damage_min,
@@ -9,8 +10,11 @@ WeaponWhite::WeaponWhite() :
 void WeaponWhite::attack(AttackInformation& attack_info,
                     std::list<Block>& blocks, std::map<char,
                                 Character>& characters) {
-    /*if (activated && ammo >= 1) {
-        attack_info.set_weapon(PositionType::GLOCK);
+    // FALTA EL BARRIDO EN AREA. CORTA CON UN JUGADOR
+    if (activated) {
+        syslog(LOG_INFO, "[%s:%i]: Ataque del cuchi. "
+                        , __FILE__, __LINE__);
+        attack_info.set_weapon(PositionType::KNIFE);
         std::map<char,Character>::iterator closest_char;
         float distance;
         float angle = attack_info.get_angle();
@@ -25,23 +29,16 @@ void WeaponWhite::attack(AttackInformation& attack_info,
             }   
         }
         deactivate();
-        ammo -= 1;
    }
-   */
-
 }
 
 char WeaponWhite::get_type(){
 	return PositionType::KNIFE;
 }
-/*
-void WeaponWhite::shoot(Character &character, uint16_t distance) {
-    if (distance <= 1) {
-        double damage_range = this->damage_max - this->damage_min;
-        double damage = fmod((double)std::rand(), damage_range) + this->damage_min;
-        character.takeDamage(damage);
-    }
+
+char WeaponWhite::calculate_damage(float distance) {
+    double damage_range = damage_max - damage_min;
+    return (char)(fmod((double)std::rand(), damage_range) + damage_min);
 }
-*/
 
 WeaponWhite::~WeaponWhite() {}

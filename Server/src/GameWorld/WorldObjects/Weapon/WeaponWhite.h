@@ -14,7 +14,8 @@ class WeaponWhite : public Weapon {
 			 					 Character>& characters);
 
         char get_type();
-        void shoot(Character &character, uint16_t distance);
+        //void shoot(Character &character, uint16_t distance);
+        char calculate_damage(float distance);
 
         ~WeaponWhite();
 };

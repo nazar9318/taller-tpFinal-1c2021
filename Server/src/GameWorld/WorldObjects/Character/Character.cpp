@@ -106,8 +106,10 @@ void Character::attack(char self_id, std::list<Block>& blocks,
 
 
 b2Vec2 Character::get_pos() {
-	return character_body->GetPosition();
-}
+	if (is_alive())
+		return character_body->GetPosition();
+	return b2Vec2(-10, 10); // una posicion fuera del mapa. 
+}	
 
 b2Fixture* Character::GetFixtureList() {
 	return character_body->GetFixtureList();
@@ -155,6 +157,7 @@ void Character::take_damage(char points) {
 			life_points -= points;
 		} else {
 			life_points = 0;
+			character_body->GetWorld()->DestroyBody(character_body);
 		}
 	}
 }

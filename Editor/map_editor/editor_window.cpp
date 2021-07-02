@@ -274,9 +274,7 @@ void MainWindow::addSquare(QMouseEvent* event) {
 void MainWindow::mouseMoveEvent(QMouseEvent* event) {
     if (this->dragged.toStdString().compare("color") == 0) {
         delay_cnt++;
-        if (delay_cnt < BASE_X) {
-            return;
-        }
+        if (delay_cnt < BASE_X) { return; }
         delay_cnt = 0;
         int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
         int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
@@ -329,4 +327,8 @@ void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
     }
 }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow() {
+    for (auto item : this->scene->items()) { delete item; }
+    delete this->scene;
+    delete ui;
+}

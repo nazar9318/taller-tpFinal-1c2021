@@ -119,7 +119,6 @@ void Match::handle_events() {
 
 // POST: Envia el evento a todos los jugadores de la partida.
 void Match::push_event(std::shared_ptr<Event>& event) {
-	std::lock_guard<std::mutex> l(m);
 	for (auto it = players.begin(); it != players.end(); ++it) {
 			std::shared_ptr<Event> to_push = event;
 			it->second->push(to_push);

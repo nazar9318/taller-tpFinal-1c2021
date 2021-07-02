@@ -146,6 +146,8 @@ void MainWindow::update_players() {
 			switch (model_event.get_type()) {
 				case ModelTypeEvent::PLAYERS_ID_LIST:
 					{
+						syslog(LOG_INFO, "[%s:%i]: Llego mensaje de players list"
+									, __FILE__, __LINE__);
 						update_players_list(model_event);
 						break;
 					}

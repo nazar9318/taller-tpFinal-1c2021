@@ -8,10 +8,10 @@
 #include "WeaponShotgun.h"
 #include "WeaponAutomatic.h"
 
-float Character::body_radius = 16;
+float Character::body_radius = 32;
 
 Character::Character(Team team, b2World* world,
-		 std::vector<Position*> available_positions, 
+		 std::vector<Position*> available_positions,
 		 StepInformation& step)
 		: life_points(CF::character_life_points),
 		 money(CF::character_money), team(team), step_info(step) {
@@ -27,7 +27,7 @@ Character::Character(Team team, b2World* world,
 	syslog(LOG_INFO, "[%s:%i]: Por agregar un character al world"
 					 , __FILE__, __LINE__);
 
-	std::random_device rd;  
+	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distrib(0,
 					 available_positions.size() - 1);
@@ -39,16 +39,16 @@ Character::Character(Team team, b2World* world,
 
 void Character::add_body(char x, char y, b2World* world) {
 	b2BodyDef body_def;
-	body_def.type = b2_dynamicBody; 
-	body_def.position.Set((int)x,(int)y); 
-	body_def.angle = 0; 
+	body_def.type = b2_dynamicBody;
+	body_def.position.Set((int)x,(int)y);
+	body_def.angle = 0;
 	character_body = world->CreateBody(&body_def);
-	
+
 	b2CircleShape circle_shape;
 	circle_shape.m_p.Set(0, 0);
 	circle_shape.m_radius = body_radius;
 	b2FixtureDef fixture_def;
-	fixture_def.shape = &circle_shape; 
+	fixture_def.shape = &circle_shape;
 	fixture_def.density = 1;
 	character_body->CreateFixture(&fixture_def);
 }
@@ -59,7 +59,7 @@ void Character::set_move_state(Direction dir) {
 }
 
 void Character::apply_impulses() {
-	// Citamos iforce2d para esta funcion. 
+	// Citamos iforce2d para esta funcion.
 	if (life_points > 0) {
 		b2Vec2 vel = character_body->GetLinearVelocity();
 		b2Vec2 desired_vel(0.0, 0.0);
@@ -76,7 +76,7 @@ void Character::apply_impulses() {
 				desired_vel.x = 0.0;
 				desired_vel.y = 120.0f;
 				break;
-			case Direction::DOWN: 
+			case Direction::DOWN:
 				desired_vel.x = 0.0;
 				desired_vel.y = -120.0f;
 				break;
@@ -206,8 +206,8 @@ void Character::take(unsigned int money) {
 */
 /*
 
-char Character::getLifePoints() { 
-	return life_points; 
+char Character::getLifePoints() {
+	return life_points;
 }
 
 Team Character::getTeam() { return this->team; }
@@ -271,5 +271,3 @@ void Character::attack(Character &enemy, Team my_team, uint16_t distance) {
 	}
 }
 */
-
-

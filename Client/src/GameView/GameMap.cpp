@@ -31,8 +31,8 @@ void GameMap::setSize(int& width, int& height) {
 
 /*-------------------------Metodos para render----------------------------*/
 
-void GameMap::cleanWeapons() { 
-  weapons.clear(); 
+void GameMap::cleanWeapons() {
+  weapons.clear();
 }
 
 void GameMap::renderGround() {

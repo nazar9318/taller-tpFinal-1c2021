@@ -31,7 +31,7 @@ void StartGameHandler::handle(Event& event,
 		std::shared_ptr<Event> event_weapon = weapons;
 		it->second->push(event_start);
 		it->second->push(event_map);
-		it->second->push(weapons);
+		it->second->push(event_weapon);
 	}
 }
 

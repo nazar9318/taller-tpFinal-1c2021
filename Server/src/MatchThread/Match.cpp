@@ -93,7 +93,10 @@ void Match::game_loop() {
 		finished = !game_world.simulate_step();
 		std::shared_ptr<Event> players_info(
 				new SendStepInfoEvent(game_world.get_step_info()));
+		std::shared_ptr<Event> weapons(
+			new SendWeaponsEvent(game_world.get_weapons_info()));
 		push_event(players_info);
+		push_event(weapons);
 		end = steady_clock::now();
 		t_delta = duration<double>(end - begin).count();
 		std::this_thread::sleep_for(duration<double>(CF::step_time - t_delta));

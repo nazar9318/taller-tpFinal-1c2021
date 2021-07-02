@@ -1,5 +1,5 @@
 #include "SendFullMapEvent.h"
-#include <iostream>
+
 SendFullMapEvent::SendFullMapEvent(std::vector<Position*> map_info,
 			 int x_lenght, int y_lenght) {
 	this->msg.push_back((char)ModelTypeEvent::SEND_FULL_MAP);

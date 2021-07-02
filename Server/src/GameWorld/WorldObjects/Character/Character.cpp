@@ -14,7 +14,8 @@ Character::Character(Team team, b2World* world,
 		 std::vector<Position*> available_positions,
 		 StepInformation& step)
 		: life_points(CF::character_life_points),
-		 money(CF::character_money), team(team), step_info(step) {
+		 money(CF::character_money), team(team), 
+		 step_info(step), number_weapons(2) {
 	std::unique_ptr<Weapon> knife(new WeaponWhite());
 	std::unique_ptr<Weapon> pistol(new WeaponPistol());
 	weapons.push_back(std::move(knife));
@@ -133,13 +134,16 @@ bool Character::has_optative_weapon() {
 }
 
 Weapon* Character::drop_optative_weapon() {
-	return weapons[2].release();
+	Weapon* weapon = weapons[2].release();
+	weapons.pop_back();
+	number_weapons--;
+	return weapon;
 }
 
 
 void Character::buy_weapon(std::unique_ptr<Weapon> weapon) {
 	money -= weapon->get_price();
-	weapons[2] = std::move(weapon);
+	weapons.push_back(std::move(weapon));
 	number_weapons++;
 }
 
@@ -190,7 +194,7 @@ bool Character::is_alive() {
 }
 
 void Character::add_weapon(std::unique_ptr<Weapon> weapon) {
-	weapons[2] = std::move(weapon);
+	weapons.push_back(std::move(weapon));
 	number_weapons++;
 }
 

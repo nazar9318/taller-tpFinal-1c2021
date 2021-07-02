@@ -9,7 +9,6 @@ SendStepInfoEvent::SendStepInfoEvent(StepInformation& step) {
 	this->msg.push_back(type);
 	//this->msg.push_back(step.get_number_players());
 	if (type == FaseType::PLAYING) {
-		syslog(LOG_INFO, "[%s:%i]: Fase Juego" , __FILE__, __LINE__);
 		std::vector<char> players_info = step.get_players_info();
 		std::copy(players_info.begin(),
 				 players_info.end(), std::back_inserter(this->msg));
@@ -18,7 +17,6 @@ SendStepInfoEvent::SendStepInfoEvent(StepInformation& step) {
 		std::vector<char> ground_info = step.get_ground_info();
 		*/
 	} else if (type == FaseType::INITIAL_FASE) {
-		syslog(LOG_INFO, "[%s:%i]: Fase Inicial" , __FILE__, __LINE__);
 		int wait = step.get_wait();
 		push_back(wait);
 		if (wait <= 0) {

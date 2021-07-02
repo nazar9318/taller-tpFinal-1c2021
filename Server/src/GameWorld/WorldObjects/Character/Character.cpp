@@ -8,6 +8,8 @@
 #include "WeaponShotgun.h"
 #include "WeaponAutomatic.h"
 
+#define FROM_DEG_TO_RAD 0.01745329252
+
 float Character::body_radius = 16;
 
 Character::Character(Team team, b2World* world,
@@ -15,7 +17,7 @@ Character::Character(Team team, b2World* world,
 		 StepInformation& step)
 		: life_points(CF::character_life_points),
 		 money(CF::character_money), team(team), 
-		 step_info(step), number_weapons(2) {
+		 step_info(step), number_weapons(2), angle(0) {
 	std::unique_ptr<Weapon> knife(new WeaponWhite());
 	std::unique_ptr<Weapon> pistol(new WeaponPistol());
 	weapons.push_back(std::move(knife));
@@ -120,11 +122,6 @@ void Character::start_attacking() {
 
 
 
-float Character::get_angle() {
-	return character_body->GetAngle();
-}
-
-
 bool Character::has_enough_to_buy(std::unique_ptr<Weapon>& weapon_buy) {
 	return (money >= weapon_buy->get_price());
 }
@@ -197,6 +194,15 @@ bool Character::is_alive() {
 void Character::add_weapon(std::unique_ptr<Weapon> weapon) {
 	weapons.push_back(std::move(weapon));
 	number_weapons++;
+}
+
+
+void Character::set_angle(int alfa) {
+	angle = alfa;
+}
+
+int Character::get_angle() {
+	return angle; 
 }
 
 

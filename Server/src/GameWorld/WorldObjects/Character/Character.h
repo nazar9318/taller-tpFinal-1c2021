@@ -36,6 +36,7 @@ class Character {
 		b2Body* character_body;
 		Direction move_state;
 		StepInformation& step_info;
+		int angle;
 
 	public:
 		static float body_radius;
@@ -80,12 +81,15 @@ class Character {
 		void attack(char self_id, std::list<Block>& blocks,
 			 std::map<char, Character>& characters);
 
-		float get_angle();
-
 		bool is_alive();
 		void add_weapon(std::unique_ptr<Weapon> weapon);
 
 		void stop_attacking();
+
+		void set_angle(int angle);
+
+		int get_angle();
+
 /*
 disparo pistola ---. 
 arma.attack(team.opposite(), pos.x, pos.y,

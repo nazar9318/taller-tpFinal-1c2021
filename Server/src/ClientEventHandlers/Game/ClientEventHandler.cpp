@@ -6,6 +6,11 @@ ClientEventHandler::
 
 void ClientEventHandler::handle(Event& event) {
 	switch(event.get_type()) {
+		case ClientTypeEvent::ROTATE:
+			{
+				rotator.handle(event, world);
+				break;
+			}
 		case ClientTypeEvent::MOVE:
 			{
 				mover.handle(event, world);
@@ -40,7 +45,7 @@ void ClientEventHandler::handle(Event& event) {
 			{
 				attack_stoper.handle(event, world);
 				break;
-			}	
+			}
 		default:
 			{
 				throw Exception("[%s:%i]:No hay ningun"

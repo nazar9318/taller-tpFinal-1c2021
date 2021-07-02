@@ -64,6 +64,13 @@ std::vector<char> StepInformation::get_players_info() {
 		players_info.push_back(*((char*)(&y) + 1));
 		players_info.push_back(*((char*)(&y) + 2));
 		players_info.push_back(*((char*)(&y) + 3)); 
+		/*
+		int angle = it->second.get_angle();
+		players_info.push_back(*((char*)(&angle)));
+		players_info.push_back(*((char*)(&angle) + 1));
+		players_info.push_back(*((char*)(&angle) + 2));
+		players_info.push_back(*((char*)(&angle) + 3)); 
+		*/
 	}	
 
 	return players_info;

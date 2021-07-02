@@ -12,6 +12,7 @@
 #include "ChangeWeaponHandler.h"
 #include "BuyWeaponHandler.h"
 #include "StopAttackingHandler.h"
+#include "RotateHandler.h"
 
 class ClientEventHandler{
 		MoveHandler mover;
@@ -21,8 +22,9 @@ class ClientEventHandler{
 		ChangeWeaponHandler changer; 
 		BuyWeaponHandler buyier;
 		StopAttackingHandler attack_stoper;
+		RotateHandler rotator;
 		GameWorld& world;
-		
+
 	public:
 		ClientEventHandler(GameWorld& game_world); 
 

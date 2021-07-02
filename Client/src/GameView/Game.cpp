@@ -136,19 +136,24 @@ void Game::handle_unclick(SDL_Event& event) {
 	}
 }
 
+
+#define FROM_RAD_TO_DEG 57.295779513
+
 void Game::handle_mouse_motion() {
 	/* code */
 	/*int delta_x; int delta_y;
 	int mouse_x, mouse_y;
 	int angle;
 	SDL_GetMouseState(&mouse_x, &mouse_y);
-	delta_x = prev_mouse_x - mouse_x;
-	delta_y = prev_mouse_y - mouse_y;
-	angle = (atan2(delta_y, delta_x) * 180.0000)/ 3.14159265;
+	delta_x = mouse_x - player_x;
+	delta_y = (-1) * (mouse_y - player_y);
+	angle = (int)((atan2(delta_y, delta_x) * FROM_RAD_TO_DEG);
+	if (delta_x < 0) {
+		angle += 180;
+	}
+	angle = angle % 360;
 	std::unique_ptr<Event> move(new ChangeAngleEvent(angle));
 	this->client_events.push(move);
-	prev_mouse_x = mouse_x;
-	prev_mouse_y = mouse_y;
 */}
 
 void Game::process_events() {

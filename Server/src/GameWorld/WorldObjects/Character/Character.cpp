@@ -25,8 +25,6 @@ Character::Character(Team team, b2World* world,
 		throw ExceptionInvalidCommand("No hay suficientes posiciones"
 				" para ubicar a los jugadores", ServerError::MATCH_FULL);
 	}
-	syslog(LOG_INFO, "[%s:%i]: Por agregar un character al world"
-					 , __FILE__, __LINE__);
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
@@ -35,10 +33,13 @@ Character::Character(Team team, b2World* world,
 	Position* position = available_positions[distrib(gen)];
 	position->occupy();
 	add_body(position->get_x(), position->get_y(), world);
+	syslog(LOG_INFO, "[%s:%i]: Por agregar un character al world"
+					 "con posicion (%d, %d) ", __FILE__, __LINE__,
+					  position->get_x(), position->get_y());
 	move_state = Direction::STOP_MOVING;
 }
 
-void Character::add_body(char x, char y, b2World* world) {
+void Character::add_body(int x, int y, b2World* world) {
 	b2BodyDef body_def;
 	body_def.type = b2_dynamicBody;
 	body_def.position.Set((int)x,(int)y);

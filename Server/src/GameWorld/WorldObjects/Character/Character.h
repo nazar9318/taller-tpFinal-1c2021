@@ -47,7 +47,7 @@ class Character {
 
 		Character& operator = (Character&&) = default;
 
-		void add_body(char x, char y, b2World* world);
+		void add_body(int x, int y, b2World* world);
 
 		void set_move_state(Direction dir);
 

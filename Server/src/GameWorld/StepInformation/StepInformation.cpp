@@ -47,7 +47,6 @@ void StepInformation::add_position(char id, int x, int y) {
 	positions[id] = pos;
 }
 
-
 std::vector<char> StepInformation::get_players_info() {
 	std::vector<char> players_info;
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
@@ -64,7 +63,7 @@ std::vector<char> StepInformation::get_players_info() {
 		players_info.push_back(*((char*)(&y)));
 		players_info.push_back(*((char*)(&y) + 1));
 		players_info.push_back(*((char*)(&y) + 2));
-		players_info.push_back(*((char*)(&y) + 3)); 		
+		players_info.push_back(*((char*)(&y) + 3)); 
 	}	
 
 	return players_info;

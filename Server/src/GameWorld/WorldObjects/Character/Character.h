@@ -84,6 +84,8 @@ class Character {
 
 		bool is_alive();
 		void add_weapon(std::unique_ptr<Weapon> weapon);
+
+		void stop_attacking();
 /*
 disparo pistola ---. 
 arma.attack(team.opposite(), pos.x, pos.y,

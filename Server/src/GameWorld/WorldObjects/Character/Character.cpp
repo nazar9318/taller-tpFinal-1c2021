@@ -88,6 +88,8 @@ void Character::apply_impulses() {
 		b2Vec2 impulse = character_body->GetMass() * vel_change;
 		character_body->ApplyLinearImpulse
 					(impulse, character_body->GetWorldCenter(), true);
+		syslog(LOG_INFO, "[%s:%i]: Aplico un impulso (%d, %d)"
+				 , __FILE__, __LINE__, (int)impulse.x, (int)impulse.y);
 	}
 }
 
@@ -175,6 +177,10 @@ Team Character::get_team() {
 	return team;
 }
 
+
+void Character::stop_attacking() {
+	weapons[current_weapon]->deactivate();
+}
 
 Character::~Character() {
 }

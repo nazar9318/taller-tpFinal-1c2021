@@ -36,11 +36,16 @@ void ClientEventHandler::handle(Event& event) {
 				buyier.handle(event, world);
 				break;
 			}
+		case ClientTypeEvent::STOP_ATTACKING:
+			{
+				attack_stoper.handle(event, world);
+				break;
+			}	
 		default:
 			{
 				throw Exception("[%s:%i]:No hay ningun"
-						" evento con esta caracteristica", 
-						__FILE__, __LINE__);
+						" evento con esta caracteristica: %d", 
+						__FILE__, __LINE__, (int)event.get_type());
 			}
 	}
 }

@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "StepInformation.h"
+#include <syslog.h>
 
 StepInformation::
 StepInformation(std::map<char,Character>& players):
@@ -64,6 +65,8 @@ std::vector<char> StepInformation::get_players_info() {
 		players_info.push_back(*((char*)(&y) + 1));
 		players_info.push_back(*((char*)(&y) + 2));
 		players_info.push_back(*((char*)(&y) + 3)); 
+		syslog(LOG_INFO, "[%s:%i]: Mando"
+					" jugador con pos %d, %d" , __FILE__, __LINE__, x, y);
 
 		
 	}	

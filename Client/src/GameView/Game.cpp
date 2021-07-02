@@ -6,7 +6,7 @@ Game::Game(ProtectedQueue<Event>& model,
 model_events(model), client_events(client), is_running(true),
 player(player_id, charactersInfo.at(player_id)),
 window("Counter 2d", 800, 600, false), renderer(window), map(renderer, player, characters),
-prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE) {
+prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE), camera(renderer) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
 		if (it->first != player_id) {
 			ClientCharacter character(it->second);
@@ -39,7 +39,7 @@ void Game::render() {
 		map.renderWeapons();
 		map.renderPlayer();
 	} else {
-		// fase final 
+		// fase final
 	}
 	//	map.renderOtherCharacters();
 	// renderer.setDrawColor(0xFF,0xFF,0xFF,0xFF);
@@ -165,7 +165,7 @@ void Game::process_events() {
 		}
 	}
 }
- 
+
 void Game::update() { is_running = false; }
 
 Game::~Game() {}

@@ -21,6 +21,7 @@
 #include "ChangeAngleEvent.h"
 #include <SDL2/SDL.h>
 #include "FaseType.h"
+#include "Camera.h"
 
 class Game {
 	private:
@@ -33,6 +34,7 @@ class Game {
 		std::map<char, ClientCharacter> characters;
 		Window window;
 		Renderer renderer;
+		Camera camera;
 		int prev_mouse_x;
 		int prev_mouse_y;
 		FaseType fase;

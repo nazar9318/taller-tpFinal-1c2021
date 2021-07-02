@@ -8,7 +8,7 @@
 #include "WeaponShotgun.h"
 #include "WeaponAutomatic.h"
 
-float Character::body_radius = 32;
+float Character::body_radius = 16;
 
 Character::Character(Team team, b2World* world,
 		 std::vector<Position*> available_positions,

@@ -26,8 +26,8 @@ SDL_Rect ClientPlayer::getBox() {
 }
 
 void ClientPlayer::update_position(int pos_x, int pos_y) {
-	pos.x = pos_x + texture->get_w()/2;
-	pos.y = pos_y + texture->get_h()/2;
+	pos.x = pos_x - texture->get_w()/2;
+	pos.y = pos_y - texture->get_h()/2;
 }
 
 

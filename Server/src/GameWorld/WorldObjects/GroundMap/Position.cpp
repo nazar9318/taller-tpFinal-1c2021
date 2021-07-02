@@ -1,7 +1,7 @@
 #include "Position.h"
 
 Position::Position(int column, int row, char type) :
-	x(column), y(row * (-1)), type_position(type), occupied(false) {
+	x(column), y(row), type_position(type), occupied(false) {
 }
 
 char Position::get_type() const {

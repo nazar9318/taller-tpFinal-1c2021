@@ -8,7 +8,6 @@
 #include "WeaponShotgun.h"
 #include "WeaponAutomatic.h"
 
-
 float Character::body_radius = 16;
 
 Character::Character(Team team, b2World* world,
@@ -50,6 +49,7 @@ void Character::add_body(char x, char y, b2World* world) {
 	circle_shape.m_radius = body_radius;
 	b2FixtureDef fixture_def;
 	fixture_def.shape = &circle_shape; 
+	fixture_def.density = 1;
 	character_body->CreateFixture(&fixture_def);
 }
 
@@ -78,7 +78,7 @@ void Character::apply_impulses() {
 				break;
 			case Direction::DOWN: 
 				desired_vel.x = 0.0;
-				desired_vel.y = 120.0f;
+				desired_vel.y = -120.0f;
 				break;
 			case Direction::STOP_MOVING:
 				desired_vel.x = 0.0;
@@ -88,8 +88,6 @@ void Character::apply_impulses() {
 		b2Vec2 impulse = character_body->GetMass() * vel_change;
 		character_body->ApplyLinearImpulse
 					(impulse, character_body->GetWorldCenter(), true);
-		syslog(LOG_INFO, "[%s:%i]: Aplico un impulso (%d, %d)"
-				 , __FILE__, __LINE__, (int)impulse.x, (int)impulse.y);
 	}
 }
 

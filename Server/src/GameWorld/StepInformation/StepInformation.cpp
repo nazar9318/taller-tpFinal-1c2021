@@ -64,11 +64,7 @@ std::vector<char> StepInformation::get_players_info() {
 		players_info.push_back(*((char*)(&y)));
 		players_info.push_back(*((char*)(&y) + 1));
 		players_info.push_back(*((char*)(&y) + 2));
-		players_info.push_back(*((char*)(&y) + 3)); 
-		syslog(LOG_INFO, "[%s:%i]: Mando"
-					" jugador con pos %d, %d" , __FILE__, __LINE__, x, y);
-
-		
+		players_info.push_back(*((char*)(&y) + 3)); 		
 	}	
 
 	return players_info;

@@ -33,6 +33,8 @@ class Texture {
     int get_w();
     int get_h();
 
+    void setColor(Color& color);
+
     //Libera la textura
     void free();
 

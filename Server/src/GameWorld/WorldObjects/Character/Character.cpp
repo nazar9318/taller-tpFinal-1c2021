@@ -11,7 +11,7 @@
 Character::Character(Team team, b2World* world,
 		 std::vector<Position*> available_positions)
 		: life_points(CF::character_life_points),
-		 money(CF::character_money), team(team), 
+		 money(CF::character_money), team(team),
 		 number_weapons(2), angle(0) {
 	std::unique_ptr<Weapon> knife(new WeaponWhite());
 	std::unique_ptr<Weapon> pistol(new WeaponPistol());
@@ -94,7 +94,7 @@ void Character::apply_impulses() {
 void Character::attack(char self_id, std::list<Block>& blocks,
     	std::map<char, Character>& characters) {
 	AttackInformation attack_info(self_id, this, get_opposite(team));
-	if (is_alive()) 
+	if (is_alive())
 		weapons[current_weapon]->attack(attack_info, blocks, characters);
 	return attack_info;
 }
@@ -122,7 +122,7 @@ void Character::take_damage(char points) {
 void Character::receive_damage(AttackInformation& attack) {
 	if ((attack.get_team() == team) && is_alive()) {
 		take_damage(attack.get_damage());
-	
+
 		if (life_points == 0) {
 			attack.add_receiver(this, true);
 		} else {
@@ -137,8 +137,8 @@ void Character::receive_damage(AttackInformation& attack) {
 b2Vec2 Character::get_pos() {
 	if (is_alive())
 		return character_body->GetPosition();
-	return b2Vec2(-10, 10); // una posicion fuera del mapa. 
-}	
+	return b2Vec2(-10, 10); // una posicion fuera del mapa.
+}
 
 b2Fixture* Character::GetFixtureList() {
 	return character_body->GetFixtureList();
@@ -213,9 +213,16 @@ void Character::set_angle(int alfa) {
 }
 
 int Character::get_angle() {
-	return angle; 
+	return angle;
 }
 
+char Character::get_life(){
+	return life_points;
+}
+
+int Character::get_money(){
+	return money;
+}
 
 Character::~Character() {
 }

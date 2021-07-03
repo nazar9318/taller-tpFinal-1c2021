@@ -1,9 +1,10 @@
 #include "GameMap.h"
 
-GameMap::GameMap(Renderer& renderer, ClientPlayer& player, std::map<char, ClientCharacter> &characters)
+GameMap::GameMap(Renderer& renderer, ClientPlayer& player, Camera& camera, std::map<char,
+          ClientCharacter> &characters, Hud& hud)
 : renderer(renderer), tile_container(TileContainer::getInstance()),
 sprite_container(SpriteContainer::getInstance()), player(player),
-characters(characters) {}
+characters(characters), camera(camera), hud(hud) {}
 
 void GameMap::create() {}
 
@@ -44,8 +45,6 @@ void GameMap::renderGround() {
     quad = tiles[i].getBox();
     renderer.render(texture.getTexture(), NULL, &quad);
   }
-  // syslog(LOG_INFO, "[%s:%i]: El ground fue renderizado",
-  //                    __FILE__, __LINE__);
 }
 
 
@@ -59,13 +58,15 @@ void GameMap::renderWeapons() {
     quad = weapons[i].getBox();
     renderer.render(texture.getTexture(), NULL, &quad);
   }
-  // syslog(LOG_INFO, "[%s:%i]: Los Weapons fueron renderizados",
-  //                    __FILE__, __LINE__);
+  syslog(LOG_INFO, "[%s:%i]: Los Weapons fueron renderizados",
+                     __FILE__, __LINE__);
 }
 
-void GameMap::update_position(char id, int pos_x, int pos_y, int angle) {
+void GameMap::update_position(char id, int pos_x, int pos_y, int angle, char life, int money) {
   if (id == player.get_id()) {
-    player.update_position(pos_x, pos_y, angle);
+    player.update_position(pos_x, pos_y, angle, life, money);
+    hud.update_values(life, money);
+    // camera.center(player.getBox(), map_width, map_height);
   } else {
     characters.at(id).update_position(pos_x, pos_y, angle);
   }
@@ -88,7 +89,6 @@ void GameMap::renderPlayer() {
   quad = player.getBox();
   double angle = player.getAngle();
   renderer.render(texture.getTexture(), NULL, &quad, angle);
-
 }
 
 void GameMap::renderCharacters() {

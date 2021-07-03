@@ -75,6 +75,10 @@ int Texture::get_h(){
   return height;
 }
 
+void Texture::setColor(Color& color){
+  SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
+}
+
 Texture::~Texture() {
     free();
 }

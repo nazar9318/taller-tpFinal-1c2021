@@ -10,10 +10,10 @@ YAML::Node CF::common_yaml_file = YAML::LoadFile("../Common/Configuration/Common
 /**************************COMMON*********************************/
 
 std::string CF::port = common_yaml_file["port"].as<std::string>();
-int CF::max_iterations_pop_events = 
+int CF::max_iterations_pop_events =
 				CF::common_yaml_file["max_iterations_pop_events"].as<int>();
 int CF::size_position = CF::common_yaml_file["size_position"].as<int>();
-double CF::step_time = CF::common_yaml_file["step_time"].as<double>(); 
+double CF::step_time = CF::common_yaml_file["step_time"].as<double>();
 int CF::character_radius = CF::common_yaml_file["character_radius"].as<int>();
 
 /*****************************************************************/
@@ -28,8 +28,8 @@ double CF::time_preparation = CF::yaml_file["time_preparation"].as<double>();
 int CF::number_rounds = CF::yaml_file["number_rounds"].as<int>();
 int CF::players_allowed = CF::yaml_file["players_allowed"].as<int>();
 
-double CF::character_life_points = CF::yaml_file["character_life_points"].as<double>();
-double CF::character_money = CF::yaml_file["character_money"].as<double>();
+int CF::character_life_points = CF::yaml_file["character_life_points"].as<int>();
+int CF::character_money = CF::yaml_file["character_money"].as<int>();
 int CF::bomb_clock_count = CF::yaml_file["bomb_clock_count"].as<int>();
 int CF::glock_bullets = CF::yaml_file["glock_bullets"].as<int>();
 int CF::ak47_bullets = CF::yaml_file["ak47_bullets"].as<int>();
@@ -87,7 +87,7 @@ Configuration::~Configuration() {}
 
 void Configuration::load_configuration(const std::string& file_path) {
 	yaml_file =	YAML::LoadFile("../../../" + file_path);
-	
+
 	syslog(LOG_INFO, "[%s:%i]: Se cargo el port: %s"
 			, __FILE__, __LINE__, port.c_str());
 	time_preparation = yaml_file["time_preparation"].as<double>();
@@ -100,8 +100,8 @@ void Configuration::load_configuration(const std::string& file_path) {
 	velocity_iterations = yaml_file["velocity_iterations"].as<int>();
 	position_iterations = yaml_file["position_iterations"].as<int>();
 
-	character_life_points = yaml_file["character_life_points"].as<double>();
-	character_money = yaml_file["character_money"].as<double>();
+	character_life_points = yaml_file["character_life_points"].as<int>();
+	character_money = yaml_file["character_money"].as<int>();
 	bomb_clock_count = yaml_file["bomb_clock_count"].as<int>();
 	glock_bullets = yaml_file["glock_bullets"].as<int>();
 	ak47_bullets = yaml_file["ak47_bullets"].as<int>();

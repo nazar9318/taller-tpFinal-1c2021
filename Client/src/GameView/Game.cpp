@@ -5,8 +5,9 @@ Game::Game(ProtectedQueue<Event>& model,
 	std::map<char, std::string>& charactersInfo, char& player_id) :
 model_events(model), client_events(client), is_running(true),
 player(player_id, charactersInfo.at(player_id)),
-window("Counter 2d", 800, 600, false), renderer(window), map(renderer, player, characters),
-prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE), camera(renderer) {
+window("Counter 2d", 800, 600, false), renderer(window), camera(renderer), hud(renderer, 800, 600),
+ map(renderer, player,camera, characters, hud),
+prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
 		if (it->first != player_id) {
 			ClientCharacter character(it->second);
@@ -28,7 +29,10 @@ void Game::execute() {
 	}
 }
 
-void Game::loadMedia() { map.loadMedia(); }
+void Game::loadMedia() {
+	map.loadMedia();
+	hud.loadMedia();
+}
 
 void Game::render() {
 	renderer.clearScreen();
@@ -39,6 +43,7 @@ void Game::render() {
 		map.renderWeapons();
 		map.renderPlayer();
 		map.renderCharacters();
+		hud.render();
 	} else {
 		// fase final
 	}
@@ -138,7 +143,6 @@ void Game::handle_unclick(SDL_Event& event) {
 
 
 #define FROM_RAD_TO_DEG 57.295779513
-#include <iostream>
 void Game::handle_mouse_motion() {
 
 	SDL_Rect player_pos = player.getBox();
@@ -154,7 +158,6 @@ void Game::handle_mouse_motion() {
 	// 	angle += 180;
 	// }
 	angle = angle % 360;
-	std::cout << angle << '\n';
 	std::unique_ptr<Event> move(new ChangeAngleEvent(angle));
 	this->client_events.push(move);
 }

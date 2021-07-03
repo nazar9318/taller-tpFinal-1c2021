@@ -9,15 +9,17 @@
 #include "SpriteContainer.h"
 #include "ClientPlayer.h"
 #include "ClientCharacter.h"
+#include "Hud.h"
 #include "Tile.h"
 #include "WeaponSprite.h"    //VER SI HAGO WEAPON Y CHARACTER COMO UNA UNICA CLASE SPRITE
 #include "Team.h"
+#include "Camera.h"
 
 class GameMap {
 	private:
 		Renderer& renderer;
-		ClientPlayer& player;
-		std::map<char, ClientCharacter> &characters;
+		Camera& camera;
+		Hud& hud;
 
 		/*Contenedores*/
 		TileContainer& tile_container;
@@ -26,7 +28,8 @@ class GameMap {
 		/*Entidades*/
 		std::vector<Tile> tiles;
 		std::vector<WeaponSprite> weapons;
-		// std::vector<Character> weapons;
+		ClientPlayer& player;
+		std::map<char, ClientCharacter> &characters;
 
 		int map_width;
 		int map_height;
@@ -35,7 +38,8 @@ class GameMap {
 		int x_min = 0, x_max = 0, y_min = 0, y_max = 0;
 
 	public:
-		GameMap(Renderer& renderer, ClientPlayer& player, std::map<char, ClientCharacter> &characters);
+		GameMap(Renderer& renderer, ClientPlayer& player, Camera& camera, std::map<char,
+			 			ClientCharacter> &characters, Hud& hud);
 		void create();
 		void setSize(int& width, int& height);
 
@@ -43,7 +47,7 @@ class GameMap {
 		void addWeapon(WeaponSprite tile);
 		void cleanWeapons();
 		void loadMedia();
-		void update_position(char id, int pos_x, int pos_y, int angle);
+		void update_position(char id, int pos_x, int pos_y, int angle, char life, int money);
 		/*------------Metodos para render--------------*/
 		void setRenderArea();
 		void renderCharacters();

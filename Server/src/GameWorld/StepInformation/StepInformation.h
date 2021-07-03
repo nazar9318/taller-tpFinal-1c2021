@@ -25,6 +25,7 @@ class StepInformation {
 		void set_type(FaseType fase);
 		FaseType get_type();
 		std::vector<char> get_players_info();
+		std::vector<char> get_attacks();
 		void set_waiting_time(int wait);
 		int get_waiting_time();
 		void clear();

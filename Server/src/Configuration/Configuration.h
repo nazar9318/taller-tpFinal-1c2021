@@ -11,23 +11,23 @@ class Configuration;
 typedef Configuration CF;
 
 class Configuration {
-	public:		
+	public:
 		Configuration();
 		~Configuration();
 		static void load_configuration(const std::string& file_path);
 		static YAML::Node yaml_file;
-		
+
 		/**************************************/
 		/**************COMMON******************/
 		static YAML::Node common_yaml_file;
 		static std::string port;
 		static int max_iterations_pop_events;
-		static double step_time; 
+		static double step_time;
 		static int size_position;
 		static int character_radius;
-		
+
 		/**************************************/
-		
+
 
 		static double time_preparation;
 		static int number_rounds;
@@ -38,11 +38,11 @@ class Configuration {
 
 		static int max_distance_grab;
 
-		static double character_life_points;
-		static double character_money;
+		static int character_life_points;
+		static int character_money;
 
 		static int bomb_clock_count;
-		
+
 		static double knife_damage_min;
 		static double glock_damage_min;
 		static double ak47_damage_min;

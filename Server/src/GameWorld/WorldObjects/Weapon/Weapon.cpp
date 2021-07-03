@@ -1,7 +1,7 @@
 #include "Weapon.h"
 
 
-Weapon::Weapon(unsigned int price, char damage_min, char damage_max,
+Weapon::Weapon(int price, char damage_min, char damage_max,
 		 unsigned int max_distance, float distance_penalty):
 		price(price),
 		damage_min(damage_min),
@@ -14,7 +14,7 @@ void Weapon::activate() {
 	activated = true;
 }
 
-unsigned int Weapon::get_price() {
+int Weapon::get_price() {
 	return price;
 }
 

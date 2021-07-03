@@ -29,7 +29,18 @@ void StepInformation::add_attack(AttackInformation attack_info) {
 	attacks.push_back(std::move(attack_info));
 }
 
+std::vector<char> StepInformation::get_attacks(){
 
+	std::vector<char> msg;
+	msg.push_back((char)attacks.size());
+
+	for (auto it = attacks.begin(); it != attacks.end(); ++it) {
+		std::vector<char> attack = it->get_attack_message();
+		std::copy(attack.begin(), attack.end(), std::back_inserter(msg));
+	}
+	attacks.clear();
+	return msg;
+}
 
 void StepInformation::set_type(FaseType fase_type) {
 	fase = fase_type;
@@ -75,6 +86,14 @@ std::vector<char> StepInformation::get_players_info() {
 		players_info.push_back(*((char*)(&angle) + 1));
 		players_info.push_back(*((char*)(&angle) + 2));
 		players_info.push_back(*((char*)(&angle) + 3));
+
+		players_info.push_back((it->second).get_life());
+
+		int money = it->second.get_money();
+		players_info.push_back(*((char*)(&money)));
+		players_info.push_back(*((char*)(&money) + 1));
+		players_info.push_back(*((char*)(&money) + 2));
+		players_info.push_back(*((char*)(&money) + 3));
 
 	}
 

@@ -10,8 +10,21 @@ bool AttackInformation::is_valid_attack() {
 	return (weapon != PositionType::NO_WEAPON);
 }
 
+std::vector<char> AttackInformation::get_attack_message(){
+	std::vector<char> msg;
+
+	msg.push_back(id_attacker);
+	msg.push_back((char)receivers.size());
+
+	for (auto it = receivers.begin(); it != receivers.end(); ++it) {
+		msg.push_back(it->first);
+	}
+
+	return msg;
+}
+
 std::list<Character*> AttackInformation::get_killed_chars() {
-	std::list<Character*> killed; 
+	std::list<Character*> killed;
 	for (auto it = receivers.begin(); it != receivers.end(); ++it) {
 		if (!it->second->is_alive()) {
 			killed.push_back(it->second);
@@ -54,5 +67,3 @@ b2Vec2 AttackInformation::get_init_pos() {
 
 AttackInformation::~AttackInformation() {
 }
-
-

@@ -13,9 +13,11 @@ class Camera {
   public:
     Camera(Renderer& renderer);
 
-    void center(SDL_Rect object, int map_width, int map_height);
+    void center(SDL_Rect& object, int map_width, int map_height);
 
     void render(Texture& texture, int x, int y);
+
+    bool isVisible(SDL_Rect& quad);
 
     int get_x();
     int get_y();

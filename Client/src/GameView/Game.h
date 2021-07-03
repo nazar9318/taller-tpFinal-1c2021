@@ -22,12 +22,14 @@
 #include <SDL2/SDL.h>
 #include "FaseType.h"
 #include "Camera.h"
+#include "Hud.h"
 
 class Game {
 	private:
 		ProtectedQueue<Event>& model_events;
 		ProtectedQueue<std::unique_ptr<Event>>& client_events;
 		GameMap map;
+		Hud hud;
 		ModelEventHandler handler;
 		bool is_running;
 		ClientPlayer player;

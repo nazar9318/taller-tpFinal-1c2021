@@ -27,7 +27,7 @@ class WeaponAutomatic;
 class Character {
 	private:
 		char life_points;
-		unsigned int money;
+		int money;
 		Team team;
 		std::vector<std::unique_ptr<Weapon>> weapons;
 		int current_weapon;
@@ -39,7 +39,7 @@ class Character {
 	public:
 		Character(Team team, b2World* world,
 			 std::vector<Position*> available_positions);
-		
+
 		Character(Character&&) = default;
 
 		Character& operator = (Character&&) = default;
@@ -72,7 +72,7 @@ class Character {
 		b2Vec2 get_pos();
 
 		void take_damage(char points);
-		
+
 		char getLifePoints();
 
 		void attack(AttackInformation& attack_info, std::list<Block>& blocks,
@@ -87,8 +87,12 @@ class Character {
 
 		int get_angle();
 
+		char get_life();
+
+		int get_money();
+
 /*
-disparo pistola ---. 
+disparo pistola ---.
 arma.attack(team.opposite(), pos.x, pos.y,
 	 angulo, world, characters, stepinfo)
 encuentra jugador/es
@@ -107,7 +111,7 @@ area escopeta
 /*
 
 		void buy(Weapon *new_weapon);
-		
+
 		void grab(Weapon *new_weapon);
 
 		void grab(Bomb *bomb);

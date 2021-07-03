@@ -3,7 +3,7 @@
 
 SendStepInfoEvent::SendStepInfoEvent(StepInformation& step) {
 	this->msg.push_back((char)ModelTypeEvent::STEP_INFO);
-	
+
 
 	char type = step.get_type();
 	this->msg.push_back(type);
@@ -12,20 +12,21 @@ SendStepInfoEvent::SendStepInfoEvent(StepInformation& step) {
 		std::vector<char> players_info = step.get_players_info();
 		std::copy(players_info.begin(),
 				 players_info.end(), std::back_inserter(this->msg));
-		/*
-		std::vector<char> attacks_info = step.get_attacks_info();
-		std::vector<char> ground_info = step.get_ground_info();
+
+		// std::vector<char> attacks_info = step.get_attacks();
+		// std::copy(attacks_info.begin(), attacks_info.end(), std::back_inserter(this->msg));
+		/*std::vector<char> ground_info = step.get_ground_info();
 		*/
 	} else if (type == FaseType::INITIAL_FASE) {
 		int wait = step.get_wait();
 		push_back(wait);
 		if (wait <= 0) {
-			// ID(char), counter / anticounter; 
+			// ID(char), counter / anticounter;
 			std::vector<char> v = step.get_players_init();
 			std::copy(v.begin(), v.end(), std::back_inserter(msg));
 		}
 		//std::vector<char> players_info = step.get_players_info();
-		// id_player(char), pos_x(int), pos_y(int), life(char), 
+		// id_player(char), pos_x(int), pos_y(int), life(char),
 		// std::map<id, player*>
 		//std::vector<char> attacks_info = step.get_buying_things_info();
 

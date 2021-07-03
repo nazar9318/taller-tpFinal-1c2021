@@ -17,6 +17,7 @@
 #include "Team.h"
 #include "Position.h"
 #include "StepInformation.h"
+#include "AttackInformation.h"
 #include "FaseType.h"
 #include "Character.h"
 #include "Bomb.h"
@@ -63,6 +64,9 @@ class GameWorld {
 		void simulate_playing_step();
 		void prepare_new_round();
 		void charge_stats();
+		void handle_attack(std::map<char, Character>::iterator& it,
+								 AttackInformation& attack);
+
 		GameWorld(const GameWorld &other) = delete;
 		GameWorld& operator=(const GameWorld &other) = delete;
 };

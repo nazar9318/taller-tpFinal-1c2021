@@ -19,48 +19,33 @@ enum TypeReceptor: char {
 class AttackInformation {
 	TypeReceptor type_attack;
 	PositionType weapon;
-	char id_receiver;
 	char id_attacker;
-	char damage_weapon;
 	Character* attacker;
-	Character* receiver;
 	Team team_attacked;
-	int x_attacker;
-	int y_attacker;
-	int x_receiver;
-	int y_receiver;
-	bool is_dead;
+	std::map<char, Character*> receivers;
 
 	public:
+		AttackInformation(char id, Character* attacker);
+		
+		bool is_valid_attack();
+		
+		std::list<Character*> get_killed_chars();
 
-		AttackInformation(char id, Character* attacker, Team team_attacked);
-		
-		AttackInformation(AttackInformation&&) = default;
-		
 		float get_angle();
 
 		char get_attacker_id();
 		
-		void add_receiver_id(char id);
-
-		void add_receiver(Character* attacked, bool is_dead);
-
-		bool attack_is_kill();
-
-		b2Vec2 get_init_pos();
+		void add_receiver(char id, Character* attacked);
 		
-		void set_receptor(TypeReceptor type);
-
-		void set_weapon(PositionType weapon);
+		void add_attacked_team(Team team);
 
 		Team get_team();
 
+		b2Vec2 get_init_pos();
+		
+		void set_weapon(PositionType weapon);
 
-		void set_damage(char damage);
-
-		char get_damage();
-
-
+		AttackInformation(AttackInformation&&) = default;
 
 		AttackInformation& operator = (AttackInformation&&) = default;
 

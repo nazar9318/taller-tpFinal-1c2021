@@ -8,27 +8,31 @@ WeaponWhite::WeaponWhite() :
 }
 
 void WeaponWhite::attack(AttackInformation& attack_info,
-                    std::list<Block>& blocks, std::map<char,
-                                Character>& characters) {
-    // FALTA EL BARRIDO EN AREA. CORTA CON UN JUGADOR
-    if (activated) {
-        syslog(LOG_INFO, "[%s:%i]: Ataque del cuchi. "
-                        , __FILE__, __LINE__);
-        attack_info.set_weapon(PositionType::KNIFE);
-        std::map<char,Character>::iterator closest_char;
-        float distance;
-        float angle = attack_info.get_angle();
-        bool is_character = find_closest_character(attack_info, blocks,
-                                characters, angle, closest_char, distance);
-        if (is_character) {
-            char damage = calculate_damage(distance);
-            if (damage > 0) {
-                attack_info.set_receptor(TypeReceptor::CHARACTER);
-                attack_info.add_receiver_id(closest_char->first);
-                closest_char->second.receive_damage(attack_info);
-            }   
-        }
-        deactivate();
+					std::list<Block>& blocks, std::map<char,
+								Character>& characters) {
+	// FALTA EL BARRIDO EN AREA. CORTA CON UN JUGADOR
+	if (activated) {
+		syslog(LOG_INFO, "[%s:%i]: Ataque del cuchi. "
+						, __FILE__, __LINE__);
+		attack_info.set_weapon(PositionType::KNIFE);
+		std::map<char,Character>::iterator closest_char;
+		float distance;
+		float angle = attack_info.get_angle();
+		syslog(LOG_INFO, "[%s:%i]: El angulo es de . "
+			"%f. ", __FILE__, __LINE__, angle);
+		bool is_character = find_closest_character(attack_info, blocks,
+								characters, angle, closest_char, distance);
+		if (is_character) {
+			char damage = calculate_damage(distance);
+			syslog(LOG_INFO, "[%s:%i]: Va a atacar a un character con damage"
+			"%d. ", __FILE__, __LINE__, (int)damage);
+			if (damage > 0) {
+				attack_info.add_receiver(closest_char->first,
+											 &(closest_char->second));
+				closest_char->second.take_damage(damage);
+			}   
+		}
+		deactivate();
    }
 }
 
@@ -37,8 +41,8 @@ char WeaponWhite::get_type(){
 }
 
 char WeaponWhite::calculate_damage(float distance) {
-    double damage_range = damage_max - damage_min;
-    return (char)(fmod((double)std::rand(), damage_range) + damage_min);
+	double damage_range = damage_max - damage_min;
+	return (char)(fmod((double)std::rand(), damage_range) + damage_min);
 }
 
 WeaponWhite::~WeaponWhite() {}

@@ -81,10 +81,6 @@ bool Weapon::find_closest_character(AttackInformation& attack_info,
 	}
 	b2Vec2 intersection_point = p1 + closest_fraction * (p2 - p1);
 	distance = (intersection_point - p1).Length();
-	attack_info.set_receptor(TypeReceptor::NO_RECEPTOR);
-	if (is_static && (closest_fraction < 1)) {
-		attack_info.set_receptor(TypeReceptor::STATIC);
-	}
 	return !is_static;
 }
 

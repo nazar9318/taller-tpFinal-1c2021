@@ -9,6 +9,7 @@
 #include "Team.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
+#include "AttackInformation.h"
 
 
 class Character;
@@ -18,6 +19,7 @@ class StepInformation {
 	FaseType fase;
 	std::map<char,Character>& characters;
 	int waiting_time;
+	std::list<AttackInformation> attacks;
 	public:
 		StepInformation(std::map<char,Character>& characters);
 		void set_type(FaseType fase);
@@ -29,6 +31,7 @@ class StepInformation {
 		void add_position(char id, int x, int y);
 		int get_wait();
 		std::vector<char> get_players_init();
+		void add_attack(AttackInformation attack_info);
 
 
 		~StepInformation();

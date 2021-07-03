@@ -11,9 +11,8 @@ class WeaponAutomatic;
 
 #include "Position.h"
 #include "Weapon.h"
-
+#include "AttackInformation.h"
 #include "Team.h"
-#include "StepInformation.h"
 #include "Configuration.h"
 #include "Block.h"
 #include "TypesOfEvents.h"
@@ -35,14 +34,11 @@ class Character {
 		int number_weapons;
 		b2Body* character_body;
 		Direction move_state;
-		StepInformation& step_info;
 		int angle;
 
 	public:
-		static float body_radius;
 		Character(Team team, b2World* world,
-			 std::vector<Position*> available_positions, 
-			 StepInformation& step_info);
+			 std::vector<Position*> available_positions);
 		
 		Character(Character&&) = default;
 
@@ -70,7 +66,8 @@ class Character {
 
 		b2Fixture* GetFixtureList();
 
-		void receive_damage(AttackInformation& attack);
+		void add_kill_bonus();
+		//void receive_damage(AttackInformation& attack);
 
 		b2Vec2 get_pos();
 
@@ -78,8 +75,8 @@ class Character {
 		
 		char getLifePoints();
 
-		void attack(char self_id, std::list<Block>& blocks,
-			 std::map<char, Character>& characters);
+		void attack(AttackInformation& attack_info, std::list<Block>& blocks,
+			 							std::map<char, Character>& characters);
 
 		bool is_alive();
 		void add_weapon(std::unique_ptr<Weapon> weapon);

@@ -23,7 +23,7 @@ void GameWorld::add_player_if_not_full(char id) {
 	syslog(LOG_INFO, "[%s:%i]: Por agregar el jugador con id %d"
 					 " al GameWorld", __FILE__, __LINE__, id);
 	Character character(actual_team, world,
-					 ground.get_zone(actual_team), step_info);
+					 ground.get_zone(actual_team));
 	characters.insert({id, std::move(character)});
 	actual_team = get_opposite(actual_team);
 	number_players++;
@@ -102,17 +102,32 @@ void GameWorld::change_teams() {
 }
 
 
+void GameWorld::handle_attack(std::map<char, Character>::iterator& it_attacker,
+										 AttackInformation& attack_info) {
+	if (attack_info.is_valid_attack()) {
+		auto killed = attack_info.get_killed_chars();
+		for (auto character = killed.begin(); character != killed.end(); ++character) {
+			if ((*character)->has_optative_weapon()) {
+				Weapon* weapon = (*character)->drop_optative_weapon();
+				std::unique_ptr<Weapon> ground_weapon(weapon);
+				weapons_in_ground.push_back(std::move(ground_weapon));
+			}
+			it_attacker->second.add_kill_bonus();
+		}
+		step_info.add_attack(std::move(attack_info));
+	}
+}
+
+
 void GameWorld::simulate_playing_step() {
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		it->second.apply_impulses();
-		it->second.attack(it->first, blocks, characters);
+		AttackInformation attack_info(it->first, &(it->second));
+		it->second.attack(attack_info, blocks, characters);
+		handle_attack(it, attack_info);
 	}
-
-
 	world->Step(CF::step_time, CF::velocity_iterations,
 								 CF::position_iterations);
-
-
 	if (round_finished())
 		fase_type = FaseType::END_ROUND;
 

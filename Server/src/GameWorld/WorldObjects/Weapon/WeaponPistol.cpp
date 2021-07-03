@@ -23,9 +23,9 @@ void WeaponPistol::attack(AttackInformation& attack_info,
 		if (is_character) {
 			char damage = calculate_damage(distance);
 			if (damage > 0) {
-				attack_info.set_receptor(TypeReceptor::CHARACTER);
-				attack_info.add_receiver_id(closest_char->first);
-				closest_char->second.receive_damage(attack_info);
+				attack_info.add_receiver(closest_char->first,
+											 &(closest_char->second));
+				closest_char->second.take_damage(damage);
 			}   
 		}
 		ammo -= 1;

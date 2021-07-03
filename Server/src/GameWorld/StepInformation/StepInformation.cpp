@@ -25,6 +25,11 @@ std::vector<char> StepInformation::get_players_init() {
 	return v;
 }
 
+void StepInformation::add_attack(AttackInformation attack_info) {
+	attacks.push_back(std::move(attack_info));
+}
+
+
 
 void StepInformation::set_type(FaseType fase_type) {
 	fase = fase_type;

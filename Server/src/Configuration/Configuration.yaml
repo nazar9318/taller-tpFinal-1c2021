@@ -65,8 +65,8 @@ ak47_price: 30
 m3_price: 50
 awp_price: 100
 
-glock_max_distance: 18
-ak47_max_distance: 10
-m3_max_distance: 3
-awp_max_distance: 120
-knife_max_distance: 10
+glock_max_distance: 80
+ak47_max_distance: 100
+m3_max_distance: 50
+awp_max_distance: 768
+knife_max_distance: 64

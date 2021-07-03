@@ -8,14 +8,11 @@
 #include "WeaponShotgun.h"
 #include "WeaponAutomatic.h"
 
-float Character::body_radius = 16;
-
 Character::Character(Team team, b2World* world,
-		 std::vector<Position*> available_positions,
-		 StepInformation& step)
+		 std::vector<Position*> available_positions)
 		: life_points(CF::character_life_points),
 		 money(CF::character_money), team(team), 
-		 step_info(step), number_weapons(2), angle(0) {
+		 number_weapons(2), angle(0) {
 	std::unique_ptr<Weapon> knife(new WeaponWhite());
 	std::unique_ptr<Weapon> pistol(new WeaponPistol());
 	weapons.push_back(std::move(knife));
@@ -48,7 +45,7 @@ void Character::add_body(int x, int y, b2World* world) {
 
 	b2CircleShape circle_shape;
 	circle_shape.m_p.Set(0, 0);
-	circle_shape.m_radius = body_radius;
+	circle_shape.m_radius = CF::character_radius;
 	b2FixtureDef fixture_def;
 	fixture_def.shape = &circle_shape;
 	fixture_def.density = 1;
@@ -93,16 +90,48 @@ void Character::apply_impulses() {
 	}
 }
 
-
+/*
 void Character::attack(char self_id, std::list<Block>& blocks,
     	std::map<char, Character>& characters) {
-	if (life_points > 0) {
-		AttackInformation attack_info(self_id, this, get_opposite(team));
+	AttackInformation attack_info(self_id, this, get_opposite(team));
+	if (is_alive()) 
 		weapons[current_weapon]->attack(attack_info, blocks, characters);
-		if (attack_info.attack_is_kill())
-			money++;
+	return attack_info;
+}
+*/
+
+
+void Character::attack(AttackInformation& attack_info,
+		 std::list<Block>& blocks, std::map<char, Character>& characters) {
+	if (is_alive()) {
+		attack_info.add_attacked_team(get_opposite(team));
+		weapons[current_weapon]->attack(attack_info, blocks, characters);
 	}
 }
+
+void Character::take_damage(char points) {
+	if (life_points > points) {
+		life_points -= points;
+	} else {
+		life_points = 0;
+		character_body->GetWorld()->DestroyBody(character_body);
+	}
+}
+
+/*
+void Character::receive_damage(AttackInformation& attack) {
+	if ((attack.get_team() == team) && is_alive()) {
+		take_damage(attack.get_damage());
+	
+		if (life_points == 0) {
+			attack.add_receiver(this, true);
+		} else {
+			attack.add_receiver(this, false);
+		}
+	}
+}
+*/
+
 
 
 b2Vec2 Character::get_pos() {
@@ -118,9 +147,13 @@ b2Fixture* Character::GetFixtureList() {
 
 void Character::start_attacking() {
 	weapons[current_weapon]->activate();
+		syslog(LOG_INFO, "[%s:%i]: START ATTACKING ", __FILE__, __LINE__);
+
 }
 
-
+void Character::stop_attacking() {
+	weapons[current_weapon]->deactivate();
+}
 
 bool Character::has_enough_to_buy(std::unique_ptr<Weapon>& weapon_buy) {
 	return (money >= weapon_buy->get_price());
@@ -138,6 +171,11 @@ Weapon* Character::drop_optative_weapon() {
 	return weapon;
 }
 
+#define BONUS_KILL 50
+void Character::add_kill_bonus() {
+	money += BONUS_KILL;
+}
+
 
 void Character::buy_weapon(std::unique_ptr<Weapon> weapon) {
 	money -= weapon->get_price();
@@ -147,44 +185,16 @@ void Character::buy_weapon(std::unique_ptr<Weapon> weapon) {
 
 
 void Character::change_weapon() {
-	if (life_points > 0)
+	if (is_alive())
 		current_weapon = (current_weapon + 1) % number_weapons;
 }
 
-void Character::take_damage(char points) {
-	if (life_points > 0) {
-		if (life_points > points) {
-			life_points -= points;
-		} else {
-			life_points = 0;
-			character_body->GetWorld()->DestroyBody(character_body);
-		}
-	}
-}
-
-
-void Character::receive_damage(AttackInformation& attack) {
-	if ((attack.get_team() == team) && life_points > 0) {
-		take_damage(attack.get_damage());
-		if (life_points == 0) {
-			attack.add_receiver(this, true);
-		} else {
-			attack.add_receiver(this, false);
-		}
-	}
-}
 
 Team Character::get_team() {
 	return team;
 }
 
 
-void Character::stop_attacking() {
-	weapons[current_weapon]->deactivate();
-}
-
-Character::~Character() {
-}
 
 
 
@@ -207,6 +217,11 @@ int Character::get_angle() {
 }
 
 
+Character::~Character() {
+}
+
+
+
 /*
 
 
@@ -222,19 +237,7 @@ char Character::getLifePoints() {
 	return life_points;
 }
 
-Team Character::getTeam() { return this->team; }
 
-void Character::grab(Weapon *new_weapon) {
-	if (this->life_points > 0 && !new_weapon->taken()) {
-		if (this->weapons.size() == 2) {
-			this->weapons.push_back(new_weapon);
-		} else {
-			this->weapons[2]->beNotTaken();
-			this->weapons[2] = new_weapon;
-		}
-		new_weapon->beTaken();
-	}
-}
 
 void Character::grab(Bomb* bomb) {
 	if (this->team == TERRORIST) {
@@ -245,21 +248,6 @@ void Character::grab(Bomb* bomb) {
 			this->weapons.push_back(bomb);
 			//this->weapons.insert(this->weapons.begin() + 4, bomb);
 		}
-	}
-}
-
-void Character::removeSecondary() {
-	if (this->weapons.size() > 2) {
-		this->weapons[2]->beNotTaken();
-		this->weapons[2] = NULL;
-		this->current_weapon = this->weapons[1];
-	}
-}
-
-void Character::buy(Weapon *new_weapon) {
-	if (this->money >= new_weapon->getPrice()) {
-		this->grab(new_weapon);
-		this->money -= new_weapon->getPrice();
 	}
 }
 
@@ -274,12 +262,3 @@ void Character::deactivate(Bomb *bomb) {
 		bomb->deactivate();
 	}
 }*/
-/*
-void Character::attack(Character &enemy, Team my_team, uint16_t distance) {
-	if (this->life_points > 0) {
-		if (enemy.getTeam() != this->getTeam()) {
-			this->current_weapon->shoot(enemy, distance);
-		}
-	}
-}
-*/

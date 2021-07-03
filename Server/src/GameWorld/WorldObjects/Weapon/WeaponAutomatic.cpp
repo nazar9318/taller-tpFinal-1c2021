@@ -15,7 +15,7 @@ void WeaponAutomatic::attack(AttackInformation& attack_info,
 			 std::list<Block>& blocks,
 			  std::map<char, Character>& characters) {
 	if (activated && ammo >= shoot_rate) {
-		if (number_tics * CF::step_time >= shoot_freq) {
+		if (number_tics * STEP_TIME >= shoot_freq) {
 			attack_info.set_weapon(PositionType::AK47);
 			std::map<char, Character>::iterator closest_char;
 			float distance;

@@ -22,7 +22,6 @@ class Configuration {
 		static YAML::Node common_yaml_file;
 		static std::string port;
 		static int max_iterations_pop_events;
-		static double step_time;
 		static int size_position;
 		static int character_radius;
 

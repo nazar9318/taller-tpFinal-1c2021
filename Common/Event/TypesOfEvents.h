@@ -2,6 +2,8 @@
 #define _TYPES_OF_EVENTS_H_
 
 
+#define STEP_TIME 0.0333
+
 enum ClientTypeEvent: char {
 	MOVE, //type/direction
 	ROTATE, //angle

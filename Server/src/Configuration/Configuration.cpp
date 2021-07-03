@@ -13,7 +13,6 @@ std::string CF::port = common_yaml_file["port"].as<std::string>();
 int CF::max_iterations_pop_events =
 				CF::common_yaml_file["max_iterations_pop_events"].as<int>();
 int CF::size_position = CF::common_yaml_file["size_position"].as<int>();
-double CF::step_time = CF::common_yaml_file["step_time"].as<double>();
 int CF::character_radius = CF::common_yaml_file["character_radius"].as<int>();
 
 /*****************************************************************/

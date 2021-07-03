@@ -99,7 +99,7 @@ void Match::game_loop() {
 		push_event(weapons);
 		end = steady_clock::now();
 		t_delta = duration<double>(end - begin).count();
-		std::this_thread::sleep_for(duration<double>(CF::step_time - t_delta));
+		std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
 	}
 }
 

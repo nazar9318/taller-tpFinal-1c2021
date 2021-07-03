@@ -18,11 +18,19 @@ prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE) {
 
 void Game::execute() {
 	try {
+		using namespace std::chrono;
+		auto begin = steady_clock::now();
+		auto end = steady_clock::now(); 
+		double t_delta;
 		loadMedia();
 		while (is_running) {
+			begin = steady_clock::now();
 			is_running = handle_events();
 			process_events();
 			render();
+			end = steady_clock::now();
+			t_delta = duration<double>(end - begin).count();
+			std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
 		}
 	} catch (std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: Exception: %s", __FILE__, __LINE__,  e.what());

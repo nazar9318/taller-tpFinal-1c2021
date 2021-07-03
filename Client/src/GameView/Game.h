@@ -4,6 +4,8 @@
 #include <string>
 #include <syslog.h>
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include "Event.h"
 #include "ProtectedQueue.h"
 #include "GameMap.h"
@@ -19,6 +21,7 @@
 #include "ClientPlayer.h"
 #include "ClientCharacter.h"
 #include "ChangeAngleEvent.h"
+#include "TypesOfEvents.h"
 #include <SDL2/SDL.h>
 #include "FaseType.h"
 #include "Camera.h"

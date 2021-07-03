@@ -75,7 +75,7 @@ bool GameWorld::simulate_step() {
 		return true;
 	} else if (fase_type == FaseType::INITIAL_FASE) {
 		number_tics++;
-		int wait = (int)(CF::time_preparation - number_tics * CF::step_time);
+		int wait = (int)(CF::time_preparation - number_tics * STEP_TIME);
 		step_info.set_waiting_time(wait);
 		if (wait <= 0) {
 			fase_type = FaseType::PLAYING;
@@ -126,7 +126,7 @@ void GameWorld::simulate_playing_step() {
 		it->second.attack(attack_info, blocks, characters);
 		handle_attack(it, attack_info);
 	}
-	world->Step(CF::step_time, CF::velocity_iterations,
+	world->Step(STEP_TIME, CF::velocity_iterations,
 								 CF::position_iterations);
 	if (round_finished())
 		fase_type = FaseType::END_ROUND;

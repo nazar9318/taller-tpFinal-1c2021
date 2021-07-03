@@ -94,7 +94,6 @@ std::vector<char> StepInformation::get_players_info() {
 		players_info.push_back(*((char*)(&money) + 1));
 		players_info.push_back(*((char*)(&money) + 2));
 		players_info.push_back(*((char*)(&money) + 3));
-
 	}
 
 	return players_info;

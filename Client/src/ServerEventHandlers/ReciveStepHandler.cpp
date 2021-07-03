@@ -45,9 +45,9 @@ handle_playing_fase(std::vector<char>& event_msg, GameMap& map) {
 		char id = *it;
 		int pos_x = *((int*)&(*(it + 1)));
 		int pos_y = *((int*)&(*(it + 5)));
-    int angle = *((int*)&(*(it + 9)));
-    char life = *(it+10);
-    int money = *((int*)&(*(it + 11)));
+    	int angle = *((int*)&(*(it + 9)));
+    	char life = *(it + 13);
+    	int money = *((int*)&(*(it + 14)));
 		map.update_position(id, pos_x, pos_y, angle, life, money);
 	}
 }

@@ -22,7 +22,6 @@ Character::Character(Team team, b2World* world,
 		throw ExceptionInvalidCommand("No hay suficientes posiciones"
 				" para ubicar a los jugadores", ServerError::MATCH_FULL);
 	}
-
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distrib(0,

@@ -115,6 +115,21 @@ void Game::handle_key_press(SDL_Event& event) {
 			this->client_events.push(grab);
 			break;
 		}
+		case SDL_c: {
+			std::unique_ptr<Event> change(new ChangeWeaponEvent());
+			this->client_events.push(change);
+			break;
+		}
+		case SDL_q: {
+			std::unique_ptr<Event> plant(new PlantBombEvent());
+			this->client_events.push(plant);
+			break;
+		}
+		case SDL_e: {
+			std::unique_ptr<Event> deactivate(new DeactivateBombEvent());
+			this->client_events.push(deactivate);
+			break;
+		}
 	}
 }
 

@@ -115,18 +115,18 @@ void Game::handle_key_press(SDL_Event& event) {
 			this->client_events.push(grab);
 			break;
 		}
-		case SDL_c: {
+		case SDLK_c: {
 			std::unique_ptr<Event> change(new ChangeWeaponEvent());
 			this->client_events.push(change);
 			break;
 		}
-		case SDL_q: {
-			std::unique_ptr<Event> plant(new PlantBombEvent());
+		case SDLK_q: {
+			std::unique_ptr<Event> plant(new StartPlantBombEvent());
 			this->client_events.push(plant);
 			break;
 		}
-		case SDL_e: {
-			std::unique_ptr<Event> deactivate(new DeactivateBombEvent());
+		case SDLK_e: {
+			std::unique_ptr<Event> deactivate(new StartDeactivateBombEvent());
 			this->client_events.push(deactivate);
 			break;
 		}
@@ -138,6 +138,12 @@ void Game::handle_key_release(SDL_Event& event) {
 		event.key.keysym.sym == SDLK_d || event.key.keysym.sym == SDLK_s ) {
 			std::unique_ptr<Event> move(new MoveEvent(Direction::STOP_MOVING));
 			this->client_events.push(move);
+	} else if (event.key.keysym.sym == SDLK_q) {
+		std::unique_ptr<Event> plant(new StopPlantBombEvent());
+		this->client_events.push(plant);
+	} else if (event.key.keysym.sym == SDLK_e) {
+		std::unique_ptr<Event> deactivate(new StopDeactivateBombEvent());
+		this->client_events.push(deactivate);
 	}
 }
 

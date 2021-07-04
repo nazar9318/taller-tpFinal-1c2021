@@ -4,9 +4,8 @@
 WeaponSniper::WeaponSniper() :
 			Weapon(CF::awp_price, CF::awp_damage_min,
 			CF::awp_damage_max, CF::awp_max_distance,
-			CF::awp_distance_penalty),
-			accuracy(CF::awp_accuracy),
-			ammo(CF::awp_ammo) {
+			CF::awp_distance_penalty, CF::awp_ammo),
+			accuracy(CF::awp_accuracy) {
 }
 
 void WeaponSniper::attack(AttackInformation& attack_info,
@@ -25,7 +24,7 @@ void WeaponSniper::attack(AttackInformation& attack_info,
 				attack_info.add_receiver(closest_char->first,
 											 &(closest_char->second));
 				closest_char->second.take_damage(damage);
-			}   
+			}
 		}
 		deactivate();
 		ammo -= 1;
@@ -46,7 +45,7 @@ char WeaponSniper::calculate_damage() {
 	double rand = unif(rng);
 	if (rand < accuracy) {
 		return damage_max;
-	}	
+	}
 	return 0;
 }
 

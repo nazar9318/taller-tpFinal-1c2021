@@ -94,6 +94,17 @@ std::vector<char> StepInformation::get_players_info() {
 		players_info.push_back(*((char*)(&money) + 1));
 		players_info.push_back(*((char*)(&money) + 2));
 		players_info.push_back(*((char*)(&money) + 3));
+
+		//WEAPON
+		players_info.push_back(it->second.get_weapon_type());
+
+		//BULLETS
+		int ammo = it->second.get_ammo();
+		players_info.push_back(*((char*)(&ammo)));
+		players_info.push_back(*((char*)(&ammo) + 1));
+		players_info.push_back(*((char*)(&ammo) + 2));
+		players_info.push_back(*((char*)(&ammo) + 3));
+
 	}
 
 	return players_info;

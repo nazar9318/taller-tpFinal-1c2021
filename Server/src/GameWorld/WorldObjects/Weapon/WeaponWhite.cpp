@@ -1,10 +1,12 @@
 #include "WeaponWhite.h"
 #include <syslog.h>
 
+#define NO_AMMO -1
+
 WeaponWhite::WeaponWhite() :
 			Weapon(0, CF::knife_damage_min,
 			CF::knife_damage_max, CF::knife_max_distance,
-			CF::knife_distance_penalty) {
+			CF::knife_distance_penalty, NO_AMMO) {
 }
 
 void WeaponWhite::attack(AttackInformation& attack_info,
@@ -30,7 +32,7 @@ void WeaponWhite::attack(AttackInformation& attack_info,
 				attack_info.add_receiver(closest_char->first,
 											 &(closest_char->second));
 				closest_char->second.take_damage(damage);
-			}   
+			}
 		}
 		deactivate();
    }

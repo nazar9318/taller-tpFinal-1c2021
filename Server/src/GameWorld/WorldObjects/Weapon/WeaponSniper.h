@@ -10,7 +10,6 @@
 
 class WeaponSniper : public Weapon {
 		double accuracy;
-		int ammo;
 	public:
 		WeaponSniper();
 

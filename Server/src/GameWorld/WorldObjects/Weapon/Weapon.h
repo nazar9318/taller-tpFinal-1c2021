@@ -19,6 +19,7 @@ class Weapon {
 	protected:
 		int pos_x;
 		int pos_y;
+		int ammo;
 		bool activated;
 		int price;
 		double damage_min;
@@ -29,11 +30,12 @@ class Weapon {
 
 	public:
 		Weapon(int price, double damage_min, double damage_max,
-				 double max_distance, double distance_penalty);
+				 double max_distance, double distance_penalty, int ammo);
 
 		void activate();
 
 		int get_price();
+		int get_ammo();
 		void set_pos(int x, int y);
 		void get_pos(int& x, int& y);
 		virtual char get_type();

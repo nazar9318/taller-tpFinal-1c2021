@@ -4,9 +4,8 @@
 WeaponPistol::WeaponPistol() :
 			Weapon(CF::glock_price, CF::glock_damage_min,
 			CF::glock_damage_max, CF::glock_max_distance,
-			CF::glock_distance_penalty),
-			accuracy(CF::glock_accuracy),
-			ammo(CF::glock_ammo) {
+			CF::glock_distance_penalty,CF::glock_ammo),
+			accuracy(CF::glock_accuracy) {
 }
 
 
@@ -26,7 +25,7 @@ void WeaponPistol::attack(AttackInformation& attack_info,
 				attack_info.add_receiver(closest_char->first,
 											 &(closest_char->second));
 				closest_char->second.take_damage(damage);
-			}   
+			}
 		}
 		ammo -= 1;
 		deactivate();

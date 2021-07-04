@@ -91,6 +91,10 @@ class Character {
 
 		int get_money();
 
+		int get_ammo();
+
+		char get_weapon_type();
+
 /*
 disparo pistola ---.
 arma.attack(team.opposite(), pos.x, pos.y,

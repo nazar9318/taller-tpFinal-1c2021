@@ -4,15 +4,14 @@
 WeaponShotgun::WeaponShotgun() :
 			Weapon(CF::m3_price, CF::m3_damage_min,
 			CF::m3_damage_max, CF::m3_max_distance,
-			CF::m3_distance_penalty),
-			accuracy(CF::m3_accuracy),
-			ammo(CF::m3_ammo) {
+			CF::m3_distance_penalty, CF::m3_ammo),
+			accuracy(CF::m3_accuracy){
 }
 
 
 
 
-// FALTA CORREGIR PARA QUE SEA EN CONO. 
+// FALTA CORREGIR PARA QUE SEA EN CONO.
 void WeaponShotgun::attack(AttackInformation& attack_info,
 					std::list<Block>& blocks, std::map<char,
 								 Character>& characters){
@@ -29,7 +28,7 @@ void WeaponShotgun::attack(AttackInformation& attack_info,
 				attack_info.add_receiver(closest_char->first,
 											 &(closest_char->second));
 				closest_char->second.take_damage(damage);
-			}   
+			}
 		}
 		deactivate();
 		ammo -= 1;
@@ -53,8 +52,8 @@ char WeaponShotgun::calculate_damage(double distance) {
 		double damage_range = damage_max - damage_min;
 		double damage = fmod((double)std::rand(), damage_range) + damage_min;
 		return (char)(damage - (distance > 1 ? distance * distance_penalty : 0));
-	}	
-	return 0;	
+	}
+	return 0;
 }
 
 bool WeaponShotgun::empty() {

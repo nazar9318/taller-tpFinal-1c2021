@@ -13,8 +13,6 @@ void ClientCharacter::set_team(Team team) {
 	pos.h = texture->get_h();
 }
 
-<<<<<<< Updated upstream
-=======
 SDL_Rect& ClientCharacter::getBox() {
 	return pos;
 }
@@ -27,18 +25,13 @@ double ClientCharacter::getAngle() {
 	return angle;
 }
 
->>>>>>> Stashed changes
 void ClientCharacter::update_position(int pos_x, int pos_y, int angle) {
 	pos.x = pos_x - texture->get_w()/2;
 	pos.y = pos_y - texture->get_h()/2;
-	
+
 	std::complex<double>  z = std::polar (1.0, angle*PI/180);
 	z = pow (z, -1);
 	this->angle = (int) ((std::arg(z) + PI/2)* 180/PI);
 }
-
-SDL_Rect& ClientCharacter::getBox() { return pos; }
-
-Texture& ClientCharacter::getTexture() { return *texture; }
 
 ClientCharacter::~ClientCharacter() {}

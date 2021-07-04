@@ -66,14 +66,20 @@ void ClientPlayer::render(Renderer& renderer) {
 	//renderer.render(texture->getTexture(), NULL, &renderQuad, angle);
 }
 
-double ClientPlayer::getAngle() { return (double)angle; }
+double ClientPlayer::getAngle() {
+	return (double)angle;
+}
 
-char ClientPlayer::get_id() { return id; }
+char ClientPlayer::get_id() {
+	return id;
+ }
 
-Texture& ClientPlayer::getTexture() { return *texture; }
+Texture& ClientPlayer::getTexture() {
+	return *texture;
+ }
 
-SDL_Rect& ClientPlayer::getClip() { return clip[current_clip];}
-
-SDL_Rect& ClientPlayer::getBox() { return pos; }
+SDL_Rect& ClientPlayer::getClip() {
+	return clip[current_clip];
+}
 
 ClientPlayer::~ClientPlayer() {}

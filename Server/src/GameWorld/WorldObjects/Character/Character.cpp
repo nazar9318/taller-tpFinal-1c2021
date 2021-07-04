@@ -223,6 +223,14 @@ int Character::get_money(){
 	return money;
 }
 
+int Character::get_ammo(){
+	return weapons[current_weapon]->get_ammo();
+}
+
+char Character::get_weapon_type(){
+	return weapons[current_weapon]->get_type();
+}
+
 Character::~Character() {
 }
 

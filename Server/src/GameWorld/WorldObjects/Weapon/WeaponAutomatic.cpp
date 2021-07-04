@@ -3,11 +3,10 @@
 WeaponAutomatic::WeaponAutomatic() :
 			Weapon(CF::ak47_price, CF::ak47_damage_min,
 			CF::ak47_damage_max, CF::ak47_max_distance,
-			CF::ak47_distance_penalty),
+			CF::ak47_distance_penalty, CF::ak47_ammo),
 			accuracy(CF::ak47_accuracy),
 			shoot_rate(CF::ak47_shoot_rate),
-			shoot_freq(CF::ak47_shoot_freq),
-			ammo(CF::ak47_ammo) {
+			shoot_freq(CF::ak47_shoot_freq){
 }
 
 
@@ -29,7 +28,7 @@ void WeaponAutomatic::attack(AttackInformation& attack_info,
 						attack_info.add_receiver(closest_char->first,
 													 &(closest_char->second));
 						closest_char->second.take_damage(damage);
-					}	
+					}
 				}
 			}
 			number_tics = 0;

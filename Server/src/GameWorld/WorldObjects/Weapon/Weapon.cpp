@@ -3,13 +3,14 @@
 
 
 Weapon::Weapon(int price, double damage_min, double damage_max,
-		 	double max_distance, double distance_penalty):
+		 	double max_distance, double distance_penalty, int ammo):
 		price(price),
 		damage_min(damage_min),
 		damage_max(damage_max),
 		max_distance(max_distance),
 		distance_penalty(distance_penalty),
-		activated(false) {
+		activated(false),
+		ammo(ammo) {
 }
 
 void Weapon::activate() {
@@ -18,6 +19,10 @@ void Weapon::activate() {
 
 int Weapon::get_price() {
 	return price;
+}
+
+int Weapon::get_ammo() {
+	return ammo;
 }
 
 void Weapon::set_pos(int x, int y) {

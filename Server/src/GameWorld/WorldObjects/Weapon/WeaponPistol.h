@@ -10,7 +10,6 @@
 class WeaponPistol : public Weapon {
 	private:
 		double accuracy;
-		int ammo;
 
 	public:
 		WeaponPistol();

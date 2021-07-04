@@ -1,7 +1,6 @@
 #include "Texture.h"
 
-Texture::Texture(){}
-
+Texture::Texture() {}
 
 SDL_Texture* Texture::getTexture() const {
   if (!texture) {
@@ -15,13 +14,11 @@ void Texture::loadFromFile(const Renderer& renderer, std::string filePath){
   if (!tmp) {
     throw SDLException("SDLException: failed to load surface - %s\n", SDL_GetError());
   }
-
   texture = renderer.createTextureFromSurface(tmp);
   if (!texture) {
     SDL_FreeSurface(tmp);
     throw SDLException("SDLException: failed to create texture - %s\n", SDL_GetError());
   }
-
   this->height = tmp->h;
   this->width = tmp->w;
 
@@ -49,7 +46,6 @@ void Texture::loadFromFile(const Renderer& renderer, std::string filePath, Color
 
   /* releases the temporary surface */
   SDL_FreeSurface(tmp);
-
 }
 
 void Texture::loadFromFile(const Renderer& renderer, std::string filePath, Color key, SDL_BlendMode blending, uint8_t alpha){
@@ -67,18 +63,14 @@ void Texture::free() {
   }
 }
 
-int Texture::get_w(){
-  return width;
-}
+int Texture::get_w() { return width; }
 
-int Texture::get_h(){
-  return height;
-}
+int Texture::get_h() { return height; }
 
 void Texture::setColor(Color& color){
   SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
 }
 
 Texture::~Texture() {
-    free();
+  //free();
 }

@@ -118,6 +118,7 @@ void Game::handle_key_press(SDL_Event& event) {
 		case SDLK_c: {
 			std::unique_ptr<Event> change(new ChangeWeaponEvent());
 			this->client_events.push(change);
+			player.changeClip();
 			break;
 		}
 		case SDLK_q: {

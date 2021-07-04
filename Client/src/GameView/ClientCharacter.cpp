@@ -4,21 +4,10 @@ ClientCharacter::ClientCharacter(const std::string& _name) : name(_name) {
 	pos = {0};
 }
 
-ClientCharacter::~ClientCharacter() {}
-
-
 void ClientCharacter::set_team(Team team) {
 	texture = &(SpriteContainer::getInstance()[team]);
 	pos.w = texture->get_w();
 	pos.h = texture->get_h();
-}
-
-SDL_Rect& ClientCharacter::getBox() {
-	return pos;
-}
-
-Texture& ClientCharacter::getTexture() {
-	return *texture;
 }
 
 void ClientCharacter::update_position(int pos_x, int pos_y, int angle) {
@@ -26,3 +15,9 @@ void ClientCharacter::update_position(int pos_x, int pos_y, int angle) {
 	pos.y = pos_y - texture->get_h()/2;
 	this->angle = angle;
 }
+
+SDL_Rect& ClientCharacter::getBox() { return pos; }
+
+Texture& ClientCharacter::getTexture() { return *texture; }
+
+ClientCharacter::~ClientCharacter() {}

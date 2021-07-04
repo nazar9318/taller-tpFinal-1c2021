@@ -1,8 +1,8 @@
 #include "Client.h"
 
 Client::Client(const std::string& host, const std::string& port):
-			 socket(host, port), model_events(), client_events(),
-			 reciever(socket, model_events), sender(socket, client_events) {}
+socket(host, port), model_events(), client_events(),
+reciever(socket, model_events), sender(socket, client_events) {}
 
 
 void Client::execute(int argc, char** argv) {
@@ -19,6 +19,4 @@ void Client::execute(int argc, char** argv) {
 }
 
 
-Client::~Client() {
-
-}
+Client::~Client() {}

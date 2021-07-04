@@ -18,9 +18,7 @@ class SpriteContainer {
 	public:
 		/* Carga las texturas de los sprites */
 		void loadMedia(Renderer& renderer);
-
 		static SpriteContainer& getInstance();
-
 		/* Obtiene la textura correspondiente */
 		Texture& operator[](char id);
 		

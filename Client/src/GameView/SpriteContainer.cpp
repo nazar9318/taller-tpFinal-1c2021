@@ -24,8 +24,8 @@ void SpriteContainer::loadMedia(Renderer& renderer) {
   container[PositionType::BOMB].loadFromFile(renderer, "../Client/Assets/Sprites/Weapons/bomb.bmp", black_color);
 
   /*Aca tambien cargariamos las texturas de los players*/
-  container[Team::TERRORIST].loadFromFile(renderer, "../Client/Assets/NPC/t1.bmp", black_color);
-  container[Team::COUNTER_ENEMY].loadFromFile(renderer, "../Client/Assets/NPC/ct1.bmp", black_color);
+  container[Team::TERRORIST].loadFromFile(renderer, "../Client/Assets/NPC/t2.bmp", black_color);
+  container[Team::COUNTER_ENEMY].loadFromFile(renderer, "../Client/Assets/NPC/ct2.bmp", black_color);
 
   syslog(LOG_INFO, "[%s:%i]: Texturas de los sprites cargadas", __FILE__, __LINE__);
 }

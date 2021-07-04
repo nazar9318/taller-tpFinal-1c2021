@@ -47,12 +47,8 @@ void GameMap::renderGround() {
   }
 }
 
-
-
 void GameMap::renderWeapons() {
-
   SDL_Rect quad = {0};
-
   for (size_t i = 0; i < weapons.size(); i++) {
     Texture& texture(weapons[i].getTexture());
     quad = weapons[i].getBox();
@@ -72,8 +68,6 @@ void GameMap::update_position(char id, int pos_x, int pos_y, int angle, char lif
   }
 }
 
-
-
 void GameMap::add_character_team(char id, Team team) {
   if (id == player.get_id()) {
     player.set_team(team);
@@ -82,27 +76,22 @@ void GameMap::add_character_team(char id, Team team) {
   }
 }
 
-
 void GameMap::renderPlayer() {
-  SDL_Rect quad = {0};
   Texture& texture(player.getTexture());
-  quad = player.getBox();
   double angle = player.getAngle();
-  renderer.render(texture.getTexture(), NULL, &quad, angle);
+  SDL_RenderCopyEx(renderer.getRenderer(), texture.getTexture(),
+                  &player.getClip(), &player.getBox(), angle, NULL, SDL_FLIP_NONE);
+  //renderer.render(texture.getTexture(), NULL, &quad, angle);
 }
 
 void GameMap::renderCharacters() {
-
   SDL_Rect quad = {0};
-
-  for(auto it = characters.begin(); it != characters.end(); ++it){
+  for (auto it = characters.begin(); it != characters.end(); ++it) {
     Texture& texture(it->second.getTexture());
     quad = it->second.getBox();
     renderer.render(texture.getTexture(), NULL, &quad);
   }
 }
-
-
 
 /*------------------------------------------------------------------------*/
 

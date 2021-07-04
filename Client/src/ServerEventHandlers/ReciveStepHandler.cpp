@@ -39,15 +39,17 @@ void ReciveStepHandler::
 
 }
 
+
+
 void ReciveStepHandler::
 handle_playing_fase(std::vector<char>& event_msg, GameMap& map) {
 	for (auto it = event_msg.begin() + 2; it != event_msg.end(); it += 18) {
 		char id = *it;
 		int pos_x = *((int*)&(*(it + 1)));
 		int pos_y = *((int*)&(*(it + 5)));
-    	int angle = *((int*)&(*(it + 9)));
-    	char life = *(it + 13);
-    	int money = *((int*)&(*(it + 14)));
+    int angle = *((int*)&(*(it + 9)));
+    char life = *(it + 13);
+    int money = *((int*)&(*(it + 14)));
 		map.update_position(id, pos_x, pos_y, angle, life, money);
 	}
 }

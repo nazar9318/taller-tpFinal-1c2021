@@ -2,6 +2,6 @@
 
 Team get_opposite(Team team) {
 	if (team == Team::TERRORIST)
-		return Team::TERRORIST;
-	return Team::COUNTER_ENEMY;
+		return Team::COUNTER_ENEMY;
+	return Team::TERRORIST;
 }

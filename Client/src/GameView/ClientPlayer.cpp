@@ -40,6 +40,11 @@ void ClientPlayer::changeClip() {
 	}
 }
 
+SDL_Rect& ClientPlayer::getBox() {
+	return pos;
+}
+
+
 void ClientPlayer::update_position(int pos_x, int pos_y, int angle, char life, int money) {
 	pos.x = pos_x - texture->get_w()/2;
 	pos.y = pos_y - texture->get_h()/2;
@@ -51,7 +56,7 @@ void ClientPlayer::update_position(int pos_x, int pos_y, int angle, char life, i
 }
 
 void ClientPlayer::render(Renderer& renderer) {
-	SDL_Rect renderQuad = { 
+	SDL_Rect renderQuad = {
 		pos.x,
 		pos.y,
 		pos.w,

@@ -18,8 +18,6 @@ void ReciveWeaponHandler::handle(Event& event, GameMap& map){
     map.addWeapon(std::move(weapon));
   }
 
-  syslog(LOG_INFO, "[%s:%i]: Toda la info del mapa fue cargada en los tiles",
-                     __FILE__, __LINE__);
 }
 
 ReciveWeaponHandler::~ReciveWeaponHandler(){}

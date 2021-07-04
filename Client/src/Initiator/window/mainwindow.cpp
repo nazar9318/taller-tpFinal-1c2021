@@ -20,7 +20,7 @@ MainWindow::MainWindow(Socket& skt, bool &started,
 		 ModelRecieverThread& rcv, EventSenderThread& snd,
 		 ProtectedQueue<Event>& m_events,
 		 ProtectedQueue<std::unique_ptr<Event>>& c_events,
-		 std::map<char, std::string>& users, char id,
+		 std::map<char, std::string>& users, char& id,
 		 QWidget *parent)
  		: socket(skt), game_started(started), receiver(rcv),
  		 sender(snd), model_events(m_events),
@@ -88,13 +88,13 @@ void MainWindow::show_error(const QString& message, Event& event) {
 				error_msg.append("Se envio un mensaje"
 								" inesperado al servidor.");
 				break;
-			}			
+			}
 			case ServerError::MATCH_NOT_FOUND:
 			{
 				error_msg.append("No se ha podido"
 								" encontrar la partida.");
 				break;
-			}			
+			}
 			case ServerError::MATCH_ALREADY_EXISTS:
 			{
 				error_msg.append("Ya existe una partida con este nombre");
@@ -165,6 +165,7 @@ void MainWindow::createMatch(const QString& map_name) {
 			, __FILE__, __LINE__, match_name.c_str());
 		// seria la posicion 2 en el protocolo.
 		self_id = is_successful.get_msg()[1];
+		syslog(LOG_INFO, "[%s:%i]: El jugador de id %i crea  la partida", __FILE__, __LINE__, (int)self_id);
 		players[self_id] = user_name;
 	    ui->stackedWidget->setCurrentIndex(CREATE_MATCH_WAITING);
 	    receiver.start();
@@ -196,7 +197,7 @@ void MainWindow::update_players() {
 						sender.start();
 						players_joined_timer->stop();
 						game_started = true;
-						//char self_id = model_event.get_msg()[1]; 
+						//char self_id = model_event.get_msg()[1];
 						this->close();
 						break;
 					}
@@ -293,6 +294,7 @@ void MainWindow::joinMatch(const QString &text) {
 		return;
 	}
 	self_id = is_successful.get_msg()[1];
+syslog(LOG_INFO, "[%s:%i]: El jugador de id %i se une a la partida", __FILE__, __LINE__, (int)self_id);
 	players[self_id] = user_name;
 	matches_timer->stop();
 	ui->stackedWidget->setCurrentIndex(JOIN_MATCH_WAITING);

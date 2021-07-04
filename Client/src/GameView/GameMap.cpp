@@ -54,20 +54,25 @@ void GameMap::renderWeapons() {
     quad = weapons[i].getBox();
     renderer.render(texture.getTexture(), NULL, &quad);
   }
-  syslog(LOG_INFO, "[%s:%i]: Los Weapons fueron renderizados",
-                     __FILE__, __LINE__);
+
 }
 
 void GameMap::update_position(char id, int pos_x, int pos_y, int angle, char life, int money) {
   if (id == player.get_id()) {
     player.update_position(pos_x, pos_y, angle, life, money);
     hud.update_values(life, money);
+    // std::cout << "id: " << (int)id << ",angle: "<<angle << ",life: " <<(int)life << ",money: "<<money<< '\n';
+
     // camera.center(player.getBox(), map_width, map_height);
   } else {
     characters.at(id).update_position(pos_x, pos_y, angle);
   }
 }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 void GameMap::add_character_team(char id, Team team) {
   if (id == player.get_id()) {
     player.set_team(team);
@@ -86,10 +91,17 @@ void GameMap::renderPlayer() {
 
 void GameMap::renderCharacters() {
   SDL_Rect quad = {0};
+<<<<<<< Updated upstream
   for (auto it = characters.begin(); it != characters.end(); ++it) {
+=======
+  double angle = 0;
+
+  for(auto it = characters.begin(); it != characters.end(); ++it){
+>>>>>>> Stashed changes
     Texture& texture(it->second.getTexture());
     quad = it->second.getBox();
-    renderer.render(texture.getTexture(), NULL, &quad);
+    angle = it->second.getAngle();
+    renderer.render(texture.getTexture(), NULL, &quad, angle);
   }
 }
 

@@ -21,6 +21,7 @@ class ClientCharacter {
 		SDL_Rect& getBox();
 		char getType();
 		Texture& getTexture();
+		double getAngle();
 		void set_team(Team team);
 		void update_position(int pos_x, int pos_y, int angle);
 

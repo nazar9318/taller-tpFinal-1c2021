@@ -25,10 +25,16 @@ SDL_Rect& ClientPlayer::getBox() {
 	return pos;
 }
 
+#include <math.h>
+#include <complex> 
+#define PI 3.14159265
+
 void ClientPlayer::update_position(int pos_x, int pos_y, int angle, char life, int money) {
 	pos.x = pos_x - texture->get_w()/2;
 	pos.y = pos_y - texture->get_h()/2;
-	this->angle = angle;
+	std::complex<double>  z = std::polar (1.0, angle*PI/180);
+	z = pow (z, -1);
+	this->angle = (int) ((std::arg(z) + PI/2)* 180/PI);
 	this->life = life;
 	this->money = money;
 }

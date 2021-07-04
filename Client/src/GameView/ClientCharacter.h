@@ -9,7 +9,6 @@
 class ClientCharacter {
 	private:
 		std::string name;
-		SDL_Rect box;
 		char type;
 		Texture* texture;
 		SDL_Rect pos;

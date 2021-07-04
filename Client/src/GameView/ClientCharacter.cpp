@@ -1,7 +1,7 @@
 #include "ClientCharacter.h"
 
 ClientCharacter::ClientCharacter(const std::string& _name) : name(_name) {
-
+	pos = {0};
 }
 
 ClientCharacter::~ClientCharacter() {}

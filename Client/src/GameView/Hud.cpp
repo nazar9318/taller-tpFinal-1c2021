@@ -31,11 +31,6 @@ int Hud::numbers_offset(std::string& string, int& i){
 }
 
 void Hud::render(){
-
-  // SDL_Rect money_pos = {}
-
-  // renderer.render(money_icon.getTexture(), NULL, )
-
   std::string life_str = std::to_string(life);
   std::string money_str = std::to_string(money);
 

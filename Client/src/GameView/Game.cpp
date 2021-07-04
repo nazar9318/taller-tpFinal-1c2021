@@ -20,7 +20,7 @@ void Game::execute() {
 	try {
 		using namespace std::chrono;
 		auto begin = steady_clock::now();
-		auto end = steady_clock::now(); 
+		auto end = steady_clock::now();
 		double t_delta;
 		loadMedia();
 		while (is_running) {
@@ -149,7 +149,6 @@ void Game::handle_unclick(SDL_Event& event) {
 	}
 }
 
-
 #define FROM_RAD_TO_DEG 57.295779513
 void Game::handle_mouse_motion() {
 
@@ -161,11 +160,11 @@ void Game::handle_mouse_motion() {
 	SDL_GetMouseState(&mouse_x, &mouse_y);
 	delta_x = mouse_x - (player_pos.x + player_pos.w/2);
 	delta_y = (-1) * (mouse_y - (player_pos.y + player_pos.h/2));
-	angle = (int)((atan2(delta_x, delta_y) * FROM_RAD_TO_DEG));
+	angle = (int)((atan2(delta_y, delta_x) * FROM_RAD_TO_DEG));
 	// if (delta_x < 0) {
 	// 	angle += 180;
 	// }
-	angle = angle % 360;
+	angle = (angle+360) % 360;
 	std::unique_ptr<Event> move(new ChangeAngleEvent(angle));
 	this->client_events.push(move);
 }

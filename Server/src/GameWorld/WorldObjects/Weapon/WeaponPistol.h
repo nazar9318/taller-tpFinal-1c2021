@@ -9,8 +9,8 @@
 
 class WeaponPistol : public Weapon {
 	private:
-		float accuracy;
-		unsigned int ammo;
+		double accuracy;
+		int ammo;
 
 	public:
 		WeaponPistol();
@@ -20,7 +20,7 @@ class WeaponPistol : public Weapon {
 
 		char get_type();
 		~WeaponPistol();
-		char calculate_damage(float distance);
+		char calculate_damage(double distance);
 
 	private:
 		bool empty();

@@ -17,7 +17,7 @@ Event Protocol::recv_event(Socket& socket){
 void Protocol::send_event(Socket& socket, std::vector<char> msg){
 	uint16_t len = htons((uint16_t)msg.size());
 	socket.send_message((char*)&len, 2);
-	socket.send_message(msg.data(), msg.size());
+	socket.send_message(msg.data(), (unsigned int)msg.size());
 }
 
 Protocol::~Protocol() {}

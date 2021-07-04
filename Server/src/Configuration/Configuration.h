@@ -85,10 +85,10 @@ class Configuration {
 		static double awp_distance_penalty;
 		static double knife_distance_penalty;
 
-		static double glock_price;
-		static double ak47_price;
-		static double m3_price;
-		static double awp_price;
+		static int glock_price;
+		static int ak47_price;
+		static int m3_price;
+		static int awp_price;
 
 		static int glock_ammo;
 		static int ak47_ammo;

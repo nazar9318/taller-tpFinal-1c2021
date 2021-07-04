@@ -9,8 +9,8 @@
 #include <random>
 
 class WeaponSniper : public Weapon {
-		float accuracy;
-		unsigned int ammo;
+		double accuracy;
+		int ammo;
 	public:
 		WeaponSniper();
 

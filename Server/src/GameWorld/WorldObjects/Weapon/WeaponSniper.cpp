@@ -15,8 +15,8 @@ void WeaponSniper::attack(AttackInformation& attack_info,
 	if (activated && ammo >= 1) {
 		attack_info.set_weapon(PositionType::AWP);
 		std::map<char,Character>::iterator closest_char;
-		float distance;
-		float angle = attack_info.get_angle();
+		double distance;
+		int angle = attack_info.get_angle();
 		bool is_character = find_closest_character(attack_info, blocks,
 								characters, angle, closest_char, distance);
 		if (is_character) {

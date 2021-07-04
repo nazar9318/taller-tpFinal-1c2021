@@ -16,10 +16,10 @@ void WeaponWhite::attack(AttackInformation& attack_info,
 						, __FILE__, __LINE__);
 		attack_info.set_weapon(PositionType::KNIFE);
 		std::map<char,Character>::iterator closest_char;
-		float distance;
-		float angle = attack_info.get_angle();
+		double distance;
+		int angle = attack_info.get_angle();
 		syslog(LOG_INFO, "[%s:%i]: El angulo es de . "
-			"%f. ", __FILE__, __LINE__, angle);
+			"%d. ", __FILE__, __LINE__, angle);
 		bool is_character = find_closest_character(attack_info, blocks,
 								characters, angle, closest_char, distance);
 		if (is_character) {
@@ -40,7 +40,7 @@ char WeaponWhite::get_type(){
 	return PositionType::KNIFE;
 }
 
-char WeaponWhite::calculate_damage(float distance) {
+char WeaponWhite::calculate_damage(double distance) {
 	double damage_range = damage_max - damage_min;
 	return (char)(fmod((double)std::rand(), damage_range) + damage_min);
 }

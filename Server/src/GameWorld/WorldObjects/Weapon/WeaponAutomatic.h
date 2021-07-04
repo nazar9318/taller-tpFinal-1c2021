@@ -12,17 +12,17 @@
 
 class WeaponAutomatic : public Weapon {
 		float accuracy;
-		unsigned int shoot_rate;
-		unsigned int shoot_freq;
-		unsigned int ammo;
-		unsigned int number_tics;
+		int shoot_rate;
+		int shoot_freq;
+		int ammo;
+		int number_tics;
 
 	public:
 		WeaponAutomatic();
 		void attack(AttackInformation& attack_info,
 			 		std::list<Block>& blocks, std::map<char,
 			 					 Character>& characters);
-		char calculate_damage(float distance);
+		char calculate_damage(double distance);
 
 		void deactivate();
 

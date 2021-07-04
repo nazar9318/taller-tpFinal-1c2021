@@ -66,14 +66,15 @@ double CF::m3_distance_penalty = CF::yaml_file["m3_distance_penalty"].as<double>
 double CF::awp_distance_penalty = CF::yaml_file["awp_distance_penalty"].as<double>();
 double CF::knife_distance_penalty = CF::yaml_file["knife_distance_penalty"].as<double>();
 
-double CF::glock_price = CF::yaml_file["glock_price"].as<double>();
-double CF::ak47_price = CF::yaml_file["ak47_price"].as<double>();
-double CF::m3_price = CF::yaml_file["m3_price"].as<double>();
-double CF::awp_price = CF::yaml_file["awp_price"].as<double>();
+int CF::glock_price = CF::yaml_file["glock_price"].as<int>();
+int CF::ak47_price = CF::yaml_file["ak47_price"].as<int>();
+int CF::m3_price = CF::yaml_file["m3_price"].as<int>();
+int CF::awp_price = CF::yaml_file["awp_price"].as<int>();
 int CF::glock_ammo = CF::yaml_file["glock_ammo"].as<int>();
 int CF::ak47_ammo = CF::yaml_file["ak47_ammo"].as<int>();
 int CF::m3_ammo = CF::yaml_file["m3_ammo"].as<int>();
 int CF::awp_ammo = CF::yaml_file["awp_ammo"].as<int>();
+
 double CF::glock_max_distance = CF::yaml_file["glock_max_distance"].as<double>();
 double CF::ak47_max_distance = CF::yaml_file["ak47_max_distance"].as<double>();
 double CF::m3_max_distance = CF::yaml_file["m3_max_distance"].as<double>();
@@ -139,14 +140,15 @@ void Configuration::load_configuration(const std::string& file_path) {
 	knife_distance_penalty = yaml_file["knife_distance_penalty"].as<double>();
 
 
-	glock_price = yaml_file["glock_price"].as<double>();
-	ak47_price = yaml_file["ak47_price"].as<double>();
-	m3_price = yaml_file["m3_price"].as<double>();
-	awp_price = yaml_file["awp_price"].as<double>();
+	glock_price = yaml_file["glock_price"].as<int>();
+	ak47_price = yaml_file["ak47_price"].as<int>();
+	m3_price = yaml_file["m3_price"].as<int>();
+	awp_price = yaml_file["awp_price"].as<int>();
 	glock_ammo = yaml_file["glock_ammo"].as<int>();
 	ak47_ammo = yaml_file["ak47_ammo"].as<int>();
 	m3_ammo = yaml_file["m3_ammo"].as<int>();
 	awp_ammo = yaml_file["awp_ammo"].as<int>();
+	
 	glock_max_distance = yaml_file["glock_max_distance"].as<double>();
 	ak47_max_distance = yaml_file["ak47_max_distance"].as<double>();
 	m3_max_distance = yaml_file["m3_max_distance"].as<double>();

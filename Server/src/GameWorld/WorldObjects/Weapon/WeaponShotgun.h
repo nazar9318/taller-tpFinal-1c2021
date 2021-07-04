@@ -9,8 +9,8 @@
 #include <random>
 
 class WeaponShotgun : public Weapon {
-        float accuracy;
-        unsigned int ammo;
+        double accuracy;
+        int ammo;
 
     public:
         WeaponShotgun();
@@ -20,7 +20,7 @@ class WeaponShotgun : public Weapon {
 
 
         //void shoot(Character &character, uint16_t distance);
-        char calculate_damage(float distance);
+        char calculate_damage(double distance);
 
         char get_type();
         ~WeaponShotgun();

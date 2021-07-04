@@ -21,15 +21,15 @@ class Weapon {
 		int pos_y;
 		bool activated;
 		int price;
-		char damage_min;
-		char damage_max;
-		unsigned int max_distance;
-		float distance_penalty;
+		double damage_min;
+		double damage_max;
+		double max_distance;
+		double distance_penalty;
 		Weapon();
 
 	public:
-		Weapon(int price, char damage_min,char damage_max,
-				 unsigned int max_distance, float distance_penalty);
+		Weapon(int price, double damage_min, double damage_max,
+				 double max_distance, double distance_penalty);
 
 		void activate();
 
@@ -43,9 +43,9 @@ class Weapon {
 		bool find_closest_character(AttackInformation& attack_info,
 							std::list<Block>& blocks,
 							std::map<char, Character>& characters,
-							float& angle,
+							int& angle,
 							std::map<char,Character>::iterator& closest_char,
-							float& distance);
+							double& distance);
 
 		virtual void attack(AttackInformation& attack_info,
 			 		std::list<Block>& blocks, std::map<char,

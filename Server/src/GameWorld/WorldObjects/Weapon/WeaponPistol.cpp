@@ -16,8 +16,8 @@ void WeaponPistol::attack(AttackInformation& attack_info,
 	if (activated && ammo >= 1) {
 		attack_info.set_weapon(PositionType::GLOCK);
 		std::map<char,Character>::iterator closest_char;
-		float distance;
-		float angle = attack_info.get_angle();
+		double distance;
+		int angle = attack_info.get_angle();
 		bool is_character = find_closest_character(attack_info, blocks,
 								characters, angle, closest_char, distance);
 		if (is_character) {
@@ -33,7 +33,7 @@ void WeaponPistol::attack(AttackInformation& attack_info,
    }
 }
 
-char WeaponPistol::calculate_damage(float distance) {
+char WeaponPistol::calculate_damage(double distance) {
 	std::mt19937_64 rng;
 	uint64_t seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
 	std::seed_seq ss{uint32_t(seed & 0xffffffff), uint32_t(seed>>32)};

@@ -18,12 +18,12 @@ void WeaponAutomatic::attack(AttackInformation& attack_info,
 		if (number_tics * STEP_TIME >= shoot_freq) {
 			attack_info.set_weapon(PositionType::AK47);
 			std::map<char, Character>::iterator closest_char;
-			float distance;
-			float angle = attack_info.get_angle();
+			double distance;
+			int angle = attack_info.get_angle();
 			bool is_character = find_closest_character(attack_info, blocks,
 									characters, angle, closest_char, distance);
 			if (is_character) {
-				for (unsigned i = 0; i < shoot_rate; i++) {
+				for (int i = 0; i < shoot_rate; i++) {
 					char damage = calculate_damage(distance);
 					if (damage > 0) {
 						attack_info.add_receiver(closest_char->first,
@@ -41,7 +41,7 @@ void WeaponAutomatic::attack(AttackInformation& attack_info,
 
 
 
-char WeaponAutomatic::calculate_damage(float distance) {
+char WeaponAutomatic::calculate_damage(double distance) {
 	std::mt19937_64 rng;
 	uint64_t seed = std::chrono::high_resolution_clock::now().
 										time_since_epoch().count();

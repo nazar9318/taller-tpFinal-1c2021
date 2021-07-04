@@ -140,7 +140,7 @@ void MainWindow::show_maps(Event& maps_received) {
 		std::string map_name(&msg[i]);
 		QString str = QString::fromUtf8(map_name.c_str());
 		maps << str;
-		i += map_name.length() + 1;
+		i += (unsigned)map_name.length() + 1;
 	}
 	MapsWidget* maps_buttons = new MapsWidget(maps, this);
 	ui->mapList->addWidget(maps_buttons);
@@ -264,7 +264,7 @@ void MainWindow::show_matches(Event& matches_received) {
 			, __FILE__, __LINE__, match_name.c_str());
 		QString str = QString::fromUtf8(match_name.c_str());
 		matches << str;
-		i += match_name.length() + 1;
+		i += (unsigned)match_name.length() + 1;
 	}
 	MatchesWidget* matches_buttons = new MatchesWidget(matches, this);
 	ui->matchsList->addWidget(matches_buttons);
@@ -327,7 +327,7 @@ void MainWindow::update_players_list(Event& players_list) {
 		}
 		ui->players_join->addItem(QString::fromStdString(player_name));
 		ui->players_create->addItem(QString::fromStdString(player_name));
-		i += player_name.length() + 1;
+		i += (unsigned)player_name.length() + 1;
 	}
 	players.swap(new_players);
 }

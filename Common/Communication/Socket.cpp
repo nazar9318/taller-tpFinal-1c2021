@@ -161,7 +161,7 @@ unsigned Socket::send_message(const char* buf, const unsigned& size) {
 	unsigned sent = 0;
 	bool is_the_socket_valid = true;
 	while (sent < size && is_the_socket_valid) {
-		int s = send(socket_fd, &buf[sent], size - sent, MSG_NOSIGNAL);
+		int s = (int)send(socket_fd, &buf[sent], size - sent, MSG_NOSIGNAL);
 		if (s == 0 || s == -1)
 			is_the_socket_valid = false;
 		else 
@@ -179,7 +179,7 @@ unsigned Socket::recv_message(char* buf, const unsigned& size) {
 	unsigned received = 0;
 	bool is_the_socket_valid = true;
 	while (received < size && is_the_socket_valid) {
-		int s = recv(socket_fd, &buf[received], size - received, 0);
+		int s = (int)recv(socket_fd, &buf[received], size - received, 0);
 		if (s == 0 || s == -1)
 			is_the_socket_valid = false;
 		else 

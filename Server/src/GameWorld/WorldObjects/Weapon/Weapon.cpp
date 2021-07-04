@@ -1,11 +1,13 @@
 #include "Weapon.h"
+#define PI 3.14159265
 
 
-Weapon::Weapon(int price, char damage_min, char damage_max,
-		 unsigned int max_distance, float distance_penalty):
+Weapon::Weapon(int price, double damage_min, double damage_max,
+		 	double max_distance, double distance_penalty):
 		price(price),
 		damage_min(damage_min),
 		damage_max(damage_max),
+		max_distance(max_distance),
 		distance_penalty(distance_penalty),
 		activated(false) {
 }
@@ -43,12 +45,12 @@ void Weapon::deactivate() {
 bool Weapon::find_closest_character(AttackInformation& attack_info,
 					 std::list<Block>& blocks,
 					 std::map<char, Character>& characters,
-					 float& angle,
+					 int& angle,
 					 std::map<char,Character>::iterator& closest_char,
-					 float& distance) {
+					 double& distance) {
 	b2Vec2 p1 = attack_info.get_init_pos();
-	b2Vec2 p2 = p1 + max_distance * b2Vec2(sinf(angle), cosf(angle));
-
+	b2Vec2 direction(cos(angle * PI / 180), sin(angle * PI / 180));
+	b2Vec2 p2 = p1 + max_distance * direction;
 	bool is_static = true;
 	b2RayCastInput input;
 	input.p1 = p1;

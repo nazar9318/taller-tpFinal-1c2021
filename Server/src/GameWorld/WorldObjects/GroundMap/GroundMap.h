@@ -31,6 +31,7 @@ class GroundMap {
 		std::vector<Position*> get_drawable_positions();
 		std::list<std::unique_ptr<Weapon>> fill_weapons();
 		bool is_bomb_zone(b2Vec2& pos);
+		void unoccupy_spawns();
 		~GroundMap();
 
 	private:

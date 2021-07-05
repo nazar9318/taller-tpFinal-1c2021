@@ -45,7 +45,7 @@ class Character {
 
 		Character& operator = (Character&&) = default;
 
-		void add_body(int x, int y, b2World* world);
+		void add_body(b2World* world, std::vector<Position*> available_positions);
 
 		void set_move_state(Direction dir);
 
@@ -100,6 +100,9 @@ class Character {
 
 		void unblock();
 
+		void reset_body(b2World* world, std::vector<Position*> available_positions);
+
+		void change_team();
 /*
 disparo pistola ---.
 arma.attack(team.opposite(), pos.x, pos.y,

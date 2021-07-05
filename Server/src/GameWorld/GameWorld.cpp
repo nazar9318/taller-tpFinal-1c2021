@@ -40,18 +40,24 @@ Character& GameWorld::get_character(char id) {
 }
 
 
+void GameWorld::prepare_new_round() {
+	ground.unoccupy_spawns();
+	for (auto it = characters.begin(); it != characters.end(); ++it) {
+		it->second.reset_body(world, ground.get_zone(it->second.get_team()));
+	}
+	// DESCOMENTAR CUANDO TERMINEN LAS PRUEBAS
+	//assign_bomb();
+}
+
 void GameWorld::start() {
-	/* COMENTO PARA PROBAR SDL MAS FACIL.
+	/* DESCOMENTAR CUANDO TERMINEN LAS PRUEBAS
 	if (number_players == 1) {
 		throw ExceptionInvalidCommand("Debe haber al menos dos"
 							"jugadores para empezar la partida",
 								ServerError::NOT_ENOUGH_PLAYERS);
 	}
-	*/
-	// pongo esto asi no se rompe todo. 
 	fase_type = FaseType::INITIAL_FASE;
-	if (number_players > 1) 
-		assign_bomb();
+	assign_bomb();*/
 }
 
 void GameWorld::assign_bomb() {
@@ -107,21 +113,26 @@ bool GameWorld::simulate_step() {
 		}
 		return true;
 	} else {
-		number_round++;
-		charge_stats();
-		if (number_round == CF::number_rounds / 2) {
-			change_teams();
-		} else if (number_round == CF::number_rounds) {
+		number_tics++;
+		int wait = (int)(CF::time_finish - number_tics * STEP_TIME);
+		step_info.set_waiting_time(wait);
+		if (number_round == CF::number_rounds) {
 			return false;
 		}
-		prepare_new_round();
-		fase_type = FaseType::PLAYING;
+		if (wait <= 0) {
+			fase_type = FaseType::INITIAL_FASE;
+			syslog(LOG_INFO, "[%s:%i]: Cambio de fase"
+			 , __FILE__, __LINE__);
+		}
 	}
 	return true;
 }
 
 
 void GameWorld::change_teams() {
+	for (auto it = characters.begin(); it != characters.end(); ++it) {
+		it->second.change_team();
+	}
 }
 
 
@@ -154,19 +165,48 @@ void GameWorld::simulate_playing_step() {
 	}
 	world->Step(STEP_TIME, CF::velocity_iterations,
 								 CF::position_iterations);
-	if (round_finished())
+	if (round_finished()) {
 		fase_type = FaseType::END_ROUND;
+		charge_stats();
+		number_round++;
+		if (number_round == CF::number_rounds / 2) {
+			change_teams();
+		}
+		prepare_new_round();
+	}
 }
 
 bool GameWorld::round_finished() {
-	// algun bando muerto.
-	// bomba explota, bomba desactivada
+	//descomentar el return false cuando terminen las pruebas. 
+	return false;
+	if (bomb.simulate_step()) {
+		//step_info.add_finish(bomb.state());
+		return true;
+	} 
+	bool terrorist_dead = true;
+	bool counter_dead = true;
+	auto it = characters.begin();
+	while ((counter_dead || terrorist_dead) && (it != characters.end())) {
+		if (it->second.is_alive()) {
+			if (it->second.get_team() == Team::TERRORIST)
+				terrorist_dead = false;
+			else
+				counter_dead = false;
+		}
+		++it;
+	}
+	if (counter_dead) {
+		//step_info.add_counter_eliminated();
+		return true;
+	}
+	if (terrorist_dead && bomb.get_state() != BombState::ACTIVATED) {
+		//step_info.add_terrorist_eliminated());
+		return true;
+	}
 	return false;
 }
 
-void GameWorld::prepare_new_round() {
 
-}
 
 void GameWorld::charge_stats() {
 

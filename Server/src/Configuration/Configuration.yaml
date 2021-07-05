@@ -2,6 +2,7 @@
 max_distance_grab: 64
 
 time_preparation: 15
+time_finish: 5
 number_rounds: 10
 players_allowed: 10
 velocity_iterations: 8

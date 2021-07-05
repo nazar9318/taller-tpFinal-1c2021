@@ -60,5 +60,8 @@ void Position::occupy() {
 	occupied = true;
 }
 
+void Position::unoccupy() {
+	occupied = false;
+}
 
 Position::~Position() {}

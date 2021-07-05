@@ -121,7 +121,7 @@ void Match::handle_events() {
 
 void Match::push_step_events() {
 /*
-	if (game_world.fase() == TypeFase::INITIALIZATION) {
+	if (game_world.get_fase() == TypeFase::INITIALIZATION) {
 		statistics_not_sent = true;
 		std::shared_ptr<Event> init_event(
 			new SendStepInitEvent(game_world.step_info()));
@@ -132,7 +132,7 @@ void Match::push_step_events() {
 			new SendBuysEvent(game_world.step_info()));
 		push_event(init_event);
 		push_event(buys);
-	} else if (game_world.fase() == TypeFase::PLAYING) {
+	} else if (game_world.get_fase() == TypeFase::PLAYING) {
 		// envio info general de los jugadores. 	
 		std::shared_ptr<Event> playing_event(
 			new SendStepPlayingEvent(game_world.step_info()));

@@ -126,5 +126,10 @@ bool GroundMap::is_bomb_zone(b2Vec2& pos) {
 	return false;
 }
 
+void GroundMap::unoccupy_spawns() {
+	for (auto it = positions.begin(); it != positions.end(); ++it) {
+		it->unoccupy();
+	}
+}
 
 GroundMap::~GroundMap() {}

@@ -24,6 +24,8 @@ class Position {
 		bool is_weapon() const;
 		bool is_occupied() const;
 		void occupy();
+		void unoccupy();
+
 		~Position();
 };
 

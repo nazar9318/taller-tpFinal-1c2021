@@ -29,6 +29,7 @@ int CF::position_iterations = CF::yaml_file["position_iterations"].as<int>();
 int CF::max_distance_grab = CF::yaml_file["max_distance_grab"].as<int>();
 int CF::bonus_kill = CF::yaml_file["bonus_kill"].as<int>();
 double CF::time_preparation = CF::yaml_file["time_preparation"].as<double>();
+double CF::time_finish = CF::yaml_file["time_finish"].as<double>();
 int CF::number_rounds = CF::yaml_file["number_rounds"].as<int>();
 int CF::players_allowed = CF::yaml_file["players_allowed"].as<int>();
 
@@ -96,6 +97,7 @@ void Configuration::load_configuration(const std::string& file_path) {
 	syslog(LOG_INFO, "[%s:%i]: Se cargo el port: %s"
 			, __FILE__, __LINE__, port.c_str());
 	time_preparation = yaml_file["time_preparation"].as<double>();
+	time_finish = yaml_file["time_finish"].as<double>();
 	number_rounds = yaml_file["number_rounds"].as<int>();
 	players_allowed = yaml_file["players_allowed"].as<int>();
 

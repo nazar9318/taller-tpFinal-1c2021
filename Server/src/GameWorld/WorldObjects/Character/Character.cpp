@@ -22,23 +22,25 @@ Character::Character(Team team, b2World* world,
 		throw ExceptionInvalidCommand("No hay suficientes posiciones"
 				" para ubicar a los jugadores", ServerError::MATCH_FULL);
 	}
+
+	add_body(world, available_positions);
+}
+
+void Character::add_body(b2World* world,
+				 std::vector<Position*> available_positions) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distrib(0,
 					 available_positions.size() - 1);
 	Position* position = available_positions[distrib(gen)];
 	position->occupy();
-	add_body(position->get_x(), position->get_y(), world);
 	syslog(LOG_INFO, "[%s:%i]: Por agregar un character al world"
 					 "con posicion (%d, %d) ", __FILE__, __LINE__,
 					  position->get_x(), position->get_y());
-	move_state = Direction::STOP_MOVING;
-}
 
-void Character::add_body(int x, int y, b2World* world) {
 	b2BodyDef body_def;
 	body_def.type = b2_dynamicBody;
-	body_def.position.Set((int)x,(int)y);
+	body_def.position.Set((int)position->get_x(),(int)position->get_y());
 	body_def.angle = 0;
 	character_body = world->CreateBody(&body_def);
 
@@ -49,6 +51,8 @@ void Character::add_body(int x, int y, b2World* world) {
 	fixture_def.shape = &circle_shape;
 	fixture_def.density = 1;
 	character_body->CreateFixture(&fixture_def);
+	
+	move_state = Direction::STOP_MOVING;
 }
 
 
@@ -216,6 +220,18 @@ void Character::unblock() {
 	blocked = false;
 }
 
+void Character::reset_body(b2World* world,
+					 std::vector<Position*> available_positions) {
+	if (is_alive())
+		character_body->GetWorld()->DestroyBody(character_body);
+	add_body(world, available_positions);
+	life_points = CF::character_life_points;
+	unblock();
+}
+
+void Character::change_team() {
+	team = get_opposite(team);
+}
 
 Character::~Character() {
 }

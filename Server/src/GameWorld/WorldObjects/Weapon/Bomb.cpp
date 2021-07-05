@@ -13,13 +13,19 @@ void Bomb::add_owner(char id) {
 	clock_deactivate = 0;
 }
 
-void Bomb::simulate_step() {
+BombState Bomb::get_state() {
+	return state;
+}
+
+bool Bomb::simulate_step() {
 	switch (state) {
 		case BombState::ACTIVATED:
 		{
 			clock_active++;
-			if (clock_active * STEP_TIME >= CF::TIME_BOMB_EXPLOTE)
+			if (clock_active * STEP_TIME >= CF::TIME_BOMB_EXPLOTE) {
 				state = BombState::EXPLOTED;
+				return true;
+			}
 			break;
 		}                
 		case BombState::ACTIVATING:
@@ -38,8 +44,10 @@ void Bomb::simulate_step() {
 			if (clock_active * STEP_TIME >= CF::TIME_BOMB_EXPLOTE)
 				state = BombState::EXPLOTED;
 			clock_deactivate++;
-			if (clock_active * STEP_TIME >= CF::TIME_BOMB_DEACTIVATE)
+			if (clock_active * STEP_TIME >= CF::TIME_BOMB_DEACTIVATE) {
 				state = BombState::DEACTIVATED;	
+				return true;
+			}
 			break;
 		}
 		case BombState::NORMAL:
@@ -52,15 +60,18 @@ void Bomb::simulate_step() {
 		{
 			clock_active = 0;
 			clock_deactivate = 0;
+			return true;
 			break;
 		}
 		case BombState::EXPLOTED:
 		{
 			clock_active = 0;
 			clock_deactivate = 0;
+			return true;
 			break;
 		}
 	}
+	return false;
 }	
 
 

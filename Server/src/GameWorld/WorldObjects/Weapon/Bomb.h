@@ -26,8 +26,9 @@ class Bomb {
 
 	public:
 		Bomb();
+		BombState get_state();
 		void add_owner(char id);
-		void simulate_step();
+		bool simulate_step();
 		bool activate(char id, b2Vec2& pos);
 		void stop_activating(char id);
 		bool deactivate(Team team, char deactivator);

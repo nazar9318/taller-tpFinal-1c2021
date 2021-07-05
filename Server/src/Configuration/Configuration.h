@@ -31,6 +31,7 @@ class Configuration {
 		static int TIME_BOMB_DEACTIVATE;
 
 		static double time_preparation;
+		static double time_finish;
 		static int number_rounds;
 
 		static int players_allowed;

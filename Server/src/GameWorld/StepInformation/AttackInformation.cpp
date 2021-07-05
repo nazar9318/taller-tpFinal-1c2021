@@ -23,11 +23,11 @@ std::vector<char> AttackInformation::get_attack_message(){
 	return msg;
 }
 
-std::list<Character*> AttackInformation::get_killed_chars() {
-	std::list<Character*> killed;
+std::map<char, Character*> AttackInformation::get_killed_chars() {
+	std::map<char, Character*> killed;
 	for (auto it = receivers.begin(); it != receivers.end(); ++it) {
 		if (!it->second->is_alive()) {
-			killed.push_back(it->second);
+			killed[it->first] = it->second;
 		}
 	}
 	return killed;

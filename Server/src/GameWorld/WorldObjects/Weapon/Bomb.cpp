@@ -64,13 +64,12 @@ void Bomb::simulate_step() {
 }	
 
 
-bool Bomb::activate(char id, int x, int y) {
+bool Bomb::activate(char id, b2Vec2& position) {
 	if (has_owner && (id_owner == id) && (state == BombState::NORMAL)) {
 		state = BombState::ACTIVATING;
 		clock_active = 0;
 		clock_deactivate = 0;
-		pos_x = x;
-		pos_y = y;
+		pos = position;
 		return true;
 	}
 	return false;
@@ -107,12 +106,11 @@ void Bomb::stop_deactivating(char id) {
 }
 
 		
-void Bomb::drop(char id, int x, int y) {
+void Bomb::drop(char id, b2Vec2& position) {
 	if (has_owner && (id == id_owner)) {
 		has_owner = false;
 		if ((state == BombState::NORMAL) || (state == BombState::ACTIVATING)) {
-			pos_x = x;
-			pos_y = y;
+			pos = position;
 			state = BombState::NORMAL;
 			clock_active = 0;
 		} else if (state == BombState::DEACTIVATING) {
@@ -132,6 +130,9 @@ bool Bomb::grab(char id, Team team) {
 	return false;
 }
 
+b2Vec2 Bomb::get_pos() {
+	return pos;
+}
 
 Bomb::~Bomb() {
 }

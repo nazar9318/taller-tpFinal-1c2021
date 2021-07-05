@@ -20,8 +20,6 @@ void GameWorld::add_player_if_not_full(char id) {
 	if (CF::players_allowed == number_players)
 		throw ExceptionInvalidCommand("La partida esta completa",
 								 ServerError::MATCH_FULL);
-	syslog(LOG_INFO, "[%s:%i]: Por agregar el jugador con id %d"
-					 " al GameWorld", __FILE__, __LINE__, id);
 	Character character(actual_team, world,
 					 ground.get_zone(actual_team));
 	characters.insert({id, std::move(character)});
@@ -130,12 +128,15 @@ void GameWorld::handle_attack(std::map<char, Character>::iterator& it_attacker,
 										 AttackInformation& attack_info) {
 	if (attack_info.is_valid_attack()) {
 		auto killed = attack_info.get_killed_chars();
-		for (auto character = killed.begin(); character != killed.end(); ++character) {
-			if ((*character)->has_optative_weapon()) {
-				Weapon* weapon = (*character)->drop_optative_weapon();
+		for (auto character = killed.begin();
+									 character != killed.end(); ++character) {
+			if (character->second->has_optative_weapon()) {
+				Weapon* weapon = character->second->drop_optative_weapon();
 				std::unique_ptr<Weapon> ground_weapon(weapon);
 				weapons_in_ground.push_back(std::move(ground_weapon));
 			}
+			b2Vec2 pos = character->second->get_pos();
+			bomb.drop(character->first, pos);
 			it_attacker->second.add_kill_bonus();
 		}
 		step_info.add_attack(std::move(attack_info));
@@ -154,7 +155,6 @@ void GameWorld::simulate_playing_step() {
 								 CF::position_iterations);
 	if (round_finished())
 		fase_type = FaseType::END_ROUND;
-
 }
 
 bool GameWorld::round_finished() {
@@ -194,8 +194,6 @@ bool GameWorld::get_closest_weapon(b2Vec2 char_pos, Weapon** weapon) {
 }
 
 
-
-
 void GameWorld::add_weapon(const b2Vec2& pos, Weapon* weapon) {
 	std::unique_ptr<Weapon> ground_weapon(weapon);
 	weapon->set_pos((int)pos.x, (int)pos.y);
@@ -207,10 +205,8 @@ StepInformation& GameWorld::get_step_info() {
 	return step_info;
 }
 
-
-
-bool GameWorld::activate_bomb(char id, int x, int y) {
-	return bomb.activate(id, x, y);
+bool GameWorld::activate_bomb(char id, b2Vec2& pos) {
+	return bomb.activate(id, pos);
 }
 
 bool GameWorld::deactivate_bomb(Team team, char id) {
@@ -224,6 +220,14 @@ void GameWorld::stop_activating_bomb(char id) {
 void GameWorld::stop_deactivating_bomb(char id) {
 	bomb.stop_deactivating(id);
 }
+
+bool GameWorld::grab_bomb(char id, Team team, b2Vec2& pos) {
+	int distance = (bomb.get_pos() - pos).Length();
+	if (distance <= CF::max_distance_grab)
+		return bomb.grab(id, team);
+	return false;
+}
+
 
 GameWorld::~GameWorld() {
 	delete world;

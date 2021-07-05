@@ -31,7 +31,7 @@ class AttackInformation {
 
 		std::vector<char> get_attack_message();
 
-		std::list<Character*> get_killed_chars();
+		std::map<char, Character*> get_killed_chars();
 
 		float get_angle();
 

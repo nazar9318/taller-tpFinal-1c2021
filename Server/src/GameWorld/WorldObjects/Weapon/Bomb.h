@@ -4,6 +4,7 @@
 #include "TypesOfEvents.h"
 #include "Team.h"
 #include "Configuration.h"
+#include "../../libs/box2d/include/box2d/b2_math.h"
 
 enum BombState: char {
 	NORMAL,
@@ -21,19 +22,19 @@ class Bomb {
 		BombState state;
 		bool has_owner;
 		char id_owner;
-		int pos_x;
-		int pos_y;
+		b2Vec2 pos;
 
 	public:
 		Bomb();
 		void add_owner(char id);
 		void simulate_step();
-		bool activate(char id, int x, int y);
+		bool activate(char id, b2Vec2& pos);
 		void stop_activating(char id);
 		bool deactivate(Team team, char deactivator);
 		void stop_deactivating(char id);
-		void drop(char id, int x, int y);
+		void drop(char id, b2Vec2& pos);
 		bool grab(char id, Team team);
+		b2Vec2 get_pos();
 		~Bomb();
 };
 

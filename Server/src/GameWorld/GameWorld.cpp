@@ -50,7 +50,7 @@ void GameWorld::start() {
 								ServerError::NOT_ENOUGH_PLAYERS);
 	}
 	*/
-	assign_bomb();
+	//assign_bomb();
 }
 
 void GameWorld::assign_bomb() {

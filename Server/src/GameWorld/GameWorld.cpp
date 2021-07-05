@@ -46,12 +46,13 @@ void GameWorld::prepare_new_round() {
 		it->second.reset_body(world, ground.get_zone(it->second.get_team()));
 	}
 	// DESCOMENTAR CUANDO TERMINEN LAS PRUEBAS
+	//bomb.restart();
 	//assign_bomb();
 }
 
 void GameWorld::start() {
-	/* DESCOMENTAR CUANDO TERMINEN LAS PRUEBAS
-	if (number_players == 1) {
+	//DESCOMENTAR CUANDO TERMINEN LAS PRUEBAS
+	/*if (number_players == 1) {
 		throw ExceptionInvalidCommand("Debe haber al menos dos"
 							"jugadores para empezar la partida",
 								ServerError::NOT_ENOUGH_PLAYERS);
@@ -169,6 +170,7 @@ void GameWorld::simulate_playing_step() {
 		fase_type = FaseType::END_ROUND;
 		charge_stats();
 		number_round++;
+		number_tics = 0;
 		if (number_round == CF::number_rounds / 2) {
 			change_teams();
 		}

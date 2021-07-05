@@ -145,5 +145,13 @@ b2Vec2 Bomb::get_pos() {
 	return pos;
 }
 
+void Bomb::restart() {
+	state = BombState::NORMAL;
+	clock_active = 0; 
+	clock_deactivate = 0;
+	has_owner = false;
+
+}
+
 Bomb::~Bomb() {
 }

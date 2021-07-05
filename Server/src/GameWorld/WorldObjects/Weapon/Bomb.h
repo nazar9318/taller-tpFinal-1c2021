@@ -36,6 +36,7 @@ class Bomb {
 		void drop(char id, b2Vec2& pos);
 		bool grab(char id, Team team);
 		b2Vec2 get_pos();
+		void restart();
 		~Bomb();
 };
 

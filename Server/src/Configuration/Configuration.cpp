@@ -27,6 +27,7 @@ int CF::velocity_iterations = CF::yaml_file["velocity_iterations"].as<int>();
 int CF::position_iterations = CF::yaml_file["position_iterations"].as<int>();
 
 int CF::max_distance_grab = CF::yaml_file["max_distance_grab"].as<int>();
+int CF::bonus_kill = CF::yaml_file["bonus_kill"].as<int>();
 double CF::time_preparation = CF::yaml_file["time_preparation"].as<double>();
 int CF::number_rounds = CF::yaml_file["number_rounds"].as<int>();
 int CF::players_allowed = CF::yaml_file["players_allowed"].as<int>();
@@ -109,6 +110,8 @@ void Configuration::load_configuration(const std::string& file_path) {
 	velocity_iterations = yaml_file["velocity_iterations"].as<int>();
 	position_iterations = yaml_file["position_iterations"].as<int>();
 
+	bonus_kill = yaml_file["bonus_kill"].as<int>();
+	
 	character_life_points = yaml_file["character_life_points"].as<int>();
 	character_money = yaml_file["character_money"].as<int>();
 	bomb_clock_count = yaml_file["bomb_clock_count"].as<int>();

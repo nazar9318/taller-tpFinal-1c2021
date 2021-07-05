@@ -149,9 +149,8 @@ Weapon* Character::drop_optative_weapon() {
 	return weapon;
 }
 
-#define BONUS_KILL 50
 void Character::add_kill_bonus() {
-	money += BONUS_KILL;
+	money += CF::bonus_kill;
 }
 
 

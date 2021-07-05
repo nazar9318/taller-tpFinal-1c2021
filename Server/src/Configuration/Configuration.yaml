@@ -13,6 +13,8 @@ TIME_BOMB_DEACTIVATE: 2
 
 
 character_life_points: 100
+bonus_kill: 50
+
 character_money: 100
 
 bomb_clock_count: 15

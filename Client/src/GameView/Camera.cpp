@@ -1,19 +1,19 @@
 #include "Camera.h"
 
-Camera::Camera(Renderer& renderer/*Tengo que recibir el archivo de configs*/) :
+Camera::Camera(Renderer& renderer, int screen_width, int screen_height) :
 renderer(renderer) {
   box.x = 0;
   box.y = 0;
-  box.w = 640;
-  box.h = 480;  //Esto sale del cfg file
+  box.w = screen_width;
+  box.h = screen_height;  //Esto sale del cfg file
 }
 
 void Camera::render(Texture& texture, int x, int y) {
   SDL_Rect renderQuad = { x, y, texture.get_w(), texture.get_h() };
-  // renderQuad.w = box.w;
-  // renderQuad.h = box.h;
-  // renderer.render(texture.getTexture(), NULL, &renderQuad);
-  renderer.render(texture.getTexture(), &box, &renderQuad);
+  renderQuad.w = box.w;
+  renderQuad.h = box.h;
+  renderer.render(texture.getTexture(), NULL, &renderQuad);
+  // renderer.render(texture.getTexture(), &box, &renderQuad);
 }
 
 void Camera::center(SDL_Rect& object, int map_width, int map_height) {

@@ -11,7 +11,7 @@ class Camera {
     Renderer& renderer;
 
   public:
-    Camera(Renderer& renderer);
+    Camera(Renderer& renderer, int screen_width, int screen_height);
 
     void center(SDL_Rect& object, int map_width, int map_height);
 

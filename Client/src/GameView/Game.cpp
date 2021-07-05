@@ -1,12 +1,14 @@
 #include "Game.h"
 
+#define FROM_RAD_TO_DEG 57.295779513
+
 Game::Game(ProtectedQueue<Event>& model,
 	ProtectedQueue<std::unique_ptr<Event>>& client,
 	std::map<char, std::string>& charactersInfo, char& player_id) :
 model_events(model), client_events(client), is_running(true),
 player(player_id, charactersInfo.at(player_id)),
-window("Counter 2d", 800, 600, false), renderer(window), camera(renderer), hud(renderer, 800, 600),
- map(renderer, player,camera, characters, hud),
+window("Counter 2d", 800, 600, false), renderer(window), camera(renderer, 800, 600), hud(renderer, 800, 600),
+ map(renderer, player,camera, characters, hud), initial_fase(renderer, 800, 600),
 prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
 		if (it->first != player_id) {
@@ -25,6 +27,9 @@ void Game::execute() {
 		loadMedia();
 		while (is_running) {
 			begin = steady_clock::now();
+			// if(fase == initial){
+			// 	initial_fase.run();
+			// }
 			is_running = handle_events();
 			process_events();
 			render();
@@ -40,13 +45,14 @@ void Game::execute() {
 void Game::loadMedia() {
 	map.loadMedia();
 	hud.loadMedia();
+	initial_fase.loadMedia();
 }
 
 void Game::render() {
 	renderer.clearScreen();
 	map.renderGround();
 	if (fase == FaseType::INITIAL_FASE) {
-
+		initial_fase.render();
 	} else if (fase == FaseType::PLAYING) {
 		map.renderWeapons();
 		map.renderPlayer();
@@ -172,7 +178,6 @@ void Game::handle_unclick(SDL_Event& event) {
 	}
 }
 
-#define FROM_RAD_TO_DEG 57.295779513
 void Game::handle_mouse_motion() {
 
 	SDL_Rect player_pos = player.getBox();

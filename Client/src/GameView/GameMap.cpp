@@ -32,10 +32,21 @@ void GameMap::setSize(int& width, int& height) {
 
 /*-------------------------Metodos para render----------------------------*/
 
-void GameMap::cleanWeapons() {
-  weapons.clear();
-}
 
+
+// void GameMap::renderGround() {
+//
+//   SDL_Rect quad = {0};
+//
+//   for (size_t i = 0; i < tiles.size(); i++) {
+//     quad = tiles[i].getBox();
+//     if(camera.isVisible(quad)){
+//       Texture& texture(tiles[i].getTexture());
+//       camera.render(texture, quad.x, quad.y);
+//     }
+//     // renderer.render(texture.getTexture(), NULL, &quad);
+//   }
+// }
 void GameMap::renderGround() {
 
   SDL_Rect quad = {0};
@@ -45,6 +56,10 @@ void GameMap::renderGround() {
     quad = tiles[i].getBox();
     renderer.render(texture.getTexture(), NULL, &quad);
   }
+}
+
+void GameMap::cleanWeapons() {
+  weapons.clear();
 }
 
 void GameMap::renderWeapons() {
@@ -80,6 +95,7 @@ void GameMap::renderPlayer() {
   Texture& texture(player.getTexture());
   double angle = player.getAngle();
   renderer.render(texture.getTexture(), &player.getClip(), &player.getBox(), angle);
+  // player.render(renderer, camera.get_x(), camera.get_y());
 }
 
 void GameMap::renderPlayerWeapon() {

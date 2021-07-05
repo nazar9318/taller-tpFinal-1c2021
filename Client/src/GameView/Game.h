@@ -30,6 +30,7 @@
 #include "FaseType.h"
 #include "Camera.h"
 #include "Hud.h"
+#include "InitialFase.h"
 
 class Game {
 	private:
@@ -37,6 +38,7 @@ class Game {
 		ProtectedQueue<std::unique_ptr<Event>>& client_events;
 		GameMap map;
 		Hud hud;
+		InitialFase initial_fase;
 		ModelEventHandler handler;
 		bool is_running;
 		ClientPlayer player;

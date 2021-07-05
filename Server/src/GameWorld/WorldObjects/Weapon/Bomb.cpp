@@ -1,28 +1,137 @@
 #include "Bomb.h"
-/*
-Bomb::Bomb() : Weapon(0, 0, 0), clock_count(CF::bomb_clock_count) {
-    this->with_owner = false;
-    this->activated = true;
-    this->placed = false;
+
+
+Bomb::Bomb(): state(BombState::NORMAL),
+			  clock_active(0), has_owner(false), 
+			  clock_deactivate(0) {
 }
 
-void Bomb::shoot(Character &character, uint16_t distance) {
-    this->placed = true;
+void Bomb::add_owner(char id) {
+	id_owner = id;
+	has_owner = true;
+	clock_active = 0;
+	clock_deactivate = 0;
 }
 
-bool Bomb::countdownEnded() { 
-    return this->clock_count == 0 || !this->activated;
+void Bomb::simulate_step() {
+	switch (state) {
+		case BombState::ACTIVATED:
+		{
+			clock_active++;
+			if (clock_active * STEP_TIME >= CF::TIME_BOMB_EXPLOTE)
+				state = BombState::EXPLOTED;
+			break;
+		}                
+		case BombState::ACTIVATING:
+		{
+			clock_active++;
+			if (clock_active * STEP_TIME >= CF::TIME_BOMB_ACTIVATE) {
+				state = BombState::ACTIVATED;
+				clock_active = 0;
+				has_owner = false;
+			}   
+			break; 
+		}
+		case BombState::DEACTIVATING: 
+		{
+			clock_active++;
+			if (clock_active * STEP_TIME >= CF::TIME_BOMB_EXPLOTE)
+				state = BombState::EXPLOTED;
+			clock_deactivate++;
+			if (clock_active * STEP_TIME >= CF::TIME_BOMB_DEACTIVATE)
+				state = BombState::DEACTIVATED;	
+			break;
+		}
+		case BombState::NORMAL:
+		{
+			clock_active = 0;
+			clock_deactivate = 0;
+			break;
+		}
+		case BombState::DEACTIVATED:
+		{
+			clock_active = 0;
+			clock_deactivate = 0;
+			break;
+		}
+		case BombState::EXPLOTED:
+		{
+			clock_active = 0;
+			clock_deactivate = 0;
+			break;
+		}
+	}
+}	
+
+
+bool Bomb::activate(char id, int x, int y) {
+	if (has_owner && (id_owner == id) && (state == BombState::NORMAL)) {
+		state = BombState::ACTIVATING;
+		clock_active = 0;
+		clock_deactivate = 0;
+		pos_x = x;
+		pos_y = y;
+		return true;
+	}
+	return false;
 }
 
-void Bomb::tickTime() {
-    if (this->activated && this->placed) {
-        this->clock_count--;
-    }
+void Bomb::stop_activating(char id) {
+	if (has_owner && (state = BombState::ACTIVATING) && (id_owner == id)) {
+		state = BombState::NORMAL;
+		clock_active = 0;
+	}
 }
 
-void Bomb::deactivate() { this->activated = false; }
 
-void Bomb::place() { this->placed = true; }
+bool Bomb::deactivate(Team team, char deactivator) {
+	if ((state == BombState::ACTIVATED) && 
+		 (team == Team::COUNTER_ENEMY)) {
+		state = BombState::DEACTIVATING;
+		has_owner = true;
+		id_owner = deactivator;
+		clock_deactivate = 0;
+		return true;
+	}
+	return false;
+}
 
-Bomb::~Bomb() {}
-*/
+
+void Bomb::stop_deactivating(char id) {
+	if ((state == BombState::DEACTIVATING) && 
+		 (id_owner == id)) {
+		state = BombState::ACTIVATED;
+		has_owner = false;
+		clock_deactivate = 0;
+	}
+}
+
+		
+void Bomb::drop(char id, int x, int y) {
+	if (has_owner && (id == id_owner)) {
+		has_owner = false;
+		if ((state == BombState::NORMAL) || (state == BombState::ACTIVATING)) {
+			pos_x = x;
+			pos_y = y;
+			state = BombState::NORMAL;
+			clock_active = 0;
+		} else if (state == BombState::DEACTIVATING) {
+			state = BombState::ACTIVATED;
+			clock_deactivate = 0;
+		}		
+	}
+}
+
+bool Bomb::grab(char id, Team team) {
+	if ((!has_owner) && (team == Team::TERRORIST)) {
+		id_owner = id;
+		clock_active = 0;
+		has_owner = true;
+		return true;
+	}
+	return false;
+}
+
+
+Bomb::~Bomb() {
+}

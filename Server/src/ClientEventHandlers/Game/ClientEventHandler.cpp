@@ -46,6 +46,26 @@ void ClientEventHandler::handle(Event& event) {
 				attack_stoper.handle(event, world);
 				break;
 			}
+		case ClientTypeEvent::START_PLANTING_BOMB:
+			{
+				bomb_activator.handle(event, world);
+				break;
+			}
+		case ClientTypeEvent::STOP_PLANTING_BOMB:
+			{
+				attack_stoper.handle(event, world);
+				break;
+			}
+		case ClientTypeEvent::START_DEACTIVATING_BOMB:
+			{
+				bomb_deactivator.handle(event, world);
+				break;
+			}
+		case ClientTypeEvent::STOP_DEACTIVATING_BOMB:
+			{
+				bomb_deactivator_stopper.handle(event, world);
+				break;
+			}
 		default:
 			{
 				throw Exception("[%s:%i]:No hay ningun"

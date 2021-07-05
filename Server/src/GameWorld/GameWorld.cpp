@@ -52,8 +52,32 @@ void GameWorld::start() {
 								ServerError::NOT_ENOUGH_PLAYERS);
 	}
 	*/
-	// asignar la bomba.
+	assign_bomb();
 }
+
+void GameWorld::assign_bomb() {
+	int number_terrorist = number_players / 2;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distrib(0, number_terrorist - 1);
+	int bomb_terrorits = distrib(gen);
+	bool bomb_not_assigned = true;
+	auto it = characters.begin();
+	int characters_checked = 0;
+	while (bomb_not_assigned && (it != characters.end())) {
+		if (it->second.get_team() == Team::TERRORIST) {
+			if (characters_checked == bomb_terrorits) {
+				bomb_not_assigned = false;
+				bomb.add_owner(it->first);
+				syslog(LOG_INFO, "[%s:%i]: Bomba es de %d "
+			 					, __FILE__, __LINE__, (int)(it->first));
+			}
+			characters_checked++;
+		}
+		++it;
+	}
+}
+
 
 std::vector<Position*> GameWorld::get_ground_info() {
 	return ground.get_drawable_positions();
@@ -181,6 +205,24 @@ void GameWorld::add_weapon(const b2Vec2& pos, Weapon* weapon) {
 
 StepInformation& GameWorld::get_step_info() {
 	return step_info;
+}
+
+
+
+bool GameWorld::activate_bomb(char id, int x, int y) {
+	return bomb.activate(id, x, y);
+}
+
+bool GameWorld::deactivate_bomb(Team team, char id) {
+	return bomb.deactivate(team, id);
+}
+
+void GameWorld::stop_activating_bomb(char id) {
+	bomb.stop_activating(id);
+}
+
+void GameWorld::stop_deactivating_bomb(char id) {
+	bomb.stop_deactivating(id);
 }
 
 GameWorld::~GameWorld() {

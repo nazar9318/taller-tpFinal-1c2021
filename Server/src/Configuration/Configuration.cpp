@@ -17,6 +17,10 @@ int CF::character_radius = CF::common_yaml_file["character_radius"].as<int>();
 
 /*****************************************************************/
 
+int CF::TIME_BOMB_EXPLOTE = CF::yaml_file["TIME_BOMB_EXPLOTE"].as<int>();
+int CF::TIME_BOMB_ACTIVATE = CF::yaml_file["TIME_BOMB_ACTIVATE"].as<int>();
+int CF::TIME_BOMB_DEACTIVATE = CF::yaml_file["TIME_BOMB_DEACTIVATE"].as<int>();
+
 
 
 int CF::velocity_iterations = CF::yaml_file["velocity_iterations"].as<int>();
@@ -95,6 +99,11 @@ void Configuration::load_configuration(const std::string& file_path) {
 	players_allowed = yaml_file["players_allowed"].as<int>();
 
 	max_distance_grab = yaml_file["max_distance_grab"].as<int>();
+
+
+	TIME_BOMB_EXPLOTE = yaml_file["TIME_BOMB_EXPLOTE"].as<int>();
+	TIME_BOMB_ACTIVATE = yaml_file["TIME_BOMB_ACTIVATE"].as<int>();
+	TIME_BOMB_DEACTIVATE = yaml_file["TIME_BOMB_DEACTIVATE"].as<int>();
 
 
 	velocity_iterations = yaml_file["velocity_iterations"].as<int>();

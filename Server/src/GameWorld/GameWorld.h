@@ -35,7 +35,8 @@ class GameWorld {
 		std::list<Block> blocks;
 		FaseType fase_type;
 		std::list<std::unique_ptr<Weapon>> weapons_in_ground;
-		//Bomb bomb;
+		Bomb bomb;
+
 	public:
 		GameWorld(const std::string& map_type);
 		void add_player_if_not_full(char id);
@@ -54,7 +55,10 @@ class GameWorld {
 
 		void add_weapon(const b2Vec2& pos, Weapon* weapon);
 		bool get_closest_weapon(b2Vec2 char_pos, Weapon** weapon);
-
+		bool activate_bomb(char id, int x, int y);
+		bool deactivate_bomb(Team team, char id);
+		void stop_activating_bomb(char id);
+		void stop_deactivating_bomb(char id);
 		~GameWorld();
 
 
@@ -66,6 +70,7 @@ class GameWorld {
 		void charge_stats();
 		void handle_attack(std::map<char, Character>::iterator& it,
 								 AttackInformation& attack);
+		void assign_bomb();
 
 		GameWorld(const GameWorld &other) = delete;
 		GameWorld& operator=(const GameWorld &other) = delete;

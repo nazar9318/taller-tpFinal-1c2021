@@ -12,7 +12,7 @@ Character::Character(Team team, b2World* world,
 		 std::vector<Position*> available_positions)
 		: life_points(CF::character_life_points),
 		 money(CF::character_money), team(team),
-		 number_weapons(2), angle(0) {
+		 number_weapons(2), angle(0), blocked(false) {
 	std::unique_ptr<Weapon> knife(new WeaponWhite());
 	std::unique_ptr<Weapon> pistol(new WeaponPistol());
 	weapons.push_back(std::move(knife));
@@ -53,7 +53,10 @@ void Character::add_body(int x, int y, b2World* world) {
 
 
 void Character::set_move_state(Direction dir) {
-	move_state = dir;
+	if (!blocked)
+		move_state = dir;
+	else
+		move_state = Direction::STOP_MOVING;
 }
 
 void Character::apply_impulses() {
@@ -89,16 +92,6 @@ void Character::apply_impulses() {
 	}
 }
 
-/*
-void Character::attack(char self_id, std::list<Block>& blocks,
-    	std::map<char, Character>& characters) {
-	AttackInformation attack_info(self_id, this, get_opposite(team));
-	if (is_alive())
-		weapons[current_weapon]->attack(attack_info, blocks, characters);
-	return attack_info;
-}
-*/
-
 
 void Character::attack(AttackInformation& attack_info,
 		 std::list<Block>& blocks, std::map<char, Character>& characters) {
@@ -117,21 +110,6 @@ void Character::take_damage(char points) {
 	}
 }
 
-/*
-void Character::receive_damage(AttackInformation& attack) {
-	if ((attack.get_team() == team) && is_alive()) {
-		take_damage(attack.get_damage());
-
-		if (life_points == 0) {
-			attack.add_receiver(this, true);
-		} else {
-			attack.add_receiver(this, false);
-		}
-	}
-}
-*/
-
-
 
 b2Vec2 Character::get_pos() {
 	if (is_alive())
@@ -145,8 +123,9 @@ b2Fixture* Character::GetFixtureList() {
 
 
 void Character::start_attacking() {
-	weapons[current_weapon]->activate();
-		syslog(LOG_INFO, "[%s:%i]: START ATTACKING ", __FILE__, __LINE__);
+	if (!blocked) 
+		weapons[current_weapon]->activate();
+	syslog(LOG_INFO, "[%s:%i]: START ATTACKING ", __FILE__, __LINE__);
 
 }
 
@@ -194,9 +173,6 @@ Team Character::get_team() {
 }
 
 
-
-
-
 bool Character::is_alive() {
 	return (life_points > 0);
 }
@@ -231,48 +207,17 @@ char Character::get_weapon_type(){
 	return weapons[current_weapon]->get_type();
 }
 
+void Character::block() {
+	blocked = true;
+	move_state = Direction::STOP_MOVING;
+	stop_attacking();
+}
+
+void Character::unblock() {
+	blocked = false;
+}
+
+
 Character::~Character() {
 }
 
-
-
-/*
-
-
-void Character::take(unsigned int money) {
-	if (this->life_points > 0) {
-		this->money += money;
-	}
-}
-*/
-/*
-
-char Character::getLifePoints() {
-	return life_points;
-}
-
-
-
-void Character::grab(Bomb* bomb) {
-	if (this->team == TERRORIST) {
-		if (this->weapons.size() == 3) {
-			this->weapons.push_back(bomb);
-		} else {
-			this->weapons.push_back(NULL);
-			this->weapons.push_back(bomb);
-			//this->weapons.insert(this->weapons.begin() + 4, bomb);
-		}
-	}
-}
-
-void Character::place(Bomb* bomb) {
-	if (this->team == TERRORIST || bomb == this->weapons[3]) {
-		bomb->place();
-	}
-}
-
-void Character::deactivate(Bomb *bomb) {
-	if (this->team == COUNTER_ENEMY) {
-		bomb->deactivate();
-	}
-}*/

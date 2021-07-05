@@ -13,6 +13,10 @@
 #include "BuyWeaponHandler.h"
 #include "StopAttackingHandler.h"
 #include "RotateHandler.h"
+#include "ActivateBombHandler.h"
+#include "DeactivateBombHandler.h"
+#include "StopActivatingBombHandler.h"
+#include "StopDeactivatingBombHandler.h"
 
 class ClientEventHandler{
 		MoveHandler mover;
@@ -23,6 +27,10 @@ class ClientEventHandler{
 		BuyWeaponHandler buyier;
 		StopAttackingHandler attack_stoper;
 		RotateHandler rotator;
+		ActivateBombHandler bomb_activator;
+		DeactivateBombHandler bomb_deactivator;
+		StopActivatingBombHandler bomb_activator_stopper;
+		StopDeactivatingBombHandler bomb_deactivator_stopper;
 		GameWorld& world;
 
 	public:

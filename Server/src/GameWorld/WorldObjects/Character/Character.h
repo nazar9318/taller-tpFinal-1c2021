@@ -35,6 +35,7 @@ class Character {
 		b2Body* character_body;
 		Direction move_state;
 		int angle;
+		bool blocked;
 
 	public:
 		Character(Team team, b2World* world,
@@ -94,6 +95,10 @@ class Character {
 		int get_ammo();
 
 		char get_weapon_type();
+
+		void block();
+
+		void unblock();
 
 /*
 disparo pistola ---.

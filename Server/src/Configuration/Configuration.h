@@ -26,7 +26,9 @@ class Configuration {
 		static int character_radius;
 
 		/**************************************/
-
+		static int TIME_BOMB_EXPLOTE;
+		static int TIME_BOMB_ACTIVATE;
+		static int TIME_BOMB_DEACTIVATE;
 
 		static double time_preparation;
 		static int number_rounds;

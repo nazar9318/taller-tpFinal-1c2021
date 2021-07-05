@@ -12,7 +12,6 @@ id(id), name(name), current_clip(0) {
 		clip[i].w = 32;
 		clip[i].h = 32;
 	}
-
 	clip[0].x = 32;
 	clip[0].y = 0;
 	clip[1].x = 32;

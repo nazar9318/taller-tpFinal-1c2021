@@ -1,7 +1,10 @@
 #include "ClientCharacter.h"
 #include <math.h>
 #include <complex>
+
 #define PI 3.14159265
+#define PLAYER_WIDTH 32
+#define PLAYER_HEIGHT 32
 
 ClientCharacter::ClientCharacter(const std::string& _name)
 : name(_name), current_clip(0) {
@@ -32,8 +35,8 @@ Texture& ClientCharacter::getTexture() { return *texture; }
 double ClientCharacter::getAngle() { return angle; }
 
 void ClientCharacter::update_position(int pos_x, int pos_y, int angle, char weapon_type) {
-	pos.x = pos_x - texture->get_w()/2;
-	pos.y = pos_y - texture->get_h()/2;
+	pos.x = pos_x - PLAYER_WIDTH/2;
+	pos.y = pos_y - PLAYER_HEIGHT/2;
 	std::complex<double>  z = std::polar (1.0, angle*PI/180);
 	z = pow (z, -1);
 	this->angle = (int) ((std::arg(z) + PI/2)* 180/PI);

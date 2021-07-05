@@ -36,7 +36,7 @@ class ClientPlayer {
 		double getAngle();
 		void update_position(int pos_x, int pos_y, int angle,
 				char life, int money, char weapon_type, int ammo);
-		void render(Renderer& renderer);
+		void render(Renderer& renderer, int cam_x,int cam_y);
 
 	private:
 		ClientPlayer(const ClientPlayer &other) = delete;

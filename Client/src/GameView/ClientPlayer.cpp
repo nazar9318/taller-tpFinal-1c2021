@@ -3,6 +3,8 @@
 #include <complex>
 #include <iostream>
 #define PI 3.14159265
+#define PLAYER_WIDTH 32
+#define PLAYER_HEIGHT 32
 
 ClientPlayer::ClientPlayer(char& id, std::string& name):
 id(id), name(name), current_clip(0) {
@@ -24,8 +26,8 @@ void ClientPlayer::set_team(Team team) {
 	texture = &(SpriteContainer::getInstance()[team]);
 	pos.x = 0;
 	pos.y = 0;
-	pos.w = 32;
-	pos.h = 32;
+	pos.w = PLAYER_WIDTH;
+	pos.h = PLAYER_HEIGHT;
 }
 
 /*void ClientPlayer::set_weapon() {
@@ -42,8 +44,8 @@ void ClientPlayer::changeClip() {
 
 void ClientPlayer::update_position(int pos_x, int pos_y, int angle,
 		char life, int money, char weapon_type, int ammo) {
-	pos.x = pos_x - texture->get_w()/2;
-	pos.y = pos_y - texture->get_h()/2;
+	pos.x = pos_x - PLAYER_WIDTH/2;
+	pos.y = pos_y - PLAYER_HEIGHT/2;
 	std::complex<double> z = std::polar (1.0, angle*PI/180);
 	z = pow (z, -1);
 	this->angle = (int)((std::arg(z) + PI/2)* 180/PI);
@@ -79,10 +81,10 @@ void ClientPlayer::update_position(int pos_x, int pos_y, int angle,
 	}
 }
 
-void ClientPlayer::render(Renderer& renderer) {
-	SDL_Rect renderQuad = { pos.x, pos.y, pos.w, pos.h };
-	SDL_RenderCopy(renderer.getRenderer(), texture->getTexture(), &pos, &renderQuad);
-	//renderer.render(texture->getTexture(), NULL, &renderQuad, angle);
+void ClientPlayer::render(Renderer& renderer, int cam_x, int cam_y) {
+	SDL_Rect renderQuad = { pos.x - cam_x, pos.y-cam_y, pos.w, pos.h };
+	// SDL_RenderCopy(renderer.getRenderer(), texture->getTexture(), &pos, &renderQuad);
+	renderer.render(texture->getTexture(), &clip[current_clip], &renderQuad, angle);
 }
 
 double ClientPlayer::getAngle() { return (double)angle; }

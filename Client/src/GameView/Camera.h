@@ -8,6 +8,7 @@
 class Camera {
   private:
     SDL_Rect box = {0};
+    SDL_Point pos = {0};
     Renderer& renderer;
 
   public:
@@ -15,7 +16,7 @@ class Camera {
 
     void center(SDL_Rect& object, int map_width, int map_height);
 
-    void render(Texture& texture, int x, int y);
+    void render(Texture& texture, int x, int y, int w, int h);
 
     bool isVisible(SDL_Rect& quad);
 

@@ -41,12 +41,20 @@ class MainWindow : public QMainWindow {
         QGraphicsPixmapItem* createNewItem();
         QGraphicsPixmapItem* createSpawn();
         void addSquare(QMouseEvent* event);
-        bool thereIsFloorIn(std::vector<YAML::Node> &nodes, int &x, int &y);
         bool thereIsFloorIn(int &x, int &y);
-        std::vector<std::pair<int,int>> positions;
+        bool thereIsWeaponIn(int &x, int &y);
+        bool thereIsBoxIn(int &x, int &y);
+        bool thereIsBombPlaceIn(int &x, int &y);
+        bool thereIsSpawnIn(int &x, int &y);
+        std::vector<std::pair<int,int>> floor;
+        std::vector<std::pair<int,int>> weapon;
+        std::vector<std::pair<int,int>> box;
+        std::vector<std::pair<int,int>> bomb;
+        std::vector<std::pair<int,int>> spawn;
+        void placePos(int &x, int &y);
         bool hasPos(std::vector<size_t> &vector, size_t pos);
         int delay_cnt;
-        void mapPositions(int &x, int &y);
+
     private slots:
         void on_save_clicked();
 

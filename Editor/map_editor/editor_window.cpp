@@ -12,8 +12,8 @@
 #define BASE_Y 33
 #define FLOOR_SIZE 32
 
-MainWindow::MainWindow(QWidget *parent) :
-QMainWindow(parent), ui(new Ui::MainWindow), delay_cnt(0) {
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
+ui(new Ui::MainWindow), delay_cnt(0) {
     this->ui->setupUi(this);
     scene = new QGraphicsScene(this);
     this->ui->map->setScene(scene);
@@ -28,14 +28,11 @@ QMainWindow(parent), ui(new Ui::MainWindow), delay_cnt(0) {
 }
 
 void MainWindow::saveObjects(YAML::Emitter &emitter) {
-    int i = 0;
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
         if ((name.find("weapon") != std::string::npos) || (name.find("box") != std::string::npos) ||
             (name.find("bomb") != std::string::npos) || (name.find("spawn") != std::string::npos)) {
             YAML::Node node;
-            node["node"] = i;
-            i++;
             YAML::Node coordinates;
             coordinates.push_back((int)item->pos().x()/BASE_X);
             coordinates.push_back((int)item->pos().y()/BASE_X);
@@ -46,26 +43,70 @@ void MainWindow::saveObjects(YAML::Emitter &emitter) {
     }
 }
 
-/*bool MainWindow::thereIsFloorIn(std::vector<YAML::Node> &nodes, int &x, int &y) {
-    for (size_t i = 0; i < nodes.size(); i++) {
-        bool is_in_x = nodes[i]["position"][0].as<int>() == x;
-        bool is_in_y = nodes[i]["position"][1].as<int>() == y;
-        return is_in_x && is_in_y;
-    }
-    return false;
-}*/
-
 bool MainWindow::thereIsFloorIn(int &x, int &y) {
-    for (size_t i = 0; i < this->positions.size(); i++) {
-        bool is_in_x = positions[i].first == x;
-        bool is_in_y = positions[i].second == y;
+    for (size_t i = 0; i < this->floor.size(); i++) {
+        bool is_in_x = floor[i].first == x;
+        bool is_in_y = floor[i].second == y;
         if (is_in_x && is_in_y) { return true; }
     }
     return false;
 }
 
+bool MainWindow::thereIsBoxIn(int &x, int &y) {
+    for (size_t i = 0; i < this->box.size(); i++) {
+        bool is_in_x = box[i].first == x;
+        bool is_in_y = box[i].second == y;
+        if (is_in_x && is_in_y) { return true; }
+    }
+    return false;
+}
+
+bool MainWindow::thereIsBombPlaceIn(int &x, int &y) {
+    for (size_t i = 0; i < this->bomb.size(); i++) {
+        bool is_in_x = bomb[i].first == x;
+        bool is_in_y = bomb[i].second == y;
+        if (is_in_x && is_in_y) { return true; }
+    }
+    return false;
+}
+
+bool MainWindow::thereIsWeaponIn(int &x, int &y) {
+    for (size_t i = 0; i < this->weapon.size(); i++) {
+        bool is_in_x = weapon[i].first == x;
+        bool is_in_y = weapon[i].second == y;
+        if (is_in_x && is_in_y) { return true; }
+    }
+    return false;
+}
+
+bool MainWindow::thereIsSpawnIn(int &x, int &y) {
+    for (size_t i = 0; i < this->spawn.size(); i++) {
+        bool is_in_x = spawn[i].first == x;
+        bool is_in_y = spawn[i].second == y;
+        if (is_in_x && is_in_y) { return true; }
+    }
+    return false;
+}
+
+void MainWindow::placePos(int &x, int &y) {
+    if (this->dragged.toStdString().find("base") != std::string::npos) {
+        this->floor.push_back(std::make_pair(x,y));
+    }
+    else if (this->dragged.toStdString().find("bomb") != std::string::npos) {
+        this->bomb.push_back(std::make_pair(x,y));
+    }
+    else if (this->dragged.toStdString().find("weapon") != std::string::npos) {
+        this->weapon.push_back(std::make_pair(x,y));
+    }
+    else if (this->dragged.toStdString().find("box") != std::string::npos) {
+        this->box.push_back(std::make_pair(x,y));
+    }
+    else if (this->dragged.toStdString().find("spawn") != std::string::npos) {
+        this->spawn.push_back(std::make_pair(x,y));
+    }
+}
+
 void MainWindow::saveBases(YAML::Emitter &emitter) {
-    int i = 0;
     std::vector<YAML::Node> nodes;
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
@@ -73,8 +114,6 @@ void MainWindow::saveBases(YAML::Emitter &emitter) {
             int x = (int)item->pos().x()/BASE_X;
             int y = (int)item->pos().y()/BASE_Y;
             YAML::Node node;
-            node["node"] = i;
-            i++;
             YAML::Node coordinates;
             coordinates.push_back(x);
             coordinates.push_back(y);
@@ -173,8 +212,14 @@ void MainWindow::on_load_clicked() {
 }
 
 void MainWindow::on_clean_clicked() {
+    for (auto item : this->scene->items()) { delete item; }
     this->scene->clear();
     this->scene->items().clear();
+    this->floor.clear();
+    this->bomb.clear();
+    this->box.clear();
+    this->spawn.clear();
+    this->weapon.clear();
     for (int x = 0; x <= 1000; x += BASE_X) {
         scene->addLine(x, 0, x, 1000, QPen(Qt::black));
     }
@@ -280,9 +325,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent* event) {
         int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
         int x = x_0*BASE_X+1;
         int y = y_0*BASE_Y+1;
-        if (!this->thereIsFloorIn(x, y)) {
-            this->addSquare(event);
-        }
+        if (!this->thereIsFloorIn(x, y)) { this->addSquare(event); }
     }
 }
 
@@ -303,8 +346,11 @@ void MainWindow::on_button_clicked() {
             int y = item->pos().y()+1;
             if (!this->thereIsFloorIn(x, y)) {
                 new_item->setPos(x, y);
-                this->positions.push_back(std::make_pair(x,y));
+                this->placePos(x,y);
+                //this->positions.push_back(std::make_pair(x,y));
                 this->scene->addItem(new_item);
+            } else {
+                delete new_item;
             }
             this->scene->removeItem(item);
             delete item;
@@ -313,17 +359,25 @@ void MainWindow::on_button_clicked() {
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
+    int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
+    int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
+    int x = x_0*BASE_X+1;
+    int y = y_0*BASE_Y+1;
+    if (thereIsFloorIn(x, y) && (this->dragged.toStdString().find("box") != std::string::npos)) {
+        return;
+    }
+    if (thereIsFloorIn(x, y) && (this->dragged.toStdString().find("bomb") != std::string::npos)) {
+        return;
+    }
     if (this->dragged.compare("color") != 0) {
         QGraphicsPixmapItem *item = this->createNewItem();
         item->setFlag(QGraphicsItem::ItemIsMovable, true);
-        int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
-        int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
-        int x = x_0*BASE_X+1;
-        int y = y_0*BASE_Y+1;
-        item->setPos(x, y);
-        this->positions.push_back(std::make_pair(x,y));
-        item->setData(0, this->dragged);
-        this->scene->addItem(item);
+        if (!thereIsWeaponIn(x, y) && !thereIsBombPlaceIn(x, y) && !thereIsBoxIn(x, y) && !thereIsSpawnIn(x, y)) {
+            item->setPos(x, y);
+            this->placePos(x,y);
+            item->setData(0, this->dragged);
+            this->scene->addItem(item);
+        } else { delete item; }
     }
 }
 

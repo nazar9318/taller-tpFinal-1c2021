@@ -65,6 +65,7 @@ class Match: public Thread {
 	private:
 		void start_game();
 		void game_loop();
+		void push_step_events();
 
 		// POST: Envia el evento a todos los jugadores de la partida.
 		void push_event(std::shared_ptr<Event>& event);

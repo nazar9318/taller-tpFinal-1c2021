@@ -41,6 +41,10 @@ class ClientEventHandler{
 		~ClientEventHandler();
 
 	private:
+		void handle_init(Event& event);
+		void handle_play(Event& event);
+
+
 		ClientEventHandler(const ClientEventHandler &other) = delete;
 		ClientEventHandler& operator=(const ClientEventHandler &other) = delete;
 };

@@ -80,19 +80,6 @@ std::list<std::unique_ptr<Weapon>> GroundMap::fill_weapons() {
 
 
 
-// Quedaria mas elegante con punteros a funciones.
-
-std::vector<Position*> GroundMap::get_blocks() {
-	std::vector<Position*> blocks;
-	for (auto it = positions.begin(); it != positions.end(); ++it) {
-		if (it->is_block()){
-			blocks.push_back(&(*it));
-			syslog(LOG_INFO, "[%s:%i]: Cargo un bloque"
-			, __FILE__, __LINE__);
-		}
-	}
-	return blocks;
-}
 
 std::vector<Position*> GroundMap::get_terrorist_zone() {
 	std::vector<Position*> terrorist_zone;
@@ -112,15 +99,6 @@ std::vector<Position*> GroundMap::get_counter_terrorist_zone() {
 	return counter_terrorists;
 }
 
-std::vector<Position*> GroundMap::get_bomb_zone() {
-	std::vector<Position*> bomb_zone;
-	for (auto it = positions.begin(); it != positions.end(); ++it) {
-		if (it->is_bomb_zone())
-			bomb_zone.push_back(&(*it));
-	}
-	return bomb_zone;
-}
-
 std::vector<Position*> GroundMap::get_zone(Team team) {
 	if (team == Team::TERRORIST)
 		return get_terrorist_zone();
@@ -135,5 +113,18 @@ std::vector<Position*> GroundMap::get_drawable_positions() {
 	}
 	return drawable_zone;
 }
+
+bool GroundMap::is_bomb_zone(b2Vec2& pos) {
+	for (auto it = positions.begin(); it != positions.end(); ++it) {
+		if ((it->is_bomb_zone()) &&
+		 	(it->get_x() - CF::size_position / 2 <= pos.x) &&
+		 	(it->get_x() + CF::size_position / 2 >= pos.x) && 
+		 	(it->get_y() - CF::size_position / 2 <= pos.y) &&
+		 	(it->get_y() + CF::size_position / 2 >= pos.y))
+		 	return true;
+	}
+	return false;
+}
+
 
 GroundMap::~GroundMap() {}

@@ -59,6 +59,7 @@ class GameWorld {
 		void stop_activating_bomb(char id);
 		void stop_deactivating_bomb(char id);
 		bool grab_bomb(char id, Team team, b2Vec2& pos);
+		FaseType get_fase();
 		~GameWorld();
 
 

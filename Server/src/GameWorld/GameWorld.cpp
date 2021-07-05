@@ -207,7 +207,7 @@ StepInformation& GameWorld::get_step_info() {
 }
 
 bool GameWorld::activate_bomb(char id, b2Vec2& pos) {
-	return bomb.activate(id, pos);
+	return (ground.is_bomb_zone(pos) && bomb.activate(id, pos));
 }
 
 bool GameWorld::deactivate_bomb(Team team, char id) {
@@ -229,6 +229,11 @@ bool GameWorld::grab_bomb(char id, Team team, b2Vec2& pos) {
 	return false;
 }
 
+
+
+FaseType GameWorld::get_fase() {
+	return fase_type;
+}
 
 GameWorld::~GameWorld() {
 	delete world;

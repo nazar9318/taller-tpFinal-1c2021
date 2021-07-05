@@ -76,8 +76,6 @@ void Match::start_game() {
 			push_event(error);
 			if (e.get_type() == ServerError::CREATOR_ABANDONS_MATCH) {
 				finished = true;
-				syslog(LOG_CRIT, "[%s:%i]: Termino la"
-						" partida fuerza bruta", __FILE__, __LINE__);
 			} else {
 				match_started = false;
 			}
@@ -97,12 +95,7 @@ void Match::game_loop() {
 		begin = steady_clock::now();
 		handle_events();
 		finished = !game_world.simulate_step();
-		std::shared_ptr<Event> players_info(
-				new SendStepInfoEvent(game_world.get_step_info()));
-		std::shared_ptr<Event> weapons(
-			new SendWeaponsEvent(game_world.get_weapons_info()));
-		push_event(players_info);
-		push_event(weapons);
+		push_step_events();
 		end = steady_clock::now();
 		t_delta = duration<double>(end - begin).count();
 		std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
@@ -125,6 +118,57 @@ void Match::handle_events() {
 		}
 	}
 }
+
+void Match::push_step_events() {
+/*
+	if (game_world.fase() == TypeFase::INITIALIZATION) {
+		statistics_not_sent = true;
+		std::shared_ptr<Event> init_event(
+			new SendStepInitEvent(game_world.step_info()));
+		// envio fase, tiempo hasta que termine. 
+		// cuando hay una compra, el handler manda al 
+		// world: add compra. 
+		std::shared_ptr<Event> buys(
+			new SendBuysEvent(game_world.step_info()));
+		push_event(init_event);
+		push_event(buys);
+	} else if (game_world.fase() == TypeFase::PLAYING) {
+		// envio info general de los jugadores. 	
+		std::shared_ptr<Event> playing_event(
+			new SendStepPlayingEvent(game_world.step_info()));
+		// info de pistolaas en el piso. 
+		std::shared_ptr<Event> weapons(
+			new SendWeaponsEvent(game_world.get_weapons_info()));
+		std::shared_ptr<Event> attacks(
+			new SendAttacksEvent(game_world.step_info()));
+		std::shared_ptr<Event> bomb(
+			new SendBombStateEvent(game_world.bomb_state()));
+		push_event(playing_event);
+		push_event(weapons);
+		push_event(attacks);
+		push_event(bomb);
+	} else {
+		if (statistics_not_sent) {
+				// fin, round, cantidad_rounds, porque termino la partida. 
+			std::shared_ptr<Event> reason_end(
+				new SendFinalStateEvent(game_world.final_state()));
+			std::shared_ptr<Event> stats(
+				new SendStatsEvent(game_world.stats()));
+			statistics_not_sent = false;
+			push_event(reason_end);
+			push_event(stats);
+		}
+	}
+*/
+
+	std::shared_ptr<Event> players_info(
+			new SendStepInfoEvent(game_world.get_step_info()));
+	std::shared_ptr<Event> weapons(
+		new SendWeaponsEvent(game_world.get_weapons_info()));
+	push_event(players_info);
+	push_event(weapons);
+}
+
 
 // POST: Envia el evento a todos los jugadores de la partida.
 void Match::push_event(std::shared_ptr<Event>& event) {

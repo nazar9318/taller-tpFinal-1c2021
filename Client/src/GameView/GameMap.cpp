@@ -57,9 +57,10 @@ void GameMap::renderWeapons() {
 
 }
 
-void GameMap::update_position(char id, int pos_x, int pos_y, int angle, char life, int money, char weapon_type, int ammo) {
+void GameMap::update_position(char id, int pos_x, int pos_y, int angle,
+        char life, int money, char weapon_type, int ammo) {
   if (id == player.get_id()) {
-    player.update_position(pos_x, pos_y, angle, life, money);
+    player.update_position(pos_x, pos_y, angle, life, money, weapon_type, ammo);
     hud.update_values(life, money);
     // camera.center(player.getBox(), map_width, map_height);
   } else {
@@ -83,7 +84,7 @@ void GameMap::renderPlayer() {
 
 void GameMap::renderPlayerWeapon() {
   SDL_Rect quad = player.getBox();
-  player.set_weapon(Equipped_Weapon::AK47_EQUIPPED);
+  //player.set_weapon(Equipped_Weapon::AK47_EQUIPPED);
   Texture& texture(player.getWeapon());
   double angle = player.getAngle();
   renderer.render(texture.getTexture(), NULL, &quad, angle);

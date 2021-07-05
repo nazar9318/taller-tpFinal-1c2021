@@ -29,7 +29,7 @@ void ClientPlayer::set_team(Team team) {
 	pos.h = 32;
 }
 
-void ClientPlayer::set_weapon(Equipped_Weapon weapon) {
+/*void ClientPlayer::set_weapon() {
 	texture_weapon = &(SpriteContainer::getInstance()[weapon]);
 }
 
@@ -39,9 +39,10 @@ void ClientPlayer::changeClip() {
 	} else {
 		this->current_clip++;
 	}
-}
+}*/
 
-void ClientPlayer::update_position(int pos_x, int pos_y, int angle, char life, int money) {
+void ClientPlayer::update_position(int pos_x, int pos_y, int angle,
+		char life, int money, char weapon_type, int ammo) {
 	pos.x = pos_x - texture->get_w()/2;
 	pos.y = pos_y - texture->get_h()/2;
 	std::complex<double> z = std::polar (1.0, angle*PI/180);
@@ -49,6 +50,34 @@ void ClientPlayer::update_position(int pos_x, int pos_y, int angle, char life, i
 	this->angle = (int)((std::arg(z) + PI/2)* 180/PI);
 	this->life = life;
 	this->money = money;
+	switch (weapon_type) {
+		case PositionType::KNIFE : {
+			this->current_clip = 0;
+			texture_weapon = &(SpriteContainer::getInstance()[Equipped_Weapon::KNIFE_EQUIPPED]);
+			break;
+		}
+		case PositionType::GLOCK : {
+			this->current_clip = 1;
+			texture_weapon = &(SpriteContainer::getInstance()[Equipped_Weapon::GLOCK_EQUIPPED]);
+			break;
+		}
+		case PositionType::AK47 : {
+			this->current_clip = 2;
+			texture_weapon = &(SpriteContainer::getInstance()[Equipped_Weapon::AK47_EQUIPPED]);
+			break;
+		}
+		case PositionType::M3 : {
+			this->current_clip = 2;
+			texture_weapon = &(SpriteContainer::getInstance()[Equipped_Weapon::M3_EQUIPPED]);
+			break;
+		}
+		case PositionType::AWP : {
+			this->current_clip = 2;
+			texture_weapon = &(SpriteContainer::getInstance()[Equipped_Weapon::AWP_EQUIPPED]);
+			break;
+		}
+		default: break;
+	}
 }
 
 void ClientPlayer::render(Renderer& renderer) {

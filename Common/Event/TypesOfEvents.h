@@ -77,7 +77,7 @@ enum PositionType: char {
 	GLOCK,
 	AK47,
 	M3,
-	AWP, 
+	AWP,
 	NO_WEAPON
 };
 

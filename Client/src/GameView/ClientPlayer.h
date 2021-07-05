@@ -19,6 +19,7 @@ class ClientPlayer {
 		int angle;
 		int money;
 		char life;
+		char weapon_type;
 
 	public:
 		ClientPlayer(char& id, std::string& name);
@@ -27,14 +28,16 @@ class ClientPlayer {
 		char get_id();
 		void changeClip();
 		void set_team(Team team);
-		void set_weapon(Equipped_Weapon weapon);
+		void set_weapon();
 		Texture& getTexture();
 		Texture& getWeapon();
 		SDL_Rect& getBox();
 		SDL_Rect& getClip();
 		double getAngle();
-		void update_position(int pos_x, int pos_y, int angle, char life, int money);
+		void update_position(int pos_x, int pos_y, int angle,
+				char life, int money, char weapon_type, int ammo);
 		void render(Renderer& renderer);
+
 	private:
 		ClientPlayer(const ClientPlayer &other) = delete;
 		ClientPlayer& operator=(const ClientPlayer &other) = delete;

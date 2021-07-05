@@ -19,10 +19,11 @@ class EventReceiverThread: public Thread {
 	Protocol protocol;
 	ProtectedQueue<Event>& events;
 	std::atomic<bool> allowed_to_run;
+	bool is_creator;
 
 	public:
 		EventReceiverThread(Socket& skt, char id,
-						 ProtectedQueue<Event>& events);
+						 ProtectedQueue<Event>& events, bool is_creator);
 		
 		// POST: Fuerza la finalizacion de la ejecucion de run()
 		void stop_running();

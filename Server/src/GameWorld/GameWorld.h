@@ -23,7 +23,6 @@
 #include "Bomb.h"
 
 class GameWorld {
-		std::mutex m;
 		int number_players;
 		GroundMap ground;
 		Team actual_team;

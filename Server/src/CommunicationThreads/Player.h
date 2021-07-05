@@ -24,7 +24,7 @@ class Player {
 		//       hilos, uno en el que escucha mensajes a traves del 
 		//       protocolo y otro en el que envia mensajes. 
 		Player(Socket& socket, char player_id, const std::string& name,
-					  ProtectedQueue<Event>& client_events);
+				ProtectedQueue<Event>& client_events, bool is_creator = false);
 		
 		// POST: Encola el evento en la cola de eventos a enviar por el 
 		//       protocolo. 

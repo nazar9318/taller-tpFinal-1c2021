@@ -16,7 +16,6 @@ GameWorld::GameWorld(const std::string& map_type):
 
 
 void GameWorld::add_player_if_not_full(char id) {
-	std::lock_guard<std::mutex> l(m);
 	if (CF::players_allowed == number_players)
 		throw ExceptionInvalidCommand("La partida esta completa",
 								 ServerError::MATCH_FULL);
@@ -30,7 +29,6 @@ void GameWorld::add_player_if_not_full(char id) {
 }
 
 void GameWorld::delete_player(char id) {
-	std::lock_guard<std::mutex> l(m);
 	characters.erase(id);
 	number_players--;
 }
@@ -50,7 +48,10 @@ void GameWorld::start() {
 								ServerError::NOT_ENOUGH_PLAYERS);
 	}
 	*/
-	//assign_bomb();
+	// pongo esto asi no se rompe todo. 
+	fase_type = FaseType::INITIAL_FASE;
+	if (number_players > 1) 
+		assign_bomb();
 }
 
 void GameWorld::assign_bomb() {

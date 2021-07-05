@@ -5,9 +5,9 @@
 //       hilos, uno en el que escucha mensajes a traves del 
 //       protocolo y otro en el que envia mensajes. 
 Player::Player(Socket& skt, char player_id, const std::string& player_name,
-			ProtectedQueue<Event>& client_events):
+			ProtectedQueue<Event>& client_events, bool is_creator):
 			socket(std::move(skt)), id(player_id),
-			name(player_name), receiver(socket, id, client_events),
+			name(player_name), receiver(socket, id, client_events, is_creator),
 			model_events(), sender(socket, model_events)  {
 	EntrySuccessfulEvent event(id);
 	Protocol protocol;

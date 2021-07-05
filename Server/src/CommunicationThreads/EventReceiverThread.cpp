@@ -1,9 +1,9 @@
 #include "EventReceiverThread.h"
 
-EventReceiverThread::EventReceiverThread(Socket& skt,
-					char id, ProtectedQueue<Event>& queue):
+EventReceiverThread::EventReceiverThread(Socket& skt, char id,
+			 	ProtectedQueue<Event>& queue, bool creator):
 					client_id(id), socket_recv(skt), events(queue),
-					allowed_to_run(true) {
+					allowed_to_run(true), is_creator(creator) {
 	syslog(LOG_INFO, "[%s:%i]: Se crea un receiver"
 			" con id %d", __FILE__, __LINE__, id);
 }
@@ -29,6 +29,14 @@ void EventReceiverThread::run() {
 		syslog(LOG_INFO, "[%s:%i]: Se cierra el socket del"
 				" jugador con id %d. Msg:%s", __FILE__,
 						 __LINE__, client_id, e.what());
+		if (is_creator) {
+			std::vector<char> error;
+			error.push_back(ClientTypeEvent::CREATOR_ABANDONS);
+			Event error_event(error, 1);
+			events.push(error_event);
+			syslog(LOG_ERR, "[%s:%i]: Pusheo el"
+					" evento de error en el creador", __FILE__, __LINE__);
+		}	
 	} catch(const std::exception& e) {
 		syslog(LOG_ERR, "[%s:%i]: Error: %s", __FILE__, __LINE__, e.what());
 	} catch (...) {

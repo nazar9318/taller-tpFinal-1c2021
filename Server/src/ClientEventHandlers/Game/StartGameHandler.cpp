@@ -8,13 +8,16 @@ StartGameHandler::StartGameHandler() {
 //       los jugadores la informacion del estado del mundo.
 void StartGameHandler::handle(Event& event,
 		 std::map<char, Player*>& players, GameWorld& game_world) {
-	if (event.get_type() != ClientTypeEvent::START_GAME) {
+	if (event.get_type() == ClientTypeEvent::CREATOR_ABANDONS) {
+		throw ExceptionInvalidCommand("El creador abandono la partida",
+							ServerError::CREATOR_ABANDONS_MATCH);
+	} else if (event.get_type() != ClientTypeEvent::START_GAME) {
 		throw Exception("[%s:%i]: LLega un evento "
 				"diferente al esperado, startgame",
 						 __FILE__, __LINE__);
 	}
-	game_world.start();
 
+	game_world.start();
 	std::shared_ptr<Event> starter_event(new GameStartedEvent());
 	int x_size;
 	int y_size;

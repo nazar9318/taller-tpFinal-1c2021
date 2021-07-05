@@ -24,7 +24,8 @@ enum ClientTypeEvent: char {
 	GET_MATCHES, // Loby
 	CREATE, // Loby
 	JOIN, // Loby
-	USER_NAME // Loby
+	USER_NAME, // Loby
+	CREATOR_ABANDONS
 };
 
 enum ModelTypeEvent: char {
@@ -37,7 +38,7 @@ enum ModelTypeEvent: char {
 	GAME_STARTED, // primer mensaje a todos, luego full map.
 	STEP_INFO, // id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
 	GAME_FINISHED, //manda los resultados. FALTA USAR.
-	ERROR
+	ERROR, 
 };
 
 enum ServerError: char {
@@ -46,7 +47,8 @@ enum ServerError: char {
 	MATCH_ALREADY_STARTED,
 	INVALID_TYPE_EVENT,
 	MATCH_NOT_FOUND,
-	MATCH_ALREADY_EXISTS
+	MATCH_ALREADY_EXISTS, 
+	CREATOR_ABANDONS_MATCH
 };
 
 

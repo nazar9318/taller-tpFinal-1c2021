@@ -8,7 +8,7 @@ Match::Match(Socket& socket, const std::string& map_type,
 			finished(false), last_id(0), 
 			game_world(map_type), handler(game_world) {
 	game_world.add_player_if_not_full(last_id);
-	Player* player = new Player(socket, last_id, player_name, to_process_events);
+	Player* player = new Player(socket, last_id, player_name, to_process_events, true);
 	if (!player)
 		throw Exception("No se pudo alocar memoria para el jugador");
 	players[last_id] = player;
@@ -56,6 +56,8 @@ void Match::run() {
 		stop_running();
 	} catch(std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what());
+	} catch (...) {
+		syslog(LOG_CRIT, "[%s:%i]: Unknown Error", __FILE__, __LINE__);
 	}
 }
 
@@ -72,9 +74,13 @@ void Match::start_game() {
 		} catch(ExceptionInvalidCommand& e) {
 			std::shared_ptr<Event> error(new ErrorEvent(e.get_type()));
 			push_event(error);
-			syslog(LOG_CRIT, "[%s:%i]: No hay jugadores suficientes"
-						, __FILE__, __LINE__);
-			match_started = false;
+			if (e.get_type() == ServerError::CREATOR_ABANDONS_MATCH) {
+				finished = true;
+				syslog(LOG_CRIT, "[%s:%i]: Termino la"
+						" partida fuerza bruta", __FILE__, __LINE__);
+			} else {
+				match_started = false;
+			}
 		}
 	}
 }

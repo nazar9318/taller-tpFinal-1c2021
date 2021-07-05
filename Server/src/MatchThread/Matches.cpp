@@ -50,6 +50,7 @@ void Matches::join_if_exists(Socket& skt,
 // POST: Retorna los nombres de las partidas.  
 std::list<std::string> Matches::get_matches_info() {
 	std::lock_guard<std::mutex> l(m);
+	clear_matches();
 	std::list<std::string> matches_names;
 	for (auto it = matches.begin(); it != matches.end(); ++it) {
 		matches_names.push_back(it->first);

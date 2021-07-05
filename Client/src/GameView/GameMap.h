@@ -52,6 +52,7 @@ class GameMap {
 		void setRenderArea();
 		void renderCharacters();
 		void renderPlayer();
+		void renderPlayerWeapon();
 		void renderGround();
 		void renderWeapons();
 		void add_character_team(char id, Team team);

@@ -27,6 +27,12 @@ void SpriteContainer::loadMedia(Renderer& renderer) {
   container[Team::TERRORIST].loadFromFile(renderer, "../Client/Assets/NPC/t2.bmp", black_color);
   container[Team::COUNTER_ENEMY].loadFromFile(renderer, "../Client/Assets/NPC/ct2.bmp", black_color);
 
+  container[Equipped_Weapon::KNIFE_EQUIPPED].loadFromFile(renderer, "../Client/Assets/NPC/knife.bmp", black_color);
+  container[Equipped_Weapon::GLOCK_EQUIPPED].loadFromFile(renderer, "../Client/Assets/NPC/glock.bmp", black_color);
+  container[Equipped_Weapon::M3_EQUIPPED].loadFromFile(renderer, "../Client/Assets/NPC/m3.bmp", black_color);
+  container[Equipped_Weapon::AK47_EQUIPPED].loadFromFile(renderer, "../Client/Assets/NPC/ak47.bmp", black_color);
+  container[Equipped_Weapon::AWP_EQUIPPED].loadFromFile(renderer, "../Client/Assets/NPC/awp.bmp", black_color);
+
   syslog(LOG_INFO, "[%s:%i]: Texturas de los sprites cargadas", __FILE__, __LINE__);
 }
 

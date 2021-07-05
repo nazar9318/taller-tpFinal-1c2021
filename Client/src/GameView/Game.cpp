@@ -50,6 +50,7 @@ void Game::render() {
 	} else if (fase == FaseType::PLAYING) {
 		map.renderWeapons();
 		map.renderPlayer();
+		map.renderPlayerWeapon();
 		map.renderCharacters();
 		hud.render();
 	} else {

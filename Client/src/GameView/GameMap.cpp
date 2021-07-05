@@ -78,9 +78,15 @@ void GameMap::add_character_team(char id, Team team) {
 void GameMap::renderPlayer() {
   Texture& texture(player.getTexture());
   double angle = player.getAngle();
-  SDL_RenderCopyEx(renderer.getRenderer(), texture.getTexture(),
-                  &player.getClip(), &player.getBox(), angle, NULL, SDL_FLIP_NONE);
-  //renderer.render(texture.getTexture(), NULL, &quad, angle);
+  renderer.render(texture.getTexture(), &player.getClip(), &player.getBox(), angle);
+}
+
+void GameMap::renderPlayerWeapon() {
+  SDL_Rect quad = player.getBox();
+  player.set_weapon(Equipped_Weapon::AK47_EQUIPPED);
+  Texture& texture(player.getWeapon());
+  double angle = player.getAngle();
+  renderer.render(texture.getTexture(), NULL, &quad, angle);
 }
 
 void GameMap::renderCharacters() {

@@ -12,6 +12,7 @@ class ClientPlayer {
 		char& id;
 		std::string& name;
 		Texture* texture;
+		Texture* texture_weapon;
 		SDL_Rect pos;
 		SDL_Rect clip[3];
 		int current_clip;
@@ -26,7 +27,9 @@ class ClientPlayer {
 		char get_id();
 		void changeClip();
 		void set_team(Team team);
+		void set_weapon(Equipped_Weapon weapon);
 		Texture& getTexture();
+		Texture& getWeapon();
 		SDL_Rect& getBox();
 		SDL_Rect& getClip();
 		double getAngle();

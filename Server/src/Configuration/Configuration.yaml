@@ -23,11 +23,6 @@ ak47_bullets: 20
 m3_bullets: 12
 awp_bullets: 7
 
-glock_range: 15
-ak47_range: 20
-m3_range: 4
-awp_range: 50
-
 glock_accuracy: 0.8
 ak47_accuracy: 0.8
 m3_accuracy: 0.7

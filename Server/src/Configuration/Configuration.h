@@ -61,11 +61,6 @@ class Configuration {
 		static int m3_bullets;
 		static int awp_bullets;
 
-		static int glock_range;
-		static int ak47_range;
-		static int m3_range;
-		static int awp_range;
-
 		static double glock_accuracy;
 		static double ak47_accuracy;
 		static double m3_accuracy;

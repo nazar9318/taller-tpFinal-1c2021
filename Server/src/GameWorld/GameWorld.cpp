@@ -119,6 +119,10 @@ bool GameWorld::simulate_step() {
 			return false;
 		}
 		if (wait <= 0) {
+			if (number_round == CF::number_rounds / 2) {
+				change_teams();
+			}
+			prepare_new_round();
 			fase_type = FaseType::INITIAL_FASE;
 			syslog(LOG_INFO, "[%s:%i]: Cambio de fase"
 			 , __FILE__, __LINE__);
@@ -169,10 +173,7 @@ void GameWorld::simulate_playing_step() {
 		charge_stats();
 		number_round++;
 		number_tics = 0;
-		if (number_round == CF::number_rounds / 2) {
-			change_teams();
-		}
-		prepare_new_round();
+		
 	}
 }
 

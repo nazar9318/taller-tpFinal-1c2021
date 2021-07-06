@@ -160,6 +160,8 @@ void Match::push_step_events() {
 			new SendFinalStepEvent(game_world.get_step_info()));
 		push_event(final_step);
 		if (statistics_not_sent) {
+					std::shared_ptr<Event> playing_event(
+			new SendStepPlayingEvent(game_world.get_step_info()));
 				// fin, round, cantidad_rounds, porque termino la partida. 
 			std::shared_ptr<Event> reason_end(
 				new SendFinalStateEvent(game_world.get_step_info()));
@@ -167,6 +169,7 @@ void Match::push_step_events() {
 				new SendStatsEvent(game_world.get_step_info()));
 			statistics_not_sent = false;
 			init_players_not_sent = true;
+			push_event(playing_event);
 			push_event(reason_end);
 			push_event(stats);
 		}

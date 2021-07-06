@@ -1,7 +1,7 @@
 #include "StopPlantBombEvent.h"
 
-StopPlantBombEvent::StopPlantBombEvent(){
+StopPlantBombEvent::StopPlantBombEvent() {
   this->msg.push_back(ClientTypeEvent::STOP_PLANTING_BOMB);
 }
 
-StopPlantBombEvent::~StopPlantBombEvent(){}
+StopPlantBombEvent::~StopPlantBombEvent() {}

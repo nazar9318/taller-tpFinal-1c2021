@@ -366,6 +366,9 @@ void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
     if (thereIsFloorIn(x, y) && (this->dragged.toStdString().find("box") != std::string::npos)) {
         return;
     }
+    if (thereIsFloorIn(x, y) && (this->dragged.toStdString().find("base") != std::string::npos)) {
+        return;
+    }
     if (thereIsFloorIn(x, y) && (this->dragged.toStdString().find("bomb") != std::string::npos)) {
         return;
     }

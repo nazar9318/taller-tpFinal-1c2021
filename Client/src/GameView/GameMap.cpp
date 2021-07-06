@@ -66,7 +66,7 @@ void GameMap::update_position(char id, int pos_x, int pos_y, int angle,
         char life, int money, char weapon_type, int ammo) {
   if (id == player.get_id()) {
     player.update_position(pos_x, pos_y, angle, life, money, weapon_type, ammo);
-    hud.update_values(life, money);
+    hud.update_values(life, money, ammo, weapon_type);
     camera.center(player.getBox(), map_width, map_height);
   } else {
     characters.at(id).update_position(pos_x, pos_y, angle, weapon_type);
@@ -83,13 +83,6 @@ void GameMap::add_character_team(char id, Team team) {
 
 void GameMap::renderPlayer() {
   player.render(camera);
-}
-
-void GameMap::renderPlayerWeapon() {
-  // SDL_Rect quad = player.getBox();
-  // Texture& texture(player.getWeapon());
-  // double angle = player.getAngle();
-  // renderer.render(texture.getTexture(), NULL, &quad, angle);
 }
 
 

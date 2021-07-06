@@ -1,7 +1,7 @@
 #include "ClientPlayer.h"
 #include <math.h>
 #include <complex>
-#include <iostream>
+
 #define PI 3.14159265
 #define PLAYER_WIDTH 32
 #define PLAYER_HEIGHT 32

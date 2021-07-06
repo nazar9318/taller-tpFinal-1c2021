@@ -7,6 +7,9 @@
 
 class EntrySuccessfulEvent: public Event {
 	public:
+		// Descripcion: Se envia este evento cuando el jugador logra 
+		//              crear o unirse satisfactoriamente a una partida. 
+		// POST: El mensaje: type|id en dos char.
 		EntrySuccessfulEvent(char self_id);
 		~EntrySuccessfulEvent();
 	private:

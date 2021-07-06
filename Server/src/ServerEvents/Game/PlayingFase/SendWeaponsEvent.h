@@ -11,7 +11,11 @@
 
 class SendWeaponsEvent: public Event {
 	public:
-		SendWeaponsEvent(std::list<std::unique_ptr<Weapon>>&  weapons_info);
+		// Descripcion: Envia todos las armas que estan en el suelo. 
+		// POST: El mensaje es de la forma: 
+		//       pos0x(int), pos0y(int), type0,
+		//       pos1x(int), pos1y(int), type1, ...
+		SendWeaponsEvent(const std::list<std::unique_ptr<Weapon>>& weapons_info);
 		~SendWeaponsEvent();
 	private:
 		SendWeaponsEvent(const SendWeaponsEvent &other) = delete;

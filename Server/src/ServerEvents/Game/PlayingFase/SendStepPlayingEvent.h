@@ -13,6 +13,10 @@
 
 class SendStepPlayingEvent: public Event {
 	public:
+		// Descripcion: Envia la informacion de los
+		//              characters en el ultimo step. 
+		// POST: El mensaje se construye con la informacion
+		//       del step. 
 		SendStepPlayingEvent(StepInformation& step);
 		~SendStepPlayingEvent();
 	private:

@@ -1,7 +1,7 @@
 #include "SendPlayersIdsEvent.h"
 #include <syslog.h>
 
-// map of (name, id_player) 
+// map de (name, id_player) 
 // POST: El mensaje se construye como:
 //       msg[0] = type
 //       msg[1] = id

@@ -1,4 +1,9 @@
 /*
+
+
+CLASE COMENTADA PORQUE ES PROXIMA A ELIMINARSE. 
+ANTES TENIA DEMASIADAS RESPONSABILIDADES. 
+
 #include "SendStepInfoEvent.h"
 #include <syslog.h>
 

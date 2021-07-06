@@ -10,7 +10,9 @@
 
 class SendMapsEvent: public Event {
 	public:
-		SendMapsEvent(std::list<std::string> maps);
+		// POST: El mensaje se construye como: 
+		//		nombre_map1'\0'nombre_map2'\0'...
+		SendMapsEvent(const std::list<std::string>& maps);
 		~SendMapsEvent();
 	private:
 		SendMapsEvent(const SendMapsEvent &other) = delete;

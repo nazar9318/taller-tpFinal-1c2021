@@ -10,6 +10,8 @@
 
 class SendBombStateEvent: public Event {
 	public:
+		// Descripcion: Se envia el estado de la bomba luego de cada step.
+		// POST: El mensaje se construye con el tipo y el vector de informacion
 		SendBombStateEvent(std::vector<char> bomb_info);
 		~SendBombStateEvent();
 	private:

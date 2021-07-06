@@ -1,6 +1,6 @@
 #ifndef _SEND_STEP_INFO_EVENT_H
 #define _SEND_STEP_INFO_EVENT_H
-
+/*
 #include "TypesOfEvents.h"
 #include "Event.h"
 #include "StepInformation.h"
@@ -19,5 +19,5 @@ class SendStepInfoEvent: public Event {
 		SendStepInfoEvent(const SendStepInfoEvent &other) = delete;
 		SendStepInfoEvent& operator=(const SendStepInfoEvent &other) = delete;
 };
-
+*/
 #endif

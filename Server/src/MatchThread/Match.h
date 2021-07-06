@@ -26,6 +26,18 @@
 #include "StepInformation.h"
 #include "SendStepInfoEvent.h"
 
+#include "FaseType.h"
+#include "SendStepInitEvent.h"
+#include "SendBuysEvent.h"
+#include "SendInitPlayersEvent.h"
+#include "SendStepPlayingEvent.h"
+#include "SendAttacksInfoEvent.h"
+#include "SendBombStateEvent.h"
+#include "SendFinalStateEvent.h"
+#include "SendStatsEvent.h"
+
+
+
 #include "ClientEventHandler.h"
 
 

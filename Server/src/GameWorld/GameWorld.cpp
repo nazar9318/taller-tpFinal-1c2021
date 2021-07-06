@@ -45,20 +45,18 @@ void GameWorld::prepare_new_round() {
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		it->second.reset_body(world, ground.get_zone(it->second.get_team()));
 	}
-	// DESCOMENTAR CUANDO TERMINEN LAS PRUEBAS
-	//bomb.restart();
-	//assign_bomb();
+	bomb.restart();
+	assign_bomb();
 }
 
 void GameWorld::start() {
-	//DESCOMENTAR CUANDO TERMINEN LAS PRUEBAS
-	/*if (number_players == 1) {
+	if (number_players == 1) {
 		throw ExceptionInvalidCommand("Debe haber al menos dos"
 							"jugadores para empezar la partida",
 								ServerError::NOT_ENOUGH_PLAYERS);
 	}
 	fase_type = FaseType::INITIAL_FASE;
-	assign_bomb();*/
+	assign_bomb();
 }
 
 void GameWorld::assign_bomb() {
@@ -179,8 +177,6 @@ void GameWorld::simulate_playing_step() {
 }
 
 bool GameWorld::round_finished() {
-	//descomentar el return false cuando terminen las pruebas. 
-	return false;
 	if (bomb.simulate_step()) {
 		//step_info.add_finish(bomb.state());
 		return true;
@@ -271,7 +267,9 @@ bool GameWorld::grab_bomb(char id, Team team, b2Vec2& pos) {
 	return false;
 }
 
-
+std::vector<char> GameWorld::bomb_info() {
+	return bomb.get_info();
+}
 
 FaseType GameWorld::get_fase() {
 	return fase_type;

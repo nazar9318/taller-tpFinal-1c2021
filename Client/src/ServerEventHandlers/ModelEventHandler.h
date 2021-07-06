@@ -11,12 +11,22 @@
 #include "ReciveMapHandler.h"
 #include "ReciveWeaponHandler.h"
 #include "ReciveStepHandler.h"
+#include "ReceivePlayingStepHandler.h"
+#include "ReceiveInitStepHandler.h"
+#include "ReceiveInitPlayersHandler.h"
+#include "ReceiveBombStateHandler.h"
+
+
 
 class ModelEventHandler{
 	private:
 		ReciveMapHandler recive_map;
 		ReciveWeaponHandler recive_weapons;
-		ReciveStepHandler recive_step;
+		//ReciveStepHandler recive_step;
+		ReceivePlayingStepHandler playing_step;
+		ReceiveInitStepHandler init_step;
+		ReceiveInitPlayersHandler player_init;
+		ReceiveBombStateHandler bomb_state;
 	public:
 		ModelEventHandler();
 

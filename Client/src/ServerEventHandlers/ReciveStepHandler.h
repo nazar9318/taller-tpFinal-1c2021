@@ -1,6 +1,10 @@
 #ifndef RECIVE_STEP_HANDLER_H
 #define RECIVE_STEP_HANDLER_H
 
+
+/*
+
+//comento porque se deberia poder borrar. 
 #include <vector>
 #include "Event.h"
 #include "FaseType.h"
@@ -24,6 +28,6 @@ class ReciveStepHandler {
 
 
 };
-
+*/
 
 #endif

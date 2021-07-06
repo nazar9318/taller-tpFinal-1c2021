@@ -10,7 +10,7 @@
 
 class SendBombStateEvent: public Event {
 	public:
-		SendBombStateEvent();
+		SendBombStateEvent(std::vector<char> bomb_info);
 		~SendBombStateEvent();
 	private:
 		SendBombStateEvent(const SendBombStateEvent &other) = delete;

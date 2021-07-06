@@ -5,15 +5,7 @@
 #include "Team.h"
 #include "Configuration.h"
 #include "../../libs/box2d/include/box2d/b2_math.h"
-
-enum BombState: char {
-	NORMAL,
-	ACTIVATED, 
-	DEACTIVATED, 
-	ACTIVATING, 
-	DEACTIVATING, 
-	EXPLOTED
-};
+#include "BombState.h"
 
 class Bomb {
 	private:
@@ -37,6 +29,7 @@ class Bomb {
 		bool grab(char id, Team team);
 		b2Vec2 get_pos();
 		void restart();
+		std::vector<char> get_info();
 		~Bomb();
 };
 

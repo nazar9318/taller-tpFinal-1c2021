@@ -1,4 +1,6 @@
-#include "ReciveStepHandler.h"
+
+// COMENTO TODO PORQUE SE DEBERIA PODER BORRAR. 
+/*#include "ReciveStepHandler.h"
 
 ReciveStepHandler::ReciveStepHandler(){}
 
@@ -59,3 +61,4 @@ handle_playing_fase(std::vector<char>& event_msg, GameMap& map) {
 void ReciveStepHandler::handle_end_round_fase(std::vector<char>& event_msg, GameMap& map){}
 
 ReciveStepHandler::~ReciveStepHandler(){}
+*/

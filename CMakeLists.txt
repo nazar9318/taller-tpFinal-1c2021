@@ -86,6 +86,8 @@ include_directories(${PROJECT_SOURCE_DIR}/Client/src/Initiator)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/Initiator/ui)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/Initiator/window)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/ServerEventHandlers)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/ServerEventHandlers/Playing)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/ServerEventHandlers/Initial)
 add_subdirectory("Client/src")
 
 

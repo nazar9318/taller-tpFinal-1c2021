@@ -60,6 +60,7 @@ class GameWorld {
 		void stop_deactivating_bomb(char id);
 		bool grab_bomb(char id, Team team, b2Vec2& pos);
 		FaseType get_fase();
+		std::vector<char> bomb_info();
 		~GameWorld();
 
 

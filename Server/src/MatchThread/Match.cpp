@@ -120,29 +120,31 @@ void Match::handle_events() {
 }
 
 void Match::push_step_events() {
-/*
-	if (game_world.get_fase() == TypeFase::INITIALIZATION) {
-		statistics_not_sent = true;
+	bool statistics_not_sent = true;
+	bool init_players_not_sent = true;
+	if (game_world.get_fase() == FaseType::INITIAL_FASE) {
 		std::shared_ptr<Event> init_event(
-			new SendStepInitEvent(game_world.step_info()));
-		// envio fase, tiempo hasta que termine. 
-		// cuando hay una compra, el handler manda al 
-		// world: add compra. 
+			new SendStepInitEvent(game_world.get_step_info()));
 		std::shared_ptr<Event> buys(
-			new SendBuysEvent(game_world.step_info()));
+			new SendBuysEvent(game_world.get_step_info()));
 		push_event(init_event);
 		push_event(buys);
-	} else if (game_world.get_fase() == TypeFase::PLAYING) {
-		// envio info general de los jugadores. 	
+		if (init_players_not_sent) {
+			std::shared_ptr<Event> init_players(
+				new SendInitPlayersEvent(game_world.get_step_info()));
+			push_event(init_players);
+			init_players_not_sent = false;
+			statistics_not_sent = true;
+		}
+	} else if (game_world.get_fase() == FaseType::PLAYING) {
 		std::shared_ptr<Event> playing_event(
-			new SendStepPlayingEvent(game_world.step_info()));
-		// info de pistolaas en el piso. 
+			new SendStepPlayingEvent(game_world.get_step_info()));
 		std::shared_ptr<Event> weapons(
 			new SendWeaponsEvent(game_world.get_weapons_info()));
 		std::shared_ptr<Event> attacks(
-			new SendAttacksEvent(game_world.step_info()));
+			new SendAttacksInfoEvent(game_world.get_step_info()));
 		std::shared_ptr<Event> bomb(
-			new SendBombStateEvent(game_world.bomb_state()));
+			new SendBombStateEvent(game_world.bomb_info()));
 		push_event(playing_event);
 		push_event(weapons);
 		push_event(attacks);
@@ -151,22 +153,23 @@ void Match::push_step_events() {
 		if (statistics_not_sent) {
 				// fin, round, cantidad_rounds, porque termino la partida. 
 			std::shared_ptr<Event> reason_end(
-				new SendFinalStateEvent(game_world.final_state()));
+				new SendFinalStateEvent(game_world.get_step_info()));
 			std::shared_ptr<Event> stats(
-				new SendStatsEvent(game_world.stats()));
+				new SendStatsEvent(game_world.get_step_info()));
 			statistics_not_sent = false;
+			init_players_not_sent = true;
 			push_event(reason_end);
 			push_event(stats);
 		}
 	}
-*/
 
-	std::shared_ptr<Event> players_info(
-			new SendStepInfoEvent(game_world.get_step_info()));
-	std::shared_ptr<Event> weapons(
-		new SendWeaponsEvent(game_world.get_weapons_info()));
-	push_event(players_info);
-	push_event(weapons);
+
+	//std::shared_ptr<Event> players_info(
+	//		new SendStepInfoEvent(game_world.get_step_info()));
+	//std::shared_ptr<Event> weapons(
+	//	new SendWeaponsEvent(game_world.get_weapons_info()));
+	//push_event(players_info);
+	//push_event(weapons);
 }
 
 

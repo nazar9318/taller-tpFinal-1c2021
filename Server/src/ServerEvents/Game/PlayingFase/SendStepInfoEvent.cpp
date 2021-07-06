@@ -1,3 +1,4 @@
+/*
 #include "SendStepInfoEvent.h"
 #include <syslog.h>
 
@@ -15,9 +16,9 @@ SendStepInfoEvent::SendStepInfoEvent(StepInformation& step) {
 
 		// std::vector<char> attacks_info = step.get_attacks();
 		// std::copy(attacks_info.begin(), attacks_info.end(), std::back_inserter(this->msg));
-		/*std::vector<char> ground_info = step.get_ground_info();
+		*//*std::vector<char> ground_info = step.get_ground_info();
 		*/
-	} else if (type == FaseType::INITIAL_FASE) {
+	/*} else if (type == FaseType::INITIAL_FASE) {
 		int wait = step.get_wait();
 		push_back(wait);
 		if (wait <= 0) {
@@ -41,3 +42,4 @@ SendStepInfoEvent::SendStepInfoEvent(StepInformation& step) {
 }
 
 SendStepInfoEvent::~SendStepInfoEvent() {}
+*/

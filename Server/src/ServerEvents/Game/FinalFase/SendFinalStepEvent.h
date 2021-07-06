@@ -9,9 +9,11 @@
 #include "StepInformation.h"
 
 
-
 class SendFinalStepEvent: public Event {
 	public:
+		// Descripcion: Envia el tiempo que falta hasta
+		//              que comienza la siguiente fase. 
+		// POST: Se envia: type, wait(int)
 		SendFinalStepEvent(StepInformation& step);
 		~SendFinalStepEvent();
 	private:

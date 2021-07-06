@@ -24,7 +24,6 @@
 #include "StartGameHandler.h"
 #include "SendPlayersIdsEvent.h"
 #include "StepInformation.h"
-#include "SendStepInfoEvent.h"
 
 #include "FaseType.h"
 #include "SendStepInitEvent.h"

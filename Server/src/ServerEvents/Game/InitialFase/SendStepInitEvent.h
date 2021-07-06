@@ -12,6 +12,9 @@
 
 class SendStepInitEvent: public Event {
 	public:
+		// Descripcion: Envia el tiempo que falta hasta
+		//              que comienza la siguiente fase. 
+		// POST: Se envia: type, wait(int)
 		SendStepInitEvent(StepInformation& step);
 		~SendStepInitEvent();
 	private:

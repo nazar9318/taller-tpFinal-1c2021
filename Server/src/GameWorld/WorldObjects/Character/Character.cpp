@@ -112,6 +112,7 @@ void Character::take_damage(char points) {
 	} else {
 		life_points = 0;
 		character_body->GetWorld()->DestroyBody(character_body);
+		current_weapon = 0;
 	}
 }
 

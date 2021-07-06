@@ -3,7 +3,7 @@
 
 Bomb::Bomb(): state(BombState::NORMAL),
 			  clock_active(0), has_owner(false), 
-			  clock_deactivate(0) {
+			  clock_deactivate(0), pos(0.0, 0.0) {
 }
 
 void Bomb::add_owner(char id) {

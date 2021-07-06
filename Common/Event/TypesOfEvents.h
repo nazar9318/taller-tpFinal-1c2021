@@ -46,6 +46,7 @@ enum ModelTypeEvent: char {
 	STATISTICS,
 	FINAL_STATE,
 	INIT_STEP,
+	FINAL_STEP,
 
 	STEP_INFO // id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
 

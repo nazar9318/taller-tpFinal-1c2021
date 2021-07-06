@@ -8,9 +8,9 @@ players_allowed: 10
 velocity_iterations: 8
 position_iterations: 3
 
-TIME_BOMB_EXPLOTE: 10
-TIME_BOMB_ACTIVATE: 2
-TIME_BOMB_DEACTIVATE: 2
+TIME_BOMB_EXPLOTE: 15
+TIME_BOMB_ACTIVATE: 5
+TIME_BOMB_DEACTIVATE: 5
 
 
 character_life_points: 100

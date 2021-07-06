@@ -35,7 +35,10 @@ void Match::join_player_if_not_full(Socket& skt,
 	}
 	players[last_id] = player;
 	std::shared_ptr<Event> players_info(new SendPlayersIdsEvent(players));
-	push_event(players_info);
+	for (auto it = players.begin(); it != players.end(); ++it) {
+			std::shared_ptr<Event> to_push = players_info;
+			it->second->push(to_push);
+	}
 	last_id++;
 }
 
@@ -150,6 +153,9 @@ void Match::push_step_events() {
 		push_event(attacks);
 		push_event(bomb);
 	} else {
+		std::shared_ptr<Event> final_step(
+			new SendFinalStepEvent(game_world.get_step_info()));
+		push_event(final_step);
 		if (statistics_not_sent) {
 				// fin, round, cantidad_rounds, porque termino la partida. 
 			std::shared_ptr<Event> reason_end(
@@ -175,6 +181,7 @@ void Match::push_step_events() {
 
 // POST: Envia el evento a todos los jugadores de la partida.
 void Match::push_event(std::shared_ptr<Event>& event) {
+	std::lock_guard<std::mutex> l(m);
 	for (auto it = players.begin(); it != players.end(); ++it) {
 			std::shared_ptr<Event> to_push = event;
 			it->second->push(to_push);

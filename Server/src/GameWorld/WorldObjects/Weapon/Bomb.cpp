@@ -95,7 +95,7 @@ void Bomb::stop_activating(char id) {
 
 
 bool Bomb::deactivate(Team team, char deactivator) {
-	if ((state == BombState::ACTIVATED) && 
+	if ((!has_owner) && (state == BombState::ACTIVATED) && 
 		 (team == Team::COUNTER_ENEMY)) {
 		state = BombState::DEACTIVATING;
 		has_owner = true;

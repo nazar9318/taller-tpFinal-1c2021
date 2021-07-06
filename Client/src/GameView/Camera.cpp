@@ -24,19 +24,23 @@ bool Camera::isVisible(SDL_Rect& object) {
     return true;
 }
 
+void Camera::render(SDL_Texture* texture, SDL_Rect& render_quad, SDL_Rect* clip, double angle){
+  renderer.render(texture, clip, &render_quad, angle);
+}
+
 void Camera::renderAddingOffset(SDL_Texture* texture, SDL_Rect& render_quad, SDL_Rect* clip, double angle){
-  render_quad.x += (box.x - pos.x);
-  render_quad.y += (box.y - pos.y);
+  render_quad.x -= pos.x;
+  render_quad.y -= pos.y;
 
   renderer.render(texture, clip, &render_quad, angle);
 }
 
 int Camera::xOffset(){
-    return box.x - pos.x;
+    return pos.x;
 }
 
 int Camera::yOffset(){
-    return box.y - pos.y;
+    return pos.y;
 }
 
 SDL_Point Camera::getPos(){

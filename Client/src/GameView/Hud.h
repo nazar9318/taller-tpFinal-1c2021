@@ -6,9 +6,9 @@
 #include "Texture.h"
 #include "Renderer.h"
 
-#define NUMBERS_WIDTH 46
+#define NUMBERS_WIDTH 42
 #define NUMBERS_HEIGHT 66
-#define NUMBERS_OFFSET 5
+#define NUMBERS_OFFSET 6
 
 class Hud {
 	private:

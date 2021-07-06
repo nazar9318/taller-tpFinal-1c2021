@@ -82,8 +82,14 @@ void ClientPlayer::update_position(int pos_x, int pos_y, int angle,
 }
 
 void ClientPlayer::render(Camera& camera) {
+	/*Renderizo el player*/
 	SDL_Rect renderQuad = { pos.x, pos.y, PLAYER_WIDTH, PLAYER_HEIGHT};
 	camera.renderAddingOffset(texture->getTexture(), renderQuad, &clip[current_clip], angle);
+
+	/*Renderizo su arma*/
+	camera.render(texture_weapon->getTexture(), renderQuad, NULL, angle);
+
+	/*Renderizo el stencil*/
 }
 
 double ClientPlayer::getAngle() { return (double)angle; }

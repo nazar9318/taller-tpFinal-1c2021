@@ -25,6 +25,8 @@ class Camera {
     /* Renderiza una textura agregandole un offset, SEA O NO VISIBLE */
     void renderAddingOffset(SDL_Texture* texture, SDL_Rect& render_quad, SDL_Rect* clip = NULL, double angle = 0.0);
 
+    void render(SDL_Texture* texture, SDL_Rect& render_quad, SDL_Rect* clip = NULL, double angle = 0.0);
+
     /* Offset de la camara en X */
     int xOffset();
 

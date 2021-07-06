@@ -25,7 +25,7 @@ void Hud::update_values(char life, int money){
 int Hud::numbers_offset(std::string& string, int& i){
   int number = string[i] - 48;
   if(number != 0){
-    return number*NUMBERS_WIDTH + NUMBERS_OFFSET;
+    return number*NUMBERS_WIDTH + number*NUMBERS_OFFSET;
   }
   return number*NUMBERS_WIDTH;
 }

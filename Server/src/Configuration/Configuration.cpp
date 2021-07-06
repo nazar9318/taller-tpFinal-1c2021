@@ -35,34 +35,37 @@ int CF::players_allowed = CF::yaml_file["players_allowed"].as<int>();
 
 int CF::character_life_points = CF::yaml_file["character_life_points"].as<int>();
 int CF::character_money = CF::yaml_file["character_money"].as<int>();
-int CF::bomb_clock_count = CF::yaml_file["bomb_clock_count"].as<int>();
+
 int CF::glock_bullets = CF::yaml_file["glock_bullets"].as<int>();
 int CF::ak47_bullets = CF::yaml_file["ak47_bullets"].as<int>();
 int CF::m3_bullets = CF::yaml_file["m3_bullets"].as<int>();
 int CF::awp_bullets = CF::yaml_file["awp_bullets"].as<int>();
+
 int CF::glock_range = CF::yaml_file["glock_range"].as<int>();
 int CF::ak47_range = CF::yaml_file["ak47_range"].as<int>();
 int CF::m3_range = CF::yaml_file["m3_range"].as<int>();
 int CF::awp_range = CF::yaml_file["awp_range"].as<int>();
+
 double CF::glock_accuracy = CF::yaml_file["glock_accuracy"].as<double>();
 double CF::ak47_accuracy = CF::yaml_file["ak47_accuracy"].as<double>();
 double CF::m3_accuracy = CF::yaml_file["m3_accuracy"].as<double>();
 double CF::awp_accuracy = CF::yaml_file["awp_accuracy"].as<double>();
+
 double CF::knife_damage_min = CF::yaml_file["knife_damage_min"].as<double>();
 double CF::glock_damage_min = CF::yaml_file["glock_damage_min"].as<double>();
 double CF::ak47_damage_min = CF::yaml_file["ak47_damage_min"].as<double>();
 double CF::m3_damage_min = CF::yaml_file["m3_damage_min"].as<double>();
 double CF::awp_damage_min = CF::yaml_file["awp_damage_min"].as<double>();
+
 double CF::knife_damage_max = CF::yaml_file["knife_damage_max"].as<double>();
 double CF::glock_damage_max = CF::yaml_file["glock_damage_max"].as<double>();
 double CF::ak47_damage_max = CF::yaml_file["ak47_damage_max"].as<double>();
 double CF::m3_damage_max = CF::yaml_file["m3_damage_max"].as<double>();
 double CF::awp_damage_max = CF::yaml_file["awp_damage_max"].as<double>();
-int CF::glock_shoot_rate = CF::yaml_file["glock_shoot_rate"].as<int>();
+
 int CF::ak47_shoot_rate = CF::yaml_file["ak47_shoot_rate"].as<int>();
-int CF::m3_shoot_rate = CF::yaml_file["m3_shoot_rate"].as<int>();
-int CF::awp_shoot_rate = CF::yaml_file["awp_shoot_rate"].as<int>();
 double CF::ak47_shoot_freq = CF::yaml_file["ak47_shoot_freq"].as<double>();
+
 double CF::glock_distance_penalty = CF::yaml_file["glock_distance_penalty"].as<double>();
 double CF::ak47_distance_penalty = CF::yaml_file["ak47_distance_penalty"].as<double>();
 double CF::m3_distance_penalty = CF::yaml_file["m3_distance_penalty"].as<double>();
@@ -113,33 +116,35 @@ void Configuration::load_configuration(const std::string& file_path) {
 	
 	character_life_points = yaml_file["character_life_points"].as<int>();
 	character_money = yaml_file["character_money"].as<int>();
-	bomb_clock_count = yaml_file["bomb_clock_count"].as<int>();
+	
 	glock_bullets = yaml_file["glock_bullets"].as<int>();
 	ak47_bullets = yaml_file["ak47_bullets"].as<int>();
 	m3_bullets = yaml_file["m3_bullets"].as<int>();
 	awp_bullets = yaml_file["awp_bullets"].as<int>();
+	
 	glock_range = yaml_file["glock_range"].as<int>();
 	ak47_range = yaml_file["ak47_range"].as<int>();
 	m3_range = yaml_file["m3_range"].as<int>();
 	awp_range = yaml_file["awp_range"].as<int>();
+	
 	glock_accuracy = yaml_file["glock_accuracy"].as<double>();
 	ak47_accuracy = yaml_file["ak47_accuracy"].as<double>();
 	m3_accuracy = yaml_file["m3_accuracy"].as<double>();
 	awp_accuracy = yaml_file["awp_accuracy"].as<double>();
+	
 	knife_damage_min = yaml_file["knife_damage_min"].as<double>();
 	glock_damage_min = yaml_file["glock_damage_min"].as<double>();
 	ak47_damage_min = yaml_file["ak47_damage_min"].as<double>();
 	m3_damage_min = yaml_file["m3_damage_min"].as<double>();
 	awp_damage_min = yaml_file["awp_damage_min"].as<double>();
+	
 	knife_damage_max = yaml_file["knife_damage_max"].as<double>();
 	glock_damage_max = yaml_file["glock_damage_max"].as<double>();
 	ak47_damage_max = yaml_file["ak47_damage_max"].as<double>();
 	m3_damage_max = yaml_file["m3_damage_max"].as<double>();
 	awp_damage_max = yaml_file["awp_damage_max"].as<double>();
-	glock_shoot_rate = yaml_file["glock_shoot_rate"].as<int>();
+
 	ak47_shoot_rate = yaml_file["ak47_shoot_rate"].as<int>();
-	m3_shoot_rate = yaml_file["m3_shoot_rate"].as<int>();
-	awp_shoot_rate = yaml_file["awp_shoot_rate"].as<int>();
 	ak47_shoot_freq = yaml_file["ak47_shoot_freq"].as<double>();
 
 	glock_distance_penalty = yaml_file["glock_distance_penalty"].as<double>();
@@ -153,6 +158,7 @@ void Configuration::load_configuration(const std::string& file_path) {
 	ak47_price = yaml_file["ak47_price"].as<int>();
 	m3_price = yaml_file["m3_price"].as<int>();
 	awp_price = yaml_file["awp_price"].as<int>();
+	
 	glock_ammo = yaml_file["glock_ammo"].as<int>();
 	ak47_ammo = yaml_file["ak47_ammo"].as<int>();
 	m3_ammo = yaml_file["m3_ammo"].as<int>();

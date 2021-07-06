@@ -100,6 +100,11 @@ void MainWindow::show_error(const QString& message, Event& event) {
 				error_msg.append("Ya existe una partida con este nombre");
 				break;
 			}
+			case ServerError::CREATOR_ABANDONS_MATCH:
+			{
+				error_msg.append("El creador ha abandonado la partida.");
+				break;
+			}
 			default:
 				error_msg.append("Error desconocido.");
 		}
@@ -197,8 +202,12 @@ void MainWindow::update_players() {
 						sender.start();
 						players_joined_timer->stop();
 						game_started = true;
-						//char self_id = model_event.get_msg()[1];
 						this->close();
+						break;
+					}
+				case ModelTypeEvent::ERROR:
+					{
+						show_error("Ha ocurrido un error inesperado.", model_event);
 						break;
 					}
 				default:

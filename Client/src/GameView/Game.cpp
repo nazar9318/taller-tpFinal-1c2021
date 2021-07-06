@@ -186,11 +186,16 @@ void Game::handle_unclick(SDL_Event& event) {
 void Game::handle_mouse_motion() {
 
 	SDL_Rect player_pos = player.getBox();
+	SDL_Point camera_pos = camera.getPos();
 
 	int delta_x; int delta_y;
 	int mouse_x, mouse_y;
 	int angle;
 	SDL_GetMouseState(&mouse_x, &mouse_y);
+
+	mouse_x += camera_pos.x;
+	mouse_y += camera_pos.y;
+
 	delta_x = mouse_x - (player_pos.x + player_pos.w/2);
 	delta_y = (-1) * (mouse_y - (player_pos.y + player_pos.h/2));
 	angle = (int)((atan2(delta_y, delta_x) * FROM_RAD_TO_DEG));

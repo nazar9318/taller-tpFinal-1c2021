@@ -81,10 +81,9 @@ void ClientPlayer::update_position(int pos_x, int pos_y, int angle,
 	}
 }
 
-void ClientPlayer::render(Renderer& renderer, int cam_x, int cam_y) {
-	SDL_Rect renderQuad = { pos.x - cam_x, pos.y-cam_y, pos.w, pos.h };
-	// SDL_RenderCopy(renderer.getRenderer(), texture->getTexture(), &pos, &renderQuad);
-	renderer.render(texture->getTexture(), &clip[current_clip], &renderQuad, angle);
+void ClientPlayer::render(Camera& camera) {
+	SDL_Rect renderQuad = { pos.x, pos.y, PLAYER_WIDTH, PLAYER_HEIGHT};
+	camera.renderAddingOffset(texture->getTexture(), renderQuad, &clip[current_clip], angle);
 }
 
 double ClientPlayer::getAngle() { return (double)angle; }

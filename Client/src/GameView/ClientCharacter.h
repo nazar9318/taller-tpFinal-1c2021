@@ -6,6 +6,7 @@
 #include <SDL2/SDL.h>
 #include "SpriteContainer.h"
 #include "Team.h"
+#include "Camera.h"
 
 class ClientCharacter {
 	private:
@@ -28,6 +29,8 @@ class ClientCharacter {
 		double getAngle();
 		void set_team(Team team);
 		void update_position(int pos_x, int pos_y, int angle, char weapon_type);
+
+		void render(Camera& camera);
 
 		ClientCharacter(ClientCharacter&& other) = default;
 		ClientCharacter& operator=(ClientCharacter&& other) = default;

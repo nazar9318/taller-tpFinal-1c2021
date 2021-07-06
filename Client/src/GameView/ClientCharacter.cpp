@@ -70,6 +70,11 @@ void ClientCharacter::update_position(int pos_x, int pos_y, int angle, char weap
 	}
 }
 
+void ClientCharacter::render(Camera& camera){
+	SDL_Rect renderQuad = { pos.x, pos.y, PLAYER_WIDTH, PLAYER_HEIGHT};
+	camera.renderAddingOffset(texture->getTexture(), renderQuad, &clip[current_clip], angle);
+}
+
 SDL_Rect& ClientCharacter::getClip() { return clip[current_clip]; }
 
 ClientCharacter::~ClientCharacter() {}

@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "Team.h"
 #include "SpriteContainer.h"
+#include "Camera.h"
 
 class ClientPlayer {
 	private:
@@ -36,7 +37,8 @@ class ClientPlayer {
 		double getAngle();
 		void update_position(int pos_x, int pos_y, int angle,
 				char life, int money, char weapon_type, int ammo);
-		void render(Renderer& renderer, int cam_x,int cam_y);
+
+		void render(Camera& camera);
 
 	private:
 		ClientPlayer(const ClientPlayer &other) = delete;

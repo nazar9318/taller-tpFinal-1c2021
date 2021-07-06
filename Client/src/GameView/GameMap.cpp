@@ -34,27 +34,16 @@ void GameMap::setSize(int& width, int& height) {
 
 
 
-// void GameMap::renderGround() {
-//
-//   SDL_Rect quad = {0};
-//
-//   for (size_t i = 0; i < tiles.size(); i++) {
-//     quad = tiles[i].getBox();
-//     if(camera.isVisible(quad)){
-//       Texture& texture(tiles[i].getTexture());
-//       camera.render(texture, quad.x, quad.y);
-//     }
-//     // renderer.render(texture.getTexture(), NULL, &quad);
-//   }
-// }
 void GameMap::renderGround() {
 
   SDL_Rect quad = {0};
 
   for (size_t i = 0; i < tiles.size(); i++) {
-    Texture& texture(tiles[i].getTexture());
     quad = tiles[i].getBox();
-    renderer.render(texture.getTexture(), NULL, &quad);
+    if(camera.isVisible(quad)){
+      Texture& texture(tiles[i].getTexture());
+      camera.renderAddingOffset(texture.getTexture(), quad);
+    }
   }
 }
 
@@ -65,11 +54,12 @@ void GameMap::cleanWeapons() {
 void GameMap::renderWeapons() {
   SDL_Rect quad = {0};
   for (size_t i = 0; i < weapons.size(); i++) {
-    Texture& texture(weapons[i].getTexture());
     quad = weapons[i].getBox();
-    renderer.render(texture.getTexture(), NULL, &quad);
+    if(camera.isVisible(quad)){
+      Texture& texture(weapons[i].getTexture());
+      camera.renderAddingOffset(texture.getTexture(), quad);
+    }
   }
-
 }
 
 void GameMap::update_position(char id, int pos_x, int pos_y, int angle,
@@ -77,7 +67,7 @@ void GameMap::update_position(char id, int pos_x, int pos_y, int angle,
   if (id == player.get_id()) {
     player.update_position(pos_x, pos_y, angle, life, money, weapon_type, ammo);
     hud.update_values(life, money);
-    // camera.center(player.getBox(), map_width, map_height);
+    camera.center(player.getBox(), map_width, map_height);
   } else {
     characters.at(id).update_position(pos_x, pos_y, angle, weapon_type);
   }
@@ -92,27 +82,24 @@ void GameMap::add_character_team(char id, Team team) {
 }
 
 void GameMap::renderPlayer() {
-  Texture& texture(player.getTexture());
-  double angle = player.getAngle();
-  renderer.render(texture.getTexture(), &player.getClip(), &player.getBox(), angle);
-  // player.render(renderer, camera.get_x(), camera.get_y());
+  player.render(camera);
 }
 
 void GameMap::renderPlayerWeapon() {
-  SDL_Rect quad = player.getBox();
-  Texture& texture(player.getWeapon());
-  double angle = player.getAngle();
-  renderer.render(texture.getTexture(), NULL, &quad, angle);
+  // SDL_Rect quad = player.getBox();
+  // Texture& texture(player.getWeapon());
+  // double angle = player.getAngle();
+  // renderer.render(texture.getTexture(), NULL, &quad, angle);
 }
+
 
 void GameMap::renderCharacters() {
   SDL_Rect quad = {0};
-  double angle = 0;
   for(auto it = characters.begin(); it != characters.end(); ++it){
-    Texture& texture(it->second.getTexture());
     quad = it->second.getBox();
-    angle = it->second.getAngle();
-    renderer.render(texture.getTexture(), &it->second.getClip(), &quad, angle);
+    if(camera.isVisible(quad)){
+      it->second.render(camera);
+    }
   }
 }
 

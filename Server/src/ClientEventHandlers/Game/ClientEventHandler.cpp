@@ -57,7 +57,7 @@ void ClientEventHandler::handle_play(Event& event) {
 			}
 		case ClientTypeEvent::STOP_PLANTING_BOMB:
 			{
-				attack_stoper.handle(event, world);
+				bomb_activator_stopper.handle(event, world);
 				break;
 			}
 		case ClientTypeEvent::START_DEACTIVATING_BOMB:

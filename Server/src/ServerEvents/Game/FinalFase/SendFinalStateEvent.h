@@ -11,6 +11,8 @@
 
 class SendFinalStateEvent: public Event {
 	public:
+		// FALTA IMPLEMENTAR. DEBERIA MANDAR POR QUE TERMINO LA PARTIDA
+		// BOMBA, UN TEAM DERROTADO, ETC.
 		SendFinalStateEvent(StepInformation& step);
 		~SendFinalStateEvent();
 	private:

@@ -13,6 +13,8 @@ MapParser::MapParser() {
 // POST: Agrega todas las posiciones del mapa
 //       de tipo type a la lista de posiciones.
 //       Carga en x e y, las dimensiones del mapa.
+//       Realiza una transformacion en las posiciones con
+//       respecto al tamanio de un bloque
 void MapParser::build_positions(const std::string &type,
 	std::vector<Position> &list, int &x, int &y) {
 	syslog(LOG_INFO, "[%s:%i]: Por cargar la info del mapa"
@@ -60,7 +62,8 @@ std::list<std::string> MapParser::get_maps() {
 	return maps_names;
 }
 
-
+// Descripcion: Transforma de string a variables de un
+//              enum sobre el tipo de posicion. 
 char MapParser::get_type(const std::string& type) {
 	if (type == "base_inferno")
 				return PositionType::INFERNO;

@@ -9,7 +9,9 @@
 
 class SendMatchesEvent: public Event {
 	public:
-		SendMatchesEvent(std::list<std::string> matches_info);
+		// POST: El mensaje se construye como: 
+		//		nombre_match1'\0'nombre_match2'\0'...
+		SendMatchesEvent(const std::list<std::string>& matches_info);
 		~SendMatchesEvent();
 	private:
 		SendMatchesEvent(const SendMatchesEvent &other) = delete;

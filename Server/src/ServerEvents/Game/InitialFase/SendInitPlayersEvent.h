@@ -11,6 +11,10 @@
 
 class SendInitPlayersEvent: public Event {
 	public:
+		// Descripcion: Envia la informacion inicial
+		//              de los jugadores antes de que comience la ronda. 
+		// POST: El mensaje se construye como el type + la informacion
+		//       que tenga el step al respecto.  
 		SendInitPlayersEvent(StepInformation& step);
 		~SendInitPlayersEvent();
 	private:

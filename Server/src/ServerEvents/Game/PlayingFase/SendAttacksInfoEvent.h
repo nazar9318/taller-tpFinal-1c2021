@@ -13,6 +13,7 @@
 
 class SendAttacksInfoEvent: public Event {
 	public:
+		// FALTA IMPLEMENTAR. 
 		SendAttacksInfoEvent(StepInformation& step);
 		~SendAttacksInfoEvent();
 	private:

@@ -11,6 +11,7 @@
 
 class SendStatsEvent: public Event {
 	public:
+		// FALTA IMPLEMENTAR. 
 		SendStatsEvent(StepInformation& step);
 		~SendStatsEvent();
 	private:

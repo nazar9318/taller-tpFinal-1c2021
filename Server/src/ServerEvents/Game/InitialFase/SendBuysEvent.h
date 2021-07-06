@@ -12,6 +12,7 @@
 
 class SendBuysEvent: public Event {
 	public:
+		// FALTA IMPLEMENTAR
 		SendBuysEvent(StepInformation& step);
 		~SendBuysEvent();
 	private:

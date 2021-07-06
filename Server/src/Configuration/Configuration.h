@@ -44,8 +44,6 @@ class Configuration {
 		static int character_life_points;
 		static int character_money;
 
-		static int bomb_clock_count;
-
 		static double knife_damage_min;
 		static double glock_damage_min;
 		static double ak47_damage_min;
@@ -73,15 +71,9 @@ class Configuration {
 		static double m3_accuracy;
 		static double awp_accuracy;
 
-		static int glock_shoot_rate;
 		static int ak47_shoot_rate;
-		static int m3_shoot_rate;
-		static int awp_shoot_rate;
 
-		static int glock_shoot_freq;
-		static int ak47_shoot_freq;
-		static int m3_shoot_freq;
-		static int awp_shoot_freq;
+		static double ak47_shoot_freq;
 
 		static double glock_distance_penalty;
 		static double ak47_distance_penalty;

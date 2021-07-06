@@ -103,44 +103,6 @@ class Character {
 		void reset_body(b2World* world, std::vector<Position*> available_positions);
 
 		void change_team();
-/*
-disparo pistola ---.
-arma.attack(team.opposite(), pos.x, pos.y,
-	 angulo, world, characters, stepinfo)
-encuentra jugador/es
-jugador{id}.recieveattack(calculoquehace)
-
-80metros de ancho
-cuchi 45grad 5metros
-pistola normal busca en la recta ---->
-sniper recto
-area escopeta
-
-*/
-
-
-
-/*
-
-		void buy(Weapon *new_weapon);
-
-		void grab(Weapon *new_weapon);
-
-		void grab(Bomb *bomb);
-
-		void place(Bomb *bomb);
-
-		void deactivate(Bomb *bomb);
-
-		void removeSecondary();
-
-		void take(unsigned int money);
-
-
-		Team getTeam();
-*/
-		/*acá habría que incluir la distancia entre jugadores*/
-		//void attack(Character &enemy, Team my_team, uint16_t distance);
 		~Character();
 	private:
 		Character(const Character &other) = delete;

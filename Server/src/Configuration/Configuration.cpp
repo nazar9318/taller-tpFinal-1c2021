@@ -62,10 +62,7 @@ int CF::glock_shoot_rate = CF::yaml_file["glock_shoot_rate"].as<int>();
 int CF::ak47_shoot_rate = CF::yaml_file["ak47_shoot_rate"].as<int>();
 int CF::m3_shoot_rate = CF::yaml_file["m3_shoot_rate"].as<int>();
 int CF::awp_shoot_rate = CF::yaml_file["awp_shoot_rate"].as<int>();
-int CF::glock_shoot_freq = CF::yaml_file["glock_shoot_freq"].as<int>();
-int CF::ak47_shoot_freq = CF::yaml_file["ak47_shoot_freq"].as<int>();
-int CF::m3_shoot_freq = CF::yaml_file["m3_shoot_freq"].as<int>();
-int CF::awp_shoot_freq = CF::yaml_file["awp_shoot_freq"].as<int>();
+double CF::ak47_shoot_freq = CF::yaml_file["ak47_shoot_freq"].as<double>();
 double CF::glock_distance_penalty = CF::yaml_file["glock_distance_penalty"].as<double>();
 double CF::ak47_distance_penalty = CF::yaml_file["ak47_distance_penalty"].as<double>();
 double CF::m3_distance_penalty = CF::yaml_file["m3_distance_penalty"].as<double>();
@@ -143,10 +140,8 @@ void Configuration::load_configuration(const std::string& file_path) {
 	ak47_shoot_rate = yaml_file["ak47_shoot_rate"].as<int>();
 	m3_shoot_rate = yaml_file["m3_shoot_rate"].as<int>();
 	awp_shoot_rate = yaml_file["awp_shoot_rate"].as<int>();
-	glock_shoot_freq = yaml_file["glock_shoot_freq"].as<int>();
-	ak47_shoot_freq = yaml_file["ak47_shoot_freq"].as<int>();
-	m3_shoot_freq = yaml_file["m3_shoot_freq"].as<int>();
-	awp_shoot_freq = yaml_file["awp_shoot_freq"].as<int>();
+	ak47_shoot_freq = yaml_file["ak47_shoot_freq"].as<double>();
+
 	glock_distance_penalty = yaml_file["glock_distance_penalty"].as<double>();
 	ak47_distance_penalty = yaml_file["ak47_distance_penalty"].as<double>();
 	m3_distance_penalty = yaml_file["m3_distance_penalty"].as<double>();

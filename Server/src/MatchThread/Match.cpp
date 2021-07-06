@@ -122,6 +122,9 @@ void Match::handle_events() {
 	}
 }
 
+
+// POST: Envia todos los eventos que sucedieron en el ultimo step
+//       dependiendo de la fase actual. 
 void Match::push_step_events() {
 	bool statistics_not_sent = true;
 	bool init_players_not_sent = true;
@@ -168,14 +171,6 @@ void Match::push_step_events() {
 			push_event(stats);
 		}
 	}
-
-
-	//std::shared_ptr<Event> players_info(
-	//		new SendStepInfoEvent(game_world.get_step_info()));
-	//std::shared_ptr<Event> weapons(
-	//	new SendWeaponsEvent(game_world.get_weapons_info()));
-	//push_event(players_info);
-	//push_event(weapons);
 }
 
 

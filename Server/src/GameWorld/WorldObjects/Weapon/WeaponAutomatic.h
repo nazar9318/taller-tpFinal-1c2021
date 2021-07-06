@@ -13,7 +13,7 @@
 class WeaponAutomatic : public Weapon {
 		float accuracy;
 		int shoot_rate;
-		int shoot_freq;
+		double shoot_freq;
 		int number_tics;
 
 	public:

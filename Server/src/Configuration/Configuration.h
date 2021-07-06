@@ -78,10 +78,7 @@ class Configuration {
 		static int m3_shoot_rate;
 		static int awp_shoot_rate;
 
-		static int glock_shoot_freq;
-		static int ak47_shoot_freq;
-		static int m3_shoot_freq;
-		static int awp_shoot_freq;
+		static double ak47_shoot_freq;
 
 		static double glock_distance_penalty;
 		static double ak47_distance_penalty;

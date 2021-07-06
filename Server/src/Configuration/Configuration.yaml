@@ -52,10 +52,8 @@ ak47_shoot_rate: 3
 m3_shoot_rate: 1
 awp_shoot_rate: 1
 
-glock_shoot_freq: 0
-ak47_shoot_freq: 400
-m3_shoot_freq: 0
-awp_shoot_freq: 0
+ak47_shoot_freq: 0.4
+
 
 glock_distance_penalty: 2
 ak47_distance_penalty: 1

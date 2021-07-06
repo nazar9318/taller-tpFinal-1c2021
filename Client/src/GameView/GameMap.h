@@ -14,12 +14,14 @@
 #include "WeaponSprite.h"    //VER SI HAGO WEAPON Y CHARACTER COMO UNA UNICA CLASE SPRITE
 #include "Team.h"
 #include "Camera.h"
+#include "FinalPhase.h"
 
 class GameMap {
 	private:
 		Renderer& renderer;
 		Camera& camera;
 		Hud& hud;
+		FinalPhase& final_phase;
 
 		/*Contenedores*/
 		TileContainer& tile_container;
@@ -39,7 +41,7 @@ class GameMap {
 
 	public:
 		GameMap(Renderer& renderer, ClientPlayer& player, Camera& camera, std::map<char,
-			 			ClientCharacter> &characters, Hud& hud);
+			 			ClientCharacter> &characters, Hud& hud, FinalPhase& final_phase);
 		void create();
 		void setSize(int& width, int& height);
 
@@ -55,6 +57,7 @@ class GameMap {
 		void renderGround();
 		void renderWeapons();
 		void add_character_team(char id, Team team);
+		void add_stats(char id, int kills_round, int kills_total);
 		~GameMap();
 
 	private:

@@ -32,6 +32,7 @@ class StepInformation {
 		void add_position(char id, int x, int y);
 		int get_wait();
 		std::vector<char> get_players_init();
+		std::vector<char> get_stats();
 		void add_attack(AttackInformation attack_info);
 
 

@@ -36,6 +36,8 @@ class Character {
 		Direction move_state;
 		int angle;
 		bool blocked;
+		int round_kills;
+		int total_kills;
 
 	public:
 		Character(Team team, b2World* world,
@@ -103,6 +105,9 @@ class Character {
 		void reset_body(b2World* world, std::vector<Position*> available_positions);
 
 		void change_team();
+
+		int get_round_kills();
+		int get_total_kills();
 		~Character();
 	private:
 		Character(const Character &other) = delete;

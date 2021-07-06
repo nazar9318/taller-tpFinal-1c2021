@@ -15,6 +15,7 @@
 #include "ReceiveInitStepHandler.h"
 #include "ReceiveInitPlayersHandler.h"
 #include "ReceiveBombStateHandler.h"
+#include "ReceiveStatsHandler.h"
 
 
 
@@ -27,6 +28,7 @@ class ModelEventHandler{
 		ReceiveInitStepHandler init_step;
 		ReceiveInitPlayersHandler player_init;
 		ReceiveBombStateHandler bomb_state;
+		ReceiveStatsHandler stats;
 	public:
 		ModelEventHandler();
 

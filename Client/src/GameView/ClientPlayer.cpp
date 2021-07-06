@@ -104,4 +104,8 @@ SDL_Rect& ClientPlayer::getClip() { return clip[current_clip]; }
 
 SDL_Rect& ClientPlayer::getBox() { return pos; }
 
+std::string ClientPlayer::get_name() {
+	return name;
+}
+
 ClientPlayer::~ClientPlayer() {}

@@ -7,8 +7,11 @@ Game::Game(ProtectedQueue<Event>& model,
 	std::map<char, std::string>& charactersInfo, char& player_id) :
 model_events(model), client_events(client), is_running(true),
 player(player_id, charactersInfo.at(player_id)),
-window("Counter 2d", 800, 600, false), renderer(window), camera(renderer, 800, 600), hud(renderer, 800, 600),
- map(renderer, player,camera, characters, hud), initial_fase(renderer, 800, 600), final_phase(renderer, 800, 600),
+window("Counter 2d", 800, 600, false), renderer(window),
+ camera(renderer, 800, 600), hud(renderer, 800, 600),
+ final_phase(renderer, 800, 600),
+ map(renderer, player,camera, characters, hud, final_phase),
+  initial_fase(renderer, 800, 600),
 prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
 		if (it->first != player_id) {

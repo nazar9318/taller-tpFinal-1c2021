@@ -11,7 +11,7 @@
 class ClientPlayer {
 	private:
 		char& id;
-		std::string& name;
+		std::string name;
 		Texture* texture;
 		Texture* texture_weapon;
 		SDL_Rect pos;
@@ -39,6 +39,7 @@ class ClientPlayer {
 				char life, int money, char weapon_type, int ammo);
 
 		void render(Camera& camera);
+		std::string get_name();
 
 	private:
 		ClientPlayer(const ClientPlayer &other) = delete;

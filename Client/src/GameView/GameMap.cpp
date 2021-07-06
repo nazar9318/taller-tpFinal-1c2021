@@ -1,10 +1,11 @@
 #include "GameMap.h"
 
 GameMap::GameMap(Renderer& renderer, ClientPlayer& player,
-Camera& camera, std::map<char, ClientCharacter> &characters, Hud& hud)
+Camera& camera, std::map<char, ClientCharacter> &characters, Hud& hud, 
+FinalPhase& final_phase)
 : renderer(renderer), tile_container(TileContainer::getInstance()),
 sprite_container(SpriteContainer::getInstance()), player(player),
-characters(characters), camera(camera), hud(hud) {}
+characters(characters), camera(camera), hud(hud), final_phase(final_phase) {}
 
 void GameMap::create() {}
 
@@ -95,6 +96,18 @@ void GameMap::renderCharacters() {
     }
   }
 }
+
+
+void GameMap::add_stats(char id, int kills_round, int kills_total) {
+  std::string name;
+  if (id == player.get_id()) {
+    name = player.get_name();
+  } else {
+    name = characters.at(id).get_name();
+  }
+  final_phase.addScore(name, kills_round, kills_total);
+}
+
 
 /*------------------------------------------------------------------------*/
 

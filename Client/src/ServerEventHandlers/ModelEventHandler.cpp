@@ -29,6 +29,9 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map) {
     case ModelTypeEvent::BOMB_INFO:
       bomb_state.handle(fase, event, map);
       break;
+    case ModelTypeEvent::STATISTICS:
+      stats.handle(fase, event, map);
+      break;
     default:
       break;
   }

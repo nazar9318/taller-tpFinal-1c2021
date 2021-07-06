@@ -110,6 +110,27 @@ std::vector<char> StepInformation::get_players_info() {
 	return players_info;
 }
 
+std::vector<char> StepInformation::get_stats() {
+	std::vector<char> stats;
+	for (auto it = characters.begin(); it != characters.end(); ++it) {
+		stats.push_back(it->first);
+		int kills_round = it->second.get_round_kills();
+		int kills_total = it->second.get_total_kills();
+		
+		stats.push_back(*((char*)(&kills_round)));
+		stats.push_back(*((char*)(&kills_round) + 1));
+		stats.push_back(*((char*)(&kills_round) + 2));
+		stats.push_back(*((char*)(&kills_round) + 3));
+		
+		stats.push_back(*((char*)(&kills_total)));
+		stats.push_back(*((char*)(&kills_total) + 1));
+		stats.push_back(*((char*)(&kills_total) + 2));
+		stats.push_back(*((char*)(&kills_total) + 3));
+	}
+	return stats;
+}
+
+
 
 
 StepInformation::~StepInformation() {

@@ -77,4 +77,8 @@ void ClientCharacter::render(Camera& camera){
 
 SDL_Rect& ClientCharacter::getClip() { return clip[current_clip]; }
 
+std::string ClientCharacter::get_name() {
+	return name;
+}
+
 ClientCharacter::~ClientCharacter() {}

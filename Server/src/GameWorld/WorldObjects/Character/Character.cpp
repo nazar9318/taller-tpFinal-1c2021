@@ -12,7 +12,8 @@ Character::Character(Team team, b2World* world,
 		 std::vector<Position*> available_positions)
 		: life_points(CF::character_life_points),
 		 money(CF::character_money), team(team),
-		 number_weapons(2), angle(0), blocked(false) {
+		 number_weapons(2), angle(0), blocked(false), 
+		 round_kills(0), total_kills(0) {
 	std::unique_ptr<Weapon> knife(new WeaponWhite());
 	std::unique_ptr<Weapon> pistol(new WeaponPistol());
 	weapons.push_back(std::move(knife));
@@ -155,6 +156,8 @@ Weapon* Character::drop_optative_weapon() {
 
 void Character::add_kill_bonus() {
 	money += CF::bonus_kill;
+	round_kills++;
+	total_kills++;
 }
 
 
@@ -227,10 +230,18 @@ void Character::reset_body(b2World* world,
 	add_body(world, available_positions);
 	life_points = CF::character_life_points;
 	unblock();
+	round_kills = 0;
 }
 
 void Character::change_team() {
 	team = get_opposite(team);
+}
+
+int Character::get_round_kills() {
+	return round_kills;
+}
+int Character::get_total_kills() {
+	return total_kills;
 }
 
 Character::~Character() {

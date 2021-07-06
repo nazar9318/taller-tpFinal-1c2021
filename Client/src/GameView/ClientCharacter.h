@@ -31,7 +31,7 @@ class ClientCharacter {
 		void update_position(int pos_x, int pos_y, int angle, char weapon_type);
 
 		void render(Camera& camera);
-
+		std::string get_name();
 		ClientCharacter(ClientCharacter&& other) = default;
 		ClientCharacter& operator=(ClientCharacter&& other) = default;
 

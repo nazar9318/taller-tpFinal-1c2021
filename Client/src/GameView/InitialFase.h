@@ -20,7 +20,7 @@ class InitialFase {
 		int screen_height;
 
 	public:
-    InitialFase(Renderer& renderer, int screen_width, int screen_height);
+    	InitialFase(Renderer& renderer, int screen_width, int screen_height);
 
 		void loadMedia();
 

@@ -39,7 +39,6 @@ void InitialFase::loadMedia(){
 // }
 
 void InitialFase::render(){
-
   SDL_Rect quad = {screen_width/2 - 225, screen_height/2 - 225, background.get_w(), background.get_h()};
   renderer.render(background.getTexture(), NULL, &quad);
 
@@ -49,9 +48,6 @@ void InitialFase::render(){
   } else{
     renderer.render(ak.base.getTexture(), NULL, &ak.render_box);
   }
-
-
 }
-
 
 InitialFase::~InitialFase(){}

@@ -1,7 +1,7 @@
 #include "GameMap.h"
 
-GameMap::GameMap(Renderer& renderer, ClientPlayer& player, Camera& camera, std::map<char,
-          ClientCharacter> &characters, Hud& hud)
+GameMap::GameMap(Renderer& renderer, ClientPlayer& player,
+Camera& camera, std::map<char, ClientCharacter> &characters, Hud& hud)
 : renderer(renderer), tile_container(TileContainer::getInstance()),
 sprite_container(SpriteContainer::getInstance()), player(player),
 characters(characters), camera(camera), hud(hud) {}

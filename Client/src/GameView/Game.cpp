@@ -8,7 +8,7 @@ Game::Game(ProtectedQueue<Event>& model,
 model_events(model), client_events(client), is_running(true),
 player(player_id, charactersInfo.at(player_id)),
 window("Counter 2d", 800, 600, false), renderer(window), camera(renderer, 800, 600), hud(renderer, 800, 600),
- map(renderer, player,camera, characters, hud), initial_fase(renderer, 800, 600),
+ map(renderer, player,camera, characters, hud), initial_fase(renderer, 800, 600), final_phase(renderer, 800, 600),
 prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
 		if (it->first != player_id) {
@@ -25,6 +25,9 @@ void Game::execute() {
 		auto end = steady_clock::now();
 		double t_delta;
 		loadMedia();
+		/*final_phase.addScore("Federico", 9, 845);
+		final_phase.addScore("Mateo", 23, 875);
+		final_phase.addScore("Santiago", 832, 865);*/
 		while (is_running) {
 			begin = steady_clock::now();
 			// if(fase == initial){
@@ -46,12 +49,14 @@ void Game::loadMedia() {
 	map.loadMedia();
 	hud.loadMedia();
 	initial_fase.loadMedia();
+	final_phase.loadMedia();
 }
 
 void Game::render() {
 	renderer.clearScreen();
 	map.renderGround();
 	if (fase == FaseType::INITIAL_FASE) {
+		//final_phase.render();
 		initial_fase.render();
 	} else if (fase == FaseType::PLAYING) {
 		map.renderWeapons();
@@ -60,7 +65,7 @@ void Game::render() {
 		map.renderCharacters();
 		hud.render();
 	} else {
-		// fase final
+		//final_phase.render();
 	}
 	// renderer.setDrawColor(0xFF,0xFF,0xFF,0xFF);
 	renderer.presentScreen();

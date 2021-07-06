@@ -11,7 +11,6 @@
 // #include <iostream>
 
 class Renderer {
-
   private:
     bool initialized = false;
     Window& window;
@@ -47,7 +46,6 @@ class Renderer {
     ~Renderer();
 
   private:
-
     void setDrawColor() const;
 
 };

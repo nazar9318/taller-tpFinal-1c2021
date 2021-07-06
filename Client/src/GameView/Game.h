@@ -31,6 +31,7 @@
 #include "Camera.h"
 #include "Hud.h"
 #include "InitialFase.h"
+#include "FinalPhase.h"
 
 class Game {
 	private:
@@ -39,6 +40,7 @@ class Game {
 		GameMap map;
 		Hud hud;
 		InitialFase initial_fase;
+		FinalPhase final_phase;
 		ModelEventHandler handler;
 		bool is_running;
 		ClientPlayer player;
@@ -49,7 +51,6 @@ class Game {
 		int prev_mouse_x;
 		int prev_mouse_y;
 		FaseType fase;
-
 
 	public:
 		Game(ProtectedQueue<Event>& model_events,
@@ -72,6 +73,5 @@ class Game {
 		Game(const Game &other) = delete;
 		Game& operator=(const Game &other) = delete;
 };
-
 
 #endif

@@ -10,7 +10,7 @@ renderer(renderer), screen_width(screen_width), screen_height(screen_height) {
 
 void FinalPhase::loadMedia() {
   font = TTF_OpenFont("../Client/Assets/Fonts/japanese.ttf", 20);
-  if (!font){
+  if (!font) {
     throw SDLException("SDLException: failed to load fonts -> FinalPhase - %s\n",TTF_GetError());
   }
 }
@@ -33,7 +33,7 @@ void FinalPhase::render() {
   quad_name.y = 0;
   quad_name.h = 40;
   for (unsigned int i = 0; i < names.size(); i++) {
-    quad_name.w = 10*names[i].size();
+    quad_name.w = 15*names[i].size();
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, names[i].c_str(), white);
     SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
     renderer.render(Message, NULL, &quad_name);
@@ -45,7 +45,7 @@ void FinalPhase::render() {
   quad_round.y = 0;
   quad_round.h = 40;
   for (unsigned int i = 0; i < round_kills.size(); i++) {
-    quad_round.w = 10*round_kills[i].size();
+    quad_round.w = 15*round_kills[i].size();
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, round_kills[i].c_str(), white);
     SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
     renderer.render(Message, NULL, &quad_round);
@@ -53,16 +53,22 @@ void FinalPhase::render() {
   }
 
   SDL_Rect quad_total = {0};
-  quad_total.x = screen_width/2 + 200;
+  quad_total.x = screen_width/2 + 150;
   quad_total.y = 0;
   quad_total.h = 40;
   for (unsigned int i = 0; i < total_kills.size(); i++) {
-    quad_total.w = 10*total_kills[i].size();
+    quad_total.w = 15*total_kills[i].size();
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, total_kills[i].c_str(), white);
     SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
     renderer.render(Message, NULL, &quad_total);
     quad_total.y += 40;
   }
+  this->names.clear();
+  this->round_kills.clear();
+  this->total_kills.clear();
+  names.push_back("Nombre");
+  round_kills.push_back("Puntos ronda");
+  total_kills.push_back("Puntos totales");
 }
 
 FinalPhase::~FinalPhase() {}

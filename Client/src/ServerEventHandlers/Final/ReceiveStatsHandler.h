@@ -8,7 +8,6 @@
 #include "Team.h"
 #include "FaseType.h"
 
-
 class ReceiveStatsHandler {
 	public:
 		ReceiveStatsHandler();
@@ -17,6 +16,5 @@ class ReceiveStatsHandler {
 
 		~ReceiveStatsHandler();
 };
-
 
 #endif

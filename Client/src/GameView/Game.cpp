@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <thread>
 
 #define FROM_RAD_TO_DEG 57.295779513
 
@@ -31,6 +32,9 @@ void Game::execute() {
 		loadMedia();
 		while (is_running) {
 			begin = steady_clock::now();
+			if (fase == FaseType::INITIAL_FASE) {
+				this->final_phase_rendered = false;
+			}
 			// if(fase == initial){
 			// 	initial_fase.run();
 			// }
@@ -40,11 +44,6 @@ void Game::execute() {
 			end = steady_clock::now();
 			t_delta = duration<double>(end - begin).count();
 			std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
-			if (fase != FaseType::INITIAL_FASE && fase != FaseType::PLAYING) {
-				std::this_thread::sleep_for(duration<double>(5));
-			} else {
-				std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
-			}
 		}
 	} catch (std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: Exception: %s", __FILE__, __LINE__,  e.what());
@@ -68,11 +67,12 @@ void Game::render() {
 		map.renderPlayer();
 		map.renderCharacters();
 		hud.render();
-	} else {
-		if (!final_phase_rendered) {
+	} else if (fase == FaseType::END_ROUND) {
+		final_phase.render();
+		/*if (!final_phase_rendered) {
 			final_phase.render();
 			final_phase_rendered = true;
-		}
+		}*/
 	}
 	renderer.presentScreen();
 }
@@ -190,7 +190,6 @@ void Game::handle_unclick(SDL_Event& event) {
 }
 
 void Game::handle_mouse_motion() {
-
 	SDL_Rect player_pos = player.getBox();
 	SDL_Point camera_pos = camera.getPos();
 

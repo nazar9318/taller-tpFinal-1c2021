@@ -130,8 +130,4 @@ std::vector<char> StepInformation::get_stats() {
 	return stats;
 }
 
-
-
-
-StepInformation::~StepInformation() {
-}
+StepInformation::~StepInformation() {}

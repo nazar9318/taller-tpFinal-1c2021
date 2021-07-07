@@ -38,7 +38,7 @@ void InitialFase::loadMedia(){
 //   }
 // }
 
-void InitialFase::render(){
+void InitialFase::render() {
   SDL_Rect quad = {screen_width/2 - 225, screen_height/2 - 225, background.get_w(), background.get_h()};
   renderer.render(background.getTexture(), NULL, &quad);
 

@@ -17,9 +17,7 @@
 #include "ReceiveBombStateHandler.h"
 #include "ReceiveStatsHandler.h"
 
-
-
-class ModelEventHandler{
+class ModelEventHandler {
 	private:
 		ReciveMapHandler recive_map;
 		ReciveWeaponHandler recive_weapons;

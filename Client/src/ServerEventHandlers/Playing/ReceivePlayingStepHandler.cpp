@@ -4,7 +4,7 @@ ReceivePlayingStepHandler::ReceivePlayingStepHandler(){}
 
 
 void ReceivePlayingStepHandler::handle(FaseType& fase, Event& event, GameMap& map){
-	fase = FaseType::PLAYING; 
+	//fase = FaseType::PLAYING;
 	std::vector<char> event_msg = event.get_msg();
 	for (auto it = event_msg.begin() + 1; it != event_msg.end(); it += 23) {
 		char id = *it;

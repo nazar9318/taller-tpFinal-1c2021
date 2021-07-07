@@ -19,7 +19,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>89</width>
+      <width>131</width>
       <height>25</height>
      </rect>
     </property>
@@ -30,9 +30,9 @@
    <widget class="QPushButton" name="save">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>140</x>
       <y>0</y>
-      <width>89</width>
+      <width>131</width>
       <height>25</height>
      </rect>
     </property>
@@ -40,17 +40,17 @@
      <string>Save</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="clean">
+   <widget class="QPushButton" name="clean_all">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>280</x>
       <y>0</y>
-      <width>89</width>
+      <width>131</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>Clean</string>
+     <string>Clean All</string>
     </property>
    </widget>
    <widget class="QScrollArea" name="scrollArea">
@@ -305,6 +305,19 @@
       <width>631</width>
       <height>511</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="clean_selected">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>0</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Clean Selected</string>
     </property>
    </widget>
   </widget>

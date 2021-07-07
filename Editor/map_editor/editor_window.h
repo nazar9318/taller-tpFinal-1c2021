@@ -14,6 +14,7 @@
 #include <QFileDialog>
 #include <QObject>
 #include <vector>
+#include <algorithm>
 #include "yaml-cpp/yaml.h"
 
 QT_BEGIN_NAMESPACE
@@ -34,7 +35,7 @@ class MainWindow : public QMainWindow {
         void saveBases(YAML::Emitter &emitter);
         void saveObjects(YAML::Emitter &emitter);
         size_t width();
-        size_t height();
+        size_t heigth();
         bool isFloor();
         QGraphicsPixmapItem* createFloor();
         QGraphicsPixmapItem* createPlaceable();
@@ -51,6 +52,8 @@ class MainWindow : public QMainWindow {
         std::vector<std::pair<int,int>> box;
         std::vector<std::pair<int,int>> bomb;
         std::vector<std::pair<int,int>> spawn;
+        std::vector<std::pair<int,int>> positions_loaded;
+        void removeFrom(const std::string& item, int x, int y);
         void placePos(int &x, int &y);
         bool hasPos(std::vector<size_t> &vector, size_t pos);
         int delay_cnt;
@@ -60,7 +63,7 @@ class MainWindow : public QMainWindow {
 
         void on_load_clicked();
 
-        void on_clean_clicked();
+        void on_clean_all_clicked();
 
         void connectItems();
 
@@ -73,5 +76,6 @@ class MainWindow : public QMainWindow {
         void mouseMoveEvent(QMouseEvent* event) override;
 
         void on_button_clicked();
+        void on_clean_selected_clicked();
 };
 #endif // MAINWINDOW_H

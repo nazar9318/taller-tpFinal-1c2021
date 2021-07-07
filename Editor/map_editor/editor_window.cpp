@@ -129,19 +129,19 @@ bool MainWindow::hasPos(std::vector<size_t> &vector, size_t pos) {
     return std::find(vector.begin(), vector.end(), pos) != vector.end();
 }
 
-size_t MainWindow::height() {
-    size_t height = 0;
-    std::vector<size_t> count_heights;
+size_t MainWindow::heigth() {
+    size_t heigth = 0;
+    std::vector<size_t> count_heigth;
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
         if (name.size() > 0) {
-            if (!hasPos(count_heights, (size_t)item->pos().y())) {
-                count_heights.push_back(item->pos().y());
-                height++;
+            if (!hasPos(count_heigth, (size_t)item->pos().y())) {
+                count_heigth.push_back(item->pos().y());
+                heigth++;
             }
         }
     }
-    return height;
+    return heigth;
 }
 
 size_t MainWindow::width() {
@@ -163,7 +163,7 @@ void MainWindow::on_save_clicked() {
     YAML::Emitter emitter;
     YAML::Node size;
     size["width"] = this->width();
-    size["height"] = this->height();
+    size["height"] = this->heigth();
     emitter << size;
     this->saveBases(emitter);
     this->saveObjects(emitter);
@@ -177,6 +177,14 @@ void MainWindow::on_save_clicked() {
 void MainWindow::on_load_clicked() {
     QString file_name = QFileDialog::getOpenFileName(this, "Open a file", "../configs/");
     std::vector<YAML::Node> nodes = YAML::LoadAllFromFile(file_name.toStdString());
+    /*int width = nodes[0]["width"].as<int>();
+    int heigth = nodes[0]["heigth"].as<int>();
+    int positions_loaded[width][heigth];
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < heigth; j++) {
+            positions_loaded[i][j] = -1;
+        }
+    }*/
     for (size_t i = 1; i < nodes.size(); i++) {
         QGraphicsPixmapItem *item;
         const std::string &new_item_name = nodes[i]["item"].as<std::string>();
@@ -202,16 +210,62 @@ void MainWindow::on_load_clicked() {
             QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE));
             item = new QGraphicsPixmapItem(pixmap);
         }
-        item->setFlag(QGraphicsItem::ItemIsMovable, true);
-        int x = (nodes[i]["position"][0].as<float>())*BASE_X+1;
-        int y = (nodes[i]["position"][1].as<float>())*BASE_Y+1;
+        item->setFlag(QGraphicsItem::ItemIsSelectable, true);
+        int x_0 = nodes[i]["position"][0].as<int>();
+        int y_0 = nodes[i]["position"][1].as<int>();
+        int x = (x_0)*BASE_X+1;
+        int y = (y_0)*BASE_Y+1;
         item->setPos(x, y);
         item->setData(0, q_new_item_name);
         this->scene->addItem(item);
+        //positions_loaded[nodes[i]["position"][0].as<int>()][nodes[i]["position"][1].as<int>()] = 1;
+    }
+    /*for (int i = 0; i < width; i++) {
+        for (int j = 0; j < heigth; j++) {
+            if (positions_loaded[i][j] == 0) {
+                QPixmap pix(":/resources/box_black.png");
+                QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE));
+                QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pixmap);
+                int x = (width)*BASE_X+1;
+                int y = (heigth)*BASE_Y+1;
+                item->setPos(x, y);
+                item->setData(0, "box_black");
+            }
+        }
+    }*/
+}
+
+void MainWindow::removeFrom(const std::string& item, int x, int y) {
+    if (item.find("base") != std::string::npos) {
+        this->floor.erase(std::remove(this->floor.begin(), this->floor.end(), std::make_pair(x,y)), this->floor.end());
+    }
+    if (item.find("box") != std::string::npos) {
+        this->box.erase(std::remove(this->box.begin(), this->box.end(), std::make_pair(x,y)), this->box.end());
+    }
+    if (item.find("bomb") != std::string::npos) {
+        this->bomb.erase(std::remove(this->bomb.begin(), this->bomb.end(), std::make_pair(x,y)), this->bomb.end());
+    }
+    if (item.find("spawn") != std::string::npos) {
+        this->spawn.erase(std::remove(this->spawn.begin(), this->spawn.end(), std::make_pair(x,y)), this->spawn.end());
+    }
+    if (item.find("weapon") != std::string::npos) {
+        this->weapon.erase(std::remove(this->weapon.begin(), this->weapon.end(), std::make_pair(x,y)), this->weapon.end());
     }
 }
 
-void MainWindow::on_clean_clicked() {
+void MainWindow::on_clean_selected_clicked() {
+    for (auto item : this->scene->items()) {
+        if (item->isSelected()) {
+            int x = item->pos().x();
+            int y = item->pos().y();
+            removeFrom(item->data(0).toString().toStdString(), x, y);
+            this->scene->removeItem(item);
+            delete item;
+        }
+    }
+}
+
+void MainWindow::on_clean_all_clicked() {
     for (auto item : this->scene->items()) { delete item; }
     this->scene->clear();
     this->scene->items().clear();
@@ -341,7 +395,7 @@ void MainWindow::on_button_clicked() {
             QGraphicsPixmapItem *new_item = this->createNewItem();
             QPushButton* button = (QPushButton*)sender();
             new_item->setData(0, button->objectName());
-            new_item->setFlag(QGraphicsItem::ItemIsMovable, true);
+            new_item->setFlag(QGraphicsItem::ItemIsSelectable, true);
             int x = item->pos().x()+1;
             int y = item->pos().y()+1;
             if (!this->thereIsFloorIn(x, y)) {
@@ -363,18 +417,14 @@ void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
     int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
     int x = x_0*BASE_X+1;
     int y = y_0*BASE_Y+1;
-    if (thereIsFloorIn(x, y) && (this->dragged.toStdString().find("box") != std::string::npos)) {
-        return;
-    }
-    if (thereIsFloorIn(x, y) && (this->dragged.toStdString().find("base") != std::string::npos)) {
-        return;
-    }
-    if (thereIsFloorIn(x, y) && (this->dragged.toStdString().find("bomb") != std::string::npos)) {
-        return;
-    }
-    if (this->dragged.compare("color") != 0) {
+    std::string dragged = this->dragged.toStdString();
+    bool putting_box_in_floor = thereIsFloorIn(x, y) && (dragged.find("box") != std::string::npos);
+    bool putting_floor_in_floor = thereIsFloorIn(x, y) && (dragged.find("base") != std::string::npos);
+    bool putting_bomb_in_floor = thereIsFloorIn(x, y) && (dragged.find("bomb") != std::string::npos);
+    bool valid = !putting_box_in_floor && !putting_floor_in_floor && !putting_bomb_in_floor;
+    if (valid && this->dragged.compare("color") != 0) {
         QGraphicsPixmapItem *item = this->createNewItem();
-        item->setFlag(QGraphicsItem::ItemIsMovable, true);
+        item->setFlag(QGraphicsItem::ItemIsSelectable, true);
         if (!thereIsWeaponIn(x, y) && !thereIsBombPlaceIn(x, y) && !thereIsBoxIn(x, y) && !thereIsSpawnIn(x, y)) {
             item->setPos(x, y);
             this->placePos(x,y);

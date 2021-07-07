@@ -12,7 +12,8 @@ window("Counter 2d", 800, 600, false), renderer(window),
  final_phase(renderer, 800, 600),
  map(renderer, player,camera, characters, hud, final_phase),
   initial_fase(renderer, 800, 600),
-prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE) {
+prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE),
+final_phase_rendered(false) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
 		if (it->first != player_id) {
 			ClientCharacter character(it->second);
@@ -28,9 +29,6 @@ void Game::execute() {
 		auto end = steady_clock::now();
 		double t_delta;
 		loadMedia();
-		/*final_phase.addScore("Federico", 9, 845);
-		final_phase.addScore("Mateo", 23, 875);
-		final_phase.addScore("Santiago", 832, 865);*/
 		while (is_running) {
 			begin = steady_clock::now();
 			// if(fase == initial){
@@ -42,6 +40,11 @@ void Game::execute() {
 			end = steady_clock::now();
 			t_delta = duration<double>(end - begin).count();
 			std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
+			if (fase != FaseType::INITIAL_FASE && fase != FaseType::PLAYING) {
+				std::this_thread::sleep_for(duration<double>(5));
+			} else {
+				std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
+			}
 		}
 	} catch (std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: Exception: %s", __FILE__, __LINE__,  e.what());
@@ -59,7 +62,6 @@ void Game::render() {
 	renderer.clearScreen();
 	map.renderGround();
 	if (fase == FaseType::INITIAL_FASE) {
-		//final_phase.render();
 		initial_fase.render();
 	} else if (fase == FaseType::PLAYING) {
 		map.renderWeapons();
@@ -67,9 +69,11 @@ void Game::render() {
 		map.renderCharacters();
 		hud.render();
 	} else {
-		//final_phase.render();
+		if (!final_phase_rendered) {
+			final_phase.render();
+			final_phase_rendered = true;
+		}
 	}
-	// renderer.setDrawColor(0xFF,0xFF,0xFF,0xFF);
 	renderer.presentScreen();
 }
 

@@ -28,39 +28,36 @@ void FinalPhase::addScore(const std::string& name, int round_kills, int total_ki
 void FinalPhase::render() {
   SDL_Color white = {255, 255, 255};
 
-  SDL_Rect quad_name = {
-    screen_width/2 - 300,
-    0,
-    80,
-    40
-  };
+  SDL_Rect quad_name = {0};
+  quad_name.x = screen_width/2 - 400;
+  quad_name.y = 0;
+  quad_name.h = 40;
   for (unsigned int i = 0; i < names.size(); i++) {
+    quad_name.w = 10*names[i].size();
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, names[i].c_str(), white);
     SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
     renderer.render(Message, NULL, &quad_name);
     quad_name.y += 40;
   }
 
-  SDL_Rect quad_round = {
-    screen_width/2 - 150,
-    0,
-    80,
-    40
-  };
+  SDL_Rect quad_round = {0};
+  quad_round.x = screen_width/2 - 100;
+  quad_round.y = 0;
+  quad_round.h = 40;
   for (unsigned int i = 0; i < round_kills.size(); i++) {
+    quad_round.w = 10*round_kills[i].size();
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, round_kills[i].c_str(), white);
     SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
     renderer.render(Message, NULL, &quad_round);
     quad_round.y += 40;
   }
 
-  SDL_Rect quad_total = {
-    screen_width/2,
-    0,
-    80,
-    40
-  };
+  SDL_Rect quad_total = {0};
+  quad_total.x = screen_width/2 + 200;
+  quad_total.y = 0;
+  quad_total.h = 40;
   for (unsigned int i = 0; i < total_kills.size(); i++) {
+    quad_total.w = 10*total_kills[i].size();
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, total_kills[i].c_str(), white);
     SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
     renderer.render(Message, NULL, &quad_total);

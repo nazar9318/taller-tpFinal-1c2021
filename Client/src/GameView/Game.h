@@ -51,6 +51,7 @@ class Game {
 		int prev_mouse_x;
 		int prev_mouse_y;
 		FaseType fase;
+		bool final_phase_rendered;
 
 	public:
 		Game(ProtectedQueue<Event>& model_events,

@@ -184,22 +184,20 @@ void MainWindow::moveMap(YAML::Emitter &emitter) {
 }
 
 void MainWindow::makeSquared(YAML::Emitter &emitter) {
-    int width = nodes[0]["width"].as<int>();
-    int height = nodes[0]["height"].as<int>();
-    int positions_loaded[width + min_x + 1][height + min_y + 1];
+    std::map<std::pair<int,int>, int> positions;
     for (size_t i = min_x-1; i <= max_x + 1; i++) {
         for (size_t j = min_y-1; j <= max_y + 1; j++) {
-            positions_loaded[i][j] = -1;
+            positions[std::make_pair(i,j)] = -1;
         }
     }
     for (size_t i = 1; i < nodes.size(); i++) {
         int x = nodes[i]["position"][0].as<int>();
         int y = nodes[i]["position"][1].as<int>();
-        positions_loaded[x][y] = 0;
+        positions[std::make_pair(x, y)] = 0;
     }
     for (size_t i = min_x-1; i <= max_x+1; i++) {
         for (size_t j = min_y-1; j <= max_y+1; j++) {
-            if (positions_loaded[i][j] == -1) {
+            if (positions.at(std::make_pair(i,j)) == -1) {
                 YAML::Node node;
                 YAML::Node coordinates;
                 coordinates.push_back(i);
@@ -220,9 +218,9 @@ void MainWindow::on_save_clicked() {
     size["height"] = this->heigth();
     nodes.push_back(size);
     emitter << size;
-    this->saveBases(emitter);
-    this->saveObjects(emitter);
-    moveMap(emitter);
+    this->saveBases();
+    this->saveObjects();
+    this->moveMap(emitter);
     this->makeSquared(emitter);
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save Address Book"), "../configs/",

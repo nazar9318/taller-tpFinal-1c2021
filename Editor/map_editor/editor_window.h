@@ -32,9 +32,10 @@ class MainWindow : public QMainWindow {
         Ui::MainWindow *ui;
         QGraphicsScene *scene;
         QString dragged;
-        void saveBases(YAML::Emitter &emitter);
-        void saveObjects(YAML::Emitter &emitter);
+        void saveBases();
+        void saveObjects();
         void makeSquared(YAML::Emitter &emitter);
+        void moveMap(YAML::Emitter &emitter);
         size_t width();
         size_t heigth();
         size_t min_x;

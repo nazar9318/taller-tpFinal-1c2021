@@ -27,7 +27,7 @@ ui(new Ui::MainWindow), delay_cnt(0) {
     this->ui->map->setMouseTracking(true);
 }
 
-void MainWindow::saveObjects(YAML::Emitter &emitter) {
+void MainWindow::saveObjects() {
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
         if ((name.find("weapon") != std::string::npos) || (name.find("box") != std::string::npos) ||
@@ -38,7 +38,6 @@ void MainWindow::saveObjects(YAML::Emitter &emitter) {
             coordinates.push_back((int)item->pos().y()/BASE_X);
             node["item"] = item->data(0).toString().toStdString();
             node["position"] = coordinates;
-            emitter << node;
             this->nodes.push_back(node);
         }
     }
@@ -107,7 +106,7 @@ void MainWindow::placePos(int &x, int &y) {
     }
 }
 
-void MainWindow::saveBases(YAML::Emitter &emitter) {
+void MainWindow::saveBases() {
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
         if ((name.find("base") != std::string::npos)) {
@@ -119,14 +118,9 @@ void MainWindow::saveBases(YAML::Emitter &emitter) {
             coordinates.push_back(y);
             node["item"] = item->data(0).toString().toStdString();
             node["position"] = coordinates;
-            emitter << node;
             this->nodes.push_back(node);
         }
     }
-}
-
-bool MainWindow::hasPos(std::vector<size_t> &vector, size_t pos) {
-    return std::find(vector.begin(), vector.end(), pos) != vector.end();
 }
 
 size_t MainWindow::heigth() {
@@ -165,22 +159,46 @@ size_t MainWindow::width() {
     return (this->max_x - this->min_x + 1);
 }
 
+void MainWindow::moveMap(YAML::Emitter &emitter) {
+    if (this->min_x == 0) {
+        for (size_t i = 1; i < nodes.size(); i++) {
+            int x = nodes[i]["position"][0].as<int>();
+            x++;
+            nodes[i]["position"][0] = x;
+        }
+        this->min_x++;
+        this->max_x++;
+    }
+    if (this->min_y == 0) {
+        for (size_t i = 1; i < nodes.size(); i++) {
+            int y = nodes[i]["position"][1].as<int>();
+            y++;
+            nodes[i]["position"][1] = y;
+        }
+        this->min_y++;
+        this->max_y++;
+    }
+    for (size_t i = 1; i < nodes.size(); i++) {
+        emitter << nodes[i];
+    }
+}
+
 void MainWindow::makeSquared(YAML::Emitter &emitter) {
     int width = nodes[0]["width"].as<int>();
     int height = nodes[0]["height"].as<int>();
     int positions_loaded[width + min_x + 1][height + min_y + 1];
-    for (size_t i = min_x; i <= max_x+1; i++) {
-        for (size_t j = min_y; j < max_y + 1; j++) {
+    for (size_t i = min_x-1; i <= max_x + 1; i++) {
+        for (size_t j = min_y-1; j <= max_y + 1; j++) {
             positions_loaded[i][j] = -1;
         }
     }
     for (size_t i = 1; i < nodes.size(); i++) {
-        int x = nodes[i]["position"][0].as<int>();;
-        int y = nodes[i]["position"][1].as<int>();;
+        int x = nodes[i]["position"][0].as<int>();
+        int y = nodes[i]["position"][1].as<int>();
         positions_loaded[x][y] = 0;
     }
-    for (size_t i = min_x; i <= max_x; i++) {
-        for (size_t j = min_y; j <= max_y; j++) {
+    for (size_t i = min_x-1; i <= max_x+1; i++) {
+        for (size_t j = min_y-1; j <= max_y+1; j++) {
             if (positions_loaded[i][j] == -1) {
                 YAML::Node node;
                 YAML::Node coordinates;
@@ -204,6 +222,7 @@ void MainWindow::on_save_clicked() {
     emitter << size;
     this->saveBases(emitter);
     this->saveObjects(emitter);
+    moveMap(emitter);
     this->makeSquared(emitter);
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save Address Book"), "../configs/",
@@ -418,7 +437,6 @@ void MainWindow::on_button_clicked() {
             if (!this->thereIsFloorIn(x, y)) {
                 new_item->setPos(x, y);
                 this->placePos(x,y);
-                //this->positions.push_back(std::make_pair(x,y));
                 this->scene->addItem(new_item);
             } else {
                 delete new_item;

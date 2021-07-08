@@ -39,6 +39,7 @@ void MainWindow::saveObjects(YAML::Emitter &emitter) {
             node["item"] = item->data(0).toString().toStdString();
             node["position"] = coordinates;
             emitter << node;
+            this->nodes.push_back(node);
         }
     }
 }
@@ -107,7 +108,6 @@ void MainWindow::placePos(int &x, int &y) {
 }
 
 void MainWindow::saveBases(YAML::Emitter &emitter) {
-    std::vector<YAML::Node> nodes;
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
         if ((name.find("base") != std::string::npos)) {
@@ -120,7 +120,7 @@ void MainWindow::saveBases(YAML::Emitter &emitter) {
             node["item"] = item->data(0).toString().toStdString();
             node["position"] = coordinates;
             emitter << node;
-            nodes.push_back(node);
+            this->nodes.push_back(node);
         }
     }
 }
@@ -130,33 +130,69 @@ bool MainWindow::hasPos(std::vector<size_t> &vector, size_t pos) {
 }
 
 size_t MainWindow::heigth() {
-    size_t heigth = 0;
+    this->min_y = this->scene->items().first()->pos().y()/BASE_Y;
+    this->max_y = this->scene->items().first()->pos().y()/BASE_Y;
     std::vector<size_t> count_heigth;
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
         if (name.size() > 0) {
-            if (!hasPos(count_heigth, (size_t)item->pos().y())) {
-                count_heigth.push_back(item->pos().y());
-                heigth++;
+            if (item->pos().y()/BASE_X < this->min_y) {
+                this->min_y = item->pos().y()/BASE_Y;
+            }
+            if (item->pos().y()/BASE_X > this->max_y) {
+                this->max_y = item->pos().y()/BASE_Y;
             }
         }
     }
-    return heigth;
+    return (this->max_y - this->min_y + 1);
 }
 
 size_t MainWindow::width() {
-    size_t width = 0;
+    this->min_x = this->scene->items().first()->pos().x()/BASE_X;
+    this->max_x = this->scene->items().first()->pos().x()/BASE_X;
     std::vector<size_t> count_width;
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
         if (name.size() > 0) {
-            if (!hasPos(count_width, (size_t)item->pos().x())) {
-                count_width.push_back(item->pos().x());
-                width++;
+            if (item->pos().x()/BASE_X < this->min_x) {
+                this->min_x = item->pos().x()/BASE_X;
+            }
+            if (item->pos().x()/BASE_X > this->max_x) {
+                this->max_x = item->pos().x()/BASE_X;
             }
         }
     }
-    return width;
+    return (this->max_x - this->min_x + 1);
+}
+
+void MainWindow::makeSquared(YAML::Emitter &emitter) {
+    int width = nodes[0]["width"].as<int>();
+    int height = nodes[0]["height"].as<int>();
+    int positions_loaded[width + min_x + 1][height + min_y + 1];
+    for (size_t i = min_x; i <= max_x+1; i++) {
+        for (size_t j = min_y; j < max_y + 1; j++) {
+            positions_loaded[i][j] = -1;
+        }
+    }
+    for (size_t i = 1; i < nodes.size(); i++) {
+        int x = nodes[i]["position"][0].as<int>();;
+        int y = nodes[i]["position"][1].as<int>();;
+        positions_loaded[x][y] = 0;
+    }
+    for (size_t i = min_x; i <= max_x; i++) {
+        for (size_t j = min_y; j <= max_y; j++) {
+            if (positions_loaded[i][j] == -1) {
+                YAML::Node node;
+                YAML::Node coordinates;
+                coordinates.push_back(i);
+                coordinates.push_back(j);
+                node["item"] = "box_black";
+                node["position"] = coordinates;
+                emitter << node;
+                this->nodes.push_back(node);
+            }
+        }
+    }
 }
 
 void MainWindow::on_save_clicked() {
@@ -164,27 +200,22 @@ void MainWindow::on_save_clicked() {
     YAML::Node size;
     size["width"] = this->width();
     size["height"] = this->heigth();
+    nodes.push_back(size);
     emitter << size;
     this->saveBases(emitter);
     this->saveObjects(emitter);
+    this->makeSquared(emitter);
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save Address Book"), "../configs/",
             tr("Address Book (*.yml);;All Files (*)"));
     std::ofstream out(fileName.toStdString());
     out << emitter.c_str();
+    nodes.clear();
 }
 
 void MainWindow::on_load_clicked() {
     QString file_name = QFileDialog::getOpenFileName(this, "Open a file", "../configs/");
     std::vector<YAML::Node> nodes = YAML::LoadAllFromFile(file_name.toStdString());
-    /*int width = nodes[0]["width"].as<int>();
-    int heigth = nodes[0]["heigth"].as<int>();
-    int positions_loaded[width][heigth];
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < heigth; j++) {
-            positions_loaded[i][j] = -1;
-        }
-    }*/
     for (size_t i = 1; i < nodes.size(); i++) {
         QGraphicsPixmapItem *item;
         const std::string &new_item_name = nodes[i]["item"].as<std::string>();
@@ -218,21 +249,7 @@ void MainWindow::on_load_clicked() {
         item->setPos(x, y);
         item->setData(0, q_new_item_name);
         this->scene->addItem(item);
-        //positions_loaded[nodes[i]["position"][0].as<int>()][nodes[i]["position"][1].as<int>()] = 1;
     }
-    /*for (int i = 0; i < width; i++) {
-        for (int j = 0; j < heigth; j++) {
-            if (positions_loaded[i][j] == 0) {
-                QPixmap pix(":/resources/box_black.png");
-                QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE));
-                QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pixmap);
-                int x = (width)*BASE_X+1;
-                int y = (heigth)*BASE_Y+1;
-                item->setPos(x, y);
-                item->setData(0, "box_black");
-            }
-        }
-    }*/
 }
 
 void MainWindow::removeFrom(const std::string& item, int x, int y) {

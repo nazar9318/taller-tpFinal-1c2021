@@ -34,8 +34,14 @@ class MainWindow : public QMainWindow {
         QString dragged;
         void saveBases(YAML::Emitter &emitter);
         void saveObjects(YAML::Emitter &emitter);
+        void makeSquared(YAML::Emitter &emitter);
         size_t width();
         size_t heigth();
+        size_t min_x;
+        size_t min_y;
+        size_t max_x;
+        size_t max_y;
+        std::vector<YAML::Node> nodes;
         bool isFloor();
         QGraphicsPixmapItem* createFloor();
         QGraphicsPixmapItem* createPlaceable();

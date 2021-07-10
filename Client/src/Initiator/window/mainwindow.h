@@ -65,10 +65,8 @@ public:
 
 private slots:
     void on_createButton_clicked();
-
     void on_joinButton_clicked();
-
-    void on_buttonBox_accepted();
+    void on_OK_clicked();
     void update_players();
     void update_matches();
     void on_pushButton_clicked();
@@ -84,8 +82,6 @@ private:
     void show_maps(Event& maps_received);
     void clean_matches();
     void show_matches(Event& matches_received);
-
-
 };
 
 #endif // MAINWINDOW_H

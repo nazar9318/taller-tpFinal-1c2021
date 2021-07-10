@@ -50,10 +50,10 @@ m3_distance_penalty: 0.03
 awp_distance_penalty: 0
 knife_distance_penalty: 0
 
-glock_ammo: 8
-ak47_ammo: 30
-m3_ammo: 12
-awp_ammo: 7
+glock_ammo: 50
+ak47_ammo: 120
+m3_ammo: 90
+awp_ammo: 20
 
 glock_price: 15
 ak47_price: 30

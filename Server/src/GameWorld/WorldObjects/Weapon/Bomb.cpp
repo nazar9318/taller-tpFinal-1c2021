@@ -87,7 +87,7 @@ bool Bomb::activate(char id, b2Vec2& position) {
 }
 
 void Bomb::stop_activating(char id) {
-	if (has_owner && (state = BombState::ACTIVATING) && (id_owner == id)) {
+	if (has_owner && (state == BombState::ACTIVATING) && (id_owner == id)) {
 		state = BombState::NORMAL;
 		clock_active = 0;
 	}

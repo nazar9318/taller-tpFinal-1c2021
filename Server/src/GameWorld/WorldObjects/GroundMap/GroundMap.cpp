@@ -1,6 +1,7 @@
 #include "GroundMap.h"
 #include <string>
 #include <utility>
+#include <syslog.h>
 
 GroundMap::GroundMap(const std::string& map_type) {
 	MapParser parser;
@@ -120,8 +121,11 @@ bool GroundMap::is_bomb_zone(b2Vec2& pos) {
 		 	(it->get_x() - CF::size_position / 2 <= pos.x) &&
 		 	(it->get_x() + CF::size_position / 2 >= pos.x) && 
 		 	(it->get_y() - CF::size_position / 2 <= pos.y) &&
-		 	(it->get_y() + CF::size_position / 2 >= pos.y))
+		 	(it->get_y() + CF::size_position / 2 >= pos.y)) {
+			syslog(LOG_INFO, "[%s:%i]: Zona de bomba en %d, %d "
+					, __FILE__, __LINE__, (int)pos.x, (int)pos.y);
 		 	return true;
+		}
 	}
 	return false;
 }

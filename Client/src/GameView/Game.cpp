@@ -9,10 +9,10 @@ Game::Game(ProtectedQueue<Event>& model,
 model_events(model), client_events(client), is_running(true),
 player(player_id, charactersInfo.at(player_id)),
 window("Counter 2d", 800, 600, false), renderer(window),
- camera(renderer, 800, 600), hud(renderer, 800, 600),
- final_phase(renderer, 800, 600),
- map(renderer, player,camera, characters, hud, final_phase),
-  initial_fase(renderer, 800, 600),
+camera(renderer, 800, 600), hud(renderer, 800, 600),
+final_phase(renderer, 800, 600),
+map(renderer, player,camera, characters, hud, final_phase),
+initial_fase(renderer, 800, 600),
 prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE),
 final_phase_rendered(false) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
@@ -69,10 +69,6 @@ void Game::render() {
 		hud.render();
 	} else if (fase == FaseType::END_ROUND) {
 		final_phase.render();
-		/*if (!final_phase_rendered) {
-			final_phase.render();
-			final_phase_rendered = true;
-		}*/
 	}
 	renderer.presentScreen();
 }

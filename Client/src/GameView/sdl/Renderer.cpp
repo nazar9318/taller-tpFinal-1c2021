@@ -26,7 +26,7 @@ void Renderer::setDrawColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
 }
 
 SDL_Texture* Renderer::createTextureFromSurface(SDL_Surface* surface) const {
-  SDL_Texture* new_texture =  SDL_CreateTextureFromSurface(renderer, surface);
+  SDL_Texture* new_texture = SDL_CreateTextureFromSurface(renderer, surface);
   if (!new_texture) {
     throw SDLException("SDLException: failed to create texture from surface - %s\n",SDL_GetError());
   }

@@ -17,7 +17,7 @@ class FinalPhase {
 		std::vector<std::string> names;
 		std::vector<std::string> round_kills;
 		std::vector<std::string> total_kills;
-		TTF_Font* font = NULL;
+		TTF_Font* font;
 		int screen_width;
 		int screen_height;
 

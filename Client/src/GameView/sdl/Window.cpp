@@ -26,9 +26,7 @@ Window::Window(const std::string& title, int w, int h, bool fullscreen):width(w)
 //   }
 // }
 
-SDL_Window* Window::getWindow(){
-  return window;
-}
+SDL_Window* Window::getWindow() { return window; }
 
 Window::~Window(){
   if (window) {

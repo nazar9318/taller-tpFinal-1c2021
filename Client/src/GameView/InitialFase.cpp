@@ -1,11 +1,7 @@
 #include "InitialFase.h"
 
 InitialFase::InitialFase(Renderer& renderer, int screen_width, int screen_height):
-    renderer(renderer),
-    screen_width(screen_width),
-    screen_height(screen_height)
-    {}
-
+renderer(renderer), screen_width(screen_width), screen_height(screen_height), font(NULL) {}
 
 void InitialFase::loadMedia(){
   background.loadFromFile(renderer, "../Client/Assets/InitialFase/background.png");
@@ -22,7 +18,7 @@ void InitialFase::loadMedia(){
 
   /*FONT*/
   font = TTF_OpenFont("../Client/Assets/Fonts/japanese.ttf", 5);
-  if(!font){
+  if (!font) {
     throw SDLException("SDLException: failed to load fonts -> InitialFase - %s\n",TTF_GetError());
   }
 }
@@ -50,4 +46,6 @@ void InitialFase::render() {
   }
 }
 
-InitialFase::~InitialFase(){}
+InitialFase::~InitialFase() {
+  if (font != NULL) { TTF_CloseFont(font); }
+}

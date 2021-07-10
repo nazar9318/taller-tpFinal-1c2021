@@ -16,8 +16,6 @@ class Window {
     SDL_Window* window;
     // SDL_Renderer* renderer; No se si lo necesito
 
-
-
   public:
 
     Window(const std::string& title, int w, int h, bool fullscreen);

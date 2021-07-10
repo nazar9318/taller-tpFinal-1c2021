@@ -13,9 +13,7 @@ class InitialFase {
 		Renderer& renderer;
 		Texture background;
 		Button ak, awp, m3;
-
-		TTF_Font* font = NULL;
-
+		TTF_Font* font;
 		int screen_width;
 		int screen_height;
 
@@ -29,7 +27,6 @@ class InitialFase {
 		~InitialFase();
 
 	private:
-
 		InitialFase(const InitialFase &other) = delete;
 		InitialFase& operator=(const InitialFase &other) = delete;
 		InitialFase(InitialFase&& other) = delete;

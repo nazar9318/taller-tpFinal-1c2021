@@ -22,6 +22,7 @@ class ClientPlayer {
 		int money;
 		char life;
 		char weapon_type;
+		bool bomb_owner = false;
 
 	public:
 		ClientPlayer(char& id, std::string& name);
@@ -31,6 +32,8 @@ class ClientPlayer {
 		void changeClip();
 		void set_team(Team team);
 		void set_weapon();
+		void change_bomb_ownership(bool is_owner);
+		bool has_bomb();
 		Texture& getTexture();
 		Texture& getWeapon();
 		SDL_Rect& getBox();

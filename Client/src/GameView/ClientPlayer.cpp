@@ -115,4 +115,12 @@ std::string ClientPlayer::get_name() {
 	return name;
 }
 
+void ClientPlayer::change_bomb_ownership(bool is_owner){
+	bomb_owner = is_owner;
+}
+
+bool ClientPlayer::has_bomb(){
+	return bomb_owner;
+}
+
 ClientPlayer::~ClientPlayer() {}

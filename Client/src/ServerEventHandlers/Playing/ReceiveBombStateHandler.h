@@ -8,13 +8,14 @@
 #include "Team.h"
 #include "FaseType.h"
 #include "BombState.h"
+#include "ClientBomb.h"
 
 
 class ReceiveBombStateHandler {
 	public:
 		ReceiveBombStateHandler();
 
-		void handle(FaseType& fase, Event& event, GameMap& map);
+		void handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb);
 
 		~ReceiveBombStateHandler();
 };

@@ -6,15 +6,16 @@
 Game::Game(ProtectedQueue<Event>& model,
 	ProtectedQueue<std::unique_ptr<Event>>& client,
 	std::map<char, std::string>& charactersInfo, char& player_id) :
-model_events(model), client_events(client), is_running(true),
-player(player_id, charactersInfo.at(player_id)),
-window("Counter 2d", 800, 600, false), renderer(window),
-camera(renderer, 800, 600), hud(renderer, 800, 600),
-final_phase(renderer, 800, 600),
-map(renderer, player,camera, characters, hud, final_phase),
-initial_fase(renderer, 800, 600),
-prev_mouse_x(0), prev_mouse_y(0), fase(FaseType::INITIAL_FASE),
-final_phase_rendered(false) {
+	model_events(model), client_events(client), is_running(true),
+	player(player_id, charactersInfo.at(player_id)),
+	window("Counter 2d", 800, 600, false), renderer(window),
+ 	camera(renderer, 800, 600), hud(renderer, 800, 600),
+ 	final_phase(renderer, 800, 600),
+ 	map(renderer, player,camera, characters, hud, final_phase),
+  initial_fase(renderer, 800, 600),
+ 	fase(FaseType::INITIAL_FASE),
+	final_phase_rendered(false),
+	bomb(renderer, camera, player_id, player) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
 		if (it->first != player_id) {
 			ClientCharacter character(it->second);
@@ -53,6 +54,7 @@ void Game::execute() {
 void Game::loadMedia() {
 	map.loadMedia();
 	hud.loadMedia();
+	bomb.loadMedia();
 	initial_fase.loadMedia();
 	final_phase.loadMedia();
 }
@@ -67,6 +69,7 @@ void Game::render() {
 		map.renderPlayer();
 		map.renderCharacters();
 		hud.render();
+		bomb.render();
 	} else if (fase == FaseType::END_ROUND) {
 		final_phase.render();
 	}
@@ -215,7 +218,7 @@ void Game::process_events() {
 	while (queue_not_empty && max_iterations > i) {
 		try {
 			Event event = model_events.pop();
-			handler.handle(fase, event, map);
+			handler.handle(fase, event, map, bomb);
 			i++;
 		} catch(ExceptionEmptyQueue& e) {
 			queue_not_empty = false;

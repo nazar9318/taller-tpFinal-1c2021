@@ -1,4 +1,4 @@
-#include "InitialFase.h"
+#include "InitialPhase.h"
 
 InitialFase::InitialFase(Renderer& renderer, int screen_width, int screen_height):
 renderer(renderer), screen_width(screen_width), screen_height(screen_height), font(NULL) {}

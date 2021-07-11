@@ -30,7 +30,7 @@
 #include "FaseType.h"
 #include "Camera.h"
 #include "Hud.h"
-#include "InitialFase.h"
+#include "InitialPhase.h"
 #include "FinalPhase.h"
 
 class Game {
@@ -39,6 +39,7 @@ class Game {
 		ProtectedQueue<std::unique_ptr<Event>>& client_events;
 		GameMap map;
 		Hud hud;
+		ClientBomb bomb;
 		InitialFase initial_fase;
 		FinalPhase final_phase;
 		ModelEventHandler handler;
@@ -48,8 +49,6 @@ class Game {
 		Window window;
 		Renderer renderer;
 		Camera camera;
-		int prev_mouse_x;
-		int prev_mouse_y;
 		FaseType fase;
 		bool final_phase_rendered;
 

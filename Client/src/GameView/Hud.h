@@ -2,9 +2,12 @@
 #define _HUD_H
 
 #include <string>
+#include <map>
 
 #include "Texture.h"
 #include "Renderer.h"
+
+#include "TypesOfEvents.h"
 
 #define SYMBOL_WIDTH 64
 #define SYMBOL_HEIGHT 64
@@ -19,11 +22,11 @@ class Hud {
 	private:
 		Renderer& renderer;
 
-		Texture money_icon;
 		Texture numbers;
 		Texture hud_symbols;
+		std::map<char, Texture> weapons;
 
-		SDL_Rect clips[3];
+		SDL_Rect clips[4];
 
 		int window_width;
 		int window_height;
@@ -33,6 +36,7 @@ class Hud {
 		int money;
 		int ammo;
 		char weapon_type;
+		bool has_bomb;
 
 	public:
 
@@ -40,7 +44,7 @@ class Hud {
 
 		void loadMedia();
 
-		void update_values(char life, int money, int ammo, char weapon_type);
+		void update_values(char life, int money, int ammo, char weapon_type, bool has_bomb);
 
 		void render();
 
@@ -51,6 +55,8 @@ class Hud {
 		void renderLife();
 		void renderMoney();
 		void renderAmmo();
+		void renderBomb();
+		void renderWeapon();
 		void setClips();
 		Hud(const Hud &other) = delete;
 		Hud& operator=(const Hud &other) = delete;

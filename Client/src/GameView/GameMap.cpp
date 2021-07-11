@@ -1,11 +1,16 @@
 #include "GameMap.h"
 
 GameMap::GameMap(Renderer& renderer, ClientPlayer& player,
-Camera& camera, std::map<char, ClientCharacter> &characters, Hud& hud, 
-FinalPhase& final_phase)
-: renderer(renderer), tile_container(TileContainer::getInstance()),
-sprite_container(SpriteContainer::getInstance()), player(player),
-characters(characters), camera(camera), hud(hud), final_phase(final_phase) {}
+  Camera& camera, std::map<char, ClientCharacter> &characters, Hud& hud,
+  FinalPhase& final_phase):
+  renderer(renderer),
+  tile_container(TileContainer::getInstance()),
+  sprite_container(SpriteContainer::getInstance()),
+  player(player),
+  characters(characters),
+  camera(camera),
+  hud(hud),
+  final_phase(final_phase){}
 
 void GameMap::create() {}
 
@@ -67,7 +72,7 @@ void GameMap::update_position(char id, int pos_x, int pos_y, int angle,
         char life, int money, char weapon_type, int ammo) {
   if (id == player.get_id()) {
     player.update_position(pos_x, pos_y, angle, life, money, weapon_type, ammo);
-    hud.update_values(life, money, ammo, weapon_type);
+    hud.update_values(life, money, ammo, weapon_type, player.has_bomb());
     camera.center(player.getBox(), map_width, map_height);
   } else {
     characters.at(id).update_position(pos_x, pos_y, angle, weapon_type);
@@ -110,6 +115,7 @@ void GameMap::add_stats(char id, int kills_round, int kills_total) {
   }
   final_phase.addScore(name, team, kills_round, kills_total);
 }
+
 
 
 /*------------------------------------------------------------------------*/

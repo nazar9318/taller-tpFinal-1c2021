@@ -2,7 +2,7 @@
 
 
 Bomb::Bomb(): state(BombState::NORMAL),
-			  clock_active(0), has_owner(false), 
+			  clock_active(0), has_owner(false),
 			  clock_deactivate(0), pos(0.0, 0.0) {
 }
 
@@ -27,7 +27,7 @@ bool Bomb::simulate_step() {
 				return true;
 			}
 			break;
-		}                
+		}
 		case BombState::ACTIVATING:
 		{
 			clock_active++;
@@ -35,17 +35,17 @@ bool Bomb::simulate_step() {
 				state = BombState::ACTIVATED;
 				clock_active = 0;
 				has_owner = false;
-			}   
-			break; 
+			}
+			break;
 		}
-		case BombState::DEACTIVATING: 
+		case BombState::DEACTIVATING:
 		{
 			clock_active++;
 			if (clock_active * STEP_TIME >= CF::TIME_BOMB_EXPLOTE)
 				state = BombState::EXPLOTED;
 			clock_deactivate++;
 			if (clock_deactivate * STEP_TIME >= CF::TIME_BOMB_DEACTIVATE) {
-				state = BombState::DEACTIVATED;	
+				state = BombState::DEACTIVATED;
 				return true;
 			}
 			break;
@@ -72,7 +72,7 @@ bool Bomb::simulate_step() {
 		}
 	}
 	return false;
-}	
+}
 
 
 bool Bomb::activate(char id, b2Vec2& position) {
@@ -95,7 +95,7 @@ void Bomb::stop_activating(char id) {
 
 
 bool Bomb::deactivate(Team team, char deactivator) {
-	if ((!has_owner) && (state == BombState::ACTIVATED) && 
+	if ((!has_owner) && (state == BombState::ACTIVATED) &&
 		 (team == Team::COUNTER_ENEMY)) {
 		state = BombState::DEACTIVATING;
 		has_owner = true;
@@ -108,7 +108,7 @@ bool Bomb::deactivate(Team team, char deactivator) {
 
 
 void Bomb::stop_deactivating(char id) {
-	if ((state == BombState::DEACTIVATING) && 
+	if ((state == BombState::DEACTIVATING) &&
 		 (id_owner == id)) {
 		state = BombState::ACTIVATED;
 		has_owner = false;
@@ -116,7 +116,7 @@ void Bomb::stop_deactivating(char id) {
 	}
 }
 
-		
+
 void Bomb::drop(char id, b2Vec2& position) {
 	if (has_owner && (id == id_owner)) {
 		has_owner = false;
@@ -127,7 +127,7 @@ void Bomb::drop(char id, b2Vec2& position) {
 		} else if (state == BombState::DEACTIVATING) {
 			state = BombState::ACTIVATED;
 			clock_deactivate = 0;
-		}		
+		}
 	}
 }
 
@@ -147,7 +147,7 @@ b2Vec2 Bomb::get_pos() {
 
 void Bomb::restart() {
 	state = BombState::NORMAL;
-	clock_active = 0; 
+	clock_active = 0;
 	clock_deactivate = 0;
 	has_owner = false;
 
@@ -160,7 +160,7 @@ void Bomb::restart() {
 	//bool has_owner
 		//if(has_owner)
 			// id
-		//else 
+		//else
 			// 2 ints posicion
 
 // if es ACTIVATING:
@@ -208,10 +208,10 @@ std::vector<char> Bomb::get_info() {
 		char time_until_explote = (char)(CF::TIME_BOMB_EXPLOTE -
 											 clock_active * STEP_TIME);
 		info.push_back(time_until_explote);
-		
+
 		int x = (int)pos.x;
 		int y = (int)pos.y;
-		
+
 		info.push_back(*((char*)(&x)));
 		info.push_back(*((char*)(&x) + 1));
 		info.push_back(*((char*)(&x) + 2));

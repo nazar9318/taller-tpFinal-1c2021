@@ -186,8 +186,8 @@ void FinalPhase::renderPostGame() {
   quad_post_game_player.y += 40;
   SDL_FreeSurface(surfaceMessage);
   quad_post_game_player.w = 15*player_winner.size();
-  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, player_winner.c_str(), white);
-  SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
+  surfaceMessage = TTF_RenderText_Solid(font, player_winner.c_str(), white);
+  Message = renderer.createTextureFromSurface(surfaceMessage);
   renderer.render(Message, NULL, &quad_post_game_player);
   SDL_FreeSurface(surfaceMessage);
 
@@ -196,14 +196,14 @@ void FinalPhase::renderPostGame() {
   quad_post_game_team.y = 0;
   quad_post_game_team.h = 40;
   quad_post_game_team.w = 15*team_winner_title.size();
-  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, team_winner_title.c_str(), white);
-  SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
+  surfaceMessage = TTF_RenderText_Solid(font, team_winner_title.c_str(), white);
+  Message = renderer.createTextureFromSurface(surfaceMessage);
   renderer.render(Message, NULL, &quad_post_game_team);
   quad_post_game_team.y += 40;
   SDL_FreeSurface(surfaceMessage);
   quad_post_game_team.w = 15*team_winner.size();
-  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, team_winner.c_str(), white);
-  SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
+  surfaceMessage = TTF_RenderText_Solid(font, team_winner.c_str(), white);
+  Message = renderer.createTextureFromSurface(surfaceMessage);
   renderer.render(Message, NULL, &quad_post_game_team);
   SDL_FreeSurface(surfaceMessage);
 }

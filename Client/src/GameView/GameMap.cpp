@@ -100,12 +100,15 @@ void GameMap::renderCharacters() {
 
 void GameMap::add_stats(char id, int kills_round, int kills_total) {
   std::string name;
+  std::string team;
   if (id == player.get_id()) {
     name = player.get_name();
+    team = player.getTeam();
   } else {
     name = characters.at(id).get_name();
+    team = characters.at(id).getTeam();
   }
-  final_phase.addScore(name, kills_round, kills_total);
+  final_phase.addScore(name, team, kills_round, kills_total);
 }
 
 

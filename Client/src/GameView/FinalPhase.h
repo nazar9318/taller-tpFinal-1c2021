@@ -15,17 +15,25 @@ class FinalPhase {
 		Renderer& renderer;
 		Texture background;
 		std::vector<std::string> names;
+		std::vector<std::string> team;
 		std::vector<std::string> round_kills;
 		std::vector<std::string> total_kills;
 		TTF_Font* font;
 		int screen_width;
 		int screen_height;
+		bool post_game;
+		void teamWinner(std::string& winner, int count);
+		void playerWinner(std::string& winner, int count);
 
 	public:
     	FinalPhase(Renderer& renderer, int screen_width, int screen_height);
-		void addScore(const std::string& name, int round_kills, int total_kills);
+		void addScore(const std::string& name, const std::string& team,
+						int round_kills, int total_kills);
 		void loadMedia();
 		void render();
+		void endGame();
+		void renderPostGame();
+		void renderRound();
 		~FinalPhase();
 
 	private:

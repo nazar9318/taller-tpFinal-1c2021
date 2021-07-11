@@ -26,6 +26,11 @@ void ClientCharacter::set_team(Team team) {
 	texture = &(SpriteContainer::getInstance()[team]);
 	pos.w = 32;
 	pos.h = 32;
+	if (team == TERRORIST) {
+		this->team = "Terrorist";
+	} else if (team == COUNTER_ENEMY) {
+		this->team = "Counter";
+	}
 }
 
 SDL_Rect& ClientCharacter::getBox() { return pos; }
@@ -77,8 +82,8 @@ void ClientCharacter::render(Camera& camera){
 
 SDL_Rect& ClientCharacter::getClip() { return clip[current_clip]; }
 
-std::string ClientCharacter::get_name() {
-	return name;
-}
+std::string ClientCharacter::getTeam() { return team; }
+
+std::string ClientCharacter::get_name() { return name; }
 
 ClientCharacter::~ClientCharacter() {}

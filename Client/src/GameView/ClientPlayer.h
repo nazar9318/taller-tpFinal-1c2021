@@ -12,6 +12,7 @@ class ClientPlayer {
 	private:
 		char& id;
 		std::string name;
+		std::string team;
 		Texture* texture;
 		Texture* texture_weapon;
 		SDL_Rect pos;
@@ -34,6 +35,7 @@ class ClientPlayer {
 		Texture& getWeapon();
 		SDL_Rect& getBox();
 		SDL_Rect& getClip();
+		std::string getTeam();
 		double getAngle();
 		void update_position(int pos_x, int pos_y, int angle,
 				char life, int money, char weapon_type, int ammo);

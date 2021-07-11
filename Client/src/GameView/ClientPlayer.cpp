@@ -28,7 +28,14 @@ void ClientPlayer::set_team(Team team) {
 	pos.y = 0;
 	pos.w = PLAYER_WIDTH;
 	pos.h = PLAYER_HEIGHT;
+	if (team == TERRORIST) {
+		this->team = "Terrorist";
+	} else if (team == COUNTER_ENEMY) {
+		this->team = "Counter";
+	}
 }
+
+std::string ClientPlayer::getTeam() { return team; }
 
 /*void ClientPlayer::set_weapon() {
 	texture_weapon = &(SpriteContainer::getInstance()[weapon]);

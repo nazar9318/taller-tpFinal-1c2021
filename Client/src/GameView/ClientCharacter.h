@@ -11,6 +11,7 @@
 class ClientCharacter {
 	private:
 		std::string name;
+		std::string team;
 		char type;
 		Texture* texture;
 		Texture* texture_weapon;
@@ -25,6 +26,7 @@ class ClientCharacter {
 		SDL_Rect& getClip();
 		SDL_Rect& getBox();
 		char getType();
+		std::string getTeam();
 		Texture& getTexture();
 		double getAngle();
 		void set_team(Team team);

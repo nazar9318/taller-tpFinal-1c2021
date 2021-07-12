@@ -94,9 +94,10 @@ void Bomb::stop_activating(char id) {
 }
 
 
-bool Bomb::deactivate(Team team, char deactivator) {
+bool Bomb::deactivate(Team team, char deactivator, b2Vec2& deact_pos) {
 	if ((!has_owner) && (state == BombState::ACTIVATED) &&
-		 (team == Team::COUNTER_ENEMY)) {
+		 (team == Team::COUNTER_ENEMY) && 
+		 (pos - deact_pos).Length() <= CF::size_position) {
 		state = BombState::DEACTIVATING;
 		has_owner = true;
 		id_owner = deactivator;

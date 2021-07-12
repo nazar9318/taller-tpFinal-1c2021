@@ -254,8 +254,8 @@ bool GameWorld::activate_bomb(char id, b2Vec2& pos) {
 	return (ground.is_bomb_zone(pos) && bomb.activate(id, pos));
 }
 
-bool GameWorld::deactivate_bomb(Team team, char id) {
-	return bomb.deactivate(team, id);
+bool GameWorld::deactivate_bomb(Team team, char id, b2Vec2& pos) {
+	return bomb.deactivate(team, id, pos);
 }
 
 void GameWorld::stop_activating_bomb(char id) {

@@ -57,7 +57,7 @@ class GameWorld {
 		void add_weapon(const b2Vec2& pos, Weapon* weapon);
 		bool get_closest_weapon(b2Vec2 char_pos, Weapon** weapon);
 		bool activate_bomb(char id, b2Vec2& pos);
-		bool deactivate_bomb(Team team, char id);
+		bool deactivate_bomb(Team team, char id, b2Vec2& pos);
 		void stop_activating_bomb(char id);
 		void stop_deactivating_bomb(char id);
 		bool grab_bomb(char id, Team team, b2Vec2& pos);

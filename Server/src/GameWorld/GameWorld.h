@@ -21,6 +21,7 @@
 #include "FaseType.h"
 #include "Character.h"
 #include "Bomb.h"
+#include "SquadsManager.h"
 
 class GameWorld {
 		int number_players;
@@ -35,6 +36,7 @@ class GameWorld {
 		FaseType fase_type;
 		std::list<std::unique_ptr<Weapon>> weapons_in_ground;
 		Bomb bomb;
+		SquadsManager squad_manager;
 
 	public:
 		GameWorld(const std::string& map_type);
@@ -61,6 +63,7 @@ class GameWorld {
 		bool grab_bomb(char id, Team team, b2Vec2& pos);
 		FaseType get_fase();
 		std::vector<char> bomb_info();
+		std::vector<char> get_squads();
 		~GameWorld();
 
 

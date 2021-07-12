@@ -11,6 +11,7 @@
 #include "GameWorld.h"
 #include "GameStartedEvent.h"
 #include "Position.h"
+#include "SendSquadsEvent.h"
 
 class StartGameHandler{
 	public:

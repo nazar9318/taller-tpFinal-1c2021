@@ -28,13 +28,18 @@ void StartGameHandler::handle(Event& event,
 	std::shared_ptr<Event> weapons(
 			new SendWeaponsEvent(game_world.get_weapons_info()));
 
+	std::shared_ptr<Event> squads(
+			new SendSquadsEvent(game_world.get_squads()));
+
 	for (auto it = players.begin(); it != players.end(); ++it) {
 		std::shared_ptr<Event> event_start = starter_event;
 		std::shared_ptr<Event> event_map = game_map;
 		std::shared_ptr<Event> event_weapon = weapons;
+		std::shared_ptr<Event> event_squads = squads;
 		it->second->push(event_start);
 		it->second->push(event_map);
 		it->second->push(event_weapon);
+		it->second->push(event_squads);
 	}
 }
 

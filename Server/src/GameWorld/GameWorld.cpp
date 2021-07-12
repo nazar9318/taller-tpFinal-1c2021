@@ -6,7 +6,8 @@ GameWorld::GameWorld(const std::string& map_type):
 			 number_players(0),ground(map_type),
 			 actual_team(Team::COUNTER_ENEMY),
 			 number_tics(0), number_round(0), 
-			 characters(), step_info(characters) {
+			 characters(), step_info(characters), 
+			 squad_manager(actual_team) {
 	b2Vec2 gravity(0, 0);
 	world = new b2World(gravity);
 	blocks = ground.fill_blocks(world);
@@ -24,6 +25,7 @@ void GameWorld::add_player_if_not_full(char id) {
 	characters.insert({id, std::move(character)});
 	actual_team = get_opposite(actual_team);
 	number_players++;
+	squad_manager.add_squad_character(actual_team, id);
 	syslog(LOG_INFO, "[%s:%i]: Se agrego al jugador con id %d"
 					 " al GameWorld", __FILE__, __LINE__, id);
 }
@@ -136,6 +138,7 @@ void GameWorld::change_teams() {
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		it->second.change_team();
 	}
+	squad_manager.change_teams();
 }
 
 
@@ -173,13 +176,13 @@ void GameWorld::simulate_playing_step() {
 		charge_stats();
 		number_round++;
 		number_tics = 0;
-		
 	}
 }
 
 bool GameWorld::round_finished() {
 	if (bomb.simulate_step()) {
-		//step_info.add_finish(bomb.state());
+		step_info.add_finish(bomb.get_state());
+		squad_manager.add_win(bomb.get_state());
 		return true;
 	} 
 	bool terrorist_dead = true;
@@ -195,11 +198,13 @@ bool GameWorld::round_finished() {
 		++it;
 	}
 	if (counter_dead) {
-		//step_info.add_counter_eliminated();
+		step_info.add_team_eliminated(Team::COUNTER_ENEMY);
+		squad_manager.add_win(Team::COUNTER_ENEMY);
 		return true;
 	}
 	if (terrorist_dead && bomb.get_state() != BombState::ACTIVATED) {
-		//step_info.add_terrorist_eliminated());
+		step_info.add_team_eliminated(Team::TERRORIST);
+		squad_manager.add_win(Team::TERRORIST);
 		return true;
 	}
 	return false;
@@ -275,6 +280,13 @@ std::vector<char> GameWorld::bomb_info() {
 FaseType GameWorld::get_fase() {
 	return fase_type;
 }
+
+
+std::vector<char> GameWorld::get_squads() {
+	return squad_manager.get_squads();
+}
+
+
 
 GameWorld::~GameWorld() {
 	delete world;

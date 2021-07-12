@@ -7,12 +7,24 @@ StepInformation(std::map<char,Character>& players):
 						characters(players) {
 }
 
-void StepInformation::clear() {
-	//
-}
-
 int StepInformation::get_wait() {
 	return waiting_time;
+}
+
+std::vector<char> StepInformation::get_reason_finish() {
+	return reason_finish;
+}
+
+void StepInformation::add_team_eliminated(Team team) {
+	reason_finish.clear();
+	reason_finish.push_back(ReasonFinish::TEAM_ELIMINATED);
+	reason_finish.push_back((char)team);
+}
+
+void StepInformation::add_finish(BombState state) {
+	reason_finish.clear();
+	reason_finish.push_back(ReasonFinish::BOMB_ENDED);
+	reason_finish.push_back((char)state);
 }
 
 std::vector<char> StepInformation::get_players_init() {
@@ -30,7 +42,6 @@ void StepInformation::add_attack(AttackInformation attack_info) {
 }
 
 std::vector<char> StepInformation::get_attacks(){
-
 	std::vector<char> msg;
 	msg.push_back((char)attacks.size());
 

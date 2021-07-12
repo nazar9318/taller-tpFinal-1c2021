@@ -165,10 +165,10 @@ void GameWorld::handle_attack(std::map<char, Character>::iterator& it_attacker,
 
 void GameWorld::simulate_playing_step() {
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
-		it->second.apply_impulses();
 		AttackInformation attack_info(it->first, &(it->second));
 		it->second.attack(attack_info, blocks, characters);
 		handle_attack(it, attack_info);
+		it->second.apply_impulses();
 	}
 	world->Step(STEP_TIME, CF::velocity_iterations,
 								 CF::position_iterations);

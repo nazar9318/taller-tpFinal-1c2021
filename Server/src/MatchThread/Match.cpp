@@ -78,7 +78,10 @@ void Match::start_game() {
 			game_starter.handle(event, players, game_world);
 		} catch(ExceptionInvalidCommand& e) {
 			std::shared_ptr<Event> error(new ErrorEvent(e.get_type()));
-			push_event(error);
+			for (auto it = players.begin(); it != players.end(); ++it) {
+				std::shared_ptr<Event> to_push = error;
+				it->second->push(to_push);
+			}
 			if (e.get_type() == ServerError::CREATOR_ABANDONS_MATCH) {
 				finished = true;
 			} else {

@@ -18,5 +18,4 @@ void Client::execute(int argc, char** argv) {
 	sender.stop_running();
 }
 
-
 Client::~Client() {}

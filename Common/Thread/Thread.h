@@ -16,6 +16,7 @@ class Thread {
 
         void start();
         void join();
+        bool joinable();
 
         Thread(Thread&& other);
 

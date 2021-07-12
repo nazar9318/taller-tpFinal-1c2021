@@ -26,5 +26,7 @@ void EventSenderThread::run() {
 }
 
 EventSenderThread::~EventSenderThread() {
-	this->join();
+	if (this->joinable()) {
+		this->join();
+	}
 }

@@ -14,6 +14,7 @@
 #include <map>
 #include <QSignalMapper>
 #include <QTimer>
+#include <QCloseEvent>
 
 #include "CreateMatchEvent.h"
 #include "JoinMatchEvent.h"
@@ -28,6 +29,7 @@
 #include "StartGameEvent.h"
 #include "MapsWidget.h"
 #include "MatchesWidget.h"
+#include "Exception.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -82,6 +84,7 @@ private:
     void show_maps(Event& maps_received);
     void clean_matches();
     void show_matches(Event& matches_received);
+    void closeEvent(QCloseEvent*) override;
 };
 
 #endif // MAINWINDOW_H

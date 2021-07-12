@@ -38,6 +38,13 @@ MainWindow::MainWindow(Socket& skt, bool &started,
     this->ui->lineEdit->setPlaceholderText("Ingrese su nombre");
 }
 
+void MainWindow::closeEvent(QCloseEvent*) {
+    //game_started = false;
+	//client_events.close();
+    //model_events.close();
+	//receiver.stop_running();
+	//sender.stop_running();
+}
 
 // POST: Boton de la primera pantalla mostrada.
 //       Se pide un nombre de usuario.
@@ -129,7 +136,7 @@ void MainWindow::on_createButton_clicked() {
     Event maps_received = protocol.recv_event(socket);
     if (maps_received.get_type() != ModelTypeEvent::SEND_MAPS) {
         show_error("error al intentar recibir"
-                        " los mapas actuales. ", maps_received);
+                        " los mapas actuales", maps_received);
         return;
     }
     show_maps(maps_received);
@@ -179,7 +186,7 @@ void MainWindow::createMatch(const QString& map_name) {
         receiver.start();
         players_joined_timer->start(1000);
     } else {
-        show_error("Error al intentar crear la partida. ", is_successful);
+        show_error("Error al intentar crear la partida", is_successful);
     }
 }
 
@@ -247,18 +254,21 @@ void MainWindow::on_joinButton_clicked() {
     ui->stackedWidget->setCurrentIndex(MATCHES_FOR_JOIN_PAGE);
 }
 
+
 void MainWindow::update_matches() {
     ReceiveMatchesEvent recv_matches;
     protocol.send_event(socket, recv_matches.get_msg());
     Event matches_received = protocol.recv_event(socket);
     if (matches_received.get_type() != ModelTypeEvent::SEND_MATCHES) {
         show_error("error al intentar recibir las partidas "
-                        "actuales. ", matches_received);
+                        "actuales", matches_received);
         return;
     }
     clean_matches();
     show_matches(matches_received);
 }
+
+
 
 void MainWindow::show_matches(Event& matches_received) {
     std::vector<char> msg = matches_received.get_msg();
@@ -275,6 +285,7 @@ void MainWindow::show_matches(Event& matches_received) {
     MatchesWidget* matches_buttons = new MatchesWidget(matches, this);
     ui->matchsList->addWidget(matches_buttons);
 }
+
 
 void MainWindow::clean_matches() {
     while (ui->matchsList->count()) {

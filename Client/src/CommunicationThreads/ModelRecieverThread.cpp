@@ -9,7 +9,6 @@ void ModelRecieverThread::stop_running() {
 	allowed_to_run = false;
 }
 
-
 void ModelRecieverThread::run() {
 	try {
 		while (allowed_to_run) {
@@ -27,5 +26,7 @@ void ModelRecieverThread::run() {
 }
 
 ModelRecieverThread::~ModelRecieverThread() {
-	this->join();
+	if (this->joinable()) {
+		this->join();
+	}
 }

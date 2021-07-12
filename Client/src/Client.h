@@ -6,8 +6,8 @@
 #include <syslog.h>
 #include <map>
 
-
 #include "Event.h"
+#include "Exception.h"
 #include "ProtectedQueue.h"
 #include "EventSenderThread.h"
 #include "ModelRecieverThread.h"

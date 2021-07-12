@@ -4,6 +4,7 @@
 #include <string>
 #include <atomic>
 #include <syslog.h>
+#include <iostream>
 
 #include "Event.h"
 #include "ProtectedQueue.h"

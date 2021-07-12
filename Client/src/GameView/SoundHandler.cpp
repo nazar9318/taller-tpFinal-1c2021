@@ -1,6 +1,6 @@
 #include "SoundHandler.h"
 
-SoundHandler::SoundHandler() {}
+SoundHandler::SoundHandler() : sound(NULL) {}
 
 void SoundHandler::play(PositionType weapon) {
 	switch (weapon) {
@@ -74,8 +74,10 @@ void SoundHandler::play(SoundEvent sound_event) {
 		}
 		default : break;
 	}
-	SDL_Delay(1000);
-	Mix_FreeChunk(sound);
+	//SDL_Delay(1000);
+	//Mix_FreeChunk(sound);
 }
 
-SoundHandler::~SoundHandler() {}
+SoundHandler::~SoundHandler() {
+	if (sound) {free(sound);}
+}

@@ -11,11 +11,12 @@
 class SoundHandler {
 	public:
 		SoundHandler();
-		static void play(SoundEvent sound);
-		static void play(PositionType weapon);
+		void play(SoundEvent sound);
+		void play(PositionType weapon);
 		~SoundHandler();
 
 	private:
+		Mix_Chunk* sound;
 		SoundHandler(const SoundHandler &other) = delete;
 		SoundHandler& operator=(const SoundHandler &other) = delete;
 };

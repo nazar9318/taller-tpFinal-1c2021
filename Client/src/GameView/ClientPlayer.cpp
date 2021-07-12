@@ -35,33 +35,6 @@ void ClientPlayer::set_team(Team team) {
 	}
 }
 
-void ClientPlayer::playWeaponSound() {
-	switch (weapon_type) {
-		case PositionType::AK47 : {
-			SoundHandler::play(SoundEvent::AK47_SOUND);
-			break;
-		}
-		case PositionType::AWP : {
-			SoundHandler::play(SoundEvent::AWP_SOUND);
-			break;
-		}
-		case PositionType::GLOCK : {
-			SoundHandler::play(SoundEvent::GLOCK_SOUND);
-			break;
-		}
-		case PositionType::M3 : {
-			SoundHandler::play(SoundEvent::M3_SOUND);
-			break;
-		}
-		case PositionType::KNIFE : {
-			SoundHandler::play(SoundEvent::KNIFE_SOUND);
-			break;
-		}
-		default:
-			break;
-	}
-}
-
 std::string ClientPlayer::getTeam() { return team; }
 
 /*void ClientPlayer::set_weapon() {

@@ -13,8 +13,9 @@ void ReceiveAttacksHandler::handle(FaseType& fase, Event& event, GameMap& map) {
 	for (int i = 0; i < number_attacks; i++) {
 		char id_attacker = event_msg[iterator];
 		PositionType weapon = (PositionType)event_msg[iterator + 1];
+		SoundHandler::play(weapon);
 		std::cout << "Ataca: " << (int)id_attacker <<
-						 "con weapon: " << (int)weapon << std::endl;
+						 " con weapon: " << (int)weapon << std::endl;
 		int number_receivers = (int)event_msg[iterator + 2];
 		iterator += 3;
 		for (int j = 0; j < number_receivers; j++) {

@@ -125,6 +125,7 @@ bool GameWorld::simulate_step() {
 				change_teams();
 			}
 			prepare_new_round();
+			number_tics = 0;
 			fase_type = FaseType::INITIAL_FASE;
 			syslog(LOG_INFO, "[%s:%i]: Cambio de fase"
 			 , __FILE__, __LINE__);
@@ -173,6 +174,7 @@ void GameWorld::simulate_playing_step() {
 								 CF::position_iterations);
 	if (round_finished()) {
 		fase_type = FaseType::END_ROUND;
+		step_info.set_waiting_time(CF::time_finish);
 		charge_stats();
 		number_round++;
 		number_tics = 0;

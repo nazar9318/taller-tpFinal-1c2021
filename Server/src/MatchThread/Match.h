@@ -63,6 +63,7 @@ class Match: public Thread {
 		ClientEventHandler handler;
 		bool statistics_not_sent; 
 		bool init_players_not_sent;
+		bool final_state_not_send;
 
 	public:
 		// POST: Crea una partida con el tipo de mapa correspondiente

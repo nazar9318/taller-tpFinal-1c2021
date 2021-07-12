@@ -7,7 +7,8 @@ Match::Match(Socket& socket, const std::string& map_type,
 			const std::string& player_name): match_started(false),
 			finished(false), last_id(0), 
 			game_world(map_type), handler(game_world),
-			statistics_not_sent(true), init_players_not_sent(true) {
+			statistics_not_sent(true), init_players_not_sent(true), 
+			final_state_not_send(true) {
 	game_world.add_player_if_not_full(last_id);
 	Player* player = new Player(socket, last_id, player_name, to_process_events, true);
 	if (!player)
@@ -140,6 +141,7 @@ void Match::push_step_events() {
 			push_event(init_players);
 			init_players_not_sent = false;
 			statistics_not_sent = true;
+			final_state_not_send = true;
 		}
 	} else if (game_world.get_fase() == FaseType::PLAYING) {
 		std::shared_ptr<Event> playing_event(
@@ -158,18 +160,26 @@ void Match::push_step_events() {
 		std::shared_ptr<Event> final_step(
 			new SendFinalStepEvent(game_world.get_step_info()));
 		push_event(final_step);
-		if (statistics_not_sent) {
-					std::shared_ptr<Event> playing_event(
-			new SendStepPlayingEvent(game_world.get_step_info()));
+		
+		if (final_state_not_send) {
+			std::shared_ptr<Event> playing_event(
+				new SendStepPlayingEvent(game_world.get_step_info()));
+			std::shared_ptr<Event> attacks(
+				new SendAttacksInfoEvent(game_world.get_step_info()));
 				// fin, round, cantidad_rounds, porque termino la partida. 
 			std::shared_ptr<Event> reason_end(
 				new SendFinalStateEvent(game_world.get_step_info()));
+			push_event(playing_event);
+			push_event(attacks);
+			push_event(reason_end);	
+			final_state_not_send = false;		
+		}
+		if (statistics_not_sent && ((int)CF::time_finish - 
+			game_world.get_step_info().get_wait() > (int)CF::time_between)) {
 			std::shared_ptr<Event> stats(
 				new SendStatsEvent(game_world.get_step_info()));
 			statistics_not_sent = false;
 			init_players_not_sent = true;
-			push_event(playing_event);
-			push_event(reason_end);
 			push_event(stats);
 		}
 	}

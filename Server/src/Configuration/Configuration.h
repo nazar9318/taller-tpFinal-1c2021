@@ -32,6 +32,7 @@ class Configuration {
 
 		static double time_preparation;
 		static double time_finish;
+		static double time_between;
 		static int number_rounds;
 
 		static int players_allowed;

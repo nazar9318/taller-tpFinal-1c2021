@@ -33,7 +33,10 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
       break; 
     case ModelTypeEvent::FINAL_STATE:
       final_state_receiver.handle(fase, event, map);
-      break;  
+      break;
+    case ModelTypeEvent::ATTACKS_INFO:
+      attacks_receiver.handle(fase, event, map);
+      break;      
       
       
     default:

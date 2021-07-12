@@ -14,6 +14,7 @@ std::vector<char> AttackInformation::get_attack_message(){
 	std::vector<char> msg;
 
 	msg.push_back(id_attacker);
+	msg.push_back(weapon);
 	msg.push_back((char)receivers.size());
 
 	for (auto it = receivers.begin(); it != receivers.end(); ++it) {

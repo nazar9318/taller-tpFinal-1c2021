@@ -11,23 +11,24 @@
 #include "FaseType.h"
 #include "ReciveMapHandler.h"
 #include "ReciveWeaponHandler.h"
-#include "ReciveStepHandler.h"
 #include "ReceivePlayingStepHandler.h"
 #include "ReceiveInitStepHandler.h"
 #include "ReceiveInitPlayersHandler.h"
 #include "ReceiveBombStateHandler.h"
 #include "ReceiveStatsHandler.h"
+#include "ReceiveSquadsHandler.h"
+
 
 class ModelEventHandler {
 	private:
 		ReciveMapHandler recive_map;
 		ReciveWeaponHandler recive_weapons;
-		//ReciveStepHandler recive_step;
 		ReceivePlayingStepHandler playing_step;
 		ReceiveInitStepHandler init_step;
 		ReceiveInitPlayersHandler player_init;
 		ReceiveBombStateHandler bomb_state;
 		ReceiveStatsHandler stats;
+		ReceiveSquadsHandler squads_receiver;
 	public:
 		ModelEventHandler();
 

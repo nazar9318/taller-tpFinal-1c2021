@@ -28,6 +28,10 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
     case ModelTypeEvent::STATISTICS:
       stats.handle(fase, event, map);
       break;
+    case ModelTypeEvent::SEND_SQUADS:
+      squads_receiver.handle(event, map);
+      break;  
+      
     default:
       break;
   }

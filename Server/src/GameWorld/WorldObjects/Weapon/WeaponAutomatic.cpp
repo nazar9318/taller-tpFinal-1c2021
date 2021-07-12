@@ -48,7 +48,7 @@ char WeaponAutomatic::calculate_damage(double distance) {
 	rng.seed(ss);
 	std::uniform_real_distribution<> unif(0,1);
 	double rand = unif(rng);
-	if (rand >= accuracy / distance) {
+	if (rand < (accuracy * CF::size_position) / distance) {
 		double damage_range = damage_max - damage_min;
 		double damage = fmod((double)std::rand(), damage_range) + damage_min;
 		return (char)(damage - distance * distance_penalty);

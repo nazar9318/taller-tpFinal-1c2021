@@ -17,6 +17,7 @@
 #include "ReceiveBombStateHandler.h"
 #include "ReceiveStatsHandler.h"
 #include "ReceiveSquadsHandler.h"
+#include "ReceiveFinalStateHandler.h"
 
 
 class ModelEventHandler {
@@ -29,6 +30,7 @@ class ModelEventHandler {
 		ReceiveBombStateHandler bomb_state;
 		ReceiveStatsHandler stats;
 		ReceiveSquadsHandler squads_receiver;
+		ReceiveFinalStateHandler final_state_receiver;
 	public:
 		ModelEventHandler();
 

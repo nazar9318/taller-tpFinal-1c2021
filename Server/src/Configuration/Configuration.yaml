@@ -18,12 +18,7 @@ bonus_kill: 50
 
 character_money: 100
 
-glock_bullets: 10
-ak47_bullets: 20
-m3_bullets: 12
-awp_bullets: 7
-
-glock_accuracy: 0.8
+glock_accuracy: 0.998
 ak47_accuracy: 0.8
 m3_accuracy: 0.7
 awp_accuracy: 0.9

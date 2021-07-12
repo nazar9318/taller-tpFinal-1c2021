@@ -36,11 +36,6 @@ int CF::players_allowed = CF::yaml_file["players_allowed"].as<int>();
 int CF::character_life_points = CF::yaml_file["character_life_points"].as<int>();
 int CF::character_money = CF::yaml_file["character_money"].as<int>();
 
-int CF::glock_bullets = CF::yaml_file["glock_bullets"].as<int>();
-int CF::ak47_bullets = CF::yaml_file["ak47_bullets"].as<int>();
-int CF::m3_bullets = CF::yaml_file["m3_bullets"].as<int>();
-int CF::awp_bullets = CF::yaml_file["awp_bullets"].as<int>();
-
 double CF::glock_accuracy = CF::yaml_file["glock_accuracy"].as<double>();
 double CF::ak47_accuracy = CF::yaml_file["ak47_accuracy"].as<double>();
 double CF::m3_accuracy = CF::yaml_file["m3_accuracy"].as<double>();
@@ -111,11 +106,6 @@ void Configuration::load_configuration(const std::string& file_path) {
 	
 	character_life_points = yaml_file["character_life_points"].as<int>();
 	character_money = yaml_file["character_money"].as<int>();
-	
-	glock_bullets = yaml_file["glock_bullets"].as<int>();
-	ak47_bullets = yaml_file["ak47_bullets"].as<int>();
-	m3_bullets = yaml_file["m3_bullets"].as<int>();
-	awp_bullets = yaml_file["awp_bullets"].as<int>();
 		
 	glock_accuracy = yaml_file["glock_accuracy"].as<double>();
 	ak47_accuracy = yaml_file["ak47_accuracy"].as<double>();

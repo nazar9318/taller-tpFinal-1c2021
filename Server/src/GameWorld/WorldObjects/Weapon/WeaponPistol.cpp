@@ -1,4 +1,5 @@
 #include "WeaponPistol.h"
+#include <syslog.h>
 
 
 WeaponPistol::WeaponPistol() :
@@ -20,6 +21,9 @@ void WeaponPistol::attack(AttackInformation& attack_info,
 		bool is_character = find_closest_character(attack_info, blocks,
 								characters, angle, closest_char, distance);
 		if (is_character) {
+			syslog(LOG_INFO, "[%s:%i]: Encuentra character pistol. "
+				, __FILE__, __LINE__);
+
 			char damage = calculate_damage(distance);
 			if (damage > 0) {
 				attack_info.add_receiver(closest_char->first,

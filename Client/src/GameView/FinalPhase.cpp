@@ -125,14 +125,14 @@ void FinalPhase::renderRound() {
     quad_total.y += 40;
     SDL_FreeSurface(surfaceMessage);
   }
-  this->names.clear();
-  this->team.clear();
-  this->round_kills.clear();
-  this->total_kills.clear();
-  names.push_back("Nombre");
-  team.push_back("Equipo");
-  round_kills.push_back("Ronda");
-  total_kills.push_back("Totales");
+  //this->names.clear();
+  //this->team.clear();
+  //this->round_kills.clear();
+  //this->total_kills.clear();
+  //names.push_back("Nombre");
+  //team.push_back("Equipo");
+  //round_kills.push_back("Ronda");
+  //total_kills.push_back("Totales");
 }
 
 void FinalPhase::teamWinner(std::string& winner, int count) {

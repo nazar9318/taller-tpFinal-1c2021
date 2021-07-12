@@ -169,7 +169,6 @@ void Game::handle_click(SDL_Event& event) {
 		case SDL_BUTTON_LEFT:{
 			std::unique_ptr<Event> shoot(new AttackEvent());
 			this->client_events.push(shoot);
-			this->player.playWeaponSound();
 			break;
 		}
 		default : break;

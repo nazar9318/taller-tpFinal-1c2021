@@ -12,6 +12,7 @@ class SoundHandler {
 	public:
 		SoundHandler();
 		static void play(SoundEvent sound);
+		static void play(PositionType weapon);
 		~SoundHandler();
 
 	private:

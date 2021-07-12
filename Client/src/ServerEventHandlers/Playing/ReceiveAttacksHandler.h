@@ -9,7 +9,7 @@
 #include "FaseType.h"
 #include "BombState.h"
 #include "ClientBomb.h"
-
+#include "SoundHandler.h"
 
 class ReceiveAttacksHandler {
 	public:

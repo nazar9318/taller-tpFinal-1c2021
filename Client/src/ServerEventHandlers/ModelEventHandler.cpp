@@ -30,15 +30,15 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
       break;
     case ModelTypeEvent::SEND_SQUADS:
       squads_receiver.handle(event, map);
-      break; 
+      break;
     case ModelTypeEvent::FINAL_STATE:
-      final_state_receiver.handle(fase, event, map);
+      final_state_receiver.handle(fase, event, map, bomb);
       break;
     case ModelTypeEvent::ATTACKS_INFO:
       attacks_receiver.handle(fase, event, map);
-      break;      
-      
-      
+      break;
+
+
     default:
       break;
   }

@@ -8,7 +8,7 @@
 
 ReceiveBombStateHandler::ReceiveBombStateHandler(){}
 
-#include <iostream>
+// #include <iostream>
 void ReceiveBombStateHandler::handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb){
 	fase = FaseType::PLAYING;
 	map.updateTimeToExplode(-1);
@@ -35,11 +35,12 @@ void ReceiveBombStateHandler::handle(FaseType& fase, Event& event, GameMap& map,
 		// std::cout << "Activating, owner, porcentaje:" << (int)id_owner
 							// << (int)percentage << std::endl;
 	} else if (state == BombState::ACTIVATED) {
-		// char id_owner = event_msg[2];
+		char id_owner = event_msg[2];
 		char time_until_explote = event_msg[3];
-		// int x = *((int*)&(event_msg[4]));
-		// int y = *((int*)&(event_msg[8]));
+		int x = *((int*)&(event_msg[4]));
+		int y = *((int*)&(event_msg[8]));
 		map.updateTimeToExplode((int)time_until_explote);
+		bomb.set_activated_state(id_owner, x, y, (int)time_until_explote);
 		// std::cout << "Activada, owner, time_until_explote, x, y:"<<
 				 // (int)id_owner << (int)time_until_explote << x << y << std::endl;
 	} else if (state == BombState::DEACTIVATING) {

@@ -19,6 +19,11 @@ class ClientBomb {
     Texture progress_bar;
     SDL_Rect progress_bar_clips[10];
 
+    Texture explosion;
+    SDL_Rect explosion_clips[10];
+
+    Texture bomb_in_ground;
+
     char state;
     char id_owner;
     char player_id;
@@ -40,14 +45,23 @@ class ClientBomb {
 
     void set_deactivating_state(char id_owner, int percentage);
 
+    void set_activated_state(char id_owner, int x, int y, int time_until_explote);
+
+    void set_exploted_state();
+
+    void set_deactivated_state();
+
     void render();
 
     ~ClientBomb();
 
   private:
+    void render_bomb_in_ground();
     void render_activating_bomb();
     void render_deactivating_bomb();
-    void loadClips();
+    void render_explosion();
+    void loadBarClips();
+    void loadExplosionClips();
     ClientBomb(const ClientBomb &other) = delete;
     ClientBomb& operator=(const ClientBomb &other) = delete;
 

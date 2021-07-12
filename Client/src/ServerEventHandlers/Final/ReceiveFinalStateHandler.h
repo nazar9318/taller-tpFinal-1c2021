@@ -8,13 +8,14 @@
 #include "FaseType.h"
 #include "ReasonFinish.h"
 #include "BombState.h"
+#include "ClientBomb.h"
 
 
 class ReceiveFinalStateHandler {
 	public:
 		ReceiveFinalStateHandler();
 
-		void handle(FaseType& fase, Event& event, GameMap& map);
+		void handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb);
 
 		~ReceiveFinalStateHandler();
 };

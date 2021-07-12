@@ -9,7 +9,7 @@ ClientBomb::ClientBomb(Renderer& renderer,Camera& camera, char player_id, Client
   state(BombState::NORMAL)
   {}
 
-void ClientBomb::loadClips(){
+void ClientBomb::loadBarClips(){
   for (int i = 0; i < 10; i++) {
     progress_bar_clips[i].x = 0;
     progress_bar_clips[i].y = i*101;
@@ -18,12 +18,20 @@ void ClientBomb::loadClips(){
   }
 }
 
+void ClientBomb::loadExplosionClips() {
+  return;
+}
+
 
 void ClientBomb::loadMedia(){
+  Color black_color = {0x00, 0x00, 0x00};
 
   progress_bar.loadFromFile(renderer, "../Client/Assets/Bomb/progress_bars.png");
+  bomb_in_ground.loadFromFile(renderer, "../Client/Assets/Bomb/bomb_d.bmp", black_color);
+  explosion.loadFromFile(renderer, "../Client/Assets/Bomb/explosion.png");
 
-  loadClips();
+  loadBarClips();
+  loadExplosionClips();
 }
 
 void ClientBomb::set_normal_state(bool has_owner, char id_owner, int x_pos, int y_pos){
@@ -55,9 +63,28 @@ void ClientBomb::set_deactivating_state(char id_owner, int percentage){
   this->percentage = percentage;
 }
 
+void ClientBomb::set_activated_state(char id_owner, int x, int y, int time_until_explote){
+  this->state = BombState::ACTIVATED;
+  this->id_owner = id_owner;
+  this->x = x;
+  this->y = y;
+  has_owner = false;
+  if(id_owner == player_id){
+    player.change_bomb_ownership(false);
+  }
+}
+
+void ClientBomb::set_exploted_state(){
+  this->state = BombState::EXPLOTED;
+}
+
+void ClientBomb::set_deactivated_state(){
+  this->state = BombState::DEACTIVATED;
+}
+
 void ClientBomb::render(){
   if(state == BombState::NORMAL && !has_owner){
-    // renderizo en piso
+    render_bomb_in_ground();
   }
 
   if(state == BombState::ACTIVATING && id_owner == player_id){
@@ -68,6 +95,15 @@ void ClientBomb::render(){
     render_deactivating_bomb();
   }
 
+  if(state == BombState::EXPLOTED){
+    render_explosion();
+  }
+
+}
+
+void ClientBomb::render_bomb_in_ground(){
+  SDL_Rect quad = {x ,y, bomb_in_ground.get_w(), bomb_in_ground.get_h()};
+  camera.render(bomb_in_ground.getTexture(), quad, NULL);
 }
 
 void ClientBomb::render_activating_bomb(){
@@ -97,6 +133,10 @@ void ClientBomb::render_deactivating_bomb(){
 
   SDL_Rect quad = {player_pos.x - bar_width/3 , player_pos.y - 20, bar_width, bar_height};
   camera.renderAddingOffset(progress_bar.getTexture(), quad, &current_clip);
+
+}
+
+void ClientBomb::render_explosion(){
 
 }
 

@@ -34,12 +34,11 @@ class ClientBomb {
 
     void loadMedia();
 
-
     void set_normal_state(bool has_owner, char id_owner, int x_pos, int y_pos);
 
     void set_activating_state(char id_owner, int percentage);
 
-    void set_deactivating_state(bool has_owner, int id_owner, int x_pos, int y_pos);
+    void set_deactivating_state(char id_owner, int percentage);
 
     void render();
 
@@ -47,6 +46,7 @@ class ClientBomb {
 
   private:
     void render_activating_bomb();
+    void render_deactivating_bomb();
     void loadClips();
     ClientBomb(const ClientBomb &other) = delete;
     ClientBomb& operator=(const ClientBomb &other) = delete;

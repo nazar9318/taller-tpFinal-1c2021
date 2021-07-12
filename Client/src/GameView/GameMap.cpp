@@ -79,6 +79,10 @@ void GameMap::update_position(char id, int pos_x, int pos_y, int angle,
   }
 }
 
+void GameMap::updateTimeToExplode(int time){
+  hud.updateTimeToExplode(time);
+}
+
 void GameMap::add_character_team(char id, Team team) {
   if (id == player.get_id()) {
     player.set_team(team);

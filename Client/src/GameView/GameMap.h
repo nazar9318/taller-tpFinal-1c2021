@@ -52,6 +52,7 @@ class GameMap {
 		void cleanWeapons();
 		void loadMedia();
 		void update_position(char id, int pos_x, int pos_y, int angle, char life, int money, char weapon_type, int ammo);
+		void updateTimeToExplode(int time);
 		/*------------Metodos para render--------------*/
 		void setRenderArea();
 		void renderCharacters();

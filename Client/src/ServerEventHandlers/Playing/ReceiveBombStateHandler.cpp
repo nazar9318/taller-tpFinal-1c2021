@@ -11,8 +11,11 @@ ReceiveBombStateHandler::ReceiveBombStateHandler(){}
 #include <iostream>
 void ReceiveBombStateHandler::handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb){
 	fase = FaseType::PLAYING;
+	map.updateTimeToExplode(-1);
+
 	std::vector<char> event_msg = event.get_msg();
 	BombState state = (BombState)event_msg[1];
+
 	if (state == BombState::NORMAL) {
 		bool has_owner = (bool)event_msg[2];
 		if (has_owner) {
@@ -29,21 +32,24 @@ void ReceiveBombStateHandler::handle(FaseType& fase, Event& event, GameMap& map,
 		char id_owner = event_msg[2];
 		char percentage = event_msg[3];
 		bomb.set_activating_state(id_owner, (int)percentage);
-		std::cout << "Activating, owner, porcentaje:" << (int)id_owner
-							<< (int)percentage << std::endl;
+		// std::cout << "Activating, owner, porcentaje:" << (int)id_owner
+							// << (int)percentage << std::endl;
 	} else if (state == BombState::ACTIVATED) {
-		char id_owner = event_msg[2];
+		// char id_owner = event_msg[2];
 		char time_until_explote = event_msg[3];
-		int x = *((int*)&(event_msg[4]));
-		int y = *((int*)&(event_msg[8]));
-		std::cout << "Activada, owner, time_until_explote, x, y:"<<
-				 (int)id_owner << (int)time_until_explote << x << y << std::endl;
+		// int x = *((int*)&(event_msg[4]));
+		// int y = *((int*)&(event_msg[8]));
+		map.updateTimeToExplode((int)time_until_explote);
+		// std::cout << "Activada, owner, time_until_explote, x, y:"<<
+				 // (int)id_owner << (int)time_until_explote << x << y << std::endl;
 	} else if (state == BombState::DEACTIVATING) {
 		char id_owner = event_msg[2];
 		char percentage = event_msg[3];
 		char time_until_explote = event_msg[4];
-		std::cout << "Desactivada, owner, porcentaje, time_until_explote:"<<
-		 (int)id_owner << (int)percentage << (int)time_until_explote << std::endl;
+		bomb.set_deactivating_state(id_owner, (int)percentage);
+		map.updateTimeToExplode((int)time_until_explote);
+		// std::cout << "Desactivada, owner, porcentaje, time_until_explote:"<<
+		 // (int)id_owner << (int)percentage << (int)time_until_explote << std::endl;
 
 	}
 }

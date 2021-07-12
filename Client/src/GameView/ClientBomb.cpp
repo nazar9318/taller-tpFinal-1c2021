@@ -30,6 +30,7 @@ void ClientBomb::set_normal_state(bool has_owner, char id_owner, int x_pos, int 
   this->state = BombState::NORMAL;
   this->has_owner = has_owner;
   this->id_owner = id_owner;
+  player.change_bomb_ownership(false);
 
   if(has_owner){
     if(id_owner == player_id){
@@ -48,6 +49,12 @@ void ClientBomb::set_activating_state(char id_owner, int percentage){
   this->percentage = percentage;
 }
 
+void ClientBomb::set_deactivating_state(char id_owner, int percentage){
+  this->state = BombState::DEACTIVATING;
+  this->id_owner = id_owner;
+  this->percentage = percentage;
+}
+
 void ClientBomb::render(){
   if(state == BombState::NORMAL && !has_owner){
     // renderizo en piso
@@ -56,37 +63,18 @@ void ClientBomb::render(){
   if(state == BombState::ACTIVATING && id_owner == player_id){
     render_activating_bomb();
   }
-  //
-  // if(state == BombState::DEACTIVATING && id_owner == player_id){
-  //   // renderizo barra
-  // }
+
+  if(state == BombState::DEACTIVATING && id_owner == player_id){
+    render_deactivating_bomb();
+  }
 
 }
 
 void ClientBomb::render_activating_bomb(){
   SDL_Rect current_clip = {0};
 
-  if(percentage <= 10){
-    current_clip = progress_bar_clips[0];
-  } else if (percentage <= 20){
-    current_clip = progress_bar_clips[1];
-  } else if(percentage <= 30){
-    current_clip = progress_bar_clips[2];
-  } else if(percentage <= 40){
-    current_clip = progress_bar_clips[3];
-  } else if(percentage <= 50){
-    current_clip = progress_bar_clips[4];
-  } else if(percentage <= 60){
-    current_clip = progress_bar_clips[5];
-  } else if(percentage <= 70){
-    current_clip = progress_bar_clips[6];
-  } else if(percentage <= 80){
-    current_clip = progress_bar_clips[7];
-  } else if(percentage <= 90){
-    current_clip = progress_bar_clips[8];
-  } else if(percentage <= 100){
-    current_clip = progress_bar_clips[9];
-  }
+  int clip = (int)(percentage/10);
+  current_clip = progress_bar_clips[clip];
 
   SDL_Rect player_pos = player.getBox();
   int bar_width = 147;
@@ -94,7 +82,21 @@ void ClientBomb::render_activating_bomb(){
 
   SDL_Rect quad = {player_pos.x - bar_width/3 , player_pos.y - 20, bar_width, bar_height};
   camera.renderAddingOffset(progress_bar.getTexture(), quad, &current_clip);
-  // renderer.render(progress_bar.getTexture(), &quad, &current_clip);
+
+}
+
+void ClientBomb::render_deactivating_bomb(){
+  SDL_Rect current_clip = {0};
+
+  int clip = (int)(percentage/10);
+  current_clip = progress_bar_clips[clip];
+
+  SDL_Rect player_pos = player.getBox();
+  int bar_width = 147;
+  int bar_height = 20;
+
+  SDL_Rect quad = {player_pos.x - bar_width/3 , player_pos.y - 20, bar_width, bar_height};
+  camera.renderAddingOffset(progress_bar.getTexture(), quad, &current_clip);
 
 }
 

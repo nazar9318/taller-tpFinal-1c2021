@@ -73,6 +73,17 @@ enum Direction: char {
 	STOP_MOVING
 };
 
+enum SoundEvent: char {
+	AK47_SOUND,
+	M3_SOUND,
+	GLOCK_SOUND,
+	AWP_SOUND,
+	KNIFE_SOUND,
+	BOMB_PLACED_SOUND,
+	BOMB_DEACTIVATED_SOUND,
+	BOMB_EXPLODED_SOUND
+};
+
 enum PositionType: char {
 	AZTEC,
 	INFERNO,

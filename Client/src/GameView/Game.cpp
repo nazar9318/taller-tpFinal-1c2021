@@ -12,7 +12,7 @@ Game::Game(ProtectedQueue<Event>& model,
  	camera(renderer, 800, 600), hud(renderer, 800, 600),
  	final_phase(renderer, 800, 600),
  	map(renderer, player,camera, characters, hud, final_phase),
-  initial_fase(renderer, 800, 600),
+	initial_fase(renderer, 800, 600),
  	fase(FaseType::INITIAL_FASE),
 	final_phase_rendered(false),
 	bomb(renderer, camera, player_id, player) {
@@ -135,7 +135,6 @@ void Game::handle_key_press(SDL_Event& event) {
 		case SDLK_c: {
 			std::unique_ptr<Event> change(new ChangeWeaponEvent());
 			this->client_events.push(change);
-			//player.changeClip();
 			break;
 		}
 		case SDLK_q: {
@@ -167,12 +166,13 @@ void Game::handle_key_release(SDL_Event& event) {
 
 void Game::handle_click(SDL_Event& event) {
 	switch (event.button.button) {
-		case SDL_BUTTON_RIGHT: {/*Lo dejamos por si necesitamos este botón*/}
 		case SDL_BUTTON_LEFT:{
 			std::unique_ptr<Event> shoot(new AttackEvent());
 			this->client_events.push(shoot);
+			this->player.playWeaponSound();
 			break;
 		}
+		default : break;
 	}
 }
 

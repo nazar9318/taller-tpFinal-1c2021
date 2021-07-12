@@ -7,6 +7,7 @@
 #include "Team.h"
 #include "SpriteContainer.h"
 #include "Camera.h"
+#include "SoundHandler.h"
 
 class ClientPlayer {
 	private:
@@ -42,6 +43,7 @@ class ClientPlayer {
 		double getAngle();
 		void update_position(int pos_x, int pos_y, int angle,
 				char life, int money, char weapon_type, int ammo);
+		void playWeaponSound();
 
 		void render(Camera& camera);
 		std::string get_name();

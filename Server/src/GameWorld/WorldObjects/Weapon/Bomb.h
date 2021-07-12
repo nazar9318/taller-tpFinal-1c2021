@@ -23,7 +23,7 @@ class Bomb {
 		bool simulate_step();
 		bool activate(char id, b2Vec2& pos);
 		void stop_activating(char id);
-		bool deactivate(Team team, char deactivator);
+		bool deactivate(Team team, char deactivator, b2Vec2& deact_pos);
 		void stop_deactivating(char id);
 		void drop(char id, b2Vec2& pos);
 		bool grab(char id, Team team);

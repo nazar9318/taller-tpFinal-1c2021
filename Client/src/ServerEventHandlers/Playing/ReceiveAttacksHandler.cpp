@@ -3,12 +3,12 @@
 ReceiveAttacksHandler::ReceiveAttacksHandler(){}
 
 #include <iostream>
-void ReceiveAttacksHandler::handle(FaseType& fase, Event& event, GameMap& map) {
+void ReceiveAttacksHandler::handle(FaseType& fase, Event& event, GameMap& map, AttackEffect& attack_effects) {
 	//fase = FaseType::PLAYING;
 	SoundHandler s;
 	std::vector<char> event_msg = event.get_msg();
 	int number_attacks = (int)event_msg[1];
-	int iterator = 2; 
+	int iterator = 2;
 	if (number_attacks > 0)
 		std::cout << "Hay " << number_attacks<<"ataques"<< std::endl;
 	for (int i = 0; i < number_attacks; i++) {
@@ -19,9 +19,11 @@ void ReceiveAttacksHandler::handle(FaseType& fase, Event& event, GameMap& map) {
 						 " con weapon: " << (int)weapon << std::endl;
 		int number_receivers = (int)event_msg[iterator + 2];
 		iterator += 3;
+
 		for (int j = 0; j < number_receivers; j++) {
 			char receiver_id = event_msg[iterator];
-			std::cout << "Recibe ataque: " << (int)receiver_id << std::endl;
+			attack_effects.createAttack(receiver_id, id_attacker);
+			// std::cout << "Recibe ataque: " << (int)receiver_id << std::endl;
 			iterator++;
 		}
 	}

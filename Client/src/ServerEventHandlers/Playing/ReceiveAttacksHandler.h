@@ -10,12 +10,13 @@
 #include "BombState.h"
 #include "ClientBomb.h"
 #include "SoundHandler.h"
+#include "AttackEffect.h"
 
 class ReceiveAttacksHandler {
 	public:
 		ReceiveAttacksHandler();
 
-		void handle(FaseType& fase, Event& event, GameMap& map);
+		void handle(FaseType& fase, Event& event, GameMap& map, AttackEffect& attack_effects);
 
 		~ReceiveAttacksHandler();
 };

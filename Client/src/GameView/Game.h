@@ -32,6 +32,7 @@
 #include "Hud.h"
 #include "InitialPhase.h"
 #include "FinalPhase.h"
+#include "AttackEffect.h"
 
 class Game {
 	private:
@@ -51,6 +52,7 @@ class Game {
 		Camera camera;
 		FaseType fase;
 		bool final_phase_rendered;
+		AttackEffect attack_effects;
 
 	public:
 		Game(ProtectedQueue<Event>& model_events,

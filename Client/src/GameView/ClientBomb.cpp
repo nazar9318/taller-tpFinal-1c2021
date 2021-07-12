@@ -12,14 +12,24 @@ ClientBomb::ClientBomb(Renderer& renderer,Camera& camera, char player_id, Client
 void ClientBomb::loadBarClips(){
   for (int i = 0; i < 10; i++) {
     progress_bar_clips[i].x = 0;
-    progress_bar_clips[i].y = i*101;
-    progress_bar_clips[i].w = 737;
-    progress_bar_clips[i].h = 101;
+    progress_bar_clips[i].y = i*BAR_HEIGHT;
+    progress_bar_clips[i].w = BAR_WIDTH;
+    progress_bar_clips[i].h = BAR_HEIGHT;
   }
 }
 
 void ClientBomb::loadExplosionClips() {
-  return;
+  /*cada clip es de 64x64 y hay 5 5 5 5 3*/
+  for (int i = 0; i < 5; i++) {
+    for (int j = 0; j < 5; j++) {
+      if(!(i == 4 && (j == 3 || j == 4))){
+        explosion_clips[i].x = j*EXPLOSION_WIDTH;
+        explosion_clips[i].y = i*EXPLOSION_HEIGHT;
+        explosion_clips[i].w = EXPLOSION_WIDTH;
+        explosion_clips[i].h = EXPLOSION_HEIGHT;
+      }
+    }
+  }
 }
 
 
@@ -133,11 +143,16 @@ void ClientBomb::render_deactivating_bomb(){
 
   SDL_Rect quad = {player_pos.x - bar_width/3 , player_pos.y - 20, bar_width, bar_height};
   camera.renderAddingOffset(progress_bar.getTexture(), quad, &current_clip);
-
 }
 
 void ClientBomb::render_explosion(){
+  SDL_Rect quad = {x, y, EXPLOSION_WIDTH, EXPLOSION_HEIGHT};
+  // SDL_Rect clip = {0, 0, EXPLOSION_WIDTH, EXPLOSION_HEIGHT};
 
+  for (int i = 0; i < EXPLOSION_CLIPS; i++) {
+    camera.render(explosion.getTexture(), quad, &explosion_clips[i]);
+  }
+  // camera.render(explosion.getTexture(), quad, &clip);
 }
 
 ClientBomb::~ClientBomb(){

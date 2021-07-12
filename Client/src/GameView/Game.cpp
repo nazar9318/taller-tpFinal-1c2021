@@ -15,7 +15,8 @@ Game::Game(ProtectedQueue<Event>& model,
 	initial_fase(renderer, 800, 600),
  	fase(FaseType::INITIAL_FASE),
 	final_phase_rendered(false),
-	bomb(renderer, camera, player_id, player) {
+	bomb(renderer, camera, player_id, player),
+	attack_effects(renderer, camera, player_id, player, characters) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
 		if (it->first != player_id) {
 			ClientCharacter character(it->second);
@@ -55,6 +56,7 @@ void Game::loadMedia() {
 	map.loadMedia();
 	hud.loadMedia();
 	bomb.loadMedia();
+	attack_effects.loadMedia();
 	initial_fase.loadMedia();
 	final_phase.loadMedia();
 }
@@ -66,6 +68,7 @@ void Game::render() {
 		initial_fase.render();
 	} else if (fase == FaseType::PLAYING) {
 		map.renderWeapons();
+		attack_effects.render();
 		map.renderPlayer();
 		map.renderCharacters();
 		hud.render();
@@ -217,7 +220,7 @@ void Game::process_events() {
 	while (queue_not_empty && max_iterations > i) {
 		try {
 			Event event = model_events.pop();
-			handler.handle(fase, event, map, bomb);
+			handler.handle(fase, event, map, bomb, attack_effects);
 			i++;
 		} catch(ExceptionEmptyQueue& e) {
 			queue_not_empty = false;

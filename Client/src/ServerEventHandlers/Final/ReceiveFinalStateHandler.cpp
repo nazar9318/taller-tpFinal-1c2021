@@ -15,10 +15,8 @@ void ReceiveFinalStateHandler::handle(FaseType& fase, Event& event, GameMap& map
 		BombState bomb_state = (BombState)event_msg[2];
     if(bomb_state == BombState::DEACTIVATED){
 			bomb.set_deactivated_state();
-			std::cout << "Se desactivo la bomba" << '\n';
     } else if(bomb_state == BombState::EXPLOTED){
 			bomb.set_exploted_state();
-			std::cout << "Exploto la bomba" << '\n';
     }
 	}
 }

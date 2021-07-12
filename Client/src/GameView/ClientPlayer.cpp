@@ -3,8 +3,6 @@
 #include <complex>
 
 #define PI 3.14159265
-#define PLAYER_WIDTH 32
-#define PLAYER_HEIGHT 32
 
 ClientPlayer::ClientPlayer(char& id, std::string& name):
 id(id), name(name), current_clip(0) {
@@ -97,6 +95,9 @@ void ClientPlayer::render(Camera& camera) {
 	camera.render(texture_weapon->getTexture(), renderQuad, NULL, angle);
 
 	/*Renderizo el stencil*/
+
+	/*render effects*/
+	
 }
 
 double ClientPlayer::getAngle() { return (double)angle; }

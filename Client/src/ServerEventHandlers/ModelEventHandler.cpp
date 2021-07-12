@@ -2,7 +2,7 @@
 
 ModelEventHandler::ModelEventHandler() {}
 
-void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb) {
+void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb, AttackEffect& attack_effects) {
   switch (event.get_type()) {
     case ModelTypeEvent::SEND_FULL_MAP:
       recive_map.handle(event, map);
@@ -35,7 +35,7 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
       final_state_receiver.handle(fase, event, map, bomb);
       break;
     case ModelTypeEvent::ATTACKS_INFO:
-      attacks_receiver.handle(fase, event, map);
+      attacks_receiver.handle(fase, event, map, attack_effects);
       break;
 
 

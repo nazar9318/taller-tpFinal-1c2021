@@ -7,6 +7,7 @@
 #include "Exception.h"
 
 #include "GameMap.h"
+#include "AttackEffect.h"
 #include "ClientBomb.h"
 #include "FaseType.h"
 #include "ReciveMapHandler.h"
@@ -37,7 +38,7 @@ class ModelEventHandler {
 		ModelEventHandler();
 
 		// POST: Retorna la fase actual
-		void handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb);
+		void handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb, AttackEffect& attack_effects);
 
 		~ModelEventHandler();
 

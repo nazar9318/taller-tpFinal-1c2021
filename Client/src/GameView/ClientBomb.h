@@ -1,5 +1,5 @@
-#ifndef __BOMB_EFFECT_H__
-#define __BOMB_EFFECT_H__
+#ifndef __CLIENT_BOMB_H__
+#define __CLIENT_BOMB_H__
 
 #include <SDL2/SDL.h>
 #include "Renderer.h"
@@ -8,6 +8,12 @@
 
 #include "BombState.h"
 #include "ClientPlayer.h"
+
+#define EXPLOSION_WIDTH 64
+#define EXPLOSION_HEIGHT 64
+#define BAR_WIDTH 737
+#define BAR_HEIGHT 101
+#define EXPLOSION_CLIPS 23
 
 class ClientBomb {
 
@@ -20,7 +26,7 @@ class ClientBomb {
     SDL_Rect progress_bar_clips[10];
 
     Texture explosion;
-    SDL_Rect explosion_clips[10];
+    SDL_Rect explosion_clips[EXPLOSION_CLIPS];
 
     Texture bomb_in_ground;
 

@@ -14,7 +14,6 @@
 #include <map>
 #include <QSignalMapper>
 #include <QTimer>
-#include <QCloseEvent>
 
 #include "CreateMatchEvent.h"
 #include "JoinMatchEvent.h"
@@ -29,7 +28,6 @@
 #include "StartGameEvent.h"
 #include "MapsWidget.h"
 #include "MatchesWidget.h"
-#include "Exception.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -68,14 +66,15 @@ public:
 private slots:
     void on_createButton_clicked();
     void on_joinButton_clicked();
-    void on_OK_clicked();
     void update_players();
     void update_matches();
     void on_pushButton_clicked();
+    void on_OK_clicked();
 
 private:
     Ui::MainWindow* ui;
     Protocol protocol;
+    bool match_started;
     void load_players(Event& join_successfull);
     void wait_until_start();
     void show_error(const QString& message);
@@ -87,4 +86,4 @@ private:
     void closeEvent(QCloseEvent*) override;
 };
 
-#endif // MAINWINDOW_H
+#endif

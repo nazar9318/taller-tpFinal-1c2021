@@ -6,7 +6,8 @@
 Match::Match(Socket& socket, const std::string& map_type,
 			const std::string& player_name): match_started(false),
 			finished(false), last_id(0), 
-			game_world(map_type), handler(game_world) {
+			game_world(map_type), handler(game_world),
+			statistics_not_sent(true), init_players_not_sent(true) {
 	game_world.add_player_if_not_full(last_id);
 	Player* player = new Player(socket, last_id, player_name, to_process_events, true);
 	if (!player)
@@ -126,8 +127,6 @@ void Match::handle_events() {
 // POST: Envia todos los eventos que sucedieron en el ultimo step
 //       dependiendo de la fase actual. 
 void Match::push_step_events() {
-	bool statistics_not_sent = true;
-	bool init_players_not_sent = true;
 	if (game_world.get_fase() == FaseType::INITIAL_FASE) {
 		std::shared_ptr<Event> init_event(
 			new SendStepInitEvent(game_world.get_step_info()));

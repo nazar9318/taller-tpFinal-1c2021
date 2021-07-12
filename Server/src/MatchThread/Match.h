@@ -61,6 +61,8 @@ class Match: public Thread {
 		ProtectedQueue<Event> to_process_events;
 		GameWorld game_world;
 		ClientEventHandler handler;
+		bool statistics_not_sent; 
+		bool init_players_not_sent;
 
 	public:
 		// POST: Crea una partida con el tipo de mapa correspondiente

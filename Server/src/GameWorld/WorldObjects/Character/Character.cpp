@@ -13,7 +13,7 @@ Character::Character(Team team, b2World* world,
 		: life_points(CF::character_life_points),
 		 money(CF::character_money), team(team),
 		 number_weapons(2), angle(0), blocked(false), 
-		 round_kills(0), total_kills(0) {
+		 round_kills(0), total_kills(0), last_pos(0.0, 0.0) {
 	std::unique_ptr<Weapon> knife(new WeaponWhite());
 	std::unique_ptr<Weapon> pistol(new WeaponPistol());
 	weapons.push_back(std::move(knife));
@@ -111,6 +111,7 @@ void Character::take_damage(char points) {
 		life_points -= points;
 	} else {
 		life_points = 0;
+		last_pos = character_body->GetPosition();
 		character_body->GetWorld()->DestroyBody(character_body);
 		current_weapon = 0;
 	}
@@ -120,7 +121,7 @@ void Character::take_damage(char points) {
 b2Vec2 Character::get_pos() {
 	if (is_alive())
 		return character_body->GetPosition();
-	return b2Vec2(-10, 10); // una posicion fuera del mapa.
+	return last_pos; // su ultima posicion.
 }
 
 b2Fixture* Character::GetFixtureList() {

@@ -38,6 +38,7 @@ class Character {
 		bool blocked;
 		int round_kills;
 		int total_kills;
+		b2Vec2 last_pos;
 
 	public:
 		Character(Team team, b2World* world,

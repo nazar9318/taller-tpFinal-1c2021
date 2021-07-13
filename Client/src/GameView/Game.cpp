@@ -27,6 +27,8 @@ Game::Game(ProtectedQueue<Event>& model,
 
 void Game::execute() {
 	try {
+		Mix_Music* music = Mix_LoadMUS("../Client/Assets/Sounds/menu.wav");
+		Mix_PlayMusic(music, -1);
 		using namespace std::chrono;
 		auto begin = steady_clock::now();
 		auto end = steady_clock::now();
@@ -46,6 +48,7 @@ void Game::execute() {
 			t_delta = duration<double>(end - begin).count();
 			std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
 		}
+		Mix_FreeMusic(music);
 	} catch (std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: Exception: %s", __FILE__, __LINE__,  e.what());
 	}

@@ -3,9 +3,6 @@
 
 SoundHandler::SoundHandler() : sound(NULL), bomb_activated(false) {
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
-	/*sound = Mix_LoadWAV("../Client/Assets/Sounds/menu.wav");
-	Mix_PlayChannel(-1, sound, 0);
-	sounds.push_back(sound);*/
 }
 
 void SoundHandler::handleBomb(Event& event) {
@@ -42,9 +39,9 @@ void SoundHandler::handleAttack(Event& event) {
 }
 
 void SoundHandler::handleWalk() {
+	if (sound) { Mix_FreeChunk(sound); }
 	sound = Mix_LoadWAV("../Client/Assets/Sounds/pl_dirt1.wav");
 	Mix_PlayChannel(-1, sound, 0);
-	sounds.push_back(sound);
 }
 
 void SoundHandler::play(PositionType weapon) {
@@ -74,71 +71,64 @@ void SoundHandler::play(PositionType weapon) {
 }
 
 void SoundHandler::play(SoundEvent sound_event) {
+	if (sound != NULL) {
+		Mix_FreeChunk(sound);
+		sound = NULL;
+	}
 	switch (sound_event) {
 		case SoundEvent::AK47_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/ak47.wav");
-			sounds.push_back(sound);
 			Mix_PlayChannel(-1, sound, 0);
 			break;
 		}
 		case SoundEvent::AWP_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/awp.wav");
-			sounds.push_back(sound);
 			Mix_PlayChannel(-1, sound, 0);
 			break;
 		}
 		case SoundEvent::M3_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/m3.wav");
-			sounds.push_back(sound);
 			Mix_PlayChannel(-1, sound, 0);
 			break;
 		}
 		case SoundEvent::GLOCK_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/glock18.wav");
-			sounds.push_back(sound);
 			Mix_PlayChannel(-1, sound, 0);
 			break;
 		}
 		case SoundEvent::KNIFE_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/knife_hit.wav");
-			sounds.push_back(sound);
 			Mix_PlayChannel(-1, sound, 0);
 			break;
 		}
 		case SoundEvent::BOMB_PLACED_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/c4.wav");
 			Mix_PlayChannel(-1, sound, 0);
-			sounds.push_back(sound);
 			break;
 		}
 		case SoundEvent::BOMB_DEACTIVATED_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/c4_disarm.wav");
 			Mix_PlayChannel(-1, sound, 0);
-			sounds.push_back(sound);
 			break;
 		}
 		case SoundEvent::BOMB_EXPLODED_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/c4_explode.wav");
 			Mix_PlayChannel(-1, sound, 0);
-			sounds.push_back(sound);
 			break;
 		}
 		case SoundEvent::WALK_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/pl_dirt1.wav");
 			Mix_PlayChannel(-1, sound, 0);
-			sounds.push_back(sound);
 			break;
 		}
 		case SoundEvent::GRAB_WEAPON_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/wpn_hudon.wav");
 			Mix_PlayChannel(-1, sound, 0);
-			sounds.push_back(sound);
 			break;
 		}
 		case SoundEvent::CHANGE_WEAPON_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/wpn_select.wav");
 			Mix_PlayChannel(-1, sound, 0);
-			sounds.push_back(sound);
 			break;
 		}
 		default : break;
@@ -146,6 +136,9 @@ void SoundHandler::play(SoundEvent sound_event) {
 }
 
 SoundHandler::~SoundHandler() {
-	for (auto sound : sounds) { Mix_FreeChunk(sound); }
+	if (sound != NULL) {
+		Mix_FreeChunk(sound);
+		sound = NULL;
+	}
 	Mix_CloseAudio();
 }

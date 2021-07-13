@@ -22,7 +22,6 @@ class SoundHandler {
 	private:
 		bool bomb_activated;
 		Mix_Chunk* sound;
-		std::vector<Mix_Chunk*> sounds;
 		SoundHandler(const SoundHandler &other) = delete;
 		SoundHandler& operator=(const SoundHandler &other) = delete;
 };

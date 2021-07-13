@@ -64,9 +64,27 @@ cree un mapa cualquiera con zonas vacías, guárdelo y vuelva a cargarlo).
 Además, para evitar que los personajes se salgan del mapa,
 al guardar se rodea todo el mapa creado de cajas negras.
 
--Cliente:
+- Cliente:
 		Ventana de inicio: Al ejecutarlo le aparecerá una ventana que le pedirá su nombre,
 		éste debe tener más de 3 caracteres para poder avanzar (no puede jugar sin nombre).
+
 		Ventana de Crear/Unirse: Le permitirá elegir entre Crear una nueva partida o unirse a otra en espera.
-		Si elige Crear, le aparecerá una lista de mapas (creados por el Editor) para poder seleccionar,
+		-Si elige Crear, le aparecerá una lista de mapas (creados por el Editor) para poder seleccionar,
 		una vez seleccionado, deberá ponerle un nombre a la partida, de más de 3 caracteres.
+		Luego, le aparecerá la lista de jugadores que se vayan uniendo a la partida que ha creado,
+		de click en el botón 'Comenzar Juego' para que comience la partida, ésto sólo funcionará
+		si hay por lo menos un jugador que se haya unido a su partida, de lo contrario deberá esperar.
+		-Si elige Unirse, le aparecerá la lista de partidas disponibles, haga click
+		en la que quiera unirse y espera a que el Creador de la partida de comienzo.
+		
+Asignación de las teclas del juego:
+		-W: Moverse hacia arriba.
+		-A: Moverse hacia la izquierda.
+		-D: Moverse hacia la derecha.
+		-S: Moverse hacia abajo.
+		(Nota: la dirección del movimiento es respecto al mapa, no respecto hacia donde está apuntanto el personaje.
+		-C: Cambiar al arma siguiente de entre las disponibles.
+		-SPACE: Recoger arma, si ya tiene un arma secundaria equipada, ésta última será droppeada.
+		-Click Izquierdo del mousse: Disparar con el arma equipada hacia donde el personaje está apuntando.
+		-Q: Colocar bomba, debe mantenerlo apretado hasta que el conteo de tiempo termine para que funcione correctamente.
+		-E: Desactivar bomba, debe mantenerlo apretado hasta que el conteo de tiempo termine para que funcione correctamente.

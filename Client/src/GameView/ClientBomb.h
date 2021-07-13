@@ -9,6 +9,8 @@
 #include "BombState.h"
 #include "ClientPlayer.h"
 
+class ClientPlayer;
+
 #define EXPLOSION_WIDTH 64
 #define EXPLOSION_HEIGHT 64
 #define BAR_WIDTH 737

@@ -20,7 +20,7 @@
 #include "ReceiveSquadsHandler.h"
 #include "ReceiveFinalStateHandler.h"
 #include "ReceiveAttacksHandler.h"
-
+#include "SoundHandler.h"
 
 class ModelEventHandler {
 	private:
@@ -34,6 +34,8 @@ class ModelEventHandler {
 		ReceiveSquadsHandler squads_receiver;
 		ReceiveFinalStateHandler final_state_receiver;
 		ReceiveAttacksHandler attacks_receiver;
+		SoundHandler sound_handler;
+
 	public:
 		ModelEventHandler();
 

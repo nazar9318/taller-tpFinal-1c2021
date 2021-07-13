@@ -22,23 +22,27 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
     case ModelTypeEvent::INITIAL_PLAYERS:
       player_init.handle(fase, event, map);
       break;
-    case ModelTypeEvent::BOMB_INFO:
+    case ModelTypeEvent::BOMB_INFO: {
       bomb_state.handle(fase, event, map, bomb);
+      sound_handler.handleBomb(event);
       break;
+    }
     case ModelTypeEvent::STATISTICS:
       stats.handle(fase, event, map);
       break;
     case ModelTypeEvent::SEND_SQUADS:
       squads_receiver.handle(event, map);
       break;
-    case ModelTypeEvent::FINAL_STATE:
+    case ModelTypeEvent::FINAL_STATE: {
       final_state_receiver.handle(fase, event, map, bomb);
+      sound_handler.handleBomb(event);
       break;
-    case ModelTypeEvent::ATTACKS_INFO:
+    }
+    case ModelTypeEvent::ATTACKS_INFO: {
       attacks_receiver.handle(fase, event, map, attack_effects);
+      sound_handler.handle(event);
       break;
-
-
+    }
     default:
       break;
   }

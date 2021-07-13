@@ -5,13 +5,14 @@ WeaponSniper::WeaponSniper() :
 			Weapon(CF::awp_price, CF::awp_damage_min,
 			CF::awp_damage_max, CF::awp_max_distance,
 			CF::awp_distance_penalty, CF::awp_ammo),
-			accuracy(CF::awp_accuracy) {
+			accuracy(CF::awp_accuracy), retard_time(CF::awp_retard_time), 
+			tics(0) {
 }
 
 void WeaponSniper::attack(AttackInformation& attack_info,
 					std::list<Block>& blocks, std::map<char,
 								 Character>& characters){
-	if (activated && ammo >= 1) {
+	if (activated && (ammo >= 1)) {
 		attack_info.set_weapon(PositionType::AWP);
 		std::map<char,Character>::iterator closest_char;
 		double distance;
@@ -29,6 +30,7 @@ void WeaponSniper::attack(AttackInformation& attack_info,
 		deactivate();
 		ammo -= 1;
    }
+   tics++;
 }
 
 char WeaponSniper::get_type(){

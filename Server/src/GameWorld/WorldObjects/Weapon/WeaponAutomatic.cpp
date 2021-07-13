@@ -6,7 +6,8 @@ WeaponAutomatic::WeaponAutomatic() :
 			CF::ak47_distance_penalty, CF::ak47_ammo),
 			accuracy(CF::ak47_accuracy),
 			shoot_rate(CF::ak47_shoot_rate),
-			shoot_freq(CF::ak47_shoot_freq){
+			shoot_freq(CF::ak47_shoot_freq), 
+			number_tics((int)(shoot_freq / STEP_TIME)) {
 }
 
 
@@ -58,7 +59,7 @@ char WeaponAutomatic::calculate_damage(double distance) {
 
 void WeaponAutomatic::deactivate() {
 	Weapon::deactivate();
-	number_tics = 0;
+	number_tics = (int)(shoot_freq / STEP_TIME);
 }
 
 char WeaponAutomatic::get_type(){

@@ -18,7 +18,6 @@ class WeaponShotgun : public Weapon {
 		 				 Character>& characters);
 
 
-        //void shoot(Character &character, uint16_t distance);
         char calculate_damage(double distance);
 
         char get_type();

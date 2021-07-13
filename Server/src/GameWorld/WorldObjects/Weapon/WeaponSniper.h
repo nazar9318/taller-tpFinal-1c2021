@@ -10,6 +10,8 @@
 
 class WeaponSniper : public Weapon {
 		double accuracy;
+		int tics;
+		double retard_time;
 	public:
 		WeaponSniper();
 

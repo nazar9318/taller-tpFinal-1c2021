@@ -20,6 +20,8 @@ class WeaponSniper : public Weapon {
 						 Character>& characters);
 
 		char calculate_damage();
+		void activate();
+
 		char get_type();
 		~WeaponSniper();
 

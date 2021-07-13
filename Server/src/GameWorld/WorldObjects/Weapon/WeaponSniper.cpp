@@ -6,7 +6,7 @@ WeaponSniper::WeaponSniper() :
 			CF::awp_damage_max, CF::awp_max_distance,
 			CF::awp_distance_penalty, CF::awp_ammo),
 			accuracy(CF::awp_accuracy), retard_time(CF::awp_retard_time), 
-			tics(0) {
+			tics((int)(retard_time / STEP_TIME)) {
 }
 
 void WeaponSniper::attack(AttackInformation& attack_info,
@@ -29,11 +29,19 @@ void WeaponSniper::attack(AttackInformation& attack_info,
 		}
 		deactivate();
 		ammo -= 1;
-   }
-   tics++;
+		tics = 0;
+	}
+	tics++;
 }
 
-char WeaponSniper::get_type(){
+
+void WeaponSniper::activate() {
+	if (tics * STEP_TIME >= retard_time) {
+		activated = true;
+	}
+}
+
+char WeaponSniper::get_type() {
 	return PositionType::AWP;
 }
 

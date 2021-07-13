@@ -32,7 +32,7 @@ class Weapon {
 		Weapon(int price, double damage_min, double damage_max,
 				 double max_distance, double distance_penalty, int ammo);
 
-		void activate();
+		virtual void activate();
 
 		int get_price();
 		int get_ammo();

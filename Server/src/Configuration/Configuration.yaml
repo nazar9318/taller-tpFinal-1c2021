@@ -62,4 +62,4 @@ m3_max_distance: 50.0
 awp_max_distance: 768.0
 knife_max_distance: 40.0
 
-awp_retard_time: 2
+awp_retard_time: 1

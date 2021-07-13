@@ -83,9 +83,9 @@ char MapParser::get_type(const std::string& type) {
 				return PositionType::BOX_BROWN;
 	if (type == "box_brown")
 				return PositionType::BOX_METAL;
-	if (type == "box_metal")
-				return PositionType::BOX_WOOD_METAL;
 	if (type == "box_wood_metal")
+				return PositionType::BOX_WOOD_METAL;
+	if (type == "box_wood")
 				return PositionType::BOX_WOOD;
 	if (type == "T_spawn")
 				return PositionType::TERRORIST_SPAWN;

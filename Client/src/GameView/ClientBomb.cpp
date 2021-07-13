@@ -6,7 +6,8 @@ ClientBomb::ClientBomb(Renderer& renderer,Camera& camera, char player_id, Client
   player_id(player_id),
   player(player),
   has_owner(false),
-  state(BombState::NORMAL)
+  state(BombState::NORMAL),
+  ticks(0)
   {}
 
 void ClientBomb::loadBarClips(){
@@ -20,13 +21,15 @@ void ClientBomb::loadBarClips(){
 
 void ClientBomb::loadExplosionClips() {
   /*cada clip es de 64x64 y hay 5 5 5 5 3*/
+  int pos = 0;
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 5; j++) {
       if(!(i == 4 && (j == 3 || j == 4))){
-        explosion_clips[i].x = j*EXPLOSION_WIDTH;
-        explosion_clips[i].y = i*EXPLOSION_HEIGHT;
-        explosion_clips[i].w = EXPLOSION_WIDTH;
-        explosion_clips[i].h = EXPLOSION_HEIGHT;
+        explosion_clips[pos].x = j*EXPLOSION_WIDTH;
+        explosion_clips[pos].y = i*EXPLOSION_HEIGHT;
+        explosion_clips[pos].w = EXPLOSION_WIDTH;
+        explosion_clips[pos].h = EXPLOSION_HEIGHT;
+        pos++;
       }
     }
   }
@@ -85,6 +88,7 @@ void ClientBomb::set_activated_state(char id_owner, int x, int y, int time_until
 }
 
 void ClientBomb::set_exploted_state(){
+  ticks = 0;
   this->state = BombState::EXPLOTED;
 }
 
@@ -146,13 +150,22 @@ void ClientBomb::render_deactivating_bomb(){
 }
 
 void ClientBomb::render_explosion(){
-  SDL_Rect quad = {x, y, EXPLOSION_WIDTH, EXPLOSION_HEIGHT};
-  // SDL_Rect clip = {0, 0, EXPLOSION_WIDTH, EXPLOSION_HEIGHT};
 
-  for (int i = 0; i < EXPLOSION_CLIPS; i++) {
-    camera.render(explosion.getTexture(), quad, &explosion_clips[i]);
+  if(ticks >= EXPLOSION_TICKS){
+    return;
   }
-  // camera.render(explosion.getTexture(), quad, &clip);
+
+  SDL_Rect quad = {x - EXPLOSION_WIDTH/2, y - EXPLOSION_HEIGHT/2, EXPLOSION_WIDTH, EXPLOSION_HEIGHT};
+  int current_clip;
+
+  if(ticks%2 == 0) {
+    current_clip = ticks/2;
+  } else {
+    current_clip = (ticks-1)/2;
+  }
+
+  camera.renderAddingOffset(explosion.getTexture(), quad, &explosion_clips[current_clip]);
+  ticks += 1;
 }
 
 ClientBomb::~ClientBomb(){

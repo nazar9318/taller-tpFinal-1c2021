@@ -40,7 +40,7 @@ void AttackEffect::renderBlood(){
     } else{
       position = characters.at(receiver_id).getBox();
     }
-    SDL_Rect quad = {position.x + PLAYER_WIDTH/2, position.y + PLAYER_HEIGHT/2, BLOOD_WIDTH, BLOOD_HEIGHT};
+    SDL_Rect quad = {position.x, position.y, BLOOD_WIDTH/2, BLOOD_HEIGHT/2};
     camera.renderAddingOffset(blood.getTexture(), quad);
 
     if(it->addTick()){

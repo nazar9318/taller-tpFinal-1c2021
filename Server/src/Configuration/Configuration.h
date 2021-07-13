@@ -89,6 +89,8 @@ class Configuration {
 		static double knife_max_distance;
 
 		static double awp_retard_time;
+
+		static int m3_angle_covered;
 };
 
 #endif

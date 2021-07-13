@@ -10,6 +10,7 @@
 
 class WeaponShotgun : public Weapon {
         double accuracy;
+        int angle_covered;
 
     public:
         WeaponShotgun();

@@ -88,7 +88,10 @@ bool Weapon::find_closest_character(AttackInformation& attack_info,
 	}
 	b2Vec2 intersection_point = p1 + closest_fraction * (p2 - p1);
 	distance = (intersection_point - p1).Length();
-	return !is_static;
+	if (!is_static && attack_info.get_team() == closest_char->second.get_team()) {
+		return true;
+	}
+	return false;
 }
 
 

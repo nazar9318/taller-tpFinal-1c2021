@@ -233,6 +233,7 @@ void Character::reset_body(b2World* world,
 	life_points = CF::character_life_points;
 	unblock();
 	round_kills = 0;
+	stop_attacking();
 }
 
 void Character::change_team() {

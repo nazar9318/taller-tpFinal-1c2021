@@ -87,6 +87,8 @@ class Configuration {
 		static double m3_max_distance;
 		static double awp_max_distance;
 		static double knife_max_distance;
+
+		static double awp_retard_time;
 };
 
 #endif

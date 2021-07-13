@@ -188,7 +188,7 @@ std::vector<char> Bomb::get_info() {
 			info.push_back(id_owner);
 		} else {
 			int x = (int)pos.x;
-			int y = (int)pos.y;
+			int y = (int)pos.y * (-1);
 			info.push_back(*((char*)(&x)));
 			info.push_back(*((char*)(&x) + 1));
 			info.push_back(*((char*)(&x) + 2));
@@ -211,7 +211,7 @@ std::vector<char> Bomb::get_info() {
 		info.push_back(time_until_explote);
 
 		int x = (int)pos.x;
-		int y = (int)pos.y;
+		int y = (int)pos.y * (-1);
 
 		info.push_back(*((char*)(&x)));
 		info.push_back(*((char*)(&x) + 1));

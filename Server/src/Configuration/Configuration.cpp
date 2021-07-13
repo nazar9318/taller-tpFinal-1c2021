@@ -78,6 +78,7 @@ double CF::m3_max_distance = CF::yaml_file["m3_max_distance"].as<double>();
 double CF::awp_max_distance = CF::yaml_file["awp_max_distance"].as<double>();
 double CF::knife_max_distance = CF::yaml_file["knife_max_distance"].as<double>();
 
+double CF::awp_retard_time = CF::yaml_file["awp_retard_time"].as<double>();
 
 Configuration::Configuration() {}
 Configuration::~Configuration() {}
@@ -153,4 +154,5 @@ void Configuration::load_configuration(const std::string& file_path) {
 	awp_max_distance = yaml_file["awp_max_distance"].as<double>();
 	knife_max_distance = yaml_file["knife_max_distance"].as<double>();
 
+	awp_retard_time = yaml_file["awp_retard_time"].as<double>();
 }

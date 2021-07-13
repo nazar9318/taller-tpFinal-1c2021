@@ -15,13 +15,8 @@
 #include "Game.h"
 
 class Client {
-	Socket socket;
-	ProtectedQueue<Event> model_events;
-	ProtectedQueue<std::unique_ptr<Event>> client_events;
-	ModelRecieverThread reciever;
-	EventSenderThread sender;
-	std::map<char, std::string> players;
-
+	std::string host;
+	std::string port;
 	public:
 		Client(const std::string& host, const std::string& port);
 

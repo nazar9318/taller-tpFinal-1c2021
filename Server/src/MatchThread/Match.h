@@ -86,6 +86,9 @@ class Match: public Thread {
 		// POST: Fuerza la finalizacion de la partida.  
 		void stop_running();
 
+		bool has_started();
+
+
 		~Match();
 
 	private:

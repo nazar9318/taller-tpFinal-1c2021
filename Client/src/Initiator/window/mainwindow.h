@@ -46,9 +46,11 @@ private:
     ProtectedQueue<Event>& model_events;
     std::map<char, std::string>& players;
     char& self_id;
-    std::string user_name;
+    std::string& user_name;
     QTimer* matches_timer;
     QTimer* players_joined_timer;
+    bool& active;
+    bool& user_name_charged;
 public:
     MainWindow(Socket& socket, bool& game_started,
             ModelRecieverThread& receiver,
@@ -56,7 +58,8 @@ public:
             ProtectedQueue<Event>& model_events,
             ProtectedQueue<std::unique_ptr<Event>>& client_events,
             std::map<char, std::string>& players,
-            char& self_id,
+            char& self_id, bool& active,
+            bool& user_name_charged, std::string& name,
             QWidget *parent = nullptr);
 
     void createMatch(const QString& map_name);

@@ -20,16 +20,25 @@ MainWindow::MainWindow(Socket& skt, bool &started,
 		 ModelRecieverThread& rcv, EventSenderThread& snd,
 		 ProtectedQueue<Event>& m_events,
 		 ProtectedQueue<std::unique_ptr<Event>>& c_events,
-		 std::map<char, std::string>& users, char& id,
+		 std::map<char, std::string>& users, char& id, bool& active,
+		 bool& user_name_charged, std::string& name, 
 		 QWidget *parent)
  		: socket(skt), game_started(started), receiver(rcv),
  		 sender(snd), model_events(m_events),
  		 client_events(c_events), players(users), self_id(id),
  		  QMainWindow(parent),
-         ui(new Ui::MainWindow), match_started(false) {
+         ui(new Ui::MainWindow), match_started(false), active(active), 
+          user_name_charged(user_name_charged), user_name(name){
    	ui->setupUi(this);
 	this->setStyleSheet("background-color: white;");
-	ui->stackedWidget->setCurrentIndex(USER_NAME_PAGE);
+	active = false;
+	if (!user_name_charged) {
+		ui->stackedWidget->setCurrentIndex(USER_NAME_PAGE);
+	} else {
+		SendUserNameEvent user_event(user_name);
+		protocol.send_event(socket, user_event.get_msg());
+		ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
+	}
 	setWindowTitle(TITLE);
 	players_joined_timer = new QTimer(this);
     connect(players_joined_timer, SIGNAL(timeout()), this, SLOT(update_players()));
@@ -49,6 +58,7 @@ void MainWindow::on_OK_clicked() {
 		show_error("El nombre es demasiado corto");
 		return;
 	}
+	user_name_charged = true;
 	SendUserNameEvent user_event(user_name);
 	protocol.send_event(socket, user_event.get_msg());
 	ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
@@ -105,6 +115,11 @@ void MainWindow::show_error(const QString& message, Event& event) {
 			case ServerError::CREATOR_ABANDONS_MATCH:
 			{
 				error_msg.append("El creador ha abandonado la partida.");
+				active = true;
+				sender.start();
+				players_joined_timer->stop();
+				// manejarlo para que se cierre todo desps de la cruz. 
+
 				break;
 			}
 			default:
@@ -207,6 +222,7 @@ void MainWindow::update_players() {
 						sender.start();
 						players_joined_timer->stop();
 						game_started = true;
+						active = true;
 						this->close();
 						break;
 					}

@@ -53,7 +53,8 @@ std::list<std::string> Matches::get_matches_info() {
 	clear_matches();
 	std::list<std::string> matches_names;
 	for (auto it = matches.begin(); it != matches.end(); ++it) {
-		matches_names.push_back(it->first);
+		if (!it->second->has_started())
+			matches_names.push_back(it->first);
 	}
 	return matches_names;
 }

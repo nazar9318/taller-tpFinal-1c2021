@@ -1,21 +1,34 @@
 #include "Client.h"
 
 Client::Client(const std::string& host, const std::string& port):
-socket(host, port), model_events(), client_events(),
-reciever(socket, model_events), sender(socket, client_events) {}
+			host(host), port(port) {}
 
 
 void Client::execute(int argc, char** argv) {
-	Initiator initiator(reciever, sender, model_events, client_events);
-	bool game_started = true;
-	char self_id;
-	initiator.launch(socket, argc, argv, game_started, players, self_id);
-	if (game_started) {
-		Game game(model_events, client_events, players, self_id);
-		game.execute();
+	bool client_active = true; 
+	bool user_name_charged = false;
+	std::string name; 
+	while (client_active) {
+		Socket socket(host, port);
+		ProtectedQueue<Event> model_events;
+		ProtectedQueue<std::unique_ptr<Event>> client_events;
+		ModelRecieverThread reciever(socket, model_events);
+		EventSenderThread sender(socket, client_events);
+		std::map<char, std::string> players;
+		Initiator initiator(reciever, sender, 
+					model_events, client_events, client_active);
+		bool game_started = false;
+		char self_id;
+		initiator.launch(socket, argc, argv, game_started,
+							players, self_id, user_name_charged, name);
+		if (game_started) {
+			Game game(model_events, client_events, players, self_id);
+			game.execute();
+		} 
+		reciever.stop_running();
+		sender.stop_running();
 	}
-	reciever.stop_running();
-	sender.stop_running();
+
 }
 
 Client::~Client() {}

@@ -58,17 +58,17 @@ void Match::run() {
 		syslog(LOG_INFO, "[%s:%i]: Termina la etapa de start"
 						, __FILE__, __LINE__);		
 		game_loop();
-		stop_running();
 	} catch(std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what());
 	} catch (...) {
 		syslog(LOG_CRIT, "[%s:%i]: Unknown Error", __FILE__, __LINE__);
 	}
+	finished = true;
 }
 
 
 void Match::start_game() {
-	while(!match_started) {
+	while(!match_started && !finished) {
 		Event event = to_process_events.blocking_pop();
 		// bloqueamos para no aceptar mas jugadores. 
 		std::lock_guard<std::mutex> l(m);
@@ -91,7 +91,9 @@ void Match::start_game() {
 	}
 }
 
-
+bool Match::has_started() {
+	return match_started;
+}
 
 void Match::game_loop() {
 	using namespace std::chrono;
@@ -212,12 +214,13 @@ void Match::stop_running() {
 	syslog(LOG_INFO, "[%s:%i]: Se cerraron"
 					 " los hilos de los jugadores "
 				 	  , __FILE__, __LINE__);
-	finished = true;
 	to_process_events.close();
+	finished = true;
 }
 
 
 Match::~Match() {
+	stop_running();
 	syslog(LOG_INFO, "[%s:%i]: Se elimino el match "
 				 	  , __FILE__, __LINE__);
 }

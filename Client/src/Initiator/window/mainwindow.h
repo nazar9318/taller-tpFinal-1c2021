@@ -14,6 +14,7 @@
 #include <map>
 #include <QSignalMapper>
 #include <QTimer>
+#include <QWidget>
 
 #include "CreateMatchEvent.h"
 #include "JoinMatchEvent.h"

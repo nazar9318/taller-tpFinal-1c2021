@@ -3,7 +3,7 @@ max_distance_grab: 64
 
 time_preparation: 5
 time_finish: 20
-time_between: 15
+time_between: 2
 number_rounds: 10
 players_allowed: 10
 velocity_iterations: 8
@@ -63,3 +63,4 @@ awp_max_distance: 768.0
 knife_max_distance: 40.0
 
 awp_retard_time: 1
+

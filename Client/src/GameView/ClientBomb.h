@@ -16,6 +16,7 @@ class ClientPlayer;
 #define BAR_WIDTH 737
 #define BAR_HEIGHT 101
 #define EXPLOSION_CLIPS 23
+#define EXPLOSION_TICKS 45
 
 class ClientBomb {
 
@@ -29,6 +30,7 @@ class ClientBomb {
 
     Texture explosion;
     SDL_Rect explosion_clips[EXPLOSION_CLIPS];
+    int ticks;
 
     Texture bomb_in_ground;
 

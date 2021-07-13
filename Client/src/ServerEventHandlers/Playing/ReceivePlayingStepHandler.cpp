@@ -10,8 +10,8 @@ void ReceivePlayingStepHandler::handle(FaseType& fase, Event& event, GameMap& ma
 		char id = *it;
 		int pos_x = *((int*)&(*(it + 1)));
 		int pos_y = *((int*)&(*(it + 5)));
-	  int angle = *((int*)&(*(it + 9)));
-    char life = *(it + 13);
+		int angle = *((int*)&(*(it + 9)));
+		char life = *(it + 13);
 		int money = *((int*)&(*(it + 14)));
 		char weapon_type = *(it + 18);
 		int ammo = *((int*)&(*(it + 19)));

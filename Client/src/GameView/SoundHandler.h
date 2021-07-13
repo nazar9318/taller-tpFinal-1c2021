@@ -14,8 +14,9 @@ class SoundHandler {
 		SoundHandler();
 		void play(SoundEvent sound);
 		void play(PositionType weapon);
-		void handle(Event& event);
+		void handleAttack(Event& event);
 		void handleBomb(Event& event);
+		void handleWalk();
 		~SoundHandler();
 
 	private:

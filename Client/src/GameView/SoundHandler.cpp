@@ -3,6 +3,9 @@
 
 SoundHandler::SoundHandler() : sound(NULL), bomb_activated(false) {
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+	/*sound = Mix_LoadWAV("../Client/Assets/Sounds/menu.wav");
+	Mix_PlayChannel(-1, sound, 0);
+	sounds.push_back(sound);*/
 }
 
 void SoundHandler::handleBomb(Event& event) {
@@ -22,7 +25,7 @@ void SoundHandler::handleBomb(Event& event) {
 	}
 }
 
-void SoundHandler::handle(Event& event) {
+void SoundHandler::handleAttack(Event& event) {
 	std::vector<char> event_msg = event.get_msg();
 	int number_attacks = (int)event_msg[1];
 	int iterator = 2; 
@@ -36,6 +39,12 @@ void SoundHandler::handle(Event& event) {
 			iterator++;
 		}
 	}
+}
+
+void SoundHandler::handleWalk() {
+	sound = Mix_LoadWAV("../Client/Assets/Sounds/pl_dirt1.wav");
+	Mix_PlayChannel(-1, sound, 0);
+	sounds.push_back(sound);
 }
 
 void SoundHandler::play(PositionType weapon) {
@@ -110,6 +119,24 @@ void SoundHandler::play(SoundEvent sound_event) {
 		}
 		case SoundEvent::BOMB_EXPLODED_SOUND : {
 			sound = Mix_LoadWAV("../Client/Assets/Sounds/c4_explode.wav");
+			Mix_PlayChannel(-1, sound, 0);
+			sounds.push_back(sound);
+			break;
+		}
+		case SoundEvent::WALK_SOUND : {
+			sound = Mix_LoadWAV("../Client/Assets/Sounds/pl_dirt1.wav");
+			Mix_PlayChannel(-1, sound, 0);
+			sounds.push_back(sound);
+			break;
+		}
+		case SoundEvent::GRAB_WEAPON_SOUND : {
+			sound = Mix_LoadWAV("../Client/Assets/Sounds/wpn_hudon.wav");
+			Mix_PlayChannel(-1, sound, 0);
+			sounds.push_back(sound);
+			break;
+		}
+		case SoundEvent::CHANGE_WEAPON_SOUND : {
+			sound = Mix_LoadWAV("../Client/Assets/Sounds/wpn_select.wav");
 			Mix_PlayChannel(-1, sound, 0);
 			sounds.push_back(sound);
 			break;

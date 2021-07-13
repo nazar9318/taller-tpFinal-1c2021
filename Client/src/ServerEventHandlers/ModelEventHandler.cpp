@@ -15,6 +15,7 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
       break;*/
     case ModelTypeEvent::PLAYING_STEP:
       playing_step.handle(fase, event, map);
+      //sound_handler.handleWalk();
       break;
     case ModelTypeEvent::INIT_STEP:
       init_step.handle(fase, event, map);
@@ -40,7 +41,7 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
     }
     case ModelTypeEvent::ATTACKS_INFO: {
       attacks_receiver.handle(fase, event, map, attack_effects);
-      sound_handler.handle(event);
+      sound_handler.handleAttack(event);
       break;
     }
     default:

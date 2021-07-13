@@ -78,52 +78,43 @@ void MainWindow::show_error(const QString& message, Event& event) {
 	QString error_msg(message);
 	if (event.get_type() == ModelTypeEvent::ERROR) {
 		switch (event.get_msg()[1]) {
-			case ServerError::MATCH_FULL:
-			{
-				error_msg.append("La partida ha llegado"
+			case ServerError::MATCH_FULL : {
+				error_msg.append(" La partida ha llegado"
 								" al limite de jugadores");
 				break;
 			}
-			case ServerError::NOT_ENOUGH_PLAYERS:
-			{
-				error_msg.append("La partida ha llegado"
+			case ServerError::NOT_ENOUGH_PLAYERS : {
+				error_msg.append(" La partida ha llegado"
 				" al limite de jugadores");
 				break;
 			}
-			case ServerError::MATCH_ALREADY_STARTED:
-			{
-				error_msg.append("La partida ya ha comenzado.");
+			case ServerError::MATCH_ALREADY_STARTED : {
+				error_msg.append(" La partida ya ha comenzado.");
 				break;
 			}
-			case ServerError::INVALID_TYPE_EVENT:
-			{
-				error_msg.append("Se envio un mensaje"
+			case ServerError::INVALID_TYPE_EVENT : {
+				error_msg.append(" Se envio un mensaje"
 								" inesperado al servidor.");
 				break;
 			}
-			case ServerError::MATCH_NOT_FOUND:
-			{
-				error_msg.append("No se ha podido"
+			case ServerError::MATCH_NOT_FOUND : {
+				error_msg.append(" No se ha podido"
 								" encontrar la partida.");
 				break;
 			}
-			case ServerError::MATCH_ALREADY_EXISTS:
-			{
-				error_msg.append("Ya existe una partida con este nombre");
+			case ServerError::MATCH_ALREADY_EXISTS : {
+				error_msg.append(" Ya existe una partida con este nombre");
 				break;
 			}
-			case ServerError::CREATOR_ABANDONS_MATCH:
-			{
-				error_msg.append("El creador ha abandonado la partida.");
+			case ServerError::CREATOR_ABANDONS_MATCH : {
+				error_msg.append(" El creador ha abandonado la partida.");
 				active = true;
 				sender.start();
 				players_joined_timer->stop();
-				// manejarlo para que se cierre todo desps de la cruz. 
-
+				QWidget::close();
 				break;
 			}
-			default:
-				error_msg.append("Error desconocido.");
+			default : error_msg.append("Error desconocido.");
 		}
 	}
 	show_error(error_msg);
@@ -208,34 +199,30 @@ void MainWindow::update_players() {
     	try {
     		Event model_event = model_events.pop();
 			switch (model_event.get_type()) {
-				case ModelTypeEvent::PLAYERS_ID_LIST:
-					{
-						syslog(LOG_INFO, "[%s:%i]: Llego mensaje de players list"
-									, __FILE__, __LINE__);
-						update_players_list(model_event);
-						break;
-					}
-				case ModelTypeEvent::GAME_STARTED:
-					{
-						syslog(LOG_CRIT, "[%s:%i]: Se inicia la partida.", __FILE__, __LINE__);
-						players_waiting = false;
-						sender.start();
-						players_joined_timer->stop();
-						game_started = true;
-						active = true;
-						this->close();
-						break;
-					}
-				case ModelTypeEvent::ERROR:
-					{
-						show_error("Ha ocurrido un error inesperado.", model_event);
-						break;
-					}
-				default:
-					{
-						syslog(LOG_CRIT, "[%s:%i]: Se recibe un tipo inesperado."
-						, __FILE__, __LINE__);
-					}
+				case ModelTypeEvent::PLAYERS_ID_LIST : {
+					syslog(LOG_INFO, "[%s:%i]: Llego mensaje de players list"
+								, __FILE__, __LINE__);
+					update_players_list(model_event);
+					break;
+				}
+				case ModelTypeEvent::GAME_STARTED : {
+					syslog(LOG_CRIT, "[%s:%i]: Se inicia la partida.", __FILE__, __LINE__);
+					players_waiting = false;
+					sender.start();
+					players_joined_timer->stop();
+					game_started = true;
+					active = true;
+					this->close();
+					break;
+				}
+				case ModelTypeEvent::ERROR : {
+					show_error("Ha ocurrido un error inesperado.", model_event);
+					break;
+				}
+				default : {
+					syslog(LOG_CRIT, "[%s:%i]: Se recibe un tipo inesperado."
+					, __FILE__, __LINE__);
+				}
 			}
 		} catch (ExceptionEmptyQueue& e) {
 			players_waiting = false;

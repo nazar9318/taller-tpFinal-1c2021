@@ -12,7 +12,16 @@ void BuyWeaponHandler::handle(Event& event, GameWorld& world){
 			world.add_weapon(character.get_pos(), weapon.release());
 		}
 		character.buy_weapon(std::move(weapon_buy)); 
+		world.add_weapon_buy(event.get_id());
 	}
 }
+
+/*
+id plata #armas bullets_arma2 arma3 bullets
+id plata
+
+
+*/
+
 
 BuyWeaponHandler::~BuyWeaponHandler(){}

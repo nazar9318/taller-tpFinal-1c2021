@@ -288,7 +288,9 @@ std::vector<char> GameWorld::get_squads() {
 	return squad_manager.get_squads();
 }
 
-
+void GameWorld::add_weapon_buy(char id) {
+	step_info.add_weapon_buy(id);
+}
 
 GameWorld::~GameWorld() {
 	delete world;

@@ -64,6 +64,7 @@ class GameWorld {
 		FaseType get_fase();
 		std::vector<char> bomb_info();
 		std::vector<char> get_squads();
+		void add_weapon_buy(char id);
 		~GameWorld();
 
 

@@ -141,4 +141,9 @@ std::vector<char> StepInformation::get_stats() {
 	return stats;
 }
 
+void StepInformation::add_weapon_buy(char id) {
+	//manejarr
+}
+
+
 StepInformation::~StepInformation() {}

@@ -39,6 +39,7 @@ class StepInformation {
 		void add_team_eliminated(Team team);
 		void add_finish(BombState state);
 		std::vector<char> get_reason_finish();
+		void add_weapon_buy(char id);
 
 		~StepInformation();
 	private:

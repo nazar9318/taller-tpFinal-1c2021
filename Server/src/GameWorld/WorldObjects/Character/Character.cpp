@@ -247,6 +247,28 @@ int Character::get_total_kills() {
 	return total_kills;
 }
 
+
+char Character::get_number_weapons() {
+	return (char)number_weapons;
+}
+int Character::get_glock_bullets() {
+	return weapons[1]->get_ammo();
+}
+char Character::get_optative_weapon_type() {
+	if (number_weapons == 2) {
+		throw Exception("Tiene solo 2 weapons, no una optativa");
+	}
+	return weapons[2]->get_type();
+}
+int Character::get_optative_weapon_bullets() {
+	if (number_weapons == 2) {
+		throw Exception("Tiene solo 2 weapons, no una optativa");
+	}
+	return weapons[2]->get_ammo(); 
+}
+
+
+
 Character::~Character() {
 }
 

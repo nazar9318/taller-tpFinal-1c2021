@@ -15,6 +15,7 @@ class WeaponAutomatic;
 #include "Team.h"
 #include "Configuration.h"
 #include "Block.h"
+#include "Exception.h"
 #include "TypesOfEvents.h"
 #include "ExceptionInvalidCommand.h"
 #include "../../libs/box2d/include/box2d/box2d.h"
@@ -109,6 +110,10 @@ class Character {
 
 		int get_round_kills();
 		int get_total_kills();
+		char get_number_weapons();
+		int get_glock_bullets();
+		char get_optative_weapon_type();
+		int get_optative_weapon_bullets();
 		~Character();
 	private:
 		Character(const Character &other) = delete;

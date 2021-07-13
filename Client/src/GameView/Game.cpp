@@ -28,6 +28,7 @@ Game::Game(ProtectedQueue<Event>& model,
 void Game::execute() {
 	try {
 		Mix_Music* music = Mix_LoadMUS("../Client/Assets/Sounds/menu.wav");
+		Mix_VolumeMusic(MIX_MAX_VOLUME/2);
 		Mix_PlayMusic(music, -1);
 		using namespace std::chrono;
 		auto begin = steady_clock::now();

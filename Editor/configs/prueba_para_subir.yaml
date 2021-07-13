@@ -1,0 +1,124 @@
+width: 6
+height: 4
+---
+item: base_aztec
+position:
+  - 7
+  - 2
+---
+item: base_aztec
+position:
+  - 7
+  - 3
+---
+item: base_aztec
+position:
+  - 6
+  - 3
+---
+item: base_aztec
+position:
+  - 6
+  - 2
+---
+item: base_aztec
+position:
+  - 5
+  - 2
+---
+item: base_aztec
+position:
+  - 5
+  - 3
+---
+item: base_aztec
+position:
+  - 4
+  - 3
+---
+item: base_aztec
+position:
+  - 4
+  - 2
+---
+item: box_black
+position:
+  - 8
+  - 4
+---
+item: box_black
+position:
+  - 8
+  - 3
+---
+item: box_black
+position:
+  - 8
+  - 2
+---
+item: box_black
+position:
+  - 8
+  - 1
+---
+item: box_black
+position:
+  - 7
+  - 4
+---
+item: box_black
+position:
+  - 7
+  - 1
+---
+item: box_black
+position:
+  - 6
+  - 4
+---
+item: box_black
+position:
+  - 6
+  - 1
+---
+item: box_black
+position:
+  - 5
+  - 4
+---
+item: box_black
+position:
+  - 5
+  - 1
+---
+item: box_black
+position:
+  - 4
+  - 4
+---
+item: box_black
+position:
+  - 4
+  - 1
+---
+item: box_black
+position:
+  - 3
+  - 4
+---
+item: box_black
+position:
+  - 3
+  - 3
+---
+item: box_black
+position:
+  - 3
+  - 2
+---
+item: box_black
+position:
+  - 3
+  - 1
+---
+Resized: 1

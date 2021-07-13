@@ -64,6 +64,7 @@ class MainWindow : public QMainWindow {
         void placePos(int &x, int &y);
         bool hasPos(std::vector<size_t> &vector, size_t pos);
         int delay_cnt;
+        bool resized;
 
     private slots:
         void on_save_clicked();

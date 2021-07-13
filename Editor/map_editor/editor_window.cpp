@@ -13,7 +13,7 @@
 #define FLOOR_SIZE 32
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
-ui(new Ui::MainWindow), delay_cnt(0) {
+ui(new Ui::MainWindow), delay_cnt(0), resized(false) {
     this->ui->setupUi(this);
     scene = new QGraphicsScene(this);
     this->ui->map->setScene(scene);
@@ -195,8 +195,12 @@ void MainWindow::makeSquared(YAML::Emitter &emitter) {
         int y = nodes[i]["position"][1].as<int>();
         positions[std::make_pair(x, y)] = 0;
     }
-    for (size_t i = min_x-1; i <= max_x+1; i++) {
-        for (size_t j = min_y-1; j <= max_y+1; j++) {
+    size_t inf_x = min_x - (this->resized ? 0:1);
+    size_t sup_x = max_x + (this->resized ? 0:1);
+    size_t inf_y = min_y - (this->resized ? 0:1);
+    size_t sup_y = max_y + (this->resized ? 0:1);
+    for (size_t i = inf_x; i <= sup_x; i++) {
+        for (size_t j = inf_y; j <= sup_y; j++) {
             if (positions.at(std::make_pair(i,j)) == -1) {
                 YAML::Node node;
                 YAML::Node coordinates;
@@ -214,14 +218,19 @@ void MainWindow::makeSquared(YAML::Emitter &emitter) {
 void MainWindow::on_save_clicked() {
     YAML::Emitter emitter;
     YAML::Node size;
-    size["width"] = this->width();
-    size["height"] = this->heigth();
+    YAML::Node resized;
+    size["width"] = this->width() + (this->resized ? 0 : 2);
+    size["height"] = this->heigth() + (this->resized ? 0 : 2);
     nodes.push_back(size);
     emitter << size;
     this->saveBases();
     this->saveObjects();
     this->moveMap(emitter);
     this->makeSquared(emitter);
+    this->resized = true;
+    if (this->resized) { resized["Resized"] = 1; }
+    else { resized["Resized"] = 0; }
+    emitter << resized;
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save Address Book"), "../configs/",
             tr("Address Book (*.yml);;All Files (*)"));
@@ -233,7 +242,7 @@ void MainWindow::on_save_clicked() {
 void MainWindow::on_load_clicked() {
     QString file_name = QFileDialog::getOpenFileName(this, "Open a file", "../configs/");
     std::vector<YAML::Node> nodes = YAML::LoadAllFromFile(file_name.toStdString());
-    for (size_t i = 1; i < nodes.size(); i++) {
+    for (size_t i = 1; i < nodes.size()-1; i++) {
         QGraphicsPixmapItem *item;
         const std::string &new_item_name = nodes[i]["item"].as<std::string>();
         QString q_new_item_name = QString::fromStdString(new_item_name);
@@ -267,6 +276,7 @@ void MainWindow::on_load_clicked() {
         item->setData(0, q_new_item_name);
         this->scene->addItem(item);
     }
+    this->resized = (nodes[nodes.size()-1]["Resized"].as<int>() == 1);
 }
 
 void MainWindow::removeFrom(const std::string& item, int x, int y) {

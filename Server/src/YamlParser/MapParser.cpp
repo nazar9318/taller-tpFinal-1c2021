@@ -27,7 +27,7 @@ void MapParser::build_positions(const std::string &type,
 	syslog(LOG_INFO, "[%s:%i]: Mapa con largo %d y ancho %d"
 		, __FILE__, __LINE__, y, x);
 
-	for (auto it = nodes.begin() + 1; it != nodes.end(); ++it) {
+	for (auto it = nodes.begin() + 1; it != nodes.end()-1; ++it) {
 		syslog(LOG_INFO, "[%s:%i]: Por leer un nodo"
 		, __FILE__, __LINE__);
 		const YAML::Node& obj = *it;

@@ -5,29 +5,30 @@ WeaponShotgun::WeaponShotgun() :
 			Weapon(CF::m3_price, CF::m3_damage_min,
 			CF::m3_damage_max, CF::m3_max_distance,
 			CF::m3_distance_penalty, CF::m3_ammo),
-			accuracy(CF::m3_accuracy){
+			accuracy(CF::m3_accuracy), 
+			angle_covered(CF::m3_angle_covered){
 }
 
 
 
-
-// FALTA CORREGIR PARA QUE SEA EN CONO.
 void WeaponShotgun::attack(AttackInformation& attack_info,
 					std::list<Block>& blocks, std::map<char,
 								 Character>& characters){
 	if (activated && ammo >= 1) {
 		attack_info.set_weapon(PositionType::M3);
-		std::map<char,Character>::iterator closest_char;
-		double distance;
-		int angle = attack_info.get_angle();
-		bool is_character = find_closest_character(attack_info, blocks,
-								characters, angle, closest_char, distance);
-		if (is_character) {
-			char damage = calculate_damage(distance);
-			if (damage > 0) {
-				attack_info.add_receiver(closest_char->first,
-											 &(closest_char->second));
-				closest_char->second.take_damage(damage);
+		for (int i = ((-1) * angle_covered / 2); i < (angle_covered / 2); i++) {
+			std::map<char,Character>::iterator closest_char;
+			double distance;
+			int angle = attack_info.get_angle() + i;
+			bool is_character = find_closest_character(attack_info, blocks,
+									characters, angle, closest_char, distance);
+			if (is_character) {
+				char damage = calculate_damage(distance);
+				if (damage > 0) {
+					attack_info.add_receiver(closest_char->first,
+												 &(closest_char->second));
+					closest_char->second.take_damage(damage);
+				}
 			}
 		}
 		deactivate();

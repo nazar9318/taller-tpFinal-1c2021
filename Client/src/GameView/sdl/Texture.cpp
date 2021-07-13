@@ -53,6 +53,43 @@ void Texture::loadFromFile(const Renderer& renderer, std::string filePath, Color
   SDL_SetTextureBlendMode(this->texture, blending);
   SDL_SetTextureAlphaMod(this->texture, alpha);
 }
+#include <iostream>
+void Texture::loadFromRenderedText(Renderer& renderer, TTF_Font* font, std::string text, SDL_Color color, TextType type){
+    // Eliminamos una textura previa si existe
+    free();
+    // Generamos la surface de texto
+    SDL_Surface* text_surface = NULL;
+
+    switch (type) {
+        case SOLID_TEXT: {
+            text_surface = TTF_RenderText_Solid(font, text.c_str(), color);
+            break;
+        }
+
+        case BLENDED_TEXT: {
+            text_surface = TTF_RenderText_Blended(font, text.c_str(), color);
+            break;
+        }
+
+        default: {
+            throw SDLException("SDLException: failed to create texture from text\n");
+        }
+    }
+
+    if (text_surface == NULL) {
+        throw SDLException("Error in function TTF_RenderUTF8 - SDL_Error: %s",SDL_GetError());
+    }
+
+    // Creamos la textura desde la surface
+    texture = renderer.createTextureFromSurface(text_surface);
+
+    // Seteamos las dimensiones
+    this->height = text_surface->h;
+    this->width = text_surface->w;
+
+    // Liberamos la surface
+    SDL_FreeSurface(text_surface);
+}
 
 void Texture::free() {
   if (texture) {

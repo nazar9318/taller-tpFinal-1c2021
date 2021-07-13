@@ -12,7 +12,7 @@ Game::Game(ProtectedQueue<Event>& model,
  	camera(renderer, 800, 600), hud(renderer, 800, 600),
  	final_phase(renderer, 800, 600),
  	map(renderer, player,camera, characters, hud, final_phase),
-	initial_fase(renderer, 800, 600),
+	initial_phase(renderer, 800, 600),
  	fase(FaseType::INITIAL_FASE),
 	final_phase_rendered(false),
 	bomb(renderer, camera, player_id, player),
@@ -36,11 +36,10 @@ void Game::execute() {
 			begin = steady_clock::now();
 			if (fase == FaseType::INITIAL_FASE) {
 				this->final_phase_rendered = false;
+				is_running = initial_phase.run();
+			} else {
+				is_running = handle_events();
 			}
-			// if(fase == initial){
-			// 	initial_fase.run();
-			// }
-			is_running = handle_events();
 			process_events();
 			render();
 			end = steady_clock::now();
@@ -57,7 +56,7 @@ void Game::loadMedia() {
 	hud.loadMedia();
 	bomb.loadMedia();
 	attack_effects.loadMedia();
-	initial_fase.loadMedia();
+	initial_phase.loadMedia();
 	final_phase.loadMedia();
 }
 
@@ -65,7 +64,7 @@ void Game::render() {
 	renderer.clearScreen();
 	map.renderGround();
 	if (fase == FaseType::INITIAL_FASE) {
-		initial_fase.render();
+		initial_phase.render();
 	} else if (fase == FaseType::PLAYING) {
 		map.renderWeapons();
 		attack_effects.render();

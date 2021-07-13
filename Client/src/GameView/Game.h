@@ -41,7 +41,7 @@ class Game {
 		GameMap map;
 		Hud hud;
 		ClientBomb bomb;
-		InitialFase initial_fase;
+		InitialPhase initial_phase;
 		FinalPhase final_phase;
 		ModelEventHandler handler;
 		bool is_running;

@@ -44,6 +44,12 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
       sound_handler.handleAttack(event);
       break;
     }
+    case ModelTypeEvent::INITIAL_CONFIGS: {
+      configs.handle(event, map);
+      break;
+    }
+
+    
     default:
       break;
   }

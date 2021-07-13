@@ -12,6 +12,7 @@
 #include "GameStartedEvent.h"
 #include "Position.h"
 #include "SendSquadsEvent.h"
+#include "SendInitialConfigsEvent.h"
 
 class StartGameHandler{
 	public:

@@ -20,6 +20,7 @@
 #include "ReceiveSquadsHandler.h"
 #include "ReceiveFinalStateHandler.h"
 #include "ReceiveAttacksHandler.h"
+#include "ReceiveInitConfigsHandler.h"
 #include "SoundHandler.h"
 
 class ModelEventHandler {
@@ -34,6 +35,7 @@ class ModelEventHandler {
 		ReceiveSquadsHandler squads_receiver;
 		ReceiveFinalStateHandler final_state_receiver;
 		ReceiveAttacksHandler attacks_receiver;
+		ReceiveInitConfigsHandler configs;
 		SoundHandler sound_handler;
 
 	public:

@@ -48,6 +48,7 @@ enum ModelTypeEvent: char {
 	INIT_STEP,
 	FINAL_STEP,
 	SEND_SQUADS,
+	INITIAL_CONFIGS,
 
 	STEP_INFO // id,posicion,plata,vida,arma;id,posicion,plata,vida,arma
 

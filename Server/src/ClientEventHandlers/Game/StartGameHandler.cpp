@@ -22,6 +22,8 @@ void StartGameHandler::handle(Event& event,
 	int x_size;
 	int y_size;
 	game_world.get_limits(x_size, y_size);
+	std::shared_ptr<Event> configs(new SendInitialConfigsEvent());
+
 	std::shared_ptr<Event> game_map(
 			new SendFullMapEvent(game_world.get_ground_info(), x_size, y_size));
 
@@ -32,10 +34,12 @@ void StartGameHandler::handle(Event& event,
 			new SendSquadsEvent(game_world.get_squads()));
 
 	for (auto it = players.begin(); it != players.end(); ++it) {
+		std::shared_ptr<Event> event_configs = configs;
 		std::shared_ptr<Event> event_start = starter_event;
 		std::shared_ptr<Event> event_map = game_map;
 		std::shared_ptr<Event> event_weapon = weapons;
 		std::shared_ptr<Event> event_squads = squads;
+		it->second->push(event_configs);
 		it->second->push(event_start);
 		it->second->push(event_map);
 		it->second->push(event_weapon);

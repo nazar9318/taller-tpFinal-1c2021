@@ -8,7 +8,7 @@
 
 class BuyBulletsEvent: public Event {
 	public:
-		BuyBulletsEvent(char weapon);
+		BuyBulletsEvent(char kind_of_ammo);
 		~BuyBulletsEvent();
 	private:
 		BuyBulletsEvent(const BuyBulletsEvent &other) = delete;

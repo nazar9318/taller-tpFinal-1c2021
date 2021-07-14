@@ -24,6 +24,7 @@ class FinalPhase {
 		bool post_game;
 		void teamWinner(std::string& winner, int count);
 		void playerWinner(std::string& winner, int count);
+		void renderRequested(int x, const std::vector<std::string>& request);
 
 	public:
     	FinalPhase(Renderer& renderer, int screen_width, int screen_height);
@@ -31,6 +32,7 @@ class FinalPhase {
 						int round_kills, int total_kills);
 		void loadMedia();
 		void render();
+		void clean();
 		void endGame();
 		void renderPostGame();
 		void renderRound();

@@ -27,9 +27,6 @@ Game::Game(ProtectedQueue<Event>& model,
 
 void Game::execute() {
 	try {
-		Mix_Music* music = Mix_LoadMUS("../Client/Assets/Sounds/menu.wav");
-		Mix_VolumeMusic(MIX_MAX_VOLUME/2);
-		Mix_PlayMusic(music, -1);
 		using namespace std::chrono;
 		auto begin = steady_clock::now();
 		auto end = steady_clock::now();
@@ -38,6 +35,7 @@ void Game::execute() {
 		while (is_running) {
 			begin = steady_clock::now();
 			if (fase == FaseType::INITIAL_FASE) {
+				this->final_phase.clean();
 				this->final_phase_rendered = false;
 				is_running = initial_phase.run();
 			} else {
@@ -50,7 +48,6 @@ void Game::execute() {
 			if (t_delta < STEP_TIME)
 				std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
 		}
-		Mix_FreeMusic(music);
 	} catch (std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: Exception: %s", __FILE__, __LINE__,  e.what());
 	}

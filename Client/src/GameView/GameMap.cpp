@@ -95,6 +95,16 @@ void GameMap::renderPlayer() {
   player.render(camera);
 }
 
+float GameMap::distance(char id) {
+  if (player.get_id() != id) {
+    float x_0 = characters.at(id).getBox().x;
+    float y_0 = characters.at(id).getBox().y;
+    float x_1 = player.getBox().x;
+    float y_1 = player.getBox().y;
+    return (sqrt((x_0-x_1)*(x_0-x_1)+(y_0-y_1)*(y_0-y_1)));
+  }
+  return 0;
+}
 
 void GameMap::renderCharacters() {
   SDL_Rect quad = {0};

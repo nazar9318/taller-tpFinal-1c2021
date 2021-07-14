@@ -1,6 +1,8 @@
 #ifndef _GAME_MAP_H
 #define _GAME_MAP_H
 
+class ClientPlayer;
+
 #include <string>
 #include <vector>
 #include "Event.h"
@@ -46,7 +48,7 @@ class GameMap {
 			 			ClientCharacter> &characters, Hud& hud, FinalPhase& final_phase);
 		void create();
 		void setSize(int& width, int& height);
-
+		float distance(char id);
 		void addTile(Tile tile);
 		void addWeapon(WeaponSprite tile);
 		void cleanWeapons();
@@ -61,7 +63,6 @@ class GameMap {
 		void renderWeapons();
 		void add_character_team(char id, Team team);
 		void add_stats(char id, int kills_round, int kills_total);
-
 		void activate_bomb(char id_owner, char percentage);
 		~GameMap();
 
@@ -69,6 +70,5 @@ class GameMap {
 		GameMap(const GameMap &other) = delete;
 		GameMap& operator=(const GameMap &other) = delete;
 };
-
 
 #endif

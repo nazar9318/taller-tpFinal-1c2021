@@ -43,7 +43,7 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map,
     }
     case ModelTypeEvent::ATTACKS_INFO: {
       attacks_receiver.handle(fase, event, map, attack_effects);
-      sound_handler.handleAttack(event);
+      sound_handler.handleAttack(event, map);
       break;
     }
     case ModelTypeEvent::INITIAL_CONFIGS: {
@@ -58,11 +58,7 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map,
       game_over.handle(fase, event, map);
       break;
     }
-
-
-
-    default:
-      break;
+    default : break;
   }
 }
 

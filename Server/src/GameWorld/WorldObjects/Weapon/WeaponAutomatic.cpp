@@ -3,7 +3,7 @@
 WeaponAutomatic::WeaponAutomatic() :
 			Weapon(CF::ak47_price, CF::ak47_damage_min,
 			CF::ak47_damage_max, CF::ak47_max_distance,
-			CF::ak47_distance_penalty, CF::ak47_ammo),
+			CF::ak47_distance_penalty, CF::ak47_ammo, CF::ak47_10_bullets_price),
 			accuracy(CF::ak47_accuracy),
 			shoot_rate(CF::ak47_shoot_rate),
 			shoot_freq(CF::ak47_shoot_freq), 

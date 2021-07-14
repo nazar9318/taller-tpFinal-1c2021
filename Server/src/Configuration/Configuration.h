@@ -81,6 +81,7 @@ class Configuration {
 		static int ak47_10_bullets_price;
 		static int m3_10_bullets_price;
 		static int awp_10_bullets_price;
+		static int glock_10_bullets_price;
 
 
 		static int glock_ammo;

@@ -4,7 +4,7 @@
 WeaponShotgun::WeaponShotgun() :
 			Weapon(CF::m3_price, CF::m3_damage_min,
 			CF::m3_damage_max, CF::m3_max_distance,
-			CF::m3_distance_penalty, CF::m3_ammo),
+			CF::m3_distance_penalty, CF::m3_ammo, CF::m3_10_bullets_price),
 			accuracy(CF::m3_accuracy), 
 			angle_covered((int)(CF::m3_angle_covered % 360)){
 }

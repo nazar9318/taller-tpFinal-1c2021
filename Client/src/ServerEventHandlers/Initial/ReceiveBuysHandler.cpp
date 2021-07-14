@@ -5,6 +5,9 @@ ReceiveBuysHandler::ReceiveBuysHandler() {
 
 void ReceiveBuysHandler::handle(FaseType& fase, Event& event, GameMap& map){
 	/*
+	********
+	
+	********
 	std::vector<char> event_msg = event.get_msg();
 	auto it = event_msg.begin() + 1;
 	while(it != event_msg.end()) {

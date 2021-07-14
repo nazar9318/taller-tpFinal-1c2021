@@ -71,6 +71,7 @@ int CF::awp_price = CF::yaml_file["awp_price"].as<int>();
 int CF::ak47_10_bullets_price = CF::yaml_file["ak47_10_bullets_price"].as<int>();
 int CF::m3_10_bullets_price = CF::yaml_file["m3_10_bullets_price"].as<int>();
 int CF::awp_10_bullets_price = CF::yaml_file["awp_10_bullets_price"].as<int>();
+int CF::glock_10_bullets_price = CF::yaml_file["glock_10_bullets_price"].as<int>();
 
 
 int CF::glock_ammo = CF::yaml_file["glock_ammo"].as<int>();
@@ -153,6 +154,7 @@ void Configuration::load_configuration(const std::string& file_path) {
 	ak47_10_bullets_price = yaml_file["ak47_10_bullets_price"].as<int>();
 	m3_10_bullets_price = yaml_file["m3_10_bullets_price"].as<int>();
 	awp_10_bullets_price = yaml_file["awp_10_bullets_price"].as<int>();
+	glock_10_bullets_price = yaml_file["glock_10_bullets_price"].as<int>();
 
 	glock_ammo = yaml_file["glock_ammo"].as<int>();
 	ak47_ammo = yaml_file["ak47_ammo"].as<int>();

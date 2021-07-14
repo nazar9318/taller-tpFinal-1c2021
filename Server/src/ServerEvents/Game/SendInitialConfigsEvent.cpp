@@ -6,6 +6,9 @@ SendInitialConfigsEvent::SendInitialConfigsEvent() {
 	int stencil_angle = CF::stencil_angle;
 	push_back(stencil_angle);
 	
+	int glock_bullets_price = CF::glock_10_bullets_price;	
+	push_back(glock_bullets_price);
+
 	int ak47_price = CF::ak47_price;
 	int m3_price = CF::m3_price;
 	int awp_price = CF::awp_price;
@@ -26,6 +29,7 @@ SendInitialConfigsEvent::SendInitialConfigsEvent() {
 	push_back(awp_price);
 	push_back(awp_bullets_price);
 
+	
 }
 
 SendInitialConfigsEvent::~SendInitialConfigsEvent() {

@@ -78,9 +78,14 @@ void ClientEventHandler::handle_init(Event& event) {
 	switch(event.get_type()) {
 		case ClientTypeEvent::BUY_WEAPON:
 			{
-				buyier.handle(event, world);
+				buyier_weapon.handle(event, world);
 				break;
-			}	
+			}
+		case ClientTypeEvent::BUY_BULLETS:
+			{
+				buyier_bullets.handle(event, world);
+				break;
+			}
 		default:
 				syslog(LOG_CRIT, "[%s:%i]:No hay ningun"
 						" evento con esta caracteristica: %d", 

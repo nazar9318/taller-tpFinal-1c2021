@@ -1,9 +1,9 @@
 ---
 max_distance_grab: 64
 
-time_preparation: 15
-time_finish: 20
-time_between: 2
+time_preparation: 15.0
+time_finish: 20.0
+time_between: 2.0
 number_rounds: 10
 players_allowed: 10
 velocity_iterations: 8
@@ -59,6 +59,7 @@ awp_price: 100
 ak47_10_bullets_price: 10
 m3_10_bullets_price: 30
 awp_10_bullets_price: 20
+glock_10_bullets_price: 5
 
 glock_max_distance: 80.0
 ak47_max_distance: 100.0

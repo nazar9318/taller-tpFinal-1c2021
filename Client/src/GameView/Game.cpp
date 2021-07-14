@@ -110,12 +110,12 @@ bool Game::handle_events() {
 	}
 	return true;
 }
-#include <iostream>
+
 void Game::handle_key_press(SDL_Event& event) {
 	if(event.key.repeat > 0){
 		return;
 	}
-	std::cout << "Presiono una tecla/" << '\n';
+
 	switch (event.key.keysym.sym) {
 		case SDLK_w: {
 			std::unique_ptr<Event> move(new MoveEvent(Direction::UP));

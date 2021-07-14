@@ -36,10 +36,10 @@ enum ModelTypeEvent: char {
 	SEND_WEAPONS,
 	GAME_STARTED, // primer mensaje a todos, luego full map.
 	GAME_FINISHED, //manda los resultados. FALTA USAR.
-	BOMB_INFO, // protocolo en Bomb.cpp. 
+	BOMB_INFO, // protocolo en Bomb.cpp.
 	ERROR,
 	PLAYING_STEP,
-	ATTACKS_INFO, 
+	ATTACKS_INFO,
 	BUYS,
 	INITIAL_PLAYERS,
 	STATISTICS,
@@ -57,7 +57,7 @@ enum ServerError: char {
 	MATCH_ALREADY_STARTED,
 	INVALID_TYPE_EVENT,
 	MATCH_NOT_FOUND,
-	MATCH_ALREADY_EXISTS, 
+	MATCH_ALREADY_EXISTS,
 	CREATOR_ABANDONS_MATCH
 };
 
@@ -104,7 +104,9 @@ enum PositionType: char {
 	AK47,
 	M3,
 	AWP,
-	NO_WEAPON
+	NO_WEAPON,
+	PRIMARY_AMMO,
+	SECONDARY_AMMO
 };
 
 // CONSTANTS FOR EVENTS

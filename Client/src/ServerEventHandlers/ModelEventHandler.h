@@ -24,6 +24,7 @@
 #include "ReceiveBuysHandler.h"
 #include "GameOverHandler.h"
 #include "SoundHandler.h"
+#include "InitialPhase.h"
 
 class ModelEventHandler {
 	private:
@@ -46,7 +47,8 @@ class ModelEventHandler {
 		ModelEventHandler();
 
 		// POST: Retorna la fase actual
-		void handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb, AttackEffect& attack_effects);
+		void handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb,
+			 					AttackEffect& attack_effects, InitialPhase& initial_phase);
 
 		~ModelEventHandler();
 

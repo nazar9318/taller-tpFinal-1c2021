@@ -1,10 +1,23 @@
 #include "InitialPhase.h"
-#include <iostream>
-InitialPhase::InitialPhase(Renderer& renderer, int screen_width, int screen_height):
+
+#define BUTTON_WIDTH 360
+#define BUTTON_HEIGHT 40
+#define BUTTON_X_OFFSET 45
+#define BUTTON_Y_OFFSET 20
+#define NAME_X_OFFSET 10
+#define NAME_Y_OFFSET 10
+#define PRICE_X_OFFSET 10
+#define PRICE_Y_OFFSET 10
+#define BACKGROUND_WIDTH 450
+#define BACKGROUND_HEIGHT 450
+
+InitialPhase::InitialPhase(Renderer& renderer, int screen_width, int screen_height,
+                            ProtectedQueue<std::unique_ptr<Event>>& client):
   renderer(renderer),
   screen_width(screen_width),
   screen_height(screen_height),
-  font(NULL){}
+  font(NULL),
+  client_event(client){}
 
 void InitialPhase::loadMedia(){
 
@@ -21,40 +34,18 @@ void InitialPhase::loadMedia(){
   button_over.loadFromFile(renderer, "../Client/Assets/InitialPhase/over_button.png");
   button_pressed.loadFromFile(renderer, "../Client/Assets/InitialPhase/pressed_button.png");
 
-  /* Ak47 BUTTON*/
-  ak47.base = &button;
-  ak47.over = &button_over;
-  ak47.pressed = &button_pressed;
-  // ak47.base.loadFromFile(renderer, "../Client/Assets/InitialPhase/button.png");
-  // ak47.over.loadFromFile(renderer, "../Client/Assets/InitialPhase/over_button.png");
-  // ak47.pressed.loadFromFile(renderer, "../Client/Assets/InitialPhase/pressed_button.png");
-  ak47.text.loadFromRenderedText(renderer, font, "AK-47", white, SOLID_TEXT);
+  buttons[PositionType::AK47].text.loadFromRenderedText(renderer, font, "AK-47", white, SOLID_TEXT);
+  buttons[PositionType::AWP].text.loadFromRenderedText(renderer, font, "AWP", white, SOLID_TEXT);
+  buttons[PositionType::M3].text.loadFromRenderedText(renderer, font, "M3", white, SOLID_TEXT);
+  buttons[PositionType::PRIMARY_AMMO].text.loadFromRenderedText(renderer, font, "PRIMARY AMMO", white, SOLID_TEXT);
+  buttons[PositionType::SECONDARY_AMMO].text.loadFromRenderedText(renderer, font, "SECONDARY AMMO", white, SOLID_TEXT);
 
-  // /* AWP BUTTON*/
-  // awp.base.loadFromFile(renderer, "../Client/Assets/InitialPhase/button.png");
-  // awp.over.loadFromFile(renderer, "../Client/Assets/InitialPhase/over_button.png");
-  // awp.pressed.loadFromFile(renderer, "../Client/Assets/InitialPhase/pressed_button.png");
-  // awp.text.loadFromRenderedText(renderer, font, "AWP", white, SOLID_TEXT);
-  //
-  //
-  // /* M3 BUTTON*/
-  // m3.base.loadFromFile(renderer, "../Client/Assets/InitialPhase/button.png");
-  // m3.over.loadFromFile(renderer, "../Client/Assets/InitialPhase/over_button.png");
-  // m3.pressed.loadFromFile(renderer, "../Client/Assets/InitialPhase/pressed_button.png");
-  // m3.text.loadFromRenderedText(renderer, font, "M3", white, SOLID_TEXT);
-  //
-  // /* PRIMARY_AMMO BUTTON*/
-  // primary_ammo.base.loadFromFile(renderer, "../Client/Assets/InitialPhase/button.png");
-  // primary_ammo.over.loadFromFile(renderer, "../Client/Assets/InitialPhase/over_button.png");
-  // primary_ammo.pressed.loadFromFile(renderer, "../Client/Assets/InitialPhase/pressed_button.png");
-  // primary_ammo.text.loadFromRenderedText(renderer, font, "PRIMARY AMMO", white, SOLID_TEXT);
-  //
-  // /* SECONDARY_AMMO BUTTON*/
-  // secondary_ammo.base.loadFromFile(renderer, "../Client/Assets/InitialPhase/button.png");
-  // secondary_ammo.over.loadFromFile(renderer, "../Client/Assets/InitialPhase/over_button.png");
-  // secondary_ammo.pressed.loadFromFile(renderer, "../Client/Assets/InitialPhase/pressed_button.png");
-  // secondary_ammo.text.loadFromRenderedText(renderer, font, "SECONDARY AMMO", white, SOLID_TEXT);
 
+  for (auto it = buttons.begin(); it != buttons.end(); ++it) {
+    it->second.base = &button;
+    it->second.over = &button_over;
+    it->second.pressed = &button_pressed;
+  }
 
 }
 
@@ -63,7 +54,6 @@ bool InitialPhase::inside(SDL_Point& pos, SDL_Rect& box){
         (pos.y > (box.y + box.h)) || (pos.y < (box.y))) {
         return false;
     }
-
     return true;
 }
 
@@ -72,8 +62,11 @@ void InitialPhase::handleAk47(SDL_Event& event){
     switch (event.type) {
       case SDL_MOUSEBUTTONDOWN:
         if(event.button.button == SDL_BUTTON_LEFT){
-          std::cout << "Comprando ak47" << '\n';
           ak47.mouse_pressed = true;
+          ak47.mouse_over = false;
+
+          std::unique_ptr<Event> weapon(new BuyWeaponEvent((char)PositionType::AK47));
+          this->client_event.push(weapon);
         }
         break;
       case SDL_MOUSEBUTTONUP:
@@ -84,43 +77,39 @@ void InitialPhase::handleAk47(SDL_Event& event){
     }
 }
 
+void InitialPhase::handleButton(SDL_Event& event, PositionType weapon_button){
+
+  switch (event.type) {
+    case SDL_MOUSEBUTTONDOWN:
+      if(event.button.button == SDL_BUTTON_LEFT){
+        buttons[weapon_button].mouse_pressed = true;
+        buttons[weapon_button].mouse_over = false;
+
+        std::unique_ptr<Event> weapon(new BuyWeaponEvent((char)weapon_button));
+        this->client_event.push(weapon);
+      }
+      break;
+    case SDL_MOUSEBUTTONUP:
+      if(event.button.button == SDL_BUTTON_LEFT){
+        buttons[weapon_button].mouse_pressed = false;
+      }
+      break;
+
+    default:
+      break;
+  }
+}
+
 void InitialPhase::handleEvents(SDL_Event& event, SDL_Point& mousePosition){
 
-  if(inside(mousePosition, ak47.render_box)){
-    ak47.mouse_over = true;
-    handleAk47(event);
-  } else {
-    ak47.mouse_over = false;
+  for (auto it = buttons.begin(); it != buttons.end(); ++it) {
+    if(inside(mousePosition, it->second.render_box)){
+      it->second.mouse_over = true;
+      handleButton(event, (PositionType)it->first);
+    } else {
+      it->second.mouse_over = false;
+    }
   }
-  //
-  // if(inside(mousePosition, ak47.render_box)){
-  //   ak47.mouse_over = true;
-  //   handleAk47(event);
-  // } else {
-  //   ak47.mouse_over = false;
-  // }
-  //
-  // if(inside(mousePosition, ak47.render_box)){
-  //   ak47.mouse_over = true;
-  //   handleAk47(event);
-  // } else {
-  //   ak47.mouse_over = false;
-  // }
-  //
-  // if(inside(mousePosition, ak47.render_box)){
-  //   ak47.mouse_over = true;
-  //   handleAk47(event);
-  // } else {
-  //   ak47.mouse_over = false;
-  // }
-  //
-  // if(inside(mousePosition, ak47.render_box)){
-  //   ak47.mouse_over = true;
-  //   handleAk47(event);
-  // } else {
-  //   ak47.mouse_over = false;
-  // }
-
 }
 
 bool InitialPhase::run(){
@@ -144,26 +133,45 @@ bool InitialPhase::run(){
   return true;
 }
 
+void InitialPhase::addPrice(int price, PositionType weapon){
+  std::string price_str = std::to_string(price);
+
+  SDL_Color white = {255, 255, 255};
+  buttons[weapon].description.loadFromRenderedText(renderer, font, price_str, white, SOLID_TEXT);
+}
+
 void InitialPhase::render() {
 
-  SDL_Rect text_quad = {0};
+  SDL_Rect name_quad = {0};
+  SDL_Rect price_quad = {0};
+  int y = 0;
 
-  SDL_Rect quad = {screen_width/2 - 225, screen_height/2 - 225, background.get_w(), background.get_h()};
+  SDL_Rect quad = {screen_width/2 - BACKGROUND_WIDTH/2, screen_height/2 - BACKGROUND_HEIGHT/2, BACKGROUND_WIDTH, BACKGROUND_HEIGHT};
   renderer.render(background.getTexture(), NULL, &quad);
 
+  y = quad.y + 10;
 
-  ak47.render_box = {quad.x + 45, quad.y + 70, ak47.base->get_w(), ak47.base->get_h()};
+  for (auto it = buttons.begin(); it != buttons.end(); ++it) {
+    it->second.render_box = {quad.x + BUTTON_X_OFFSET, y + BUTTON_HEIGHT + BUTTON_Y_OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT};
+    y = y + BUTTON_HEIGHT + BUTTON_Y_OFFSET;
 
-  if(ak47.mouse_over){
-    renderer.render(ak47.over->getTexture(), NULL, &ak47.render_box);
-  } else if(ak47.mouse_pressed){
-    renderer.render(ak47.pressed->getTexture(), NULL, &ak47.render_box);
-  } else {
-    renderer.render(ak47.base->getTexture(), NULL, &ak47.render_box);
+    if(it->second.mouse_over){
+      renderer.render(it->second.over->getTexture(), NULL, &it->second.render_box);
+    } else if(it->second.mouse_pressed){
+      renderer.render(it->second.pressed->getTexture(), NULL, &it->second.render_box);
+    } else {
+      renderer.render(it->second.base->getTexture(), NULL, &it->second.render_box);
+    }
+
+
+    name_quad = {it->second.render_box.x + NAME_X_OFFSET, it->second.render_box.y + NAME_Y_OFFSET, it->second.text.get_w(), it->second.text.get_h()};
+    renderer.render(it->second.text.getTexture(), NULL, &name_quad);
+
+    price_quad = {it->second.render_box.x + BUTTON_WIDTH - NAME_X_OFFSET - it->second.description.get_w(), it->second.render_box.y + NAME_Y_OFFSET,
+                  it->second.description.get_w(), it->second.description.get_h()};
+
+    renderer.render(it->second.description.getTexture(), NULL, &price_quad);
   }
-
-  text_quad = {ak47.render_box.x + 10, ak47.render_box.y + 10, ak47.text.get_w(), ak47.text.get_h()};
-  renderer.render(ak47.text.getTexture(), NULL, &text_quad);
 }
 
 InitialPhase::~InitialPhase() {

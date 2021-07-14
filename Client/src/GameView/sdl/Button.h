@@ -18,6 +18,7 @@ struct Button {
     Texture* over;
     Texture* pressed;
     Texture text;
+    Texture description;
 
     // Constructor por defecto
     Button():

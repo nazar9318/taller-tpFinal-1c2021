@@ -2,7 +2,9 @@
  #include <iostream>
 ModelEventHandler::ModelEventHandler() {}
 
-void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb, AttackEffect& attack_effects) {
+void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map,
+                              ClientBomb& bomb, AttackEffect& attack_effects,
+                              InitialPhase& initial_phase) {
   switch (event.get_type()) {
     case ModelTypeEvent::SEND_FULL_MAP:
       recive_map.handle(event, map);
@@ -45,7 +47,7 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
       break;
     }
     case ModelTypeEvent::INITIAL_CONFIGS: {
-      configs.handle(event, map);
+      configs.handle(event, map, initial_phase);
       break;
     }
     case ModelTypeEvent::BUYS: {
@@ -56,9 +58,9 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
       game_over.handle(fase, event, map);
       break;
     }
-    
 
-    
+
+
     default:
       break;
   }

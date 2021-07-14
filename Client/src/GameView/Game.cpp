@@ -12,7 +12,7 @@ Game::Game(ProtectedQueue<Event>& model,
  	camera(renderer, 800, 600), hud(renderer, 800, 600),
  	final_phase(renderer, 800, 600),
  	map(renderer, player,camera, characters, hud, final_phase),
-	initial_phase(renderer, 800, 600),
+	initial_phase(renderer, 800, 600, client),
  	fase(FaseType::INITIAL_FASE),
 	final_phase_rendered(false),
 	bomb(renderer, camera, player_id, player),
@@ -47,7 +47,7 @@ void Game::execute() {
 			render();
 			end = steady_clock::now();
 			t_delta = duration<double>(end - begin).count();
-			if (t_delta < STEP_TIME) 
+			if (t_delta < STEP_TIME)
 				std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
 		}
 		Mix_FreeMusic(music);
@@ -226,7 +226,7 @@ void Game::process_events() {
 	while (queue_not_empty && max_iterations > i) {
 		try {
 			Event event = model_events.pop();
-			handler.handle(fase, event, map, bomb, attack_effects);
+			handler.handle(fase, event, map, bomb, attack_effects, initial_phase);
 			i++;
 		} catch(ExceptionEmptyQueue& e) {
 			queue_not_empty = false;

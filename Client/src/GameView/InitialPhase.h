@@ -7,16 +7,21 @@
 #include <SDL2/SDL_ttf.h>
 #include "SDLException.h"
 #include "Button.h"
-
-#include "FaseType.h"
+#include <map>
+#include "TypesOfEvents.h"
+#include "BuyWeaponEvent.h"
+#include <memory>
+#include "ProtectedQueue.h"
 
 class InitialPhase {
 	private:
 		Renderer& renderer;
 		Texture background;
+		ProtectedQueue<std::unique_ptr<Event>>& client_event;
 
 		Button ak47, awp, m3, primary_ammo, secondary_ammo;
-		
+		std::map<char, Button> buttons;
+
 		Texture button;
 		Texture button_over;
 		Texture button_pressed;
@@ -26,11 +31,13 @@ class InitialPhase {
 		int screen_height;
 
 	public:
-    InitialPhase(Renderer& renderer, int screen_width, int screen_height);
+    InitialPhase(Renderer& renderer, int screen_width, int screen_height, ProtectedQueue<std::unique_ptr<Event>>& client);
 
 		void loadMedia();
 
 		bool run();
+
+		void addPrice(int price, PositionType weapon);
 
 		void render();
 
@@ -38,6 +45,8 @@ class InitialPhase {
 
 	private:
 		void handleEvents(SDL_Event& event, SDL_Point& mousePosition);
+
+		void handleButton(SDL_Event& event, PositionType button);
 
 		void handleAk47(SDL_Event& event);
 

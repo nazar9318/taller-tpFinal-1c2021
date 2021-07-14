@@ -6,12 +6,14 @@
 #include "GameMap.h"
 #include "Tile.h"
 #include "FaseType.h"
+#include "TypesOfEvents.h"
+#include "InitialPhase.h"
 
 class ReceiveInitConfigsHandler {
 	public:
 		ReceiveInitConfigsHandler();
 
-		void handle(Event& event, GameMap& map);
+		void handle(Event& event, GameMap& map, InitialPhase& initial_phase);
 
 		~ReceiveInitConfigsHandler();
 

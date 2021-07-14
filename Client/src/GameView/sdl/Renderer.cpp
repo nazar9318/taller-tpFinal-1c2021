@@ -43,7 +43,10 @@ SDL_Texture* Renderer::createTextureFromSurface(SDL_Surface* surface) const {
 // }
 void Renderer::render(SDL_Texture* texture, SDL_Rect* src, SDL_Rect* dest,
                       double angle, SDL_Point* center, SDL_RendererFlip flip) {
-  SDL_RenderCopyEx(renderer, texture, src, dest, angle, center, flip);
+  int status = SDL_RenderCopyEx(renderer, texture, src, dest, angle, center, flip);
+  if(status != 0 ){
+    throw SDLException("SDLException: failed to create render texture - %s\n",SDL_GetError());
+  }
 }
 
 // void Renderer::render(SDL_Texture* texture, int x, int y, int w, int h, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip){

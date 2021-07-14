@@ -47,7 +47,8 @@ void Game::execute() {
 			render();
 			end = steady_clock::now();
 			t_delta = duration<double>(end - begin).count();
-			std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
+			if (t_delta < STEP_TIME) 
+				std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
 		}
 		Mix_FreeMusic(music);
 	} catch (std::exception& e) {

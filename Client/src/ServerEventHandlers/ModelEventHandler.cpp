@@ -52,6 +52,10 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
       buys.handle(fase, event, map);
       break;
     }
+    case ModelTypeEvent::GAME_OVER: {
+      game_over.handle(fase, event, map);
+      break;
+    }
     
 
     

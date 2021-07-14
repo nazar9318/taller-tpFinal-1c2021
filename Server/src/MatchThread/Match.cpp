@@ -110,7 +110,6 @@ void Match::game_loop() {
 		t_delta = duration<double>(end - begin).count();
 		if (t_delta < STEP_TIME) 
 			std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
-
 	}
 }
 
@@ -183,6 +182,10 @@ void Match::push_step_events() {
 		}
 		if (statistics_not_sent && ((int)CF::time_finish - 
 			game_world.get_step_info().get_wait() > (int)CF::time_between)) {
+			if (finished) {
+				std::shared_ptr<Event> game_over(new GameOverEvent());
+				push_event(game_over);
+			}
 			std::shared_ptr<Event> stats(
 				new SendStatsEvent(game_world.get_step_info()));
 			statistics_not_sent = false;

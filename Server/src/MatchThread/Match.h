@@ -1,21 +1,6 @@
 #ifndef _MATCH_H
 #define _MATCH_H
 
-/*
-
-**************************************************************
-
-******************FALTA SOLUCIONAR BUG************************
-
-Cuando en la inicializacion el creador sale de la partida, 
-no le llega un mensaje al cliente que se unio alertandole que no
-va a poder jugar porque el creador no puede arrancar la partida. 
-Ademas, el server se rompe. 
-
-*/
-
-
-
 #include <string>
 #include <mutex>
 #include <map>
@@ -42,6 +27,7 @@ Ademas, el server se rompe.
 
 #include "FaseType.h"
 #include "SendStepInitEvent.h"
+#include "GameOverEvent.h"
 #include "SendBuysEvent.h"
 #include "SendInitPlayersEvent.h"
 #include "SendStepPlayingEvent.h"

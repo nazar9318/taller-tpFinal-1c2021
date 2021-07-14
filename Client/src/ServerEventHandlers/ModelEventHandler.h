@@ -22,6 +22,7 @@
 #include "ReceiveAttacksHandler.h"
 #include "ReceiveInitConfigsHandler.h"
 #include "ReceiveBuysHandler.h"
+#include "GameOverHandler.h"
 #include "SoundHandler.h"
 
 class ModelEventHandler {
@@ -38,6 +39,7 @@ class ModelEventHandler {
 		ReceiveAttacksHandler attacks_receiver;
 		ReceiveInitConfigsHandler configs;
 		ReceiveBuysHandler buys;
+		GameOverHandler game_over;
 		SoundHandler sound_handler;
 
 	public:

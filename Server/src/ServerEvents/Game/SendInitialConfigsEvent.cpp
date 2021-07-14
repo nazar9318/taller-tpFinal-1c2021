@@ -1,7 +1,7 @@
 #include "SendInitialConfigsEvent.h"
-
+#include <iostream>
 SendInitialConfigsEvent::SendInitialConfigsEvent() {
-	msg.push_back((char)ModelTypeEvent::INITIAL_CONFIGS);
+	this->msg.push_back((char)ModelTypeEvent::INITIAL_CONFIGS);
 	
 	int glock_price = CF::glock_price;
 	int ak47_price = CF::ak47_price;
@@ -15,8 +15,6 @@ SendInitialConfigsEvent::SendInitialConfigsEvent() {
 
 	int stencil_angle = CF::stencil_angle;
 	push_back(stencil_angle);
-	
-
 }
 
 SendInitialConfigsEvent::~SendInitialConfigsEvent() {

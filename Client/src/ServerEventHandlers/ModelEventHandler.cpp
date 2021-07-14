@@ -1,5 +1,5 @@
 #include "ModelEventHandler.h"
-
+ #include <iostream>
 ModelEventHandler::ModelEventHandler() {}
 
 void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, ClientBomb& bomb, AttackEffect& attack_effects) {
@@ -45,6 +45,8 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
       break;
     }
     case ModelTypeEvent::INITIAL_CONFIGS: {
+     
+      std::cout << "recibo configs"<<std::endl;
       configs.handle(event, map);
       break;
     }

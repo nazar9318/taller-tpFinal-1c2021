@@ -123,6 +123,8 @@ std::vector<char> StepInformation::get_players_info() {
 
 std::vector<char> StepInformation::get_stats() {
 	std::vector<char> stats;
+	
+	// puedo hacer un std map y agregar cosas con indice en kills y nombre en id. 
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		stats.push_back(it->first);
 		int kills_round = it->second.get_round_kills();

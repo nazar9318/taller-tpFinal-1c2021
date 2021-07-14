@@ -14,12 +14,13 @@ class InitialPhase {
 	private:
 		Renderer& renderer;
 		Texture background;
+
+		Button ak47, awp, m3, primary_ammo, secondary_ammo;
+		
 		Texture button;
 		Texture button_over;
 		Texture button_pressed;
 
-		Button ak47, awp, m3, primary_ammo, secondary_ammo;
-		
 		TTF_Font* font;
 		int screen_width;
 		int screen_height;

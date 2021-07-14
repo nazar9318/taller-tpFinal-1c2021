@@ -1,6 +1,6 @@
 #include "Texture.h"
 
-Texture::Texture() {}
+Texture::Texture():texture(NULL) {}
 
 SDL_Texture* Texture::getTexture() const {
   if (!texture) {

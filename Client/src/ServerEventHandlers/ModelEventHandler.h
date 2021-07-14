@@ -21,6 +21,7 @@
 #include "ReceiveFinalStateHandler.h"
 #include "ReceiveAttacksHandler.h"
 #include "ReceiveInitConfigsHandler.h"
+#include "ReceiveBuysHandler.h"
 #include "SoundHandler.h"
 
 class ModelEventHandler {
@@ -36,6 +37,7 @@ class ModelEventHandler {
 		ReceiveFinalStateHandler final_state_receiver;
 		ReceiveAttacksHandler attacks_receiver;
 		ReceiveInitConfigsHandler configs;
+		ReceiveBuysHandler buys;
 		SoundHandler sound_handler;
 
 	public:

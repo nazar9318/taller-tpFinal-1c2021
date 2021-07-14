@@ -48,6 +48,11 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
       configs.handle(event, map);
       break;
     }
+    case ModelTypeEvent::BUYS: {
+      buys.handle(fase, event, map);
+      break;
+    }
+    
 
     
     default:

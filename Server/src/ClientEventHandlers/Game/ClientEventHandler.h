@@ -8,7 +8,6 @@
 #include "MoveHandler.h"
 #include "StartAttackingHandler.h"
 #include "GrabWeaponHandler.h"
-#include "DropWeaponHandler.h"
 #include "ChangeWeaponHandler.h"
 #include "BuyWeaponHandler.h"
 #include "StopAttackingHandler.h"
@@ -22,7 +21,6 @@ class ClientEventHandler{
 		MoveHandler mover;
 		StartAttackingHandler attacker; 
 		GrabWeaponHandler graber; 
-		DropWeaponHandler droper; 
 		ChangeWeaponHandler changer; 
 		BuyWeaponHandler buyier;
 		StopAttackingHandler attack_stoper;

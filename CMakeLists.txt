@@ -48,6 +48,8 @@ add_subdirectory("Common")
 
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/ClientEventHandlers)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/ClientEventHandlers/Game)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/ClientEventHandlers/Game/Initial)
+include_directories(${PROJECT_SOURCE_DIR}/Server/src/ClientEventHandlers/Game/Playing)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/ClientEventHandlers/Lobby)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/CommunicationThreads)
 include_directories(${PROJECT_SOURCE_DIR}/Server/src/Configuration)

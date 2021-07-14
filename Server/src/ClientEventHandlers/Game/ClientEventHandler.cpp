@@ -35,11 +35,6 @@ void ClientEventHandler::handle_play(Event& event) {
 				graber.handle(event, world);
 				break;
 			}
-		case ClientTypeEvent::DROP_WEAPON:
-			{
-				droper.handle(event, world);
-				break;
-			}
 		case ClientTypeEvent::CHANGE_WEAPON:
 			{
 				changer.handle(event, world);

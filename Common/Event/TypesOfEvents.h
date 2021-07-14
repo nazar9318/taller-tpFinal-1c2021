@@ -16,7 +16,7 @@ enum ClientTypeEvent: char {
 	START_DEACTIVATING_BOMB,//Type
 	STOP_DEACTIVATING_BOMB,//Type
 	BUY_WEAPON,//type, weapon
-	BUY_BULLETS,//type, weapon, cantidad
+	BUY_BULLETS,//type, weapon
 	START_GAME, // Loby. Manda el cliente creador.
 	QUIT_GAME,
 	GET_MAPS, // Loby

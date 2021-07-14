@@ -10,7 +10,6 @@ enum ClientTypeEvent: char {
 	START_ATTACKING, //type/angle
 	STOP_ATTACKING, //type
 	GRAB_WEAPON, //type
-	DROP_WEAPON, //type
 	CHANGE_WEAPON,//type
 	START_PLANTING_BOMB, //type
 	STOP_PLANTING_BOMB, //type

@@ -23,6 +23,7 @@ class StepInformation {
 	int waiting_time;
 	std::list<AttackInformation> attacks;
 	std::vector<char> reason_finish;
+	std::vector<char> buys;
 	public:
 		StepInformation(std::map<char,Character>& characters);
 		void set_type(FaseType fase);
@@ -40,6 +41,8 @@ class StepInformation {
 		void add_finish(BombState state);
 		std::vector<char> get_reason_finish();
 		std::vector<char> get_buys();
+		void add_buy(char id, ClientTypeEvent bullets_or_weapon, bool successful);
+		bool any_buys();
 
 		~StepInformation();
 	private:

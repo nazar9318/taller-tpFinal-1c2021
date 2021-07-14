@@ -146,11 +146,59 @@ std::vector<char> StepInformation::get_stats() {
 
 
 /*
-	id plata #armas bullets_arma2 arma3 bullets
+	id tipo_compra successful, plata #armas bullets_arma2 arma3 bullets
 	...
 */
+
+void StepInformation::add_buy(char id,
+				 ClientTypeEvent bullets_or_weapon, bool successful) {
+	
+	syslog(LOG_INFO, "[%s:%i]: Por agregar compra de %d "
+					 , __FILE__, __LINE__, (int)id);
+
+	buys.push_back(id);
+	buys.push_back((char)bullets_or_weapon);
+	buys.push_back((char)successful);
+	
+	Character& character = characters.at(id);
+	
+	int money = character.get_money();
+	buys.push_back(*((char*)(&money)));
+	buys.push_back(*((char*)(&money) + 1));
+	buys.push_back(*((char*)(&money) + 2));
+	buys.push_back(*((char*)(&money) + 3));
+
+	char number_of_weapons = character.get_number_weapons();
+	buys.push_back(number_of_weapons);
+	
+	int glock_bullets = character.get_glock_bullets();
+	buys.push_back(*((char*)(&glock_bullets)));
+	buys.push_back(*((char*)(&glock_bullets) + 1));
+	buys.push_back(*((char*)(&glock_bullets) + 2));
+	buys.push_back(*((char*)(&glock_bullets) + 3));
+
+	if (number_of_weapons == 3) {
+		buys.push_back(character.get_optative_weapon_type());
+		int bullets = character.get_optative_weapon_bullets();
+		buys.push_back(*((char*)(&bullets)));
+		buys.push_back(*((char*)(&bullets) + 1));
+		buys.push_back(*((char*)(&bullets) + 2));
+		buys.push_back(*((char*)(&bullets) + 3));
+	}	
+}
+
+bool StepInformation::any_buys() {
+	syslog(LOG_INFO, "[%s:%i]: compras con size %d "
+				 , __FILE__, __LINE__, (int)buys.size());
+
+	return (buys.size() > 0);
+}
+
 std::vector<char> StepInformation::get_buys() {
-	std::vector<char> buys;
+	std::vector<char> buys_send(std::move(buys));
+	buys.clear();
+	return buys_send;
+	/*
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		buys.push_back(it->first);
 
@@ -177,7 +225,7 @@ std::vector<char> StepInformation::get_buys() {
 			buys.push_back(*((char*)(&bullets) + 3));
 		}
 	}
-	return buys;
+	return buys;*/
 }
 
 

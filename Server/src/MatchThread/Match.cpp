@@ -137,10 +137,14 @@ void Match::push_step_events() {
 	if (game_world.get_fase() == FaseType::INITIAL_FASE) {
 		std::shared_ptr<Event> init_event(
 			new SendStepInitEvent(game_world.get_step_info()));
-		std::shared_ptr<Event> buys(
-			new SendBuysEvent(game_world.get_step_info()));
 		push_event(init_event);
-		push_event(buys);
+		if (game_world.get_step_info().any_buys()) {
+			std::shared_ptr<Event> buys(
+				new SendBuysEvent(game_world.get_step_info()));
+			push_event(buys);
+			syslog(LOG_INFO, "[%s:%i]: Mando buys "
+				 , __FILE__, __LINE__);
+		}
 		if (init_players_not_sent) {
 			std::shared_ptr<Event> init_players(
 				new SendInitPlayersEvent(game_world.get_step_info()));

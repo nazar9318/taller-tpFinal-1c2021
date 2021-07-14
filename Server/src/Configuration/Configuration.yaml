@@ -60,7 +60,7 @@ glock_max_distance: 80.0
 ak47_max_distance: 100.0
 m3_max_distance: 50.0
 awp_max_distance: 768.0
-knife_max_distance: 40.0
+knife_max_distance: 20.0
 
 awp_retard_time: 1
 m3_angle_covered: 60

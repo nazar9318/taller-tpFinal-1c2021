@@ -114,6 +114,9 @@ void Character::take_damage(char points) {
 		last_pos = character_body->GetPosition();
 		character_body->GetWorld()->DestroyBody(character_body);
 		current_weapon = 0;
+		if (number_weapons == 3) {
+			weapons[2]->set_pos((int)last_pos.x, (int)last_pos.y);
+		}
 	}
 }
 

@@ -25,6 +25,7 @@ int CF::TIME_BOMB_DEACTIVATE = CF::yaml_file["TIME_BOMB_DEACTIVATE"].as<int>();
 
 int CF::velocity_iterations = CF::yaml_file["velocity_iterations"].as<int>();
 int CF::position_iterations = CF::yaml_file["position_iterations"].as<int>();
+int CF::stencil_angle = CF::yaml_file["stencil_angle"].as<int>();
 
 int CF::max_distance_grab = CF::yaml_file["max_distance_grab"].as<int>();
 int CF::bonus_kill = CF::yaml_file["bonus_kill"].as<int>();
@@ -97,6 +98,7 @@ void Configuration::load_configuration(const std::string& file_path) {
 	players_allowed = yaml_file["players_allowed"].as<int>();
 
 	max_distance_grab = yaml_file["max_distance_grab"].as<int>();
+	stencil_angle = yaml_file["stencil_angle"].as<int>();
 
 
 	TIME_BOMB_EXPLOTE = yaml_file["TIME_BOMB_EXPLOTE"].as<int>();

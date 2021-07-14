@@ -24,6 +24,8 @@ class Configuration {
 		static int max_iterations_pop_events;
 		static int size_position;
 		static int character_radius;
+		
+		static int stencil_angle;
 
 		/**************************************/
 		static int TIME_BOMB_EXPLOTE;

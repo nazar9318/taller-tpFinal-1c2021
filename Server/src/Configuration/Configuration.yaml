@@ -13,6 +13,7 @@ TIME_BOMB_EXPLOTE: 15
 TIME_BOMB_ACTIVATE: 5
 TIME_BOMB_DEACTIVATE: 5
 
+stencil_angle: 60
 
 character_life_points: 100
 bonus_kill: 50

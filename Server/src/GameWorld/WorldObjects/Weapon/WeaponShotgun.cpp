@@ -6,10 +6,8 @@ WeaponShotgun::WeaponShotgun() :
 			CF::m3_damage_max, CF::m3_max_distance,
 			CF::m3_distance_penalty, CF::m3_ammo),
 			accuracy(CF::m3_accuracy), 
-			angle_covered(CF::m3_angle_covered){
+			angle_covered((int)(CF::m3_angle_covered % 360)){
 }
-
-
 
 void WeaponShotgun::attack(AttackInformation& attack_info,
 					std::list<Block>& blocks, std::map<char,

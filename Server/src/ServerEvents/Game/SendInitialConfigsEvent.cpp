@@ -2,6 +2,7 @@
 
 SendInitialConfigsEvent::SendInitialConfigsEvent() {
 	msg.push_back((char)ModelTypeEvent::INITIAL_CONFIGS);
+	
 	int glock_price = CF::glock_price;
 	int ak47_price = CF::ak47_price;
 	int m3_price = CF::m3_price;
@@ -12,6 +13,9 @@ SendInitialConfigsEvent::SendInitialConfigsEvent() {
 	push_back(m3_price);
 	push_back(awp_price);
 
+	int stencil_angle = CF::stencil_angle;
+	push_back(stencil_angle);
+	
 
 }
 

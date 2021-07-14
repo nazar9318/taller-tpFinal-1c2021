@@ -113,50 +113,48 @@ bool Game::handle_events() {
 }
 
 void Game::handle_key_press(SDL_Event& event) {
-	if(event.key.repeat > 0){
-		return;
-	}
-
-	switch (event.key.keysym.sym) {
-		case SDLK_w: {
-			std::unique_ptr<Event> move(new MoveEvent(Direction::UP));
-			this->client_events.push(move);
-			break;
-		}
-		case SDLK_a: {
-			std::unique_ptr<Event> move(new MoveEvent(Direction::LEFT));
-			this->client_events.push(move);
-			break;
-		}
-		case SDLK_d: {
-			std::unique_ptr<Event> move(new MoveEvent(Direction::RIGHT));
-			this->client_events.push(move);
-			break;
-		}
-		case SDLK_s: {
-			std::unique_ptr<Event> move(new MoveEvent(Direction::DOWN));
-			this->client_events.push(move);
-			break;
-		}
-		case SDLK_SPACE: {
-			std::unique_ptr<Event> grab(new GrabWeaponEvent());
-			this->client_events.push(grab);
-			break;
-		}
-		case SDLK_c: {
-			std::unique_ptr<Event> change(new ChangeWeaponEvent());
-			this->client_events.push(change);
-			break;
-		}
-		case SDLK_q: {
-			std::unique_ptr<Event> plant(new StartPlantBombEvent());
-			this->client_events.push(plant);
-			break;
-		}
-		case SDLK_e: {
-			std::unique_ptr<Event> deactivate(new StartDeactivateBombEvent());
-			this->client_events.push(deactivate);
-			break;
+	if (event.key.repeat == 0) {
+		switch (event.key.keysym.sym) {
+			case SDLK_w: {
+				std::unique_ptr<Event> move(new MoveEvent(Direction::UP));
+				this->client_events.push(move);
+				break;
+			}
+			case SDLK_a: {
+				std::unique_ptr<Event> move(new MoveEvent(Direction::LEFT));
+				this->client_events.push(move);
+				break;
+			}
+			case SDLK_d: {
+				std::unique_ptr<Event> move(new MoveEvent(Direction::RIGHT));
+				this->client_events.push(move);
+				break;
+			}
+			case SDLK_s: {
+				std::unique_ptr<Event> move(new MoveEvent(Direction::DOWN));
+				this->client_events.push(move);
+				break;
+			}
+			case SDLK_SPACE: {
+				std::unique_ptr<Event> grab(new GrabWeaponEvent());
+				this->client_events.push(grab);
+				break;
+			}
+			case SDLK_c: {
+				std::unique_ptr<Event> change(new ChangeWeaponEvent());
+				this->client_events.push(change);
+				break;
+			}
+			case SDLK_q: {
+				std::unique_ptr<Event> plant(new StartPlantBombEvent());
+				this->client_events.push(plant);
+				break;
+			}
+			case SDLK_e: {
+				std::unique_ptr<Event> deactivate(new StartDeactivateBombEvent());
+				this->client_events.push(deactivate);
+				break;
+			}
 		}
 	}
 }

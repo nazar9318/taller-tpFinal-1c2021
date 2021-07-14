@@ -66,42 +66,42 @@ std::list<std::string> MapParser::get_maps() {
 //              enum sobre el tipo de posicion. 
 char MapParser::get_type(const std::string& type) {
 	if (type == "base_inferno")
-				return PositionType::INFERNO;
+		return PositionType::INFERNO;
 	if (type == "base_dust")
-				return PositionType::DUST;
+		return PositionType::DUST;
 	if (type == "base_aztec")
-				return PositionType::AZTEC;
+		return PositionType::AZTEC;
 	if (type == "bomb_area_a")
-				return PositionType::BOMB_AREA_A;
+		return PositionType::BOMB_AREA_A;
 	if (type == "bomb_area_b")
-				return PositionType::BOMB_AREA_B;
+		return PositionType::BOMB_AREA_B;
 	if (type == "bomb_area_c")
-				return PositionType::BOMB_AREA_C;
-	if (type == "box_area_c")
-				return PositionType::BOX_BLACK;
+		return PositionType::BOMB_AREA_C;
 	if (type == "box_black")
-				return PositionType::BOX_BROWN;
+		return PositionType::BOX_BLACK;
 	if (type == "box_brown")
-				return PositionType::BOX_METAL;
+		return PositionType::BOX_BROWN;
+	if (type == "box_metal")
+		return PositionType::BOX_METAL;
 	if (type == "box_wood_metal")
-				return PositionType::BOX_WOOD_METAL;
+		return PositionType::BOX_WOOD_METAL;
 	if (type == "box_wood")
-				return PositionType::BOX_WOOD;
+		return PositionType::BOX_WOOD;
 	if (type == "T_spawn")
-				return PositionType::TERRORIST_SPAWN;
+		return PositionType::TERRORIST_SPAWN;
 	if (type == "C_spawn")
-				return PositionType::COUNTER_SPAWN;
+		return PositionType::COUNTER_SPAWN;
 	if (type == "glock_weapon")
-				return PositionType::GLOCK;
+		return PositionType::GLOCK;
 	if (type == "ak47_weapon")
-				return PositionType::AK47;
+		return PositionType::AK47;
 	if (type == "m3_weapon")
-				return PositionType::M3;
+		return PositionType::M3;
 	if (type == "awp_weapon")
-				return PositionType::AWP;
+		return PositionType::AWP;
 	throw Exception("[%s:%i]: No existe"
 	 			"un tipo para esta posicion",
-			 		 __FILE__, __LINE__);
+			 	__FILE__, __LINE__);
 }
 
 MapParser::~MapParser() {}

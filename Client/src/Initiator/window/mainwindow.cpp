@@ -84,8 +84,8 @@ void MainWindow::show_error(const QString& message, Event& event) {
 				break;
 			}
 			case ServerError::NOT_ENOUGH_PLAYERS : {
-				error_msg.append(" La partida ha llegado"
-				" al limite de jugadores");
+				error_msg.append(" Falta que se"
+				"  unan más jugadores");
 				break;
 			}
 			case ServerError::MATCH_ALREADY_STARTED : {

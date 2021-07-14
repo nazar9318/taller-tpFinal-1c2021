@@ -45,8 +45,6 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map, Clien
       break;
     }
     case ModelTypeEvent::INITIAL_CONFIGS: {
-     
-      std::cout << "recibo configs"<<std::endl;
       configs.handle(event, map);
       break;
     }

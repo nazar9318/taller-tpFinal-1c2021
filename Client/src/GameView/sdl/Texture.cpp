@@ -53,7 +53,7 @@ void Texture::loadFromFile(const Renderer& renderer, std::string filePath, Color
   SDL_SetTextureBlendMode(this->texture, blending);
   SDL_SetTextureAlphaMod(this->texture, alpha);
 }
-#include <iostream>
+
 void Texture::loadFromRenderedText(Renderer& renderer, TTF_Font* font, std::string text, SDL_Color color, TextType type){
     // Eliminamos una textura previa si existe
     free();

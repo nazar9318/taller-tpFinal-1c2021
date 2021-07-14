@@ -29,11 +29,13 @@ void InitialPhase::loadMedia(){
     throw SDLException("SDLException: failed to load fonts -> InitialPhase - %s\n",TTF_GetError());
   }
 
+  /*BUTTONS*/
   background.loadFromFile(renderer, "../Client/Assets/InitialPhase/background.png");
   button.loadFromFile(renderer, "../Client/Assets/InitialPhase/button.png");
   button_over.loadFromFile(renderer, "../Client/Assets/InitialPhase/over_button.png");
   button_pressed.loadFromFile(renderer, "../Client/Assets/InitialPhase/pressed_button.png");
 
+  /*BUTTONS TEXT*/
   buttons[PositionType::AK47].text.loadFromRenderedText(renderer, font, "AK-47", white, SOLID_TEXT);
   buttons[PositionType::AWP].text.loadFromRenderedText(renderer, font, "AWP", white, SOLID_TEXT);
   buttons[PositionType::M3].text.loadFromRenderedText(renderer, font, "M3", white, SOLID_TEXT);
@@ -57,26 +59,6 @@ bool InitialPhase::inside(SDL_Point& pos, SDL_Rect& box){
     return true;
 }
 
-void InitialPhase::handleAk47(SDL_Event& event){
-
-    switch (event.type) {
-      case SDL_MOUSEBUTTONDOWN:
-        if(event.button.button == SDL_BUTTON_LEFT){
-          ak47.mouse_pressed = true;
-          ak47.mouse_over = false;
-
-          std::unique_ptr<Event> weapon(new BuyWeaponEvent((char)PositionType::AK47));
-          this->client_event.push(weapon);
-        }
-        break;
-      case SDL_MOUSEBUTTONUP:
-        if(event.button.button == SDL_BUTTON_LEFT){
-          ak47.mouse_pressed = false;
-        }
-        break;
-    }
-}
-
 void InitialPhase::handleButton(SDL_Event& event, PositionType weapon_button){
 
   switch (event.type) {
@@ -85,8 +67,13 @@ void InitialPhase::handleButton(SDL_Event& event, PositionType weapon_button){
         buttons[weapon_button].mouse_pressed = true;
         buttons[weapon_button].mouse_over = false;
 
-        std::unique_ptr<Event> weapon(new BuyWeaponEvent((char)weapon_button));
-        this->client_event.push(weapon);
+        if(weapon_button == PositionType::PRIMARY_AMMO || weapon_button == PositionType::SECONDARY_AMMO){
+          std::unique_ptr<Event> bullet_type(new BuyBulletsEvent((char)weapon_button));
+          this->client_event.push(bullet_type);
+        } else {
+          std::unique_ptr<Event> weapon_type(new BuyWeaponEvent((char)weapon_button));
+          this->client_event.push(weapon_type);
+        }
       }
       break;
     case SDL_MOUSEBUTTONUP:

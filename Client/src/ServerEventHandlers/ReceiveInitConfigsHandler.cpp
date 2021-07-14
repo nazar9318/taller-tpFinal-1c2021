@@ -11,9 +11,10 @@ void ReceiveInitConfigsHandler::handle(Event& event, GameMap& map, InitialPhase&
     while (it != event_msg.end()) {
     	PositionType type_weapon = (PositionType)*it;
     	int price = *((int*)&(*(it + 1)));
-    	it += 5;
-      initial_phase.addPrice(price, type_weapon);
-    	// std::cout << "type: " << (int)type_weapon << "price " << price << std::endl;
+        int bullets_price = *((int*)&(*(it + 5)));
+    	it += 9;
+        initial_phase.addPrice(price, type_weapon);
+    	std::cout << "type: " << (int)type_weapon << "price " << bullets_price << std::endl;
     }
     initial_phase.addPrice(50, PositionType::PRIMARY_AMMO);
     initial_phase.addPrice(50, PositionType::SECONDARY_AMMO);

@@ -52,10 +52,13 @@ ak47_ammo: 120
 m3_ammo: 90
 awp_ammo: 20
 
-glock_price: 15
 ak47_price: 30
 m3_price: 50
 awp_price: 100
+
+ak47_10_bullets_price: 10
+m3_10_bullets_price: 30
+awp_10_bullets_price: 20
 
 glock_max_distance: 80.0
 ak47_max_distance: 100.0

@@ -29,6 +29,12 @@ Para ejecutarlos desde la carpeta build, las siguientes:
 sudo apt-get install libyaml-cpp-dev
 ~~~
 
+**Instalar SDL gfx**
+
+~~~{.bash}
+sudo apt-get install libsdl2-gfx-dev
+~~~
+
 # ¡Bienvenido al Counter Strike 2D!
 A continuación, le indicamos cómo jugar:
 

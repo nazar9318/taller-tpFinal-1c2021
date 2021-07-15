@@ -27,7 +27,6 @@
 
 #include "FaseType.h"
 #include "SendStepInitEvent.h"
-#include "GameOverEvent.h"
 #include "SendBuysEvent.h"
 #include "SendInitPlayersEvent.h"
 #include "SendStepPlayingEvent.h"

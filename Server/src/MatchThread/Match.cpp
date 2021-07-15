@@ -192,11 +192,6 @@ void Match::push_step_events() {
 			statistics_not_sent = false;
 			init_players_not_sent = true;
 			push_event(stats);
-			if (finished) {
-				//std::shared_ptr<Event> game_over(new GameOverEvent());
-				//push_event(game_over);
-				syslog(LOG_INFO, "[%s:%i]: GAMEOVER", __FILE__, __LINE__);
-			}
 		}
 	}
 }

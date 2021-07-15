@@ -186,15 +186,15 @@ void Match::push_step_events() {
 		}
 		if (statistics_not_sent && ((int)CF::time_finish - 
 			game_world.get_step_info().get_wait() > (int)CF::time_between)) {
-			if (finished) {
-				std::shared_ptr<Event> game_over(new GameOverEvent());
-				push_event(game_over);
-			}
 			std::shared_ptr<Event> stats(
 				new SendStatsEvent(game_world.get_step_info()));
 			statistics_not_sent = false;
 			init_players_not_sent = true;
 			push_event(stats);
+			if (finished) {
+				std::shared_ptr<Event> game_over(new GameOverEvent());
+				push_event(game_over);
+			}
 		}
 	}
 }

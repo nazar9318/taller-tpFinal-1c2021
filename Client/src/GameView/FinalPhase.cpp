@@ -132,39 +132,6 @@ void FinalPhase::renderPostGame() {
   team_scores.push_back(terrorist_cnt.str());
   renderRequested(screen_width/2-200, player_scores);
   renderRequested(screen_width/2+200, team_scores);
-  /*SDL_Color white = {255, 255, 255};
-
-  SDL_Rect quad_post_game_player = {0};
-  quad_post_game_player.x = screen_width/2 - 200;
-  quad_post_game_player.y = 0;
-  quad_post_game_player.h = 40;
-  quad_post_game_player.w = 15*player_winner_title.size();
-  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, player_winner_title.c_str(), white);
-  SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
-  renderer.render(Message, NULL, &quad_post_game_player);
-  quad_post_game_player.y += 40;
-  SDL_FreeSurface(surfaceMessage);
-  quad_post_game_player.w = 15*player_winner.size();
-  surfaceMessage = TTF_RenderText_Solid(font, player_winner.c_str(), white);
-  Message = renderer.createTextureFromSurface(surfaceMessage);
-  renderer.render(Message, NULL, &quad_post_game_player);
-  SDL_FreeSurface(surfaceMessage);
-
-  SDL_Rect quad_post_game_team = {0};
-  quad_post_game_team.x = screen_width/2 + 200;
-  quad_post_game_team.y = 0;
-  quad_post_game_team.h = 40;
-  quad_post_game_team.w = 15*team_winner_title.size();
-  surfaceMessage = TTF_RenderText_Solid(font, team_winner_title.c_str(), white);
-  Message = renderer.createTextureFromSurface(surfaceMessage);
-  renderer.render(Message, NULL, &quad_post_game_team);
-  quad_post_game_team.y += 40;
-  SDL_FreeSurface(surfaceMessage);
-  quad_post_game_team.w = 15*team_winner.size();
-  surfaceMessage = TTF_RenderText_Solid(font, team_winner.c_str(), white);
-  Message = renderer.createTextureFromSurface(surfaceMessage);
-  renderer.render(Message, NULL, &quad_post_game_team);
-  SDL_FreeSurface(surfaceMessage);*/
 }
 
 void FinalPhase::render() { post_game ? renderPostGame() : renderRound(); }

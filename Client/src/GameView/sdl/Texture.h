@@ -33,6 +33,8 @@ class Texture {
 
     void loadFromFile(const Renderer& renderer, std::string filePath, Color key, SDL_BlendMode blending, uint8_t alpha);
 
+    void loadFromSurface(Renderer& renderer, SDL_Surface* surface, Color key, SDL_BlendMode blending, uint8_t alpha);
+
     void loadFromRenderedText(Renderer& renderer, TTF_Font* font, std::string text, SDL_Color color, TextType type);
 
     SDL_Texture* getTexture() const;

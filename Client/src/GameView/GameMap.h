@@ -17,7 +17,6 @@ class ClientPlayer;
 #include "Team.h"
 #include "Camera.h"
 #include "FinalPhase.h"
-
 #include "BombState.h"
 
 class GameMap {
@@ -47,6 +46,9 @@ class GameMap {
 		GameMap(Renderer& renderer, ClientPlayer& player, Camera& camera, std::map<char,
 			 			ClientCharacter> &characters, Hud& hud, FinalPhase& final_phase);
 		void create();
+
+		void createStencil(int angle, int alpha);
+
 		void setSize(int& width, int& height);
 		float distance(char id);
 		void addTile(Tile tile);

@@ -10,7 +10,9 @@
 #include "Team.h"
 #include "SpriteContainer.h"
 #include "Camera.h"
+#include "Renderer.h"
 #include "SoundHandler.h"
+#include "Stencil.h"
 
 class ClientPlayer {
 	private:
@@ -19,6 +21,7 @@ class ClientPlayer {
 		std::string team;
 		Texture* texture;
 		Texture* texture_weapon;
+		Texture stencil;
 		SDL_Rect pos;
 		SDL_Rect clip[3];
 		int current_clip;
@@ -34,6 +37,8 @@ class ClientPlayer {
 		ClientPlayer();
 
 		~ClientPlayer();
+
+		void createStencil(Renderer& renderer, double angle, int alpha);
 
 		char get_id();
 

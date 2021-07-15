@@ -23,6 +23,10 @@ void GameMap::loadMedia() {
   sprite_container.loadMedia(renderer);
 }
 
+void GameMap::createStencil(int angle, int alpha){
+  player.createStencil(renderer, (double)angle, alpha);
+}
+
 void GameMap::addTile(Tile tile) {
   tiles.push_back(std::move(tile));
 }

@@ -17,7 +17,7 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline ")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 # SDL
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lSDL2 -lSDL2_image -lSDL2_ttf")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_gfx")
 
 
 
@@ -100,7 +100,7 @@ add_executable(server "Server/main.cpp")
 target_link_libraries(server server_classes common_classes yaml-cpp box2d)
 
 add_executable(client "Client/main.cpp")
-target_link_libraries(client client_classes common_classes SDL2 SDL2_image SDL2_ttf SDL2_mixer yaml-cpp)
+target_link_libraries(client client_classes common_classes SDL2 SDL2_image SDL2_ttf SDL2_mixer SDL2_gfx yaml-cpp)
 
 
 

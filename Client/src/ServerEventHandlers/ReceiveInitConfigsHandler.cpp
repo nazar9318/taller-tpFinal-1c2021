@@ -5,7 +5,9 @@ ReceiveInitConfigsHandler::ReceiveInitConfigsHandler() {}
 void ReceiveInitConfigsHandler::handle(Event& event, GameMap& map, InitialPhase& initial_phase) {
     std::vector<char> event_msg = event.get_msg();
     int stencil_angle = *((int*)&(event_msg[1]));
-    int glock_bullets_price = *((int*)&(event_msg[5]));   
+    map.createStencil(stencil_angle, 150);
+
+    int glock_bullets_price = *((int*)&(event_msg[5]));
     std::cout << "stencil_angle: " << stencil_angle <<
             "glock_bullets_price " << glock_bullets_price << std::endl;
 

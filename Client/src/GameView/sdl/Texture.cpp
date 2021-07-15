@@ -54,6 +54,23 @@ void Texture::loadFromFile(const Renderer& renderer, std::string filePath, Color
   SDL_SetTextureAlphaMod(this->texture, alpha);
 }
 
+void Texture::loadFromSurface(Renderer& renderer, SDL_Surface* surface, Color key, SDL_BlendMode blending, uint8_t alpha){
+
+  SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, key.r, key.g, key.b));
+
+  texture = renderer.createTextureFromSurface(surface);
+  if (!texture) {
+    SDL_FreeSurface(surface);
+    throw SDLException("SDLException: failed to create texture - %s\n", SDL_GetError());
+  }
+
+  this->height = surface->h;
+  this->width = surface->w;
+
+  SDL_SetTextureBlendMode(this->texture, blending);
+  SDL_SetTextureAlphaMod(this->texture, alpha);
+}
+
 void Texture::loadFromRenderedText(Renderer& renderer, TTF_Font* font, std::string text, SDL_Color color, TextType type){
     // Eliminamos una textura previa si existe
     free();

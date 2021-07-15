@@ -20,6 +20,10 @@ id(id), name(name), current_clip(0) {
 	clip[2].y = 0;
 }
 
+void ClientPlayer::createStencil(Renderer& renderer, double angle, int alpha){
+	Stencil::buildStencil(renderer, stencil, angle, alpha);
+}
+
 void ClientPlayer::set_team(Team team) {
 	texture = &(SpriteContainer::getInstance()[team]);
 	pos.x = 0;
@@ -96,8 +100,6 @@ void ClientPlayer::render(Camera& camera) {
 
 	/*Renderizo el stencil*/
 
-	/*render effects*/
-	
 }
 
 double ClientPlayer::getAngle() { return (double)angle; }

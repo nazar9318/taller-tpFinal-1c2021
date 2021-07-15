@@ -11,7 +11,7 @@ font(NULL), post_game(false) {
 }
 
 void FinalPhase::loadMedia() {
-  font = TTF_OpenFont("../Client/Assets/Fonts/japanese.ttf", 20);
+  font = TTF_OpenFont("../Client/Assets/Fonts/japanese.ttf", 30);
   if (!font) {
     throw SDLException("SDLException: failed to load fonts -> FinalPhase - %s\n",TTF_GetError());
   }
@@ -28,15 +28,35 @@ void FinalPhase::addScore(const std::string& name,
   this->round_kills.push_back(round.str());
   this->total_kills.push_back(total.str());
 }
+void FinalPhase::renderTeamScores() {
+  unsigned int terrorist_count = 0;
+  unsigned int counter_count = 0;
+  for (unsigned int i = 1; i < names.size(); i++) {
+    if (team[i].compare("Counter") == 0) {
+      counter_count += std::stoi(total_kills[i]);
+    } else {
+      terrorist_count += std::stoi(total_kills[i]);
+    }
+  }
+  std::stringstream counter_cnt;
+  std::stringstream terrorist_cnt;
+  counter_cnt << "Counter: " << counter_count;
+  terrorist_cnt << "Terrorist: " << terrorist_count;
+  std::vector<std::string> team_scores;
+  team_scores.push_back("Puntos por equipo");
+  team_scores.push_back(counter_cnt.str());
+  team_scores.push_back(terrorist_cnt.str());
+  renderRequested(screen_width/2 + 150, team_scores);
+}
 
 void FinalPhase::renderRequested(int x, const std::vector<std::string>& request) {
   SDL_Color white = {255, 255, 255};
   SDL_Rect quad = {0};
   quad.x = x;
   quad.y = 0;
-  quad.h = 40;
+  quad.h = 20;
   for (unsigned int i = 0; i < request.size(); i++) {
-    quad.w = 15*request[i].size();
+    quad.w = 8*request[i].size();
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, request[i].c_str(), white);
     SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
     renderer.render(Message, NULL, &quad);
@@ -48,8 +68,9 @@ void FinalPhase::renderRequested(int x, const std::vector<std::string>& request)
 void FinalPhase::renderRound() {
   renderRequested(screen_width/2 - 400, names);
   renderRequested(screen_width/2 - 200, team);
-  renderRequested(screen_width/2, round_kills);
-  renderRequested(screen_width/2 + 200, total_kills);
+  renderRequested(screen_width/2 - 100, round_kills);
+  renderRequested(screen_width/2, total_kills);
+  renderTeamScores();
 }
 
 void FinalPhase::clean() {

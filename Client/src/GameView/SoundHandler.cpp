@@ -3,9 +3,9 @@
 
 SoundHandler::SoundHandler() : sound(NULL), bomb_activated(false) {
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
-//	music = Mix_LoadMUS("../Client/Assets/Sounds/menu.wav");
-//	Mix_VolumeMusic(MIX_MAX_VOLUME/3);
-//	Mix_PlayMusic(music, -1);
+	music = Mix_LoadMUS("../Client/Assets/Sounds/menu.wav");
+	Mix_VolumeMusic(MIX_MAX_VOLUME/3);
+	Mix_PlayMusic(music, -1);
 }
 
 void SoundHandler::handleBomb(Event& event) {
@@ -90,9 +90,6 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 			break;
 		}
 		case SoundEvent::AWP_SOUND : {
-			std::cout << distance << std::endl;
-			std::cout << (float)distance/32 << std::endl;
-			std::cout << (float)distance/128 << std::endl;
 			if (distance/32 <= AWP_RANGE) {
 				sound = Mix_LoadWAV("../Client/Assets/Sounds/awp.wav");
 				if (distance/32 > 0) {Mix_VolumeChunk(sound, MIX_MAX_VOLUME/(distance/128));}
@@ -109,8 +106,6 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 			break;
 		}
 		case SoundEvent::GLOCK_SOUND : {
-			std::cout << distance << std::endl;
-			std::cout << (float)distance/32 << std::endl;
 			if (distance/32 <= GLOCK_RANGE) {
 				sound = Mix_LoadWAV("../Client/Assets/Sounds/glock18.wav");
 				if (distance/32 > 0) {Mix_VolumeChunk(sound, MIX_MAX_VOLUME/(distance/32));}
@@ -119,9 +114,6 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 			break;
 		}
 		case SoundEvent::KNIFE_SOUND : {
-			std::cout << distance << std::endl;
-			std::cout << (float)distance/32 << std::endl;
-			std::cout << (float)distance/128 << std::endl;
 			if (distance/32 <= KNIFE_RANGE) {
 				sound = Mix_LoadWAV("../Client/Assets/Sounds/knife_hit.wav");
 				if (distance/32 > 0) {Mix_VolumeChunk(sound, MIX_MAX_VOLUME/(distance/128));}
@@ -153,21 +145,6 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 			}
 			break;
 		}
-		/*case SoundEvent::WALK_SOUND : {
-			sound = Mix_LoadWAV("../Client/Assets/Sounds/pl_dirt1.wav");
-			Mix_PlayChannel(-1, sound, 0);
-			break;
-		}
-		case SoundEvent::GRAB_WEAPON_SOUND : {
-			sound = Mix_LoadWAV("../Client/Assets/Sounds/wpn_hudon.wav");
-			Mix_PlayChannel(-1, sound, 0);
-			break;
-		}
-		case SoundEvent::CHANGE_WEAPON_SOUND : {
-			sound = Mix_LoadWAV("../Client/Assets/Sounds/wpn_select.wav");
-			Mix_PlayChannel(-1, sound, 0);
-			break;
-		}*/
 		default : break;
 	}
 }
@@ -178,5 +155,5 @@ SoundHandler::~SoundHandler() {
 		sound = NULL;
 	}
 	Mix_CloseAudio();
-//	Mix_FreeMusic(music);
+	Mix_FreeMusic(music);
 }

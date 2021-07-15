@@ -6,6 +6,7 @@
 #define M3_RANGE 10
 #define AK47_RANGE 10
 #define BOMB_RANGE 50
+
 class GameMap;
 
 #include <vector>

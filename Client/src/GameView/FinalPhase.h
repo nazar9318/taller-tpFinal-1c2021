@@ -22,8 +22,8 @@ class FinalPhase {
 		int screen_width;
 		int screen_height;
 		bool post_game;
-		void teamWinner(std::string& winner, int count);
-		void playerWinner(std::string& winner, int count);
+		void teamWinner(std::string& winner, int& count);
+		void playerWinner(std::string& winner, int& count);
 		void renderRequested(int x, const std::vector<std::string>& request);
 		void renderTeamScores();
 

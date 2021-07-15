@@ -76,6 +76,9 @@ void Game::render() {
 		bomb.render();
 	} else if (fase == FaseType::END_ROUND) {
 		final_phase.render();
+	} else if (fase == FaseType::ENDGAME) {
+		final_phase.endGame();
+		final_phase.render();
 	}
 	renderer.presentScreen();
 }

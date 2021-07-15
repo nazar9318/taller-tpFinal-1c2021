@@ -46,7 +46,7 @@ void FinalPhase::renderTeamScores() {
   team_scores.push_back("Puntos por equipo");
   team_scores.push_back(counter_cnt.str());
   team_scores.push_back(terrorist_cnt.str());
-  renderRequested(screen_width/2 + 150, team_scores);
+  renderRequested(screen_width/2 + 200, team_scores);
 }
 
 void FinalPhase::renderRequested(int x, const std::vector<std::string>& request) {
@@ -56,7 +56,7 @@ void FinalPhase::renderRequested(int x, const std::vector<std::string>& request)
   quad.y = 0;
   quad.h = 20;
   for (unsigned int i = 0; i < request.size(); i++) {
-    quad.w = 8*request[i].size();
+    quad.w = 10*request[i].size();
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, request[i].c_str(), white);
     SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
     renderer.render(Message, NULL, &quad);
@@ -67,9 +67,9 @@ void FinalPhase::renderRequested(int x, const std::vector<std::string>& request)
 
 void FinalPhase::renderRound() {
   renderRequested(screen_width/2 - 400, names);
-  renderRequested(screen_width/2 - 200, team);
-  renderRequested(screen_width/2 - 100, round_kills);
-  renderRequested(screen_width/2, total_kills);
+  renderRequested(screen_width/2 - 100, team);
+  renderRequested(screen_width/2 + 20, round_kills);
+  renderRequested(screen_width/2 + 100, total_kills);
   renderTeamScores();
 }
 
@@ -84,7 +84,7 @@ void FinalPhase::clean() {
   total_kills.push_back("Totales");
 }
 
-void FinalPhase::teamWinner(std::string& winner, int count) {
+void FinalPhase::teamWinner(std::string& winner, int& count) {
   unsigned int terrorist_count = 0;
   unsigned int counter_count = 0;
   for (unsigned int i = 1; i < names.size(); i++) {
@@ -103,7 +103,7 @@ void FinalPhase::teamWinner(std::string& winner, int count) {
   }
 }
 
-void FinalPhase::playerWinner(std::string& winner, int count) {
+void FinalPhase::playerWinner(std::string& winner, int& count) {
   winner = names[0];
   for (unsigned int i = 1; i < names.size(); i++) {
     if (std::stoi(total_kills[i]) > count) {
@@ -115,17 +115,27 @@ void FinalPhase::playerWinner(std::string& winner, int count) {
 
 void FinalPhase::renderPostGame() {
   std::string player_winner;
-  std::string player_winner_title = "Jugador ganador";
   std::string team_winner;
-  std::string team_winner_title = "Equipo ganador";
   int player_count = 0;
   int team_count = 0;
+  std::vector<std::string> player_scores;
   playerWinner(player_winner, player_count);
+  std::stringstream player_cnt;
+  player_cnt << player_winner << ": " << player_count;
+  player_scores.push_back("Jugador ganador");
+  player_scores.push_back(player_cnt.str());
   teamWinner(team_winner, team_count);
-  SDL_Color white = {255, 255, 255};
+  std::stringstream terrorist_cnt;
+  terrorist_cnt << team_winner << ": " << team_count;
+  std::vector<std::string> team_scores;
+  team_scores.push_back("Equipo ganador");
+  team_scores.push_back(terrorist_cnt.str());
+  renderRequested(screen_width/2-200, player_scores);
+  renderRequested(screen_width/2+200, team_scores);
+  /*SDL_Color white = {255, 255, 255};
 
   SDL_Rect quad_post_game_player = {0};
-  quad_post_game_player.x = screen_width/2 - 100;
+  quad_post_game_player.x = screen_width/2 - 200;
   quad_post_game_player.y = 0;
   quad_post_game_player.h = 40;
   quad_post_game_player.w = 15*player_winner_title.size();
@@ -141,7 +151,7 @@ void FinalPhase::renderPostGame() {
   SDL_FreeSurface(surfaceMessage);
 
   SDL_Rect quad_post_game_team = {0};
-  quad_post_game_team.x = screen_width/2 + 100;
+  quad_post_game_team.x = screen_width/2 + 200;
   quad_post_game_team.y = 0;
   quad_post_game_team.h = 40;
   quad_post_game_team.w = 15*team_winner_title.size();
@@ -154,7 +164,7 @@ void FinalPhase::renderPostGame() {
   surfaceMessage = TTF_RenderText_Solid(font, team_winner.c_str(), white);
   Message = renderer.createTextureFromSurface(surfaceMessage);
   renderer.render(Message, NULL, &quad_post_game_team);
-  SDL_FreeSurface(surfaceMessage);
+  SDL_FreeSurface(surfaceMessage);*/
 }
 
 void FinalPhase::render() { post_game ? renderPostGame() : renderRound(); }

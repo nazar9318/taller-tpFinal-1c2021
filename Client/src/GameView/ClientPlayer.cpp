@@ -99,6 +99,8 @@ void ClientPlayer::render(Camera& camera) {
 	camera.render(texture_weapon->getTexture(), renderQuad, NULL, angle);
 
 	/*Renderizo el stencil*/
+	renderQuad = { pos.x + PLAYER_WIDTH/2 - 600, pos.y + PLAYER_HEIGHT/2 - 600, 1200, 1200};
+	camera.renderAddingOffset(stencil.getTexture(), renderQuad, NULL, angle-90);
 
 }
 

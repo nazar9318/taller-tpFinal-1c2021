@@ -9,6 +9,8 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#define BACKGROUND_WIDTH 800
+#define BACKGROUND_HEIGHT 600
 
 class FinalPhase {
 	private:
@@ -18,6 +20,8 @@ class FinalPhase {
 		std::vector<std::string> team;
 		std::vector<std::string> squad;
 		std::vector<std::string> round_kills;
+		std::vector<std::string> deaths;
+		std::vector<std::string> money;
 		std::vector<std::string> total_kills;
 		TTF_Font* font;
 		int screen_width;

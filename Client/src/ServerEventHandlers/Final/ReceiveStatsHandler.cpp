@@ -17,6 +17,8 @@ void ReceiveStatsHandler::handle(FaseType& fase, Event& event, GameMap& map) {
 		int kills_round = *((int*)&(*(it + 1)));
 		int kills_total = *((int*)&(*(it + 5)));
 		map.add_stats(id, kills_round, kills_total);
+		//el nuevo método tendría que ser:
+		//map.add_stats(id, muertes_totales, dinero_ganado_en_la_ronda,kills_round, kills_total);
 	}
 }
 

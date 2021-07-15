@@ -7,7 +7,7 @@
 #define PLAYER_HEIGHT 32
 
 ClientCharacter::ClientCharacter(const std::string& _name)
-: name(_name), current_clip(0) {
+: name(_name), current_clip(0), squad(0) {
 	pos = {0};
 	for (int i = 0; i < LIMIT_POSES; i++) { clip[i] = {0}; }
 	for (int i = 0; i < LIMIT_POSES; i++) {
@@ -32,6 +32,10 @@ void ClientCharacter::set_team(Team team) {
 		this->team = "Counter";
 	}
 }
+
+void ClientCharacter::setSquad(int squad) { this->squad = squad; }
+
+int ClientCharacter::getSquad() const { return this->squad; }
 
 SDL_Rect& ClientCharacter::getBox() { return pos; }
 

@@ -19,6 +19,7 @@ class ClientCharacter {
 		SDL_Rect clip[3];
 		int angle;
 		int current_clip;
+		int squad;
 
 	public:
 		ClientCharacter(const std::string& name);
@@ -31,7 +32,8 @@ class ClientCharacter {
 		double getAngle();
 		void set_team(Team team);
 		void update_position(int pos_x, int pos_y, int angle, char weapon_type);
-
+		void setSquad(int squad);
+		int getSquad() const;
 		void render(Camera& camera);
 		std::string get_name();
 		ClientCharacter(ClientCharacter&& other) = default;

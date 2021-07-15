@@ -48,7 +48,7 @@ class GameMap {
 		void create();
 
 		void createStencil(int angle, int alpha);
-
+		void add_squad(char id, int squad);
 		void setSize(int& width, int& height);
 		float distance(char id);
 		void addTile(Tile tile);

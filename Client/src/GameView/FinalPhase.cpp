@@ -5,7 +5,8 @@ FinalPhase::FinalPhase(Renderer& renderer, int screen_width, int screen_height):
 renderer(renderer), screen_width(screen_width), screen_height(screen_height),
 font(NULL), post_game(false) {
   names.push_back("Nombre");
-  team.push_back("Equipo");
+  team.push_back("Bando");
+  squad.push_back("Equipo");
   round_kills.push_back("Ronda");
   total_kills.push_back("Total");
 }
@@ -17,17 +18,42 @@ void FinalPhase::loadMedia() {
   }
 }
 
-void FinalPhase::addScore(const std::string& name,
-      const std::string& team, int round_kills, int total_kills) {
+void FinalPhase::addScore(const std::string& name, const std::string& team,
+                          int squad, int round_kills, int total_kills) {
   std::stringstream round;
+  std::stringstream squad_team;
   std::stringstream total;
   round << round_kills;
   total << total_kills;
+  squad_team << "Equipo " << squad;
   this->names.push_back(name);
+  this->squad.push_back(squad_team.str());
   this->team.push_back(team);
   this->round_kills.push_back(round.str());
   this->total_kills.push_back(total.str());
 }
+
+void FinalPhase::renderSquadScores() {
+  unsigned int one = 0;
+  unsigned int two = 0;
+  for (unsigned int i = 1; i < names.size(); i++) {
+    if (team[i].compare("Equipo 1") == 0) {
+      one += std::stoi(total_kills[i]);
+    } else {
+      two += std::stoi(total_kills[i]);
+    }
+  }
+  std::stringstream one_cnt;
+  std::stringstream two_cnt;
+  one_cnt << "Equipo 1: " << one;
+  two_cnt << "Equipo 2: " << two;
+  std::vector<std::string> team_scores;
+  team_scores.push_back("Puntos equipo");
+  team_scores.push_back(one_cnt.str());
+  team_scores.push_back(two_cnt.str());
+  renderRequested(screen_width/2 + 200, team_scores);
+}
+
 void FinalPhase::renderTeamScores() {
   unsigned int terrorist_count = 0;
   unsigned int counter_count = 0;
@@ -43,10 +69,10 @@ void FinalPhase::renderTeamScores() {
   counter_cnt << "Counter: " << counter_count;
   terrorist_cnt << "Terrorist: " << terrorist_count;
   std::vector<std::string> team_scores;
-  team_scores.push_back("Puntos por equipo");
+  team_scores.push_back("Puntos bando");
   team_scores.push_back(counter_cnt.str());
   team_scores.push_back(terrorist_cnt.str());
-  renderRequested(screen_width/2 + 200, team_scores);
+  renderRequested(screen_width/2 + 80, team_scores);
 }
 
 void FinalPhase::renderRequested(int x, const std::vector<std::string>& request) {
@@ -67,10 +93,12 @@ void FinalPhase::renderRequested(int x, const std::vector<std::string>& request)
 
 void FinalPhase::renderRound() {
   renderRequested(screen_width/2 - 400, names);
-  renderRequested(screen_width/2 - 100, team);
-  renderRequested(screen_width/2 + 20, round_kills);
-  renderRequested(screen_width/2 + 100, total_kills);
+  renderRequested(screen_width/2 - 300, team);
+  renderRequested(screen_width/2 - 200, squad);
+  renderRequested(screen_width/2 - 100, round_kills);
+  renderRequested(screen_width/2, total_kills);
   renderTeamScores();
+  renderSquadScores();
 }
 
 void FinalPhase::clean() {
@@ -78,10 +106,12 @@ void FinalPhase::clean() {
   this->team.clear();
   this->round_kills.clear();
   this->total_kills.clear();
+  this->squad.clear();
   names.push_back("Nombre");
-  team.push_back("Equipo");
+  team.push_back("Bando");
+  squad.push_back("Equipo");
   round_kills.push_back("Ronda");
-  total_kills.push_back("Totales");
+  total_kills.push_back("Total");
 }
 
 void FinalPhase::teamWinner(std::string& winner, int& count) {

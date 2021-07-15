@@ -5,7 +5,7 @@
 #define PI 3.14159265
 
 ClientPlayer::ClientPlayer(char& id, std::string& name):
-id(id), name(name), current_clip(0) {
+id(id), name(name), current_clip(0), bomb_owner(false), squad(0) {
 	pos = {0};
 	for (int i = 0; i < LIMIT_POSES; i++) { clip[i] = {0}; }
 	for (int i = 0; i < LIMIT_POSES; i++) {
@@ -50,6 +50,10 @@ void ClientPlayer::changeClip() {
 		this->current_clip++;
 	}
 }*/
+
+void ClientPlayer::setSquad(int squad) { this->squad = squad; }
+
+int ClientPlayer::getSquad() const { return this->squad; }
 
 void ClientPlayer::update_position(int pos_x, int pos_y, int angle,
 		char life, int money, char weapon_type, int ammo) {

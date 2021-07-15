@@ -124,17 +124,26 @@ void GameMap::renderCharacters() {
 void GameMap::add_stats(char id, int kills_round, int kills_total) {
   std::string name;
   std::string team;
+  int squad;
   if (id == player.get_id()) {
     name = player.get_name();
     team = player.getTeam();
+    squad = player.getSquad();
   } else {
     name = characters.at(id).get_name();
     team = characters.at(id).getTeam();
+    squad = characters.at(id).getSquad();
   }
-  final_phase.addScore(name, team, kills_round, kills_total);
+  final_phase.addScore(name, team, squad, kills_round, kills_total);
 }
 
-
+void GameMap::add_squad(char id, int squad) {
+  if (id == player.get_id()) {
+    player.setSquad(squad);
+  } else {
+    characters.at(id).setSquad(squad);;
+  }
+}
 
 /*------------------------------------------------------------------------*/
 

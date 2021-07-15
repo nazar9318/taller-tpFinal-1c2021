@@ -29,7 +29,8 @@ class ClientPlayer {
 		int money;
 		char life;
 		char weapon_type;
-		bool bomb_owner = false;
+		bool bomb_owner;
+		int squad;
 
 	public:
 		ClientPlayer(char& id, std::string& name);
@@ -41,6 +42,10 @@ class ClientPlayer {
 		void createStencil(Renderer& renderer, double angle, int alpha);
 
 		char get_id();
+
+		void setSquad(int squad);
+
+		int getSquad() const;
 
 		void changeClip();
 

@@ -14,6 +14,8 @@ TIME_BOMB_ACTIVATE: 5
 TIME_BOMB_DEACTIVATE: 5
 
 stencil_angle: 60
+stencil_radio: 64
+alpha_blending: 150
 
 character_life_points: 100
 bonus_kill: 50

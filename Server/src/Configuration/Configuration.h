@@ -26,6 +26,8 @@ class Configuration {
 		static int character_radius;
 		
 		static int stencil_angle;
+		static int stencil_radio;
+		static int alpha_blending;
 
 		/**************************************/
 		static int TIME_BOMB_EXPLOTE;

@@ -5,6 +5,15 @@ SendInitialConfigsEvent::SendInitialConfigsEvent() {
 	
 	int stencil_angle = CF::stencil_angle;
 	push_back(stencil_angle);
+
+	int stencil_radio = CF::stencil_radio;
+	push_back(stencil_radio);
+
+	int alpha_blending = CF::alpha_blending;
+	push_back(alpha_blending);
+
+	int init_money = CF::character_money; 
+	push_back(init_money);
 	
 	int glock_bullets_price = CF::glock_10_bullets_price;	
 	push_back(glock_bullets_price);

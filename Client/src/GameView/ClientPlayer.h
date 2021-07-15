@@ -31,6 +31,7 @@ class ClientPlayer {
 		char weapon_type;
 		bool bomb_owner;
 		int squad;
+		bool dead;
 
 	public:
 		ClientPlayer(char& id, std::string& name);

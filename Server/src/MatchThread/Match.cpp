@@ -188,7 +188,7 @@ void Match::push_step_events() {
 			game_world.get_step_info().get_wait() > (int)CF::time_between))
 			|| (finished)) {
 			std::shared_ptr<Event> stats(
-				new SendStatsEvent(game_world.get_step_info(), finished));
+				new SendStatsEvent(game_world, finished));
 			statistics_not_sent = false;
 			init_players_not_sent = true;
 			push_event(stats);

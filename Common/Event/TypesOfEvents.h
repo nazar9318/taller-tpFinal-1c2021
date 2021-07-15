@@ -47,8 +47,7 @@ enum ModelTypeEvent: char {
 	INIT_STEP,
 	FINAL_STEP,
 	SEND_SQUADS,
-	INITIAL_CONFIGS,
-	GAME_OVER,
+	INITIAL_CONFIGS
 };
 
 enum ServerError: char {

@@ -7,11 +7,11 @@
 #include <string>
 #include "Position.h"
 #include "StepInformation.h"
-
+#include "GameWorld.h"
 
 class SendStatsEvent: public Event {
 	public:
-		SendStatsEvent(StepInformation& step, bool finished);
+		SendStatsEvent(GameWorld& world, bool finished);
 		~SendStatsEvent();
 	private:
 		SendStatsEvent(const SendStatsEvent &other) = delete;

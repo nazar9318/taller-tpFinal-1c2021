@@ -49,6 +49,11 @@ std::vector<char> SquadsManager::get_squads() {
 	return squads;
 }
 
+void SquadsManager::get_wins(int& squad_one, int& squad_two) {
+	squad_one = squad_one_wins;
+	squad_two = squad_two_wins;
+}
+
 
 SquadsManager::~SquadsManager() {
 }

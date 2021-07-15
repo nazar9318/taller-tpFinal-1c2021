@@ -288,6 +288,10 @@ std::vector<char> GameWorld::get_squads() {
 	return squad_manager.get_squads();
 }
 
+void GameWorld::get_wins(int& squad_one, int& squad_two) {
+	squad_manager.get_wins(squad_one, squad_two);
+}
+
 
 GameWorld::~GameWorld() {
 	delete world;

@@ -21,6 +21,7 @@ class SquadsManager {
 		void add_win(Team team);
 		void add_win(BombState bomb);
 		std::vector<char> get_squads();
+		void get_wins(int& squad_one, int& squad_two);
 		~SquadsManager();
 };
 

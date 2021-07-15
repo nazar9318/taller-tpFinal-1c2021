@@ -1,10 +1,17 @@
 #include "SendStatsEvent.h"
 
 
-SendStatsEvent::SendStatsEvent(StepInformation& step, bool finished) {
+SendStatsEvent::SendStatsEvent(GameWorld& world, bool finished) {
 	this->msg.push_back((char)ModelTypeEvent::STATISTICS);
 	this->msg.push_back((char)finished);
-	std::vector<char> stats = step.get_stats();
+	
+	int team_one_wins;
+	int team_two_wins;
+	world.get_wins(team_one_wins, team_two_wins);
+	push_back(team_one_wins);
+	push_back(team_two_wins);
+
+	std::vector<char> stats = world.get_step_info().get_stats();
 	std::copy(stats.begin(), stats.end(), std::back_inserter(msg));
 }
 

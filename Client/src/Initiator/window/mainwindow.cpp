@@ -52,16 +52,21 @@ void MainWindow::closeEvent(QCloseEvent*) {}
 // POST: Boton de la primera pantalla mostrada.
 //       Se pide un nombre de usuario.
 void MainWindow::on_OK_clicked() {
-    //user_name = ui->textEdit->toPlainText().toStdString();
-    user_name = ui->lineEdit->text().toStdString();
-	if (user_name.length() < MIN_NAME_LENGTH) {
-		show_error("El nombre es demasiado corto");
-		return;
+	try {
+	    user_name = ui->lineEdit->text().toStdString();
+		if (user_name.length() < MIN_NAME_LENGTH) {
+			show_error("El nombre es demasiado corto");
+			return;
+		}
+		user_name_charged = true;
+		SendUserNameEvent user_event(user_name);
+		protocol.send_event(socket, user_event.get_msg());
+		ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);		
+	} catch (ExceptionSocketClosed& e) {
+		// manejar. 
+	} catch (...) {
+		// manejar. 
 	}
-	user_name_charged = true;
-	SendUserNameEvent user_event(user_name);
-	protocol.send_event(socket, user_event.get_msg());
-	ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
 }
 
 // POST: Abre una ventana de error con el mensaje
@@ -132,16 +137,22 @@ void MainWindow::show_error(const QString& message, Event& event) {
 //       se piden los mapas al servidor y se
 //       abre una nueva pagina con los mismos.
 void MainWindow::on_createButton_clicked() {
-	ReceiveMapsEvent recv_maps;
-	protocol.send_event(socket, recv_maps.get_msg());
-	Event maps_received = protocol.recv_event(socket);
-	if (maps_received.get_type() != ModelTypeEvent::SEND_MAPS) {
-		show_error("error al intentar recibir"
-						" los mapas actuales", maps_received);
-		return;
+	try {
+		ReceiveMapsEvent recv_maps;
+		protocol.send_event(socket, recv_maps.get_msg());
+		Event maps_received = protocol.recv_event(socket);
+		if (maps_received.get_type() != ModelTypeEvent::SEND_MAPS) {
+			show_error("error al intentar recibir"
+							" los mapas actuales", maps_received);
+			return;
+		}
+		show_maps(maps_received);
+		ui->stackedWidget->setCurrentIndex(MAPS_FOR_CREATE_PAGE);		
+	} catch(ExceptionSocketClosed& e) {
+		// manejar. 
+	} catch(...) {
+		// manejar. 
 	}
-	show_maps(maps_received);
-	ui->stackedWidget->setCurrentIndex(MAPS_FOR_CREATE_PAGE);
 }
 
 
@@ -163,80 +174,98 @@ void MainWindow::show_maps(Event& maps_received) {
 // POST: Al apretar el boton de crear el match con el nombre,
 //       se crea una partida con ese mapa.
 void MainWindow::createMatch(const QString& map_name) {
-    bool name_inserted = false;
-    QLineEdit::EchoMode echo = QLineEdit::Normal;
-	QString qname = QInputDialog::getText(this, "entrada", "Ingrese un"
-                    " nombre para la partida", echo, "", &name_inserted, NULL, NULL);
-    if (!name_inserted) {return;}
-    std::string match_name = qname.toStdString();
-    if (match_name.length() < MIN_NAME_LENGTH) {
-		show_error("El nombre es demasiado corto");
-		return;
-	}
-    CreateMatchEvent create(match_name, map_name.toStdString());
-    protocol.send_event(socket, create.get_msg());
-    Event is_successful = protocol.recv_event(socket);
-	if (is_successful.get_type() == ModelTypeEvent::SUCCESSFUL_ENTRY) {
-		syslog(LOG_INFO, "[%s:%i]: Se creo la partida %s"
-			, __FILE__, __LINE__, match_name.c_str());
-		// seria la posicion 2 en el protocolo.
-		self_id = is_successful.get_msg()[1];
-		syslog(LOG_INFO, "[%s:%i]: El jugador de id %i crea  la partida", __FILE__, __LINE__, (int)self_id);
-		players[self_id] = user_name;
-	    ui->stackedWidget->setCurrentIndex(CREATE_MATCH_WAITING);
-	    receiver.start();
-	    players_joined_timer->start(1000);
-	} else {
-		show_error("Error al intentar crear la partida", is_successful);
+    try {
+	    bool name_inserted = false;
+	    QLineEdit::EchoMode echo = QLineEdit::Normal;
+		QString qname = QInputDialog::getText(this, "entrada", "Ingrese un"
+	                    " nombre para la partida", echo, "", &name_inserted, NULL, NULL);
+	    if (!name_inserted) {return;}
+	    std::string match_name = qname.toStdString();
+	    if (match_name.length() < MIN_NAME_LENGTH) {
+			show_error("El nombre es demasiado corto");
+			return;
+		}
+	    CreateMatchEvent create(match_name, map_name.toStdString());
+	    protocol.send_event(socket, create.get_msg());
+	    Event is_successful = protocol.recv_event(socket);
+		if (is_successful.get_type() == ModelTypeEvent::SUCCESSFUL_ENTRY) {
+			syslog(LOG_INFO, "[%s:%i]: Se creo la partida %s"
+				, __FILE__, __LINE__, match_name.c_str());
+			// seria la posicion 2 en el protocolo.
+			self_id = is_successful.get_msg()[1];
+			syslog(LOG_INFO, "[%s:%i]: El jugador de id %i crea  la partida", __FILE__, __LINE__, (int)self_id);
+			players[self_id] = user_name;
+		    ui->stackedWidget->setCurrentIndex(CREATE_MATCH_WAITING);
+		    receiver.start();
+		    players_joined_timer->start(1000);
+		} else {
+			show_error("Error al intentar crear la partida", is_successful);
+		}
+    } catch(ExceptionSocketClosed& e) {
+		// manejar. 
+	} catch(...) {
+		// manejar. 
 	}
 }
 
 void MainWindow::update_players() {
 	syslog(LOG_CRIT, "[%s:%i]: Timer de players en funcionamiento."
 		, __FILE__, __LINE__);
-	bool players_waiting = true;
-    while(players_waiting) {
-    	try {
-    		Event model_event = model_events.pop();
-			switch (model_event.get_type()) {
-				case ModelTypeEvent::PLAYERS_ID_LIST : {
-					syslog(LOG_INFO, "[%s:%i]: Llego mensaje de players list"
-								, __FILE__, __LINE__);
-					update_players_list(model_event);
-					break;
+	try {
+		bool players_waiting = true;
+	    while(players_waiting) {
+	    	try {
+	    		Event model_event = model_events.pop();
+				switch (model_event.get_type()) {
+					case ModelTypeEvent::PLAYERS_ID_LIST : {
+						syslog(LOG_INFO, "[%s:%i]: Llego mensaje de players list"
+									, __FILE__, __LINE__);
+						update_players_list(model_event);
+						break;
+					}
+					case ModelTypeEvent::GAME_STARTED : {
+						syslog(LOG_CRIT, "[%s:%i]: Se inicia la partida.", __FILE__, __LINE__);
+						players_waiting = false;
+						sender.start();
+						players_joined_timer->stop();
+						game_started = true;
+						active = true;
+						this->close();
+						break;
+					}
+					case ModelTypeEvent::ERROR : {
+						show_error("Ha ocurrido un error inesperado.", model_event);
+						break;
+					}
+					default : {
+						syslog(LOG_CRIT, "[%s:%i]: Se recibe un tipo inesperado."
+						, __FILE__, __LINE__);
+					}
 				}
-				case ModelTypeEvent::GAME_STARTED : {
-					syslog(LOG_CRIT, "[%s:%i]: Se inicia la partida.", __FILE__, __LINE__);
-					players_waiting = false;
-					sender.start();
-					players_joined_timer->stop();
-					game_started = true;
-					active = true;
-					this->close();
-					break;
-				}
-				case ModelTypeEvent::ERROR : {
-					show_error("Ha ocurrido un error inesperado.", model_event);
-					break;
-				}
-				default : {
-					syslog(LOG_CRIT, "[%s:%i]: Se recibe un tipo inesperado."
-					, __FILE__, __LINE__);
-				}
+			} catch (ExceptionEmptyQueue& e) {
+				players_waiting = false;
 			}
-		} catch (ExceptionEmptyQueue& e) {
-			players_waiting = false;
-		}
-    }
+	    }
+	} catch(ExceptionSocketClosed& e) {
+		// manejar. 
+	} catch(...) {
+		// manejar. 
+	}
 }
 
 
 // POST: Al apretar el boton de iniciar la partida, se
 //       cierra qt para comenzar sdl.
 void MainWindow::on_pushButton_clicked() {
-	StartGameEvent starter;
-	syslog(LOG_CRIT, "[%s:%i]: Creador inicia la partida, por enviar evento.", __FILE__, __LINE__);
-	protocol.send_event(socket, starter.get_msg());
+	try {
+		StartGameEvent starter;
+		syslog(LOG_CRIT, "[%s:%i]: Creador inicia la partida, por enviar evento.", __FILE__, __LINE__);
+		protocol.send_event(socket, starter.get_msg());
+	} catch(ExceptionSocketClosed& e) {
+		// manejar. 
+	} catch(...) {
+		// manejar. 
+	}
 }
 
 
@@ -250,22 +279,34 @@ void MainWindow::on_pushButton_clicked() {
 // POST: Cuando se aprieta en join, se reciben las partidas
 // actuales y se las agrega a la lista de partidas.
 void MainWindow::on_joinButton_clicked() {
-	matches_timer->start(1000);
-	ui->stackedWidget->setCurrentIndex(MATCHES_FOR_JOIN_PAGE);
+	try {
+		matches_timer->start(1000);
+		ui->stackedWidget->setCurrentIndex(MATCHES_FOR_JOIN_PAGE);
+	} catch(ExceptionSocketClosed& e) {
+		// manejar. 
+	} catch(...) {
+		// manejar. 
+	}
 }
 
 
 void MainWindow::update_matches() {
-	ReceiveMatchesEvent recv_matches;
-	protocol.send_event(socket, recv_matches.get_msg());
-	Event matches_received = protocol.recv_event(socket);
-	if (matches_received.get_type() != ModelTypeEvent::SEND_MATCHES) {
-		show_error("error al intentar recibir las partidas "
-						"actuales", matches_received);
-		return;
+	try {
+		ReceiveMatchesEvent recv_matches;
+		protocol.send_event(socket, recv_matches.get_msg());
+		Event matches_received = protocol.recv_event(socket);
+		if (matches_received.get_type() != ModelTypeEvent::SEND_MATCHES) {
+			show_error("error al intentar recibir las partidas "
+							"actuales", matches_received);
+			return;
+		}
+		clean_matches();
+		show_matches(matches_received);
+	} catch(ExceptionSocketClosed& e) {
+		// manejar. 
+	} catch(...) {
+		// manejar. 
 	}
-	clean_matches();
-	show_matches(matches_received);
 }
 
 void MainWindow::show_matches(Event& matches_received) {
@@ -298,24 +339,31 @@ void MainWindow::clean_matches() {
 // POST: Al apretar el boton de la partida en particular
 //       se une a la partida.
 void MainWindow::joinMatch(const QString &text) {
-	std::string match_name = text.toStdString();
-	JoinMatchEvent joiner_event(match_name);
-	protocol.send_event(socket, joiner_event.get_msg());
-	Event is_successful = protocol.recv_event(socket);
-	if (is_successful.get_type() != ModelTypeEvent::SUCCESSFUL_ENTRY) {
-		show_error("error al intentar unirse a la partida.", is_successful);
-		return;
-	}
-	self_id = is_successful.get_msg()[1];
-    syslog(LOG_INFO, "[%s:%i]: El jugador de id %i se une a la partida", __FILE__, __LINE__, (int)self_id);
-	players[self_id] = user_name;
-	matches_timer->stop();
-	ui->stackedWidget->setCurrentIndex(JOIN_MATCH_WAITING);
-	syslog(LOG_INFO, "[%s:%i]: Se unio a la partida %s"
-			, __FILE__, __LINE__, match_name.c_str());
+	try {
+		std::string match_name = text.toStdString();
+		JoinMatchEvent joiner_event(match_name);
+		protocol.send_event(socket, joiner_event.get_msg());
+		Event is_successful = protocol.recv_event(socket);
+		if (is_successful.get_type() != ModelTypeEvent::SUCCESSFUL_ENTRY) {
+			show_error("error al intentar unirse a la partida.", is_successful);
+			return;
+		}
+		self_id = is_successful.get_msg()[1];
+	    syslog(LOG_INFO, "[%s:%i]: El jugador de id %i se une a la partida", __FILE__, __LINE__, (int)self_id);
+		players[self_id] = user_name;
+		matches_timer->stop();
+		ui->stackedWidget->setCurrentIndex(JOIN_MATCH_WAITING);
+		syslog(LOG_INFO, "[%s:%i]: Se unio a la partida %s"
+				, __FILE__, __LINE__, match_name.c_str());
 
-	receiver.start();
-	players_joined_timer->start();
+		receiver.start();
+		players_joined_timer->start();
+	} catch(ExceptionSocketClosed& e) {
+		// manejar. 
+	} catch(...) {
+		// manejar. 
+	}
+
 }
 
 void MainWindow::update_players_list(Event& players_list) {

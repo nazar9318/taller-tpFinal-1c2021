@@ -22,6 +22,7 @@
 #include "ReceiveAttacksHandler.h"
 #include "ReceiveInitConfigsHandler.h"
 #include "ReceiveBuysHandler.h"
+#include "ConectionFailedHandler.h"
 #include "SoundHandler.h"
 #include "InitialPhase.h"
 
@@ -39,6 +40,7 @@ class ModelEventHandler {
 		ReceiveAttacksHandler attacks_receiver;
 		ReceiveInitConfigsHandler configs;
 		ReceiveBuysHandler buys;
+		ConectionFailedHandler conection_failed;
 		SoundHandler sound_handler;
 
 	public:

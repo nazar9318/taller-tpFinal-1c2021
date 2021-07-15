@@ -20,6 +20,7 @@ class ClientCharacter {
 		int angle;
 		int current_clip;
 		int squad;
+		bool dead;
 
 	public:
 		ClientCharacter(const std::string& name);
@@ -31,7 +32,7 @@ class ClientCharacter {
 		Texture& getTexture();
 		double getAngle();
 		void set_team(Team team);
-		void update_position(int pos_x, int pos_y, int angle, char weapon_type);
+		void update_position(int pos_x, int pos_y, int angle, char weapon_type, int life);
 		void setSquad(int squad);
 		int getSquad() const;
 		void render(Camera& camera);

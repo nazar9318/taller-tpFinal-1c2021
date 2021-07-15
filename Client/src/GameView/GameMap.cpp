@@ -79,7 +79,7 @@ void GameMap::update_position(char id, int pos_x, int pos_y, int angle,
     hud.update_values(life, money, ammo, weapon_type, player.has_bomb());
     camera.center(player.getBox(), map_width, map_height);
   } else {
-    characters.at(id).update_position(pos_x, pos_y, angle, weapon_type);
+    characters.at(id).update_position(pos_x, pos_y, angle, weapon_type, life);
   }
 }
 

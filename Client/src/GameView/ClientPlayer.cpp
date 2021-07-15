@@ -5,7 +5,7 @@
 #define PI 3.14159265
 
 ClientPlayer::ClientPlayer(char& id, std::string& name):
-id(id), name(name), current_clip(0), bomb_owner(false), squad(0) {
+id(id), name(name), current_clip(0), bomb_owner(false), squad(0), dead(false) {
 	pos = {0};
 	for (int i = 0; i < LIMIT_POSES; i++) { clip[i] = {0}; }
 	for (int i = 0; i < LIMIT_POSES; i++) {
@@ -21,7 +21,7 @@ id(id), name(name), current_clip(0), bomb_owner(false), squad(0) {
 }
 
 void ClientPlayer::createStencil(Renderer& renderer, double angle, int alpha){
-	Stencil::buildStencil(renderer, stencil, angle, alpha);
+	// Stencil::buildStencil(renderer, stencil, angle, alpha);
 }
 
 void ClientPlayer::set_team(Team team) {
@@ -63,6 +63,12 @@ void ClientPlayer::update_position(int pos_x, int pos_y, int angle,
 	z = pow (z, -1);
 	this->angle = (int)((std::arg(z) + PI/2)* 180/PI);
 	this->life = life;
+	if(life <= 0){
+		dead = true;
+	} else {
+		dead = false;
+	}
+
 	this->money = money;
 	switch (weapon_type) {
 		case PositionType::KNIFE : {
@@ -95,6 +101,9 @@ void ClientPlayer::update_position(int pos_x, int pos_y, int angle,
 }
 
 void ClientPlayer::render(Camera& camera) {
+	if(dead){
+		return; //ESTA MUERTO, NO SE RENDERIZA
+	}
 	/*Renderizo el player*/
 	SDL_Rect renderQuad = { pos.x, pos.y, PLAYER_WIDTH, PLAYER_HEIGHT};
 	camera.renderAddingOffset(texture->getTexture(), renderQuad, &clip[current_clip], angle);
@@ -103,8 +112,8 @@ void ClientPlayer::render(Camera& camera) {
 	camera.render(texture_weapon->getTexture(), renderQuad, NULL, angle);
 
 	/*Renderizo el stencil*/
-	renderQuad = { pos.x + PLAYER_WIDTH/2 - 600, pos.y + PLAYER_HEIGHT/2 - 600, 1200, 1200};
-	camera.renderAddingOffset(stencil.getTexture(), renderQuad, NULL, angle-90);
+	// renderQuad = { pos.x + PLAYER_WIDTH/2 - 600, pos.y + PLAYER_HEIGHT/2 - 600, 1200, 1200};
+	// camera.renderAddingOffset(stencil.getTexture(), renderQuad, NULL, angle-90);
 
 }
 

@@ -12,7 +12,7 @@ Character::Character(Team team, b2World* world,
 		 std::vector<Position*> available_positions)
 		: life_points(CF::character_life_points),
 		 money(CF::character_money), team(team),
-		 number_weapons(2), angle(0), blocked(false), 
+		 number_weapons(2), angle(0), blocked(false),
 		 round_kills(0), total_kills(0), last_pos(0.0, 0.0) {
 	std::unique_ptr<Weapon> knife(new WeaponWhite());
 	std::unique_ptr<Weapon> pistol(new WeaponPistol());
@@ -52,7 +52,7 @@ void Character::add_body(b2World* world,
 	fixture_def.shape = &circle_shape;
 	fixture_def.density = 1;
 	character_body->CreateFixture(&fixture_def);
-	
+
 	move_state = Direction::STOP_MOVING;
 }
 
@@ -133,7 +133,7 @@ b2Fixture* Character::GetFixtureList() {
 
 
 void Character::start_attacking() {
-	if (!blocked) 
+	if (!blocked)
 		weapons[current_weapon]->activate();
 	syslog(LOG_INFO, "[%s:%i]: START ATTACKING ", __FILE__, __LINE__);
 
@@ -267,7 +267,7 @@ int Character::get_optative_weapon_bullets() {
 	if (number_weapons == 2) {
 		throw Exception("Tiene solo 2 weapons, no una optativa");
 	}
-	return weapons[2]->get_ammo(); 
+	return weapons[2]->get_ammo();
 }
 
 bool Character::buy(char type_ammo) {
@@ -278,7 +278,7 @@ bool Character::buy(char type_ammo) {
 			money -= price;
 			weapons[1]->add_ammo();
 			return true;
-		}	
+		}
 	} else if (type_ammo == (char)PositionType::PRIMARY_AMMO &&
 											 number_weapons == 3) {
 		price = weapons[2]->get_ammo_price();
@@ -287,10 +287,16 @@ bool Character::buy(char type_ammo) {
 			weapons[2]->add_ammo();
 			return true;
 		}
-	} 
+	}
 	return false;
+}
+
+int Character::get_optative_weapon_bullets_price(){
+	if (number_weapons == 2) {
+		throw Exception("Tiene solo 2 weapons, no una optativa");
+	}
+	return weapons[2]->get_ammo_price();
 }
 
 Character::~Character() {
 }
-

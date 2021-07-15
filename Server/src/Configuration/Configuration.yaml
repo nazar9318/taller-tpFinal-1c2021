@@ -1,7 +1,7 @@
 ---
 max_distance_grab: 64
 
-time_preparation: 5.0
+time_preparation: 15.0
 time_finish: 20.0
 time_between: 2.0
 number_rounds: 2
@@ -69,5 +69,5 @@ m3_max_distance: 50.0
 awp_max_distance: 768.0
 knife_max_distance: 20.0
 
-awp_retard_time: 1
+awp_retard_time: 1.0
 m3_angle_covered: 60

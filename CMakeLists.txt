@@ -91,6 +91,8 @@ include_directories(${PROJECT_SOURCE_DIR}/Client/src/ServerEventHandlers)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/ServerEventHandlers/Playing)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/ServerEventHandlers/Initial)
 include_directories(${PROJECT_SOURCE_DIR}/Client/src/ServerEventHandlers/Final)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/ServerEventHandlers/Error)
+include_directories(${PROJECT_SOURCE_DIR}/Client/src/ClientConfiguration)
 add_subdirectory("Client/src")
 
 

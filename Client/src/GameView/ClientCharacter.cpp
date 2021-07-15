@@ -7,7 +7,7 @@
 #define PLAYER_HEIGHT 32
 
 ClientCharacter::ClientCharacter(const std::string& _name)
-: name(_name), current_clip(0), squad(0) {
+: name(_name), current_clip(0), squad(0), dead(false) {
 	pos = {0};
 	for (int i = 0; i < LIMIT_POSES; i++) { clip[i] = {0}; }
 	for (int i = 0; i < LIMIT_POSES; i++) {
@@ -43,12 +43,19 @@ Texture& ClientCharacter::getTexture() { return *texture; }
 
 double ClientCharacter::getAngle() { return angle; }
 
-void ClientCharacter::update_position(int pos_x, int pos_y, int angle, char weapon_type) {
+void ClientCharacter::update_position(int pos_x, int pos_y, int angle, char weapon_type, int life) {
 	pos.x = pos_x - PLAYER_WIDTH/2;
 	pos.y = pos_y - PLAYER_HEIGHT/2;
 	std::complex<double>  z = std::polar (1.0, angle*PI/180);
 	z = pow (z, -1);
 	this->angle = (int) ((std::arg(z) + PI/2)* 180/PI);
+
+	if(life <= 0) {
+		dead = true;
+	} else {
+		dead = false;
+	}
+
 	switch (weapon_type) {
 		case PositionType::KNIFE : {
 			this->current_clip = 0;
@@ -80,8 +87,10 @@ void ClientCharacter::update_position(int pos_x, int pos_y, int angle, char weap
 }
 
 void ClientCharacter::render(Camera& camera){
-	SDL_Rect renderQuad = { pos.x, pos.y, PLAYER_WIDTH, PLAYER_HEIGHT};
-	camera.renderAddingOffset(texture->getTexture(), renderQuad, &clip[current_clip], angle);
+	if(!dead){
+		SDL_Rect renderQuad = { pos.x, pos.y, PLAYER_WIDTH, PLAYER_HEIGHT};
+		camera.renderAddingOffset(texture->getTexture(), renderQuad, &clip[current_clip], angle);
+	}
 }
 
 SDL_Rect& ClientCharacter::getClip() { return clip[current_clip]; }

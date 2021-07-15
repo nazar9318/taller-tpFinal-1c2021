@@ -17,7 +17,10 @@ InitialPhase::InitialPhase(Renderer& renderer, int screen_width, int screen_heig
   screen_width(screen_width),
   screen_height(screen_height),
   font(NULL),
-  client_event(client){}
+  client_event(client),
+  number_of_weapons(2),
+  ticks_rendered(0),
+  successful_buy(true){}
 
 void InitialPhase::loadMedia(){
 
@@ -91,8 +94,12 @@ void InitialPhase::handleEvents(SDL_Event& event, SDL_Point& mousePosition){
 
   for (auto it = buttons.begin(); it != buttons.end(); ++it) {
     if(inside(mousePosition, it->second.render_box)){
-      it->second.mouse_over = true;
-      handleButton(event, (PositionType)it->first);
+      if(number_of_weapons == 2 && it->first == PositionType::SECONDARY_AMMO){
+
+      } else {
+        it->second.mouse_over = true;
+        handleButton(event, (PositionType)it->first);
+      }
     } else {
       it->second.mouse_over = false;
     }
@@ -122,13 +129,54 @@ bool InitialPhase::run(){
 
 void InitialPhase::addPrice(int price, PositionType weapon){
   std::string price_str = std::to_string(price);
+  price_str = "$" + price_str;
 
   SDL_Color white = {255, 255, 255};
   buttons[weapon].description.loadFromRenderedText(renderer, font, price_str, white, SOLID_TEXT);
 }
 
-void InitialPhase::render() {
+void InitialPhase::updateMoney(int money){
+  std::string money_str = std::to_string(money);
+  money_str = "$" + money_str;
+  SDL_Color white = {255, 255, 255};
+  actual_money.loadFromRenderedText(renderer, font, money_str, white, SOLID_TEXT);
+}
 
+void InitialPhase::handleError(){
+  successful_buy = false;
+
+  SDL_Color white = {255, 255, 255};
+  error_msg.loadFromRenderedText(renderer, font, "Aca va el error", white, SOLID_TEXT);
+}
+
+void InitialPhase::updateValues(int money, bool successful, int number_of_weapons, int price_secconadary_ammo){
+  updateMoney(money);
+  if(!successful){
+    handleError();
+  }
+  this->number_of_weapons = number_of_weapons;
+  addPrice(price_secconadary_ammo, PositionType::SECONDARY_AMMO);
+}
+
+void InitialPhase::renderErrorMessage(){
+  if(ticks_rendered >= 30){
+    ticks_rendered = 0;
+    successful_buy = true;
+    return;
+  }
+
+  /*renderizo el error 545454*/
+  SDL_Rect quad = {screen_width/2 - BUTTON_WIDTH/2, screen_height/2 - BUTTON_HEIGHT/2, BUTTON_WIDTH, BUTTON_HEIGHT};
+  renderer.render(button_over.getTexture(), NULL, &quad);
+
+  SDL_Rect error_quad = {quad.x + BUTTON_WIDTH/2 - error_msg.get_w()/2,
+                        quad.y + NAME_Y_OFFSET,
+                        error_msg.get_w(), error_msg.get_h()};
+  renderer.render(error_msg.getTexture(), NULL, &error_quad);
+  ticks_rendered++;
+}
+
+void InitialPhase::renderBuysWindow(){
   SDL_Rect name_quad = {0};
   SDL_Rect price_quad = {0};
   int y = 0;
@@ -154,10 +202,26 @@ void InitialPhase::render() {
     name_quad = {it->second.render_box.x + NAME_X_OFFSET, it->second.render_box.y + NAME_Y_OFFSET, it->second.text.get_w(), it->second.text.get_h()};
     renderer.render(it->second.text.getTexture(), NULL, &name_quad);
 
-    price_quad = {it->second.render_box.x + BUTTON_WIDTH - NAME_X_OFFSET - it->second.description.get_w(), it->second.render_box.y + NAME_Y_OFFSET,
-                  it->second.description.get_w(), it->second.description.get_h()};
+    if(it->first == PositionType::SECONDARY_AMMO && number_of_weapons == 2){
 
-    renderer.render(it->second.description.getTexture(), NULL, &price_quad);
+    } else {
+      price_quad = {it->second.render_box.x + BUTTON_WIDTH - NAME_X_OFFSET - it->second.description.get_w(), it->second.render_box.y + NAME_Y_OFFSET,
+        it->second.description.get_w(), it->second.description.get_h()};
+      renderer.render(it->second.description.getTexture(), NULL, &price_quad);
+    }
+    }
+
+    SDL_Rect money_quad = {quad.x + BACKGROUND_WIDTH/2 - actual_money.get_w()/2, quad.y + BACKGROUND_HEIGHT - 50,
+                           actual_money.get_w(), actual_money.get_h()};
+    renderer.render(actual_money.getTexture(), NULL, &money_quad);
+}
+
+
+void InitialPhase::render() {
+  if(successful_buy){
+    renderBuysWindow();
+  }else{
+    renderErrorMessage();
   }
 }
 

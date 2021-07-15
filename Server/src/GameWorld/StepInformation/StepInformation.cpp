@@ -142,28 +142,12 @@ std::vector<char> StepInformation::get_stats() {
 		stats.push_back(*((char*)(&kills_round) + 1));
 		stats.push_back(*((char*)(&kills_round) + 2));
 		stats.push_back(*((char*)(&kills_round) + 3));
-		
+
 		stats.push_back(*((char*)(&kills_total)));
 		stats.push_back(*((char*)(&kills_total) + 1));
 		stats.push_back(*((char*)(&kills_total) + 2));
 		stats.push_back(*((char*)(&kills_total) + 3));
 	}
-/*
-	for (auto it = characters.begin(); it != characters.end(); ++it) {
-		stats.push_back(it->first);
-		int kills_round = it->second.get_round_kills();
-		int kills_total = it->second.get_total_kills();
-		
-		stats.push_back(*((char*)(&kills_round)));
-		stats.push_back(*((char*)(&kills_round) + 1));
-		stats.push_back(*((char*)(&kills_round) + 2));
-		stats.push_back(*((char*)(&kills_round) + 3));
-		
-		stats.push_back(*((char*)(&kills_total)));
-		stats.push_back(*((char*)(&kills_total) + 1));
-		stats.push_back(*((char*)(&kills_total) + 2));
-		stats.push_back(*((char*)(&kills_total) + 3));
-	}*/
 	return stats;
 }
 
@@ -176,16 +160,16 @@ std::vector<char> StepInformation::get_stats() {
 
 void StepInformation::add_buy(char id,
 				 ClientTypeEvent bullets_or_weapon, bool successful) {
-	
+
 	syslog(LOG_INFO, "[%s:%i]: Por agregar compra de %d "
 					 , __FILE__, __LINE__, (int)id);
 
 	buys.push_back(id);
 	buys.push_back((char)bullets_or_weapon);
 	buys.push_back((char)successful);
-	
+
 	Character& character = characters.at(id);
-	
+
 	int money = character.get_money();
 	buys.push_back(*((char*)(&money)));
 	buys.push_back(*((char*)(&money) + 1));
@@ -194,7 +178,7 @@ void StepInformation::add_buy(char id,
 
 	char number_of_weapons = character.get_number_weapons();
 	buys.push_back(number_of_weapons);
-	
+
 	int glock_bullets = character.get_glock_bullets();
 	buys.push_back(*((char*)(&glock_bullets)));
 	buys.push_back(*((char*)(&glock_bullets) + 1));
@@ -208,7 +192,13 @@ void StepInformation::add_buy(char id,
 		buys.push_back(*((char*)(&bullets) + 1));
 		buys.push_back(*((char*)(&bullets) + 2));
 		buys.push_back(*((char*)(&bullets) + 3));
-	}	
+
+		int bullets_price = character.get_optative_weapon_bullets_price();
+		buys.push_back(*((char*)(&bullets_price)));
+		buys.push_back(*((char*)(&bullets_price) + 1));
+		buys.push_back(*((char*)(&bullets_price) + 2));
+		buys.push_back(*((char*)(&bullets_price) + 3));
+	}
 }
 
 bool StepInformation::any_buys() {
@@ -222,34 +212,6 @@ std::vector<char> StepInformation::get_buys() {
 	std::vector<char> buys_send(std::move(buys));
 	buys.clear();
 	return buys_send;
-	/*
-	for (auto it = characters.begin(); it != characters.end(); ++it) {
-		buys.push_back(it->first);
-
-		int money = it->second.get_money();
-		buys.push_back(*((char*)(&money)));
-		buys.push_back(*((char*)(&money) + 1));
-		buys.push_back(*((char*)(&money) + 2));
-		buys.push_back(*((char*)(&money) + 3));
-
-		char number_of_weapons = it->second.get_number_weapons();
-		buys.push_back(number_of_weapons);
-		int glock_bullets = it->second.get_glock_bullets();
-		buys.push_back(*((char*)(&glock_bullets)));
-		buys.push_back(*((char*)(&glock_bullets) + 1));
-		buys.push_back(*((char*)(&glock_bullets) + 2));
-		buys.push_back(*((char*)(&glock_bullets) + 3));
-
-		if (number_of_weapons == 3){
-			buys.push_back(it->second.get_optative_weapon_type());
-			int bullets = it->second.get_optative_weapon_bullets();
-			buys.push_back(*((char*)(&bullets)));
-			buys.push_back(*((char*)(&bullets) + 1));
-			buys.push_back(*((char*)(&bullets) + 2));
-			buys.push_back(*((char*)(&bullets) + 3));
-		}
-	}
-	return buys;*/
 }
 
 

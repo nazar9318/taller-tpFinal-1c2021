@@ -11,8 +11,7 @@
 
 class SendStatsEvent: public Event {
 	public:
-		// FALTA IMPLEMENTAR. 
-		SendStatsEvent(StepInformation& step);
+		SendStatsEvent(StepInformation& step, bool finished);
 		~SendStatsEvent();
 	private:
 		SendStatsEvent(const SendStatsEvent &other) = delete;

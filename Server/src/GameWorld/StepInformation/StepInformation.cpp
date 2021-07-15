@@ -123,8 +123,32 @@ std::vector<char> StepInformation::get_players_info() {
 
 std::vector<char> StepInformation::get_stats() {
 	std::vector<char> stats;
-	
-	// puedo hacer un std map y agregar cosas con indice en kills y nombre en id. 
+	// tiene ((kills_round, id), kills_total)
+	std::map<std::tuple<int, char>, int> ordered_by_round_kills;
+	for (auto it = characters.begin(); it != characters.end(); ++it) {
+		std::tuple<int, char> key(
+				std::make_tuple(it->second.get_round_kills(), it->first));
+		int value = it->second.get_total_kills();
+		ordered_by_round_kills.insert({key, value});
+	}
+
+	for (auto it = ordered_by_round_kills.begin();
+								 it != ordered_by_round_kills.end(); ++it) {
+		stats.push_back(std::get<1>(it->first));
+		int kills_round = std::get<0>(it->first);
+		int kills_total = it->second;
+
+		stats.push_back(*((char*)(&kills_round)));
+		stats.push_back(*((char*)(&kills_round) + 1));
+		stats.push_back(*((char*)(&kills_round) + 2));
+		stats.push_back(*((char*)(&kills_round) + 3));
+		
+		stats.push_back(*((char*)(&kills_total)));
+		stats.push_back(*((char*)(&kills_total) + 1));
+		stats.push_back(*((char*)(&kills_total) + 2));
+		stats.push_back(*((char*)(&kills_total) + 3));
+	}
+/*
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		stats.push_back(it->first);
 		int kills_round = it->second.get_round_kills();
@@ -139,7 +163,7 @@ std::vector<char> StepInformation::get_stats() {
 		stats.push_back(*((char*)(&kills_total) + 1));
 		stats.push_back(*((char*)(&kills_total) + 2));
 		stats.push_back(*((char*)(&kills_total) + 3));
-	}
+	}*/
 	return stats;
 }
 

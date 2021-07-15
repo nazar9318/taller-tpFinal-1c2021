@@ -7,7 +7,8 @@ void ReceiveSquadsHandler::handle(Event& event, GameMap& map) {
 	for (auto it = msg.begin() + 1; it != msg.end(); ++it) {
 		/*
 		char id = *it;
-		char squad = *(it + 1); // puede ser 1 o 2.
+		int squad = (int)*(it + 1); // puede ser 1 o 2.
+		map.add_squad(id, squad);
 		*/
 	}
 }

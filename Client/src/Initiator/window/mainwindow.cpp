@@ -47,8 +47,6 @@ MainWindow::MainWindow(Socket& skt, bool &started,
     ui->lineEdit->setPlaceholderText("Ingrese su nombre");
 }
 
-void MainWindow::closeEvent(QCloseEvent*) {}
-
 // POST: Boton de la primera pantalla mostrada.
 //       Se pide un nombre de usuario.
 void MainWindow::on_OK_clicked() {
@@ -62,10 +60,14 @@ void MainWindow::on_OK_clicked() {
 		SendUserNameEvent user_event(user_name);
 		protocol.send_event(socket, user_event.get_msg());
 		ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);		
-	} catch (ExceptionSocketClosed& e) {
-		// manejar. 
-	} catch (...) {
-		// manejar. 
+	} catch(ExceptionSocketClosed& e) {
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
+	} catch(...) {
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
 }
 
@@ -147,27 +149,41 @@ void MainWindow::on_createButton_clicked() {
 			return;
 		}
 		show_maps(maps_received);
-		ui->stackedWidget->setCurrentIndex(MAPS_FOR_CREATE_PAGE);		
+		ui->stackedWidget->setCurrentIndex(MAPS_FOR_CREATE_PAGE);
 	} catch(ExceptionSocketClosed& e) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
 	} catch(...) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
 }
 
 
 void MainWindow::show_maps(Event& maps_received) {
-	std::vector<char> msg = maps_received.get_msg();
-	unsigned i = 1;
-	QStringList maps;
-	while (i < maps_received.get_size()) {
-		std::string map_name(&msg[i]);
-		QString str = QString::fromUtf8(map_name.c_str());
-		maps << str;
-		i += (unsigned)map_name.length() + 1;
+	try {
+		std::vector<char> msg = maps_received.get_msg();
+		unsigned i = 1;
+		QStringList maps;
+		while (i < maps_received.get_size()) {
+			std::string map_name(&msg[i]);
+			QString str = QString::fromUtf8(map_name.c_str());
+			maps << str;
+			i += (unsigned)map_name.length() + 1;
+		}
+		MapsWidget* maps_buttons = new MapsWidget(maps, this);
+		ui->mapList->addWidget(maps_buttons);
+	} catch(ExceptionSocketClosed& e) {
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
+	} catch(...) {
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
-	MapsWidget* maps_buttons = new MapsWidget(maps, this);
-	ui->mapList->addWidget(maps_buttons);
 }
 
 
@@ -201,10 +217,14 @@ void MainWindow::createMatch(const QString& map_name) {
 		} else {
 			show_error("Error al intentar crear la partida", is_successful);
 		}
-    } catch(ExceptionSocketClosed& e) {
-		// manejar. 
+	} catch(ExceptionSocketClosed& e) {
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
 	} catch(...) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
 }
 
@@ -247,9 +267,13 @@ void MainWindow::update_players() {
 			}
 	    }
 	} catch(ExceptionSocketClosed& e) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
 	} catch(...) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
 }
 
@@ -262,9 +286,13 @@ void MainWindow::on_pushButton_clicked() {
 		syslog(LOG_CRIT, "[%s:%i]: Creador inicia la partida, por enviar evento.", __FILE__, __LINE__);
 		protocol.send_event(socket, starter.get_msg());
 	} catch(ExceptionSocketClosed& e) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
 	} catch(...) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
 }
 
@@ -283,9 +311,13 @@ void MainWindow::on_joinButton_clicked() {
 		matches_timer->start(1000);
 		ui->stackedWidget->setCurrentIndex(MATCHES_FOR_JOIN_PAGE);
 	} catch(ExceptionSocketClosed& e) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
 	} catch(...) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
 }
 
@@ -303,36 +335,59 @@ void MainWindow::update_matches() {
 		clean_matches();
 		show_matches(matches_received);
 	} catch(ExceptionSocketClosed& e) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
 	} catch(...) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
 }
 
 void MainWindow::show_matches(Event& matches_received) {
-	std::vector<char> msg = matches_received.get_msg();
-	unsigned i = 1;
-	QStringList matches;
-	while (i < matches_received.get_size()) {
-		std::string match_name(&msg[i]);
-		syslog(LOG_INFO, "[%s:%i]: Se lee de show matches el match %s"
-			, __FILE__, __LINE__, match_name.c_str());
-		QString str = QString::fromUtf8(match_name.c_str());
-		matches << str;
-		i += (unsigned)match_name.length() + 1;
+	try {
+		std::vector<char> msg = matches_received.get_msg();
+		unsigned i = 1;
+		QStringList matches;
+		while (i < matches_received.get_size()) {
+			std::string match_name(&msg[i]);
+			syslog(LOG_INFO, "[%s:%i]: Se lee de show matches el match %s"
+				, __FILE__, __LINE__, match_name.c_str());
+			QString str = QString::fromUtf8(match_name.c_str());
+			matches << str;
+			i += (unsigned)match_name.length() + 1;
+		}
+		MatchesWidget* matches_buttons = new MatchesWidget(matches, this);
+		ui->matchsList->addWidget(matches_buttons);	
+	} catch(ExceptionSocketClosed& e) {
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
+	} catch(...) {
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
-	MatchesWidget* matches_buttons = new MatchesWidget(matches, this);
-	ui->matchsList->addWidget(matches_buttons);
 }
 
-
 void MainWindow::clean_matches() {
-	while (ui->matchsList->count()) {
-		QWidget* widget = ui->matchsList->itemAt(0)->widget();
-		if (widget) {
-			ui->matchsList->removeWidget(widget);
-			delete widget;
+	try {
+		while (ui->matchsList->count()) {
+			QWidget* widget = ui->matchsList->itemAt(0)->widget();
+			if (widget) {
+				ui->matchsList->removeWidget(widget);
+				delete widget;
+			}
 		}
+	} catch(ExceptionSocketClosed& e) {
+		// manejar. 
+
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
+	} catch(...) {
+		// manejar. 
 	}
 }
 
@@ -359,43 +414,53 @@ void MainWindow::joinMatch(const QString &text) {
 		receiver.start();
 		players_joined_timer->start();
 	} catch(ExceptionSocketClosed& e) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
 	} catch(...) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
-
 }
 
 void MainWindow::update_players_list(Event& players_list) {
-	syslog(LOG_INFO, "[%s:%i]: Por cargar lista de jugadores"
-		, __FILE__, __LINE__);
-	ui->players_join->clear();
-	ui->players_create->clear();
-	std::vector<char> msg = players_list.get_msg();
-	unsigned i = 1;
-	// se que el mensaje es del tipo id_1Nombre_1id_2Nombre_2...
-    std::map<char, std::string> new_players;
-	while (i < players_list.get_size()) {
-		char player_id = msg[i];
-		i++;
-		std::string player_name(&msg[i]);
-		syslog(LOG_INFO, "[%s:%i]: Por cargar jugador con id %d y nombre %s"
-					, __FILE__, __LINE__, player_id, player_name.c_str());
-		if (players.find(player_id) != players.end()) {
-			new_players[player_id] = std::move(players[player_id]);
-		} else {
-			std::string player(player_name);
-			new_players[player_id] = std::move(player);
-			//new_players.emplace(std::make_pair(player_id, player));
+	try {
+		syslog(LOG_INFO, "[%s:%i]: Por cargar lista de jugadores"
+			, __FILE__, __LINE__);
+		ui->players_join->clear();
+		ui->players_create->clear();
+		std::vector<char> msg = players_list.get_msg();
+		unsigned i = 1;
+		// se que el mensaje es del tipo id_1Nombre_1id_2Nombre_2...
+		std::map<char, std::string> new_players;
+		while (i < players_list.get_size()) {
+			char player_id = msg[i];
+			i++;
+			std::string player_name(&msg[i]);
+			syslog(LOG_INFO, "[%s:%i]: Por cargar jugador con id %d y nombre %s"
+						, __FILE__, __LINE__, player_id, player_name.c_str());
+			if (players.find(player_id) != players.end()) {
+				new_players[player_id] = std::move(players[player_id]);
+			} else {
+				std::string player(player_name);
+				new_players[player_id] = std::move(player);
+				//new_players.emplace(std::make_pair(player_id, player));
+			}
+			ui->players_join->addItem(QString::fromStdString(player_name));
+			ui->players_create->addItem(QString::fromStdString(player_name));
+			i += (unsigned)player_name.length() + 1;
 		}
-		ui->players_join->addItem(QString::fromStdString(player_name));
-		ui->players_create->addItem(QString::fromStdString(player_name));
-		i += (unsigned)player_name.length() + 1;
+		players.swap(new_players);
+	} catch(ExceptionSocketClosed& e) {
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
+	} catch(...) {
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
-	players.swap(new_players);
 }
 
-
-MainWindow::~MainWindow() {
-	delete ui;
-}
+MainWindow::~MainWindow() { delete ui; }

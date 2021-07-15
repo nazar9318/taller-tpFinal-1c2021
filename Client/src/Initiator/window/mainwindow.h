@@ -87,7 +87,6 @@ private:
     void show_maps(Event& maps_received);
     void clean_matches();
     void show_matches(Event& matches_received);
-    void closeEvent(QCloseEvent*) override;
 };
 
 #endif

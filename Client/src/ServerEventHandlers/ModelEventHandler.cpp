@@ -54,6 +54,10 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map,
       buys.handle(fase, event, map);
       break;
     }
+    case ModelTypeEvent::CONECTION_FAILED: {
+      conection_failed.handle(event, map);
+      break;
+    }
     default : break;
   }
 }

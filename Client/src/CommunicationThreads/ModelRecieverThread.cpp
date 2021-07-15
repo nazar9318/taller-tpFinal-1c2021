@@ -13,11 +13,13 @@ void ModelRecieverThread::run() {
 	try {
 		while (allowed_to_run) {
 			Event event = protocol.recv_event(socket_recv);
-			// syslog(LOG_ERR, "[%s:%i]: Recibo event: %d"
-			// 			, __FILE__, __LINE__,event.get_type());
-
 			events.push(event);
 		}
+	} catch(const ExceptionSocketClosed& e) {
+		std::vector<char> error;
+		error.push_back(ModelTypeEvent::CONECTION_FAILED);
+		Event error_event(error, 1);
+		events.push(error_event);
 	} catch(const std::exception& e) {
 		syslog(LOG_ERR, "[%s:%i]: Error: %s", __FILE__, __LINE__, e.what());
 	} catch (...) {

@@ -47,8 +47,7 @@ void Game::execute() {
 			if (t_delta < STEP_TIME)
 				std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
 		}
-		std::cout << "lalala" << std::endl;
-		//std::this_thread::sleep_for(duration<double>(15));
+		std::this_thread::sleep_for(duration<double>(15));
 	} catch (std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: Exception: %s", __FILE__, __LINE__,  e.what());
 	}
@@ -229,9 +228,6 @@ void Game::process_events() {
 		try {
 			Event event = model_events.pop();
 			handler.handle(fase, event, map, bomb, attack_effects, initial_phase);
-			if (fase == FaseType::ENDGAME) {
-				std::cout << "oucnhvoun" << std::endl;
-			}
 			i++;
 		} catch(ExceptionEmptyQueue& e) {
 			queue_not_empty = false;

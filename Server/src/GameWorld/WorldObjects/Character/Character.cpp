@@ -71,12 +71,26 @@ void Character::set_move_state(Direction dir) {
 			case Direction::DOWN:
 				y_direction = -1;
 				break;
-			case Direction::STOP_MOVING_X:
-				x_direction = 0;
+			case Direction::STOP_MOVING_LEFT: {
+				if (x_direction == -1)
+					x_direction = 0;
 				break;
-			case Direction::STOP_MOVING_Y:
-				y_direction = 0;
+			}
+			case Direction::STOP_MOVING_RIGHT:{
+				if (x_direction == 1)
+					x_direction = 0;
 				break;
+			}
+			case Direction::STOP_MOVING_UP:{
+				if (y_direction == 1)
+					y_direction = 0;
+				break;
+			}
+			case Direction::STOP_MOVING_DOWN:{
+				if (y_direction == -1)
+					y_direction = 0;
+				break;
+			}		
 		}
 	} else {
 		x_direction = 0;

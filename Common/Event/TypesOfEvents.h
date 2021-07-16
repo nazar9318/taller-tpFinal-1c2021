@@ -67,8 +67,10 @@ enum Direction: char {
 	LEFT,
 	UP,
 	DOWN,
-	STOP_MOVING_X, 
-	STOP_MOVING_Y
+	STOP_MOVING_LEFT, 
+	STOP_MOVING_RIGHT, 
+	STOP_MOVING_UP, 
+	STOP_MOVING_DOWN
 };
 
 enum SoundEvent: char {

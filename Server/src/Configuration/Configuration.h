@@ -28,11 +28,6 @@ class Configuration {
 		static int character_radius;
 		
 		/**************************************/
-
-		static int fullscreen_x;
-		static int fullscreen_y;
-		static int widowed_x;
-		static int widowed_y;
 		
 		static int stencil_angle;
 		static int stencil_radio;

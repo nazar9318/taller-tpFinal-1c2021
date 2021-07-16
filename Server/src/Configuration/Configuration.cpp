@@ -18,12 +18,6 @@ int CF::character_radius = CF::common_yaml_file["character_radius"].as<int>();
 /*****************************************************************/
 
 
-
-int CF::fullscreen_x = CF::yaml_file["fullscreen_x"].as<int>();
-int CF::fullscreen_y = CF::yaml_file["fullscreen_y"].as<int>();
-int CF::widowed_x = CF::yaml_file["widowed_x"].as<int>();
-int CF::widowed_y = CF::yaml_file["widowed_y"].as<int>();
-
 int CF::TIME_BOMB_EXPLOTE = CF::yaml_file["TIME_BOMB_EXPLOTE"].as<int>();
 int CF::TIME_BOMB_ACTIVATE = CF::yaml_file["TIME_BOMB_ACTIVATE"].as<int>();
 int CF::TIME_BOMB_DEACTIVATE = CF::yaml_file["TIME_BOMB_DEACTIVATE"].as<int>();
@@ -112,13 +106,6 @@ void Configuration::load_configuration(const std::string& file_path) {
 	time_preparation = yaml_file["time_preparation"].as<double>();
 	time_finish = yaml_file["time_finish"].as<double>();
 	time_between = yaml_file["time_between"].as<double>();
-
-
-	fullscreen_x = yaml_file["fullscreen_x"].as<int>();
-	fullscreen_y = yaml_file["fullscreen_y"].as<int>();
-	widowed_x = yaml_file["widowed_x"].as<int>();
-	widowed_y = yaml_file["widowed_y"].as<int>();
-
 
 	number_rounds = yaml_file["number_rounds"].as<int>();
 	players_allowed = yaml_file["players_allowed"].as<int>();

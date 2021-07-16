@@ -2,11 +2,6 @@
 max_distance_grab: 64
 
 
-fullscreen_x: 640
-fullscreen_y: 400
-widowed_x: 320
-widowed_y: 200
-
 time_preparation: 15.0
 time_finish: 20.0
 time_between: 2.0

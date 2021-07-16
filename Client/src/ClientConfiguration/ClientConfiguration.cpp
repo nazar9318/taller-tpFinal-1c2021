@@ -1,9 +1,13 @@
 #include "ClientConfiguration.h"
 
 
+YAML::Node CCF::yaml_file = YAML::LoadFile("../Client/ClientConfiguration/ClientConfiguration.yaml");
+int CCF::widowed_x = CCF::yaml_file["widowed_x"].as<int>();
+int CCF::widowed_y = CCF::yaml_file["widowed_y"].as<int>();
+
 TerroristSkin CCF::terrorist_skin = TerroristSkin::Pheonix; 
 CounterSkin CCF::counter_skin = CounterSkin::SealForce;
-WindowSize CCF::window_size = WindowSize::Windowed;
+bool CCF::is_fullscreen = false;
 bool CCF::sound_on = true;
 
 void ClientConfiguration::activate_sound() {

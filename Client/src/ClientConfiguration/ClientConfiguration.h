@@ -1,6 +1,8 @@
 #ifndef _CLIENT_CONFIGURATION_H
 #define _CLIENT_CONFIGURATION_H 
 
+#include "yaml-cpp/yaml.h"
+
 enum TerroristSkin {
 	Pheonix,
 	L337Krew, 
@@ -15,20 +17,18 @@ enum CounterSkin: char {
 	FrenchGIGN
 };
 
-enum WindowSize: char{
-	FullScreen, 
-	Windowed
-};
-
 class ClientConfiguration;
 typedef ClientConfiguration CCF;
 
 class ClientConfiguration {
 	public:
+		static YAML::Node yaml_file;
 		static TerroristSkin terrorist_skin;
 		static CounterSkin counter_skin;
-		static WindowSize window_size;
+		static bool is_fullscreen;
 		static bool sound_on;
+		static int widowed_x;
+		static int widowed_y;
 
 		static void activate_sound();
 		static void deactivate_sound();

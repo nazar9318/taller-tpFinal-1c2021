@@ -13,7 +13,7 @@ void ReceiveInitConfigsHandler::handle(Event& event, GameMap& map, InitialPhase&
     int init_money = *((int*)&(event_msg[13]));
 
     map.createStencil(stencil_angle, alpha_blending);
-    initial_phase.updateValues(init_money, BuyState::SUCCESSFUL, 2, 0);
+    initial_phase.updateValues(-1, init_money, BuyState::SUCCESSFUL, 2, 0);
 
     std::cout << "stencil_radio: " << stencil_radio <<
             "init_money " << init_money << std::endl;
@@ -32,8 +32,6 @@ void ReceiveInitConfigsHandler::handle(Event& event, GameMap& map, InitialPhase&
     	it += 5;
       initial_phase.addPrice(price, type_weapon);
     }
-
-    // initial_phase.addPrice(50, PositionType::SECONDARY_AMMO);
 }
 
 ReceiveInitConfigsHandler::~ReceiveInitConfigsHandler() {

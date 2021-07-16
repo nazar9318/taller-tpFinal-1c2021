@@ -12,7 +12,7 @@
 #define BACKGROUND_HEIGHT 450
 
 InitialPhase::InitialPhase(Renderer& renderer, int screen_width, int screen_height,
-                            ProtectedQueue<std::unique_ptr<Event>>& client):
+                            ProtectedQueue<std::unique_ptr<Event>>& client, char player_id):
   renderer(renderer),
   screen_width(screen_width),
   screen_height(screen_height),
@@ -20,7 +20,8 @@ InitialPhase::InitialPhase(Renderer& renderer, int screen_width, int screen_heig
   client_event(client),
   number_of_weapons(2),
   ticks_rendered(0),
-  successful_buy(true){}
+  successful_buy(true),
+  player_id(player_id){}
 
 void InitialPhase::loadMedia(){
 
@@ -149,13 +150,15 @@ void InitialPhase::handleError(BuyState buy_state) {
   error_msg.loadFromRenderedText(renderer, font, "Aca va el error", white, SOLID_TEXT);
 }
 
-void InitialPhase::updateValues(int money, BuyState buy_state, int number_of_weapons, int price_secconadary_ammo){
+void InitialPhase::updateValues(char id, int money, BuyState buy_state, int number_of_weapons, int price_secconadary_ammo){
+  if(id == -1 || id == player_id){
   updateMoney(money);
   if(buy_state != BuyState::SUCCESSFUL){
     handleError(buy_state);
   }
   this->number_of_weapons = number_of_weapons;
   addPrice(price_secconadary_ammo, PositionType::SECONDARY_AMMO);
+}
 }
 
 void InitialPhase::renderErrorMessage(){
@@ -206,7 +209,7 @@ void InitialPhase::renderBuysWindow(){
 
     } else {
       price_quad = {it->second.render_box.x + BUTTON_WIDTH - NAME_X_OFFSET - it->second.description.get_w(), it->second.render_box.y + NAME_Y_OFFSET,
-        it->second.description.get_w(), it->second.description.get_h()};
+                    it->second.description.get_w(), it->second.description.get_h()};
       renderer.render(it->second.description.getTexture(), NULL, &price_quad);
     }
     }

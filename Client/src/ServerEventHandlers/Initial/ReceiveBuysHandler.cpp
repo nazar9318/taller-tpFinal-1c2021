@@ -27,13 +27,13 @@ void ReceiveBuysHandler::handle(FaseType& fase, Event& event, GameMap& map, Init
 			PositionType weapon_type = (PositionType)(*it);
 			int bullets = *((int*)&(*(it + 1)));
 			int bullets_price = *((int*)&(*(it + 5)));
-			initial_phase.updateValues(money, buy_state, number_of_weapons, bullets_price);
+			initial_phase.updateValues(id, money, buy_state, number_of_weapons, bullets_price);
 			std::cout << "tercera weapon type :" << (int)weapon_type
 			          << "con bullets: " << bullets << std::endl;
 			it += 9;
 		} else {
 
-			initial_phase.updateValues(money, buy_state, number_of_weapons, NO_SECONDARY_AMMO);
+			initial_phase.updateValues(id, money, buy_state, number_of_weapons, NO_SECONDARY_AMMO);
 		}
 	}
 }

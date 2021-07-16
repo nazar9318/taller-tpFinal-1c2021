@@ -34,13 +34,15 @@ class InitialPhase {
 		bool successful_buy;
 		int ticks_rendered;
 		int number_of_weapons;
+		char player_id;
 
 		TTF_Font* font;
 		int screen_width;
 		int screen_height;
 
 	public:
-    InitialPhase(Renderer& renderer, int screen_width, int screen_height, ProtectedQueue<std::unique_ptr<Event>>& client);
+    InitialPhase(Renderer& renderer, int screen_width, int screen_height,
+			 					ProtectedQueue<std::unique_ptr<Event>>& client, char player_id);
 
 		void loadMedia();
 
@@ -48,7 +50,7 @@ class InitialPhase {
 
 		void addPrice(int price, PositionType weapon);
 
-		void updateValues(int money, BuyState buy_state, int number_of_weapons, int price_secconadary_ammo);
+		void updateValues(char id, int money, BuyState buy_state, int number_of_weapons, int price_secconadary_ammo);
 
 		void render();
 

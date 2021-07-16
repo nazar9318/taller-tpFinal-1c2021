@@ -6,19 +6,19 @@ renderer(renderer), screen_width(screen_width), screen_height(screen_height),
 font(NULL), post_game(false) {}
 
 void FinalPhase::loadMedia() {
-  font = TTF_OpenFont("../Client/Assets/Fonts/japanese.ttf", 40);
+  background_victory.loadFromFile(renderer, "../Client/Assets/FinalPhase/Victory.png");
+  background_defeat.loadFromFile(renderer, "../Client/Assets/FinalPhase/Defeat.png");
+  font = TTF_OpenFont("../Client/Assets/Fonts/japanese.ttf", 50);
   if (!font) {
     throw SDLException("SDLException: failed to load fonts -> FinalPhase - %s\n",TTF_GetError());
   }
 }
 
+void FinalPhase::setRound(int current_round) { this->round = current_round; }
+
 void FinalPhase::addScore(const std::string& name, bool my_team, int round_kills,
-						              int total_kills, int times_killed, int money, bool victory) {
-  if (victory) {
-    background.loadFromFile(renderer, "../Client/Assets/FinalPhase/Victory.png");
-  } else {
-    background.loadFromFile(renderer, "../Client/Assets/FinalPhase/Defeat.png");
-  }
+          int total_kills, int times_killed, int money, bool victory) {
+  this->victory = victory;
   std::stringstream round;
   std::stringstream total;
   std::stringstream deaths;
@@ -33,9 +33,8 @@ void FinalPhase::addScore(const std::string& name, bool my_team, int round_kills
   this->total_kills.push_back(total.str());
   this->deaths.push_back(deaths.str());
   this->money.push_back(money_gained.str());
-  std::string my("ajsvoh");
+  std::string my("");
   if (my_team) {my = " True ";} else {my = " False ";}
-  std::cout << name << my;
 }
 
 /*void FinalPhase::renderSquadScores() {
@@ -99,19 +98,48 @@ void FinalPhase::renderRequested(int x, const std::vector<std::string>& request)
   }
 }
 
-void FinalPhase::renderRound() {
+void FinalPhase::renderBackground() {
   SDL_Rect quad = {
     screen_width/2 - BACKGROUND_WIDTH/2,
     screen_height/2 - BACKGROUND_HEIGHT/2, 
     BACKGROUND_WIDTH,
     BACKGROUND_HEIGHT
   };
-  renderer.render(background.getTexture(), NULL, &quad);
+  if (this->victory) { renderer.render(background_victory.getTexture(), NULL, &quad); }
+  else { renderer.render(background_defeat.getTexture(), NULL, &quad); }
+}
+
+void FinalPhase::renderRounds() {
+  SDL_Color white = {255, 255, 255};
+  SDL_Rect quad = {0};
+  quad.x = screen_width/2 - 100 + 425;
+  quad.y = 548;
+  quad.h = 15;
+  quad.w = 8;
+  std::stringstream round_stream;
+  round_stream << this->round;
+  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, round_stream.str().c_str(), white);
+  SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
+  renderer.render(Message, NULL, &quad);
+  SDL_FreeSurface(surfaceMessage);
+  quad.x += 30;
+  quad.w = 16;
+  std::stringstream total;
+  total << 10;
+  surfaceMessage = TTF_RenderText_Solid(font, total.str().c_str(), white);
+  Message = renderer.createTextureFromSurface(surfaceMessage);
+  renderer.render(Message, NULL, &quad);
+  SDL_FreeSurface(surfaceMessage);
+}
+
+void FinalPhase::renderRound() {
+  renderBackground();
   renderRequested(screen_width/2 - 380, names);
   renderRequested(screen_width/2 - 290, round_kills);
   renderRequested(screen_width/2 - 220, total_kills);
   renderRequested(screen_width/2 - 150, deaths);
   renderRequested(screen_width/2 - 100, money);
+  renderRounds();
 }
 
 void FinalPhase::clean() {
@@ -172,12 +200,12 @@ void FinalPhase::clean() {
   renderRequested(screen_width/2+100, team_scores);
 }*/
 
-void FinalPhase::render() { //post_game ? renderPostGame() : 
-  renderRound(); 
-}
+void FinalPhase::render() { renderRound(); }
 
 void FinalPhase::endGame() { this->post_game = true; }
 
 FinalPhase::~FinalPhase() {
   if (font != NULL) { TTF_CloseFont(font); }
+  background_victory.free();
+  background_defeat.free();
 }

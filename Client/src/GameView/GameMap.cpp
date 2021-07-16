@@ -121,6 +121,9 @@ void GameMap::renderCharacters() {
   }
 }
 
+void GameMap::setRoundInFinalPhase(int current_round) {
+  final_phase.setRound(current_round);
+}
 
 void GameMap::add_stats(char id, int kills_round, int kills_total,
                         int times_killed, int money, int round_winner) {
@@ -134,7 +137,8 @@ void GameMap::add_stats(char id, int kills_round, int kills_total,
     player_team = (characters.at(id).getSquad() == player.getSquad());
   }
   bool victory = (round_winner == player.getSquad());
-  final_phase.addScore(name, player_team, kills_round, kills_total, times_killed, money, victory);
+  final_phase.addScore(name, player_team, kills_round,
+                      kills_total, times_killed, money, victory);
 }
 
 void GameMap::add_squad(char id, int squad) {

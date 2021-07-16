@@ -15,7 +15,8 @@
 class FinalPhase {
 	private:
 		Renderer& renderer;
-		Texture background;
+		Texture background_victory;
+		Texture background_defeat;
 		std::vector<std::string> names;
 		std::vector<bool> my_team;
 		//std::vector<std::string> squad;
@@ -28,12 +29,16 @@ class FinalPhase {
 		int screen_height;
 		bool post_game;
 		bool victory;
+		int round;
 		void renderRequested(int x, const std::vector<std::string>& request);
 
 	public:
     	FinalPhase(Renderer& renderer, int screen_width, int screen_height);
 		void addScore(const std::string& name, bool my_team, int round_kills,
-						int total_kills, int times_killed, int money, bool victory);
+					int total_kills, int times_killed, int money, bool victory);
+		void setRound(int current_round);
+		void renderBackground();
+		void renderRounds();
 		void loadMedia();
 		void render();
 		void clean();

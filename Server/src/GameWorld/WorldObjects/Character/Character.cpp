@@ -13,7 +13,8 @@ Character::Character(Team team, b2World* world,
 		: life_points(CF::character_life_points),
 		 money(CF::character_money), team(team),
 		 number_weapons(2), angle(0), blocked(false),
-		 round_kills(0), total_kills(0), last_pos(0.0, 0.0) {
+		 round_kills(0), total_kills(0), last_pos(0.0, 0.0), 
+		 times_killed(0) {
 	std::unique_ptr<Weapon> knife(new WeaponWhite());
 	std::unique_ptr<Weapon> pistol(new WeaponPistol());
 	weapons.push_back(std::move(knife));
@@ -117,6 +118,7 @@ void Character::take_damage(char points) {
 		if (number_weapons == 3) {
 			weapons[2]->set_pos((int)last_pos.x, (int)last_pos.y);
 		}
+		times_killed++;
 	}
 }
 
@@ -297,6 +299,11 @@ int Character::get_optative_weapon_bullets_price(){
 	}
 	return weapons[2]->get_ammo_price();
 }
+
+int Character::get_times_killed() {
+	return times_killed;
+}
+
 
 Character::~Character() {
 }

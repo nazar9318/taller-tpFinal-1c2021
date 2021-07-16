@@ -154,19 +154,22 @@ std::vector<char> StepInformation::get_players_info() {
 std::vector<char> StepInformation::get_stats() {
 	std::vector<char> stats;
 	// tiene ((kills_round, id), kills_total)
-	std::map<std::tuple<int, char>, int> ordered_by_round_kills;
+	std::set<std::tuple<int, char>> ordered_by_round_kills;
 	for (auto it = characters.begin(); it != characters.end(); ++it) {
 		std::tuple<int, char> key(
 				std::make_tuple(it->second.get_round_kills(), it->first));
-		int value = it->second.get_total_kills();
-		ordered_by_round_kills.insert({key, value});
+		ordered_by_round_kills.insert(key);
 	}
 
 	for (auto it = ordered_by_round_kills.begin();
 								 it != ordered_by_round_kills.end(); ++it) {
-		stats.push_back(std::get<1>(it->first));
-		int kills_round = std::get<0>(it->first);
-		int kills_total = it->second;
+		char id = std::get<1>(*it);
+		Character& character = characters.at(id);
+		stats.push_back(id);
+		int kills_round = std::get<0>(*it);
+		int kills_total = character.get_total_kills();
+		int money = character.get_money();
+		int times_killed = character.get_times_killed();
 
 		stats.push_back(*((char*)(&kills_round)));
 		stats.push_back(*((char*)(&kills_round) + 1));
@@ -177,6 +180,16 @@ std::vector<char> StepInformation::get_stats() {
 		stats.push_back(*((char*)(&kills_total) + 1));
 		stats.push_back(*((char*)(&kills_total) + 2));
 		stats.push_back(*((char*)(&kills_total) + 3));
+
+		stats.push_back(*((char*)(&money)));
+		stats.push_back(*((char*)(&money) + 1));
+		stats.push_back(*((char*)(&money) + 2));
+		stats.push_back(*((char*)(&money) + 3));
+
+		stats.push_back(*((char*)(&times_killed)));
+		stats.push_back(*((char*)(&times_killed) + 1));
+		stats.push_back(*((char*)(&times_killed) + 2));
+		stats.push_back(*((char*)(&times_killed) + 3));
 	}
 	return stats;
 }

@@ -13,6 +13,7 @@ class SquadsManager {
 		std::list<char> ids_squad_two;
 		int squad_one_wins;
 		int squad_two_wins;
+		char last_winner;
 		Team current_squad_one_team;
 	public:
 		SquadsManager(Team current_squad_one_team);
@@ -22,6 +23,7 @@ class SquadsManager {
 		void add_win(BombState bomb);
 		std::vector<char> get_squads();
 		void get_wins(int& squad_one, int& squad_two);
+		char get_last_winner();
 		~SquadsManager();
 };
 

@@ -65,6 +65,7 @@ class GameWorld {
 		std::vector<char> bomb_info();
 		std::vector<char> get_squads();
 		void get_wins(int& squad_one, int& squad_two);
+		char get_last_winner();
 		~GameWorld();
 
 

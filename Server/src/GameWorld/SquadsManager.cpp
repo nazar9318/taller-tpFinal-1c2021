@@ -2,7 +2,8 @@
 
 SquadsManager::SquadsManager(Team team):
 			squad_one_wins(0), squad_two_wins(0),
-			 		current_squad_one_team(team) {
+			 		current_squad_one_team(team), 
+			 		last_winner(1) {
 }
 
 void SquadsManager::add_squad_character(Team team, char id) {
@@ -14,10 +15,13 @@ void SquadsManager::add_squad_character(Team team, char id) {
 
 
 void SquadsManager::add_win(Team team) {
-	if (team == current_squad_one_team) 
+	if (team == current_squad_one_team) {
 		squad_one_wins++;
-	else
+		last_winner = 1;
+	} else {
 		squad_two_wins++;
+		last_winner = 2;
+	}
 }
 
 
@@ -53,6 +57,11 @@ void SquadsManager::get_wins(int& squad_one, int& squad_two) {
 	squad_one = squad_one_wins;
 	squad_two = squad_two_wins;
 }
+
+char SquadsManager::get_last_winner() {
+	return last_winner;
+}
+
 
 
 SquadsManager::~SquadsManager() {

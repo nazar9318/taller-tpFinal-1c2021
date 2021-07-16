@@ -292,6 +292,10 @@ void GameWorld::get_wins(int& squad_one, int& squad_two) {
 	squad_manager.get_wins(squad_one, squad_two);
 }
 
+char GameWorld::get_last_winner() {
+	return squad_manager.get_last_winner();
+}
+
 
 GameWorld::~GameWorld() {
 	delete world;

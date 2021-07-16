@@ -40,6 +40,7 @@ class Character {
 		int round_kills;
 		int total_kills;
 		b2Vec2 last_pos;
+		int times_killed;
 
 	public:
 		Character(Team team, b2World* world,
@@ -116,6 +117,7 @@ class Character {
 		int get_optative_weapon_bullets();
 		int get_optative_weapon_bullets_price(); 
 		BuyState buy(char type_ammo); 
+		int get_times_killed();
 		~Character();
 	private:
 		Character(const Character &other) = delete;

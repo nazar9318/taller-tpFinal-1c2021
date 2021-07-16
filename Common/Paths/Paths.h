@@ -30,6 +30,12 @@
 #define INIT_FASE_OVER_BUTTON_PATH "../Client/Assets/InitialPhase/over_button.png"
 #define INIT_FASE_PRESSED_BUTTON_PATH "../Client/Assets/InitialPhase/pressed_button.png"
 
+
+// FINAL PHASE
+#define FINAL_PHASE_VICTORY_PATH "../Client/Assets/FinalPhase/Victory.png"
+#define FINAL_PHASE_DEFEAT_PATH "../Client/Assets/FinalPhase/Defeat.png"
+
+
 // SOUND HANDLER
 #define SOUND_MENU_WAV_PATH "../Client/Assets/Sounds/menu.wav"
 #define SOUND_WALK_PATH "../Client/Assets/Sounds/pl_dirt1.wav"

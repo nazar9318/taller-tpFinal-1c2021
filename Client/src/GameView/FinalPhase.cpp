@@ -6,9 +6,9 @@ renderer(renderer), screen_width(screen_width), screen_height(screen_height),
 font(NULL), post_game(false) {}
 
 void FinalPhase::loadMedia() {
-  background_victory.loadFromFile(renderer, "../Client/Assets/FinalPhase/Victory.png");
-  background_defeat.loadFromFile(renderer, "../Client/Assets/FinalPhase/Defeat.png");
-  font = TTF_OpenFont("../Client/Assets/Fonts/japanese.ttf", 50);
+  background_victory.loadFromFile(renderer, FINAL_PHASE_VICTORY_PATH);
+  background_defeat.loadFromFile(renderer, FINAL_PHASE_DEFEAT_PATH);
+  font = TTF_OpenFont(JAPANESE_FONT_PATH, 50);
   if (!font) {
     throw SDLException("SDLException: failed to load fonts -> FinalPhase - %s\n",TTF_GetError());
   }

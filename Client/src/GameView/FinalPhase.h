@@ -2,6 +2,7 @@
 #define _FINAL_PHASE_H
 
 #include "Renderer.h"
+#include "Paths.h"
 #include "Texture.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>

@@ -1,7 +1,8 @@
 #include "ReceiveStatsHandler.h"
+#include <iostream>
 
 ReceiveStatsHandler::ReceiveStatsHandler() {}
-#include <iostream>
+
 void ReceiveStatsHandler::handle(FaseType& fase, Event& event, GameMap& map) {	
 	std::vector<char> event_msg = event.get_msg();
 	bool finished = (bool)event_msg[1];
@@ -12,6 +13,7 @@ void ReceiveStatsHandler::handle(FaseType& fase, Event& event, GameMap& map) {
 	int wins_two = *((int*)&(*(it + 6)));
 	int last_round_winner = (int)*(it + 10);
 	map.setRoundInFinalPhase(wins_one + wins_two);
+	map.setWinsToFinalPhase(wins_one, wins_two);
 	it += 11;
 	for (; it != event_msg.end(); it += 17) {
 		char id = *it;
@@ -21,9 +23,6 @@ void ReceiveStatsHandler::handle(FaseType& fase, Event& event, GameMap& map) {
 		int times_killed = *((int*)&(*(it + 13)));
 		map.add_stats(id, kills_round, kills_total, times_killed,
 						money, last_round_winner);
-		//el nuevo método tendría que ser:
-		//map.add_stats(id, muertes_totales, dinero_ganado_en_la_ronda,
-		//									kills_round, kills_total);
 	}
 }
 

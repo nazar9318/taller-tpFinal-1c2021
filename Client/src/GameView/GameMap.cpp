@@ -121,6 +121,10 @@ void GameMap::renderCharacters() {
   }
 }
 
+void GameMap::setWinsToFinalPhase(int wins_one, int wins_two) {
+  final_phase.setSquadsPoints(wins_one, wins_two);
+}
+
 void GameMap::setRoundInFinalPhase(int current_round) {
   final_phase.setRound(current_round);
 }
@@ -144,6 +148,7 @@ void GameMap::add_stats(char id, int kills_round, int kills_total,
 void GameMap::add_squad(char id, int squad) {
   if (id == player.get_id()) {
     player.setSquad(squad);
+    final_phase.setPlayerSquad(squad);
   } else {
     characters.at(id).setSquad(squad);;
   }

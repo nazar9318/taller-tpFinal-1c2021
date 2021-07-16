@@ -28,6 +28,9 @@ class FinalPhase {
 		TTF_Font* font;
 		int screen_width;
 		int screen_height;
+		int wins_one;
+		int wins_two;
+		int my_squad;
 		bool post_game;
 		bool victory;
 		int round;
@@ -37,9 +40,12 @@ class FinalPhase {
     	FinalPhase(Renderer& renderer, int screen_width, int screen_height);
 		void addScore(const std::string& name, bool my_team, int round_kills,
 					int total_kills, int times_killed, int money, bool victory);
+		void setSquadsPoints(int wins_one, int wins_two);
 		void setRound(int current_round);
+		void setPlayerSquad(int squad);
 		void renderBackground();
 		void renderRounds();
+		void renderSquadsPoints();
 		void loadMedia();
 		void render();
 		void clean();

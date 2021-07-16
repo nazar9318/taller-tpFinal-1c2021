@@ -98,6 +98,28 @@ void FinalPhase::renderRequested(int x, const std::vector<std::string>& request)
   }
 }
 
+void FinalPhase::renderSquadsPoints() {
+  SDL_Color white = {255, 255, 255};
+  SDL_Rect quad = {0};
+  quad.x = screen_width/2 - 140;
+  quad.y = 115;
+  quad.h = 40;
+  quad.w = 24;
+  std::stringstream wins_one;
+  wins_one << this->wins_one;
+  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, wins_one.str().c_str(), white);
+  SDL_Texture* Message = renderer.createTextureFromSurface(surfaceMessage);
+  renderer.render(Message, NULL, &quad);
+  SDL_FreeSurface(surfaceMessage);
+  quad.x = screen_width/2 + 300;
+  std::stringstream wins_two;
+  wins_two << this->wins_two;
+  surfaceMessage = TTF_RenderText_Solid(font, wins_two.str().c_str(), white);
+  Message = renderer.createTextureFromSurface(surfaceMessage);
+  renderer.render(Message, NULL, &quad);
+  SDL_FreeSurface(surfaceMessage);
+}
+
 void FinalPhase::renderBackground() {
   SDL_Rect quad = {
     screen_width/2 - BACKGROUND_WIDTH/2,
@@ -107,6 +129,13 @@ void FinalPhase::renderBackground() {
   };
   if (this->victory) { renderer.render(background_victory.getTexture(), NULL, &quad); }
   else { renderer.render(background_defeat.getTexture(), NULL, &quad); }
+}
+
+void FinalPhase::setPlayerSquad(int squad) { this->my_squad = squad; }
+
+void FinalPhase::setSquadsPoints(int wins_one, int wins_two) {
+  this->wins_one = wins_one;
+  this->wins_two = wins_two;
 }
 
 void FinalPhase::renderRounds() {
@@ -140,6 +169,7 @@ void FinalPhase::renderRound() {
   renderRequested(screen_width/2 - 150, deaths);
   renderRequested(screen_width/2 - 100, money);
   renderRounds();
+  renderSquadsPoints();
 }
 
 void FinalPhase::clean() {

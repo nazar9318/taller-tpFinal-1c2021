@@ -9,6 +9,7 @@
 #include "Texture.h"
 #include "TypesOfEvents.h"
 #include "Exception.h"
+#include "Paths.h"
 
 class TileContainer {
 	private:

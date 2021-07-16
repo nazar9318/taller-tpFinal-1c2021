@@ -13,7 +13,7 @@ void AttackEffect::loadMedia(){
 
   Color red = {0x87,0x14,0x14};
   Color black = {0x00,0x00,0x00};
-  blood.loadFromFile(renderer, "../Client/Assets/Attacks/blood.bmp", black, SDL_BLENDMODE_BLEND, 200);
+  blood.loadFromFile(renderer, ATTACK_BLOOD_PATH, black, SDL_BLENDMODE_BLEND, 200);
 
   blood.setColor(red);
 }

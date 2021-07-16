@@ -10,6 +10,7 @@
 #include "TypesOfEvents.h"
 #include "Exception.h"
 #include "Team.h"
+#include "Paths.h"
 
 class SpriteContainer {
 	private:

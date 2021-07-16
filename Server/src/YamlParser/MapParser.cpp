@@ -4,7 +4,6 @@
 #include <list>
 #include <vector>
 
-#define MAPS_PATH "../Editor/configs/"
 
 MapParser::MapParser() {
 }

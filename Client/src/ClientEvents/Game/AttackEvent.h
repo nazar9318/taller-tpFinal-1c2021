@@ -8,7 +8,6 @@
 
 class AttackEvent: public Event {
 	public:
-		// 0 <= angle < 360 
 		AttackEvent();
 		~AttackEvent();
 	private:

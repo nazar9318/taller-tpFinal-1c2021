@@ -3,6 +3,8 @@
 
 #include "yaml-cpp/yaml.h"
 
+#include "Paths.h"
+
 enum TerroristSkin {
 	Pheonix,
 	L337Krew, 

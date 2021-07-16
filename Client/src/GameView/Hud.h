@@ -8,7 +8,7 @@
 #include "Renderer.h"
 
 #include "TypesOfEvents.h"
-
+#include "Paths.h"
 #define SYMBOL_WIDTH 64
 #define SYMBOL_HEIGHT 64
 #define AMMO_OFFSET window_width/2

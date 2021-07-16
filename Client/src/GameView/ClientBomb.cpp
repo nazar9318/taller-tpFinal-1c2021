@@ -39,9 +39,9 @@ void ClientBomb::loadExplosionClips() {
 void ClientBomb::loadMedia(){
   Color black_color = {0x00, 0x00, 0x00};
 
-  progress_bar.loadFromFile(renderer, "../Client/Assets/Bomb/progress_bars.png");
-  bomb_in_ground.loadFromFile(renderer, "../Client/Assets/Bomb/bomb_d.bmp", black_color);
-  explosion.loadFromFile(renderer, "../Client/Assets/Bomb/explosion.png");
+  progress_bar.loadFromFile(renderer, PROGRESS_BARS_PATH);
+  bomb_in_ground.loadFromFile(renderer, BOMB_GROUND_PATH, black_color);
+  explosion.loadFromFile(renderer, BOMB_EXPLOSION_PATH);
 
   loadBarClips();
   loadExplosionClips();

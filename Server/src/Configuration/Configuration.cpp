@@ -2,9 +2,9 @@
 #include <syslog.h>
 
 
-YAML::Node CF::yaml_file = YAML::LoadFile("../Server/src/Configuration/Configuration.yaml");
+YAML::Node CF::yaml_file = YAML::LoadFile(SERVER_CONFIGS_PATH);
 
-YAML::Node CF::common_yaml_file = YAML::LoadFile("../Common/Configuration/CommonConfiguration.yaml");
+YAML::Node CF::common_yaml_file = YAML::LoadFile(COMMON_CONFIGS_PATH);
 
 /*****************************************************************/
 /**************************COMMON*********************************/
@@ -101,10 +101,8 @@ Configuration::Configuration() {}
 Configuration::~Configuration() {}
 
 void Configuration::load_configuration(const std::string& file_path) {
-	yaml_file =	YAML::LoadFile("../../../" + file_path);
+	yaml_file =	YAML::LoadFile(file_path);
 
-	syslog(LOG_INFO, "[%s:%i]: Se cargo el port: %s"
-			, __FILE__, __LINE__, port.c_str());
 	time_preparation = yaml_file["time_preparation"].as<double>();
 	time_finish = yaml_file["time_finish"].as<double>();
 	time_between = yaml_file["time_between"].as<double>();

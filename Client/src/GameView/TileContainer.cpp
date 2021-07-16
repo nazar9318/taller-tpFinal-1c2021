@@ -13,19 +13,19 @@ TileContainer& TileContainer::getInstance(){
 
 void TileContainer::loadMedia(Renderer& renderer){
 
-  container[PositionType::AZTEC].loadFromFile(renderer, "../Client/Assets/Tiles/aztec.png");
-  container[PositionType::INFERNO].loadFromFile(renderer, "../Client/Assets/Tiles/inferno.png");
-  container[PositionType::DUST].loadFromFile(renderer, "../Client/Assets/Tiles/dust.png");
+  container[PositionType::AZTEC].loadFromFile(renderer, TILE_AZTEC_PATH);
+  container[PositionType::INFERNO].loadFromFile(renderer, TILE_INFERNO_PATH);
+  container[PositionType::DUST].loadFromFile(renderer, TILE_DUST_PATH);
 
-  container[PositionType::BOMB_AREA_A].loadFromFile(renderer, "../Client/Assets/Tiles/bomb_area_a.png");
-  container[PositionType::BOMB_AREA_B].loadFromFile(renderer, "../Client/Assets/Tiles/bomb_area_b.png");
-  container[PositionType::BOMB_AREA_C].loadFromFile(renderer, "../Client/Assets/Tiles/bomb_area_c.png");
+  container[PositionType::BOMB_AREA_A].loadFromFile(renderer, TILE_BOMB_A_PATH);
+  container[PositionType::BOMB_AREA_B].loadFromFile(renderer, TILE_BOMB_B_PATH);
+  container[PositionType::BOMB_AREA_C].loadFromFile(renderer, TILE_BOMB_C_PATH);
 
-  container[PositionType::BOX_BLACK].loadFromFile(renderer, "../Client/Assets/Tiles/box_black.png");
-  container[PositionType::BOX_BROWN].loadFromFile(renderer, "../Client/Assets/Tiles/box_brown.png");
-  container[PositionType::BOX_METAL].loadFromFile(renderer, "../Client/Assets/Tiles/box_metal.png");
-  container[PositionType::BOX_WOOD_METAL].loadFromFile(renderer, "../Client/Assets/Tiles/box_wood_metal.png");
-  container[PositionType::BOX_WOOD].loadFromFile(renderer, "../Client/Assets/Tiles/box_wood.png");
+  container[PositionType::BOX_BLACK].loadFromFile(renderer, TILE_BOX_BLACK_PATH);
+  container[PositionType::BOX_BROWN].loadFromFile(renderer, TILE_BOX_BROWN_PATH);
+  container[PositionType::BOX_METAL].loadFromFile(renderer, TILE_BOX_METAL_PATH);
+  container[PositionType::BOX_WOOD_METAL].loadFromFile(renderer, TILE_BOX_WOOD_METAL_PATH);
+  container[PositionType::BOX_WOOD].loadFromFile(renderer, TILE_BOX_WOOD_PATH);
 
 
 

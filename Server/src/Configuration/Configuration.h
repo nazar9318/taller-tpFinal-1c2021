@@ -6,7 +6,7 @@
 #include <string>
 
 #include "yaml-cpp/yaml.h"
-
+#include "Paths.h"
 #define AMMO_CARTRIDGE_SIZE 10
 
 class Configuration;

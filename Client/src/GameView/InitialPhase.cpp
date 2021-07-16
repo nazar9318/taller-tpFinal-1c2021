@@ -28,16 +28,16 @@ void InitialPhase::loadMedia(){
   SDL_Color white = {255, 255, 255};
 
   /*FONT*/
-  font = TTF_OpenFont("../Client/Assets/Fonts/japanese.ttf", 20);
+  font = TTF_OpenFont(JAPANESE_FONT_PATH, 20);
   if (!font) {
     throw SDLException("SDLException: failed to load fonts -> InitialPhase - %s\n",TTF_GetError());
   }
 
   /*BUTTONS*/
-  background.loadFromFile(renderer, "../Client/Assets/InitialPhase/background.png");
-  button.loadFromFile(renderer, "../Client/Assets/InitialPhase/button.png");
-  button_over.loadFromFile(renderer, "../Client/Assets/InitialPhase/over_button.png");
-  button_pressed.loadFromFile(renderer, "../Client/Assets/InitialPhase/pressed_button.png");
+  background.loadFromFile(renderer, BACKGROUND_PATH);
+  button.loadFromFile(renderer, INIT_FASE_BUTTON_PATH);
+  button_over.loadFromFile(renderer, INIT_FASE_OVER_BUTTON_PATH);
+  button_pressed.loadFromFile(renderer, INIT_FASE_PRESSED_BUTTON_PATH);
 
   /*BUTTONS TEXT*/
   buttons[PositionType::AK47].text.loadFromRenderedText(renderer, font, "AK-47", white, SOLID_TEXT);

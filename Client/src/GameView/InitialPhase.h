@@ -12,6 +12,7 @@
 #include "BuyWeaponEvent.h"
 #include "BuyBulletsEvent.h"
 #include <memory>
+#include "Paths.h"
 #include "ProtectedQueue.h"
 
 #define NO_SECONDARY_AMMO -1

@@ -118,10 +118,10 @@ std::vector<Position*> GroundMap::get_drawable_positions() {
 bool GroundMap::is_bomb_zone(b2Vec2& pos) {
 	for (auto it = positions.begin(); it != positions.end(); ++it) {
 		if ((it->is_bomb_zone()) &&
-		 	(it->get_x() - CF::size_position / 2 <= pos.x) &&
-		 	(it->get_x() + CF::size_position / 2 >= pos.x) && 
-		 	(it->get_y() - CF::size_position / 2 <= pos.y) &&
-		 	(it->get_y() + CF::size_position / 2 >= pos.y)) {
+		 	(it->get_x() - SIZE_POSITION / 2 <= pos.x) &&
+		 	(it->get_x() + SIZE_POSITION / 2 >= pos.x) && 
+		 	(it->get_y() - SIZE_POSITION / 2 <= pos.y) &&
+		 	(it->get_y() + SIZE_POSITION / 2 >= pos.y)) {
 			syslog(LOG_INFO, "[%s:%i]: Zona de bomba en %d, %d "
 					, __FILE__, __LINE__, (int)pos.x, (int)pos.y);
 		 	return true;

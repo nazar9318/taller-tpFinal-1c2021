@@ -16,22 +16,22 @@ void SpriteContainer::loadMedia(Renderer& renderer) {
   Color black_color = {0x00, 0x00, 0x00};
 
   /*Aca tambien cargariamos las texturas de las armas*/
-  container[PositionType::AWP].loadFromFile(renderer, "../Client/Assets/Sprites/Weapons/awp.bmp", weapons_color);
-  container[PositionType::M3].loadFromFile(renderer, "../Client/Assets/Sprites/Weapons/m3.bmp", weapons_color);
-  container[PositionType::AK47].loadFromFile(renderer, "../Client/Assets/Sprites/Weapons/ak47.bmp", weapons_color);
-  container[PositionType::GLOCK].loadFromFile(renderer, "../Client/Assets/Sprites/Weapons/glock.bmp", weapons_color);
-  container[PositionType::KNIFE].loadFromFile(renderer, "../Client/Assets/Sprites/Weapons/knife.bmp", black_color);
-  container[PositionType::BOMB].loadFromFile(renderer, "../Client/Assets/Sprites/Weapons/bomb.bmp", black_color);
+  container[PositionType::AWP].loadFromFile(renderer, SPRITE_AWP_PATH, weapons_color);
+  container[PositionType::M3].loadFromFile(renderer, SPRITE_M3_PATH, weapons_color);
+  container[PositionType::AK47].loadFromFile(renderer, SPRITE_AK47_PATH, weapons_color);
+  container[PositionType::GLOCK].loadFromFile(renderer, SPRITE_GLOCK_PATH, weapons_color);
+  container[PositionType::KNIFE].loadFromFile(renderer, SPRITE_KNIFE_PATH, black_color);
+  container[PositionType::BOMB].loadFromFile(renderer, SPRITE_BOMB_PATH, black_color);
 
   /*Aca tambien cargariamos las texturas de los players*/
-  container[Team::TERRORIST].loadFromFile(renderer, "../Client/Assets/NPC/t2.bmp", black_color);
-  container[Team::COUNTER_ENEMY].loadFromFile(renderer, "../Client/Assets/NPC/ct2.bmp", black_color);
+  container[Team::TERRORIST].loadFromFile(renderer, SPRITE_NPC_T2_PATH, black_color);
+  container[Team::COUNTER_ENEMY].loadFromFile(renderer, SPRITE_NPC_CT2_PATH, black_color);
 
-  container[Equipped_Weapon::KNIFE_EQUIPPED].loadFromFile(renderer, "../Client/Assets/NPC/knife.bmp", black_color);
-  container[Equipped_Weapon::GLOCK_EQUIPPED].loadFromFile(renderer, "../Client/Assets/NPC/glock.bmp", black_color);
-  container[Equipped_Weapon::M3_EQUIPPED].loadFromFile(renderer, "../Client/Assets/NPC/m3.bmp", black_color);
-  container[Equipped_Weapon::AK47_EQUIPPED].loadFromFile(renderer, "../Client/Assets/NPC/ak47.bmp", black_color);
-  container[Equipped_Weapon::AWP_EQUIPPED].loadFromFile(renderer, "../Client/Assets/NPC/awp.bmp", black_color);
+  container[Equipped_Weapon::KNIFE_EQUIPPED].loadFromFile(renderer, SPRITE_NPC_KNIFE_PATH, black_color);
+  container[Equipped_Weapon::GLOCK_EQUIPPED].loadFromFile(renderer, SPRITE_NPC_GLOCK_PATH, black_color);
+  container[Equipped_Weapon::M3_EQUIPPED].loadFromFile(renderer, SPRITE_NPC_M3_PATH, black_color);
+  container[Equipped_Weapon::AK47_EQUIPPED].loadFromFile(renderer, SPRITE_NPC_AK47_PATH, black_color);
+  container[Equipped_Weapon::AWP_EQUIPPED].loadFromFile(renderer, SPRITE_NPC_AWP_PATH, black_color);
 
   syslog(LOG_INFO, "[%s:%i]: Texturas de los sprites cargadas", __FILE__, __LINE__);
 }

@@ -8,6 +8,9 @@
 #include "WeaponShotgun.h"
 #include "WeaponAutomatic.h"
 
+#define CHARACTER_RADIUS 16
+
+
 Character::Character(Team team, b2World* world,
 		 std::vector<Position*> available_positions)
 		: life_points(CF::character_life_points),
@@ -48,7 +51,7 @@ void Character::add_body(b2World* world,
 
 	b2CircleShape circle_shape;
 	circle_shape.m_p.Set(0, 0);
-	circle_shape.m_radius = CF::character_radius;
+	circle_shape.m_radius = CHARACTER_RADIUS;
 	b2FixtureDef fixture_def;
 	fixture_def.shape = &circle_shape;
 	fixture_def.density = 1;

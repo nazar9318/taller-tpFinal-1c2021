@@ -5,7 +5,7 @@
 #include "Renderer.h"
 #include "Texture.h"
 #include "Camera.h"
-
+#include "Paths.h"
 #include "BombState.h"
 #include "ClientPlayer.h"
 

@@ -6,8 +6,9 @@
 #include <string>
 
 #include "yaml-cpp/yaml.h"
-
+#include "Paths.h"
 #define AMMO_CARTRIDGE_SIZE 10
+#define SIZE_POSITION 64
 
 class Configuration;
 typedef Configuration CF;
@@ -19,16 +20,10 @@ class Configuration {
 		static void load_configuration(const std::string& file_path);
 		static YAML::Node yaml_file;
 
-		/**************************************/
-		/**************COMMON******************/
-		static YAML::Node common_yaml_file;
 		static std::string port;
-		static int max_iterations_pop_events;
 		static int size_position;
 		static int character_radius;
-		
-		/**************************************/
-		
+				
 		static int stencil_angle;
 		static int stencil_radio;
 		static int alpha_blending;

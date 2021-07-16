@@ -40,6 +40,7 @@ include_directories(${PROJECT_SOURCE_DIR}/Common/Event)
 include_directories(${PROJECT_SOURCE_DIR}/Common/DataStructures)
 include_directories(${PROJECT_SOURCE_DIR}/Common/Exception)
 include_directories(${PROJECT_SOURCE_DIR}/Common/Thread)
+include_directories(${PROJECT_SOURCE_DIR}/Common/Paths)
 
 add_subdirectory("Common")
 

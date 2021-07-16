@@ -3,7 +3,7 @@
 
 SoundHandler::SoundHandler() : sound(NULL), bomb_activated(false) {
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
-	music = Mix_LoadMUS("../Client/Assets/Sounds/menu.wav");
+	music = Mix_LoadMUS(SOUND_MENU_WAV_PATH);
 	Mix_VolumeMusic(MIX_MAX_VOLUME/3);
 	Mix_PlayMusic(music, -1);
 }
@@ -45,7 +45,7 @@ void SoundHandler::handleAttack(Event& event, GameMap& map) {
 
 void SoundHandler::handleWalk() {
 	if (sound) { Mix_FreeChunk(sound); }
-	sound = Mix_LoadWAV("../Client/Assets/Sounds/pl_dirt1.wav");
+	sound = Mix_LoadWAV(SOUND_WALK_PATH);
 	Mix_PlayChannel(-1, sound, 0);
 }
 
@@ -83,7 +83,7 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 	switch (sound_event) {
 		case SoundEvent::AK47_SOUND : {
 			if (distance/32 <= AK47_RANGE) {
-				sound = Mix_LoadWAV("../Client/Assets/Sounds/ak47.wav");
+				sound = Mix_LoadWAV(SOUND_AK47_PATH);
 				if (distance/32 > 0) {Mix_VolumeChunk(sound, MIX_MAX_VOLUME/(distance/64));}
 				Mix_PlayChannel(-1, sound, 0);
 			}
@@ -91,7 +91,7 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 		}
 		case SoundEvent::AWP_SOUND : {
 			if (distance/32 <= AWP_RANGE) {
-				sound = Mix_LoadWAV("../Client/Assets/Sounds/awp.wav");
+				sound = Mix_LoadWAV(SOUND_AWP_PATH);
 				if (distance/32 > 0) {Mix_VolumeChunk(sound, MIX_MAX_VOLUME/(distance/128));}
 				Mix_PlayChannel(-1, sound, 0);
 			}
@@ -99,7 +99,7 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 		}
 		case SoundEvent::M3_SOUND : {
 			if (distance/32 <= M3_RANGE) {
-				sound = Mix_LoadWAV("../Client/Assets/Sounds/m3.wav");
+				sound = Mix_LoadWAV(SOUND_M3_PATH);
 				if (distance/32 > 0) {Mix_VolumeChunk(sound, MIX_MAX_VOLUME/(distance/64));}
 				Mix_PlayChannel(-1, sound, 0);
 			}
@@ -107,7 +107,7 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 		}
 		case SoundEvent::GLOCK_SOUND : {
 			if (distance/32 <= GLOCK_RANGE) {
-				sound = Mix_LoadWAV("../Client/Assets/Sounds/glock18.wav");
+				sound = Mix_LoadWAV(SOUND_GLOCK_PATH);
 				if (distance/32 > 0) {Mix_VolumeChunk(sound, MIX_MAX_VOLUME/(distance/32));}
 				Mix_PlayChannel(-1, sound, 0);
 			}
@@ -115,7 +115,7 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 		}
 		case SoundEvent::KNIFE_SOUND : {
 			if (distance/32 <= KNIFE_RANGE) {
-				sound = Mix_LoadWAV("../Client/Assets/Sounds/knife_hit.wav");
+				sound = Mix_LoadWAV(SOUND_KNIFE_PATH);
 				if (distance/32 > 0) {Mix_VolumeChunk(sound, MIX_MAX_VOLUME/(distance/128));}
 				Mix_PlayChannel(-1, sound, 0);
 			}
@@ -123,7 +123,7 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 		}
 		case SoundEvent::BOMB_PLACED_SOUND : {
 			if (distance/32 <= BOMB_RANGE) {
-				sound = Mix_LoadWAV("../Client/Assets/Sounds/c4.wav");
+				sound = Mix_LoadWAV(SOUND_BOMB_PLACED_PATH);
 				if (distance/32 > 0) {Mix_VolumeChunk(sound, MIX_MAX_VOLUME/(distance/32));}
 				Mix_PlayChannel(-1, sound, 0);
 			}
@@ -131,7 +131,7 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 		}
 		case SoundEvent::BOMB_DEACTIVATED_SOUND : {
 			if (distance/32 <= BOMB_RANGE) {
-				sound = Mix_LoadWAV("../Client/Assets/Sounds/c4_disarm.wav");
+				sound = Mix_LoadWAV(SOUND_BOMB_DEACTIVATED_PATH);
 				if (distance/32 > 0) {Mix_VolumeChunk(sound, MIX_MAX_VOLUME/(distance/32));}
 				Mix_PlayChannel(-1, sound, 0);
 			}
@@ -139,7 +139,7 @@ void SoundHandler::play(SoundEvent sound_event, float distance) {
 		}
 		case SoundEvent::BOMB_EXPLODED_SOUND : {
 			if (distance/32 <= BOMB_RANGE) {
-				sound = Mix_LoadWAV("../Client/Assets/Sounds/c4_explode.wav");
+				sound = Mix_LoadWAV(SOUND_BOMB_EXPLOTED_PATH);
 				if (distance/32 > 0) {Mix_VolumeChunk(sound, MIX_MAX_VOLUME/(distance/128));}
 				Mix_PlayChannel(-1, sound, 0);
 			}

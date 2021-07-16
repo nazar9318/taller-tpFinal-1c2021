@@ -11,6 +11,7 @@
 #include "ClientPlayer.h"
 #include "ClientCharacter.h"
 #include "Attack.h"
+#include "Paths.h"
 
 #define BLOOD_WIDTH 64
 #define BLOOD_HEIGHT 64

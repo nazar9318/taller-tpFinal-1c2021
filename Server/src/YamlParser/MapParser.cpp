@@ -4,7 +4,6 @@
 #include <list>
 #include <vector>
 
-#define MAPS_PATH "../Editor/configs/"
 
 MapParser::MapParser() {
 }
@@ -22,8 +21,8 @@ void MapParser::build_positions(const std::string &type,
 					 type.c_str(), (MAPS_PATH + type + ".yaml").c_str());
 
 	nodes = YAML::LoadAllFromFile(MAPS_PATH + type + ".yaml");
-	x = nodes[0]["width"].as<int>() * CF::size_position;
-	y = nodes[0]["height"].as<int>() * CF::size_position;
+	x = nodes[0]["width"].as<int>() * SIZE_POSITION;
+	y = nodes[0]["height"].as<int>() * SIZE_POSITION;
 	syslog(LOG_INFO, "[%s:%i]: Mapa con largo %d y ancho %d"
 		, __FILE__, __LINE__, y, x);
 
@@ -32,10 +31,10 @@ void MapParser::build_positions(const std::string &type,
 		, __FILE__, __LINE__);
 		const YAML::Node& obj = *it;
 		char type = get_type(obj["item"].as<std::string>());
-		int x = obj["position"][0].as<int>() * CF::size_position
-												 + CF::size_position / 2;
-		int y = obj["position"][1].as<int>() * CF::size_position * (-1)
-									- CF::size_position / 2;
+		int x = obj["position"][0].as<int>() * SIZE_POSITION
+												 + SIZE_POSITION / 2;
+		int y = obj["position"][1].as<int>() * SIZE_POSITION * (-1)
+									- SIZE_POSITION / 2;
 		list.push_back(Position(x, y, type));
 	}
 }

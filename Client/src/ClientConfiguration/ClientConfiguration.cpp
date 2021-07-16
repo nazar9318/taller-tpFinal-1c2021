@@ -1,7 +1,7 @@
 #include "ClientConfiguration.h"
 
 
-YAML::Node CCF::yaml_file = YAML::LoadFile("../Client/ClientConfiguration/ClientConfiguration.yaml");
+YAML::Node CCF::yaml_file = YAML::LoadFile(CLIENT_CONFIGURATION_PATH);
 int CCF::widowed_x = CCF::yaml_file["widowed_x"].as<int>();
 int CCF::widowed_y = CCF::yaml_file["widowed_y"].as<int>();
 

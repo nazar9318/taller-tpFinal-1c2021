@@ -17,6 +17,7 @@ class GameMap;
 #include "TypesOfEvents.h"
 #include "ClientBomb.h"
 #include "GameMap.h"
+#include "Paths.h"
 
 class SoundHandler {
 	public:

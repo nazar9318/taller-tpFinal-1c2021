@@ -11,6 +11,7 @@
 #include "Position.h"
 #include "Exception.h"
 #include "Configuration.h"
+#include "Paths.h"
 
 class MapParser {
 		std::vector<YAML::Node> nodes;

@@ -8,14 +8,14 @@ void Hud::loadMedia(){
   Color black_color = {0x00, 0x00, 0x00};
   Color yellow = {0xFF, 0xFF, 0x00};
 
-  numbers.loadFromFile(renderer, "../Client/Assets/Hud/hud_nums.bmp", black_color, SDL_BLENDMODE_BLEND, 150);
-  hud_symbols.loadFromFile(renderer, "../Client/Assets/Hud/hud_symbols.bmp", black_color, SDL_BLENDMODE_BLEND, 150);
+  numbers.loadFromFile(renderer, HUD_NUMS_PATH, black_color, SDL_BLENDMODE_BLEND, 150);
+  hud_symbols.loadFromFile(renderer, HUD_SIMBOLS_PATH, black_color, SDL_BLENDMODE_BLEND, 150);
 
-  weapons[PositionType::AK47].loadFromFile(renderer, "../Client/Assets/Hud/ak47_k.bmp", black_color, SDL_BLENDMODE_BLEND, 150);
-  weapons[PositionType::M3].loadFromFile(renderer, "../Client/Assets/Hud/m3_k.bmp", black_color, SDL_BLENDMODE_BLEND, 150);
-  weapons[PositionType::AWP].loadFromFile(renderer, "../Client/Assets/Hud/awp_k.bmp", black_color, SDL_BLENDMODE_BLEND, 150);
-  weapons[PositionType::GLOCK].loadFromFile(renderer, "../Client/Assets/Hud/glock_k.bmp", black_color, SDL_BLENDMODE_BLEND, 150);
-  weapons[PositionType::KNIFE].loadFromFile(renderer, "../Client/Assets/Hud/knife_k.bmp", black_color, SDL_BLENDMODE_BLEND, 150);
+  weapons[PositionType::AK47].loadFromFile(renderer, HUD_AK47_PATH, black_color, SDL_BLENDMODE_BLEND, 150);
+  weapons[PositionType::M3].loadFromFile(renderer, HUD_M3_PATH, black_color, SDL_BLENDMODE_BLEND, 150);
+  weapons[PositionType::AWP].loadFromFile(renderer, HUD_AWP_PATH, black_color, SDL_BLENDMODE_BLEND, 150);
+  weapons[PositionType::GLOCK].loadFromFile(renderer, HUD_GLOCK_PATH, black_color, SDL_BLENDMODE_BLEND, 150);
+  weapons[PositionType::KNIFE].loadFromFile(renderer, HUD_KNIFE_PATH, black_color, SDL_BLENDMODE_BLEND, 150);
 
   hud_symbols.setColor(yellow);
   numbers.setColor(yellow);

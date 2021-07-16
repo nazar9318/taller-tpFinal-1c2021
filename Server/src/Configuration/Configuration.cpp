@@ -2,21 +2,10 @@
 #include <syslog.h>
 
 
-YAML::Node CF::yaml_file = YAML::LoadFile("../Server/src/Configuration/Configuration.yaml");
+YAML::Node CF::yaml_file = YAML::LoadFile(SERVER_CONFIGS_PATH);
 
-YAML::Node CF::common_yaml_file = YAML::LoadFile("../Common/Configuration/CommonConfiguration.yaml");
 
-/*****************************************************************/
-/**************************COMMON*********************************/
-
-std::string CF::port = common_yaml_file["port"].as<std::string>();
-int CF::max_iterations_pop_events =
-				CF::common_yaml_file["max_iterations_pop_events"].as<int>();
-int CF::size_position = CF::common_yaml_file["size_position"].as<int>();
-int CF::character_radius = CF::common_yaml_file["character_radius"].as<int>();
-
-/*****************************************************************/
-
+std::string CF::port = CF::yaml_file["port"].as<std::string>();
 
 int CF::TIME_BOMB_EXPLOTE = CF::yaml_file["TIME_BOMB_EXPLOTE"].as<int>();
 int CF::TIME_BOMB_ACTIVATE = CF::yaml_file["TIME_BOMB_ACTIVATE"].as<int>();
@@ -101,10 +90,8 @@ Configuration::Configuration() {}
 Configuration::~Configuration() {}
 
 void Configuration::load_configuration(const std::string& file_path) {
-	yaml_file =	YAML::LoadFile("../../../" + file_path);
+	yaml_file =	YAML::LoadFile(file_path);
 
-	syslog(LOG_INFO, "[%s:%i]: Se cargo el port: %s"
-			, __FILE__, __LINE__, port.c_str());
 	time_preparation = yaml_file["time_preparation"].as<double>();
 	time_finish = yaml_file["time_finish"].as<double>();
 	time_between = yaml_file["time_between"].as<double>();

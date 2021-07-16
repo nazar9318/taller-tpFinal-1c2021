@@ -55,7 +55,8 @@ class GameMap {
 		void addWeapon(WeaponSprite tile);
 		void cleanWeapons();
 		void loadMedia();
-		void update_position(char id, int pos_x, int pos_y, int angle, char life, int money, char weapon_type, int ammo);
+		void update_position(char id, int pos_x, int pos_y, int angle,
+							char life, int money, char weapon_type, int ammo);
 		void updateTimeToExplode(int time);
 		/*------------Metodos para render--------------*/
 		void setRenderArea();
@@ -64,7 +65,8 @@ class GameMap {
 		void renderGround();
 		void renderWeapons();
 		void add_character_team(char id, Team team);
-		void add_stats(char id, int kills_round, int kills_total);
+		void add_stats(char id, int kills_round, int kills_total,
+						int times_killed, int money, int round_winner);
 		void activate_bomb(char id_owner, char percentage);
 		~GameMap();
 

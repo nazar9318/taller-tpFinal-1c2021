@@ -1,4 +1,5 @@
 #include "GameMap.h"
+#include <iostream>
 
 GameMap::GameMap(Renderer& renderer, ClientPlayer& player,
   Camera& camera, std::map<char, ClientCharacter> &characters, Hud& hud,
@@ -121,20 +122,19 @@ void GameMap::renderCharacters() {
 }
 
 
-void GameMap::add_stats(char id, int kills_round, int kills_total) {
+void GameMap::add_stats(char id, int kills_round, int kills_total,
+                        int times_killed, int money, int round_winner) {
   std::string name;
-  std::string team;
-  int squad;
+  bool player_team = false;
   if (id == player.get_id()) {
     name = player.get_name();
-    team = player.getTeam();
-    squad = player.getSquad();
+    player_team = true;
   } else {
     name = characters.at(id).get_name();
-    team = characters.at(id).getTeam();
-    squad = characters.at(id).getSquad();
+    player_team = (characters.at(id).getSquad() == player.getSquad());
   }
-  final_phase.addScore(name, team, squad, kills_round, kills_total);
+  bool victory = (round_winner == player.getSquad());
+  final_phase.addScore(name, player_team, kills_round, kills_total, times_killed, money, victory);
 }
 
 void GameMap::add_squad(char id, int squad) {

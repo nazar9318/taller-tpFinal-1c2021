@@ -21,7 +21,7 @@ void ReceiveStatsHandler::handle(FaseType& fase, Event& event, GameMap& map) {
 		int kills_total = *((int*)&(*(it + 5)));
 		int money = *((int*)&(*(it + 9)));
 		int times_killed = *((int*)&(*(it + 13)));
-		map.add_stats(id, kills_round, kills_total);
+		map.add_stats(id, kills_round, kills_total, times_killed, money, last_round_winner);
 		std::cout << "money  " << money << 
 					" times_killed " << times_killed << std::endl;
 		//el nuevo método tendría que ser:

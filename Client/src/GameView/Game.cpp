@@ -47,7 +47,7 @@ void Game::execute() {
 			if (t_delta < STEP_TIME)
 				std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
 		}
-		// std::this_thread::sleep_for(duration<double>(15));
+		std::this_thread::sleep_for(duration<double>(10));
 	} catch (std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: Exception: %s", __FILE__, __LINE__,  e.what());
 	}

@@ -161,10 +161,12 @@ void Game::handle_key_press(SDL_Event& event) {
 }
 
 void Game::handle_key_release(SDL_Event& event) {
-	if (event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_a ||
-		event.key.keysym.sym == SDLK_d || event.key.keysym.sym == SDLK_s ) {
-			std::unique_ptr<Event> move(new MoveEvent(Direction::STOP_MOVING));
-			this->client_events.push(move);
+	if (event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_s) {
+		std::unique_ptr<Event> move(new MoveEvent(Direction::STOP_MOVING_Y));
+		this->client_events.push(move);
+	} else if (event.key.keysym.sym == SDLK_d || event.key.keysym.sym == SDLK_a) {
+		std::unique_ptr<Event> move(new MoveEvent(Direction::STOP_MOVING_X));
+		this->client_events.push(move);
 	} else if (event.key.keysym.sym == SDLK_q) {
 		std::unique_ptr<Event> plant(new StopPlantBombEvent());
 		this->client_events.push(plant);

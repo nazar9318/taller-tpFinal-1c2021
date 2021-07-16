@@ -34,7 +34,10 @@ class Character {
 		int current_weapon;
 		int number_weapons;
 		b2Body* character_body;
-		Direction move_state;
+		int x_direction;
+		int y_direction;
+
+
 		int angle;
 		bool blocked;
 		int round_kills;

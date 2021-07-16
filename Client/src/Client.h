@@ -15,10 +15,8 @@
 #include "Game.h"
 
 class Client {
-	std::string host;
-	std::string port;
 	public:
-		Client(const std::string& host, const std::string& port);
+		Client();
 
 		// POST: Executes the Counter Strike game.
 		void execute(int argc, char** argv);

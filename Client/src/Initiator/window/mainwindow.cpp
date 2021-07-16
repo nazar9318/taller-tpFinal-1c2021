@@ -39,6 +39,19 @@ MainWindow::MainWindow(Socket& skt, bool &started,
 		protocol.send_event(socket, user_event.get_msg());
 		ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
 	}
+
+/**********************************************************************/
+
+	// hay que hacerlo en una ventana nueva:
+	std::string host("localhost");
+	std::string port("8080");
+	try {
+		socket.connect_to(host, port);
+	} catch (...) {
+		//...
+	}
+/**********************************************************************/
+
 	setWindowTitle(TITLE);
 	players_joined_timer = new QTimer(this);
     connect(players_joined_timer, SIGNAL(timeout()), this, SLOT(update_players()));

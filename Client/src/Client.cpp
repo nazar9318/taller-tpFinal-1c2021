@@ -1,15 +1,14 @@
 #include "Client.h"
 
-Client::Client(const std::string& host, const std::string& port):
-			host(host), port(port) {}
-
+Client::Client() {
+}
 
 void Client::execute(int argc, char** argv) {
 	bool client_active = true; 
 	bool user_name_charged = false;
 	std::string name; 
 	while (client_active) {
-		Socket socket(host, port);
+		Socket socket;
 		ProtectedQueue<Event> model_events;
 		ProtectedQueue<std::unique_ptr<Event>> client_events;
 		ModelRecieverThread reciever(socket, model_events);
@@ -28,7 +27,6 @@ void Client::execute(int argc, char** argv) {
 		reciever.stop_running();
 		sender.stop_running();
 	}
-
 }
 
 Client::~Client() {}

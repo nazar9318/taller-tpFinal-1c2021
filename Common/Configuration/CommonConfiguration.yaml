@@ -1,8 +1,0 @@
----
-port: '8080'
-
-size_position: 64
-character_radius: 16
-
-
-max_iterations_pop_events: 15

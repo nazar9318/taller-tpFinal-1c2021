@@ -48,7 +48,7 @@ char WeaponShotgun::calculate_damage(double distance) {
 	rng.seed(ss);
 	std::uniform_real_distribution<> unif(0,1);
 	double rand = unif(rng);
-	if (rand < (accuracy * CF::size_position) / distance) {
+	if (rand < (accuracy * SIZE_POSITION) / distance) {
 		double damage_range = damage_max - damage_min;
 		double damage = fmod((double)std::rand(), damage_range) + damage_min;
 		return (char)(damage - (distance > 1 ? distance * distance_penalty : 0));

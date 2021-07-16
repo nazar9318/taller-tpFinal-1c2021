@@ -7,7 +7,7 @@ Block::Block(int x, int y, b2World* world){
 	block_body = world->CreateBody(&block_body_def);
 		    
 	b2PolygonShape box_shape;
-	box_shape.SetAsBox((float)CF::size_position/2, (float)CF::size_position/2);
+	box_shape.SetAsBox((float)SIZE_POSITION/2, (float)SIZE_POSITION/2);
 	b2FixtureDef block_fixture_def;
 	block_fixture_def.shape = &box_shape;
 	block_fixture_def.density = 1;

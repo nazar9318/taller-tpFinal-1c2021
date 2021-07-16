@@ -78,7 +78,6 @@
 
 // CONFIGURATION
 #define SERVER_CONFIGS_PATH "../Server/src/Configuration/Configuration.yaml"
-#define COMMON_CONFIGS_PATH "../Common/Configuration/CommonConfiguration.yaml"
 
 // MAP PARSER
 #define MAPS_PATH "../Editor/configs/"

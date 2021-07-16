@@ -4,19 +4,8 @@
 
 YAML::Node CF::yaml_file = YAML::LoadFile(SERVER_CONFIGS_PATH);
 
-YAML::Node CF::common_yaml_file = YAML::LoadFile(COMMON_CONFIGS_PATH);
 
-/*****************************************************************/
-/**************************COMMON*********************************/
-
-std::string CF::port = common_yaml_file["port"].as<std::string>();
-int CF::max_iterations_pop_events =
-				CF::common_yaml_file["max_iterations_pop_events"].as<int>();
-int CF::size_position = CF::common_yaml_file["size_position"].as<int>();
-int CF::character_radius = CF::common_yaml_file["character_radius"].as<int>();
-
-/*****************************************************************/
-
+std::string CF::port = CF::yaml_file["port"].as<std::string>();
 
 int CF::TIME_BOMB_EXPLOTE = CF::yaml_file["TIME_BOMB_EXPLOTE"].as<int>();
 int CF::TIME_BOMB_ACTIVATE = CF::yaml_file["TIME_BOMB_ACTIVATE"].as<int>();

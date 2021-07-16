@@ -1,6 +1,8 @@
 #include "Match.h"
 #include <string>
 
+#define MAX_ITERATIONS 15
+
 // POST: Crea una partida con el tipo de mapa correspondiente
 //       y agrega al jugador a la misma.
 Match::Match(Socket& socket, const std::string& map_type,
@@ -117,9 +119,8 @@ void Match::game_loop() {
 //       maneja. 
 void Match::handle_events() {
 	bool queue_not_empty = true;
-	int max_iterations = CF::max_iterations_pop_events;
 	int i = 0;
-	while (queue_not_empty && max_iterations > i) {
+	while (queue_not_empty && MAX_ITERATIONS > i) {
 		try {
 			Event event = to_process_events.pop();
 			handler.handle(event);

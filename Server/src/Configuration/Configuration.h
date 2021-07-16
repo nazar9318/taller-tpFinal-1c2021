@@ -51,6 +51,8 @@ class Configuration {
 
 		static int character_life_points;
 		static int character_money;
+		static int end_round_bonification;
+		static int win_round_bonification;
 
 		static double knife_damage_min;
 		static double glock_damage_min;

@@ -24,6 +24,8 @@ class SquadsManager {
 		std::vector<char> get_squads();
 		void get_wins(int& squad_one, int& squad_two);
 		char get_last_winner();
+		Team get_last_team_winner();
+
 		~SquadsManager();
 };
 

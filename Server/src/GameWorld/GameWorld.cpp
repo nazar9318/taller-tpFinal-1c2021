@@ -23,9 +23,9 @@ void GameWorld::add_player_if_not_full(char id) {
 	Character character(actual_team, world,
 					 ground.get_zone(actual_team));
 	characters.insert({id, std::move(character)});
+	squad_manager.add_squad_character(actual_team, id);
 	actual_team = get_opposite(actual_team);
 	number_players++;
-	squad_manager.add_squad_character(actual_team, id);
 	syslog(LOG_INFO, "[%s:%i]: Se agrego al jugador con id %d"
 					 " al GameWorld", __FILE__, __LINE__, id);
 }
@@ -176,6 +176,7 @@ void GameWorld::simulate_playing_step() {
 		fase_type = FaseType::END_ROUND;
 		step_info.set_waiting_time(CF::time_finish);
 		charge_stats();
+		give_bonifications();
 		number_round++;
 		number_tics = 0;
 	}
@@ -201,12 +202,12 @@ bool GameWorld::round_finished() {
 	}
 	if (counter_dead) {
 		step_info.add_team_eliminated(Team::COUNTER_ENEMY);
-		squad_manager.add_win(Team::COUNTER_ENEMY);
+		squad_manager.add_win(Team::TERRORIST);
 		return true;
 	}
 	if (terrorist_dead && bomb.get_state() != BombState::ACTIVATED) {
 		step_info.add_team_eliminated(Team::TERRORIST);
-		squad_manager.add_win(Team::TERRORIST);
+		squad_manager.add_win(Team::COUNTER_ENEMY);
 		return true;
 	}
 	return false;
@@ -296,6 +297,18 @@ char GameWorld::get_last_winner() {
 	return squad_manager.get_last_winner();
 }
 
+
+void GameWorld::give_bonifications() {
+	Team team = squad_manager.get_last_team_winner();
+	for (auto it = characters.begin(); it != characters.end(); ++it) {
+		it->second.add_bonification(CF::end_round_bonification);
+		if (it->second.get_team() == team) {
+			syslog(LOG_INFO, "[%s:%i]: Se bonificacion jugador con id %d"
+				 , __FILE__, __LINE__, (int)it->first);
+			it->second.add_bonification(CF::win_round_bonification);
+		}
+	}
+}
 
 GameWorld::~GameWorld() {
 	delete world;

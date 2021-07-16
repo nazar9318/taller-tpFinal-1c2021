@@ -78,6 +78,7 @@ class GameWorld {
 		void handle_attack(std::map<char, Character>::iterator& it,
 								 AttackInformation& attack);
 		void assign_bomb();
+		void give_bonifications();
 
 		GameWorld(const GameWorld &other) = delete;
 		GameWorld& operator=(const GameWorld &other) = delete;

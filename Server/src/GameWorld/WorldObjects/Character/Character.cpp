@@ -165,6 +165,17 @@ void Character::add_kill_bonus() {
 	money += CF::bonus_kill;
 	round_kills++;
 	total_kills++;
+	syslog(LOG_INFO, "[%s:%i]: Kill bonus para team: %d"
+				 , __FILE__, __LINE__,(int)team);
+
+}
+
+
+void Character::add_bonification(int bonification) {
+	money += bonification;
+	syslog(LOG_INFO, "[%s:%i]: Bonificacion para team: %d de %d pesos"
+			 , __FILE__, __LINE__,(int)team, bonification);
+
 }
 
 

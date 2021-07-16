@@ -39,6 +39,8 @@ int CF::players_allowed = CF::yaml_file["players_allowed"].as<int>();
 
 int CF::character_life_points = CF::yaml_file["character_life_points"].as<int>();
 int CF::character_money = CF::yaml_file["character_money"].as<int>();
+int CF::end_round_bonification = CF::yaml_file["end_round_bonification"].as<int>();
+int CF::win_round_bonification = CF::yaml_file["win_round_bonification"].as<int>();
 
 double CF::glock_accuracy = CF::yaml_file["glock_accuracy"].as<double>();
 double CF::ak47_accuracy = CF::yaml_file["ak47_accuracy"].as<double>();
@@ -126,6 +128,8 @@ void Configuration::load_configuration(const std::string& file_path) {
 	position_iterations = yaml_file["position_iterations"].as<int>();
 
 	bonus_kill = yaml_file["bonus_kill"].as<int>();
+	end_round_bonification = yaml_file["end_round_bonification"].as<int>();
+	win_round_bonification = yaml_file["win_round_bonification"].as<int>();
 	
 	character_life_points = yaml_file["character_life_points"].as<int>();
 	character_money = yaml_file["character_money"].as<int>();

@@ -1,9 +1,11 @@
 #include "SquadsManager.h"
-
+#include <syslog.h>
 SquadsManager::SquadsManager(Team team):
 			squad_one_wins(0), squad_two_wins(0),
 			 		current_squad_one_team(team), 
 			 		last_winner(1) {
+	syslog(LOG_INFO, "[%s:%i]: El team 1 tiene team: %d"
+				 , __FILE__, __LINE__, (int)team);
 }
 
 void SquadsManager::add_squad_character(Team team, char id) {
@@ -11,6 +13,8 @@ void SquadsManager::add_squad_character(Team team, char id) {
 		ids_squad_one.push_back(id);
 	else
 		ids_squad_two.push_back(id);
+	syslog(LOG_INFO, "[%s:%i]: id: %d es del team "
+				 , __FILE__, __LINE__, (int)team);
 }
 
 
@@ -18,6 +22,9 @@ void SquadsManager::add_win(Team team) {
 	if (team == current_squad_one_team) {
 		squad_one_wins++;
 		last_winner = 1;
+		syslog(LOG_INFO, "[%s:%i]: gano el team %d "
+			 , __FILE__, __LINE__, (int)team);
+
 	} else {
 		squad_two_wins++;
 		last_winner = 2;
@@ -62,7 +69,14 @@ char SquadsManager::get_last_winner() {
 	return last_winner;
 }
 
-
+Team SquadsManager::get_last_team_winner() {
+	if (last_winner == 1) {
+		syslog(LOG_INFO, "[%s:%i]: El last team winner es %d "
+	 		, __FILE__, __LINE__, (int)current_squad_one_team);
+		return current_squad_one_team;
+	}
+	return get_opposite(current_squad_one_team);
+}
 
 SquadsManager::~SquadsManager() {
 }

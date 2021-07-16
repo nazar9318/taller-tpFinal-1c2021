@@ -161,16 +161,41 @@ void Game::handle_key_press(SDL_Event& event) {
 }
 
 void Game::handle_key_release(SDL_Event& event) {
-	if (event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_a ||
-		event.key.keysym.sym == SDLK_d || event.key.keysym.sym == SDLK_s ) {
-			std::unique_ptr<Event> move(new MoveEvent(Direction::STOP_MOVING));
+	switch (event.key.keysym.sym) {
+		case SDLK_w: {
+			std::unique_ptr<Event> move(
+						new MoveEvent(Direction::STOP_MOVING_UP));
 			this->client_events.push(move);
-	} else if (event.key.keysym.sym == SDLK_q) {
-		std::unique_ptr<Event> plant(new StopPlantBombEvent());
-		this->client_events.push(plant);
-	} else if (event.key.keysym.sym == SDLK_e) {
-		std::unique_ptr<Event> deactivate(new StopDeactivateBombEvent());
-		this->client_events.push(deactivate);
+			break;
+		}
+		case SDLK_s: {
+			std::unique_ptr<Event> move(
+						new MoveEvent(Direction::STOP_MOVING_DOWN));
+			this->client_events.push(move);
+			break;
+		}
+		case SDLK_a: {
+			std::unique_ptr<Event> move(
+						new MoveEvent(Direction::STOP_MOVING_LEFT));
+			this->client_events.push(move);
+			break;
+		}
+		case SDLK_d: {
+			std::unique_ptr<Event> move(
+						new MoveEvent(Direction::STOP_MOVING_RIGHT));
+			this->client_events.push(move);
+			break;
+		}
+		case SDLK_q: {
+			std::unique_ptr<Event> plant(new StopPlantBombEvent());
+			this->client_events.push(plant);
+			break;
+		}	
+		case SDLK_e: {
+			std::unique_ptr<Event> deactivate(new StopDeactivateBombEvent());
+			this->client_events.push(deactivate);
+			break;
+		}				
 	}
 }
 

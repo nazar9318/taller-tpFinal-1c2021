@@ -14,7 +14,7 @@ Character::Character(Team team, b2World* world,
 		 money(CF::character_money), team(team),
 		 number_weapons(2), angle(0), blocked(false),
 		 round_kills(0), total_kills(0), last_pos(0.0, 0.0), 
-		 times_killed(0) {
+		 times_killed(0), x_direction(0), y_direction(0) {
 	std::unique_ptr<Weapon> knife(new WeaponWhite());
 	std::unique_ptr<Weapon> pistol(new WeaponPistol());
 	weapons.push_back(std::move(knife));
@@ -53,16 +53,49 @@ void Character::add_body(b2World* world,
 	fixture_def.shape = &circle_shape;
 	fixture_def.density = 1;
 	character_body->CreateFixture(&fixture_def);
-
-	move_state = Direction::STOP_MOVING;
 }
 
 
 void Character::set_move_state(Direction dir) {
-	if (!blocked)
-		move_state = dir;
-	else
-		move_state = Direction::STOP_MOVING;
+	if (!blocked) {
+		switch (dir) {
+			case Direction::LEFT:
+				x_direction = -1;
+				break;
+			case Direction::RIGHT:
+				x_direction = 1;
+				break;
+			case Direction::UP:
+				y_direction = 1;
+				break;
+			case Direction::DOWN:
+				y_direction = -1;
+				break;
+			case Direction::STOP_MOVING_LEFT: {
+				if (x_direction == -1)
+					x_direction = 0;
+				break;
+			}
+			case Direction::STOP_MOVING_RIGHT:{
+				if (x_direction == 1)
+					x_direction = 0;
+				break;
+			}
+			case Direction::STOP_MOVING_UP:{
+				if (y_direction == 1)
+					y_direction = 0;
+				break;
+			}
+			case Direction::STOP_MOVING_DOWN:{
+				if (y_direction == -1)
+					y_direction = 0;
+				break;
+			}		
+		}
+	} else {
+		x_direction = 0;
+		y_direction = 0;
+	}
 }
 
 void Character::apply_impulses() {
@@ -70,27 +103,8 @@ void Character::apply_impulses() {
 	if (life_points > 0) {
 		b2Vec2 vel = character_body->GetLinearVelocity();
 		b2Vec2 desired_vel(0.0, 0.0);
-		switch (move_state) {
-			case Direction::LEFT:
-				desired_vel.x = -120.0f;
-				desired_vel.y = 0.0;
-				break;
-			case Direction::RIGHT:
-				desired_vel.x = 120.0f;
-				desired_vel.y = 0.0;
-				break;
-			case Direction::UP:
-				desired_vel.x = 0.0;
-				desired_vel.y = 120.0f;
-				break;
-			case Direction::DOWN:
-				desired_vel.x = 0.0;
-				desired_vel.y = -120.0f;
-				break;
-			case Direction::STOP_MOVING:
-				desired_vel.x = 0.0;
-				desired_vel.y = 0.0;
-		}
+		desired_vel.x = x_direction * 120.0f;
+		desired_vel.y = y_direction * 120.0f;
 		b2Vec2 vel_change = desired_vel - vel;
 		b2Vec2 impulse = character_body->GetMass() * vel_change;
 		character_body->ApplyLinearImpulse
@@ -165,6 +179,17 @@ void Character::add_kill_bonus() {
 	money += CF::bonus_kill;
 	round_kills++;
 	total_kills++;
+	syslog(LOG_INFO, "[%s:%i]: Kill bonus para team: %d"
+				 , __FILE__, __LINE__,(int)team);
+
+}
+
+
+void Character::add_bonification(int bonification) {
+	money += bonification;
+	syslog(LOG_INFO, "[%s:%i]: Bonificacion para team: %d de %d pesos"
+			 , __FILE__, __LINE__,(int)team, bonification);
+
 }
 
 
@@ -222,7 +247,8 @@ char Character::get_weapon_type(){
 
 void Character::block() {
 	blocked = true;
-	move_state = Direction::STOP_MOVING;
+	y_direction = 0;
+	x_direction = 0;
 	stop_attacking();
 }
 

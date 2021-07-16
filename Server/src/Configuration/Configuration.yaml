@@ -5,7 +5,7 @@ max_distance_grab: 64
 time_preparation: 15.0
 time_finish: 20.0
 time_between: 2.0
-number_rounds: 2
+number_rounds: 4
 players_allowed: 10
 velocity_iterations: 8
 position_iterations: 3
@@ -19,9 +19,12 @@ stencil_radio: 64
 alpha_blending: 150
 
 character_life_points: 100
-bonus_kill: 50
+bonus_kill: 15
+end_round_bonification: 20
+win_round_bonification: 50
 
 character_money: 100
+
 
 glock_accuracy: 0.8
 ak47_accuracy: 0.8

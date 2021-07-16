@@ -34,7 +34,10 @@ class Character {
 		int current_weapon;
 		int number_weapons;
 		b2Body* character_body;
-		Direction move_state;
+		int x_direction;
+		int y_direction;
+
+
 		int angle;
 		bool blocked;
 		int round_kills;
@@ -73,7 +76,8 @@ class Character {
 		b2Fixture* GetFixtureList();
 
 		void add_kill_bonus();
-		//void receive_damage(AttackInformation& attack);
+
+		void add_bonification(int bonification);
 
 		b2Vec2 get_pos();
 
@@ -85,6 +89,7 @@ class Character {
 			 							std::map<char, Character>& characters);
 
 		bool is_alive();
+		
 		void add_weapon(std::unique_ptr<Weapon> weapon);
 
 		void stop_attacking();
@@ -108,16 +113,25 @@ class Character {
 		void reset_body(b2World* world, std::vector<Position*> available_positions);
 
 		void change_team();
-
+		
 		int get_round_kills();
+		
 		int get_total_kills();
+		
 		char get_number_weapons();
+		
 		int get_glock_bullets();
+		
 		char get_optative_weapon_type();
+		
 		int get_optative_weapon_bullets();
+		
 		int get_optative_weapon_bullets_price(); 
+		
 		BuyState buy(char type_ammo); 
+		
 		int get_times_killed();
+		
 		~Character();
 	private:
 		Character(const Character &other) = delete;

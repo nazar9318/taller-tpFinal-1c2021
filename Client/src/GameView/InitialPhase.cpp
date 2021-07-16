@@ -147,7 +147,7 @@ void InitialPhase::handleError(BuyState buy_state) {
   successful_buy = false;
 
   SDL_Color white = {255, 255, 255};
-  error_msg.loadFromRenderedText(renderer, font, "Aca va el error", white, SOLID_TEXT);
+  error_msg.loadFromRenderedText(renderer, font, "No cuenta con suficiente dinero", white, SOLID_TEXT);
 }
 
 void InitialPhase::updateValues(char id, int money, BuyState buy_state, int number_of_weapons, int price_secconadary_ammo){

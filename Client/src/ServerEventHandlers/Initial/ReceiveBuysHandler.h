@@ -10,7 +10,6 @@
 #include "TypesOfEvents.h"
 #include "InitialPhase.h"
 
-#define NO_SECONDARY_AMMO -1
 
 class ReceiveBuysHandler {
 	public:

@@ -7,13 +7,16 @@
 #include "GameMap.h"
 #include "Team.h"
 #include "FaseType.h"
+#include "InitialPhase.h"
+#include "TypesOfEvents.h"
 
 
 class ReceiveInitPlayersHandler {
 	public:
 		ReceiveInitPlayersHandler();
 
-		void handle(FaseType& fase, Event& event, GameMap& map);
+		void handle(FaseType& fase,
+				 Event& event, GameMap& map, InitialPhase& initial_phase);
 
 		~ReceiveInitPlayersHandler();
 };

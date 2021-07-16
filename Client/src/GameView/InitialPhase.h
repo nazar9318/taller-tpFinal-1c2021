@@ -14,6 +14,9 @@
 #include <memory>
 #include "ProtectedQueue.h"
 
+#define NO_SECONDARY_AMMO -1
+
+
 class InitialPhase {
 	private:
 		Renderer& renderer;

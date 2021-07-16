@@ -23,7 +23,7 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map,
       init_step.handle(fase, event, map);
       break;
     case ModelTypeEvent::INITIAL_PLAYERS:
-      player_init.handle(fase, event, map);
+      player_init.handle(fase, event, map, initial_phase);
       break;
     case ModelTypeEvent::BOMB_INFO: {
       bomb_state.handle(fase, event, map, bomb);

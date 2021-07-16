@@ -1,6 +1,12 @@
 ---
 max_distance_grab: 64
 
+
+fullscreen_x: 640
+fullscreen_y: 400
+widowed_x: 320
+widowed_y: 200
+
 time_preparation: 15.0
 time_finish: 20.0
 time_between: 2.0
@@ -53,6 +59,11 @@ glock_ammo: 50
 ak47_ammo: 120
 m3_ammo: 90
 awp_ammo: 20
+
+glock_max_ammo: 100
+ak47_max_ammo: 300
+m3_max_ammo: 200
+awp_max_ammo: 60
 
 ak47_price: 30
 m3_price: 50

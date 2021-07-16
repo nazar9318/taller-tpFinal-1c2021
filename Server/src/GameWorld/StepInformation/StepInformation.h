@@ -41,7 +41,7 @@ class StepInformation {
 		void add_finish(BombState state);
 		std::vector<char> get_reason_finish();
 		std::vector<char> get_buys();
-		void add_buy(char id, ClientTypeEvent bullets_or_weapon, bool successful);
+		void add_buy(char id, ClientTypeEvent bullets_or_weapon, BuyState state);
 		bool any_buys();
 
 		~StepInformation();

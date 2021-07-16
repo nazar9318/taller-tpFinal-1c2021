@@ -114,8 +114,8 @@ class Character {
 		int get_glock_bullets();
 		char get_optative_weapon_type();
 		int get_optative_weapon_bullets();
-		bool buy(char type_ammo);
 		int get_optative_weapon_bullets_price(); 
+		BuyState buy(char type_ammo); 
 		~Character();
 	private:
 		Character(const Character &other) = delete;

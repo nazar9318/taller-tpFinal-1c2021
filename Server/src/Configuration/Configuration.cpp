@@ -17,11 +17,16 @@ int CF::character_radius = CF::common_yaml_file["character_radius"].as<int>();
 
 /*****************************************************************/
 
+
+
+int CF::fullscreen_x = CF::yaml_file["fullscreen_x"].as<int>();
+int CF::fullscreen_y = CF::yaml_file["fullscreen_y"].as<int>();
+int CF::widowed_x = CF::yaml_file["widowed_x"].as<int>();
+int CF::widowed_y = CF::yaml_file["widowed_y"].as<int>();
+
 int CF::TIME_BOMB_EXPLOTE = CF::yaml_file["TIME_BOMB_EXPLOTE"].as<int>();
 int CF::TIME_BOMB_ACTIVATE = CF::yaml_file["TIME_BOMB_ACTIVATE"].as<int>();
 int CF::TIME_BOMB_DEACTIVATE = CF::yaml_file["TIME_BOMB_DEACTIVATE"].as<int>();
-
-
 
 int CF::velocity_iterations = CF::yaml_file["velocity_iterations"].as<int>();
 int CF::position_iterations = CF::yaml_file["position_iterations"].as<int>();
@@ -82,6 +87,11 @@ int CF::ak47_ammo = CF::yaml_file["ak47_ammo"].as<int>();
 int CF::m3_ammo = CF::yaml_file["m3_ammo"].as<int>();
 int CF::awp_ammo = CF::yaml_file["awp_ammo"].as<int>();
 
+int CF::glock_max_ammo = CF::yaml_file["glock_max_ammo"].as<int>();
+int CF::ak47_max_ammo = CF::yaml_file["ak47_max_ammo"].as<int>();
+int CF::m3_max_ammo = CF::yaml_file["m3_max_ammo"].as<int>();
+int CF::awp_max_ammo = CF::yaml_file["awp_max_ammo"].as<int>();
+
 double CF::glock_max_distance = CF::yaml_file["glock_max_distance"].as<double>();
 double CF::ak47_max_distance = CF::yaml_file["ak47_max_distance"].as<double>();
 double CF::m3_max_distance = CF::yaml_file["m3_max_distance"].as<double>();
@@ -102,6 +112,13 @@ void Configuration::load_configuration(const std::string& file_path) {
 	time_preparation = yaml_file["time_preparation"].as<double>();
 	time_finish = yaml_file["time_finish"].as<double>();
 	time_between = yaml_file["time_between"].as<double>();
+
+
+	fullscreen_x = yaml_file["fullscreen_x"].as<int>();
+	fullscreen_y = yaml_file["fullscreen_y"].as<int>();
+	widowed_x = yaml_file["widowed_x"].as<int>();
+	widowed_y = yaml_file["widowed_y"].as<int>();
+
 
 	number_rounds = yaml_file["number_rounds"].as<int>();
 	players_allowed = yaml_file["players_allowed"].as<int>();
@@ -166,6 +183,11 @@ void Configuration::load_configuration(const std::string& file_path) {
 	ak47_ammo = yaml_file["ak47_ammo"].as<int>();
 	m3_ammo = yaml_file["m3_ammo"].as<int>();
 	awp_ammo = yaml_file["awp_ammo"].as<int>();
+
+	glock_max_ammo = yaml_file["glock_max_ammo"].as<int>();
+	ak47_max_ammo = yaml_file["ak47_max_ammo"].as<int>();
+	m3_max_ammo = yaml_file["m3_max_ammo"].as<int>();
+	awp_max_ammo = yaml_file["awp_max_ammo"].as<int>();
 	
 	glock_max_distance = yaml_file["glock_max_distance"].as<double>();
 	ak47_max_distance = yaml_file["ak47_max_distance"].as<double>();

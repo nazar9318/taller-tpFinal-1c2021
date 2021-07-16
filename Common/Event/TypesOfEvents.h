@@ -109,6 +109,15 @@ enum PositionType: char {
 	SECONDARY_AMMO
 };
 
+enum BuyState {
+	NOT_ENOUGH_MONEY, 
+	SUCCESSFUL, 
+	NO_SIZE_BULLETS, 
+	OTHER_ERROR
+};
+
+
+
 // CONSTANTS FOR EVENTS
 
 #define START_CREATE_NAME 1

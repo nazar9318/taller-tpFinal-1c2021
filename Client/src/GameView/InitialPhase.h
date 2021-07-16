@@ -45,7 +45,7 @@ class InitialPhase {
 
 		void addPrice(int price, PositionType weapon);
 
-		void updateValues(int money, bool successful, int number_of_weapons, int price_secconadary_ammo);
+		void updateValues(int money, BuyState buy_state, int number_of_weapons, int price_secconadary_ammo);
 
 		void render();
 
@@ -56,7 +56,7 @@ class InitialPhase {
 
 		void handleButton(SDL_Event& event, PositionType button);
 
-		void handleError();
+		void handleError(BuyState buy_state);
 
 		bool inside(SDL_Point& pos, SDL_Rect& box);
 

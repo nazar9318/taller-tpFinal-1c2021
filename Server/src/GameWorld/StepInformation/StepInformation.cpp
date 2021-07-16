@@ -159,14 +159,13 @@ std::vector<char> StepInformation::get_stats() {
 */
 
 void StepInformation::add_buy(char id,
-				 ClientTypeEvent bullets_or_weapon, bool successful) {
-
+				 ClientTypeEvent bullets_or_weapon, BuyState state) {
 	syslog(LOG_INFO, "[%s:%i]: Por agregar compra de %d "
 					 , __FILE__, __LINE__, (int)id);
 
 	buys.push_back(id);
 	buys.push_back((char)bullets_or_weapon);
-	buys.push_back((char)successful);
+	buys.push_back((char)state);
 
 	Character& character = characters.at(id);
 

@@ -270,25 +270,25 @@ int Character::get_optative_weapon_bullets() {
 	return weapons[2]->get_ammo();
 }
 
-bool Character::buy(char type_ammo) {
-	int price;
-	if (type_ammo == (char)PositionType::PRIMARY_AMMO) {
-		price = weapons[1]->get_ammo_price();
-		if (money >= price) {
+BuyState Character::buy(char type_ammo) {
+	int number_weapon; 
+	if (type_ammo == (char)PositionType::PRIMARY_AMMO)
+		number_weapon = 1;
+	else if (type_ammo == (char)PositionType::SECONDARY_AMMO && number_weapons == 3)
+		number_weapon = 2;
+	else 
+		return BuyState::OTHER_ERROR;
+
+	int price = weapons[number_weapon]->get_ammo_price();
+	if (money >= price) {
+		if (weapons[number_weapon]->add_ammo()) {
 			money -= price;
-			weapons[1]->add_ammo();
-			return true;
+			return BuyState::SUCCESSFUL;
+		} else {
+			return BuyState::NO_SIZE_BULLETS;
 		}
-	} else if (type_ammo == (char)PositionType::PRIMARY_AMMO &&
-											 number_weapons == 3) {
-		price = weapons[2]->get_ammo_price();
-		if (money >= price) {
-			money -= price;
-			weapons[2]->add_ammo();
-			return true;
-		}
-	}
-	return false;
+	}	
+	return BuyState::NOT_ENOUGH_MONEY;
 }
 
 int Character::get_optative_weapon_bullets_price(){

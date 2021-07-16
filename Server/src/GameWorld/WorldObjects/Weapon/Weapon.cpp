@@ -4,7 +4,7 @@
 
 Weapon::Weapon(int price, double damage_min, double damage_max,
 		 	double max_distance, double distance_penalty,
-		 								 int ammo, int ammo_price):
+		 			int ammo, int ammo_price, int max_ammo):
 		price(price),
 		damage_min(damage_min),
 		damage_max(damage_max),
@@ -12,7 +12,8 @@ Weapon::Weapon(int price, double damage_min, double damage_max,
 		distance_penalty(distance_penalty),
 		activated(false),
 		ammo(ammo), 
-		ammo_price(ammo_price) {
+		ammo_price(ammo_price), 
+		max_ammo(max_ammo) {
 }
 
 void Weapon::activate() {
@@ -26,6 +27,7 @@ int Weapon::get_price() {
 int Weapon::get_ammo() {
 	return ammo;
 }
+
 
 void Weapon::set_pos(int x, int y) {
 	pos_x = x;
@@ -97,8 +99,12 @@ bool Weapon::find_closest_character(AttackInformation& attack_info,
 }
 
 
-void Weapon::add_ammo() {
-	ammo += 10;
+bool Weapon::add_ammo() {
+	if (ammo + AMMO_CARTRIDGE_SIZE <= max_ammo) {
+		ammo += AMMO_CARTRIDGE_SIZE;
+		return true;
+	}
+	return false;
 }
 
 int Weapon::get_ammo_price() {

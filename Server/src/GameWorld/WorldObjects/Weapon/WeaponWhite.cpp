@@ -6,7 +6,7 @@
 WeaponWhite::WeaponWhite() :
 			Weapon(0, CF::knife_damage_min,
 			CF::knife_damage_max, CF::knife_max_distance,
-			CF::knife_distance_penalty, NO_AMMO, 0) {
+			CF::knife_distance_penalty, NO_AMMO, 0, 0) {
 }
 
 void WeaponWhite::attack(AttackInformation& attack_info,

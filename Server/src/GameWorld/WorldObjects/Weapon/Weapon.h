@@ -20,6 +20,7 @@ class Weapon {
 		int pos_x;
 		int pos_y;
 		int ammo;
+		int max_ammo;
 		bool activated;
 		int price;
 		double damage_min;
@@ -32,7 +33,7 @@ class Weapon {
 	public:
 		Weapon(int price, double damage_min, double damage_max,
 				 double max_distance, double distance_penalty,
-				 						 int ammo, int ammo_price);
+				 	int ammo, int ammo_price, int max_ammo);
 
 		virtual void activate();
 
@@ -42,9 +43,8 @@ class Weapon {
 		void get_pos(int& x, int& y);
 		virtual char get_type();
 		virtual void deactivate();
-		virtual void add_ammo();
+		virtual bool add_ammo();
 		virtual int get_ammo_price();
-
 		// POST: Retorna true si el mas cercano es un player.
 		bool find_closest_character(AttackInformation& attack_info,
 							std::list<Block>& blocks,
@@ -56,7 +56,6 @@ class Weapon {
 		virtual void attack(AttackInformation& attack_info,
 			 		std::list<Block>& blocks, std::map<char,
 			 					 Character>& characters) = 0;
-
 
 		virtual ~Weapon() = 0;
 };

@@ -5,7 +5,8 @@
 WeaponSniper::WeaponSniper() :
 			Weapon(CF::awp_price, CF::awp_damage_min,
 			CF::awp_damage_max, CF::awp_max_distance,
-			CF::awp_distance_penalty, CF::awp_ammo, CF::awp_10_bullets_price),
+			CF::awp_distance_penalty, CF::awp_ammo,
+			CF::awp_10_bullets_price, CF::awp_max_ammo),
 			accuracy(CF::awp_accuracy), retard_time(CF::awp_retard_time), 
 			tics((unsigned)(retard_time / STEP_TIME)) {
 }

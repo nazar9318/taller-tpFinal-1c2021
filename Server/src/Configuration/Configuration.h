@@ -7,6 +7,8 @@
 
 #include "yaml-cpp/yaml.h"
 
+#define AMMO_CARTRIDGE_SIZE 10
+
 class Configuration;
 typedef Configuration CF;
 
@@ -25,11 +27,17 @@ class Configuration {
 		static int size_position;
 		static int character_radius;
 		
+		/**************************************/
+
+		static int fullscreen_x;
+		static int fullscreen_y;
+		static int widowed_x;
+		static int widowed_y;
+		
 		static int stencil_angle;
 		static int stencil_radio;
 		static int alpha_blending;
 
-		/**************************************/
 		static int TIME_BOMB_EXPLOTE;
 		static int TIME_BOMB_ACTIVATE;
 		static int TIME_BOMB_DEACTIVATE;
@@ -85,11 +93,15 @@ class Configuration {
 		static int awp_10_bullets_price;
 		static int glock_10_bullets_price;
 
-
 		static int glock_ammo;
 		static int ak47_ammo;
 		static int m3_ammo;
 		static int awp_ammo;
+
+		static int glock_max_ammo;
+		static int ak47_max_ammo;
+		static int m3_max_ammo;
+		static int awp_max_ammo;
 
 		static double glock_max_distance;
 		static double ak47_max_distance;

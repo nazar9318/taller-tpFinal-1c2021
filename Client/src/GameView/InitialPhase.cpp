@@ -142,17 +142,17 @@ void InitialPhase::updateMoney(int money){
   actual_money.loadFromRenderedText(renderer, font, money_str, white, SOLID_TEXT);
 }
 
-void InitialPhase::handleError(){
+void InitialPhase::handleError(BuyState buy_state) {
   successful_buy = false;
 
   SDL_Color white = {255, 255, 255};
   error_msg.loadFromRenderedText(renderer, font, "Aca va el error", white, SOLID_TEXT);
 }
 
-void InitialPhase::updateValues(int money, bool successful, int number_of_weapons, int price_secconadary_ammo){
+void InitialPhase::updateValues(int money, BuyState buy_state, int number_of_weapons, int price_secconadary_ammo){
   updateMoney(money);
-  if(!successful){
-    handleError();
+  if(buy_state != BuyState::SUCCESSFUL){
+    handleError(buy_state);
   }
   this->number_of_weapons = number_of_weapons;
   addPrice(price_secconadary_ammo, PositionType::SECONDARY_AMMO);

@@ -5,7 +5,8 @@
 WeaponPistol::WeaponPistol() :
 			Weapon(0, CF::glock_damage_min,
 			CF::glock_damage_max, CF::glock_max_distance,
-			CF::glock_distance_penalty,CF::glock_ammo, CF::glock_10_bullets_price),
+			CF::glock_distance_penalty, CF::glock_ammo,
+			CF::glock_10_bullets_price, CF::glock_max_ammo),
 			accuracy(CF::glock_accuracy) {
 }
 

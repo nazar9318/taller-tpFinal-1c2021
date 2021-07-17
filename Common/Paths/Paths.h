@@ -1,10 +1,10 @@
 #ifndef _PATHS_H
-#define _PATHS_H 
+#define _PATHS_H
 
 /****************************CLIENT***************************************/
 
 // CLIENT_CONFIGURATION
-#define CLIENT_CONFIGURATION_PATH "../Client/ClientConfiguration/ClientConfiguration.yaml"
+#define CLIENT_CONFIGURATION_PATH "../Client/src/ClientConfiguration/ClientConfiguration.yaml"
 
 // ATTACK_EFFECT
 #define ATTACK_BLOOD_PATH "../Client/Assets/Attacks/blood.bmp"
@@ -26,6 +26,7 @@
 // INITIAL PHASE
 #define JAPANESE_FONT_PATH "../Client/Assets/Fonts/japanese.ttf"
 #define BACKGROUND_PATH "../Client/Assets/InitialPhase/background.png"
+#define BUY_WINDOW_PATH "../Client/Assets/InitialPhase/buyWindow.png"
 #define INIT_FASE_BUTTON_PATH "../Client/Assets/InitialPhase/button.png"
 #define INIT_FASE_OVER_BUTTON_PATH "../Client/Assets/InitialPhase/over_button.png"
 #define INIT_FASE_PRESSED_BUTTON_PATH "../Client/Assets/InitialPhase/pressed_button.png"
@@ -79,18 +80,17 @@
 #define TILE_BOX_WOOD_METAL_PATH "../Client/Assets/Tiles/box_wood_metal.png"
 #define TILE_BOX_WOOD_PATH "../Client/Assets/Tiles/box_wood.png"
 
+// MAP PARSER
+#define MAPS_PATH "../Editor/configs/"
 
+#endif
 
 /****************************SERVER***************************************/
 
 // CONFIGURATION
-#ifdef DEV 
+// #ifdef DEV
 #define SERVER_CONFIGS_PATH "../Server/src/Configuration/Configuration.yaml"
-#else
-#define SERVER_CONFIGS_PATH "Configuration.yaml"
-// MAP PARSER
-#define MAPS_PATH "../Editor/configs/"
+// #else
+// #define SERVER_CONFIGS_PATH "Configuration.yaml"
 
-
-
-#endif
+// #endif

@@ -7,13 +7,13 @@ Game::Game(ProtectedQueue<Event>& model,
 	std::map<char, std::string>& charactersInfo, char& player_id) :
 	model_events(model), client_events(client), is_running(true),
 	player(player_id, charactersInfo.at(player_id)),
-	window("Counter 2d", 800, 600, false), renderer(window),
+	window("Counter 2d", CCF::widowed_x, CCF::widowed_y, CCF::is_fullscreen), renderer(window),
  	camera(renderer, 800, 600), hud(renderer, 800, 600),
  	final_phase(renderer, 800, 600),
  	map(renderer, player,camera, characters, hud, final_phase),
 	initial_phase(renderer, 800, 600, client, player_id),
  	fase(FaseType::INITIAL_FASE),
-	final_phase_rendered(false),
+	is_finished(false),
 	bomb(renderer, camera, player_id, player),
 	attack_effects(renderer, camera, player_id, player, characters) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
@@ -31,11 +31,11 @@ void Game::execute() {
 		auto end = steady_clock::now();
 		double t_delta;
 		loadMedia();
-		while (is_running) {
+		while (is_running && !is_finished) {
 			begin = steady_clock::now();
 			if (fase == FaseType::INITIAL_FASE) {
-				this->final_phase.clean();
-				this->final_phase_rendered = false;
+				// this->final_phase.clean();
+				// this->final_phase_rendered = false;
 				is_running = initial_phase.run();
 			} else {
 				is_running = handle_events();
@@ -47,7 +47,17 @@ void Game::execute() {
 			if (t_delta < STEP_TIME)
 				std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
 		}
-		std::this_thread::sleep_for(duration<double>(10));
+		// std::this_thread::sleep_for(duration<double>(10));
+
+		while (!is_finished) {
+			begin = steady_clock::now();
+			is_finished = handle_finished_game();
+			end = steady_clock::now();
+			t_delta = duration<double>(end - begin).count();
+			if (t_delta < STEP_TIME)
+				std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
+		}
+
 	} catch (std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: Exception: %s", __FILE__, __LINE__,  e.what());
 	}
@@ -82,6 +92,20 @@ void Game::render() {
 		is_running = false;
 	}
 	renderer.presentScreen();
+}
+
+bool Game::handle_finished_game(){
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+		switch (event.type) {
+			case SDL_QUIT:
+				return true;
+				break;
+			default:
+				break;
+			}
+	}
+	return false;
 }
 
 bool Game::handle_events() {
@@ -190,12 +214,12 @@ void Game::handle_key_release(SDL_Event& event) {
 			std::unique_ptr<Event> plant(new StopPlantBombEvent());
 			this->client_events.push(plant);
 			break;
-		}	
+		}
 		case SDLK_e: {
 			std::unique_ptr<Event> deactivate(new StopDeactivateBombEvent());
 			this->client_events.push(deactivate);
 			break;
-		}				
+		}
 	}
 }
 
@@ -259,6 +283,7 @@ void Game::process_events() {
 		}
 	}
 }
+
 
 void Game::update() { is_running = false; }
 

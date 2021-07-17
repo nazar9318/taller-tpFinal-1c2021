@@ -33,6 +33,7 @@
 #include "InitialPhase.h"
 #include "FinalPhase.h"
 #include "AttackEffect.h"
+#include "ClientConfiguration.h"
 
 class Game {
 	private:
@@ -45,13 +46,14 @@ class Game {
 		FinalPhase final_phase;
 		ModelEventHandler handler;
 		bool is_running;
+		bool is_finished;
 		ClientPlayer player;
 		std::map<char, ClientCharacter> characters;
 		Window window;
 		Renderer renderer;
 		Camera camera;
 		FaseType fase;
-		bool final_phase_rendered;
+		// bool final_phase_rendered;
 		AttackEffect attack_effects;
 
 	public:
@@ -64,6 +66,7 @@ class Game {
 	private:
 		void loadMedia();
 		bool handle_events();
+		bool handle_finished_game();
 		void process_events();
 		void update();
 		void render();
@@ -71,6 +74,7 @@ class Game {
 		void handle_key_release(SDL_Event& event);
 		void handle_click(SDL_Event& event);
 		void handle_unclick(SDL_Event& event);
+		void handle_window_event(SDL_Event& event);
 		void handle_mouse_motion();
 		Game(const Game &other) = delete;
 		Game& operator=(const Game &other) = delete;

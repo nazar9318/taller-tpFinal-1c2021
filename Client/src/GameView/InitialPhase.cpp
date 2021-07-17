@@ -33,8 +33,11 @@ void InitialPhase::loadMedia(){
     throw SDLException("SDLException: failed to load fonts -> InitialPhase - %s\n",TTF_GetError());
   }
 
-  /*BUTTONS*/
+  /*IMG*/
   background.loadFromFile(renderer, BACKGROUND_PATH);
+  buy_window.loadFromFile(renderer, BUY_WINDOW_PATH);
+
+  /*BUTTONS*/
   button.loadFromFile(renderer, INIT_FASE_BUTTON_PATH);
   button_over.loadFromFile(renderer, INIT_FASE_OVER_BUTTON_PATH);
   button_pressed.loadFromFile(renderer, INIT_FASE_PRESSED_BUTTON_PATH);
@@ -145,9 +148,14 @@ void InitialPhase::updateMoney(int money){
 
 void InitialPhase::handleError(BuyState buy_state) {
   successful_buy = false;
-
   SDL_Color white = {255, 255, 255};
-  error_msg.loadFromRenderedText(renderer, font, "No cuenta con suficiente dinero", white, SOLID_TEXT);
+
+  if(buy_state == BuyState::NOT_ENOUGH_MONEY){
+    error_msg.loadFromRenderedText(renderer, font, "No cuenta con suficiente dinero", white, SOLID_TEXT);
+  }
+  if(buy_state == BuyState::NO_SIZE_BULLETS){
+    error_msg.loadFromRenderedText(renderer, font, "No cuenta con espacio para mas balas", white, SOLID_TEXT);
+  }
 }
 
 void InitialPhase::updateValues(char id, int money, BuyState buy_state, int number_of_weapons, int price_secconadary_ammo){
@@ -185,7 +193,7 @@ void InitialPhase::renderBuysWindow(){
   int y = 0;
 
   SDL_Rect quad = {screen_width/2 - BACKGROUND_WIDTH/2, screen_height/2 - BACKGROUND_HEIGHT/2, BACKGROUND_WIDTH, BACKGROUND_HEIGHT};
-  renderer.render(background.getTexture(), NULL, &quad);
+  renderer.render(buy_window.getTexture(), NULL, &quad);
 
   y = quad.y + 10;
 
@@ -219,8 +227,13 @@ void InitialPhase::renderBuysWindow(){
     renderer.render(actual_money.getTexture(), NULL, &money_quad);
 }
 
+void InitialPhase::renderBackground(){
+  SDL_Rect quad = {0, 0, screen_width, screen_height};
+  renderer.render(background.getTexture(), NULL, &quad);
+}
 
 void InitialPhase::render() {
+  renderBackground();
   if(successful_buy){
     renderBuysWindow();
   }else{

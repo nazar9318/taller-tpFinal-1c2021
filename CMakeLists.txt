@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(counter-strike)
 
+option(DEV "make para desarrollador" ON)
+
 # std c++11
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
@@ -112,7 +114,6 @@ target_link_libraries(client client_classes common_classes SDL2 SDL2_image SDL2_
 #------------------------------------------------------------------------------
 # INSTALACION
 
-#option(DEV "make para desarrollador" ON)
 
 #file(COPY Client/Assets DESTINATION ./)
 #file(COPY Server/src/Configuration/Configuration.yaml DESTINATION ./)
@@ -148,6 +149,3 @@ target_link_libraries(client client_classes common_classes SDL2 SDL2_image SDL2_
 #install(TARGETS server DESTINATION ${BINARIES_DIRPATH} PERMISSIONS WORLD_READ WORLD_WRITE WORLD_EXECUTE)
 #install(DIRECTORY ${CMAKE_SOURCE_DIR}/server/config DESTINATION ${CONFIG_DIRPATH}/server FILE_PERMISSIONS WORLD_READ WORLD_WRITE)
 #install(DIRECTORY DESTINATION ${ASSETS_DIRPATH}/server/assets/Database DIRECTORY_PERMISSIONS WORLD_READ WORLD_WRITE WORLD_EXECUTE)
-
-
-

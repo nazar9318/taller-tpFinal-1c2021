@@ -14,7 +14,10 @@ void FinalPhase::loadMedia() {
   }
 }
 
-void FinalPhase::setRound(int current_round) { this->round = current_round; }
+void FinalPhase::setRound(int current_round) {
+  this->round = current_round;
+  clean();
+}
 
 void FinalPhase::addScore(const std::string& name, bool my_team, int round_kills,
           int total_kills, int times_killed, int money, bool victory) {
@@ -125,7 +128,7 @@ void FinalPhase::renderSquadsPoints() {
 void FinalPhase::renderBackground() {
   SDL_Rect quad = {
     screen_width/2 - BACKGROUND_WIDTH/2,
-    screen_height/2 - BACKGROUND_HEIGHT/2, 
+    screen_height/2 - BACKGROUND_HEIGHT/2,
     BACKGROUND_WIDTH,
     BACKGROUND_HEIGHT
   };
@@ -232,7 +235,9 @@ void FinalPhase::clean() {
   renderRequested(screen_width/2+100, team_scores);
 }*/
 
-void FinalPhase::render() { renderRound(); }
+void FinalPhase::render() {
+  renderRound();
+}
 
 void FinalPhase::endGame() { this->post_game = true; }
 

@@ -47,7 +47,7 @@ enum ModelTypeEvent: char {
 	INIT_STEP,
 	FINAL_STEP,
 	SEND_SQUADS,
-	INITIAL_CONFIGS, 
+	INITIAL_CONFIGS,
 	CONECTION_FAILED
 };
 
@@ -113,9 +113,9 @@ enum PositionType: char {
 };
 
 enum BuyState {
-	NOT_ENOUGH_MONEY, 
-	SUCCESSFUL, 
-	NO_SIZE_BULLETS, 
+	NOT_ENOUGH_MONEY,
+	SUCCESSFUL,
+	NO_SIZE_BULLETS,
 	OTHER_ERROR
 };
 

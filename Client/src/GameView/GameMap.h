@@ -13,7 +13,7 @@ class ClientPlayer;
 #include "ClientCharacter.h"
 #include "Hud.h"
 #include "Tile.h"
-#include "WeaponSprite.h"    //VER SI HAGO WEAPON Y CHARACTER COMO UNA UNICA CLASE SPRITE
+#include "WeaponSprite.h"
 #include "Team.h"
 #include "Camera.h"
 #include "FinalPhase.h"

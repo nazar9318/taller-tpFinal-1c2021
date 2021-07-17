@@ -26,6 +26,7 @@ class InitialPhase {
 		std::map<char, Button> buttons;
 
 		Texture background;
+		Texture buy_window;
 		Texture button;
 		Texture button_over;
 		Texture button_pressed;
@@ -69,6 +70,8 @@ class InitialPhase {
 		void renderErrorMessage();
 
 		void renderBuysWindow();
+
+		void renderBackground();
 
 		void updateMoney(int money);
 

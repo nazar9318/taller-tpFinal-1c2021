@@ -84,8 +84,10 @@
 /****************************SERVER***************************************/
 
 // CONFIGURATION
+#ifdef DEV 
 #define SERVER_CONFIGS_PATH "../Server/src/Configuration/Configuration.yaml"
-
+#else
+#define SERVER_CONFIGS_PATH "Configuration.yaml"
 // MAP PARSER
 #define MAPS_PATH "../Editor/configs/"
 

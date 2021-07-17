@@ -112,6 +112,22 @@ target_link_libraries(client client_classes common_classes SDL2 SDL2_image SDL2_
 #------------------------------------------------------------------------------
 # INSTALACION
 
+#option(DEV "make para desarrollador" ON)
+
+#file(COPY Client/Assets DESTINATION ./)
+#file(COPY Server/src/Configuration/Configuration.yaml DESTINATION ./)
+#file(COPY Client/src/ClientConfiguration/ClientConfiguration.yaml DESTINATION ./)
+#file(COPY Editor/configs DESTINATION ./)
+
+
+#message("[INFO] Adding Installation directives")
+#INSTALL(TARGETS server client DESTINATION /usr/bin)
+#INSTALL(DIRECTORY Client/Assets DESTINATION /var/Counter)
+#INSTALL(DIRECTORY Editor/configs DESTINATION /var/Counter)
+#INSTALL(FILES Server/src/Configuration/Configuration.yaml Client/src/ClientConfiguration/ClientConfiguration.yaml DESTINATION /etc/Counter)
+
+
+
 # Rutas
 #set(BINARIES_DIRPATH "/usr/bin")
 #set(SHAREDLIBS_DIRPATH "/usr/lib")

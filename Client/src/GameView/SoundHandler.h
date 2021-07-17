@@ -26,12 +26,13 @@ class SoundHandler {
 		void play(PositionType weapon, float distance);
 		void handleAttack(Event& event, GameMap& map);
 		void handleBomb(Event& event);
-		void handleWalk();
+		void handleDeath(Event& event);
 		~SoundHandler();
 
 	private:
 		bool bomb_activated;
 		Mix_Chunk* sound;
+		Mix_Chunk* death;
 		Mix_Music* music;
 		SoundHandler(const SoundHandler &other) = delete;
 		SoundHandler& operator=(const SoundHandler &other) = delete;

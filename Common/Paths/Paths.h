@@ -47,6 +47,7 @@
 #define SOUND_BOMB_PLACED_PATH "../Client/Assets/Sounds/c4.wav"
 #define SOUND_BOMB_DEACTIVATED_PATH "../Client/Assets/Sounds/c4_disarm.wav"
 #define SOUND_BOMB_EXPLOTED_PATH "../Client/Assets/Sounds/c4_explode.wav"
+#define SOUND_DIE_PATH "../Client/Assets/Sounds/die1.wav"
 
 // SPRITE CONTAINER
 

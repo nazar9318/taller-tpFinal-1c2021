@@ -1,7 +1,7 @@
 #include "SoundHandler.h"
 #include <iostream>
 
-SoundHandler::SoundHandler() : sound(NULL), bomb_activated(false) {
+SoundHandler::SoundHandler() : sound(NULL), death(NULL), bomb_activated(false) {
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 	music = Mix_LoadMUS(SOUND_MENU_WAV_PATH);
 	Mix_VolumeMusic(MIX_MAX_VOLUME/3);
@@ -43,10 +43,19 @@ void SoundHandler::handleAttack(Event& event, GameMap& map) {
 	}
 }
 
-void SoundHandler::handleWalk() {
-	if (sound) { Mix_FreeChunk(sound); }
-	sound = Mix_LoadWAV(SOUND_WALK_PATH);
-	Mix_PlayChannel(-1, sound, 0);
+void SoundHandler::handleDeath(Event& event) {
+	std::vector<char> event_msg = event.get_msg();
+	for (auto it = event_msg.begin() + 1; it != event_msg.end(); it += 23) {
+		char life = *(it + 13);
+		if (life == 0) {
+			if (death != NULL) {
+				Mix_FreeChunk(death);
+				death = NULL;
+			}
+			death = Mix_LoadWAV(SOUND_DIE_PATH);
+			Mix_PlayChannel(-1, death, 0);
+		}
+	}
 }
 
 void SoundHandler::play(PositionType weapon, float distance) {
@@ -153,6 +162,10 @@ SoundHandler::~SoundHandler() {
 	if (sound != NULL) {
 		Mix_FreeChunk(sound);
 		sound = NULL;
+	}
+	if (death != NULL) {
+		Mix_FreeChunk(death);
+		death = NULL;
 	}
 	Mix_CloseAudio();
 	Mix_FreeMusic(music);

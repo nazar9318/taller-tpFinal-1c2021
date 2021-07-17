@@ -15,10 +15,11 @@ void ModelEventHandler::handle(FaseType& fase, Event& event, GameMap& map,
       /*case ModelTypeEvent::STEP_INFO:
       recive_step.handle(fase, event, map);
       break;*/
-    case ModelTypeEvent::PLAYING_STEP:
+    case ModelTypeEvent::PLAYING_STEP: {
       playing_step.handle(fase, event, map);
-      //sound_handler.handleWalk();
+      sound_handler.handleDeath(event);
       break;
+    }
     case ModelTypeEvent::INIT_STEP:
       init_step.handle(fase, event, map);
       break;

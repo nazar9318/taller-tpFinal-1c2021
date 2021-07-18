@@ -16,7 +16,7 @@ Character::Character(Team team, b2World* world,
 		: life_points(CF::character_life_points),
 		 money(CF::character_money), team(team),
 		 number_weapons(2), angle(0), blocked(false),
-		 round_kills(0), total_kills(0), last_pos(0.0, 0.0), 
+		 round_kills(0), total_kills(0), last_pos(0.0, 0.0),
 		 times_killed(0), x_direction(0), y_direction(0) {
 	std::unique_ptr<Weapon> knife(new WeaponWhite());
 	std::unique_ptr<Weapon> pistol(new WeaponPistol());
@@ -56,6 +56,8 @@ void Character::add_body(b2World* world,
 	fixture_def.shape = &circle_shape;
 	fixture_def.density = 1;
 	character_body->CreateFixture(&fixture_def);
+	x_direction = 0;
+	y_direction= 0;
 }
 
 
@@ -93,7 +95,7 @@ void Character::set_move_state(Direction dir) {
 				if (y_direction == -1)
 					y_direction = 0;
 				break;
-			}		
+			}
 		}
 	} else {
 		x_direction = 0;
@@ -302,12 +304,12 @@ int Character::get_optative_weapon_bullets() {
 }
 
 BuyState Character::buy(char type_ammo) {
-	int number_weapon; 
+	int number_weapon;
 	if (type_ammo == (char)PositionType::PRIMARY_AMMO)
 		number_weapon = 1;
 	else if (type_ammo == (char)PositionType::SECONDARY_AMMO && number_weapons == 3)
 		number_weapon = 2;
-	else 
+	else
 		return BuyState::OTHER_ERROR;
 
 	int price = weapons[number_weapon]->get_ammo_price();
@@ -318,7 +320,7 @@ BuyState Character::buy(char type_ammo) {
 		} else {
 			return BuyState::NO_SIZE_BULLETS;
 		}
-	}	
+	}
 	return BuyState::NOT_ENOUGH_MONEY;
 }
 

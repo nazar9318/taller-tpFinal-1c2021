@@ -47,7 +47,7 @@ void SoundHandler::handleDeath(Event& event) {
 	std::vector<char> event_msg = event.get_msg();
 	for (auto it = event_msg.begin() + 1; it != event_msg.end(); it += 23) {
 		char life = *(it + 13);
-		if (life == 0) {
+		if (life <= 0) {
 			if (death != NULL) {
 				Mix_FreeChunk(death);
 				death = NULL;

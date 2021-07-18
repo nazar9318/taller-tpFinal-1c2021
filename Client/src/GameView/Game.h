@@ -34,6 +34,8 @@
 #include "FinalPhase.h"
 #include "AttackEffect.h"
 #include "ClientConfiguration.h"
+#include "Cursor.h"
+#include "Paths.h"
 
 class Game {
 	private:
@@ -55,6 +57,7 @@ class Game {
 		FaseType fase;
 		// bool final_phase_rendered;
 		AttackEffect attack_effects;
+		Cursor cursor;
 
 	public:
 		Game(ProtectedQueue<Event>& model_events,

@@ -63,6 +63,7 @@
     #define SPRITE_NPC_M3_PATH "Assets/NPC/m3.bmp"
     #define SPRITE_NPC_AK47_PATH "Assets/NPC/ak47.bmp"
     #define SPRITE_NPC_AWP_PATH "Assets/NPC/awp.bmp"
+    #define SPRITE_POINTER_PATH "Assets/Sprites/Weapons/pointer.bmp"
 
 
     // TILE CONTAINER
@@ -150,6 +151,7 @@
     #define SPRITE_NPC_M3_PATH "../Client/Assets/NPC/m3.bmp"
     #define SPRITE_NPC_AK47_PATH "../Client/Assets/NPC/ak47.bmp"
     #define SPRITE_NPC_AWP_PATH "../Client/Assets/NPC/awp.bmp"
+    #define SPRITE_POINTER_PATH "../Client/Assets/Sprites/Weapons/pointer.bmp"
 
 
     // TILE CONTAINER

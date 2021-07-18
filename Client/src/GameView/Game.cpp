@@ -64,6 +64,7 @@ void Game::execute() {
 }
 
 void Game::loadMedia() {
+	cursor.setCrusor(SPRITE_POINTER_PATH, 0xFF, 0x00, 0xFF);
 	map.loadMedia();
 	hud.loadMedia();
 	bomb.loadMedia();

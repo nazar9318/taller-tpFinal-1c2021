@@ -81,10 +81,10 @@ void Game::render() {
 	} else if (fase == FaseType::PLAYING) {
 		map.renderWeapons();
 		attack_effects.render();
+		bomb.render();
 		map.renderPlayer();
 		map.renderCharacters();
 		hud.render();
-		bomb.render();
 	} else if (fase == FaseType::END_ROUND) {
 		final_phase.render();
 	} else if (fase == FaseType::ENDGAME) {

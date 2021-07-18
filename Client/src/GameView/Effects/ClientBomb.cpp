@@ -117,7 +117,7 @@ void ClientBomb::render(){
 
 void ClientBomb::render_bomb_in_ground(){
   SDL_Rect quad = {x ,y, bomb_in_ground.get_w(), bomb_in_ground.get_h()};
-  camera.render(bomb_in_ground.getTexture(), quad, NULL);
+  camera.renderAddingOffset(bomb_in_ground.getTexture(), quad, NULL);
 }
 
 void ClientBomb::render_activating_bomb(){

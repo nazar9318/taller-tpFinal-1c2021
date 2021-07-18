@@ -1,3 +1,9 @@
+#ifdef DEV_MODE
+	#define AD "../Server/src/Configuration/Configuration.yaml"
+#else
+	#define AD "Configuration.yaml"
+#endif
+
 #include <iostream>
 #include <string>
 #include <exception>
@@ -20,6 +26,7 @@ int main(int argc, char *argv[]) {
 		CF::load_configuration(file_path_configs);
 	}
 	try {
+		std::cout << AD << '\n';
 		Server server;
 		server.execute();
 	} catch(std::exception& e) {

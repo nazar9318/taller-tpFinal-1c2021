@@ -23,7 +23,7 @@ void Stencil::buildStencil(Renderer& renderer, Texture& texture, double angle, i
     filledTrigonColor(renderer.getRenderer(), STENCIL_CENTER_X, STENCIL_CENTER_Y, STENCIL_WIDTH,
                       400-altura, STENCIL_HEIGHT, 400+altura, 0xFFFFFFFF);
 
-    SDL_Surface* surface = SDL_CreateRGBSurface(0, STENCIL_WIDTH, STENCIL_HEIGHT, 32, 0, 0, 0, 0);
+    SDL_Surface* surface = SDL_CreateRGBSurface(0, STENCIL_WIDTH, STENCIL_HEIGHT, 8, 0, 0, 0, 0);
     SDL_RenderReadPixels(renderer.getRenderer(), NULL, surface->format->format, surface->pixels, surface->pitch);
 
     Color key = {0xFF,0xFF,0xFF};

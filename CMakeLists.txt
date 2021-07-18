@@ -2,7 +2,12 @@ cmake_minimum_required(VERSION 2.8)
 
 project(counter-strike)
 
-option(DEV "make para desarrollador" ON)
+#option(DEV "make para desarrollador" ON)
+#set(DEV_MODE 0)
+if(DEV)
+ #set(DEV_MODE 1)
+ add_definitions(-DDEV_MODE=1)
+endif()
 
 # std c++11
 set(CMAKE_CXX_STANDARD 11)

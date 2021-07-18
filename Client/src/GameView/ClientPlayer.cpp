@@ -107,9 +107,15 @@ void ClientPlayer::render(Camera& camera) {
 	/*Renderizo el player*/
 	SDL_Rect renderQuad = { pos.x, pos.y, PLAYER_WIDTH, PLAYER_HEIGHT};
 	camera.renderAddingOffset(texture->getTexture(), renderQuad, &clip[current_clip], angle);
+	SDL_Rect renderQuadWeapon = {
+		pos.x + (int)(20 * cosf(angle * PI / 180 - 90)),
+		pos.y + (int)(20 * sinf(angle * PI / 180 - 90)),
+		PLAYER_WIDTH,
+		PLAYER_HEIGHT
+	};
 
 	/*Renderizo su arma*/
-	camera.render(texture_weapon->getTexture(), renderQuad, NULL, angle);
+	camera.render(texture_weapon->getTexture(), renderQuadWeapon, NULL, angle);
 
 	/*Renderizo el stencil*/
 	// renderQuad = { pos.x + PLAYER_WIDTH/2 - 600, pos.y + PLAYER_HEIGHT/2 - 600, 1200, 1200};

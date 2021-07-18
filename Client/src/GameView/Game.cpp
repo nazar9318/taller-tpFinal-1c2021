@@ -99,13 +99,13 @@ bool Game::handle_finished_game(){
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_QUIT:
-				return true;
+				return false;
 				break;
 			default:
 				break;
 			}
 	}
-	return false;
+	return true;
 }
 
 bool Game::handle_events() {

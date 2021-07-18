@@ -1,12 +1,14 @@
 #include "GameWorld.h"
 #include <syslog.h>
 
+#define VELOCITY_ITERATIONS 8
+#define POSITION_ITERATIONS 3
 
 GameWorld::GameWorld(const std::string& map_type):
 			 number_players(0),ground(map_type),
 			 actual_team(Team::COUNTER_ENEMY),
-			 number_tics(0), number_round(0), 
-			 characters(), step_info(characters), 
+			 number_tics(0), number_round(0),
+			 characters(), step_info(characters),
 			 squad_manager(actual_team) {
 	b2Vec2 gravity(0, 0);
 	world = new b2World(gravity);
@@ -170,8 +172,7 @@ void GameWorld::simulate_playing_step() {
 		handle_attack(it, attack_info);
 		it->second.apply_impulses();
 	}
-	world->Step(STEP_TIME, CF::velocity_iterations,
-								 CF::position_iterations);
+	world->Step(STEP_TIME, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 	if (round_finished()) {
 		fase_type = FaseType::END_ROUND;
 		step_info.set_waiting_time(CF::time_finish);
@@ -187,7 +188,7 @@ bool GameWorld::round_finished() {
 		step_info.add_finish(bomb.get_state());
 		squad_manager.add_win(bomb.get_state());
 		return true;
-	} 
+	}
 	bool terrorist_dead = true;
 	bool counter_dead = true;
 	auto it = characters.begin();
@@ -221,12 +222,12 @@ void GameWorld::charge_stats() {
 
 
 bool GameWorld::get_closest_weapon(b2Vec2 char_pos, Weapon** weapon) {
-	int closest_distance = CF::max_distance_grab; 
+	int closest_distance = CF::max_distance_grab;
 	bool weapon_close_enough = false;
 	std::list<std::unique_ptr<Weapon>>::iterator closest_weapon;
-	for (auto it = weapons_in_ground.begin(); 
+	for (auto it = weapons_in_ground.begin();
 						it != weapons_in_ground.end(); ++it) {
-		int x_weapon, y_weapon; 
+		int x_weapon, y_weapon;
 		(*it)->get_pos(x_weapon, y_weapon);
 		int distance = (int)((char_pos - b2Vec2(x_weapon, y_weapon)).Length());
 		if (distance < closest_distance) {

@@ -11,9 +11,6 @@ int CF::TIME_BOMB_EXPLOTE = CF::yaml_file["TIME_BOMB_EXPLOTE"].as<int>();
 int CF::TIME_BOMB_ACTIVATE = CF::yaml_file["TIME_BOMB_ACTIVATE"].as<int>();
 int CF::TIME_BOMB_DEACTIVATE = CF::yaml_file["TIME_BOMB_DEACTIVATE"].as<int>();
 
-int CF::velocity_iterations = CF::yaml_file["velocity_iterations"].as<int>();
-int CF::position_iterations = CF::yaml_file["position_iterations"].as<int>();
-
 int CF::stencil_angle = CF::yaml_file["stencil_angle"].as<int>();
 int CF::stencil_radio = CF::yaml_file["stencil_radio"].as<int>();
 int CF::alpha_blending = CF::yaml_file["alpha_blending"].as<int>();
@@ -100,7 +97,7 @@ void Configuration::load_configuration(const std::string& file_path) {
 	players_allowed = yaml_file["players_allowed"].as<int>();
 
 	max_distance_grab = yaml_file["max_distance_grab"].as<int>();
-	
+
 	stencil_angle = yaml_file["stencil_angle"].as<int>();
 	stencil_radio = yaml_file["stencil_radio"].as<int>();
 	alpha_blending = yaml_file["alpha_blending"].as<int>();
@@ -110,28 +107,24 @@ void Configuration::load_configuration(const std::string& file_path) {
 	TIME_BOMB_ACTIVATE = yaml_file["TIME_BOMB_ACTIVATE"].as<int>();
 	TIME_BOMB_DEACTIVATE = yaml_file["TIME_BOMB_DEACTIVATE"].as<int>();
 
-
-	velocity_iterations = yaml_file["velocity_iterations"].as<int>();
-	position_iterations = yaml_file["position_iterations"].as<int>();
-
 	bonus_kill = yaml_file["bonus_kill"].as<int>();
 	end_round_bonification = yaml_file["end_round_bonification"].as<int>();
 	win_round_bonification = yaml_file["win_round_bonification"].as<int>();
-	
+
 	character_life_points = yaml_file["character_life_points"].as<int>();
 	character_money = yaml_file["character_money"].as<int>();
-		
+
 	glock_accuracy = yaml_file["glock_accuracy"].as<double>();
 	ak47_accuracy = yaml_file["ak47_accuracy"].as<double>();
 	m3_accuracy = yaml_file["m3_accuracy"].as<double>();
 	awp_accuracy = yaml_file["awp_accuracy"].as<double>();
-	
+
 	knife_damage_min = yaml_file["knife_damage_min"].as<double>();
 	glock_damage_min = yaml_file["glock_damage_min"].as<double>();
 	ak47_damage_min = yaml_file["ak47_damage_min"].as<double>();
 	m3_damage_min = yaml_file["m3_damage_min"].as<double>();
 	awp_damage_min = yaml_file["awp_damage_min"].as<double>();
-	
+
 	knife_damage_max = yaml_file["knife_damage_max"].as<double>();
 	glock_damage_max = yaml_file["glock_damage_max"].as<double>();
 	ak47_damage_max = yaml_file["ak47_damage_max"].as<double>();
@@ -151,7 +144,7 @@ void Configuration::load_configuration(const std::string& file_path) {
 	ak47_price = yaml_file["ak47_price"].as<int>();
 	m3_price = yaml_file["m3_price"].as<int>();
 	awp_price = yaml_file["awp_price"].as<int>();
-	
+
 	ak47_10_bullets_price = yaml_file["ak47_10_bullets_price"].as<int>();
 	m3_10_bullets_price = yaml_file["m3_10_bullets_price"].as<int>();
 	awp_10_bullets_price = yaml_file["awp_10_bullets_price"].as<int>();
@@ -166,7 +159,7 @@ void Configuration::load_configuration(const std::string& file_path) {
 	ak47_max_ammo = yaml_file["ak47_max_ammo"].as<int>();
 	m3_max_ammo = yaml_file["m3_max_ammo"].as<int>();
 	awp_max_ammo = yaml_file["awp_max_ammo"].as<int>();
-	
+
 	glock_max_distance = yaml_file["glock_max_distance"].as<double>();
 	ak47_max_distance = yaml_file["ak47_max_distance"].as<double>();
 	m3_max_distance = yaml_file["m3_max_distance"].as<double>();

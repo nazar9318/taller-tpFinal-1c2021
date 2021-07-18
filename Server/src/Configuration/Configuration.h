@@ -23,7 +23,7 @@ class Configuration {
 		static std::string port;
 		static int size_position;
 		static int character_radius;
-				
+
 		static int stencil_angle;
 		static int stencil_radio;
 		static int alpha_blending;
@@ -38,8 +38,6 @@ class Configuration {
 		static int number_rounds;
 
 		static int players_allowed;
-		static int velocity_iterations;
-		static int position_iterations;
 
 		static int bonus_kill;
 		static int max_distance_grab;

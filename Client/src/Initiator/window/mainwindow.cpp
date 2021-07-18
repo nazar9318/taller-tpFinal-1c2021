@@ -7,14 +7,15 @@
 #include <string>
 
 #define TITLE "Counter Strike"
-#define USER_NAME_PAGE 5
-#define PRINCIPAL_PAGE 0
-#define MAPS_FOR_CREATE_PAGE 1
-#define MATCHES_FOR_JOIN_PAGE 2
-#define JOIN_MATCH_WAITING 3
-#define CREATE_MATCH_WAITING 4
-#define MIN_NAME_LENGTH 4
+#define PRINCIPAL_PAGE 1
+#define MAPS_FOR_CREATE_PAGE 2
+#define MATCHES_FOR_JOIN_PAGE 3
+#define JOIN_MATCH_WAITING 4
+#define CREATE_MATCH_WAITING 5
+#define USER_NAME_PAGE 6
+#define SOCKET_PAGE 0
 
+#define MIN_NAME_LENGTH 4
 
 MainWindow::MainWindow(Socket& skt, bool &started,
 		 ModelRecieverThread& rcv, EventSenderThread& snd,
@@ -33,23 +34,23 @@ MainWindow::MainWindow(Socket& skt, bool &started,
 	this->setStyleSheet("background-color: white;");
 	active = false;
 	if (!user_name_charged) {
-		ui->stackedWidget->setCurrentIndex(USER_NAME_PAGE);
+		ui->stackedWidget->setCurrentIndex(SOCKET_PAGE);
 	} else {
 		SendUserNameEvent user_event(user_name);
 		protocol.send_event(socket, user_event.get_msg());
-		ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
-	}
+        ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
+    }
 
 /**********************************************************************/
 
 	// hay que hacerlo en una ventana nueva:
-	std::string host("localhost");
+    /*std::string host("localhost");
 	std::string port("8080");
 	try {
 		socket.connect_to(host, port);
 	} catch (...) {
 		//...
-	}
+    }*/
 /**********************************************************************/
 
 	setWindowTitle(TITLE);
@@ -58,6 +59,19 @@ MainWindow::MainWindow(Socket& skt, bool &started,
 	matches_timer = new QTimer(this);
     connect(matches_timer, SIGNAL(timeout()), this, SLOT(update_matches()));
     ui->lineEdit->setPlaceholderText("Ingrese su nombre");
+    this->ui->host->setPlaceholderText("Ingrese host");
+    this->ui->port->setPlaceholderText("Ingrese port");
+}
+
+void MainWindow::on_startButton_clicked() {
+    std::string host(this->ui->host->text().toStdString());
+    std::string port(this->ui->port->text().toStdString());
+    try {
+        socket.connect_to(host, port);
+        this->ui->stackedWidget->setCurrentIndex(USER_NAME_PAGE);
+    } catch (...) {
+        //...
+    }
 }
 
 // POST: Boton de la primera pantalla mostrada.

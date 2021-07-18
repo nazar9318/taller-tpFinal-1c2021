@@ -75,6 +75,8 @@ private slots:
     void on_pushButton_clicked();
     void on_OK_clicked();
 
+    void on_startButton_clicked();
+
 private:
     Ui::MainWindow* ui;
     Protocol protocol;

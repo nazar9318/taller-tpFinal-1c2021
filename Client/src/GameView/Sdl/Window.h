@@ -7,6 +7,7 @@
 
 #include <string>
 #include "SDLException.h"
+#include "Paths.h"
 
 class Window {
 
@@ -14,13 +15,16 @@ class Window {
     int width;
     int height;
     SDL_Window* window;
-    // SDL_Renderer* renderer; No se si lo necesito
+    SDL_Surface* window_icon;
+    bool fullscreen;
 
   public:
 
     Window(const std::string& title, int w, int h, bool fullscreen);
 
     int clear();
+
+    void changeFullScreen();
 
     //Retorna un puntero al window
     SDL_Window* getWindow();

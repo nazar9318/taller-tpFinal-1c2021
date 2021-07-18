@@ -3,9 +3,18 @@
 #include <complex>
 
 #define PI 3.14159265
+#define STENCIL_WIDTH 2*window_width
+#define STENCIL_HEIGHT 2*window_width
 
-ClientPlayer::ClientPlayer(char& id, std::string& name):
-id(id), name(name), current_clip(0), bomb_owner(false), squad(0), dead(false) {
+ClientPlayer::ClientPlayer(char& id, std::string& name, int window_width, int window_height):
+	id(id),
+ 	name(name),
+ 	current_clip(0),
+	bomb_owner(false),
+ 	squad(0),
+ 	dead(false),
+	window_width(window_width),
+	window_height(window_height) {
 	pos = {0};
 	for (int i = 0; i < LIMIT_POSES; i++) { clip[i] = {0}; }
 	for (int i = 0; i < LIMIT_POSES; i++) {
@@ -20,8 +29,8 @@ id(id), name(name), current_clip(0), bomb_owner(false), squad(0), dead(false) {
 	clip[2].y = 0;
 }
 
-void ClientPlayer::createStencil(Renderer& renderer, double angle, int alpha){
-	// Stencil::buildStencil(renderer, stencil, angle, alpha);
+void ClientPlayer::createStencil(Renderer& renderer, double angle, int alpha, int radius){
+	Stencil::buildStencil(renderer, stencil, angle, alpha, radius);
 }
 
 void ClientPlayer::set_team(Team team) {
@@ -107,19 +116,22 @@ void ClientPlayer::render(Camera& camera) {
 	/*Renderizo el player*/
 	SDL_Rect renderQuad = { pos.x, pos.y, PLAYER_WIDTH, PLAYER_HEIGHT};
 	camera.renderAddingOffset(texture->getTexture(), renderQuad, &clip[current_clip], angle);
-	SDL_Rect renderQuadWeapon = {
-		pos.x + (int)(20 * cosf(angle * PI / 180 - 90)),
-		pos.y + (int)(20 * sinf(angle * PI / 180 - 90)),
-		PLAYER_WIDTH,
-		PLAYER_HEIGHT
-	};
 
+	// SDL_Rect renderQuadWeapon = {
+	// 	pos.x + (int)(20 * cosf(angle * PI / 180 - 90)),
+	// 	pos.y + (int)(20 * sinf(angle * PI / 180 - 90)),
+	// 	texture_weapon->get_w(),
+	// 	texture_weapon->get_h()
+	// };
+
+	SDL_Rect quad = {pos.x, pos.y, texture_weapon->get_w(), texture_weapon->get_h()};
 	/*Renderizo su arma*/
-	camera.render(texture_weapon->getTexture(), renderQuadWeapon, NULL, angle);
+	camera.renderAddingOffset(texture_weapon->getTexture(), quad, NULL, angle + 180);
 
 	/*Renderizo el stencil*/
-	// renderQuad = { pos.x + PLAYER_WIDTH/2 - 600, pos.y + PLAYER_HEIGHT/2 - 600, 1200, 1200};
-	// camera.renderAddingOffset(stencil.getTexture(), renderQuad, NULL, angle-90);
+	renderQuad = { pos.x + PLAYER_WIDTH/2 - STENCIL_WIDTH/2, pos.y + PLAYER_HEIGHT/2 - STENCIL_HEIGHT/2,
+		 						STENCIL_WIDTH, STENCIL_HEIGHT};
+	camera.renderAddingOffset(stencil.getTexture(), renderQuad, NULL, angle-90);
 
 }
 

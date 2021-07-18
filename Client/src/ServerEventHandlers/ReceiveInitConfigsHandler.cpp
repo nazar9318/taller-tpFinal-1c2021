@@ -12,7 +12,7 @@ void ReceiveInitConfigsHandler::handle(Event& event, GameMap& map, InitialPhase&
 
     int init_money = *((int*)&(event_msg[13]));
 
-    map.createStencil(stencil_angle, alpha_blending);
+    map.createStencil(stencil_angle, alpha_blending, stencil_radio);
     initial_phase.updateValues(-1, init_money, BuyState::SUCCESSFUL, 2, 0);
 
     std::cout << "stencil_radio: " << stencil_radio <<

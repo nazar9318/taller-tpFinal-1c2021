@@ -5,13 +5,17 @@
 Game::Game(ProtectedQueue<Event>& model,
 	ProtectedQueue<std::unique_ptr<Event>>& client,
 	std::map<char, std::string>& charactersInfo, char& player_id) :
-	model_events(model), client_events(client), is_running(true),
-	player(player_id, charactersInfo.at(player_id)),
-	window("Counter 2d", CCF::widowed_x, CCF::widowed_y, CCF::is_fullscreen), renderer(window),
- 	camera(renderer, 800, 600), hud(renderer, 800, 600),
- 	final_phase(renderer, 800, 600),
+	model_events(model),
+ 	client_events(client),
+ 	is_running(true),
+	player(player_id, charactersInfo.at(player_id), CCF::widowed_x, CCF::widowed_y),
+	window("Counter 2d", CCF::widowed_x, CCF::widowed_y, CCF::is_fullscreen),
+ 	renderer(window),
+ 	camera(renderer, CCF::widowed_x, CCF::widowed_y),
+ 	hud(renderer, CCF::widowed_x, CCF::widowed_y),
+ 	final_phase(renderer, CCF::widowed_x, CCF::widowed_y),
  	map(renderer, player,camera, characters, hud, final_phase),
-	initial_phase(renderer, 800, 600, client, player_id),
+	initial_phase(renderer, CCF::widowed_x, CCF::widowed_y, client, player_id),
  	fase(FaseType::INITIAL_FASE),
 	not_finished(true),
 	bomb(renderer, camera, player_id, player),
@@ -179,6 +183,10 @@ void Game::handle_key_press(SDL_Event& event) {
 			case SDLK_e: {
 				std::unique_ptr<Event> deactivate(new StartDeactivateBombEvent());
 				this->client_events.push(deactivate);
+				break;
+			}
+			case SDLK_ESCAPE: {
+				window.changeFullScreen();
 				break;
 			}
 		}

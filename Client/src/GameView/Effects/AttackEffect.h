@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <map>
 #include <list>
+#include <math.h>
 
 #include "Renderer.h"
 #include "Texture.h"
@@ -27,6 +28,7 @@ class AttackEffect {
     std::list<Attack> attacks;
 
     Texture blood;
+    Texture arrow;
 
     char player_id;
 
@@ -43,7 +45,8 @@ class AttackEffect {
     ~AttackEffect();
 
   private:
-    void renderBlood();
+    void renderBlood(SDL_Rect& position);
+    void renderArrow(SDL_Rect& receiver_pos, SDL_Rect& attacker_pos);
     AttackEffect(const AttackEffect &other) = delete;
     AttackEffect& operator=(const AttackEffect &other) = delete;
 

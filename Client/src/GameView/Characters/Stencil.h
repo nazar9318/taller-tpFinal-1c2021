@@ -14,7 +14,7 @@ class Stencil {
 
     Stencil();
 
-    static void buildStencil(Renderer& renderer, Texture& texture, double angle, int alpha);
+    static void buildStencil(Renderer& renderer, Texture& texture, double angle, int alpha, int radius);
 
     ~Stencil();
 

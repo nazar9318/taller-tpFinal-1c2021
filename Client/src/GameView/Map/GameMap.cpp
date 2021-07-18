@@ -24,8 +24,8 @@ void GameMap::loadMedia() {
   sprite_container.loadMedia(renderer);
 }
 
-void GameMap::createStencil(int angle, int alpha){
-  player.createStencil(renderer, (double)angle, alpha);
+void GameMap::createStencil(int angle, int alpha, int radius){
+  player.createStencil(renderer, (double)angle, alpha, radius);
 }
 
 void GameMap::addTile(Tile tile) {

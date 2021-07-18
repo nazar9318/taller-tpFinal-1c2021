@@ -4,8 +4,12 @@
     // CLIENT_CONFIGURATION
     #define CLIENT_CONFIGURATION_PATH "ClientConfiguration.yaml"
 
+    // WINDOW
+    #define WINDOW_ICON_PATH "Assets/Window/gametitle.png"
+
     // ATTACK_EFFECT
     #define ATTACK_BLOOD_PATH "Assets/Attacks/blood.bmp"
+    #define ATTACK_ARROW_PATH "Assets/Attacks/arrow.bmp"
 
     //CLIENT_BOMB
     #define PROGRESS_BARS_PATH "Assets/Bomb/progress_bars.png"
@@ -92,8 +96,12 @@
     // CLIENT_CONFIGURATION
     #define CLIENT_CONFIGURATION_PATH "../Client/src/ClientConfiguration/ClientConfiguration.yaml"
 
+    // WINDOW
+    #define WINDOW_ICON_PATH "../Client/Assets/Window/gametitle.png"
+
     // ATTACK_EFFECT
     #define ATTACK_BLOOD_PATH "../Client/Assets/Attacks/blood.bmp"
+    #define ATTACK_ARROW_PATH "../Client/Assets/Attacks/arrow.bmp"
 
     //CLIENT_BOMB
     #define PROGRESS_BARS_PATH "../Client/Assets/Bomb/progress_bars.png"

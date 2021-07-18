@@ -47,7 +47,7 @@ class GameMap {
 			 			ClientCharacter> &characters, Hud& hud, FinalPhase& final_phase);
 		void create();
 
-		void createStencil(int angle, int alpha);
+		void createStencil(int angle, int alpha, int radius);
 		void add_squad(char id, int squad);
 		void setSize(int& width, int& height);
 		float distance(char id);

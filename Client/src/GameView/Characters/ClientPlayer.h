@@ -33,14 +33,17 @@ class ClientPlayer {
 		int squad;
 		bool dead;
 
+		int window_width;
+		int window_height;
+
 	public:
-		ClientPlayer(char& id, std::string& name);
+		ClientPlayer(char& id, std::string& name, int window_width, int window_height);
 
 		ClientPlayer();
 
 		~ClientPlayer();
 
-		void createStencil(Renderer& renderer, double angle, int alpha);
+		void createStencil(Renderer& renderer, double angle, int alpha, int radius);
 
 		char get_id();
 
@@ -76,6 +79,7 @@ class ClientPlayer {
 		void playWeaponSound();
 
 		void render(Camera& camera);
+
 		std::string get_name();
 
 	private:

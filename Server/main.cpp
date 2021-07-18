@@ -1,10 +1,3 @@
-#ifdef DEV_MODE
-	#define AD "../Server/src/Configuration/Configuration.yaml"
-#else
-	#define AD "Configuration.yaml"
-#endif
-
-#include <iostream>
 #include <string>
 #include <exception>
 #include <syslog.h>
@@ -20,13 +13,11 @@ int main(int argc, char *argv[]) {
 		syslog(LOG_CRIT, "[%s:%i]: Se enviaron %d argumentos"
 				 " y se esperaban %d.", __FILE__, __LINE__,
 				   argc, ARGC_EXPECTED);
-		//file_path_configs = "Server/src/Configuration/Configuration.yaml";
 	} else {
 		std::string file_path_configs(argv[1]);
 		CF::load_configuration(file_path_configs);
 	}
 	try {
-		std::cout << AD << '\n';
 		Server server;
 		server.execute();
 	} catch(std::exception& e) {

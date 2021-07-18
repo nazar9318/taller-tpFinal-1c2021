@@ -20,9 +20,6 @@ function helpMessage() {
     echo "  i: instala el juego (no se instalan dependencias)."
     echo "  a: instala todo (dependencias y juego)."
     echo ""
-    echo "Opciones de desinstalación:"
-    echo "  u: desinstala el juego."
-    echo ""
     echo "Otras opciones:"
     echo "  h: muestra este mensaje."
     echo "  m: manual de usuario."
@@ -31,7 +28,7 @@ function helpMessage() {
 }
 
 function unknownInput() {
-    echo "Opción desconocida (ingrese 'h' para ayuda, 'q' para salir)." 
+    echo "Opción desconocida (ingrese 'h' para ayuda, 'q' para salir)."
     echo ""
 }
 
@@ -42,12 +39,13 @@ function userManual() {
     echo "  * Las dependencias que se instalarán serán las necesarias para utilizar la librería gráfica SDL, y CMake para la compilación."
     echo ""
     echo "Ejecución"
-    echo "  * Servidor: corriendo 'sudo ao-server port' se abrirá un servidor en el puerto dado. Es necesario ejecutar con sudo ya que el servidor modifica los archivos de la base de datos."
-    echo "  * Cliente: corriendo 'argentum' se abrirá el juego."
+    echo "  * Servidor: './server' desde la carpeta build generada o './server ruta_configuraciones'. "
+    echo "  * Cliente: corriendo './client' se abrirá el juego."
     echo ""
+
     echo "Configuración"
-    echo "  * Para configurar el cliente, se debe modificar el archivo 'config.json' en la ruta '/etc/argentum/client/config'. Desde aquí se puede modificar el tamaño de la ventana, si se desea jugar en modo fullscreen o modo ventana, y el framerate del mismo."
-    echo "  * Para configurar el servidor, podemos acceder a los archivos en la ruta '/etc/argentum/server/config' y modificar el archivo que queramos." 
+    echo "  * Para configurar el cliente, se debe modificar el archivo ClientConfiguration.yaml."
+    echo "  * Para configurar el servidor, se puede modificar el archivo Configuration.yaml."
     echo ""
 }
 
@@ -58,11 +56,14 @@ function build() {
     sudo rm -rf build
     mkdir build
     cd build
-    cmake ..
+    cmake -DUSR=YES ..
 }
 
 function installDependencies() {
     echo "=== INSTALACIÓN DE DEPENDENCIAS ==="
+    echo ""
+    echo ">> Instalando 'g++'..."
+    sudo apt install g++
     echo ""
     echo ">> Instalando 'cmake'..."
     sudo apt-get install cmake
@@ -79,7 +80,7 @@ function installDependencies() {
     echo ">> Instalando 'libsdl2-mixer-dev'..."
     sudo apt-get install libsdl2-mixer-dev
     echo ""
-    echo ">> Instalando 'libsdl2-mixer-dev'..."
+    echo ">> Instalando 'libsdl2-gfx-dev'..."
     sudo apt-get install libsdl2-gfx-dev
     echo ""
     echo ">> Instalando 'libsdl2-mixer-dev'..."
@@ -107,14 +108,7 @@ function all() {
     installGame
 }
 
-function uninstall() {
-    echo "=== DESINSTALADOR ==="
-    sudo rm -rf build
-#FALTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    echo ""
-    echo "Se ha desinstalado el juego con éxito."
-    echo ""
-}
+
 
 #------------------------------------------------------------------------------
 
@@ -122,7 +116,6 @@ function uninstall() {
 # Loop ppal
 
 # exit when any command fails
-set -e
 
 initialMessage
 helpMessage
@@ -132,7 +125,7 @@ while :
 do
     read OPTION
     case $OPTION in
-        d)  
+        d)
             echo ""
             installDependencies
             waitingInputMessage
@@ -148,12 +141,7 @@ do
             installGame
             waitingInputMessage
         ;;
-        u)
-            echo ""
-            uninstall
-            waitingInputMessage
-        ;;
-        h)  
+        h)
             echo ""
             helpMessage
             waitingInputMessage
@@ -163,13 +151,13 @@ do
             userManual
             waitingInputMessage
         ;;
-        q)  
+        q)
             echo ""
             echo "Adiós!"
             echo "-------------------------------------------------"
             exit 0
         ;;
-        *)  
+        *)
             echo ""
             unknownInput
             waitingInputMessage

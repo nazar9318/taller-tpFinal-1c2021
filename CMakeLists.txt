@@ -2,11 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(counter-strike)
 
-#option(DEV "make para desarrollador" ON)
-#set(DEV_MODE 0)
-if(DEV)
- #set(DEV_MODE 1)
- add_definitions(-DDEV_MODE=1)
+if(USR)
+ add_definitions(-DUSR_MODE=1)
 endif()
 
 # std c++11
@@ -120,17 +117,17 @@ target_link_libraries(client client_classes common_classes SDL2 SDL2_image SDL2_
 # INSTALACION
 
 
-#file(COPY Client/Assets DESTINATION ./)
-#file(COPY Server/src/Configuration/Configuration.yaml DESTINATION ./)
-#file(COPY Client/src/ClientConfiguration/ClientConfiguration.yaml DESTINATION ./)
-#file(COPY Editor/configs DESTINATION ./)
+file(COPY Client/Assets DESTINATION ./)
+file(COPY Server/src/Configuration/Configuration.yaml DESTINATION ./)
+file(COPY Client/src/ClientConfiguration/ClientConfiguration.yaml DESTINATION ./)
+file(COPY Editor/configs DESTINATION ./)
 
 
-#message("[INFO] Adding Installation directives")
-#INSTALL(TARGETS server client DESTINATION /usr/bin)
-#INSTALL(DIRECTORY Client/Assets DESTINATION /var/Counter)
-#INSTALL(DIRECTORY Editor/configs DESTINATION /var/Counter)
-#INSTALL(FILES Server/src/Configuration/Configuration.yaml Client/src/ClientConfiguration/ClientConfiguration.yaml DESTINATION /etc/Counter)
+message("[INFO] Adding Installation directives")
+INSTALL(TARGETS server client DESTINATION /usr/bin)
+INSTALL(DIRECTORY Client/Assets DESTINATION /var/Counter)
+INSTALL(DIRECTORY Editor/configs DESTINATION /var/Counter)
+INSTALL(FILES Server/src/Configuration/Configuration.yaml Client/src/ClientConfiguration/ClientConfiguration.yaml DESTINATION /etc/Counter)
 
 
 

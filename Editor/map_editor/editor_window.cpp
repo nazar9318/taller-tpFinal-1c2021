@@ -17,11 +17,11 @@ ui(new Ui::MainWindow), delay_cnt(0), resized(false) {
     this->ui->setupUi(this);
     scene = new QGraphicsScene(this);
     this->ui->map->setScene(scene);
-    for (int x = 0; x <= 1000; x += BASE_X) {
-        scene->addLine(x, 0, x, 1000, QPen(Qt::black));
+    for (int x = 0; x <= BASE_X*1000; x += BASE_X) {
+        scene->addLine(x, 0, x, BASE_X*1000, QPen(Qt::black));
     }
-    for (int y = 0; y <= 1000; y += BASE_Y) {
-        scene->addLine(0, y, 1000, y, QPen(Qt::black));
+    for (int y = 0; y <= BASE_Y*1000; y += BASE_Y) {
+        scene->addLine(0, y, BASE_Y*1000, y, QPen(Qt::black));
     }
     this->connectItems();
     this->ui->map->setMouseTracking(true);
@@ -160,27 +160,41 @@ size_t MainWindow::width() {
 }
 
 void MainWindow::moveMap(YAML::Emitter &emitter) {
-    if (this->min_x == 0) {
-        for (size_t i = 1; i < nodes.size(); i++) {
-            int x = nodes[i]["position"][0].as<int>();
-            x++;
-            nodes[i]["position"][0] = x;
+    if (!this->resized) {
+        if (this->min_x == 0) {
+            for (size_t i = 1; i < nodes.size(); i++) {
+                int x = nodes[i]["position"][0].as<int>();
+                x++;
+                nodes[i]["position"][0] = x;
+            }
+            this->min_x++;
+            this->max_x++;
+        } else {
+            for (size_t i = 1; i < nodes.size(); i++) {
+                int x = nodes[i]["position"][0].as<int>();
+                nodes[i]["position"][0] = x-this->min_x+1;
+            }
+            this->max_x -= this->min_x-1;
+            this->min_x = 1;
         }
-        this->min_x++;
-        this->max_x++;
-    }
-    if (this->min_y == 0) {
-        for (size_t i = 1; i < nodes.size(); i++) {
-            int y = nodes[i]["position"][1].as<int>();
-            y++;
-            nodes[i]["position"][1] = y;
+        if (this->min_y == 0) {
+            for (size_t i = 1; i < nodes.size(); i++) {
+                int y = nodes[i]["position"][1].as<int>();
+                y++;
+                nodes[i]["position"][1] = y;
+            }
+            this->min_y++;
+            this->max_y++;
+        } else {
+            for (size_t i = 1; i < nodes.size(); i++) {
+                int y = nodes[i]["position"][1].as<int>();
+                nodes[i]["position"][1] = y-this->min_y+1;
+            }
+            this->max_y -= this->min_y-1;
+            this->min_y = 1;
         }
-        this->min_y++;
-        this->max_y++;
     }
-    for (size_t i = 1; i < nodes.size(); i++) {
-        emitter << nodes[i];
-    }
+    for (size_t i = 1; i < nodes.size(); i++) { emitter << nodes[i]; }
 }
 
 void MainWindow::makeSquared(YAML::Emitter &emitter) {
@@ -228,8 +242,7 @@ void MainWindow::on_save_clicked() {
     this->moveMap(emitter);
     this->makeSquared(emitter);
     this->resized = true;
-    if (this->resized) { resized["Resized"] = 1; }
-    else { resized["Resized"] = 0; }
+    resized["Resized"] = 1;
     emitter << resized;
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save Address Book"), "../configs/",
@@ -318,13 +331,14 @@ void MainWindow::on_clean_all_clicked() {
     this->box.clear();
     this->spawn.clear();
     this->weapon.clear();
-    for (int x = 0; x <= 1000; x += BASE_X) {
-        scene->addLine(x, 0, x, 1000, QPen(Qt::black));
+    for (int x = 0; x <= BASE_X*1000; x += BASE_X) {
+        scene->addLine(x, 0, x, BASE_X*1000, QPen(Qt::black));
     }
-    for (int y = 0; y <= 1000; y += BASE_Y) {
-        scene->addLine(0, y, 1000, y, QPen(Qt::black));
+    for (int y = 0; y <= BASE_Y*1000; y += BASE_Y) {
+        scene->addLine(0, y, BASE_Y*1000, y, QPen(Qt::black));
     }
     this->scene->update();
+    this->resized = false;
 }
 
 void MainWindow::connectItems() {

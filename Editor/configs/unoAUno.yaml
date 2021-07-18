@@ -3,43 +3,28 @@ height: 6
 ---
 item: base_dust
 position:
-  - 2
-  - 2
----
-item: base_dust
-position:
-  - 2
-  - 3
----
-item: base_dust
-position:
-  - 2
+  - 5
   - 4
 ---
 item: base_dust
 position:
+  - 5
+  - 3
+---
+item: base_dust
+position:
+  - 5
   - 2
-  - 5
 ---
 item: base_dust
 position:
-  - 3
   - 5
+  - 1
 ---
 item: base_dust
 position:
-  - 3
   - 4
----
-item: base_dust
-position:
-  - 3
-  - 3
----
-item: base_dust
-position:
-  - 3
-  - 2
+  - 1
 ---
 item: base_dust
 position:
@@ -58,143 +43,108 @@ position:
 ---
 item: base_dust
 position:
-  - 4
-  - 5
----
-item: base_dust
-position:
-  - 5
-  - 5
----
-item: base_dust
-position:
-  - 5
+  - 3
   - 4
 ---
 item: base_dust
 position:
-  - 5
+  - 3
   - 3
 ---
 item: base_dust
 position:
-  - 5
+  - 3
   - 2
 ---
 item: base_dust
 position:
-  - 6
+  - 3
+  - 1
+---
+item: base_dust
+position:
+  - 2
+  - 1
+---
+item: base_dust
+position:
+  - 2
   - 2
 ---
 item: base_dust
 position:
-  - 6
+  - 2
   - 3
 ---
 item: base_dust
 position:
-  - 6
+  - 2
   - 4
 ---
 item: base_dust
 position:
-  - 6
-  - 5
----
-item: C_spawn
-position:
+  - 1
   - 4
-  - 5
+---
+item: base_dust
+position:
+  - 1
+  - 3
+---
+item: base_dust
+position:
+  - 1
+  - 2
+---
+item: base_dust
+position:
+  - 1
+  - 1
 ---
 item: T_spawn
 position:
+  - 3
+  - 1
+---
+item: C_spawn
+position:
+  - 3
   - 4
+---
+item: box_black
+position:
+  - 0
+  - 0
+---
+item: box_black
+position:
+  - 0
+  - 1
+---
+item: box_black
+position:
+  - 0
   - 2
 ---
 item: box_black
 position:
-  - 7
-  - 6
----
-item: box_black
-position:
-  - 7
-  - 5
----
-item: box_black
-position:
-  - 7
-  - 4
----
-item: box_black
-position:
-  - 7
+  - 0
   - 3
 ---
 item: box_black
 position:
-  - 7
-  - 2
----
-item: box_black
-position:
-  - 7
-  - 1
----
-item: box_black
-position:
-  - 6
-  - 6
----
-item: box_black
-position:
-  - 6
-  - 1
----
-item: box_black
-position:
-  - 5
-  - 6
----
-item: box_black
-position:
-  - 5
-  - 1
----
-item: box_black
-position:
+  - 0
   - 4
-  - 6
 ---
 item: box_black
 position:
-  - 4
-  - 1
----
-item: box_black
-position:
-  - 3
-  - 6
----
-item: box_black
-position:
-  - 3
-  - 1
----
-item: box_black
-position:
-  - 2
-  - 6
----
-item: box_black
-position:
-  - 2
-  - 1
+  - 0
+  - 5
 ---
 item: box_black
 position:
   - 1
-  - 6
+  - 0
 ---
 item: box_black
 position:
@@ -203,22 +153,72 @@ position:
 ---
 item: box_black
 position:
-  - 1
-  - 4
+  - 2
+  - 0
 ---
 item: box_black
 position:
-  - 1
+  - 2
+  - 5
+---
+item: box_black
+position:
   - 3
+  - 0
 ---
 item: box_black
 position:
+  - 3
+  - 5
+---
+item: box_black
+position:
+  - 4
+  - 0
+---
+item: box_black
+position:
+  - 4
+  - 5
+---
+item: box_black
+position:
+  - 5
+  - 0
+---
+item: box_black
+position:
+  - 5
+  - 5
+---
+item: box_black
+position:
+  - 6
+  - 0
+---
+item: box_black
+position:
+  - 6
   - 1
+---
+item: box_black
+position:
+  - 6
   - 2
 ---
 item: box_black
 position:
-  - 1
-  - 1
+  - 6
+  - 3
+---
+item: box_black
+position:
+  - 6
+  - 4
+---
+item: box_black
+position:
+  - 6
+  - 5
 ---
 Resized: 1

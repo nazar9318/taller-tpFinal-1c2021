@@ -408,13 +408,13 @@ void MainWindow::clean_matches() {
 			}
 		}
 	} catch(ExceptionSocketClosed& e) {
-		// manejar. 
-
 		QString exception("Ha ocurrido un problema con la comunicación.");
 		show_error(exception);
 		QWidget::close();
 	} catch(...) {
-		// manejar. 
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
 	}
 }
 

@@ -124,7 +124,7 @@ file(COPY Editor/configs DESTINATION ./)
 
 
 message("[INFO] Adding Installation directives")
-INSTALL(TARGETS server client DESTINATION /usr/bin)
+INSTALL(TARGETS server client map_editor DESTINATION /usr/bin)
 INSTALL(DIRECTORY Client/Assets DESTINATION /var/Counter)
 INSTALL(DIRECTORY Editor/configs DESTINATION /var/Counter)
 INSTALL(FILES Server/src/Configuration/Configuration.yaml Client/src/ClientConfiguration/ClientConfiguration.yaml DESTINATION /etc/Counter)

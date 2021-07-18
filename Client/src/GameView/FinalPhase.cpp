@@ -3,7 +3,7 @@
 
 FinalPhase::FinalPhase(Renderer& renderer, int screen_width, int screen_height):
 renderer(renderer), screen_width(screen_width), screen_height(screen_height),
-font(NULL), post_game(false) {}
+font(NULL), post_game(false), total_rounds(10) {}
 
 void FinalPhase::loadMedia() {
   background_victory.loadFromFile(renderer, FINAL_PHASE_VICTORY_PATH);
@@ -14,8 +14,9 @@ void FinalPhase::loadMedia() {
   }
 }
 
-void FinalPhase::setRound(int current_round) {
+void FinalPhase::setRound(int current_round, int total_rounds) {
   this->round = current_round;
+  this->total_rounds = total_rounds;
   clean();
 }
 
@@ -159,7 +160,7 @@ void FinalPhase::renderRounds() {
   quad.x += 30;
   quad.w = 16;
   std::stringstream total;
-  total << 10;
+  total << total_rounds;
   surfaceMessage = TTF_RenderText_Solid(font, total.str().c_str(), white);
   Message = renderer.createTextureFromSurface(surfaceMessage);
   renderer.render(Message, NULL, &quad);

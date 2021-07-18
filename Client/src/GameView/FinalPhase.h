@@ -34,6 +34,7 @@ class FinalPhase {
 		bool post_game;
 		bool victory;
 		int round;
+		int total_rounds;
 		void renderRequested(int x, const std::vector<std::string>& request);
 
 	public:
@@ -41,7 +42,7 @@ class FinalPhase {
 		void addScore(const std::string& name, bool my_team, int round_kills,
 					int total_kills, int times_killed, int money, bool victory);
 		void setSquadsPoints(int wins_one, int wins_two);
-		void setRound(int current_round);
+		void setRound(int current_round, int total_rounds);
 		void setPlayerSquad(int squad);
 		void renderBackground();
 		void renderRounds();

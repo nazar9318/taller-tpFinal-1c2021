@@ -3,10 +3,12 @@
 SendStatsEvent::SendStatsEvent(GameWorld& world, bool finished) {
 	this->msg.push_back((char)ModelTypeEvent::STATISTICS);
 	this->msg.push_back((char)finished);
-	
+
 	int team_one_wins;
 	int team_two_wins;
+	int total_rounds = CF::number_rounds;
 	world.get_wins(team_one_wins, team_two_wins);
+	push_back(total_rounds);
 	push_back(team_one_wins);
 	push_back(team_two_wins);
 	char last_winner = world.get_last_winner();

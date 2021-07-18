@@ -65,7 +65,7 @@ class GameMap {
 		void renderGround();
 		void renderWeapons();
 		void add_character_team(char id, Team team);
-		void setRoundInFinalPhase(int current_round);
+		void setRoundInFinalPhase(int current_round, int total_rounds);
 		void setWinsToFinalPhase(int wins_one, int wins_two);
 		void add_stats(char id, int kills_round, int kills_total,
 						int times_killed, int money, int round_winner);

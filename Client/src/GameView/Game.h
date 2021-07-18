@@ -46,7 +46,7 @@ class Game {
 		FinalPhase final_phase;
 		ModelEventHandler handler;
 		bool is_running;
-		bool is_finished;
+		bool not_finished;
 		ClientPlayer player;
 		std::map<char, ClientCharacter> characters;
 		Window window;

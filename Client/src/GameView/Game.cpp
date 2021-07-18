@@ -13,7 +13,7 @@ Game::Game(ProtectedQueue<Event>& model,
  	map(renderer, player,camera, characters, hud, final_phase),
 	initial_phase(renderer, 800, 600, client, player_id),
  	fase(FaseType::INITIAL_FASE),
-	is_finished(false),
+	not_finished(true),
 	bomb(renderer, camera, player_id, player),
 	attack_effects(renderer, camera, player_id, player, characters) {
 	for (auto it = charactersInfo.begin(); it != charactersInfo.end(); ++it) {
@@ -31,14 +31,14 @@ void Game::execute() {
 		auto end = steady_clock::now();
 		double t_delta;
 		loadMedia();
-		while (is_running && !is_finished) {
+		while (is_running && not_finished) {
 			begin = steady_clock::now();
 			if (fase == FaseType::INITIAL_FASE) {
 				// this->final_phase.clean();
 				// this->final_phase_rendered = false;
 				is_running = initial_phase.run();
 			} else {
-				is_running = handle_events();
+				not_finished = handle_events();
 			}
 			process_events();
 			render();
@@ -49,9 +49,9 @@ void Game::execute() {
 		}
 		// std::this_thread::sleep_for(duration<double>(10));
 
-		while (!is_finished) {
+		while (not_finished) {
 			begin = steady_clock::now();
-			is_finished = handle_finished_game();
+			not_finished = handle_finished_game();
 			end = steady_clock::now();
 			t_delta = duration<double>(end - begin).count();
 			if (t_delta < STEP_TIME)

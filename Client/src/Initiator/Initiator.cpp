@@ -16,7 +16,7 @@ void Initiator::launch(Socket& socket, int argc,
 	QApplication a(argc, argv);
 	MainWindow w(socket, game_started, receiver,
 			sender, model_events, client_events,
-			players, self_id, active, user_name_charged, name, port, host);
+			players, self_id, active, user_name_charged, name);//, port, host);
 	w.show();
 	a.exec();
 }

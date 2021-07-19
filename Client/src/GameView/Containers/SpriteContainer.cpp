@@ -15,8 +15,8 @@ void SpriteContainer::selectSkins(std::string& terrorist_skin_path, std::string&
   char terrorist_skin = CCF::terrorist_skin;
   char counter_skin = CCF::counter_skin;
 
-  if (terrorist_skin == TerroristSkin::PHEONIX) {
-    terrorist_skin_path = SPRITE_NPC_PHEONIX_PATH;
+  if (terrorist_skin == TerroristSkin::PHOENIX) {
+    terrorist_skin_path = SPRITE_NPC_PHOENIX_PATH;
   } else if (terrorist_skin == TerroristSkin::L337KREW) {
     terrorist_skin_path = SPRITE_NPC_L337_KREW_PATH;
   } else if (terrorist_skin == TerroristSkin::ARTIC_AVENGER) {

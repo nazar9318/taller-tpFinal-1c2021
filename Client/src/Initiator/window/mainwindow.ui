@@ -23,7 +23,7 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-10</x>
       <y>0</y>
       <width>821</width>
       <height>591</height>
@@ -34,7 +34,7 @@
 </string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="connectToPort">
      <widget class="QLineEdit" name="host">
@@ -75,7 +75,7 @@
        <rect>
         <x>80</x>
         <y>20</y>
-        <width>461</width>
+        <width>571</width>
         <height>61</height>
        </rect>
       </property>
@@ -84,6 +84,178 @@
 Para comenzar, ingrese el host y puerto al que se quiere conectarse.
 Una vez ingresados, presione el botón &quot;Empezar&quot; para avanzar.</string>
       </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Bienvenida">
+     <widget class="QPushButton" name="OK">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>330</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Aceptar</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>180</y>
+        <width>241</width>
+        <height>141</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="chooseSkins">
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>90</y>
+        <width>191</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Elija su skin de Terrorist</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>320</y>
+        <width>221</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Elija su skin de Counter</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="acceptSkins">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>60</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Aceptar</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>10</y>
+        <width>461</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Elija una skin propia para terrorista y para counter.</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>40</y>
+        <width>381</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string> Una vez haya elegido ambas, de click en Aceptar.</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>110</y>
+        <width>421</width>
+        <height>211</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="2" column="0">
+        <widget class="QPushButton" name="PHOENIX">
+         <property name="text">
+          <string>PHOENIX</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="GUERRILLA">
+         <property name="text">
+          <string>GUERRILLA</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="ARTIC_AVENGER">
+         <property name="text">
+          <string>ARTIC_AVENGER</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="L337KREW">
+         <property name="text">
+          <string>L337KREW</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>340</y>
+        <width>421</width>
+        <height>211</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="1" column="1">
+        <widget class="QPushButton" name="SEAL_FORCE">
+         <property name="text">
+          <string>SEAL_FORCE</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="GERMAN_GSG9">
+         <property name="text">
+          <string>GERMAN_GSG9</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="UKSAS">
+         <property name="text">
+          <string>UKSAS</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="FRENCH_GIGN">
+         <property name="text">
+          <string>FRENCH_GIGN</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="mainWindow">
@@ -162,7 +334,7 @@ Una vez ingresados, presione el botón &quot;Empezar&quot; para avanzar.</string
        <rect>
         <x>30</x>
         <y>50</y>
-        <width>321</width>
+        <width>411</width>
         <height>41</height>
        </rect>
       </property>
@@ -200,38 +372,13 @@ Abajo se ve la lista de jugadores esperando.</string>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>100</y>
-        <width>391</width>
-        <height>17</height>
+        <y>90</y>
+        <width>471</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="text">
        <string>Lista de jugadores esperando a que empiece la partida.</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="Bienvenida">
-     <widget class="QPushButton" name="OK">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>330</y>
-        <width>89</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Aceptar</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit">
-      <property name="geometry">
-       <rect>
-        <x>250</x>
-        <y>180</y>
-        <width>241</width>
-        <height>141</height>
-       </rect>
       </property>
      </widget>
     </widget>

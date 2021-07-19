@@ -6,7 +6,7 @@
 #include "Paths.h"
 
 enum TerroristSkin {
-	PHEONIX,
+	PHOENIX,
 	L337KREW,
 	ARTIC_AVENGER,
 	GUERRILLA

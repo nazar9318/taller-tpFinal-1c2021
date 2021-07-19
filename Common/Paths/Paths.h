@@ -67,7 +67,7 @@
     #define SPRITE_NPC_AWP_PATH "Assets/NPC/awp.bmp"
     #define SPRITE_POINTER_PATH "Assets/Sprites/Weapons/pointer.bmp"
 
-    #define SPRITE_NPC_PHEONIX_PATH "Assets/NPC/pheonix.bmp"
+    #define SPRITE_NPC_PHOENIX_PATH "Assets/NPC/PHOENIX.bmp"
     #define SPRITE_NPC_L337_KREW_PATH "Assets/NPC/l337_krew.bmp"
     #define SPRITE_NPC_ARTIC_AVENGER_PATH "Assets/NPC/artic_avenger.bmp"
     #define SPRITE_NPC_GUERRILLA_PATH "Assets/NPC/guerrilla.bmp"
@@ -166,7 +166,7 @@
     #define SPRITE_NPC_AWP_PATH "../Client/Assets/NPC/awp.bmp"
     #define SPRITE_POINTER_PATH "../Client/Assets/Sprites/Weapons/pointer.bmp"
 
-    #define SPRITE_NPC_PHEONIX_PATH "../Client/Assets/NPC/pheonix.bmp"
+    #define SPRITE_NPC_PHOENIX_PATH "../Client/Assets/NPC/phoenix.bmp"
     #define SPRITE_NPC_L337_KREW_PATH "../Client/Assets/NPC/l337_krew.bmp"
     #define SPRITE_NPC_ARTIC_AVENGER_PATH "../Client/Assets/NPC/artic_avenger.bmp"
     #define SPRITE_NPC_GUERRILLA_PATH "../Client/Assets/NPC/guerrilla.bmp"

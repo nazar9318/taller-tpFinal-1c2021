@@ -4,9 +4,11 @@ Client::Client() {
 }
 
 void Client::execute(int argc, char** argv) {
-	bool client_active = true; 
+	bool client_active = true;
 	bool user_name_charged = false;
-	std::string name; 
+	std::string name;
+	std::string port;
+	std::string host;
 	while (client_active) {
 		Socket socket;
 		ProtectedQueue<Event> model_events;
@@ -14,8 +16,8 @@ void Client::execute(int argc, char** argv) {
 		ModelRecieverThread reciever(socket, model_events);
 		EventSenderThread sender(socket, client_events);
 		std::map<char, std::string> players;
-		Initiator initiator(reciever, sender, 
-					model_events, client_events, client_active);
+		Initiator initiator(reciever, sender,
+					model_events, client_events, client_active, port, host);
 		bool game_started = false;
 		char self_id;
 		initiator.launch(socket, argc, argv, game_started,
@@ -23,7 +25,7 @@ void Client::execute(int argc, char** argv) {
 		if (game_started) {
 			Game game(model_events, client_events, players, self_id);
 			game.execute();
-		} 
+		}
 		reciever.stop_running();
 		sender.stop_running();
 	}

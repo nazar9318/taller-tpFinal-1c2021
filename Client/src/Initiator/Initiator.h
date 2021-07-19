@@ -23,15 +23,18 @@ class Initiator {
 	ProtectedQueue<Event>& model_events;
 	ProtectedQueue<std::unique_ptr<Event>>& client_events;
 	bool& active;
+	std::string& port;
+	std::string& host;
 
 	public:
 		Initiator(ModelRecieverThread& receiver, EventSenderThread& sender,
 		 ProtectedQueue<Event>& model_events,
-		  ProtectedQueue<std::unique_ptr<Event>>& client_events, bool& active);
+		  ProtectedQueue<std::unique_ptr<Event>>& client_events, bool& active,
+		std::string& port, std::string& host);
 
 		// returns true if player is logged in.
 		void launch(Socket& socket, int argc, char** argv, bool &game_started,
-						std::map<char, std::string>& players, char& self_id, 
+						std::map<char, std::string>& players, char& self_id,
 						bool& user_name_charged, std::string& name);
 		~Initiator();
 

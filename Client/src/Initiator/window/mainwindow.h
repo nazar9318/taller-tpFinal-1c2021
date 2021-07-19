@@ -48,6 +48,8 @@ private:
     std::map<char, std::string>& players;
     char& self_id;
     std::string& user_name;
+    std::string& port;
+    std::string& host;
     QTimer* matches_timer;
     QTimer* players_joined_timer;
     bool& active;
@@ -61,6 +63,7 @@ public:
             std::map<char, std::string>& players,
             char& self_id, bool& active,
             bool& user_name_charged, std::string& name,
+            std::string& port, std::string& host,
             QWidget *parent = nullptr);
 
     void createMatch(const QString& map_name);

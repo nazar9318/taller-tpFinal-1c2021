@@ -23,55 +23,51 @@ MainWindow::MainWindow(Socket& skt, bool &started,
 		 ProtectedQueue<std::unique_ptr<Event>>& c_events,
 		 std::map<char, std::string>& users, char& id, bool& active,
 		 bool& user_name_charged, std::string& name,
+		 std::string& port, std::string& host,
 		 QWidget *parent)
  		: socket(skt), game_started(started), receiver(rcv),
  		 sender(snd), model_events(m_events),
  		 client_events(c_events), players(users), self_id(id),
- 		  QMainWindow(parent),
-         ui(new Ui::MainWindow), match_started(false), active(active),
-          user_name_charged(user_name_charged), user_name(name){
-   	ui->setupUi(this);
+ 		 QMainWindow(parent), ui(new Ui::MainWindow),
+		 match_started(false), active(active),
+     user_name_charged(user_name_charged), user_name(name),
+		 port(port), host(host) {
+  ui->setupUi(this);
 	this->setStyleSheet("background-color: white;");
 	active = false;
 	if (!user_name_charged) {
 		ui->stackedWidget->setCurrentIndex(SOCKET_PAGE);
 	} else {
+		socket.connect_to(host, port);
 		SendUserNameEvent user_event(user_name);
 		protocol.send_event(socket, user_event.get_msg());
-        ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
-    }
-
-/**********************************************************************/
-
-	// hay que hacerlo en una ventana nueva:
-    /*std::string host("localhost");
-	std::string port("8080");
-	try {
-		socket.connect_to(host, port);
-	} catch (...) {
-		//...
-    }*/
-/**********************************************************************/
-
+    ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
+  }
 	setWindowTitle(TITLE);
 	players_joined_timer = new QTimer(this);
-    connect(players_joined_timer, SIGNAL(timeout()), this, SLOT(update_players()));
+  connect(players_joined_timer, SIGNAL(timeout()), this, SLOT(update_players()));
 	matches_timer = new QTimer(this);
-    connect(matches_timer, SIGNAL(timeout()), this, SLOT(update_matches()));
-    ui->lineEdit->setPlaceholderText("Ingrese su nombre");
-    this->ui->host->setPlaceholderText("Ingrese host");
-    this->ui->port->setPlaceholderText("Ingrese port");
+  connect(matches_timer, SIGNAL(timeout()), this, SLOT(update_matches()));
+  ui->lineEdit->setPlaceholderText("Ingrese su nombre");
+  this->ui->host->setPlaceholderText("Ingrese host");
+  this->ui->port->setPlaceholderText("Ingrese port");
 }
 
 void MainWindow::on_startButton_clicked() {
-    std::string host(this->ui->host->text().toStdString());
-    std::string port(this->ui->port->text().toStdString());
+    host = this->ui->host->text().toStdString();
+    port = this->ui->port->text().toStdString();
     try {
         socket.connect_to(host, port);
         this->ui->stackedWidget->setCurrentIndex(USER_NAME_PAGE);
-    } catch (...) {
-        //...
-    }
+    } catch(std::exception& e) {
+			QString exception("Ha ocurrido un problema con la comunicación.");
+			show_error(exception);
+			QWidget::close();
+    } catch(...) {
+			QString exception("Ha ocurrido un error desconocido.");
+			show_error(exception);
+			QWidget::close();
+		}
 }
 
 // POST: Boton de la primera pantalla mostrada.

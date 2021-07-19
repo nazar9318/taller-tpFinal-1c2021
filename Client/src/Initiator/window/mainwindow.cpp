@@ -41,8 +41,14 @@ MainWindow::MainWindow(Socket& skt, bool &started,
 		socket.connect_to(host, port);
 		SendUserNameEvent user_event(user_name);
 		protocol.send_event(socket, user_event.get_msg());
+<<<<<<< HEAD
+        ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
+    }
+
+=======
     ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
   }
+>>>>>>> f051ef3e2e8d4f67ea2203c7dc30e800652a5dcb
 	setWindowTitle(TITLE);
 	players_joined_timer = new QTimer(this);
   connect(players_joined_timer, SIGNAL(timeout()), this, SLOT(update_players()));
@@ -59,6 +65,25 @@ void MainWindow::on_startButton_clicked() {
     try {
         socket.connect_to(host, port);
         this->ui->stackedWidget->setCurrentIndex(USER_NAME_PAGE);
+<<<<<<< HEAD
+	} catch(ExceptionSocketClosed& e) {
+		QString exception("Ha ocurrido un problema con la comunicación.");
+		show_error(exception);
+		QWidget::close();
+	} catch(Exception& e) {
+		QString exception("No se ha podido conectar, ha ingresado un host o puerto incorrecto.");
+		show_error(exception);
+		//QWidget::close();
+	} catch(std::exception& e) {
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
+	} catch(...) {
+		QString exception("Ha ocurrido un problema desconocido.");
+		show_error(exception);
+		QWidget::close();
+	}
+=======
     } catch(std::exception& e) {
 			QString exception("Ha ocurrido un problema con la comunicación.");
 			show_error(exception);
@@ -68,6 +93,7 @@ void MainWindow::on_startButton_clicked() {
 			show_error(exception);
 			QWidget::close();
 		}
+>>>>>>> f051ef3e2e8d4f67ea2203c7dc30e800652a5dcb
 }
 
 // POST: Boton de la primera pantalla mostrada.
@@ -319,7 +345,6 @@ void MainWindow::update_players() {
 		QWidget::close();
 	}
 }
-
 
 // POST: Al apretar el boton de iniciar la partida, se
 //       cierra qt para comenzar sdl.

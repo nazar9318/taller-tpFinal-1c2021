@@ -5,8 +5,8 @@ YAML::Node CCF::yaml_file = YAML::LoadFile(CLIENT_CONFIGURATION_PATH);
 int CCF::widowed_x = CCF::yaml_file["widowed_x"].as<int>();
 int CCF::widowed_y = CCF::yaml_file["widowed_y"].as<int>();
 
-TerroristSkin CCF::terrorist_skin = TerroristSkin::Pheonix;
-CounterSkin CCF::counter_skin = CounterSkin::SealForce;
+TerroristSkin CCF::terrorist_skin = TerroristSkin::L337KREW;
+CounterSkin CCF::counter_skin = CounterSkin::UKSAS;
 bool CCF::is_fullscreen = false;
 bool CCF::sound_on = true;
 

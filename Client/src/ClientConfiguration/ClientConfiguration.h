@@ -1,22 +1,22 @@
 #ifndef _CLIENT_CONFIGURATION_H
-#define _CLIENT_CONFIGURATION_H 
+#define _CLIENT_CONFIGURATION_H
 
 #include "yaml-cpp/yaml.h"
 
 #include "Paths.h"
 
 enum TerroristSkin {
-	Pheonix,
-	L337Krew, 
-	ArticAvenger,
-	Guerrilla
+	PHEONIX,
+	L337KREW,
+	ARTIC_AVENGER,
+	GUERRILLA
 };
 
 enum CounterSkin: char {
-	SealForce,
-	GermanGSG9,
-	UKSAS, 
-	FrenchGIGN
+	SEAL_FORCE,
+	GERMAN_GSG9,
+	UKSAS,
+	FRENCH_GIGN
 };
 
 class ClientConfiguration;

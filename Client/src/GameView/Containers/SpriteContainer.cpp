@@ -11,6 +11,31 @@ SpriteContainer& SpriteContainer::getInstance() {
   return *instance;
 }
 
+void SpriteContainer::selectSkins(std::string& terrorist_skin_path, std::string& counter_skin_path){
+  char terrorist_skin = CCF::terrorist_skin;
+  char counter_skin = CCF::counter_skin;
+
+  if (terrorist_skin == TerroristSkin::PHEONIX) {
+    terrorist_skin_path = SPRITE_NPC_PHEONIX_PATH;
+  } else if (terrorist_skin == TerroristSkin::L337KREW) {
+    terrorist_skin_path = SPRITE_NPC_L337_KREW_PATH;
+  } else if (terrorist_skin == TerroristSkin::ARTIC_AVENGER) {
+    terrorist_skin_path = SPRITE_NPC_ARTIC_AVENGER_PATH;
+  } else {
+    terrorist_skin_path = SPRITE_NPC_GUERRILLA_PATH;
+  }
+
+  if (counter_skin == CounterSkin::SEAL_FORCE) {
+    counter_skin_path = SPRITE_NPC_SEAL_FORCE_PATH;
+  } else if (counter_skin == CounterSkin::GERMAN_GSG9) {
+    counter_skin_path = SPRITE_NPC_GERMAN_GSG9_PATH;
+  } else if (counter_skin == CounterSkin::UKSAS) {
+    counter_skin_path = SPRITE_NPC_UKSAS_PATH;
+  } else {
+    counter_skin_path = SPRITE_NPC_FRENCH_GIGN_PATH;
+  }
+}
+
 void SpriteContainer::loadMedia(Renderer& renderer) {
   Color weapons_color = {0xFF, 0x00, 0xFF};
   Color black_color = {0x00, 0x00, 0x00};
@@ -24,8 +49,12 @@ void SpriteContainer::loadMedia(Renderer& renderer) {
   container[PositionType::BOMB].loadFromFile(renderer, SPRITE_BOMB_PATH, black_color);
 
   /*Aca tambien cargariamos las texturas de los players*/
-  container[Team::TERRORIST].loadFromFile(renderer, SPRITE_NPC_T2_PATH, black_color);
-  container[Team::COUNTER_ENEMY].loadFromFile(renderer, SPRITE_NPC_CT2_PATH, black_color);
+  std::string terrorist_skin_path;
+  std::string counter_skin_path;
+  selectSkins(terrorist_skin_path, counter_skin_path);
+
+  container[Team::TERRORIST].loadFromFile(renderer, terrorist_skin_path.c_str(), black_color);
+  container[Team::COUNTER_ENEMY].loadFromFile(renderer, counter_skin_path.c_str(), black_color);
 
   container[Equipped_Weapon::KNIFE_EQUIPPED].loadFromFile(renderer, SPRITE_NPC_KNIFE_PATH, black_color);
   container[Equipped_Weapon::GLOCK_EQUIPPED].loadFromFile(renderer, SPRITE_NPC_GLOCK_PATH, black_color);

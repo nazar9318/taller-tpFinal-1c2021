@@ -124,8 +124,8 @@ void ClientPlayer::render(Camera& camera) {
 	// 	texture_weapon->get_h()
 	// };
 
-	SDL_Rect quad = {pos.x, pos.y, texture_weapon->get_w(), texture_weapon->get_h()};
 	/*Renderizo su arma*/
+	SDL_Rect quad = {pos.x, pos.y, texture_weapon->get_w(), texture_weapon->get_h()};
 	camera.renderAddingOffset(texture_weapon->getTexture(), quad, NULL, angle + 180);
 
 	/*Renderizo el stencil*/

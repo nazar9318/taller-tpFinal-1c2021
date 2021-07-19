@@ -25,10 +25,10 @@ win_round_bonification: 50
 character_money: 100
 
 
-glock_accuracy: 0.8
-ak47_accuracy: 0.8
-m3_accuracy: 0.7
-awp_accuracy: 0.9
+glock_accuracy: 1.0
+ak47_accuracy: 0.7
+m3_accuracy: 0.3
+awp_accuracy: 1.0
 
 knife_damage_min: 5.0
 glock_damage_min: 7.0
@@ -52,28 +52,28 @@ m3_distance_penalty: 0.03
 awp_distance_penalty: 0
 knife_distance_penalty: 0
 
-glock_ammo: 50
-ak47_ammo: 120
-m3_ammo: 90
-awp_ammo: 20
+glock_ammo: 20
+ak47_ammo: 30
+m3_ammo: 8
+awp_ammo: 10
 
-glock_max_ammo: 100
-ak47_max_ammo: 300
-m3_max_ammo: 200
-awp_max_ammo: 60
+glock_max_ammo: 120
+ak47_max_ammo: 90
+m3_max_ammo: 32
+awp_max_ammo: 30
 
-ak47_price: 30
-m3_price: 50
-awp_price: 100
+ak47_price: 250
+m3_price: 170
+awp_price: 475
 
-ak47_10_bullets_price: 10
+ak47_10_bullets_price: 50
 m3_10_bullets_price: 30
-awp_10_bullets_price: 20
-glock_10_bullets_price: 5
+awp_10_bullets_price: 35
+glock_10_bullets_price: 40
 
-glock_max_distance: 80.0
-ak47_max_distance: 100.0
-m3_max_distance: 50.0
+glock_max_distance: 384.0
+ak47_max_distance: 640.0
+m3_max_distance: 256.0
 awp_max_distance: 768.0
 knife_max_distance: 20.0
 

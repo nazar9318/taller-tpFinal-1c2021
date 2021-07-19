@@ -11,6 +11,7 @@
 #include "Exception.h"
 #include "Team.h"
 #include "Paths.h"
+#include "ClientConfiguration.h"
 
 class SpriteContainer {
 	private:
@@ -22,11 +23,12 @@ class SpriteContainer {
 		static SpriteContainer& getInstance();
 		/* Obtiene la textura correspondiente */
 		Texture& operator[](char id);
-		
+
 		~SpriteContainer();
 
 	private:
 		SpriteContainer();
+		void selectSkins(std::string& terrorist_skin_path, std::string& counter_skin_path);
 		static std::unique_ptr<SpriteContainer> instance;
 
 		SpriteContainer(const SpriteContainer &other) = delete;

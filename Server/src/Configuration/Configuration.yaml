@@ -22,7 +22,7 @@ bonus_kill: 15
 end_round_bonification: 20
 win_round_bonification: 50
 
-character_money: 100
+character_money: 500
 
 
 glock_accuracy: 1.0

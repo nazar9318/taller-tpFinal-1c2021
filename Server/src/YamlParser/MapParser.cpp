@@ -27,8 +27,6 @@ void MapParser::build_positions(const std::string &type,
 		, __FILE__, __LINE__, y, x);
 
 	for (auto it = nodes.begin() + 1; it != nodes.end()-1; ++it) {
-		syslog(LOG_INFO, "[%s:%i]: Por leer un nodo"
-		, __FILE__, __LINE__);
 		const YAML::Node& obj = *it;
 		char type = get_type(obj["item"].as<std::string>());
 		int x = obj["position"][0].as<int>() * SIZE_POSITION
@@ -62,7 +60,7 @@ std::list<std::string> MapParser::get_maps() {
 }
 
 // Descripcion: Transforma de string a variables de un
-//              enum sobre el tipo de posicion. 
+//              enum sobre el tipo de posicion.
 char MapParser::get_type(const std::string& type) {
 	if (type == "base_inferno")
 		return PositionType::INFERNO;

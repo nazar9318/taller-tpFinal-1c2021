@@ -56,7 +56,7 @@ std::vector<char> StepInformation::get_players_init() {
 			v.push_back(*((char*)(&bullets) + 1));
 			v.push_back(*((char*)(&bullets) + 2));
 			v.push_back(*((char*)(&bullets) + 3));
-	
+
 			int bullets_price = it->second.get_optative_weapon_bullets_price();
 			v.push_back(*((char*)(&bullets_price)));
 			v.push_back(*((char*)(&bullets_price) + 1));
@@ -244,9 +244,6 @@ void StepInformation::add_buy(char id,
 }
 
 bool StepInformation::any_buys() {
-	syslog(LOG_INFO, "[%s:%i]: compras con size %d "
-				 , __FILE__, __LINE__, (int)buys.size());
-
 	return (buys.size() > 0);
 }
 

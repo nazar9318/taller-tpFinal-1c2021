@@ -99,6 +99,10 @@ void Texture::loadFromRenderedText(Renderer& renderer, TTF_Font* font, std::stri
 
     // Creamos la textura desde la surface
     texture = renderer.createTextureFromSurface(text_surface);
+    if (!texture) {
+      SDL_FreeSurface(text_surface);
+      throw SDLException("SDLException: failed to create texture - %s\n", SDL_GetError());
+    }
 
     // Seteamos las dimensiones
     this->height = text_surface->h;

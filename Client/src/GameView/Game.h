@@ -41,6 +41,10 @@ class Game {
 	private:
 		ProtectedQueue<Event>& model_events;
 		ProtectedQueue<std::unique_ptr<Event>>& client_events;
+		Window window;
+		Camera camera;
+		Cursor cursor;
+		Renderer renderer;
 		GameMap map;
 		Hud hud;
 		ClientBomb bomb;
@@ -51,12 +55,8 @@ class Game {
 		bool not_finished;
 		ClientPlayer player;
 		std::map<char, ClientCharacter> characters;
-		Window window;
-		Renderer renderer;
-		Camera camera;
 		FaseType fase;
 		AttackEffect attack_effects;
-		Cursor cursor;
 
 	public:
 		Game(ProtectedQueue<Event>& model_events,

@@ -24,19 +24,22 @@ MainWindow::MainWindow(Socket& skt, bool &started,
          ProtectedQueue<std::unique_ptr<Event>>& c_events,
          std::map<char, std::string>& users, char& id, bool& active,
          bool& user_name_charged, std::string& name,
+				 std::string& port, std::string& host,
          QWidget *parent)
         : socket(skt), game_started(started), receiver(rcv),
          sender(snd), model_events(m_events),
          client_events(c_events), players(users), self_id(id),
-          QMainWindow(parent),
-         ui(new Ui::MainWindow), match_started(false), active(active),
-          user_name_charged(user_name_charged), user_name(name), chosed_skins(0) {
+          match_started(false), active(active),
+          user_name_charged(user_name_charged), user_name(name), chosed_skins(0),
+					port(port), host(host), QMainWindow(parent),
+          ui(new Ui::MainWindow) {
     ui->setupUi(this);
     this->setStyleSheet("background-color: white;");
     active = false;
     if (!user_name_charged) {
         ui->stackedWidget->setCurrentIndex(SOCKET_PAGE);
     } else {
+				socket.connect_to(host, port);
         SendUserNameEvent user_event(user_name);
         protocol.send_event(socket, user_event.get_msg());
         ui->stackedWidget->setCurrentIndex(SKINS_PAGE);
@@ -57,8 +60,8 @@ MainWindow::MainWindow(Socket& skt, bool &started,
     connect(this->ui->GERMAN_GSG9, SIGNAL(clicked()), this, SLOT(select_counter_skin()));
     connect(this->ui->UKSAS, SIGNAL(clicked()), this, SLOT(select_counter_skin()));
     connect(this->ui->FRENCH_GIGN, SIGNAL(clicked()), this, SLOT(select_counter_skin()));
-	connect(this->ui->acceptSkins, SIGNAL(clicked()), this, SLOT(on_acceptSkins_clicked()));
-	loadSkinsIcons();
+		connect(this->ui->acceptSkins, SIGNAL(clicked()), this, SLOT(on_acceptSkins_clicked()));
+		loadSkinsIcons();
 }
 
 void MainWindow::loadSkinsIcons() {
@@ -135,8 +138,8 @@ void MainWindow::on_acceptSkins_clicked() {
 }
 
 void MainWindow::on_startButton_clicked() {
-    std::string host = this->ui->host->text().toStdString();
-    std::string port = this->ui->port->text().toStdString();
+    host = this->ui->host->text().toStdString();
+    port = this->ui->port->text().toStdString();
     try {
          socket.connect_to(host, port);
          this->ui->stackedWidget->setCurrentIndex(USER_NAME_PAGE);
@@ -537,7 +540,7 @@ void MainWindow::joinMatch(const QString &text) {
                 , __FILE__, __LINE__, match_name.c_str());
 
         receiver.start();
-        players_joined_timer->start();
+        players_joined_timer->start(1000);
     } catch(ExceptionSocketClosed& e) {
         QString exception("Ha ocurrido un problema con la comunicación.");
         show_error(exception);

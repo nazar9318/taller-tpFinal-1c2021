@@ -15,9 +15,9 @@ void EventReceiverThread::stop_running() {
 }
 
 
-// Descripcion: Recibe eventos a traves del procolo y los 
+// Descripcion: Recibe eventos a traves del procolo y los
 //              encola en la cola de enventos enviados por
-//              el cliente. 
+//              el cliente.
 void EventReceiverThread::run() {
 	try {
 		while (allowed_to_run) {
@@ -36,7 +36,12 @@ void EventReceiverThread::run() {
 			events.push(error_event);
 			syslog(LOG_ERR, "[%s:%i]: Pusheo el"
 					" evento de error en el creador", __FILE__, __LINE__);
-		}	
+		}	else {
+			std::vector<char> error;
+			error.push_back(ClientTypeEvent::PLAYER_ABANDONS);
+			Event error_event(error, 1);
+			events.push(error_event);
+		}
 	} catch(const std::exception& e) {
 		syslog(LOG_ERR, "[%s:%i]: Error: %s", __FILE__, __LINE__, e.what());
 	} catch (...) {

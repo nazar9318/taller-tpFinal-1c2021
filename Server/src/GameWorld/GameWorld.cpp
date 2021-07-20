@@ -9,7 +9,7 @@ GameWorld::GameWorld(const std::string& map_type):
 			 actual_team(Team::COUNTER_ENEMY),
 			 number_tics(0), number_round(0),
 			 characters(), step_info(characters),
-			 squad_manager(actual_team) {
+			 squad_manager(actual_team), players_online(0) {
 	b2Vec2 gravity(0, 0);
 	world = new b2World(gravity);
 	blocks = ground.fill_blocks(world);
@@ -28,13 +28,15 @@ void GameWorld::add_player_if_not_full(char id) {
 	squad_manager.add_squad_character(actual_team, id);
 	actual_team = get_opposite(actual_team);
 	number_players++;
+	players_online++;
 	syslog(LOG_INFO, "[%s:%i]: Se agrego al jugador con id %d"
 					 " al GameWorld", __FILE__, __LINE__, id);
 }
 
 void GameWorld::delete_player(char id) {
-	characters.erase(id);
-	number_players--;
+	players_online--;
+	syslog(LOG_INFO, "[%s:%i]: Un jugador abandono la partida"
+					, __FILE__, __LINE__);
 }
 
 Character& GameWorld::get_character(char id) {
@@ -101,6 +103,8 @@ void GameWorld::get_limits(int& x, int& y) {
 
 
 bool GameWorld::simulate_step() {
+	if (players_online == 0)
+		return false;
 	step_info.set_type(fase_type);
 	if (fase_type == FaseType::PLAYING) {
 		simulate_playing_step();

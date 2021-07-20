@@ -5,12 +5,16 @@ ClientEventHandler::
 }
 
 void ClientEventHandler::handle(Event& event) {
+	if (event.get_type() == ClientTypeEvent::PLAYER_ABANDONS ||
+	 		event.get_type() == ClientTypeEvent::CREATOR_ABANDONS) {
+		world.delete_player(event.get_id());
+	}
 	FaseType fase = world.get_fase();
 	if (fase == FaseType::PLAYING)
 		handle_play(event);
-	else if (fase == FaseType::INITIAL_FASE) 
+	else if (fase == FaseType::INITIAL_FASE)
 		handle_init(event);
-	// en end-fase no hay eventos de los clientes. 
+	// en end-fase no hay eventos de los clientes.
 }
 
 void ClientEventHandler::handle_play(Event& event) {
@@ -67,9 +71,9 @@ void ClientEventHandler::handle_play(Event& event) {
 			}
 		default:
 				syslog(LOG_CRIT, "[%s:%i]:No hay ningun"
-						" evento con esta caracteristica: %d", 
+						" evento con esta caracteristica: %d",
 							__FILE__, __LINE__, (int)event.get_type());
-	}			
+	}
 }
 
 
@@ -88,9 +92,9 @@ void ClientEventHandler::handle_init(Event& event) {
 			}
 		default:
 				syslog(LOG_CRIT, "[%s:%i]:No hay ningun"
-						" evento con esta caracteristica: %d", 
+						" evento con esta caracteristica: %d",
 						__FILE__, __LINE__, (int)event.get_type());
-	}			
+	}
 }
 
 

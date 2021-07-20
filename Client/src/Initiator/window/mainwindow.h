@@ -54,6 +54,8 @@ private:
     QTimer* players_joined_timer;
     bool& active;
     bool& user_name_charged;
+    std::string& port;
+    std::string& host;
 public:
     MainWindow(Socket& socket, bool& game_started,
             ModelRecieverThread& receiver,
@@ -63,6 +65,7 @@ public:
             std::map<char, std::string>& players,
             char& self_id, bool& active,
             bool& user_name_charged, std::string& name,
+            std::string& port, std::string& host,
             QWidget *parent = nullptr);
 
     void createMatch(const QString& map_name);

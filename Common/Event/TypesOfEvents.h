@@ -24,7 +24,8 @@ enum ClientTypeEvent: char {
 	CREATE, // Loby
 	JOIN, // Loby
 	USER_NAME, // Loby
-	CREATOR_ABANDONS
+	CREATOR_ABANDONS,
+	PLAYER_ABANDONS
 };
 
 enum ModelTypeEvent: char {
@@ -67,9 +68,9 @@ enum Direction: char {
 	LEFT,
 	UP,
 	DOWN,
-	STOP_MOVING_LEFT, 
-	STOP_MOVING_RIGHT, 
-	STOP_MOVING_UP, 
+	STOP_MOVING_LEFT,
+	STOP_MOVING_RIGHT,
+	STOP_MOVING_UP,
 	STOP_MOVING_DOWN
 };
 

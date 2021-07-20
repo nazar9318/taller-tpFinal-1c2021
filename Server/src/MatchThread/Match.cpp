@@ -7,9 +7,9 @@
 //       y agrega al jugador a la misma.
 Match::Match(Socket& socket, const std::string& map_type,
 			const std::string& player_name): match_started(false),
-			finished(false), last_id(0), 
+			finished(false), last_id(0),
 			game_world(map_type), handler(game_world),
-			statistics_not_sent(true), init_players_not_sent(true), 
+			statistics_not_sent(true), init_players_not_sent(true),
 			final_state_not_send(true) {
 	game_world.add_player_if_not_full(last_id);
 	Player* player = new Player(socket, last_id, player_name, to_process_events, true);
@@ -23,8 +23,8 @@ Match::Match(Socket& socket, const std::string& map_type,
 
 
 // PRE: La partida no comenzo y tiene lugar para un jugador mas.
-// POST: Une a la partida al jugador. 
-void Match::join_player_if_not_full(Socket& skt, 
+// POST: Une a la partida al jugador.
+void Match::join_player_if_not_full(Socket& skt,
 						const std::string& player_name) {
 	std::lock_guard<std::mutex> l(m);
 	if (match_started) {
@@ -51,14 +51,14 @@ bool Match::is_finished() {
 }
 
 
-// Descripcion: Comienza la partida una vez que se lee el mensaje 
-//              correspondiente mediante el protocolo. Implementa 
+// Descripcion: Comienza la partida una vez que se lee el mensaje
+//              correspondiente mediante el protocolo. Implementa
 //              el game-loop.
 void Match::run() {
 	try {
 		start_game();
 		syslog(LOG_INFO, "[%s:%i]: Termina la etapa de start"
-						, __FILE__, __LINE__);		
+						, __FILE__, __LINE__);
 		game_loop();
 	} catch(std::exception& e) {
 		syslog(LOG_CRIT, "[%s:%i]: %s", __FILE__, __LINE__, e.what());
@@ -72,7 +72,11 @@ void Match::run() {
 void Match::start_game() {
 	while(!match_started && !finished) {
 		Event event = to_process_events.blocking_pop();
-		// bloqueamos para no aceptar mas jugadores. 
+		// bloqueamos para no aceptar mas jugadores.
+		while (event.get_type() == ClientTypeEvent::PLAYER_ABANDONS) {
+			game_world.delete_player(event.get_id());
+			event = to_process_events.blocking_pop();
+		}
 		std::lock_guard<std::mutex> l(m);
 		match_started = true;
 		StartGameHandler game_starter;
@@ -100,7 +104,7 @@ bool Match::has_started() {
 void Match::game_loop() {
 	using namespace std::chrono;
 	auto begin = steady_clock::now();
-	auto end = steady_clock::now(); 
+	auto end = steady_clock::now();
 	double t_delta;
 
 	while (!finished) {
@@ -110,13 +114,13 @@ void Match::game_loop() {
 		push_step_events();
 		end = steady_clock::now();
 		t_delta = duration<double>(end - begin).count();
-		if (t_delta < STEP_TIME) 
+		if (t_delta < STEP_TIME)
 			std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
 	}
 }
 
 // POST: Desencola los eventos recibidos por los clientes y los
-//       maneja. 
+//       maneja.
 void Match::handle_events() {
 	bool queue_not_empty = true;
 	int i = 0;
@@ -133,7 +137,7 @@ void Match::handle_events() {
 
 
 // POST: Envia todos los eventos que sucedieron en el ultimo step
-//       dependiendo de la fase actual. 
+//       dependiendo de la fase actual.
 void Match::push_step_events() {
 	if (game_world.get_fase() == FaseType::INITIAL_FASE) {
 		std::shared_ptr<Event> init_event(
@@ -171,21 +175,21 @@ void Match::push_step_events() {
 		std::shared_ptr<Event> final_step(
 			new SendFinalStepEvent(game_world.get_step_info()));
 		push_event(final_step);
-		
+
 		if (final_state_not_send) {
 			std::shared_ptr<Event> playing_event(
 				new SendStepPlayingEvent(game_world.get_step_info()));
 			std::shared_ptr<Event> attacks(
 				new SendAttacksInfoEvent(game_world.get_step_info()));
-				// fin, round, cantidad_rounds, porque termino la partida. 
+				// fin, round, cantidad_rounds, porque termino la partida.
 			std::shared_ptr<Event> reason_end(
 				new SendFinalStateEvent(game_world.get_step_info()));
 			push_event(playing_event);
 			push_event(attacks);
-			push_event(reason_end);	
-			final_state_not_send = false;		
+			push_event(reason_end);
+			final_state_not_send = false;
 		}
-		if ((statistics_not_sent && ((int)CF::time_finish - 
+		if ((statistics_not_sent && ((int)CF::time_finish -
 			game_world.get_step_info().get_wait() > (int)CF::time_between))
 			|| (finished)) {
 			std::shared_ptr<Event> stats(

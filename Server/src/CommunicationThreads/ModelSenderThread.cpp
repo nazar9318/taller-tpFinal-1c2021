@@ -31,6 +31,7 @@ void ModelSenderThread::run() {
 	} catch (...) {
 		syslog(LOG_ERR, "[%s:%i]: Unknown Error", __FILE__, __LINE__);
 	}
+	events.close();
 }
 
 ModelSenderThread::~ModelSenderThread() {

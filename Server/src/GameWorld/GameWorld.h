@@ -37,6 +37,7 @@ class GameWorld {
 		std::list<std::unique_ptr<Weapon>> weapons_in_ground;
 		Bomb bomb;
 		SquadsManager squad_manager;
+		int players_online;
 
 	public:
 		GameWorld(const std::string& map_type);

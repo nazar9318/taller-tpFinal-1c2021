@@ -34,9 +34,9 @@
 </string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>7</number>
     </property>
-    <widget class="QWidget" name="connectToPort">
+    <widget class="QWidget" name="connectToSocket">
      <widget class="QLineEdit" name="host">
       <property name="geometry">
        <rect>
@@ -86,7 +86,7 @@ Una vez ingresados, presione el botón &quot;Empezar&quot; para avanzar.</string
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="Bienvenida">
+    <widget class="QWidget" name="insertName">
      <widget class="QPushButton" name="OK">
       <property name="geometry">
        <rect>
@@ -258,7 +258,7 @@ Una vez ingresados, presione el botón &quot;Empezar&quot; para avanzar.</string
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="mainWindow">
+    <widget class="QWidget" name="createOrJoin">
      <widget class="QPushButton" name="createButton">
       <property name="geometry">
        <rect>
@@ -318,7 +318,7 @@ Una vez ingresados, presione el botón &quot;Empezar&quot; para avanzar.</string
       <layout class="QVBoxLayout" name="matchsList"/>
      </widget>
     </widget>
-    <widget class="QWidget" name="waitingCreator">
+    <widget class="QWidget" name="waitingForCreator">
      <widget class="QListWidget" name="players_join">
       <property name="geometry">
        <rect>

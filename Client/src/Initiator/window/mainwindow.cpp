@@ -19,20 +19,21 @@
 #define MIN_NAME_LENGTH 4
 
 MainWindow::MainWindow(Socket& skt, bool &started,
-         ModelRecieverThread& rcv, EventSenderThread& snd,
-         ProtectedQueue<Event>& m_events,
-         ProtectedQueue<std::unique_ptr<Event>>& c_events,
-         std::map<char, std::string>& users, char& id, bool& active,
-         bool& user_name_charged, std::string& name,
-				 std::string& port, std::string& host,
-         QWidget *parent)
+        ModelRecieverThread& rcv, EventSenderThread& snd,
+        ProtectedQueue<Event>& m_events,
+        ProtectedQueue<std::unique_ptr<Event>>& c_events,
+        std::map<char, std::string>& users, char& id, bool& active,
+        bool& user_name_charged, std::string& name,
+		std::string& port, std::string& host,
+        QWidget *parent)
         : socket(skt), game_started(started), receiver(rcv),
-         sender(snd), model_events(m_events),
-         client_events(c_events), players(users), self_id(id),
-          match_started(false), active(active),
-          user_name_charged(user_name_charged), user_name(name), chosed_skins(0),
-					port(port), host(host), QMainWindow(parent),
-          ui(new Ui::MainWindow) {
+        sender(snd), model_events(m_events),
+        client_events(c_events), players(users), self_id(id),
+        match_started(false), active(active),
+        user_name_charged(user_name_charged), user_name(name), 
+        chosed_counter(false), chosed_terrorist(false),
+		port(port), host(host), QMainWindow(parent),
+        ui(new Ui::MainWindow) {
     ui->setupUi(this);
     this->setStyleSheet("background-color: white;");
     active = false;
@@ -60,10 +61,12 @@ MainWindow::MainWindow(Socket& skt, bool &started,
     connect(this->ui->GERMAN_GSG9, SIGNAL(clicked()), this, SLOT(select_counter_skin()));
     connect(this->ui->UKSAS, SIGNAL(clicked()), this, SLOT(select_counter_skin()));
     connect(this->ui->FRENCH_GIGN, SIGNAL(clicked()), this, SLOT(select_counter_skin()));
-		connect(this->ui->acceptSkins, SIGNAL(clicked()), this, SLOT(on_acceptSkins_clicked()));
-		loadSkinsIcons();
+	connect(this->ui->acceptSkins, SIGNAL(clicked()), this, SLOT(on_acceptSkins_clicked()));
+	loadSkinsIcons();
 }
 
+//POST: A cada botón de skin de character, le asigna
+//      el ícono de la imagen del mismo que va a renderizarse.
 void MainWindow::loadSkinsIcons() {
 	QPixmap pixARTIC_AVENGER(SPRITE_NPC_ARTIC_AVENGER_PATH);
 	QIcon iconARTIC_AVENGER(pixARTIC_AVENGER);
@@ -99,6 +102,10 @@ void MainWindow::loadSkinsIcons() {
 	this->ui->FRENCH_GIGN->setIconSize(pixFRENCH_GIGN.rect().size());
 }
 
+//POST: cuando el usuario presiona un botón de skin, cambia en
+// ClientConfiguration el tipo de skin de terrorist, luego
+// de la asignación se pasa a true el atributo de que se haya elegido
+// una skin
 void MainWindow::select_terrorist_skin() {
     QPushButton* terrorist_skin = (QPushButton*)QObject::sender();
     std::string name = terrorist_skin->objectName().toStdString();
@@ -111,9 +118,13 @@ void MainWindow::select_terrorist_skin() {
     } else if (name.compare("GUERRILLA") == 0) {
         CCF::terrorist_skin = TerroristSkin::GUERRILLA;
     }
-    this->chosed_skins++;
+    chosed_terrorist = true;
 }
 
+//POST: cuando el usuario presiona un botón de skin, cambia en
+// ClientConfiguration el tipo de skin de counter, luego
+// de la asignación se pasa a true el atributo de que se haya elegido
+// una skin
 void MainWindow::select_counter_skin() {
     QPushButton* terrorist_skin = (QPushButton*)QObject::sender();
     std::string name = terrorist_skin->objectName().toStdString();
@@ -126,17 +137,25 @@ void MainWindow::select_counter_skin() {
     } else if (name.compare("FRENCH_GIGN") == 0) {
         CCF::counter_skin = CounterSkin::FRENCH_GIGN;
     }
-    this->chosed_skins++;
+    chosed_counter = true;
 }
 
+//POST: valida que el usuario haya elegido skins de counter y terrorist,
+// en caso verdadero pasa a la siguiente página, en caso contrario
+// se le avisará que le faltan elegir skins.
 void MainWindow::on_acceptSkins_clicked() {
-    if (this->chosed_skins >= 2) { ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE); }
+    if (chosed_counter && chosed_terrorist) {
+        ui->stackedWidget->setCurrentIndex(PRINCIPAL_PAGE);
+    }
     else {
         QString err("Para avanzar, debe elegir una skin de cada equipo.");
         show_error(err);
     }
 }
 
+//POST: intenta conectarse al host y puerto ingresados por el usuario
+// en caso que no se pueda se dará un mensaje de aviso, sino se conecta
+// al servidor y pasa a la ventana siguiente.
 void MainWindow::on_startButton_clicked() {
     host = this->ui->host->text().toStdString();
     port = this->ui->port->text().toStdString();
@@ -199,6 +218,8 @@ void MainWindow::show_error(const QString& message) {
     msgBox.exec();
 }
 
+//POST: carga el error correspondiente acorde al tipo de error 
+// que llegue desde el servidor.
 void MainWindow::show_error(const QString& message, Event& event) {
     QString error_msg(message);
     if (event.get_type() == ModelTypeEvent::ERROR) {
@@ -283,7 +304,8 @@ void MainWindow::on_createButton_clicked() {
     }
 }
 
-
+//POST: recibe los mapas disponibles,
+// y crea un botón por cada uno para elegir.
 void MainWindow::show_maps(Event& maps_received) {
     try {
         std::vector<char> msg = maps_received.get_msg();
@@ -358,6 +380,7 @@ void MainWindow::createMatch(const QString& map_name) {
     }
 }
 
+//POST: muestra al listado de jugadores esperando a que empiece el juego.
 void MainWindow::update_players() {
     syslog(LOG_CRIT, "[%s:%i]: Timer de players en funcionamiento."
         , __FILE__, __LINE__);
@@ -463,7 +486,7 @@ void MainWindow::on_joinButton_clicked() {
     }
 }
 
-
+//POST: recibe las partidas en espera a comenzar.
 void MainWindow::update_matches() {
     try {
         ReceiveMatchesEvent recv_matches;
@@ -491,6 +514,8 @@ void MainWindow::update_matches() {
     }
 }
 
+//POST: por cada partida esperando, crea un botón para que
+// el usuario pueda elegir a cuál conectarse.
 void MainWindow::show_matches(Event& matches_received) {
     std::vector<char> msg = matches_received.get_msg();
     unsigned i = 1;

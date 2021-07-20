@@ -54,6 +54,8 @@ private:
     QTimer* players_joined_timer;
     bool& active;
     bool& user_name_charged;
+    bool chosed_counter;
+    bool chosed_terrorist;
     std::string& port;
     std::string& host;
 public:
@@ -88,7 +90,6 @@ private:
     Ui::MainWindow* ui;
     Protocol protocol;
     bool match_started;
-    int chosed_skins;
     void load_players(Event& join_successfull);
     void wait_until_start();
     void show_error(const QString& message);

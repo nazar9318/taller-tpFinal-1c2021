@@ -28,6 +28,8 @@ ui(new Ui::MainWindow), delay_cnt(0), resized(false) {
     this->loadIcons();
 }
 
+//POST: asigna a cada botón de ítem a agregar al mapa,
+// un ícono con la imagen del mismo.
 void MainWindow::loadIcons() {
     QPixmap pix_ak47_weapon(":/resources/ak47_weapon.png");
     QIcon icon_ak47_weapon(pix_ak47_weapon);
@@ -101,6 +103,7 @@ void MainWindow::loadIcons() {
     this->ui->C_spawn->setIcon(icon_C_spawn);
 }
 
+//POST: crea un nodo YAML y lo guarda en el vector de nodos
 void MainWindow::saveObjects() {
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
@@ -117,6 +120,7 @@ void MainWindow::saveObjects() {
     }
 }
 
+//POST: indica si en la posición x, y hay un ítem base
 bool MainWindow::thereIsFloorIn(int &x, int &y) {
     for (size_t i = 0; i < this->floor.size(); i++) {
         bool is_in_x = floor[i].first == x;
@@ -126,6 +130,7 @@ bool MainWindow::thereIsFloorIn(int &x, int &y) {
     return false;
 }
 
+//POST: indica si en la posición x, y hay un ítem caja
 bool MainWindow::thereIsBoxIn(int &x, int &y) {
     for (size_t i = 0; i < this->box.size(); i++) {
         bool is_in_x = box[i].first == x;
@@ -135,6 +140,7 @@ bool MainWindow::thereIsBoxIn(int &x, int &y) {
     return false;
 }
 
+//POST: indica si en la posición x, y hay un ítem zona de bomba
 bool MainWindow::thereIsBombPlaceIn(int &x, int &y) {
     for (size_t i = 0; i < this->bomb.size(); i++) {
         bool is_in_x = bomb[i].first == x;
@@ -144,6 +150,7 @@ bool MainWindow::thereIsBombPlaceIn(int &x, int &y) {
     return false;
 }
 
+//POST: indica si en la posición x, y hay un ítem arma
 bool MainWindow::thereIsWeaponIn(int &x, int &y) {
     for (size_t i = 0; i < this->weapon.size(); i++) {
         bool is_in_x = weapon[i].first == x;
@@ -153,6 +160,7 @@ bool MainWindow::thereIsWeaponIn(int &x, int &y) {
     return false;
 }
 
+//POST: indica si en la posición x, y hay un ítem zona de spawn
 bool MainWindow::thereIsSpawnIn(int &x, int &y) {
     for (size_t i = 0; i < this->spawn.size(); i++) {
         bool is_in_x = spawn[i].first == x;
@@ -162,6 +170,7 @@ bool MainWindow::thereIsSpawnIn(int &x, int &y) {
     return false;
 }
 
+//POST: guarda la posición x,y en alguno de los vectores, según qué ítem sea.
 void MainWindow::placePos(int &x, int &y) {
     if (this->dragged.toStdString().find("base") != std::string::npos) {
         this->floor.push_back(std::make_pair(x,y));
@@ -180,6 +189,7 @@ void MainWindow::placePos(int &x, int &y) {
     }
 }
 
+//POST: guarda todos los ítems bases agregados
 void MainWindow::saveBases() {
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
@@ -197,6 +207,7 @@ void MainWindow::saveBases() {
     }
 }
 
+//POST: devuelve el alto del mapa
 size_t MainWindow::heigth() {
     this->min_y = this->scene->items().first()->pos().y()/BASE_Y;
     this->max_y = this->scene->items().first()->pos().y()/BASE_Y;
@@ -215,6 +226,7 @@ size_t MainWindow::heigth() {
     return (this->max_y - this->min_y + 1);
 }
 
+//POST: devuelve el ancho del mapa
 size_t MainWindow::width() {
     this->min_x = this->scene->items().first()->pos().x()/BASE_X;
     this->max_x = this->scene->items().first()->pos().x()/BASE_X;
@@ -233,6 +245,10 @@ size_t MainWindow::width() {
     return (this->max_x - this->min_x + 1);
 }
 
+//POST: si el mapa está en algún borde, lo mueve para poder
+// redearlo de cajas, si en cambio está alejado del borde,
+// lo mueve para que quede a una coordenada de valor 1 en x,y
+// del borde superior izquierda.
 void MainWindow::moveMap(YAML::Emitter &emitter) {
     if (!this->resized) {
         if (this->min_x == 0) {
@@ -271,6 +287,9 @@ void MainWindow::moveMap(YAML::Emitter &emitter) {
     for (size_t i = 1; i < nodes.size(); i++) { emitter << nodes[i]; }
 }
 
+//POST: recorre todo el mapa y llena de ítem box_black
+//todos los huecos dentro del mismo, además rodea
+//al mapa también de box_black.
 void MainWindow::makeSquared(YAML::Emitter &emitter) {
     std::map<std::pair<int,int>, int> positions;
     for (size_t i = min_x-1; i <= max_x + 1; i++) {
@@ -303,6 +322,7 @@ void MainWindow::makeSquared(YAML::Emitter &emitter) {
     }
 }
 
+//POST: guarda el mapa en formato YAML
 void MainWindow::on_save_clicked() {
     YAML::Emitter emitter;
     YAML::Node size;
@@ -326,6 +346,7 @@ void MainWindow::on_save_clicked() {
     nodes.clear();
 }
 
+//POST: carga un mapa en formato YAML
 void MainWindow::on_load_clicked() {
     QString file_name = QFileDialog::getOpenFileName(this, "Open a file", "../configs/");
     std::vector<YAML::Node> nodes = YAML::LoadAllFromFile(file_name.toStdString());
@@ -366,6 +387,7 @@ void MainWindow::on_load_clicked() {
     this->resized = (nodes[nodes.size()-1]["Resized"].as<int>() == 1);
 }
 
+//POST: remueve el ítem de la posición x,y
 void MainWindow::removeFrom(const std::string& item, int x, int y) {
     if (item.find("base") != std::string::npos) {
         this->floor.erase(std::remove(this->floor.begin(), this->floor.end(), std::make_pair(x,y)), this->floor.end());
@@ -384,6 +406,7 @@ void MainWindow::removeFrom(const std::string& item, int x, int y) {
     }
 }
 
+//POST: borra todos los ítems seleccionados por el usuario
 void MainWindow::on_clean_selected_clicked() {
     for (auto item : this->scene->items()) {
         if (item->isSelected()) {
@@ -396,6 +419,7 @@ void MainWindow::on_clean_selected_clicked() {
     }
 }
 
+//POST: reinicia el mapa
 void MainWindow::on_clean_all_clicked() {
     for (auto item : this->scene->items()) { delete item; }
     this->scene->clear();
@@ -415,6 +439,8 @@ void MainWindow::on_clean_all_clicked() {
     this->resized = false;
 }
 
+//POST: conecta los botones que representan los ítems,
+// con los métodos selectItem y on_button_clicked
 void MainWindow::connectItems() {
     connect(this->ui->ak47_weapon, SIGNAL(pressed()), this, SLOT(selectItem()));
     connect(this->ui->awp_weapon, SIGNAL(pressed()), this, SLOT(selectItem()));
@@ -452,12 +478,14 @@ void MainWindow::connectItems() {
     connect(this->ui->C_spawn, SIGNAL(pressed()), this, SLOT(on_button_clicked()));
 }
 
+//POST: asigna a dragged el nombre del botón presionado.
 void MainWindow::selectItem() {
     QPushButton* button = (QPushButton*)sender();
     this->dragged = button->objectName();
     button->show();
 }
 
+//POST: devuelve si dragged es un ítem base, zona de bomba o caja
 bool MainWindow::isFloor() {
     bool is_base = (this->dragged.toStdString().find("base") != std::string::npos);
     bool is_bomb_zone = (this->dragged.toStdString().find("bomb") != std::string::npos);
@@ -465,24 +493,29 @@ bool MainWindow::isFloor() {
     return (is_base || is_bomb_zone || is_box);
 }
 
+//POST: crea un ítem zona de spawn
 QGraphicsPixmapItem* MainWindow::createSpawn() {
     QPixmap pix(":/resources/" + this->dragged + ".png");
     QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE/2, FLOOR_SIZE/2));
     return new QGraphicsPixmapItem(pixmap);
 }
 
+//POST: crea un ítem base, zona de bomba, o caja
+// según el valor de dragged.
 QGraphicsPixmapItem* MainWindow::createFloor() {
     QPixmap pix(":/resources/" + this->dragged + ".png");
     QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE));
     return new QGraphicsPixmapItem(pixmap);
 }
 
+//POST: crea un ítem colocable sobre un piso.
 QGraphicsPixmapItem* MainWindow::createPlaceable() {
     QPixmap pix(":/resources/" + this->dragged + ".png");
     QPixmap pixmap = pix.scaled(QSize(FLOOR_SIZE, FLOOR_SIZE/2));
     return new QGraphicsPixmapItem(pixmap);
 }
 
+//POST: crea un ítem según el valor de dragged
 QGraphicsPixmapItem* MainWindow::createNewItem() {
     if (this->dragged.toStdString().find("spawn") != std::string::npos) {
         return createSpawn();
@@ -490,6 +523,7 @@ QGraphicsPixmapItem* MainWindow::createNewItem() {
     return isFloor() ? createFloor() : createPlaceable();
 }
 
+//POST: crea un ítem que representa una celda de color rojo
 void MainWindow::addSquare(QMouseEvent* event) {
     int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
     int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
@@ -502,6 +536,7 @@ void MainWindow::addSquare(QMouseEvent* event) {
     scene->addItem(item1);
 }
 
+//POST: pinta de rojo las celdas por las que se arrastra el mousse
 void MainWindow::mouseMoveEvent(QMouseEvent* event) {
     if (this->dragged.toStdString().compare("color") == 0) {
         delay_cnt++;
@@ -515,11 +550,13 @@ void MainWindow::mouseMoveEvent(QMouseEvent* event) {
     }
 }
 
+//POST: pinta de rojo las celdas sobre las que se hace click con el mousse
 void MainWindow::mousePressEvent(QMouseEvent* event) {
     this->dragged = "color";
     this->addSquare(event);
 }
 
+//POST: cambia todas las celdas de color rojo por el ítem del botón presionado.
 void MainWindow::on_button_clicked() {
     for (auto item : this->scene->items()) {
         std::string name(item->data(0).toString().toStdString());
@@ -543,6 +580,8 @@ void MainWindow::on_button_clicked() {
     }
 }
 
+//POST: cuando se presiona un botón de un ítem, se arrastra dentro del mapa
+// y se suelta el mousse, se agrega dicho ítem a la celda sobre la que se soltó.
 void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
     int x_0 = (this->ui->map->mapToScene(event->pos()).x()-3)/(BASE_X);
     int y_0 = (this->ui->map->mapToScene(event->pos()).y()-35)/(BASE_Y);
@@ -565,6 +604,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent* event) {
     }
 }
 
+//POST: libera toda la memoria reservada.
 MainWindow::~MainWindow() {
     for (auto item : this->scene->items()) { delete item; }
     delete this->scene;

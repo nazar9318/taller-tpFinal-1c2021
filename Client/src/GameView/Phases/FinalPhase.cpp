@@ -3,7 +3,7 @@
 
 FinalPhase::FinalPhase(Renderer& renderer, int screen_width, int screen_height):
 renderer(renderer), screen_width(screen_width), screen_height(screen_height),
-font(NULL), post_game(false), total_rounds(10) {}
+font(NULL), post_game(false) {}
 
 void FinalPhase::loadMedia() {
   background_victory.loadFromFile(renderer, FINAL_PHASE_VICTORY_PATH);

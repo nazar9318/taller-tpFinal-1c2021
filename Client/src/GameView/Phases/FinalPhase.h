@@ -20,7 +20,6 @@ class FinalPhase {
 		Texture background_defeat;
 		std::vector<std::string> names;
 		std::vector<bool> my_team;
-		//std::vector<std::string> squad;
 		std::vector<std::string> round_kills;
 		std::vector<std::string> deaths;
 		std::vector<std::string> money;

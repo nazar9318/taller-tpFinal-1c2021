@@ -25,6 +25,80 @@ ui(new Ui::MainWindow), delay_cnt(0), resized(false) {
     }
     this->connectItems();
     this->ui->map->setMouseTracking(true);
+    this->loadIcons();
+}
+
+void MainWindow::loadIcons() {
+    QPixmap pix_ak47_weapon(":/resources/ak47_weapon.png");
+    QIcon icon_ak47_weapon(pix_ak47_weapon);
+    this->ui->ak47_weapon->setIcon(icon_ak47_weapon);
+    this->ui->ak47_weapon->setIconSize(pix_ak47_weapon.rect().size());
+    QPixmap pix_awp_weapon(":/resources/awp_weapon.png");
+    QIcon icon_awp_weapon(pix_awp_weapon);
+    this->ui->awp_weapon->setIcon(icon_awp_weapon);
+    this->ui->awp_weapon->setIconSize(pix_awp_weapon.rect().size());
+    QPixmap pix_m3_weapon(":/resources/m3_weapon.png");
+    QIcon icon_m3_weapon(pix_m3_weapon);
+    this->ui->m3_weapon->setIcon(icon_m3_weapon);
+    this->ui->m3_weapon->setIconSize(pix_m3_weapon.rect().size());
+    QPixmap pix_glock_weapon(":/resources/glock_weapon.png");
+    QIcon icon_glock_weapon(pix_glock_weapon);
+    this->ui->glock_weapon->setIcon(icon_glock_weapon);
+    this->ui->glock_weapon->setIconSize(pix_glock_weapon.rect().size());
+
+    QPixmap pix_base_aztec(":/resources/base_aztec.png");
+    QIcon icon_base_aztec(pix_base_aztec);
+    this->ui->base_aztec->setIcon(icon_base_aztec);
+    this->ui->base_aztec->setIconSize(pix_base_aztec.rect().size());
+    QPixmap pix_base_dust(":/resources/base_dust.png");
+    QIcon icon_base_dust(pix_base_dust);
+    this->ui->base_dust->setIcon(icon_base_dust);
+    this->ui->base_dust->setIconSize(pix_base_dust.rect().size());
+    QPixmap pix_base_inferno(":/resources/base_inferno.png");
+    QIcon icon_base_inferno(pix_base_inferno);
+    this->ui->base_inferno->setIcon(icon_base_inferno);
+    this->ui->base_inferno->setIconSize(pix_base_inferno.rect().size());
+    
+    QPixmap pix_box_black(":/resources/box_black.png");
+    QIcon icon_box_black(pix_box_black);
+    this->ui->box_black->setIcon(icon_box_black);
+    this->ui->box_black->setIconSize(pix_box_black.rect().size());
+    QPixmap pix_box_brown(":/resources/box_brown.png");
+    QIcon icon_box_brown(pix_box_brown);
+    this->ui->box_brown->setIcon(icon_box_brown);
+    this->ui->box_brown->setIconSize(pix_box_brown.rect().size());
+    QPixmap pix_box_metal(":/resources/box_metal.png");
+    QIcon icon_box_metal(pix_box_metal);
+    this->ui->box_metal->setIcon(icon_box_metal);
+    this->ui->box_metal->setIconSize(pix_box_metal.rect().size());
+    QPixmap pix_box_wood(":/resources/box_wood.png");
+    QIcon icon_box_wood(pix_box_wood);
+    this->ui->box_wood->setIcon(icon_box_wood);
+    this->ui->box_wood->setIconSize(pix_box_wood.rect().size());
+    QPixmap pix_box_wood_metal(":/resources/box_wood_metal.png");
+    QIcon icon_box_wood_metal(pix_box_wood_metal);
+    this->ui->box_wood_metal->setIcon(icon_box_wood_metal);
+    this->ui->box_wood_metal->setIconSize(pix_box_wood_metal.rect().size());
+
+    QPixmap pix_bomb_area_a(":/resources/bomb_area_a.png");
+    QIcon icon_bomb_area_a(pix_bomb_area_a);
+    this->ui->bomb_area_a->setIcon(icon_bomb_area_a);
+    this->ui->bomb_area_a->setIconSize(pix_bomb_area_a.rect().size());
+    QPixmap pix_bomb_area_b(":/resources/bomb_area_b.png");
+    QIcon icon_bomb_area_b(pix_bomb_area_b);
+    this->ui->bomb_area_b->setIcon(icon_bomb_area_b);
+    this->ui->bomb_area_b->setIconSize(pix_bomb_area_b.rect().size());
+    QPixmap pix_bomb_area_c(":/resources/bomb_area_c.png");
+    QIcon icon_bomb_area_c(pix_bomb_area_c);
+    this->ui->bomb_area_c->setIcon(icon_bomb_area_c);
+    this->ui->bomb_area_c->setIconSize(pix_bomb_area_c.rect().size());
+
+    QPixmap pix_T_spawn(":/resources/T_spawn.png");
+    QIcon icon_T_spawn(pix_T_spawn);
+    this->ui->T_spawn->setIcon(icon_T_spawn);
+    QPixmap pix_C_spawn(":/resources/C_spawn.png");
+    QIcon icon_C_spawn(pix_C_spawn);
+    this->ui->C_spawn->setIcon(icon_C_spawn);
 }
 
 void MainWindow::saveObjects() {

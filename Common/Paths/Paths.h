@@ -153,10 +153,10 @@
 
     // SPRITE CONTAINER
 
-    #define SPRITE_AWP_PATH "../Client/Assets/Sprites/Weapons/awp.bmp"
-    #define SPRITE_M3_PATH "../Client/Assets/Sprites/Weapons/m3.bmp"
     #define SPRITE_AK47_PATH "../Client/Assets/Sprites/Weapons/ak47.bmp"
+    #define SPRITE_AWP_PATH "../Client/Assets/Sprites/Weapons/awp.bmp"
     #define SPRITE_GLOCK_PATH "../Client/Assets/Sprites/Weapons/glock.bmp"
+    #define SPRITE_M3_PATH "../Client/Assets/Sprites/Weapons/m3.bmp"
     #define SPRITE_KNIFE_PATH "../Client/Assets/Sprites/Weapons/knife.bmp"
     #define SPRITE_BOMB_PATH "../Client/Assets/Sprites/Weapons/bomb.bmp"
     #define SPRITE_NPC_KNIFE_PATH "../Client/Assets/NPC/knife.bmp"
@@ -180,15 +180,16 @@
     #define TILE_AZTEC_PATH "../Client/Assets/Tiles/aztec.png"
     #define TILE_INFERNO_PATH "../Client/Assets/Tiles/inferno.png"
     #define TILE_DUST_PATH "../Client/Assets/Tiles/dust.png"
-    #define TILE_BOMB_A_PATH "../Client/Assets/Tiles/bomb_area_a.png"
-    #define TILE_BOMB_B_PATH "../Client/Assets/Tiles/bomb_area_b.png"
-    #define TILE_BOMB_C_PATH "../Client/Assets/Tiles/bomb_area_c.png"
     #define TILE_BOX_BLACK_PATH "../Client/Assets/Tiles/box_black.png"
     #define TILE_BOX_BROWN_PATH "../Client/Assets/Tiles/box_brown.png"
     #define TILE_BOX_METAL_PATH "../Client/Assets/Tiles/box_metal.png"
-    #define TILE_BOX_WOOD_METAL_PATH "../Client/Assets/Tiles/box_wood_metal.png"
     #define TILE_BOX_WOOD_PATH "../Client/Assets/Tiles/box_wood.png"
-
+    #define TILE_BOX_WOOD_METAL_PATH "../Client/Assets/Tiles/box_wood_metal.png"
+    #define TILE_BOMB_A_PATH "../Client/Assets/Tiles/bomb_area_a.png"
+    #define TILE_BOMB_B_PATH "../Client/Assets/Tiles/bomb_area_b.png"
+    #define TILE_BOMB_C_PATH "../Client/Assets/Tiles/bomb_area_c.png"
+    #define TILE_SPAWN_TERRORIST_PATH "../Client/Assets/Tiles/T_spawn.png"
+    #define TILE_SPAWN_COUNTER_PATH "../Client/Assets/Tiles/C_spawn.png"
     /****************************SERVER***************************************/
 
     // MAP PARSER

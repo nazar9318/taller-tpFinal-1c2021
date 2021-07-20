@@ -16,6 +16,7 @@
 #include <vector>
 #include <algorithm>
 #include "yaml-cpp/yaml.h"
+#include "Paths.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -63,6 +64,7 @@ class MainWindow : public QMainWindow {
         void removeFrom(const std::string& item, int x, int y);
         void placePos(int &x, int &y);
         bool hasPos(std::vector<size_t> &vector, size_t pos);
+        void loadIcons();
         int delay_cnt;
         bool resized;
 

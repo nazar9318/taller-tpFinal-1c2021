@@ -66,8 +66,6 @@ void SpriteContainer::loadMedia(Renderer& renderer) {
 }
 
 Texture& SpriteContainer::operator[](char id) {
-  /*syslog(LOG_INFO, "[%s:%i]: Buscando la textura para el id %c",
-  __FILE__, __LINE__, id);*/
 
   if (container.find(id) == container.end()) {
     throw Exception("No existe un sprite para la clave %c", id);

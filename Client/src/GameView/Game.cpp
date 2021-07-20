@@ -49,11 +49,11 @@ void Game::execute() {
 			if (t_delta < STEP_TIME)
 				std::this_thread::sleep_for(duration<double>(STEP_TIME - t_delta));
 		}
-		// std::this_thread::sleep_for(duration<double>(10));
 
 		while (not_finished) {
 			begin = steady_clock::now();
 			not_finished = handle_finished_game();
+			render();
 			end = steady_clock::now();
 			t_delta = duration<double>(end - begin).count();
 			if (t_delta < STEP_TIME)
@@ -100,13 +100,14 @@ void Game::render() {
 bool Game::handle_finished_game(){
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
-		switch (event.type) {
-			case SDL_QUIT:
-				return false;
-				break;
-			default:
-				break;
+		if(event.type == SDL_QUIT){
+			return false;
+		}
+		if(event.type == SDL_KEYDOWN){
+			if(event.key.keysym.sym == SDLK_ESCAPE){
+				window.changeFullScreen();
 			}
+		}
 	}
 	return true;
 }

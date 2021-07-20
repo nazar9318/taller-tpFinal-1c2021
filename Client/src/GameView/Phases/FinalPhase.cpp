@@ -41,48 +41,6 @@ void FinalPhase::addScore(const std::string& name, bool my_team, int round_kills
   if (my_team) {my = " True ";} else {my = " False ";}
 }
 
-/*void FinalPhase::renderSquadScores() {
-  unsigned int one = 0;
-  unsigned int two = 0;
-  for (unsigned int i = 1; i < names.size(); i++) {
-    if (team[i].compare("Equipo 1") == 0) {
-      one += std::stoi(total_kills[i]);
-    } else {
-      two += std::stoi(total_kills[i]);
-    }
-  }
-  std::stringstream one_cnt;
-  std::stringstream two_cnt;
-  one_cnt << "Equipo 1: " << one;
-  two_cnt << "Equipo 2: " << two;
-  std::vector<std::string> team_scores;
-  team_scores.push_back("Puntos equipo");
-  team_scores.push_back(one_cnt.str());
-  team_scores.push_back(two_cnt.str());
-  renderRequested(screen_width/2 + 300, team_scores);
-}*/
-
-/*void FinalPhase::renderTeamScores() {
-  unsigned int terrorist_count = 0;
-  unsigned int counter_count = 0;
-  for (unsigned int i = 1; i < names.size(); i++) {
-    if (team[i].compare("Counter") == 0) {
-      counter_count += std::stoi(total_kills[i]);
-    } else {
-      terrorist_count += std::stoi(total_kills[i]);
-    }
-  }
-  std::stringstream counter_cnt;
-  std::stringstream terrorist_cnt;
-  counter_cnt << "Counter: " << counter_count;
-  terrorist_cnt << "Terrorist: " << terrorist_count;
-  std::vector<std::string> team_scores;
-  team_scores.push_back("Puntos bando");
-  team_scores.push_back(counter_cnt.str());
-  team_scores.push_back(terrorist_cnt.str());
-  renderRequested(screen_width/2 + 200, team_scores);
-}*/
-
 void FinalPhase::renderRequested(int x, const std::vector<std::string>& request) {
   SDL_Color white = {255, 255, 255};
   SDL_Rect quad = {0};
@@ -186,55 +144,6 @@ void FinalPhase::clean() {
   this->total_kills.clear();
 }
 
-/*void FinalPhase::teamWinner(std::string& winner, int& count) {
-  unsigned int one = 0;
-  unsigned int two = 0;
-  for (unsigned int i = 1; i < names.size(); i++) {
-    if (squad[i].compare("Equipo 1") == 0) {
-      one += std::stoi(total_kills[i]);
-    } else {
-      two += std::stoi(total_kills[i]);
-    }
-  }
-  if (one > two) {
-    winner = "Equipo 1";
-    count = one;
-  } else {
-    winner = "Equipo 2";
-    count = two;
-  }
-}*/
-
-/*void FinalPhase::playerWinner(std::string& winner, int& count) {
-  winner = names[0];
-  for (unsigned int i = 1; i < names.size(); i++) {
-    if (std::stoi(total_kills[i]) > count) {
-      count = std::stoi(total_kills[i]);
-      winner = names[i];
-    }
-  }
-}*/
-
-/*void FinalPhase::renderPostGame() {
-  std::string player_winner;
-  std::string team_winner;
-  int player_count = 0;
-  int team_count = 0;
-  std::vector<std::string> player_scores;
-  playerWinner(player_winner, player_count);
-  std::stringstream player_cnt;
-  player_cnt << player_winner << ": " << player_count;
-  player_scores.push_back("Jugador ganador");
-  player_scores.push_back(player_cnt.str());
-  teamWinner(team_winner, team_count);
-  std::stringstream terrorist_cnt;
-  terrorist_cnt << team_winner << " con " << team_count << " puntos";
-  std::vector<std::string> team_scores;
-  team_scores.push_back("Equipo ganador");
-  team_scores.push_back(terrorist_cnt.str());
-  renderRequested(screen_width/2-200, player_scores);
-  renderRequested(screen_width/2+100, team_scores);
-}*/
 
 void FinalPhase::render() {
   renderRound();

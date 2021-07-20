@@ -126,5 +126,5 @@ void Texture::setColor(Color& color){
 }
 
 Texture::~Texture() {
-  //free();
+  free();
 }

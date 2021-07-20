@@ -9,8 +9,7 @@ void ReceiveFinalStateHandler::handle(FaseType& fase, Event& event, GameMap& map
 
 	if (reason_finished == ReasonFinish::TEAM_ELIMINATED) {
 		Team team_eliminated = (Team)event_msg[2];
-		team_eliminated = team_eliminated; //Hay que borrar esto, lo hago para que no grite unused variable
-		std::cout << "Se elimino un team" << '\n';
+		team_eliminated = team_eliminated; //Para que el compilador no grite
 	} else if (reason_finished == ReasonFinish::BOMB_ENDED) {
 		BombState bomb_state = (BombState)event_msg[2];
     if(bomb_state == BombState::DEACTIVATED){

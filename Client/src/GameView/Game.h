@@ -55,7 +55,6 @@ class Game {
 		Renderer renderer;
 		Camera camera;
 		FaseType fase;
-		// bool final_phase_rendered;
 		AttackEffect attack_effects;
 		Cursor cursor;
 

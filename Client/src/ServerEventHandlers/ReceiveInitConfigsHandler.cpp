@@ -15,15 +15,9 @@ void ReceiveInitConfigsHandler::handle(Event& event, GameMap& map, InitialPhase&
     map.createStencil(stencil_angle, alpha_blending, stencil_radio);
     initial_phase.updateValues(-1, init_money, BuyState::SUCCESSFUL, 2, 0);
 
-    std::cout << "stencil_radio: " << stencil_radio <<
-            "init_money " << init_money << std::endl;
-
-
-
     int glock_bullets_price = *((int*)&(event_msg[17]));
     initial_phase.addPrice(glock_bullets_price, PositionType::PRIMARY_AMMO);
-    std::cout << "stencil_angle: " << stencil_angle <<
-            "glock_bullets_price " << glock_bullets_price << std::endl;
+
 
     auto it = event_msg.begin() + 21;
     while (it != event_msg.end()) {

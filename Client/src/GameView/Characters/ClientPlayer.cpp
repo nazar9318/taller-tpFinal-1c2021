@@ -48,18 +48,6 @@ void ClientPlayer::set_team(Team team) {
 
 std::string ClientPlayer::getTeam() { return team; }
 
-/*void ClientPlayer::set_weapon() {
-	texture_weapon = &(SpriteContainer::getInstance()[weapon]);
-}
-
-void ClientPlayer::changeClip() {
-	if (this->current_clip == LIMIT_POSES-1) {
-		this->current_clip = 0;
-	} else {
-		this->current_clip++;
-	}
-}*/
-
 void ClientPlayer::setSquad(int squad) { this->squad = squad; }
 
 int ClientPlayer::getSquad() const { return this->squad; }
@@ -111,18 +99,11 @@ void ClientPlayer::update_position(int pos_x, int pos_y, int angle,
 
 void ClientPlayer::render(Camera& camera) {
 	if(dead){
-		return; //ESTA MUERTO, NO SE RENDERIZA
+		return;
 	}
 	/*Renderizo el player*/
 	SDL_Rect renderQuad = { pos.x, pos.y, PLAYER_WIDTH, PLAYER_HEIGHT};
 	camera.renderAddingOffset(texture->getTexture(), renderQuad, &clip[current_clip], angle);
-
-	// SDL_Rect renderQuadWeapon = {
-	// 	pos.x + (int)(20 * cosf(angle * PI / 180 - 90)),
-	// 	pos.y + (int)(20 * sinf(angle * PI / 180 - 90)),
-	// 	texture_weapon->get_w(),
-	// 	texture_weapon->get_h()
-	// };
 
 	/*Renderizo su arma*/
 	SDL_Rect quad = {pos.x, pos.y, texture_weapon->get_w(), texture_weapon->get_h()};

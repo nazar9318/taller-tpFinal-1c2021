@@ -1,5 +1,5 @@
-height: 12
-width: 30
+height: 14
+width: 32
 ---
 item: base_inferno
 position:
@@ -2391,4 +2391,4 @@ position:
   - 31
   - 13
 ---
-Resized: 0
+Resized: 1

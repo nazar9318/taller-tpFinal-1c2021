@@ -42,9 +42,9 @@ class Game {
 		ProtectedQueue<Event>& model_events;
 		ProtectedQueue<std::unique_ptr<Event>>& client_events;
 		Window window;
+		Renderer renderer;
 		Camera camera;
 		Cursor cursor;
-		Renderer renderer;
 		GameMap map;
 		Hud hud;
 		ClientBomb bomb;

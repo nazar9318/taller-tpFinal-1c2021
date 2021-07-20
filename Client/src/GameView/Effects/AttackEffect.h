@@ -46,7 +46,6 @@ class AttackEffect {
 
   private:
     void renderBlood(SDL_Rect& position);
-    void renderArrow(SDL_Rect& receiver_pos, SDL_Rect& attacker_pos);
     AttackEffect(const AttackEffect &other) = delete;
     AttackEffect& operator=(const AttackEffect &other) = delete;
 

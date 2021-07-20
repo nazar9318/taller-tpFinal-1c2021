@@ -38,8 +38,6 @@ void Game::execute() {
 		while (is_running && not_finished) {
 			begin = steady_clock::now();
 			if (fase == FaseType::INITIAL_FASE) {
-				// this->final_phase.clean();
-				// this->final_phase_rendered = false;
 				is_running = initial_phase.run();
 			} else {
 				not_finished = handle_events();
